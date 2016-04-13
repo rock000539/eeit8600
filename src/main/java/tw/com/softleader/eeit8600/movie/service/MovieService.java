@@ -4,9 +4,7 @@ package tw.com.softleader.eeit8600.movie.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import movie.Movie;
-import tw.com.softleader.eeit8600.book.entity.Book;
-import tw.com.softleader.eeit8600.book.service.BookService;
+import tw.com.softleader.eeit8600.movie.entity.Movie;
 
 public class MovieService {
 
