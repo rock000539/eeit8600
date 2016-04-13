@@ -1,4 +1,4 @@
-package tw.com.softleader.eeit8600;
+package tw.com.softleader.eeit8600.app.entity;
 
 public class AppBean {
 	

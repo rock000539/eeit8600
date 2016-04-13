@@ -1,7 +1,9 @@
-package tw.com.softleader.eeit8600;
+package tw.com.softleader.eeit8600.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tw.com.softleader.eeit8600.app.entity.AppBean;
 
 public class AppService {
 
