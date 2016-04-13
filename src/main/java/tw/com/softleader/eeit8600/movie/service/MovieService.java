@@ -1,10 +1,10 @@
-package tw.com.eeit8600.movie.service;
+package tw.com.softleader.eeit8600.movie.service;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tw.com.eeit8600.movie.Movie;
+import movie.Movie;
 import tw.com.softleader.eeit8600.book.entity.Book;
 import tw.com.softleader.eeit8600.book.service.BookService;
 
