@@ -7,16 +7,16 @@ import tw.com.softleader.eeit8600.book.entity.Book;
 
 public class BookService {
 	
-	public static void main(String[] args) {
-		Book book = new BookService().getById(1L);
-		System.out.println(book);
-		System.out.println("--------------------------------------------------------");
-		List<Book> books = new BookService().getAll();
-		for(Book b:books) {
-			System.out.println(b);
-		}
-	}
-	
+//	public static void main(String[] args) {
+//		Book book = new BookService().getById(1L);
+//		System.out.println(book);
+//		System.out.println("--------------------------------------------------------");
+//		List<Book> books = new BookService().getAll();
+//		for(Book b:books) {
+//			System.out.println(b);
+//		}
+//	}
+//	
 
 	public Book getById(Long id) {
 		
