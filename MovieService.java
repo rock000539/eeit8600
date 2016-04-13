@@ -1,55 +1,59 @@
-package com.eeit8626;
+package tw.com.softleader.eeit8600.movie.service;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+import tw.com.softleader.eeit8600.book.entity.Book;
+import tw.com.softleader.eeit8600.book.service.BookService;
+import tw.com.softleader.eeit8600.movie.Movie;
+
 public class MovieService {
 
-	
 	public static void main(String[] args) {
-		MovieService ms = new MovieService();
-		System.out.println(ms.getById());
-		System.out.println("---------------------------------------------------------------------------------");
-		List<Movie> mss=ms.getAll();
-		for(Movie m:mss){
+		Movie movie = new MovieService().getById(1);
+		System.out.println(movie);
+		
+		List<Movie> movies = new MovieService().getAll();
+		for(Movie m: movies) {
 			System.out.println(m);
 		}
+	}
 
-	}
-	
-	public Movie getById(){
-		Movie movie = new Movie();
-		movie.setId(1);
-		movie.setName("Harry Potter");
-		movie.setPrice(350);
-		movie.setRoom("room A");
-		movie.setActor("Emma");
+	public Movie getById(int id) {
 		
-		return movie;
 		
+		Movie movie1 = new Movie();
+		movie1.setId(1);
+		movie1.setName("Bat Man");
+		movie1.setActor("Ben");
+		movie1.setType("Actor");
+		
+		return movie1;
 	}
-	
-	public List<Movie> getAll(){
+
+
+	public List<Movie> getAll() {
+		
 		List<Movie> movies = new ArrayList<Movie>();
-		Movie m1 = new Movie();
-		m1.setId(1);
-		m1.setName("Harry Potter");
-		m1.setPrice(350);
-		m1.setRoom("room A");
-		m1.setActor("Emma");
-		movies.add(m1);
 		
-		Movie m2 = new Movie();
-		m2.setId(2);
-		m2.setName("Avengers");
-		m2.setPrice(250);
-		m2.setRoom("room B");
-		m2.setActor("Chris");
-		movies.add(m2);
+		Movie movie1 = new Movie();
+		movie1.setId(1);
+		movie1.setName("Bat Man");
+		movie1.setActor("Ben");
+		movie1.setType("Actor");
+
+		movies.add(movie1);
+		
+		Movie movie2 = new Movie();
+		movie2.setId(2);
+		movie2.setName("Harry Porter");
+		movie2.setActor("Harry");
+		movie2.setType("fiction");
+		
+		movies.add(movie2);
 		
 		return movies;
-		
-		
 	}
-
+	
 }

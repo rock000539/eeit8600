@@ -1,53 +1,57 @@
-package com.eeit8626;
+package tw.com.softleader.eeit8600.movie;
+
+import java.sql.Date;
 
 public class Movie {
+	
+	private int id;
+
+	private String name;
+	
+	private String actor;
+	
+	private String type;
+	
 	
 	
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", name=" + name + ", price=" + price
-				+ ", actor=" + actor + ", room=" + room + "]";
+		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", type=" + type + "]";
 	}
 
-	private int id;
-	private String name;
-	private int price;
-	private String actor;
-	private String room;
-	
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
+
 	public String getActor() {
 		return actor;
 	}
+
 	public void setActor(String actor) {
 		this.actor = actor;
 	}
-	public String getRoom() {
-		return room;
+
+	public String getType() {
+		return type;
 	}
-	public void setRoom(String room) {
-		this.room = room;
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
-	public static void main(String[] args) {
+	
 
-	}
 
 }
