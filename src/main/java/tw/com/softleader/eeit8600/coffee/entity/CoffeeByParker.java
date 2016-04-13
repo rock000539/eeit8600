@@ -1,4 +1,4 @@
-package tw.com.softleader.eeit8600;
+package tw.com.softleader.eeit8600.coffee.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,6 @@ public class CoffeeByParker {
 	private String testing;	
 	private int id;
 	
-	public static void main(String[] args) {
-		CoffeeByParker cp=new CoffeeByParker();
-		cp.getAll();
-	}
 	
 	
 	public void getAll(){
