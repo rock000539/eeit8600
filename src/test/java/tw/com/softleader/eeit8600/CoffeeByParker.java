@@ -18,7 +18,7 @@ public class CoffeeByParker {
 	
 	
 	public void getAll(){
-		List<CoffeeByParker> result=new ArrayList();
+		List<CoffeeByParker> result=new ArrayList<CoffeeByParker>();
 		CoffeeByParker cp1=new CoffeeByParker();
 
 		cp1.setId(1);
