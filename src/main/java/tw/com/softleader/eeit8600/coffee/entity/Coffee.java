@@ -3,7 +3,7 @@ package tw.com.softleader.eeit8600.coffee.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoffeeByParker {
+public class Coffee {
 	private int id;	
 	private String name;
 	private String local;

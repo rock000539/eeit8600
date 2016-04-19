@@ -1,21 +1,20 @@
 package tw.com.softleader.eeit8600.coffee.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
 import org.junit.Test;
 
-import tw.com.softleader.eeit8600.book.entity.Book;
-import tw.com.softleader.eeit8600.coffee.entity.CoffeeByParker;
+import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
 public class CoffeeDAOTest {
 
 	@Test
 	public void testCrud() {
 		CoffeeDAO dao=new CoffeeDAO();
-		CoffeeByParker bean=new CoffeeByParker(); 
-		List<CoffeeByParker> coffees = dao.select();
+		Coffee bean=new Coffee(); 
+		List<Coffee> coffees = dao.select();
 		int originalSize = coffees.size();
 		
 		//test find all
@@ -30,7 +29,7 @@ public class CoffeeDAOTest {
 		assertEquals(originalSize+1, coffees.size());
 		
 		// test findById	
-		CoffeeByParker dbbean=dao.select(1);
+		Coffee dbbean=dao.select(1);
 		assertEquals(bean.getId(), dbbean.getId());
 		assertEquals(bean.getName(), dbbean.getName());
 		assertEquals(bean.getLocal(), dbbean.getLocal());
@@ -40,7 +39,7 @@ public class CoffeeDAOTest {
 		dbbean.setPrice(500);
 		dao.update(dbbean);
 		
-		CoffeeByParker updatedCoffee = dao.select(1);
+		Coffee updatedCoffee = dao.select(1);
 		assertEquals(dbbean.getPrice(), updatedCoffee.getPrice());
 		
 		// test delete

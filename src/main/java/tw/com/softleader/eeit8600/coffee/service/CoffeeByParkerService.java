@@ -3,13 +3,14 @@ package tw.com.softleader.eeit8600.coffee.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import tw.com.softleader.eeit8600.coffee.entity.CoffeeByParker;
+import tw.com.softleader.eeit8600.coffee.entity.Coffee;
+
 
 public class CoffeeByParkerService {
 
 	public void getAll() {
-		List<CoffeeByParker> result = new ArrayList<CoffeeByParker>();
-		CoffeeByParker cp1 = new CoffeeByParker();
+		List<Coffee> result = new ArrayList<Coffee>();
+		Coffee cp1 = new Coffee();
 
 		cp1.setId(1);
 		cp1.setName("type1");
@@ -17,7 +18,7 @@ public class CoffeeByParkerService {
 		cp1.setPrice(200);
 		cp1.setTesting("not bad");
 
-		CoffeeByParker cp2 = new CoffeeByParker();
+		Coffee cp2 = new Coffee();
 		cp2.setId(2);
 		cp2.setName("type2");
 		cp2.setLocal("us");
@@ -31,8 +32,8 @@ public class CoffeeByParkerService {
 		}
 	}
 
-	public CoffeeByParker getByid() {
-		CoffeeByParker cp1 = new CoffeeByParker();
+	public Coffee getByid() {
+		Coffee cp1 = new Coffee();
 
 		cp1.setId(1);
 		cp1.setName("type1");

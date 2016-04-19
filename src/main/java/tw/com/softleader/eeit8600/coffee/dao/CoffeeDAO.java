@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import tw.com.softleader.eeit8600.coffee.entity.CoffeeByParker;
+import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
 public class CoffeeDAO  {
 	private static final String URL = "jdbc:sqlserver://softleader.com.tw:1433;database=EEIT86DB";
@@ -17,12 +17,12 @@ public class CoffeeDAO  {
 
 	private static final String SELECT_BY_ID = "select * from coffee where id=?";
 
-	public CoffeeByParker select(int id) {
+	public Coffee select(int id) {
 		// SELECT_BY_ID ="select * from product where id=?";
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		CoffeeByParker result = null;
+		Coffee bean = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstm = conn.prepareStatement(SELECT_BY_ID);
@@ -30,15 +30,15 @@ public class CoffeeDAO  {
 			rs = pstm.executeQuery();
 
 			if (rs.next()) {
-				result = new CoffeeByParker();
-				result.setId(rs.getInt(1));
-				result.setName(rs.getString(2));
-				result.setLocal(rs.getString(3));
-				result.setTesting(rs.getString(4));
-				result.setPrice(rs.getInt(5));			
+				bean = new Coffee();
+				bean.setId(rs.getInt(1));
+				bean.setName(rs.getString(2));
+				bean.setLocal(rs.getString(3));
+				bean.setTesting(rs.getString(4));
+				bean.setPrice(rs.getInt(5));			
 			}
-			System.out.println(result);
-			return result;
+			System.out.println(bean);
+			return bean;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -65,29 +65,29 @@ public class CoffeeDAO  {
 			}
 		}
 
-		return result;
+		return bean;
 	}
 
 	private static final String SELECT_ALL = "select * from coffee";
 
-	public List<CoffeeByParker> select() {
+	public List<Coffee> select() {
 
-		List<CoffeeByParker> result = new ArrayList<CoffeeByParker>();
+		List<Coffee> result = new ArrayList<Coffee>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
-		CoffeeByParker pb = null;
+		Coffee bean = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstm = conn.prepareStatement(SELECT_ALL);
 			ResultSet rs = pstm.executeQuery();
 			while (rs.next()) {
-				pb = new CoffeeByParker();// ---------------------
-				pb.setId(rs.getInt(1));
-				pb.setName(rs.getString(2));
-				pb.setLocal(rs.getString(3));
-				pb.setTesting(rs.getString(4));
-				pb.setPrice(rs.getInt(5));		
-				result.add(pb);
+				bean = new Coffee();// ---------------------
+				bean.setId(rs.getInt(1));
+				bean.setName(rs.getString(2));
+				bean.setLocal(rs.getString(3));
+				bean.setTesting(rs.getString(4));
+				bean.setPrice(rs.getInt(5));		
+				result.add(bean);
 			}
 			for(int i=0;i<=result.size();i++){
 				System.out.println(result.get(i));
@@ -116,8 +116,8 @@ public class CoffeeDAO  {
 
 	private static final String INSERT = "insert into coffee (id, name, local, testing, price) values (?, ?, ?, ?, ?)";
 
-	public CoffeeByParker insert(CoffeeByParker bean) {
-		CoffeeByParker result = null;
+	public Coffee insert(Coffee bean) {
+		Coffee result = null;
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try {
@@ -156,8 +156,8 @@ public class CoffeeDAO  {
 	}
 
 	private static final String UPDATE = "update coffee set NAME=?, LOCAL=?, TESTING=?, PRICE=? where id=?";
-	public CoffeeByParker update(String name,String local,String testing,int price, int id) {
-		CoffeeByParker result = null;
+	public Coffee update(String name,String local,String testing,int price, int id) {
+		Coffee bean = null;
 		Connection conn=null;
 		PreparedStatement pstm = null;
 		try {
@@ -189,10 +189,10 @@ public class CoffeeDAO  {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return bean;
 	}
-	public CoffeeByParker update(CoffeeByParker bean) {
-		CoffeeByParker result = null;
+	public Coffee update(Coffee bean) {
+		Coffee result = null;
 		Connection conn=null;
 		PreparedStatement pstm = null;
 		try {
