@@ -15,17 +15,39 @@ public class CoffeeDAOTest {
 	public void testCrud() {
 		CoffeeDAO dao=new CoffeeDAO();
 		CoffeeByParker bean=new CoffeeByParker(); 
-		List<CoffeeByParker> books = dao.select();
+		List<CoffeeByParker> coffees = dao.select();
+		int originalSize = coffees.size();
 		
+		//test find all
+		coffees=dao.select();
+		//test insert
 		bean.setId(1);
 		bean.setName("first");
 		bean.setLocal("JP");
 		bean.setPrice(200);
 		bean.setTesting("not bad");		
-		dao.insert(bean);
+		dao.insert(bean);	
+		assertEquals(originalSize+1, coffees.size());
 		
-		dao.select();
-		dao.select(1);
+		// test findById	
+		CoffeeByParker dbbean=dao.select(1);
+		assertEquals(bean.getId(), dbbean.getId());
+		assertEquals(bean.getName(), dbbean.getName());
+		assertEquals(bean.getLocal(), dbbean.getLocal());
+		assertEquals(bean.getTesting(), dbbean.getTesting());
+		assertEquals(bean.getPrice(), dbbean.getPrice());
+		// test update
+		dbbean.setPrice(500);
+		dao.update(dbbean);
+		
+		CoffeeByParker updatedCoffee = dao.select(1);
+		assertEquals(dbbean.getPrice(), updatedCoffee.getPrice());
+		
+		// test delete
+		dao.delete(1);
+		coffees = dao.select();
+				
+		assertEquals(originalSize, coffees.size());
 		
 	}
 	
