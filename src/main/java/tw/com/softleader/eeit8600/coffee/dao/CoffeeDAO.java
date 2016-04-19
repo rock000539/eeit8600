@@ -11,7 +11,7 @@ import java.util.List;
 import tw.com.softleader.eeit8600.coffee.entity.CoffeeByParker;
 
 public class CoffeeDAO  {
-	private static final String URL = "softleader.com.tw";
+	private static final String URL = "jdbc:sqlserver://softleader.com.tw:1433;database=EEIT86DB";
 	private static final String USERNAME = "EEIT86";
 	private static final String PASSWORD = "EEIT86";
 
@@ -68,7 +68,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String SELECT_ALL = "select * from product";
+	private static final String SELECT_ALL = "select * from coffee";
 
 	public List<CoffeeByParker> select() {
 
@@ -111,7 +111,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String INSERT = "insert into product (id, name, local, testing, price) values (?, ?, ?, ?, ?)";
+	private static final String INSERT = "insert into coffee (id, name, local, testing, price) values (?, ?, ?, ?, ?)";
 
 	public CoffeeByParker insert(CoffeeByParker bean) {
 		CoffeeByParker result = null;
@@ -152,7 +152,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String UPDATE = "update product set NAME=?, LOCAL=?, TESTING=?, PRICE=? where id=?";
+	private static final String UPDATE = "update coffee set NAME=?, LOCAL=?, TESTING=?, PRICE=? where id=?";
 	public CoffeeByParker update(String name,String local,String testing,int price, int id) {
 		CoffeeByParker result = null;
 		Connection conn=null;
@@ -189,7 +189,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String DELETE = "delete from product where id=?";
+	private static final String DELETE = "delete from coffee where id=?";
 	public boolean delete(int id) {
 		Connection conn=null;
 		PreparedStatement pstm = null;
