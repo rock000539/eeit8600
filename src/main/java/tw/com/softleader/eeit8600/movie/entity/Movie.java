@@ -43,11 +43,11 @@ public class Movie {
 		this.actor = actor;
 	}
 
-	public String getType() {
+	public String getTypes() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setTypes(String type) {
 		this.type = type;
 	}
 	
