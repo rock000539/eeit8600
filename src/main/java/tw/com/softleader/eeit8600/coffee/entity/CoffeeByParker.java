@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeeByParker {
-
+	private int id;	
 	private String name;
 	private String local;
 	private int price;
 	private String testing;	
-	private int id;	
+	
 	@Override
 	public String toString() {
 		return "coffeeByParker [id=" + id + ", name=" + name + ", local=" + local + ", price=" + price + ", testing="

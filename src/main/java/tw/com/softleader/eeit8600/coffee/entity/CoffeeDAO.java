@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeeDAO  {
-	private static final String URL = "jdbc:sqlserver://localhost:1433;database=java";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "passw0rd";
+	private static final String URL = "softleader.com.tw";
+	private static final String USERNAME = "EEIT86";
+	private static final String PASSWORD = "EEIT86";
 
 	private static final String SELECT_BY_ID = "select * from product where id=?";
 
@@ -29,11 +29,11 @@ public class CoffeeDAO  {
 
 			if (rs.next()) {
 				result = new CoffeeByParker();
-
 				result.setId(rs.getInt(1));
 				result.setName(rs.getString(2));
-				result.setPrice(rs.getInt(3));
-				//-------------
+				result.setLocal(rs.getString(3));
+				result.setTesting(rs.getString(4));
+				result.setPrice(rs.getInt(5));			
 			}
 
 			return result;
@@ -82,10 +82,9 @@ public class CoffeeDAO  {
 				pb = new CoffeeByParker();// ---------------------
 				pb.setId(rs.getInt(1));
 				pb.setName(rs.getString(2));
-				pb.setPrice(rs.getInt(3));
-				java.util.Date date=new java.util.Date(rs.getDate(4).getTime());
-				pb.setMake(date);
-				pb.setExpire(rs.getInt(5));
+				pb.setLocal(rs.getString(3));
+				pb.setTesting(rs.getString(4));
+				pb.setPrice(rs.getInt(5));		
 				result.add(pb);
 			}
 
@@ -110,7 +109,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String INSERT = "insert into product (id, name, price, make, expire) values (?, ?, ?, ?, ?)";
+	private static final String INSERT = "insert into product (id, name, local, testing, price) values (?, ?, ?, ?, ?)";
 
 	public CoffeeByParker insert(CoffeeByParker bean) {
 		CoffeeByParker result = null;
@@ -119,12 +118,13 @@ public class CoffeeDAO  {
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstm = conn.prepareStatement(INSERT);
+			
 			pstm.setInt(1,bean.getId());
-			pstm.setString(2, bean.getName());
-			pstm.setFloat(3, bean.getPrice());
-			java.sql.Date date=new java.sql.Date(bean.getMake().getTime());
-			pstm.setDate(4,date);
-			pstm.setInt(5,bean.getExpire());
+			pstm.setString(2,bean.getName());
+			pstm.setString(3,bean.getLocal());
+			pstm.setString(4,bean.getTesting());
+			pstm.setInt(5,bean.getPrice());		
+			
 			int rs=pstm.executeUpdate();
 			System.out.printf("Succese to insert %d data/n",rs);
 
@@ -150,8 +150,8 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String UPDATE = "update product set name=?, price=?, make=?, expire=? where id=?";
-	public CoffeeByParker update(String name, double price, java.util.Date make, int expire, int id) {
+	private static final String UPDATE = "update product set NAME=?, LOCAL=?, TESTING=?, PRICE=? where id=?";
+	public CoffeeByParker update(String name,String local,String testing,int price, int id) {
 		CoffeeByParker result = null;
 		Connection conn=null;
 		PreparedStatement pstm = null;
@@ -159,10 +159,9 @@ public class CoffeeDAO  {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstm = conn.prepareStatement(UPDATE);
 			pstm.setString(1,name);
-			pstm.setDouble(2, price);
-			java.sql.Date date=new java.sql.Date(make.getTime());
-			pstm.setDate(3, date);
-			pstm.setInt(4,expire);
+			pstm.setString(2, local);		
+			pstm.setString(3, testing);
+			pstm.setInt(4,price);
 			pstm.setInt(5,id);
 			int rs=pstm.executeUpdate();
 			System.out.printf("Succese to Update %d data/n",rs);
