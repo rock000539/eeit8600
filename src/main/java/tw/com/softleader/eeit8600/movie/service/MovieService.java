@@ -25,7 +25,7 @@ public class MovieService {
 		movie1.setId(1);
 		movie1.setName("Bat Man");
 		movie1.setActor("Ben");
-		movie1.setType("Actor");
+		movie1.setTypes("Actor");
 		
 		return movie1;
 	}
@@ -39,7 +39,7 @@ public class MovieService {
 		movie1.setId(1);
 		movie1.setName("Bat Man");
 		movie1.setActor("Ben");
-		movie1.setType("Actor");
+		movie1.setTypes("Actor");
 
 		movies.add(movie1);
 		
@@ -47,7 +47,7 @@ public class MovieService {
 		movie2.setId(2);
 		movie2.setName("Harry Porter");
 		movie2.setActor("Harry");
-		movie2.setType("fiction");
+		movie2.setTypes("fiction");
 		
 		movies.add(movie2);
 		
