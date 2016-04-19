@@ -125,7 +125,7 @@ public class MovieDao {
 	
 	public int insert(Movie movie) {
 		String sqlCmd = "INSERT INTO MOVIE(id, NAME, ACTOR, TYPES)"
-				+ " VALUES ("+movie.getId()+",'"+movie.getName()+"','"+movie.getActor()+"','"+movie.getTypes()+")";
+				+ " VALUES ("+movie.getId()+",'"+movie.getName()+"','"+movie.getActor()+"','"+movie.getTypes()+"')";
 		System.out.println(sqlCmd);
 		
 		int rs = 0;

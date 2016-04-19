@@ -10,13 +10,13 @@ public class Movie {
 	
 	private String actor;
 	
-	private String type;
+	private String types;
 	
 	
 	
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", type=" + type + "]";
+		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", types=" + types + "]";
 	}
 
 	public int getId() {
@@ -44,11 +44,11 @@ public class Movie {
 	}
 
 	public String getTypes() {
-		return type;
+		return types;
 	}
 
-	public void setTypes(String type) {
-		this.type = type;
+	public void setTypes(String types) {
+		this.types = types;
 	}
 	
 	

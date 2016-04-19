@@ -23,9 +23,9 @@ public class MovieService {
 		
 		Movie movie1 = new Movie();
 		movie1.setId(1);
-		movie1.setName("Bat Man");
-		movie1.setActor("Ben");
-		movie1.setTypes("Actor");
+		movie1.setName("Batman Begin");
+		movie1.setActor("Christian Bale");
+		movie1.setTypes("Action");
 		
 		return movie1;
 	}
