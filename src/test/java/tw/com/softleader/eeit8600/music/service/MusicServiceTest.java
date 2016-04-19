@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import tw.com.softleader.eeit8600.music.entity.MusicEntity;
+import tw.com.softleader.eeit8600.music.service.MusicService;
 
 public class MusicServiceTest {
 
