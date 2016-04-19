@@ -1,4 +1,4 @@
-package tw.com.softleader.eeit8600.coffee.entity;
+package tw.com.softleader.eeit8600.coffee.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import tw.com.softleader.eeit8600.coffee.entity.CoffeeByParker;
+
 public class CoffeeDAO  {
-	private static final String URL = "softleader.com.tw";
+	private static final String URL = "jdbc:sqlserver://softleader.com.tw:1433;database=EEIT86DB";
 	private static final String USERNAME = "EEIT86";
 	private static final String PASSWORD = "EEIT86";
 
-	private static final String SELECT_BY_ID = "select * from product where id=?";
+	private static final String SELECT_BY_ID = "select * from coffee where id=?";
 
 	public CoffeeByParker select(int id) {
 		// SELECT_BY_ID ="select * from product where id=?";
@@ -35,7 +37,7 @@ public class CoffeeDAO  {
 				result.setTesting(rs.getString(4));
 				result.setPrice(rs.getInt(5));			
 			}
-
+			System.out.println(result);
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,7 +68,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String SELECT_ALL = "select * from product";
+	private static final String SELECT_ALL = "select * from coffee";
 
 	public List<CoffeeByParker> select() {
 
@@ -86,6 +88,9 @@ public class CoffeeDAO  {
 				pb.setTesting(rs.getString(4));
 				pb.setPrice(rs.getInt(5));		
 				result.add(pb);
+			}
+			for(int i=0;i<=result.size();i++){
+				System.out.println(result.get(i));
 			}
 
 		} catch (SQLException e) {
@@ -109,7 +114,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String INSERT = "insert into product (id, name, local, testing, price) values (?, ?, ?, ?, ?)";
+	private static final String INSERT = "insert into coffee (id, name, local, testing, price) values (?, ?, ?, ?, ?)";
 
 	public CoffeeByParker insert(CoffeeByParker bean) {
 		CoffeeByParker result = null;
@@ -150,7 +155,7 @@ public class CoffeeDAO  {
 		return result;
 	}
 
-	private static final String UPDATE = "update product set NAME=?, LOCAL=?, TESTING=?, PRICE=? where id=?";
+	private static final String UPDATE = "update coffee set NAME=?, LOCAL=?, TESTING=?, PRICE=? where id=?";
 	public CoffeeByParker update(String name,String local,String testing,int price, int id) {
 		CoffeeByParker result = null;
 		Connection conn=null;
@@ -186,8 +191,43 @@ public class CoffeeDAO  {
 		}
 		return result;
 	}
-
-	private static final String DELETE = "delete from product where id=?";
+	public CoffeeByParker update(CoffeeByParker bean) {
+		CoffeeByParker result = null;
+		Connection conn=null;
+		PreparedStatement pstm = null;
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstm = conn.prepareStatement(UPDATE);
+			pstm.setString(1,bean.getName());
+			pstm.setString(2, bean.getLocal());		
+			pstm.setString(3, bean.getTesting());
+			pstm.setInt(4,bean.getPrice());
+			pstm.setInt(5,bean.getId());
+			int rs=pstm.executeUpdate();
+			System.out.printf("Succese to Update %d data/n",rs);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if (pstm!=null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (conn!=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	private static final String DELETE = "delete from coffee where id=?";
 	public boolean delete(int id) {
 		Connection conn=null;
 		PreparedStatement pstm = null;
