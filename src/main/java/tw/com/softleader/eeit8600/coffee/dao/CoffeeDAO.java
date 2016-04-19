@@ -1,4 +1,4 @@
-package tw.com.softleader.eeit8600.coffee.entity;
+package tw.com.softleader.eeit8600.coffee.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import tw.com.softleader.eeit8600.coffee.entity.CoffeeByParker;
 
 public class CoffeeDAO  {
 	private static final String URL = "softleader.com.tw";
