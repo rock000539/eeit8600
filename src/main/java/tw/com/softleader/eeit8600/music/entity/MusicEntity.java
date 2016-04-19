@@ -2,40 +2,55 @@ package tw.com.softleader.eeit8600.music.entity;
 
 public class MusicEntity {
 
-	private int muid;
-	private String muauthor;
-	private String mutitle;
-	private Integer muprice;
+//	private int muid;
+//	private String muauthor;
+//	private String mutitle;
+//	private Integer muprice;
 
+	private int id;
+	private String musicNo;
+	private String title;
+	private String author;
+	private Integer price;	
 	
 	@Override
 	public String toString() {
-		return "MusicEntity [muid=" + muid + ", muauthor=" + muauthor
-				+ ", mutitle=" + mutitle + ", muprice=" + muprice + "]";
+		return "MusicEntity [id=" + id + ", music_no=" + musicNo + ", title="
+				+ title + ", author=" + author + ", price=" + price + "]";
 	}
-	public int getMuid() {
-		return muid;
+	
+	public int getId() {
+		return id;
 	}
-	public void setMuid(int muid) {
-		this.muid = muid;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getMuauthor() {
-		return muauthor;
+
+	public String getMusicNo() {
+		return musicNo;
 	}
-	public void setMuauthor(String muauthor) {
-		this.muauthor = muauthor;
+
+	public void setMusicNo(String musicNo) {
+		this.musicNo = musicNo;
 	}
-	public String getMutitle() {
-		return mutitle;
+	
+	public String getTitle() {
+		return title;
 	}
-	public void setMutitle(String mutitle) {
-		this.mutitle = mutitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public Integer getMuprice() {
-		return muprice;
+	public String getAuthor() {
+		return author;
 	}
-	public void setMuprice(Integer muprice) {
-		this.muprice = muprice;
-	}	
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
 	
 }
