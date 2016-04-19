@@ -1,11 +1,11 @@
 package tw.com.softleader.eeit8600.app.entity;
 
-public class AppBean {
+public class App {
 	
-	private int id;
+	private Integer id;
 	private String name;
-	private double evaluation;
-	private int download;
+	private Integer evaluation;
+	private Integer download;
 	private String url;
 	
 	@Override
@@ -14,7 +14,7 @@ public class AppBean {
 				+ ", url=" + url + "]";
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -26,13 +26,13 @@ public class AppBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getEvaluation() {
+	public Integer getEvaluation() {
 		return evaluation;
 	}
-	public void setEvaluation(double evaluation) {
+	public void setEvaluation(Integer evaluation) {
 		this.evaluation = evaluation;
 	}
-	public int getDownload() {
+	public Integer getDownload() {
 		return download;
 	}
 	public void setDownload(int download) {
