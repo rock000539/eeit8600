@@ -5,6 +5,7 @@
 	<groupId>tw.com.softleader</groupId>
 	<artifactId>eeit8600</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<name>eeit8600</name>
 	<url>http://maven.apache.org</url>
