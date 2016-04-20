@@ -8,8 +8,21 @@ import static org.junit.Assert.assertEquals;
 import tw.com.softleader.eeit8600.book.entity.Book;
 
 public class BookDaoTest {
-
 	
+	@Test
+	public void testInsert() {
+		BookDao bookDao = new BookDao();
+		
+		// test insert
+		Book book1 = new Book();
+		book1.setIsbnNo("111-000-0001");
+		book1.setName("Happy to learn Java");
+		book1.setAuthor("Gary Lee");
+		book1.setPrice(100);
+		book1.setId(1L);
+		
+		bookDao.insert(book1);
+	}
 	
 	@Test
 	public void testCrud() {
