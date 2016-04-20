@@ -13,6 +13,8 @@ import tw.com.softleader.eeit8600.book.entity.Book;
 import tw.com.softleader.eeit8600.notebook.entity.Notebook;
 public class NotebookDao {
 	
+	
+
 	public Connection getConnection() {
 		Connection conn = null;
 		String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
