@@ -2,25 +2,33 @@ package tw.com.softleader.eeit8600.app.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import tw.com.softleader.eeit8600.app.entity.App;
+import tw.com.softleader.eeit8600.app.entity.AppEntity;
 
 public class AppDao {
+
+	private static final String URL = "jdbc:sqlserver://softleader.com.tw:1433;database=EEIT86DB";
+	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private static final String USER = "EEIT86";
+	private static final String PWD = "EEIT86";
+
+	private static final String SELECT_ALL = "SELECT * FROM APP";
+	private static final String SELECT_BY_ID = "SELECT * FROM APP WHERE ID=?";
+	private static final String INSERT = "INSERT INTO APP VALUES (?, ?, ?, ?, ?)";
+	private static final String UPDATE = "UPDATE APP SET NAME=?, EVALUATION=?, DOWNLOAD=?, URL=? WHERE ID=?";
+	private static final String DELETE = "DELETE FROM APP WHERE ID=?";
 
 	public Connection getConnection() {
 
 		Connection conn = null;
-		String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
-		String dbUrl = "jdbc:sqlserver://softleader.com.tw:1433;database=EEIT86DB";
-
 		try {
-			Class.forName(jdbcDriver);
-			conn = DriverManager.getConnection(dbUrl, "EEIT86", "EEIT86");
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USER, PWD);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -29,77 +37,27 @@ public class AppDao {
 		return conn;
 	}
 
-	public App select(Integer id) {
+	public List<AppEntity> select() {
 
-		App app = null;
+		List<AppEntity> result = null;
+		AppEntity app = null;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sqlCmd = "SELECT * FROM APP WHERE ID=" + id.intValue();
-		System.out.println(sqlCmd);
 
 		try {
+			result = new ArrayList<AppEntity>();
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sqlCmd);
-			if (rs.next()) {
-				app = new App();
-				app.setId(rs.getInt("ID"));
-				app.setName(rs.getString("NAME"));
-				app.setEvaluation(rs.getInt("EVALUATION"));
-				app.setDownload(rs.getInt("DOWNLOAD"));
-				app.setUrl(rs.getString("URL"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return app;
-	}
-
-	public List<App> select() {
-
-		List<App> apps = new ArrayList<App>();
-		App app = new App();
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sqlCmd = "SELECT * FROM APP";
-		System.out.println(sqlCmd);
-
-		try {
-			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sqlCmd);
+			pstmt = conn.prepareStatement(SELECT_ALL);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				app = new App();
+				app = new AppEntity();
 				app.setId(rs.getInt("ID"));
 				app.setName(rs.getString("NAME"));
 				app.setEvaluation(rs.getInt("EVALUATION"));
 				app.setDownload(rs.getInt("DOWNLOAD"));
 				app.setUrl(rs.getString("URL"));
-				apps.add(app);
+				result.add(app);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,9 +69,9 @@ public class AppDao {
 					e.printStackTrace();
 				}
 			}
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -126,31 +84,81 @@ public class AppDao {
 				}
 			}
 		}
-		return apps;
+		return result;
 	}
 
-	public int insert(App app) {
-		int result = 0;
+	public AppEntity select(Integer id) {
+
+		AppEntity result = null;
 		Connection conn = null;
-		Statement stmt = null;
-		String sqlCmd = "INSERT INTO APP(ID, NAME, EVALUATION, DOWNLOAD, URL) VALUES (" 
-		+ app.getId().intValue() + ", '"+ app.getName() + "', " 
-		+ app.getEvaluation().intValue() + ", " + app.getDownload().intValue()
-		+ ", '" + app.getUrl() + "')";
-		System.out.println(sqlCmd);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 			conn = getConnection();
-			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sqlCmd);
+			pstmt = conn.prepareStatement(SELECT_BY_ID);
+			pstmt.setInt(1, id.intValue());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = new AppEntity();
+				result.setId(rs.getInt("ID"));
+				result.setName(rs.getString("NAME"));
+				result.setEvaluation(rs.getInt("EVALUATION"));
+				result.setDownload(rs.getInt("DOWNLOAD"));
+				result.setUrl(rs.getString("URL"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (stmt != null) {
+			if (rs != null) {
 				try {
-					stmt.close();
+					rs.close();
 				} catch (SQLException e) {
-					stmt = null;
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+
+	public AppEntity insert(AppEntity app) {
+
+		AppEntity result = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(INSERT);
+			pstmt.setInt(1, app.getId().intValue());
+			pstmt.setString(2, app.getName());
+			pstmt.setInt(3, app.getEvaluation().intValue());
+			pstmt.setInt(4, app.getDownload());
+			pstmt.setString(5, app.getUrl());
+			if (pstmt.executeUpdate() == 1)
+				result = select(app.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					pstmt = null;
 				}
 			}
 			if (conn != null) {
@@ -164,31 +172,30 @@ public class AppDao {
 		return result;
 	}
 
-	public int update(App app) {
-		
-		int result = 0;
+	public AppEntity update(String name, int evaluation, int download, String url, int id) {
+
+		AppEntity result = null;
 		Connection conn = null;
-		Statement stmt = null;
-		String sqlCmd = "UPDATE APP SET " 
-				+ "NAME='" + app.getName() 
-				+ "', EVALUATION=" + app.getEvaluation().intValue() 
-				+ ", DOWNLOAD=" + app.getDownload().intValue() 
-				+ ", URL='" + app.getUrl() 
-				+ "' WHERE ID=" + app.getId().intValue();
-		System.out.println(sqlCmd);
-		
+		PreparedStatement pstmt = null;
+
 		try {
 			conn = getConnection();
-			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sqlCmd);
+			pstmt = conn.prepareStatement(UPDATE);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, evaluation);
+			pstmt.setInt(3, download);
+			pstmt.setString(4, url);
+			pstmt.setInt(5, id);
+			if (pstmt.executeUpdate() == 1)
+				result = select(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
-					stmt = null;
+					pstmt = null;
 				}
 			}
 			if (conn != null) {
@@ -201,30 +208,30 @@ public class AppDao {
 		}
 		return result;
 	}
-	
-	public int delete(Integer id){
-		
-		int result = 0;
+
+	public boolean delete(Integer id) {
+
+		boolean result = false;
 		Connection conn = null;
-		Statement stmt = null;
-		String sqlCmd = "DELETE FROM APP WHERE ID="+id.intValue();
-		System.out.println(sqlCmd);
-		
+		PreparedStatement pstmt = null;
+
 		try {
 			conn = getConnection();
-			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sqlCmd);
+			pstmt = conn.prepareStatement(DELETE);
+			pstmt.setInt(1, id.intValue());
+			if (pstmt.executeUpdate() == 1)
+				result = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
-					stmt = null;
+					pstmt = null;
 				}
 			}
-			if(conn != null) {
+			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
