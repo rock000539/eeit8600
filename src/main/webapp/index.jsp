@@ -3,5 +3,5 @@ Hello, This is EEIT86 TestWebSite
 
 <ul>
 	<li><a href="${pageContext.request.contextPath}/book/bookList.jsp">Book Management</a></li>
-
+	<li><a href="${pageContext.request.contextPath}/app/AppList.jsp">App Management</a></li>
 </ul>
