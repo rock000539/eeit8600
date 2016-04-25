@@ -17,8 +17,8 @@ public class MusicServiceTest {
 		
 		MusicEntity music = musicService.getById(1);
 		
-		assertEquals("Beethoven", music.getMuauthor());
-		assertEquals(500, music.getMuprice().intValue());
+		assertEquals("Beethoven", music.getAuthor());
+		assertEquals(500, music.getPrice().intValue());
 	}
 	
 	@Test

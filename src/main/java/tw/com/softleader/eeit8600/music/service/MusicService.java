@@ -19,10 +19,10 @@ public class MusicService {
 	
 	public MusicEntity getById(int muid){
 		MusicEntity music1 = new MusicEntity();
-		music1.setMuid(1);
-		music1.setMuauthor("Beethoven");
-		music1.setMutitle("No.5 Syn.");
-		music1.setMuprice(500);
+		music1.setId(1);
+		music1.setAuthor("Beethoven");
+		music1.setTitle("No.5 Syn.");
+		music1.setPrice(500);
 		
 		return music1;
 	
@@ -32,18 +32,18 @@ public class MusicService {
 		List<MusicEntity> musics = new ArrayList<MusicEntity>();
 		
 		MusicEntity music1 = new MusicEntity();
-		music1.setMuid(1);
-		music1.setMuauthor("Beethoven");
-		music1.setMutitle("No.5 Syn.");
-		music1.setMuprice(500);
+		music1.setId(1);
+		music1.setAuthor("Beethoven");
+		music1.setTitle("No.5 Syn.");
+		music1.setPrice(500);
 		
 		musics.add(music1);
 		
 		MusicEntity music2 = new MusicEntity();
-		music2.setMuid(2);
-		music2.setMuauthor("Mozart");
-		music2.setMutitle("No.8 Ter.");
-		music2.setMuprice(600);
+		music2.setId(2);
+		music2.setAuthor("Mozart");
+		music2.setTitle("No.8 Ter.");
+		music2.setPrice(600);
 		
 		musics.add(music2);
 		
