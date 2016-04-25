@@ -17,7 +17,7 @@ public class CoffeeDAO  {
 
 	private static final String SELECT_BY_ID = "select * from coffee where id=?";
 
-	public Coffee select(int id) {
+	public Coffee select(Long id) {
 		// SELECT_BY_ID ="select * from product where id=?";
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -26,7 +26,7 @@ public class CoffeeDAO  {
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstm = conn.prepareStatement(SELECT_BY_ID);
-			pstm.setInt(1, id);
+			pstm.setLong(1, id);
 			rs = pstm.executeQuery();
 
 			if (rs.next()) {
@@ -89,7 +89,7 @@ public class CoffeeDAO  {
 				bean.setPrice(rs.getInt(5));		
 				result.add(bean);
 			}
-			for(int i=0;i<=result.size();i++){
+			for(int i=0;i<result.size();i++){
 				System.out.println(result.get(i));
 			}
 
