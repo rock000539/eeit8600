@@ -163,7 +163,7 @@ public class MovieDao {
 		String sqlCmd = "UPDATE MOVIE SET "
 				+ "NAME='"+movie.getName()+"',"
 				+ "ACTOR='"+movie.getActor()+"',"
-				+ "TYPES="+movie.getTypes()+" "
+				+ "TYPES='"+movie.getTypes()+"' "
 				+ "WHERE ID="+movie.getId();
 		
 		System.out.println(sqlCmd);
@@ -200,7 +200,7 @@ public class MovieDao {
 	}
 
 	public int delete(int id) {
-		String sqlCmd = "DELETE FROM BOOk WHERE ID="+id;
+		String sqlCmd = "DELETE FROM MOVIE WHERE ID="+id;
 		System.out.println(sqlCmd);
 		int rs = 0;
 		Connection conn = null;
