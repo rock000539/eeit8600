@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
-public class CoffeeByParkerServiceTest {
+public class CoffeeServiceTest {
 
 	@Test
 	public void testGetAll() {
@@ -15,7 +15,7 @@ public class CoffeeByParkerServiceTest {
 
 	@Test
 	public void testGetByid() {
-		CoffeeByParkerService cs = new CoffeeByParkerService();
+		CoffeeService cs = new CoffeeService();
 		Coffee cp = cs.getByid();
 		assertEquals("not bad", cp.getTesting());
 		assertEquals(200, cp.getPrice());

@@ -6,7 +6,7 @@ import java.util.List;
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
 
-public class CoffeeByParkerService {
+public class CoffeeService {
 
 	public void getAll() {
 		List<Coffee> result = new ArrayList<Coffee>();
@@ -45,7 +45,7 @@ public class CoffeeByParkerService {
 	}
 
 	public static void main(String[] args) {
-		CoffeeByParkerService cp = new CoffeeByParkerService();
+		CoffeeService cp = new CoffeeService();
 		cp.getAll();
 		cp.getByid();
 	}
