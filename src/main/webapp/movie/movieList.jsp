@@ -26,7 +26,7 @@
 				<td>${item.id}</td>
 				<td>${item.name}</td>
 				<td>${item.actor}</td>
-				<td>${item.type}</td>
+				<td>${item.types}</td>
 			</tr>
 		</c:forEach>
 	</table>
