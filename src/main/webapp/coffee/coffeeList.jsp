@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% CoffeeService CoffeeService=new CoffeeService();
-	pageContext.setAttribute("models", CoffeeService.getAll());
+	<% CoffeeService coffeeService=new CoffeeService();
+	pageContext.setAttribute("models", coffeeService.getAll());
 	%>
 
 	
@@ -24,11 +24,11 @@
 		
 		<c:forEach items="${models}" var="item" varStatus="status">
 			<tr>
-				<td>${item.ID}</td>
-				<td>${item.NAME}</td>
-				<td>${item.LOCAL}</td>
-				<td>${item.TESTING}</td>
-				<td>${item.PRICE}</td>
+				<td>${item.id}</td>
+				<td>${item.name}</td>
+				<td>${item.local}</td>
+				<td>${item.testing}</td>
+				<td>${item.price}</td>
 			</tr>
 		</c:forEach>
 	
