@@ -16,7 +16,7 @@ public class CoffeeServiceTest {
 	@Test
 	public void testGetByid() {
 		CoffeeService cs = new CoffeeService();
-		Coffee cp = cs.getByid();
+		Coffee cp = cs.getById(1L);
 		assertEquals("not bad", cp.getTesting());
 		assertEquals(200, cp.getPrice());
 	}

@@ -29,7 +29,7 @@ public class CoffeeDAOTest {
 		assertEquals(originalSize+1, coffees.size());
 		
 		// test findById	
-		Coffee dbbean=dao.select(1);
+		Coffee dbbean=dao.select(1L);
 		assertEquals(bean.getId(), dbbean.getId());
 		assertEquals(bean.getName(), dbbean.getName());
 		assertEquals(bean.getLocal(), dbbean.getLocal());
@@ -39,7 +39,7 @@ public class CoffeeDAOTest {
 		dbbean.setPrice(500);
 		dao.update(dbbean);
 		
-		Coffee updatedCoffee = dao.select(1);
+		Coffee updatedCoffee = dao.select(1L);
 		assertEquals(dbbean.getPrice(), updatedCoffee.getPrice());
 		
 		// test delete
