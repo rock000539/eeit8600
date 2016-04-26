@@ -17,7 +17,8 @@
 	
 	<table border='1'>
 		<tr>
-			<th>音樂編號</th>
+			<th>流水號</th>
+			<th>樂曲編號</th>
 			<th>曲名</th>
 			<th>作者</th>
 			<th>定價</th>
@@ -25,6 +26,7 @@
 		
 		<c:forEach items="${models}" var="item" varStatus="status">
 			<tr>
+				<td>${item.id}</td>
 				<td>${item.musicNo}</td>
 				<td>${item.title}</td>
 				<td>${item.author}</td>

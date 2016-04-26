@@ -33,6 +33,7 @@ public class MusicService {
 		
 		MusicEntity music1 = new MusicEntity();
 		music1.setId(1);
+		music1.setMusicNo("014-1972-0426");
 		music1.setAuthor("Beethoven");
 		music1.setTitle("No.5 Syn.");
 		music1.setPrice(500);
@@ -41,6 +42,7 @@ public class MusicService {
 		
 		MusicEntity music2 = new MusicEntity();
 		music2.setId(2);
+		music2.setMusicNo("015-1993-0620");
 		music2.setAuthor("Mozart");
 		music2.setTitle("No.8 Ter.");
 		music2.setPrice(600);
