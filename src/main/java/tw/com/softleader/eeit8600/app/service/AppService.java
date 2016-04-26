@@ -1,6 +1,7 @@
 package tw.com.softleader.eeit8600.app.service;
 
 import java.util.List;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import tw.com.softleader.eeit8600.app.dao.AppDao;
@@ -60,7 +61,7 @@ public class AppService {
 		return result;
 	}
 
-	public AppEntity insert(AppEntity app) {
+	public AppEntity insert(AppEntity app) throws SQLException {
 		AppEntity result = null;
 		if (app != null)
 			result = appDao.insert(app);
