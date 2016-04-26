@@ -8,4 +8,5 @@ Hello, This is EEIT86 TestWebSite
 	<li><a href="${pageContext.request.contextPath}/movie/movieList.jsp">Movie Management</a></li>
 	<li><a href="${pageContext.request.contextPath}/notebook/notebookList.jsp">NoteBook Management</a></li>
 	<li><a href="${pageContext.request.contextPath}/drama/dramaList.jsp">Drama Management</a></li>
+	<li><a href="${pageContext.request.contextPath}/music/musicList.jsp">Music Management</a></li>
 </ul>
