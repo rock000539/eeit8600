@@ -48,7 +48,7 @@
 			<artifactId>sqljdbc42</artifactId>
 			<version>4.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -68,6 +68,17 @@
 						<configuration>
 							<failOnMissingWebXml>false</failOnMissingWebXml>
 						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>org.springframework</groupId>
+								<artifactId>springloaded</artifactId>
+								<version>1.2.0.RELEASE</version>
+							</dependency>
+						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
