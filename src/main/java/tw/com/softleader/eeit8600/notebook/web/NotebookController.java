@@ -21,6 +21,6 @@ public class NotebookController {
 			
 			model.addAttribute("notebooks", notebookService.getAll());
 		
-			return "/notebooks/notebooklist";
+			return "/notebook/notebooklist";
 		}
 }
