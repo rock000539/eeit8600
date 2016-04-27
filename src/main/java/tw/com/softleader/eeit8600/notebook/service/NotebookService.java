@@ -3,8 +3,11 @@ package tw.com.softleader.eeit8600.notebook.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import tw.com.softleader.eeit8600.notebook.entity.Notebook;
 
+@Service
 public class NotebookService {
 
 	public static void main(String[] args) {
