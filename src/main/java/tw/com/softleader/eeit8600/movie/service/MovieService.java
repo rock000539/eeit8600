@@ -4,11 +4,14 @@ package tw.com.softleader.eeit8600.movie.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import tw.com.softleader.eeit8600.book.dao.BookDao;
 import tw.com.softleader.eeit8600.book.entity.Book;
 import tw.com.softleader.eeit8600.movie.dao.MovieDao;
 import tw.com.softleader.eeit8600.movie.entity.Movie;
 
+@Service
 public class MovieService {
 	
 	private MovieDao movieDao;
