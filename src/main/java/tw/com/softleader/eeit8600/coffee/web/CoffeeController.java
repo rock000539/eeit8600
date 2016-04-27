@@ -6,12 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import tw.com.softleader.eeit8600.book.service.BookService;
+import tw.com.softleader.eeit8600.coffee.service.CoffeeService;
 
 @Controller
 @RequestMapping("/coffees")
 public class CoffeeController {
 	@Autowired
-	private BookService coffeeService;
+	private CoffeeService coffeeService;
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
