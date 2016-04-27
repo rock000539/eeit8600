@@ -3,12 +3,14 @@ package tw.com.softleader.eeit8600.coffee.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import tw.com.softleader.eeit8600.book.dao.BookDao;
 import tw.com.softleader.eeit8600.book.entity.Book;
 import tw.com.softleader.eeit8600.coffee.dao.CoffeeDao;
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
-
+@Service
 public class CoffeeService {
 	private CoffeeDao coffeeDao;
 	
