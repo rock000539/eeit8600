@@ -1,15 +1,41 @@
 package tw.com.softleader.eeit8600.notebook.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import tw.com.softleader.eeit8600.notebook.dao.NotebookDao;
 import tw.com.softleader.eeit8600.notebook.entity.Notebook;
 
 @Service
 public class NotebookService {
 
+	private NotebookDao notebookDao;
+	
+	public NotebookService(){
+		notebookDao = new NotebookDao();
+	}
+	
+	public Notebook getById(int id){
+		return notebookDao.findById(id);
+	}
+	
+	public List<Notebook> getAll(){
+		return notebookDao.findAll();
+	}
+	
+	public void insert(Notebook notebook){
+		notebookDao.insert(notebook);
+	}
+	
+	public void update(Notebook notebook){
+		notebookDao.update(notebook);
+	}
+	
+	public void delete(int id){
+		notebookDao.delete(id);
+	}
+/* 0428 before spring
 	public static void main(String[] args) {
 		Notebook nb = new NotebookService().getById(1);
 		System.out.println(nb);
@@ -58,5 +84,5 @@ public class NotebookService {
 		
 		return nbs;
 	}
-
+*/
 }
