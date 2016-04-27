@@ -1,12 +1,16 @@
 package tw.com.softleader.eeit8600.app.service;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import tw.com.softleader.eeit8600.app.dao.AppDao;
 import tw.com.softleader.eeit8600.app.entity.AppEntity;
 
+@Service
 public class AppService {
 
 	// public static void main(String[] args) {
