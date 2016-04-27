@@ -12,7 +12,7 @@ public class CoffeeDAOTest {
 
 	@Test
 	public void testCrud() {
-		CoffeeDAO dao=new CoffeeDAO();
+		CoffeeDao dao=new CoffeeDao();
 		Coffee bean=new Coffee(); 
 		List<Coffee> coffees = dao.select();
 		int originalSize = coffees.size();

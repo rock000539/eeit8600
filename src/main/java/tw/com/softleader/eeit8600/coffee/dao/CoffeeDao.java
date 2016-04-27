@@ -10,7 +10,7 @@ import java.util.List;
 
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
-public class CoffeeDAO  {
+public class CoffeeDao  {
 	private static final String URL = "jdbc:sqlserver://softleader.com.tw:1433;database=EEIT86DB";
 	private static final String USERNAME = "EEIT86";
 	private static final String PASSWORD = "EEIT86";
