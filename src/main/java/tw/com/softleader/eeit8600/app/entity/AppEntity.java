@@ -7,7 +7,20 @@ public class AppEntity {
 	private Integer evaluation;
 	private Integer download;
 	private String url;
-
+	
+	public AppEntity(){
+		
+	}
+	
+	public AppEntity(Integer id, String name, Integer evaluation, Integer download, String url){
+		super();
+		this.id = id;
+		this.name = name;
+		this.evaluation = evaluation;
+		this.download = download;
+		this.url = url;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

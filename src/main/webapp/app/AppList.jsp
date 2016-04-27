@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SELECT ALL</title>
 <style>
 	table {
 		width: 450px;
