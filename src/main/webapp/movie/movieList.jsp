@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="tw.com.softleader.eeit8600.movie.service.MovieService" %>
 
@@ -8,17 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+
 	<%
 	MovieService movieService = new MovieService();
 	pageContext.setAttribute("models", movieService.getAll());
 	%>
-	
+
 	<table border='1'>
 		<tr>
-			<td>½s¸¹</td>
-			<td>¹q¼v¦WºÙ</td>
-			<td>¥Dºtºt­û</td>
-			<td>Ãþ«¬</td>
+			<td>ç·¨è™Ÿ</td>
+			<td>é›»å½±åç¨±</td>
+			<td>ä¸»æ¼”æ¼”å“¡</td>
+			<td>é¡žåž‹</td>
 		</tr>
 		
 		<c:forEach items="${models}" var="item" varStatus="status">
