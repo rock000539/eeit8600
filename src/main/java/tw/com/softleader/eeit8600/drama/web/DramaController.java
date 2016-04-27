@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import tw.com.softleader.eeit8600.drama.service.DramaService;
 
 @Controller
-@RequestMapping("/drama")
+@RequestMapping("/dramas")
 public class DramaController {
 	@Autowired
 	private DramaService dramaService;
