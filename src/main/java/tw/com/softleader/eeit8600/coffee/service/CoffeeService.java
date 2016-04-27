@@ -5,15 +5,15 @@ import java.util.List;
 
 import tw.com.softleader.eeit8600.book.dao.BookDao;
 import tw.com.softleader.eeit8600.book.entity.Book;
-import tw.com.softleader.eeit8600.coffee.dao.CoffeeDAO;
+import tw.com.softleader.eeit8600.coffee.dao.CoffeeDao;
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 
 
 public class CoffeeService {
-	private CoffeeDAO coffeeDao;
+	private CoffeeDao coffeeDao;
 	
 	public CoffeeService() {
-		coffeeDao  = new CoffeeDAO();
+		coffeeDao  = new CoffeeDao();
 	}
 	
 	public Coffee getById(Long id) {
