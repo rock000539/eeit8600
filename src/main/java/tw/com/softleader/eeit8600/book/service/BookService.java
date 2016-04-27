@@ -2,9 +2,12 @@ package tw.com.softleader.eeit8600.book.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import tw.com.softleader.eeit8600.book.dao.BookDao;
 import tw.com.softleader.eeit8600.book.entity.Book;
 
+@Service
 public class BookService {
 	
 	private BookDao bookDao;
