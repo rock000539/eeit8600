@@ -1,15 +1,31 @@
 package tw.com.softleader.eeit8600.book.entity;
 
-public class Book extends Object {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="BOOK")
+public class Book {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
 	private Long id;
 	
+	@Column(name="ISBN_NO", length=20)
 	private String isbnNo;
 	
+	@Column(name="NAME", length=50)
 	private String name;
 	
+	@Column(name="AUTHOR")
 	private String author;
 	
+	@Column(name="PRICE")
 	private Integer price;
 	
 	@Override
