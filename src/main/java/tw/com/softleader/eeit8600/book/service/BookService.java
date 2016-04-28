@@ -29,7 +29,7 @@ public class BookService {
 		
 		bookDao.save(book1);
 		
-		return bookDao.findByPriceLessThan(100);
+		return bookDao.findAll();
 	}
 	
 	public void insert(Book book) {
