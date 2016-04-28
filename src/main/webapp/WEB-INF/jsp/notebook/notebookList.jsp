@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Book List</title>
+<title>Notebook List</title>
 </head>
 <body>
 <h2>NotebookList</h2>
