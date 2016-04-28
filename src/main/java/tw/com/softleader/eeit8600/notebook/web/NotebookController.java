@@ -1,4 +1,6 @@
 package tw.com.softleader.eeit8600.notebook.web;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ public class NotebookController {
 			
 			model.addAttribute("notebooks", notebookService.getAll());
 		
-			return "/notebook/notebooklist";
+			return "/notebook/notebookList";
+	
 		}
 }
