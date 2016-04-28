@@ -1,5 +1,6 @@
 package tw.com.softleader.eeit8600.notebook.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +22,19 @@ public class NotebookService {
 	}
 	
 	public List<Notebook> getAll(){
+		
+		List<Notebook> nbs = new ArrayList<Notebook>();
+		Notebook nb1 = new Notebook();
+
+		nb1.setId(1);
+		nb1.setBrand("ASUS");
+		nb1.setName("ZenBook");
+		nb1.setCpu("Intel® Core M 5Y10 處理器");
+		nb1.setPrice(40000);
+		
+		nbs.add(nb1);
+	
+
 		return notebookDao.findAll();
 	}
 	
