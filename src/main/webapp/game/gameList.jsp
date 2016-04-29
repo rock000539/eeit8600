@@ -25,11 +25,6 @@
 </style>
 </head>
 <body>
-	<%
-		GameService appService = new GameService();
-		pageContext.setAttribute("models", appService.select(null));
-	%>
-
 	<table>
 		<tr>
 			<th>編號</th>
