@@ -11,12 +11,16 @@ import tw.com.softleader.eeit8600.coffee.service.CoffeeService;
 @Controller
 @RequestMapping("/coffees")
 public class CoffeeController {
+	
 	@Autowired
 	private CoffeeService coffeeService;
 
+	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
+		
 		model.addAttribute("coffees", coffeeService.getAll());
+		
 		return "/coffee/coffeeList";
 	}
 
