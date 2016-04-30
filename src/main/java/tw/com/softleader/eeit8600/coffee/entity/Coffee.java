@@ -3,11 +3,32 @@ package tw.com.softleader.eeit8600.coffee.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="coffee")
 public class Coffee {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
 	private int id;	
+	
+	@Column(name="NAME", length=20)
 	private String name;
+	
+	@Column(name="LOCAL", length=20)
 	private String local;
+	
+	@Column(name="PRICE")
 	private int price;
+	
+	@Column(name="TESTING")
 	private String testing;	
 	
 	@Override
