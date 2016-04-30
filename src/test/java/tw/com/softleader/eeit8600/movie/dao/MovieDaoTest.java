@@ -14,7 +14,7 @@ public class MovieDaoTest {
 
 	@Test
 	public void test() {
-		MovieDao movieDao = new MovieDao();
+		MovieDaoImp movieDao = new MovieDaoImp();
 		//findall
 		List<Movie> movies = movieDao.findAll();
 		int originalSize = movies.size();
@@ -25,25 +25,25 @@ public class MovieDaoTest {
 		movie1.setId(1);
 		movie1.setName("Batman Begin");
 		movie1.setActor("Christian Bale");
-		movie1.setTypes("Action");
+		movie1.setGenre("Adventure");
 		//movieDao.insert(movie1);
 		
-		//movies = movieDao.findAll();
-		//assertEquals(originalSize+1, movies.size());
+//		movies = movieDao.findAll();
+//		assertEquals(originalSize+1, movies.size());
 		
 		// test findById
 		Movie movieDb = movieDao.findById(1);
 		assertEquals(movieDb.getId(), movie1.getId());
 		assertEquals(movieDb.getName(), movie1.getName());
 		assertEquals(movieDb.getActor(), movie1.getActor());
-		assertEquals(movieDb.getTypes(), movie1.getTypes());
-		System.out.println(movieDb);
+		assertEquals(movieDb.getGenre(), movie1.getGenre());
+		//System.out.println(movieDb);
 		
 		
 		// test update
-		movieDb.setTypes("Adventure");
-		movieDao.update(movieDb);
-		System.out.println(movieDao.findById(1));
+		movieDb.setGenre("Action");
+		//movieDao.update(movieDb);
+		//System.out.println(movieDao.findById(1));
 		
 		
 		// test delete

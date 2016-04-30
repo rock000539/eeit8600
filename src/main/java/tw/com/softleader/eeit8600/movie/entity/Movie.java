@@ -1,25 +1,37 @@
 package tw.com.softleader.eeit8600.movie.entity;
 
-import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="MOVIE")
 public class Movie {
 	
-	private int id;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
+	private long id;
+	
+	@Column(name="NAME")
 	private String name;
 	
+	@Column(name="ACTOR")
 	private String actor;
 	
-	private String types;
-	
+	@Column(name="GENRE")
+	private String genre;
 	
 	
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", types=" + types + "]";
+		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", genre=" + genre + "]";
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -43,12 +55,12 @@ public class Movie {
 		this.actor = actor;
 	}
 
-	public String getTypes() {
-		return types;
+	public String getGenre() {
+		return genre;
 	}
 
-	public void setTypes(String types) {
-		this.types = types;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 	
 	
