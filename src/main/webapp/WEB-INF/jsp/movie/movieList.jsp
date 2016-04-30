@@ -8,7 +8,8 @@
 </head>
 <body>
 <h1>MovieList</h1>
-<input type="button" value="delete">
+<input type="button" value="add" onclick='window.location="/movies/add"'>
+<form action="/add" method="post">
 <table border="1">
 <tr align='center'><th>編號</th><th>電影名稱</th><th>主要演員</th><th>電影類型</th></tr>
 <c:forEach var="item" items="${movies}" varStatus="vs">
@@ -17,10 +18,11 @@
 		<td>${item.name }</td>
 		<td>${item.actor }</td>
 		<td>${item.genre }</td>
-		<td><input type="button" value="edit"></td>
+		<td><input type="button" value="edit" onclick='window.location="/movies/edit"'></td>
 		<td><input type="button" value="delete"></td>
 	</tr>
 </c:forEach>
 </table>
+</form>
 </body>
 </html>

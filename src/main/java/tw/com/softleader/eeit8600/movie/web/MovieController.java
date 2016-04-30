@@ -15,8 +15,6 @@ public class MovieController {
 	@Autowired
 	private MovieService movieService;
 	
-	@Autowired
-	private Movie movie;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
