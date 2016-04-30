@@ -13,7 +13,7 @@ public class MovieServiceTest {
 /*	@Test
 	public void testGetById() {
 		MovieService test = new MovieService();
-		Movie movie = test.getById((long) 1);
+		Movie movie = test.getById(1);
 		System.out.println(movie);
 		assertEquals("BatMan", movie.getName());
 		assertEquals("Adventure", movie.getGenre());

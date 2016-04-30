@@ -32,7 +32,7 @@ public class MovieDaoTest {
 		assertEquals(originalSize+1, movies.size());
 		
 		// test findById
-		Movie movieDb = movieDao.findOne((long) 1);
+		Movie movieDb = movieDao.findOne(1);
 		assertEquals(movieDb.getId(), movie1.getId());
 		assertEquals(movieDb.getName(), movie1.getName());
 		assertEquals(movieDb.getActor(), movie1.getActor());

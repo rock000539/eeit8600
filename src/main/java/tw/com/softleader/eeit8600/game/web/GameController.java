@@ -28,7 +28,7 @@ public class GameController {
 		return "/game/gameAdd";
 	}
 	
-	@RequestMapping("/add")
+	//@RequestMapping("/add")
 	public String insert(){
 		return "/game/gameAdd";
 	}
@@ -38,12 +38,12 @@ public class GameController {
 		return "/game/gameEdit";
 	}
 	
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public String update(){
 		return "/game/gameEdit";
 	}
 	
-	@RequestMapping("/list")
+	//@RequestMapping("/list")
 	public String delete(){
 		return "/game/gameList";
 	}

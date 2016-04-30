@@ -14,7 +14,7 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
-	private long id;
+	private Long id;
 	
 	@Column(name="NAME")
 	private String name;
@@ -30,7 +30,7 @@ public class Movie {
 		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", genre=" + genre + "]";
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
