@@ -9,17 +9,18 @@ import org.springframework.stereotype.Service;
 
 import tw.com.softleader.eeit8600.book.dao.BookDao;
 import tw.com.softleader.eeit8600.book.entity.Book;
-import tw.com.softleader.eeit8600.movie.dao.MovieDaoImp;
+import tw.com.softleader.eeit8600.game.entity.Game;
+import tw.com.softleader.eeit8600.movie.dao.MovieDao;
 import tw.com.softleader.eeit8600.movie.entity.Movie;
 
 @Service
 public class MovieService {
-	
+
 	@Autowired
-	private MovieDaoImp movieDao;
+	private MovieDao movieDao;
 		
 	public Movie getById(Long id) {
-		return movieDao.getOne(id);		
+		return movieDao.findOne(id);		
 	}
 	
 	public List<Movie> getAll() {

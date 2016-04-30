@@ -25,7 +25,6 @@ public class Movie {
 	@Column(name="GENRE")
 	private String genre;
 	
-	
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", genre=" + genre + "]";
@@ -35,7 +34,7 @@ public class Movie {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,7 +62,14 @@ public class Movie {
 		this.genre = genre;
 	}
 	
-	
+	public static Movie getMovie(Long id, String name, String actor, String genre){
+		Movie movie = new Movie();
+		movie.id = id;
+		movie.name = name;
+		movie.actor = actor;
+		movie.genre = genre;
+		return movie;
+	}
 
 
 }

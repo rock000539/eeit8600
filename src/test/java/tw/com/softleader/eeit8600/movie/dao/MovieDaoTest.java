@@ -1,12 +1,11 @@
 package tw.com.softleader.eeit8600.movie.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.awt.print.Book;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.eeit8600.movie.entity.Movie;
 
@@ -14,7 +13,8 @@ public class MovieDaoTest {
 
 	@Test
 	public void test() {
-		MovieDaoImp movieDao = new MovieDaoImp();
+		
+/*		MovieDao movieDao;
 		//findall
 		List<Movie> movies = movieDao.findAll();
 		int originalSize = movies.size();
@@ -28,11 +28,11 @@ public class MovieDaoTest {
 		movie1.setGenre("Adventure");
 		//movieDao.insert(movie1);
 		
-//		movies = movieDao.findAll();
-//		assertEquals(originalSize+1, movies.size());
+		movies = movieDao.findAll();
+		assertEquals(originalSize+1, movies.size());
 		
 		// test findById
-		Movie movieDb = movieDao.findById(1);
+		Movie movieDb = movieDao.findOne((long) 1);
 		assertEquals(movieDb.getId(), movie1.getId());
 		assertEquals(movieDb.getName(), movie1.getName());
 		assertEquals(movieDb.getActor(), movie1.getActor());
@@ -47,10 +47,10 @@ public class MovieDaoTest {
 		
 		
 		// test delete
-//		movieDao.delete(1);
-//		movies = movieDao.findAll();
-//		assertEquals(originalSize, movies.size());
-		
+		movieDao.delete(1);
+		movies = movieDao.findAll();
+		assertEquals(originalSize, movies.size());
+*/		
 		
 	}
 
