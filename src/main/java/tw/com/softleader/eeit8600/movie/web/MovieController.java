@@ -22,33 +22,34 @@ public class MovieController {
 		return "/movie/movieList";
 	}
 	
-	@RequestMapping(value="/add", method=RequestMethod.GET)
+	@RequestMapping("/add")
 	public String addPage(){
 		return "/movie/movieAdd";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String insert(Model model){
-		//model.addAttribute("insert", movieService.insert(movie);)
+	public String insert(Movie movie, Model model){
+		movieService.insert(movie);
+		model.addAttribute("msg", "added : ");
+		model.addAttribute("result", movieService.getById(movie.getId()));
 		return "/movie/movieAdd";
 	}
 	
 	@RequestMapping("/edit")
 	public String editPage(Model model){
-		
-		return "movie/movieEdit";
+		return "/movie/movieEdit";
 	}
 	
-	@RequestMapping("/update")
-	public String update(Model model){
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(Movie movie){
 		
-		return "movie/movieEdit";
+		return "/movie/movieEdit";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(Model model){
 		
-		return "movie/movieList";
+		return "/movie/movieList";
 	}
 	
 }

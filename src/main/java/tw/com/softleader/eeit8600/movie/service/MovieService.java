@@ -1,9 +1,12 @@
 package tw.com.softleader.eeit8600.movie.service;
 
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,6 @@ import tw.com.softleader.eeit8600.movie.entity.Movie;
 
 @Service
 public class MovieService {
-
 	@Autowired
 	private MovieDao movieDao;
 		

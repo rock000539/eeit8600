@@ -62,14 +62,5 @@ public class Movie {
 		this.genre = genre;
 	}
 	
-	public static Movie getMovie(Long id, String name, String actor, String genre){
-		Movie movie = new Movie();
-		movie.id = id;
-		movie.name = name;
-		movie.actor = actor;
-		movie.genre = genre;
-		return movie;
-	}
-
 
 }

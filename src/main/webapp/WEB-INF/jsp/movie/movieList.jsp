@@ -11,6 +11,7 @@
 <input type="button" value="add" onclick='window.location="/movies/add"'>
 <form action="/add" method="post">
 <table border="1">
+<form>
 <tr align='center'><th>編號</th><th>電影名稱</th><th>主要演員</th><th>電影類型</th></tr>
 <c:forEach var="item" items="${movies}" varStatus="vs">
 	<tr>
@@ -22,6 +23,7 @@
 		<td><input type="button" value="delete"></td>
 	</tr>
 </c:forEach>
+</form>
 </table>
 </form>
 </body>
