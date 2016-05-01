@@ -11,6 +11,10 @@
 	<form action="/movies/add" method="post">
 		<table>
 			<tr>
+				<td>編號</td>
+				<td>default</td>
+			</tr>
+			<tr>
 				<td>電影名稱</td>
 				<td><input type="text" name="name" value=""></td>
 			</tr>
@@ -30,6 +34,7 @@
 	</form>
 	<br>
 	<br>
-	<h3>${msg}${result}</h3>
+	<h4>${msg}${result}</h4>
+
 </body>
 </html>

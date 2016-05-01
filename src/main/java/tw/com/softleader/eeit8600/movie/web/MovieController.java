@@ -15,7 +15,6 @@ public class MovieController {
 	@Autowired
 	private MovieService movieService;
 	
-	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		model.addAttribute("movies", movieService.getAll());
@@ -36,9 +35,9 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value="/edit")
-	public String editPage(String id, Model model){
-		//model.addAttribute("editMovie", movie);
-		System.out.println(id);
+	public String editPage(Long id, Model model){
+		model.addAttribute("movie", movieService.getById(id));
+		System.out.println(movieService.getById(id));
 		return "/movie/movieEdit";
 	}
 	
@@ -51,9 +50,14 @@ public class MovieController {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Model model){
-		
-		return "/movie/movieList";
+	public String delete(Long id, Model model){
+		movieService.delete(id);
+		return "redirect:/movies/list";
 	}
 	
+	@RequestMapping("/loadData")
+	public String loadData(){
+		movieService.addSomeData();
+		return "redirect:/movies/list";
+	}
 }

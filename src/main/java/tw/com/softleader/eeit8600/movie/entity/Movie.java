@@ -62,5 +62,13 @@ public class Movie {
 		this.genre = genre;
 	}
 	
+	public Movie(){
+		
+	}
+	public Movie(String name, String actor, String genre){
+		this.name=name;
+		this.actor=actor;
+		this.genre=genre;
+	}
 
 }

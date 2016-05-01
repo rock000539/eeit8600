@@ -41,4 +41,18 @@ public class MovieService {
 		movieDao.delete(id);
 	}
 	
+	public void addSomeData(){
+		Movie movie1 = new Movie("Batman Begins", "Christian Bale", "Action");
+		Movie movie2 = new Movie("The Dark Knight", "Christian Bale", "Action");
+		Movie movie3 = new Movie("The Dark Knight Rises", "Christian Bale", "Action");
+		Movie movie4 = new Movie("Gone Girl", "Gillian Flynn", "Mystery");
+		Movie movie5 = new Movie("The Wolf of Wall", "Leonardo DiCaprio", "Biography");
+		Movie movie6 = new Movie("Rush", "Daniel Brühl", "Biography");
+		movieDao.save(movie1);
+		movieDao.save(movie2);
+		movieDao.save(movie3);
+		movieDao.save(movie4);
+		movieDao.save(movie5);
+		movieDao.save(movie6);
+	}
 }
