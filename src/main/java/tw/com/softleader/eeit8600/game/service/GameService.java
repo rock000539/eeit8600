@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import tw.com.softleader.eeit8600.game.dao.GameDao;
 import tw.com.softleader.eeit8600.game.entity.Game;
 
-
 @Service // 成為Service
 public class GameService {
 
@@ -20,8 +19,6 @@ public class GameService {
 	}
 	
 	public List<Game> getAll(){
-		// 由於ddl-auto=create-drop, 暫時手動新增資料
-		initData();
 		return gameDao.findAll();
 	}
 	
@@ -37,6 +34,7 @@ public class GameService {
 		gameDao.delete(game);
 	}
 	
+	// 由於ddl-auto=create-drop, 暫時手動新增資料 
 	public void initData(){
 		Game game1 = new Game();
 		game1.setName("部落衝突");

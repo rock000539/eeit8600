@@ -5,45 +5,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GameList</title>
+<title>GameListPage</title>
 <style>
-	table {
-		width: 650px;
-		text-align: center;
-		border-collapse: collapse;
-		margin: 0 auto;
-	}
+table {
+	width: 650px;
+	text-align: center;
+	line-height: 25px;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
 
-	th, td {
-		border: 2px solid gray;
-	}
+th, td {
+	border: 2px solid gray;
+}
 </style>
 </head>
 <body>
 	<table>
 		<tr>
 			<td colspan="2">
-				<input type="button" name="add" value="Add" disabled="disabled"/>
+				<input type="button" name="add" value="Add"style="width: 100px;"
+					onClick="location='/games/add'" />
 			</td>
-			<td colspan="5">
-				進階搜尋區塊(施工中)
-			</td>
-		<tr>
-		
-		<tr>
-			<th></th>
-			<th></th>
-			<th>編號</th>
-			<th>名稱</th>
-			<th>評價</th>
-			<th>下載量</th>
-			<th>連結</th>
+			<td>編號</td>
+			<td>名稱</td>
+			<td>評價</td>
+			<td>下載量</td>
+			<td>連結</td>
 		</tr>
-		
+
 		<c:forEach items="${games}" var="game" varStatus="vs">
 			<tr>
-				<td><input type="button" name="edit" value="Edit" disabled="disabled"/></td>
-				<td><input type="button" name="edit" value="Delete" disabled="disabled"/></td>
+				<td><input type="button" name="edit" value="Edit"
+					 onClick="location='/games/edit?id=${game.id}'" /></td>
+				<td><input type="button" name="delete" value="Delete"
+					 onClick="location='/games/delete?id=${game.id}'" /></td>
 				<td>${game.id}</td>
 				<td>${game.name}</td>
 				<td>${game.evaluation}</td>
