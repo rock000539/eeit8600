@@ -24,7 +24,7 @@ public class CoffeeDAOTest {
 		//test find all
 		coffees=coffeeDao.findAll();
 		//test insert
-		bean.setId(1);
+		bean.setId(1L);
 		bean.setName("first");
 		bean.setLocal("JP");
 		bean.setPrice(200);

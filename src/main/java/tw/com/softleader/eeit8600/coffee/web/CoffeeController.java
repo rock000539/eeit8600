@@ -1,6 +1,9 @@
 package tw.com.softleader.eeit8600.coffee.web;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -27,10 +30,11 @@ public class CoffeeController {
 	
 	@RequestMapping("/add")
 	public String insert(Model model){
-		CoffeeService coffeeService=new CoffeeService();
-		Coffee coffee=new Coffee();
 		
-		coffee.setId(5);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		
+		Coffee coffee=new Coffee();
+		coffee.setId(5L);
 		coffee.setLocal("TW");
 		coffee.setName("TWcoffee");
 		coffee.setPrice(100);
@@ -40,5 +44,26 @@ public class CoffeeController {
 		model.addAttribute("coffees", coffeeService.getAll());
 		return "/coffee/coffeeInsert";
 	}
-
+	@RequestMapping("/update")
+	public String update(Model model){
+		
+		Coffee coffee=new Coffee();
+		coffee.setId(5L);
+		coffee.setLocal("CHINA");
+		coffee.setName("TWcoffee");
+		coffee.setPrice(1000);
+		coffee.setTesting("NO");
+		
+		coffeeService.update(coffee);
+		model.addAttribute("coffees", coffeeService.getAll());
+		return "/coffee/coffeeInsert";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(Model model){
+		
+		coffeeService.delete(1L);
+		model.addAttribute("coffees", coffeeService.getAll());
+		return "/coffee/coffeeInsert";
+	}
 }
