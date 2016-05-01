@@ -17,9 +17,9 @@
 <tr><td><input type="text" name="testing">試用</td></tr>
 </table><br>
 
-<input type="submit" value="add" value="add"><br>
 
-<input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'>
+<input type="submit" value="update" value="update"><br>
+<input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'><br>
 </form>
 
 <c:forEach items="${coffees}" var="item">
