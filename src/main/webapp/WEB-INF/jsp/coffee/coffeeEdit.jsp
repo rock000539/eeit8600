@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>CoffeeInsert</h1>
-<form action="coffees/add" >
+<form action="/coffees/add" method="post">
 <table>
 <tr><td><input type="text" neme="id">ID</td></tr>
 <tr><td><input type="text" name="name">名字</td></tr>

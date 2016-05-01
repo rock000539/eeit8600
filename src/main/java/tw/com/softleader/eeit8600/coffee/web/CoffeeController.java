@@ -1,16 +1,11 @@
 package tw.com.softleader.eeit8600.coffee.web;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import tw.com.softleader.eeit8600.book.service.BookService;
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 import tw.com.softleader.eeit8600.coffee.service.CoffeeService;
 
@@ -31,39 +26,38 @@ public class CoffeeController {
 
 	@RequestMapping("/add")
 	public String addPage() {
-		return "/coffee/coffeeInsert";
+		return "/coffee/coffeeAdd";
 	}
-
+	
+	
 	@RequestMapping(value = "/add", method=RequestMethod.POST)
 	public String insert(Coffee coffee,Model model) {		
 		coffeeService.insert(coffee);
 		model.addAttribute("coffees", coffeeService.getAll());
-		return "/coffee/coffeeInsert";
+		return "/coffee/coffeeAdd";
 	}
 
-	@RequestMapping("/update")
+	@RequestMapping("/edit")
 	public String update() {
-		return "/coffee/coffeeUpdate";
+		return "/coffee/coffeeEdit";
 	}
-
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	public String update(Coffee coffee,Model model) {
-
 		coffeeService.update(coffee);
 		model.addAttribute("coffees", coffeeService.getAll());
-		return "/coffee/coffeeUpdate";
+		return "/coffee/coffeeEdit";
 	}
 
 	@RequestMapping("/delete")
 	public String delete() {
-		return "/coffee/coffeeInsert";
+		return "/coffee/coffeeEdit";
 	}
 	
-	@RequestMapping(value = "/delete", method=RequestMethod.POST)
-	public String delete(Model model, Long id) {
-
-		coffeeService.delete(id);
-		model.addAttribute("coffees", coffeeService.getAll());
-		return "/coffee/coffeeInsert";
-	}
+//	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+//	public String delete(Model model, Long id) {
+//
+//		coffeeService.delete(id);
+//		model.addAttribute("coffees", coffeeService.getAll());
+//		return "/coffee/coffeeEdit";
+//	}
 }
