@@ -7,7 +7,7 @@
 <title>Coffee List</title>
 </head>
 <body>
-<h1>CoffeeList</h1>
+<h1>CoffeeList in WEB-INF</h1>
 
 <c:forEach items="${coffees}" var="item">
 	${item} <br/>
