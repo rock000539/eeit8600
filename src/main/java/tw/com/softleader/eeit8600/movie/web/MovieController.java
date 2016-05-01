@@ -35,14 +35,18 @@ public class MovieController {
 		return "/movie/movieAdd";
 	}
 	
-	@RequestMapping("/edit")
-	public String editPage(Model model){
+	@RequestMapping(value="/edit")
+	public String editPage(String id, Model model){
+		//model.addAttribute("editMovie", movie);
+		System.out.println(id);
 		return "/movie/movieEdit";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(Movie movie){
-		
+	public String update(Movie movie, Model model){
+		movieService.update(movie);
+		model.addAttribute("msg", "update : ");
+		model.addAttribute("result", movieService.getById(movie.getId()));
 		return "/movie/movieEdit";
 	}
 	

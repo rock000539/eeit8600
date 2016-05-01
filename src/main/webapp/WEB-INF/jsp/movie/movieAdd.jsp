@@ -23,13 +23,13 @@
 				<td><input type="text" name="genre" value=""></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="insert" value="Insert"></td>
+				<td><input type="submit" name="insert" value="Save"></td>
 				<td><input type="button" name="cancel" value="Cancel" onclick='window.location="/movies/list"'></td>
 			</tr>
 		</table>
 	</form>
 	<br>
 	<br>
-	${msg}${result}
+	<h3>${msg}${result}</h3>
 </body>
 </html>

@@ -12,25 +12,28 @@
 		<table>
 			<tr>
 				<td>編號</td>
-				<td><input type="text" name="id" value="${item.id }"></td>
+				<td><input type="text" name="id" value=""></td>
 			</tr>
 			<tr>
 				<td>電影名稱</td>
-				<td><input type="text" name="name" value="${item.name }"></td>
+				<td><input type="text" name="name" value=""></td>
 			</tr>
 			<tr>
 				<td>主要演員</td>
-				<td><input type="text" name="actor" value="${item.actor }"></td>
+				<td><input type="text" name="actor" value=""></td>
 			</tr>
 			<tr>
 				<td>電影類型</td>
-				<td><input type="text" name="genre" value="${item.genre }"></td>
+				<td><input type="text" name="genre" value=""></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="insert" value="Insert"></td>
+				<td><input type="submit" name="update" value="update"></td>
 				<td><input type="button" name="cancel" value="Cancel" onclick='window.location="/movies/list"'></td>
 			</tr>
 		</table>
 	</form>
+	<br>
+	<br>
+	<h3>${msg}${result}</h3>
 </body>
 </html>
