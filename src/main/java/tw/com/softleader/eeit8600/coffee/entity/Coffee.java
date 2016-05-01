@@ -17,7 +17,7 @@ public class Coffee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
-	private int id;	
+	private Long id;	
 	
 	@Column(name="NAME", length=20)
 	private String name;
@@ -37,10 +37,10 @@ public class Coffee {
 				+ testing + "]";
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {

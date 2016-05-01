@@ -12,6 +12,8 @@
 <c:forEach items="${coffees}" var="item">
 	${item} <br/>
 </c:forEach>
-
+<li><a href="${pageContext.request.contextPath}/coffee/add">Add</a></li> 
+<li><a href="${pageContext.request.contextPath}/coffee/update">Update</a></li>
+<li><a href="${pageContext.request.contextPath}/coffee/delete">delete</a></li>
 </body>
 </html>
