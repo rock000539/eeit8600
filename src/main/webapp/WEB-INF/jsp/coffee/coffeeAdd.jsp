@@ -8,6 +8,19 @@
 </head>
 <body>
 <h1>CoffeeInsert</h1>
+<form action="coffees/add" >
+<table>
+<tr><td><input type="text" neme="id">ID</td></tr>
+<tr><td><input type="text" name="name">名字</td></tr>
+<tr><td><input type="text" name="local">產地</td></tr>
+<tr><td><input type="text" name="price">價錢</td></tr>
+<tr><td><input type="text" name="testing">試用</td></tr>
+</table><br>
+
+<input type="submit" value="add" value="add"><br>
+
+<input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'>
+</form>
 
 <c:forEach items="${coffees}" var="item">
 	${item} <br/>
