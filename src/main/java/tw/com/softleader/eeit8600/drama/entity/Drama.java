@@ -1,22 +1,46 @@
 package tw.com.softleader.eeit8600.drama.entity;
 
-public class Drama {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="DRAMA")
+public class Drama {
+		
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID")
+	private long id;
+	
+	@Column(name="NAME", length=50)
+	private String name;
+	
+	@Column(name="EPISODES")
+	private Integer episodes;
+	
+	@Column(name="ACTOR", length=50)
+	private String actor;
+	
+	@Column(name="CHANNEL")
+	private Integer channel;
+	
+	public Drama(){
+    }
+	
 	@Override
 	public String toString() {
-		return "Drama [id=" + id + ", name=" + name + ", episode=" + episode + ", actor=" + actor + ", channel="
-				+ channel + "]";
+		return "Drama [id=" + id + ", name=" + name + ", episodes=" + episodes 
+				+ ", actor=" + actor + ", channel=" + channel + "]";
 	}
-	private int id;
-	private String name;
-	private int episode;
-	private String actor;
-	private int channel;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -25,11 +49,11 @@ public class Drama {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getEpisode() {
-		return episode;
+	public Integer getEpisodes() {
+		return episodes;
 	}
-	public void setEpisode(int episode) {
-		this.episode = episode;
+	public void setEpisodes(Integer episodes) {
+		this.episodes = episodes;
 	}
 	public String getActor() {
 		return actor;
@@ -37,10 +61,10 @@ public class Drama {
 	public void setActor(String actor) {
 		this.actor = actor;
 	}
-	public int getChannel() {
+	public Integer getChannel() {
 		return channel;
 	}
-	public void setChannel(int channel) {
+	public void setChannel(Integer channel) {
 		this.channel = channel;
 	}
 	

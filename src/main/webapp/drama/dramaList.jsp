@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Drama List</title>
 </head>
 <body>
 	<% DramaService dramaService=new DramaService();
@@ -17,11 +18,11 @@
 			<th>主角</th>
 			<th>頻道</th>
 		</tr>
-	<c:forEach items="${models}" var="item" varStatus="ststue">
+	<c:forEach items="${models}" var="item" varStatus="status">
 		<tr>
 			<td>${item.id}</td>
 			<td>${item.name}</td>
-			<td>${item.episode}</td>
+			<td>${item.episodes}</td>
 			<td>${item.actor}</td>
 			<td>${item.channel}</td>
 		</tr>
