@@ -10,9 +10,9 @@ public class DramaServiceTest {
 	@Test
 	public void testGetById() {
 		DramaService dramaservice = new DramaService();
-		Drama drama = dramaservice.getById(1);
+		Drama drama = dramaservice.getById(1L);
 		assertEquals("Rick Grimes",drama.getActor());
-		assertEquals(20,drama.getEpisode());
+		assertEquals(20,drama.getEpisodes().intValue());
 		
 	}
 

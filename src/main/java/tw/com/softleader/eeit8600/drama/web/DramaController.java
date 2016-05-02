@@ -13,8 +13,11 @@ public class DramaController {
 	@Autowired
 	private DramaService dramaService;
 	
+	// http://**.**.**/dramas/list
 	@RequestMapping("/list")
 	public String listPage(Model model){
+		// prefix + string + suffix;
+	    // "/WEB-INF/jsp/drama/dramaList.jsp
 		model.addAttribute("dramas",dramaService.getAll());
 		return "/drama/dramaList";
 	}
