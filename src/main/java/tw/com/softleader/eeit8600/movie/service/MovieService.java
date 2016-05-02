@@ -1,18 +1,9 @@
 package tw.com.softleader.eeit8600.movie.service;
 
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import tw.com.softleader.eeit8600.book.dao.BookDao;
-import tw.com.softleader.eeit8600.book.entity.Book;
-import tw.com.softleader.eeit8600.game.entity.Game;
 import tw.com.softleader.eeit8600.movie.dao.MovieDao;
 import tw.com.softleader.eeit8600.movie.entity.Movie;
 
@@ -40,6 +31,16 @@ public class MovieService {
 	public void delete(Long id) {
 		movieDao.delete(id);
 	}
+	
+	public List<Movie> findByActor(String actor){
+		return movieDao.findByActorIgnoreCase(actor);
+	}
+	
+	public List<Movie> findByGenre(String genre){
+		return movieDao.findByGenreIgnoreCase(genre);
+	}
+	
+	
 	
 	public void addSomeData(){
 		Movie movie1 = new Movie("Batman Begins", "Christian Bale", "Action");

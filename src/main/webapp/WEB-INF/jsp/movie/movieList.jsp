@@ -7,40 +7,36 @@
 <title>Movie List</title>
 <style type="text/css">
 	td{
-		padding:1px;
-		padding-left:2px;
-		padding-right:2px;
+		text-align: center;
 	}
-	a{
-		width:40px;
-		display:block;
-		background-color:#E0E0E0;
-		border-radius: 3px;
-		text-align:center;
-	}
-	a:link{text-decoration: none; color:black;}
-	a:visited{text-decoration: none; color:black;}
 </style>
 </head>
 <body>
 <h1>MovieList</h1>
 <button type="button" onClick="window.location='/movies/add'">add</button>
 <button type="button" onClick="window.location='/movies/loadData'">loadData</button>
+<br>
 
-<table border="1">
-<tr align='center'><th>編號</th><th>電影名稱</th><th>主要演員</th><th>電影類型</th></tr>
+<br><br>
+<table border="1" cellspacing="0" cellpadding="2">
+<tr align='center'>
+	<th width="40">編號</th>
+	<th width="160">電影名稱</th>
+	<th width="180">主要演員</th>
+	<th width="80">電影類型</th>
+</tr>
 <c:forEach var="item" items="${movies}" varStatus="vs">
 	<tr>
 		<td>${item.id }</td>
 		<td>${item.name }</td>
 		<td>${item.actor }</td>
 		<td>${item.genre }</td>
-
-		<td><a href="/movies/edit?id=${item.id}"> edit </a></td>
-		<td><a href="/movies/delete?id=${item.id}"> delete </a></td>
+		<td><input type="button" name="edit" value="edit" onclick='location="/movies/edit?id=${item.id}"'></td>
+		<td><input type="button" name="delete" value="delete" onclick='location="/movies/delete?id=${item.id}"'></td>
 	</tr>
 </c:forEach>
 </table>
+<h3>${result}</h3>
 <br>
 <br>
 

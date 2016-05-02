@@ -12,22 +12,25 @@
 		<table>
 			<tr>
 				<td>編號</td>
-				<td><input type="text" name="id" value="${movie.id}"></td>
+				<td><input type="text" name="id" value="${movie.id}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>電影名稱</td>
-				<td><input type="text" name="name" value="${movie.name}"></td>
+				<td><input type="text" name="name" value="${movie.name}">
+				<font color="red" size="1">${errorMsg.nameError}</font></td>
 			</tr>
 			<tr>
 				<td>主要演員</td>
-				<td><input type="text" name="actor" value="${movie.actor}"></td>
+				<td><input type="text" name="actor" value="${movie.actor}">
+				<font color="red" size="1">${errorMsg.actorError}</font></td>
 			</tr>
 			<tr>
 				<td>電影類型</td>
-				<td><input type="text" name="genre" value="${movie.genre}"></td>
+				<td><input type="text" name="genre" value="${movie.genre}">
+				<font color="red" size="1">${errorMsg.genreError}</font></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Save" onClick="edit"></td>
+				<td><input type="submit" value="Save"></td>
 				<td><input type="button" value="Cancel" onclick='window.location="/movies/list"'></td>
 			</tr>
 		</table>

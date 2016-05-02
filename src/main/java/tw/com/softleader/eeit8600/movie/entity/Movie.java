@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="MOVIE")
 public class Movie {
@@ -24,10 +25,19 @@ public class Movie {
 	
 	@Column(name="GENRE")
 	private String genre;
-	
+		
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ", genre=" + genre + "]";
+		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ","
+				+ " genre=" + genre + "]";
+	}
+	
+	public Movie(){	}
+	
+	public Movie(String name, String actor, String genre){
+		this.name=name;
+		this.actor=actor;
+		this.genre=genre;
 	}
 
 	public Long getId() {
@@ -60,15 +70,6 @@ public class Movie {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
-	}
-	
-	public Movie(){
-		
-	}
-	public Movie(String name, String actor, String genre){
-		this.name=name;
-		this.actor=actor;
-		this.genre=genre;
 	}
 
 }
