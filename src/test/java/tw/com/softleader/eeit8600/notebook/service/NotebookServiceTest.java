@@ -14,7 +14,7 @@ public class NotebookServiceTest {
 	@Test
 	public void testGetById() {
 		NotebookService NotebookService= new NotebookService();
-		Notebook nb = NotebookService.getById(1234567);
+		Notebook nb = NotebookService.getById(1234567L);
 		
 		assertEquals(25000,nb.getPrice().intValue());
 	}
