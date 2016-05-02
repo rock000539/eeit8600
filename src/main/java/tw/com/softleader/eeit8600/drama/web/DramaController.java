@@ -21,5 +21,11 @@ public class DramaController {
 		model.addAttribute("dramas",dramaService.getAll());
 		return "/drama/dramaList";
 	}
+	
+	@RequestMapping("/add")
+	public String addPage(){
+		return "drama/dramaAdd";
+	}
 
+	
 }
