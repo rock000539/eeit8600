@@ -26,7 +26,7 @@ public class Coffee {
 	private String local;
 	
 	@Column(name="PRICE")
-	private int price;
+	private Integer price;
 	
 	@Column(name="TESTING")
 	private String testing;	
@@ -55,7 +55,7 @@ public class Coffee {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {

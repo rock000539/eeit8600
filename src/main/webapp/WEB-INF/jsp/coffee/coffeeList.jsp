@@ -8,12 +8,21 @@
 </head>
 <body>
 <h1>CoffeeList in WEB-INF</h1>
-
+<table>
+<tr align='center'><th>編號</th><th>咖啡名</th><th>產地</th><th>價錢</th><th>試用</th></tr>
 <c:forEach items="${coffees}" var="item">
-	${item} <br/>
+	<tr>
+		<td>${item.id }</td>
+		<td>${item.name }</td>
+		<td>${item.local }</td>
+		<td>${item.price }</td>
+		<td>${item.testing }</td>
+
+		<td><a href="/coffees/edit?id=${item.id}"> edit </a></td>
+		<td><a href="/coffees/delete?id=${item.id}"> delete </a></td>
+	</tr>
+	<br/>
 </c:forEach>
-<li><a href="${pageContext.request.contextPath}/coffees/add">Add</a></li> 
-<li><a href="${pageContext.request.contextPath}/coffees/update">Update</a></li>
-<li><a href="${pageContext.request.contextPath}/coffees/delete">delete</a></li>
+</table>
 </body>
 </html>

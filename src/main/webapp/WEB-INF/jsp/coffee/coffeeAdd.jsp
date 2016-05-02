@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>CoffeeInsert</h1>
+<h1>CoffeeADD</h1>
+
 <form action="coffees/add" >
 <table>
 <tr><td><input type="text" neme="id">ID</td></tr>
@@ -25,5 +26,6 @@
 <c:forEach items="${coffees}" var="item">
 	${item} <br/>
 </c:forEach>
+<h4>${msg}${result}</h4>
 </body>
 </html>

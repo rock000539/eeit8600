@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>CoffeeInsert</h1>
-<form action="/coffees/add" method="post">
+<h1>CoffeeEdit</h1>
+<form action="/coffees/update" method="post">
 <table>
 <tr><td><input type="text" neme="id">ID</td></tr>
 <tr><td><input type="text" name="name">名字</td></tr>
@@ -18,12 +18,14 @@
 </table><br>
 
 
-<input type="submit" value="update" value="update"><br>
+<input type="submit" name="update" value="update"><br>
+<input type="submit" neame="delete" value="delete"><br>
 <input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'><br>
 </form>
 
 <c:forEach items="${coffees}" var="item">
 	${item} <br/>
 </c:forEach>
+<h4>${msg}${result}</h4>
 </body>
 </html>

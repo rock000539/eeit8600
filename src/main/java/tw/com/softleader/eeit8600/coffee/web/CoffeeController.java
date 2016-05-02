@@ -28,36 +28,35 @@ public class CoffeeController {
 	public String addPage() {
 		return "/coffee/coffeeAdd";
 	}
-	
-	
-	@RequestMapping(value = "/add", method=RequestMethod.POST)
-	public String insert(Coffee coffee,Model model) {		
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String insert(Coffee coffee, Model model) {
 		coffeeService.insert(coffee);
-		model.addAttribute("coffees", coffeeService.getAll());
-		return "/coffee/coffeeAdd";
+		model.addAttribute("msg", "added : ");
+		model.addAttribute("result", coffeeService.getById(coffee.getId()));
+//		model.addAttribute("coffees", coffeeService.getAll());
+		return "coffeeAdd";
 	}
 
 	@RequestMapping("/edit")
-	public String update() {
+	public String editPage(Long id, Model model) {
+		model.addAttribute("coffees", coffeeService.getById(id));
 		return "/coffee/coffeeEdit";
 	}
-	@RequestMapping(value = "/update", method=RequestMethod.POST)
-	public String update(Coffee coffee,Model model) {
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(Coffee coffee, Model model) {
 		coffeeService.update(coffee);
+		model.addAttribute("msg", "update : ");
+		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 		model.addAttribute("coffees", coffeeService.getAll());
 		return "/coffee/coffeeEdit";
 	}
 
 	@RequestMapping("/delete")
-	public String delete() {
-		return "/coffee/coffeeEdit";
+	public String delete(Long id, Model model) {
+		coffeeService.delete(id);
+		return "redirect:/movies/list";
 	}
-	
-//	@RequestMapping(value = "/delete", method=RequestMethod.POST)
-//	public String delete(Model model, Long id) {
-//
-//		coffeeService.delete(id);
-//		model.addAttribute("coffees", coffeeService.getAll());
-//		return "/coffee/coffeeEdit";
-//	}
+
 }
