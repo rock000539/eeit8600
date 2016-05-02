@@ -4,30 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Drama Add</title>
+<title>Drama Edit</title>
 </head>
 <body>
-<h2>Drama Add</h2>
-<form action="/dramas/insert" method="post">
+<h2>Drama Edit</h2>
+<form action="/dramas/update" method="post">
 	<table>
 		<tr>
+			<td>編號：</td>
+			<td></td>
+		</tr>
+		<tr>
 			<td>劇名：</td>
-			<td><input type="text" name="name" value="${param.name}"></td>
+			<td><input type="text" name="name" value="${drama.name}"></td>
 			<td><font color="red" size="60%"></font></td>
 		</tr>
 		<tr>
 			<td>集數：</td>
-			<td><input type="text" name="episodes" value="${param.episodes}"></td>
+			<td><input type="text" name="episodes" value="${drama.episodes}"></td>
 			<td><font color="red" size="60%"></font></td>
 		</tr>
 		<tr>
 			<td>主演：</td>
-			<td><input type="text" name="actor" value="${param.actor}"></td>
+			<td><input type="text" name="actor" value="${drama.actor}"></td>
 			<td><font color="red" size="60%"></font></td>
 		</tr>
 		<tr>
 			<td>頻道：</td>
-			<td><input type="text" name="channel" value="${param.channel}"></td>
+			<td><input type="text" name="channel" value="${drama.channel}"></td>
 			<td><font color="red" size="60%"></font></td>
 		</tr>
 	</table>

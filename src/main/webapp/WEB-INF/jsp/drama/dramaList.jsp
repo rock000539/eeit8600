@@ -6,10 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Drama List</title>
+<style>
+table{
+width: 500px;
+border-collapse:collapse;
+}
+th,td{
+border:1px solid black;
+text-align:center;
+}
+</style>
 </head>
 <body>
 <h1>Drama List</h1>
-<table border="1">
+<input type="button" name="add" value="add" onclick="location='/dramas/add'"/>
+<table>
 	<tr>
 		<th>編號</th>
 		<th>劇名</th>
@@ -24,12 +35,12 @@
 		<td>${drama.episodes}</td>
 		<td>${drama.actor}</td>
 		<td>${drama.channel}</td>
-		<td><input type="button" name="edit" value="edit" onclick="'location=/dramas/edit?id=${drama.id}'"/></td>
-		<td><input type="button" name="delete" value="delete" onclick="location='/dramas/delete?id=${drama.id}'"/></td>
+		<td>
+     	<input type="button" name="edit" value="edit" onclick="location='/dramas/edit?id=${drama.id}'"/>
+		<input type="button" name="delete" value="delete" onclick="location='/dramas/delete?id=${drama.id}'"/>
+		</td>
 	</tr>
 	</c:forEach>	
 </table>
-<input type="button" name="add" value="add" onclick="location='/dramas/add'"/>
-
 </body>
 </html>
