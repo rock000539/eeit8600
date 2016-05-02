@@ -26,37 +26,46 @@ public class CoffeeController {
 
 	@RequestMapping("/add")
 	public String addPage() {
+		
 		return "/coffee/coffeeAdd";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add2", method = RequestMethod.POST)
 	public String insert(Coffee coffee, Model model) {
+		
 		coffeeService.insert(coffee);
 		model.addAttribute("msg", "added : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 //		model.addAttribute("coffees", coffeeService.getAll());
 		return "coffeeAdd";
+		
 	}
 
 	@RequestMapping("/edit")
 	public String editPage(Long id, Model model) {
+		
 		model.addAttribute("coffees", coffeeService.getById(id));
 		return "/coffee/coffeeEdit";
+		
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(Coffee coffee, Model model) {
+		
 		coffeeService.update(coffee);
 		model.addAttribute("msg", "update : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 		model.addAttribute("coffees", coffeeService.getAll());
 		return "/coffee/coffeeEdit";
+		
 	}
 
 	@RequestMapping("/delete")
 	public String delete(Long id, Model model) {
+		
 		coffeeService.delete(id);
 		return "redirect:/movies/list";
+		
 	}
 
 }
