@@ -3,6 +3,7 @@ package tw.com.softleader.eeit8600.notebook.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.softleader.eeit8600.notebook.dao.NotebookDao;
@@ -11,18 +12,20 @@ import tw.com.softleader.eeit8600.notebook.entity.Notebook;
 @Service
 public class NotebookService {
 
+	@Autowired
 	private NotebookDao notebookDao;
 	
+	/*
 	public NotebookService(){
 		notebookDao = new NotebookDao();
 	}
-	
-	public Notebook getById(int id){
-		return notebookDao.findById(id);
+	*/
+	public Notebook getById(Long id){
+		return notebookDao.findOne(id);
 	}
 	
 	public List<Notebook> getAll(){
-		
+	/*	
 		List<Notebook> nbs = new ArrayList<Notebook>();
 		Notebook nb1 = new Notebook();
 
@@ -32,21 +35,21 @@ public class NotebookService {
 		nb1.setCpu("Intel® Core M 5Y10 處理器");
 		nb1.setPrice(40000);
 		
-		nbs.add(nb1);
-	
+		notebookDao.save(nb1);
+	*/
 
 		return notebookDao.findAll();
 	}
 	
 	public void insert(Notebook notebook){
-		notebookDao.insert(notebook);
+		notebookDao.save(notebook);
 	}
 	
 	public void update(Notebook notebook){
-		notebookDao.update(notebook);
+		notebookDao.save(notebook);
 	}
 	
-	public void delete(int id){
+	public void delete(Long id){
 		notebookDao.delete(id);
 	}
 /* 0428 before spring
