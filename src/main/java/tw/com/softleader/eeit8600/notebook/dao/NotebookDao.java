@@ -1,20 +1,18 @@
 package tw.com.softleader.eeit8600.notebook.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-import tw.com.softleader.eeit8600.book.entity.Book;
-import tw.com.softleader.eeit8600.notebook.entity.Notebook;
-public class NotebookDao {
-	
-	
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import tw.com.softleader.eeit8600.notebook.entity.Notebook;
+
+
+public interface NotebookDao extends JpaRepository<Notebook,Long>{
+	
+	public List<Notebook> findBypriceLessThan(Integer price);
+}
+/*
+public class NotebookDao {
 	public Connection getConnection() {
 		Connection conn = null;
 		String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
@@ -236,5 +234,9 @@ public class NotebookDao {
 		
 		return rs;
 	}//end of delete
-	
 }//end of class
+
+*/	
+
+
+
