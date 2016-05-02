@@ -6,4 +6,5 @@ Hello, This is EEIT86 TestWebSite
 	<li><a href="${pageContext.request.contextPath}/coffees/list">coffee Management</a></li>
 	<li><a href="${pageContext.request.contextPath}/games/init">Game Management</a></li>
 	<li><a href="${pageContext.request.contextPath}/dramas/list">Drama Management</a></li>
+	<li><a href="${pageContext.request.contextPath}/movies/list">Movie Management</a></li>
 </ul>
