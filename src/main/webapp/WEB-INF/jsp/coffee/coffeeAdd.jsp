@@ -9,7 +9,7 @@
 <body>
 <h1>CoffeeADD</h1>
 
-<form action="coffees/add2" >
+<form action="/coffees/add" >
 <table>
 <tr><td><input type="text" neme="id">ID</td></tr>
 <tr><td><input type="text" name="name">名字</td></tr>

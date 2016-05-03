@@ -27,5 +27,7 @@
 	${item} <br/>
 </c:forEach>
 <h4>${msg}${result}</h4>
+<a href src="coffeeAdd.jsp">add</a>
+<a href src="coffeeEdit.jsp">add</a>
 </body>
 </html>

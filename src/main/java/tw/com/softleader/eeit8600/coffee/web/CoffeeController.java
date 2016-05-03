@@ -18,10 +18,22 @@ public class CoffeeController {
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
-
+		data();
+		
 		model.addAttribute("coffees", coffeeService.getAll());
 
 		return "/coffee/coffeeList";
+	}
+	
+	public void data(){
+		Coffee coffee = new Coffee();
+		coffee.setLocal("Australia");
+		coffee.setName("Espresso");
+		coffee.setPrice(100);
+		coffee.setTesting("yes");
+		System.out.println(coffee);
+		coffeeService.insert(coffee);
+		
 	}
 
 	@RequestMapping("/add")
@@ -30,14 +42,14 @@ public class CoffeeController {
 		return "/coffee/coffeeAdd";
 	}
 
-	@RequestMapping(value = "/add2", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String insert(Coffee coffee, Model model) {
 		
 		coffeeService.insert(coffee);
 		model.addAttribute("msg", "added : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 //		model.addAttribute("coffees", coffeeService.getAll());
-		return "coffeeAdd";
+		return "/coffee/coffeeAdd";
 		
 	}
 
