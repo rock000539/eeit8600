@@ -12,7 +12,7 @@
 	<table>
 		<tr>
 			<td>編號：</td>
-			<td>${drama.id}</td>
+			<td><input type="text" name="id" value="${drama.id}" readonly></td>
 		</tr>
 		<tr>
 			<td>劇名：</td>

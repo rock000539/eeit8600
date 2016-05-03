@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.com.softleader.eeit8600.drama.entity.Drama;
 import tw.com.softleader.eeit8600.drama.service.DramaService;
@@ -57,7 +58,7 @@ public class DramaController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(
 			@RequestParam Long id, @RequestParam String name, @RequestParam String episodes,
-			@RequestParam String actor, @RequestParam String channel, Model model
+			@RequestParam String actor, @RequestParam String channel, Model model ,RedirectAttributes attr
 			) {
 
 		String[] data = { name, episodes, actor, channel };
@@ -75,6 +76,9 @@ public class DramaController {
 		dramaService.update(drama);
 		model.addAttribute("drama",drama);
 
+		attr.addAttribute("id", drama.getId());
+		attr.addFlashAttribute("drama", drama);
+		
 		return "redirect:/dramas/list";
 	}
 
