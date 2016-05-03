@@ -31,7 +31,7 @@ th,td{border:1px solid black;
 	<td>${nb.cpu}</td>
 	<td>${nb.price}</td>
 	<td><input type="button" name="edit" value="edit" onclick="Location='/notebooks/edit?id=${nb.id}'"></td>
-	<td><input type="button" name="delete" value="delete" onclick="Location='/notebooks/delete?id=${nb.id}'"></td>
+	<td><input type="button" name="delete" value="delete" onclick="location='/notebooks/delete?id=${nb.id}'"></td>
 </tr>
 	
 </c:forEach>
