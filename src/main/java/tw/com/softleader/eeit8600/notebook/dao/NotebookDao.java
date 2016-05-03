@@ -9,7 +9,8 @@ import tw.com.softleader.eeit8600.notebook.entity.Notebook;
 
 public interface NotebookDao extends JpaRepository<Notebook,Long>{
 	
-	public List<Notebook> findBypriceLessThan(Integer price);
+	//public List<Notebook> findBypriceLessThan(Integer price);
+	
 }
 /*
 public class NotebookDao {
