@@ -13,7 +13,7 @@ import tw.com.softleader.eeit8600.notebook.service.NotebookService;
 @RequestMapping("/notebooks")
 public class NotebookController {
 
-	@Autowired  //??
+	@Autowired  //new一個物件注入進來
 	private NotebookService notebookService;
 	
 		//http://**.**.**/notebooks/list
