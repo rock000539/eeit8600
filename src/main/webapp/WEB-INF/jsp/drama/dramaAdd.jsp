@@ -13,22 +13,22 @@
 		<tr>
 			<td>劇名：</td>
 			<td><input type="text" name="name" value="${param.name}"></td>
-			<td><font color="red" size="60%"></font></td>
+			<td style="color:red;">${errorMsg.name}</td>
 		</tr>
 		<tr>
 			<td>集數：</td>
 			<td><input type="text" name="episodes" value="${param.episodes}"></td>
-			<td><font color="red" size="60%"></font></td>
+			<td style="color:red;">${errorMsg.episodes}</td>
 		</tr>
 		<tr>
 			<td>主演：</td>
 			<td><input type="text" name="actor" value="${param.actor}"></td>
-			<td><font color="red" size="60%"></font></td>
+			<td style="color:red;">${errorMsg.actor}</td>
 		</tr>
 		<tr>
 			<td>頻道：</td>
 			<td><input type="text" name="channel" value="${param.channel}"></td>
-			<td><font color="red" size="60%"></font></td>
+			<td style="color:red;">${errorMsg.channel}</td>
 		</tr>
 	</table>
 <input type="submit" name="save" value="save" />
