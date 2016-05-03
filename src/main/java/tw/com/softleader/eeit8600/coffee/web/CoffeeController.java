@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 import tw.com.softleader.eeit8600.coffee.service.CoffeeService;
@@ -18,14 +19,14 @@ public class CoffeeController {
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
-		data();
 		
 		model.addAttribute("coffees", coffeeService.getAll());
 
 		return "/coffee/coffeeList";
 	}
 	
-	public void data(){
+	@RequestMapping("/addData")
+	public String data(){
 		Coffee coffee = new Coffee();
 		coffee.setLocal("Australia");
 		coffee.setName("Espresso");
@@ -33,7 +34,7 @@ public class CoffeeController {
 		coffee.setTesting("yes");
 		System.out.println(coffee);
 		coffeeService.insert(coffee);
-		
+		return "redirect:/coffees/list";
 	}
 
 	@RequestMapping("/add")
@@ -55,15 +56,20 @@ public class CoffeeController {
 
 	@RequestMapping("/edit")
 	public String editPage(Long id, Model model) {
-		
 		model.addAttribute("coffees", coffeeService.getById(id));
 		return "/coffee/coffeeEdit";
-		
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Coffee coffee, Model model) {
-		
+	public String update(@RequestParam Long id,@RequestParam String name,
+	@RequestParam String local,@RequestParam String price,@RequestParam String testing, 
+			Model model) {
+		Coffee coffee=new Coffee();
+		coffee.setId(id);
+		coffee.setName(name);
+		coffee.setLocal(local);
+		coffee.setPrice(Integer.parseInt(price));
+		coffee.setTesting(testing);
 		coffeeService.update(coffee);
 		model.addAttribute("msg", "update : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
@@ -73,10 +79,10 @@ public class CoffeeController {
 	}
 
 	@RequestMapping("/delete")
-	public String delete(Long id, Model model) {
-		
-		coffeeService.delete(id);
-		return "redirect:/movies/list";
+	public String delete(String id, Model model) {		
+		System.out.println(id);
+		coffeeService.delete(Long.parseLong(id));
+		return "redirect:/coffee/list";
 		
 	}
 
