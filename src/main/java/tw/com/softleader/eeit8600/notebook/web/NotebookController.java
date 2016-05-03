@@ -33,10 +33,9 @@ public class NotebookController {
 			
 		}
 		
-		@RequestMapping(value="delete")
-		public String delete(Long id,Model model){
+		@RequestMapping("/delete")
+		public String delete(Long id, Model model){
 			notebookService.delete(id);
-			return "redirect:/notebook/list";
-			
+			return "redirect:/notebooks/list";
 		}
 }
