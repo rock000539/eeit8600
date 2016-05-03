@@ -23,9 +23,8 @@
 		<td><a href="/coffees/edit?id=${item.id}"> edit </a></td>
 		<td><a href="/coffees/delete?id=${item.id}"> delete </a></td>
 	</tr>
-	<br/>
 </c:forEach>
-
+<br/>
 </table>
 
 </body>
