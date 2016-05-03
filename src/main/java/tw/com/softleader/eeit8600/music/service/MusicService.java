@@ -2,6 +2,7 @@ package tw.com.softleader.eeit8600.music.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.softleader.eeit8600.music.dao.MusicDao;
@@ -10,14 +11,12 @@ import tw.com.softleader.eeit8600.music.entity.MusicEntity;
 @Service
 public class MusicService {
 		
+		@Autowired
 		private MusicDao musicDao;
 		
-		public MusicService() {
-			musicDao = new MusicDao();
-		}
 		
-		public MusicEntity getById(int id) {
-			return musicDao.findById(id);		
+		public MusicEntity getById(Long id) {
+			return musicDao.findOne(id);		
 		}
 		
 		public List<MusicEntity> getAll() {
@@ -25,14 +24,14 @@ public class MusicService {
 		}
 		
 		public void insert(MusicEntity music) {
-			musicDao.insert(music);
+			musicDao.save(music);
 		}
 		
 		public void update(MusicEntity music) {
-			musicDao.update(music);
+			musicDao.save(music);
 		}
 		
-		public void delete(int id) {
+		public void delete(Long id) {
 			musicDao.delete(id);
 		}
 

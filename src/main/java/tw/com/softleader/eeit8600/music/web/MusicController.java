@@ -18,6 +18,8 @@ public class MusicController{
 	// http://**.**.**/muiscs/list
 	@RequestMapping("/list")
 	public String listPage(Model model) {
+		// prefix + string + suffix;
+		// "/WEB-INF/jsp/book/bookList.jsp
 	
 		model.addAttribute("musics", musicService.getAll() );
 		
