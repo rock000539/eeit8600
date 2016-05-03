@@ -14,6 +14,7 @@ th,td{border:1px solid black;
 </head>
 <body>
 <h2>NotebookList</h2>
+<input type="button" name="add" value="add" onClick="location='/notebooks/add'"/>
 <table>
 <tr>
 	<th>編號</th>
