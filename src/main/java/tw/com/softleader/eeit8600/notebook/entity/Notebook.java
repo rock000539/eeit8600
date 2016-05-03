@@ -36,6 +36,14 @@ public class Notebook {
 	@Column(name="PRICE")
 	private Integer price;
 	
+	public Notebook(){}
+	
+	public Notebook(String brand,String name,String cpu,Integer price){
+		this.brand=brand;
+		this.name=name;
+		this.cpu=cpu;
+		this.price=price;
+	}
 	
 	@Override
 	public String toString() {
