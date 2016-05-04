@@ -10,13 +10,27 @@
 		text-align: center;
 	}
 </style>
+<script type="text/javascript">
+function queryActor(){
+	document.forms[0].action="/movies/actor";
+	document.forms[0].submit();
+}
+function queryGenre(){
+	document.forms[0].action="/movies/genre";
+	document.forms[0].submit();
+}
+</script>
 </head>
 <body>
 <h1>MovieList</h1>
 <button type="button" onClick="window.location='/movies/add'">add</button>
 <button type="button" onClick="window.location='/movies/loadData'">loadData</button>
 <br>
-
+<form action="/movies/actor">
+<input type="text" name="data" size="40">
+<input type="button" value="找演員" onclick="queryActor()" >
+<input type="button" value="找類型" onclick="queryGenre()" >
+</form>
 <br><br>
 <table border="1" cellspacing="0" cellpadding="2">
 <tr align='center'>

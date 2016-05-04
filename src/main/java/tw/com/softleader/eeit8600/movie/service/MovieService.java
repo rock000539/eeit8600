@@ -32,12 +32,12 @@ public class MovieService {
 		movieDao.delete(id);
 	}
 	
-	public List<Movie> findByActor(String actor){
-		return movieDao.findByActorIgnoreCase(actor);
+	public List<Movie> findByActor(String data){
+		return movieDao.findByActorIgnoreCase(data);
 	}
 	
-	public List<Movie> findByGenre(String genre){
-		return movieDao.findByGenreIgnoreCase(genre);
+	public List<Movie> findByGenre(String data){
+		return movieDao.findByGenreIgnoreCase(data);
 	}
 	
 	

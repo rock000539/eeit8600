@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.com.softleader.eeit8600.movie.entity.Movie;
 import tw.com.softleader.eeit8600.movie.service.MovieService;
@@ -71,9 +72,25 @@ public class MovieController {
 		return "redirect:/movies/list";
 	}
 	
+	
 	@RequestMapping("/actor")
-	public String findByActor(String actor, Model model){
-		List<Movie> movies = movieService.findByActor(actor);
+	public String findByActor(@RequestParam String data, Model model){
+		List<Movie> movies = movieService.findByActor(data);
+		System.out.println(data);
+		if(movies.isEmpty()){
+			String msg = "sorry, we find nothing";
+			model.addAttribute("result", msg);
+			return "/movie/movieList";
+		}else{
+			model.addAttribute("movies", movies);
+			return "/movie/movieList";
+		}
+	}
+	
+	@RequestMapping("/genre")
+	public String findByGenre(@RequestParam String data, Model model){
+		List<Movie> movies = movieService.findByGenre(data);
+		System.out.println(data);
 		if(movies.isEmpty()){
 			String msg = "sorry, we find nothing";
 			model.addAttribute("result", msg);
@@ -84,12 +101,6 @@ public class MovieController {
 			System.out.println("find");
 			return "/movie/movieList";
 		}
-	}
-	
-	@RequestMapping("/genre")
-	public String findByGenre(String genre){
-		
-		return "/movie/movieList";
 	}
 	
 	@RequestMapping("/loadData")
