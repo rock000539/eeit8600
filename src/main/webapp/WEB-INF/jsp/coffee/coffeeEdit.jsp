@@ -10,11 +10,11 @@
 <h1>CoffeeEdit</h1>
 <form action="/coffees/update" method="post">
 <table> <%-- readonly="readonly" --%>
-<tr><td><input type="text" name="id" value="${coffees.id}">ID</td></tr>
-<tr><td><input type="text" name="name" value="${coffees.name}">名字</td></tr>
-<tr><td><input type="text" name="local" value="${coffees.local}">產地</td></tr>
-<tr><td><input type="text" name="price" value="${coffees.price}">價錢</td></tr>
-<tr><td><input type="text" name="testing" value="${coffees.testing}">試用</td></tr>
+<tr><td><input type="text" name="id" value="${coffees.id}">ID</td><td>${errorMsg.Id}</td></tr>
+<tr><td><input type="text" name="name" value="${coffees.name}">名字</td><td>${errorMsg.Name}</td></tr>
+<tr><td><input type="text" name="local" value="${coffees.local}">產地</td><td>${errorMsg.Local}</td></tr>
+<tr><td><input type="text" name="price" value="${coffees.price}">價錢</td><td>${errorMsg.Price}</td></tr>
+<tr><td><input type="text" name="testing" value="${coffees.testing}">試用</td><td>${errorMsg.Testing}</td></tr>
 </table><br>
 
 

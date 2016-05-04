@@ -9,13 +9,13 @@
 <body>
 <h1>CoffeeADD</h1>
 
-<form action="/coffees/add" method="post">
+<form action="/coffees/add" method="post">${test}
 <table>
-<tr><td><input type="text" neme="id">ID</td></tr>
-<tr><td><input type="text" name="name">名字</td></tr>
-<tr><td><input type="text" name="local">產地</td></tr>
-<tr><td><input type="text" name="price">價錢</td></tr>
-<tr><td><input type="text" name="testing">試用</td></tr>
+<tr><td><input type="text" name="id" value="${coffee.id}">ID</td><td>${errorMsg.Id}</td></tr>
+<tr><td><input type="text" name="name" value="${coffee.name}">名字</td><td>${errorMsg.Name}</td></tr>
+<tr><td><input type="text" name="local" value="${coffee.local}">產地</td><td>${errorMsg.Local}</td></tr>
+<tr><td><input type="text" name="price" value="${coffee.price}">價錢</td><td>${errorMsg.Price}</td></tr>
+<tr><td><input type="text" name="testing" value="${coffee.testing}">試用</td><td>${errorMsg.Testing}</td></tr>
 </table><br>
 
 <input type="submit" value="add" value="add"><br>
@@ -23,9 +23,6 @@
 <input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'>
 </form>
 
-<c:forEach items="${coffees}" var="item">
-	${item} <br/>
-</c:forEach>
-<h4>${msg}${result}</h4>
+
 </body>
 </html>
