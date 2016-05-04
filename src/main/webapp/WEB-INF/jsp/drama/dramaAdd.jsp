@@ -41,7 +41,7 @@
 </c:if>
 <c:if test="${insertMsg=='新增成功'}">
 	New Drama：<span>id=${drama.id},name=${drama.name},episodes=${drama.episodes},
-	                 actor${drama.actor},channel=${drama.channel}</span>
+	                 actor=${drama.actor},channel=${drama.channel}</span>
 </c:if>
 
 </form>
