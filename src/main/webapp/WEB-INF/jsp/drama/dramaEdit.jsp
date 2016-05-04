@@ -35,6 +35,8 @@
 			<td style="color:red;">${errorMsg.channel}</td>
 		</tr>
 	</table>
+	<hr>
+	
 <input type="submit" name="save" value="save" />
 <input type="button" name="cancel" value="cancel" onclick="location='/dramas/list'"/>
 </form>

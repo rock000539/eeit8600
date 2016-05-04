@@ -31,7 +31,7 @@ public class NotebookDaoTest {
 		
 		// test insert
 		Notebook nb1 = new Notebook();
-		nb1.setId(1);
+		nb1.setId(1L);
 		nb1.setBrand("ASUS");
 		nb1.setName("ZenBook");
 		nb1.setCpu("Intel® Core™ M 5Y10 處理器");
