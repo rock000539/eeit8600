@@ -22,7 +22,7 @@ public class Notebook {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
-	private int id;
+	private Long id;
 	
 	@Column(name="BRAND", length=50)
 	private String brand;
@@ -51,11 +51,11 @@ public class Notebook {
 				+ ", cpu=" + cpu + ", price=" + price + "]";
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
