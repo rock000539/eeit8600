@@ -25,13 +25,13 @@ public interface GameDao extends JpaRepository<Game, Long>{
 	// 查詢URL包含某字串並忽略大小寫 (IgnoreCase (UPPER))
 	public List<Game> findByUrlContainingIgnoreCase(String name);
 	
-	// 查詢評價和下載量皆相符的資料
+	// 查詢評價和下載量皆相符的資料 (And)
 	public List<Game> findByEvaluationAndDownload(Integer evaluation, Integer download);
 	
-	// 查詢url包含任一字串的資料
+	// 查詢url包含任一字串的資料 (Or)
 	public List<Game> findByUrlContainingOrUrlContaining(String url1, String url2);
 	
-	// 查詢評價介於兩整數之間的資料
+	// 查詢評價介於兩整數之間的資料 (Between)
 	public List<Game> findByEvaluationBetween(Integer evalu1, Integer evalu2);
 	
 	// 查詢下載量小於某整數的資料 (LessThan < , LessThanEqual <=)
