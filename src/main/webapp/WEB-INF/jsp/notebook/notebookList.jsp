@@ -7,7 +7,7 @@
 <title>Notebook List</title>
 <style>
 table{border:1px solid black;
-	  width:600px;}
+	  width:600px; }
 th,td{border:1px solid black;
 	  text-align:center;}
 </style>
