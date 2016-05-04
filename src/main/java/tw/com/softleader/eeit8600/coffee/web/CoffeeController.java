@@ -63,14 +63,16 @@ public class CoffeeController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ModelAttribute("attributeName")
-	public String update(@RequestParam Long id, @RequestParam String name, @RequestParam String local,
+	public String update(@RequestParam(required=false) String id, @RequestParam String name, @RequestParam String local,
 			@RequestParam String price, @RequestParam String testing, Model model) {
 		Coffee coffee = new Coffee();
-		coffee.setId(id);
+		
+		coffee.setId(Long.parseLong(id));
 		coffee.setName(name);
 		coffee.setLocal(local);
 		coffee.setPrice(Integer.parseInt(price));
 		coffee.setTesting(testing);
+		System.out.println(coffee);
 		coffeeService.update(coffee);
 		model.addAttribute("msg", "update : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
@@ -85,7 +87,7 @@ public class CoffeeController {
 //		model.addAttribute("msg", "update : ");
 //		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 //		model.addAttribute("coffees", coffeeService.getAll());
-//		return "/coffee/coffeeEdit";
+//		return "redirect";
 //	}
 	
 

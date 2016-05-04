@@ -10,7 +10,7 @@
 <h1>CoffeeEdit</h1>
 <form action="/coffees/update" method="post">
 <table> <%-- readonly="readonly" --%>
-<tr><td><input type="text" neme="id" value="${coffees.id}">ID</td></tr>
+<tr><td><input type="text" name="id" value="${coffees.id}">ID</td></tr>
 <tr><td><input type="text" name="name" value="${coffees.name}">名字</td></tr>
 <tr><td><input type="text" name="local" value="${coffees.local}">產地</td></tr>
 <tr><td><input type="text" name="price" value="${coffees.price}">價錢</td></tr>
@@ -19,7 +19,7 @@
 
 
 <input type="submit" name="update" value="update"><br>
-<input type="submit" neame="delete" value="delete"><br>
+<input type="button" name="delete" value="delete"><br>
 <input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'><br>
 </form>
 <%--
@@ -40,7 +40,6 @@
 </c:forEach>
 </table>
  --%>
-<a href src="coffeeAdd.jsp">add</a>
-<a href src="coffeeEdit.jsp">add</a>
+
 </body>
 </html>
