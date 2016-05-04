@@ -11,14 +11,11 @@
 	}
 </style>
 <script type="text/javascript">
-function queryActor(){
-	document.forms[0].action="/movies/actor";
+function queryActor(name){
+	document.forms[0].action="/movies/"+name;
 	document.forms[0].submit();
 }
-function queryGenre(){
-	document.forms[0].action="/movies/genre";
-	document.forms[0].submit();
-}
+
 </script>
 </head>
 <body>
@@ -26,10 +23,10 @@ function queryGenre(){
 <button type="button" onClick="window.location='/movies/add'">add</button>
 <button type="button" onClick="window.location='/movies/loadData'">loadData</button>
 <br>
-<form action="/movies/actor">
+<form action="">
 <input type="text" name="data" size="40">
-<input type="button" value="找演員" onclick="queryActor()" >
-<input type="button" value="找類型" onclick="queryGenre()" >
+<input type="button" name="actor" value="找演員" onclick="queryActor(name)" >
+<input type="button" name="genre" value="找類型" onclick="queryGenre(name)" >
 </form>
 <br><br>
 <table border="1" cellspacing="0" cellpadding="2">
