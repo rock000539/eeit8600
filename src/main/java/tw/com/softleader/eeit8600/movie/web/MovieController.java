@@ -76,7 +76,6 @@ public class MovieController {
 	@RequestMapping("/actor")
 	public String findByActor(@RequestParam String data, Model model){
 		List<Movie> movies = movieService.findByActor(data);
-		System.out.println(data);
 		if(movies.isEmpty()){
 			String msg = "sorry, we find nothing";
 			model.addAttribute("result", msg);
@@ -90,15 +89,12 @@ public class MovieController {
 	@RequestMapping("/genre")
 	public String findByGenre(@RequestParam String data, Model model){
 		List<Movie> movies = movieService.findByGenre(data);
-		System.out.println(data);
 		if(movies.isEmpty()){
 			String msg = "sorry, we find nothing";
 			model.addAttribute("result", msg);
-			System.out.println("no result");
 			return "/movie/movieList";
 		}else{
 			model.addAttribute("movies", movies);
-			System.out.println("find");
 			return "/movie/movieList";
 		}
 	}
