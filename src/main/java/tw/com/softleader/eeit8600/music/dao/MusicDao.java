@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tw.com.softleader.eeit8600.movie.entity.Movie;
 
 //import java.sql.Connection;
 //import java.sql.DriverManager;
