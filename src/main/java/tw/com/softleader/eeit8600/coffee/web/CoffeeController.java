@@ -35,7 +35,7 @@ public class CoffeeController {
 		coffee.setTesting("yes");
 		System.out.println(coffee);
 		coffeeService.insert(coffee);
-		return "redirect:/coffees/list";
+		return "/coffees/coffeeAdd";
 	}
 
 	@RequestMapping("/add")
@@ -51,7 +51,7 @@ public class CoffeeController {
 		model.addAttribute("msg", "added : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 		// model.addAttribute("coffees", coffeeService.getAll());
-		return "/coffee/coffeeAdd";
+		return "redirect:/coffee/coffeeList";
 
 	}
 
@@ -61,42 +61,36 @@ public class CoffeeController {
 		return "/coffee/coffeeEdit";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ModelAttribute("attributeName")
-	public String update(@RequestParam(required=false) String id, @RequestParam String name, @RequestParam String local,
-			@RequestParam String price, @RequestParam String testing, Model model) {
-		Coffee coffee = new Coffee();
-		
-		coffee.setId(Long.parseLong(id));
-		coffee.setName(name);
-		coffee.setLocal(local);
-		coffee.setPrice(Integer.parseInt(price));
-		coffee.setTesting(testing);
-		System.out.println(coffee);
-		coffeeService.update(coffee);
-		model.addAttribute("msg", "update : ");
-		model.addAttribute("result", coffeeService.getById(coffee.getId()));
-		model.addAttribute("coffees", coffeeService.getAll());
-		return "/coffee/coffeeEdit";
-	}
-
 //	@RequestMapping(value = "/update", method = RequestMethod.POST)
-//	@ModelAttribute("attributeName")
-//	public String update(Coffee coffee, Model model) {
+//	public void update(@RequestParam(required=false) String id, @RequestParam String name, @RequestParam String local,
+//			@RequestParam String price, @RequestParam String testing, Model model) {
+//		Coffee coffee = new Coffee();
+//		
+//		coffee.setId(Long.parseLong(id));
+//		coffee.setName(name);
+//		coffee.setLocal(local);
+//		coffee.setPrice(Integer.parseInt(price));
+//		coffee.setTesting(testing);
+//		System.out.println(coffee);
 //		coffeeService.update(coffee);
-//		model.addAttribute("msg", "update : ");
-//		model.addAttribute("result", coffeeService.getById(coffee.getId()));
-//		model.addAttribute("coffees", coffeeService.getAll());
-//		return "redirect";
+
+//		return "redirect:/coffees/list?="+id;
 //	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(Coffee coffee) {
+		Long id=coffee.getId();
+		coffeeService.update(coffee);
+		return "redirect:/coffees/list?="+id;
+	}
 	
 
 	@RequestMapping("/delete")
 	public String delete(String id, Model model) {
 		System.out.println(id);
 		coffeeService.delete(Long.parseLong(id));
-		return "/coffee/coffeeList";
-		// return "redirect:/coffee/list";
+//		return "/coffee/coffeeList";
+		 return "redirect:/coffees/list";
 
 	}
 

@@ -8,8 +8,8 @@
 </head>
 <body>
 <h1>CoffeeList in WEB-INF</h1>
-<a href="add">add page</a><br>
-<a href="edit">edit page</a>
+<a href="add">Add page</a><br>
+
 <input type="button" value="addData" onclick="location='/coffees/addData'">
 <table>
 <tr align='center'><th>編號</th><th>咖啡名</th><th>產地</th><th>價錢</th><th>試用</th></tr>
