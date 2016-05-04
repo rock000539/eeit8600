@@ -43,8 +43,8 @@ public class DramaService {
 		dramaDao.save(drama);
 	}
 
-	public void delete(Drama drama) {
-		dramaDao.delete(drama);
+	public void delete(Long id) {
+		dramaDao.delete(id);
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,6 +34,16 @@
 	</table>
 <input type="submit" name="save" value="save" />
 <input type="button" name="cancel" value="cancel" onclick="location='/dramas/list'"/>
+<hr>
+
+<c:if test="${not empty insertMsg}">
+	<h4 style="color:red;">${insertMsg}</h4>
+</c:if>
+<c:if test="${insertMsg=='新增成功'}">
+	New Drama：<span>id=${drama.id},name=${drama.name},episodes=${drama.episodes},
+	                 actor${drama.actor},channel=${drama.channel}</span>
+</c:if>
+
 </form>
 </body>
 </html>

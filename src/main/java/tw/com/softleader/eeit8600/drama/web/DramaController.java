@@ -36,17 +36,22 @@ public class DramaController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@RequestParam String name, @RequestParam String episodes, @RequestParam String actor,
-			@RequestParam String channel, Model model) {
+			@RequestParam String channel, Model model, RedirectAttributes attr) {
 
 		String[] data = { name, episodes, actor, channel };
 		Map<String, String> errorMsg = validateData(data);
 		if (!errorMsg.isEmpty()) {
-			model.addAttribute("errorMsg", errorMsg);
+			model.addAttribute("errorMsg", errorMsg);		
+			model.addAttribute("insertMsg","新增失敗,請依錯誤訊息更正輸入值");
 			return "forward:/dramas/add";
 		}
 		Drama drama = new Drama(name, Integer.valueOf(episodes), actor, Integer.valueOf(channel));
 		dramaService.insert(drama);
+		
+		attr.addAttribute("insertMsg","新增成功");
+		attr.addAttribute("drama",drama);
 		return "redirect:/dramas/add";
+
 	}
 
 	@RequestMapping("/edit")
@@ -84,7 +89,7 @@ public class DramaController {
 
 	@RequestMapping("/delete")
 	public String delete(@RequestParam Long id) {
-		dramaService.delete(dramaService.getById(id));
+		dramaService.delete(id);
 		return "redirect:/dramas/list";
 	}
 
