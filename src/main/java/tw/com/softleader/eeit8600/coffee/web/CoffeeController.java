@@ -26,7 +26,7 @@ public class CoffeeController {
 		return "/coffee/coffeeList";
 	}
 
-	@RequestMapping("/addData")
+	@RequestMapping("/addSampleData")
 	public String data() {
 		Coffee coffee = new Coffee();
 		coffee.setLocal("Australia");
@@ -35,7 +35,7 @@ public class CoffeeController {
 		coffee.setTesting("yes");
 		System.out.println(coffee);
 		coffeeService.insert(coffee);
-		return "/coffees/coffeeAdd";
+		return "redirect:/coffees/list";
 	}
 
 	@RequestMapping("/add")
@@ -51,7 +51,7 @@ public class CoffeeController {
 		model.addAttribute("msg", "added : ");
 		model.addAttribute("result", coffeeService.getById(coffee.getId()));
 		// model.addAttribute("coffees", coffeeService.getAll());
-		return "redirect:/coffee/coffeeList";
+		return "redirect:/coffees/list";
 
 	}
 
@@ -60,22 +60,6 @@ public class CoffeeController {
 		model.addAttribute("coffees", coffeeService.getById(id));
 		return "/coffee/coffeeEdit";
 	}
-
-//	@RequestMapping(value = "/update", method = RequestMethod.POST)
-//	public void update(@RequestParam(required=false) String id, @RequestParam String name, @RequestParam String local,
-//			@RequestParam String price, @RequestParam String testing, Model model) {
-//		Coffee coffee = new Coffee();
-//		
-//		coffee.setId(Long.parseLong(id));
-//		coffee.setName(name);
-//		coffee.setLocal(local);
-//		coffee.setPrice(Integer.parseInt(price));
-//		coffee.setTesting(testing);
-//		System.out.println(coffee);
-//		coffeeService.update(coffee);
-
-//		return "redirect:/coffees/list?="+id;
-//	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(Coffee coffee) {
@@ -92,6 +76,10 @@ public class CoffeeController {
 //		return "/coffee/coffeeList";
 		 return "redirect:/coffees/list";
 
+	}
+	
+	public void checkData(Coffee coffee, Model model){
+		
 	}
 
 }

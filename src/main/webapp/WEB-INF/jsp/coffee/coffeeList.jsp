@@ -5,12 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Coffee List</title>
+<style>
+table,td{border: 1px solid black;
+}
+</style>
 </head>
 <body>
 <h1>CoffeeList in WEB-INF</h1>
-<a href="add">Add page</a><br>
+<a href="add" style="font-size: 200%"><input type="button" value="Add data" ></a><br>
 
-<input type="button" value="addData" onclick="location='/coffees/addData'">
+
+
+<br>
+
 <table>
 <tr align='center'><th>編號</th><th>咖啡名</th><th>產地</th><th>價錢</th><th>試用</th></tr>
 <c:forEach var="item" items="${coffees}" >
@@ -26,6 +33,6 @@
 </c:forEach>
 <br/>
 </table>
-
+Add sample data<input type="button" value="AddSampleData" onclick="location='/coffees/addSampleData'">
 </body>
 </html>
