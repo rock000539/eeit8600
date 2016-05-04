@@ -38,7 +38,7 @@ public class GameController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@RequestParam String name, @RequestParam String evalu, @RequestParam String dl,
 			@RequestParam String url, Model model, RedirectAttributes attr) {
-
+		
 		// 接收資料
 		String[] data = { name, evalu, dl, url };
 
@@ -110,13 +110,15 @@ public class GameController {
 
 	@RequestMapping("/delete")
 	public String delete(@RequestParam Long id) {
-		gameService.delete(gameService.getById(id));
+		gameService.delete(id);
 		return "redirect:/games/list";
 	}
 	
 	@RequestMapping("/init")
 	public String init(){
-		gameService.initData();
+		if(gameService.getAll().isEmpty()){
+			gameService.initData();
+		}
 		return "redirect:/games/list";
 	}
 

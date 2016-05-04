@@ -30,8 +30,8 @@ public class GameService {
 		gameDao.save(game);
 	}
 	
-	public void delete(Game game){
-		gameDao.delete(game);
+	public void delete(Long id){
+		gameDao.delete(id);
 	}
 	
 	// 由於ddl-auto=create-drop, 暫時手動新增資料 
