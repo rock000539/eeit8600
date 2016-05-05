@@ -9,7 +9,7 @@
 <body>
 <h1>CoffeeADD</h1>
 
-<form action="/coffees/add" method="post">${test}
+<form action="/coffees/add" method="post">
 <table>
 <tr><td><input type="text" name="id" value="${coffee.id}">ID</td><td>${errorMsg.Id}</td></tr>
 <tr><td><input type="text" name="name" value="${coffee.name}">名字</td><td>${errorMsg.Name}</td></tr>
@@ -22,6 +22,8 @@
 
 <input type="button" name="cancel" value="Cancel" onclick='window.location="/coffees/list"'>
 </form>
+<h2 style="color:red">${errorMsg2}</h2>
+
 
 
 </body>

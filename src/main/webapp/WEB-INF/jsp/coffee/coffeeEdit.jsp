@@ -40,6 +40,6 @@
 </c:forEach>
 </table>
  --%>
-
+<h2 style="color:red">${errorMsg}</h2>
 </body>
 </html>
