@@ -80,7 +80,7 @@ public class DramaController {
 		drama.setActor(actor);
 		drama.setChannel(Integer.valueOf(channel));
 		dramaService.update(drama);
-
+		
 		attr.addAttribute("id", drama.getId());
 		attr.addFlashAttribute("updateMsg","更新成功");
 		attr.addFlashAttribute("drama", drama);

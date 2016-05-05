@@ -43,7 +43,11 @@
 
 <hr>
 <c:if test="${not empty updateMsg}">
-<h4 style="color:red;">${updateMsg}</h4>
+	<h4 style="color:red;">${updateMsg}</h4>
+</c:if>
+<c:if test="${updateMsg=='更新成功'}">
+	Update Drama：<span>id=${drama.id}, name=${drama.name}, episodes=${drama.episodes}, 
+	actor=${drama.actor}, channel=${drama.channel}</span>
 </c:if>
 </body>
 </html>
