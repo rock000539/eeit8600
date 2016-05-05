@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 import tw.com.softleader.eeit8600.coffee.service.CoffeeService;
@@ -43,10 +44,30 @@ public class CoffeeController {
 		coffee.setPrice(100);
 		
 		coffee.setTesting("yes");
-		
-		System.out.println(coffee);
-		
+				
 		coffeeService.insert(coffee);
+		
+		Coffee coffee2 = new Coffee();
+		coffee2.setLocal("African");
+		
+		coffee2.setName("Robusta");
+		
+		coffee2.setPrice(1800);
+		
+		coffee2.setTesting("no");
+			
+		coffeeService.insert(coffee2);
+		
+		Coffee coffee3 = new Coffee();
+		coffee3.setLocal("African");
+		
+		coffee3.setName("Originally");
+		
+		coffee3.setPrice(800);
+		
+		coffee3.setTesting("yes");
+			
+		coffeeService.insert(coffee3);
 		
 		return "redirect:/coffees/list";
 	}
@@ -59,19 +80,18 @@ public class CoffeeController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String insert(Coffee coffee, Model model) {
-
 		
 //		Map error=checkData(coffee);		
 //		if(!error.isEmpty()){
 //			model.addAttribute("errorMsg",error);
 //			model.addAttribute("coffee",coffee);
-//			return "/coffees/add";
+//			return "forward: /coffees/add";
 //		}
 		
 		coffeeService.insert(coffee);
 		
 		return "redirect:/coffees/list";
-
+		
 	}
 
 	@RequestMapping("/edit")
@@ -126,5 +146,12 @@ public class CoffeeController {
 	
 		return err;
 	}
-
+	
+	@RequestMapping("/findById")
+	public String findById(Long id, RedirectAttributes redirAttrl){
+		System.out.println(id);
+		redirAttrl.addAttribute("coffees", coffeeService.findById(id));
+		return "/coffee/coffeeList";
+	}
+	
 }

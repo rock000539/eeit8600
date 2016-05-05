@@ -19,6 +19,11 @@ table,td{border: 1px solid black;
 <br>
 
 <table>
+<form action="/findById">
+<input type="text" name="id" >
+<input type="submit" value="Search">
+</form>
+
 <tr align='center'><th>編號</th><th>咖啡名</th><th>產地</th><th>價錢</th><th>試用</th></tr>
 <c:forEach var="item" items="${coffees}" >
 	<tr>

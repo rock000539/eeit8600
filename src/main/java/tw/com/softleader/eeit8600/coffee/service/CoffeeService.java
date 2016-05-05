@@ -15,6 +15,9 @@ public class CoffeeService {
 	
 	public CoffeeService() {
 	}
+	public List findById(Long id){
+		return coffeeDao.findById(id);
+	}
 	
 	public Coffee getById(Long id) {
 		return coffeeDao.findOne(id);		
@@ -35,5 +38,6 @@ public class CoffeeService {
 	public void delete(Long id) {
 		coffeeDao.delete(id);
 	}
+	
 }
 
