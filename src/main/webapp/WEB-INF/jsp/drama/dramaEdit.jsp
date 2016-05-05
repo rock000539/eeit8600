@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,10 +36,14 @@
 			<td style="color:red;">${errorMsg.channel}</td>
 		</tr>
 	</table>
-	<hr>
-	
+
 <input type="submit" name="save" value="save" />
 <input type="button" name="cancel" value="cancel" onclick="location='/dramas/list'"/>
 </form>
+
+<hr>
+<c:if test="${not empty updateMsg}">
+<h4 style="color:red;">${updateMsg}</h4>
+</c:if>
 </body>
 </html>

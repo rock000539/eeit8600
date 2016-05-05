@@ -48,8 +48,8 @@ public class DramaController {
 		Drama drama = new Drama(name, Integer.valueOf(episodes), actor, Integer.valueOf(channel));
 		dramaService.insert(drama);
 		
-		attr.addAttribute("insertMsg","新增成功");
-		attr.addAttribute("drama",drama);
+		attr.addFlashAttribute("insertMsg","新增成功");
+		attr.addFlashAttribute("drama",drama);
 		return "redirect:/dramas/add";
 
 	}
@@ -70,6 +70,7 @@ public class DramaController {
 		Map<String, String> errorMsg = validateData(data);
 		if (!errorMsg.isEmpty()) {
 			model.addAttribute("errorMsg", errorMsg);
+			model.addAttribute("updateMsg","更新失敗,請依錯誤訊息更正輸入值");
 			return "forward:/dramas/edit?id="+id;
 		}
 		Drama drama = new Drama();
@@ -79,12 +80,12 @@ public class DramaController {
 		drama.setActor(actor);
 		drama.setChannel(Integer.valueOf(channel));
 		dramaService.update(drama);
-		model.addAttribute("drama",drama);
 
 		attr.addAttribute("id", drama.getId());
+		attr.addFlashAttribute("updateMsg","更新成功");
 		attr.addFlashAttribute("drama", drama);
 		
-		return "redirect:/dramas/list";
+		return "redirect:/dramas/edit";
 	}
 
 	@RequestMapping("/delete")
