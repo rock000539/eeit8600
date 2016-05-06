@@ -12,6 +12,9 @@ public interface MovieDao extends JpaRepository<Movie, Long> {
 	
 	public List<Movie> findByGenreIgnoreCase(String genre);
 	
+	public List<Movie> findByActorIgnoreCaseStartingWith(String actor);
+	
+	public List<Movie> findByActorIgnoreCaseEndingWith(String actor);
 
 	
 }
