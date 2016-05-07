@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -25,19 +29,23 @@ public class Movie {
 	
 	@Column(name="GENRE")
 	private String genre;
-		
+	
+	@Column(name="RATING")
+	private Double rating;
+
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", name=" + name + ", actor=" + actor + ","
-				+ " genre=" + genre + "]";
+				+ " genre=" + genre + ", rating=" + rating + "]";
 	}
 	
 	public Movie(){	}
 	
-	public Movie(String name, String actor, String genre){
+	public Movie(String name, String actor, String genre, Double rating){
 		this.name=name;
 		this.actor=actor;
 		this.genre=genre;
+		this.rating = rating;
 	}
 
 	public Long getId() {
@@ -70,6 +78,14 @@ public class Movie {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+	
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
 	}
 
 }

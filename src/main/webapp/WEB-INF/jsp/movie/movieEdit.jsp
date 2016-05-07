@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="BIG5"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,23 +11,28 @@
 	<form action="/movies/update" method="post">
 		<table>
 			<tr>
-				<td>½s¸¹</td>
+				<td>ç·¨è™Ÿ</td>
 				<td><input type="text" name="id" value="${movie.id}" readonly="readonly"></td>
 			</tr>
 			<tr>
-				<td>¹q¼v¦WºÙ</td>
+				<td>é›»å½±åç¨±</td>
 				<td><input type="text" name="name" value="${movie.name}">
 				<font color="red" size="1">${errorMsg.nameError}</font></td>
 			</tr>
 			<tr>
-				<td>¥D­nºt­û</td>
+				<td>ä¸»è¦æ¼”å“¡</td>
 				<td><input type="text" name="actor" value="${movie.actor}">
 				<font color="red" size="1">${errorMsg.actorError}</font></td>
 			</tr>
 			<tr>
-				<td>¹q¼vÃş«¬</td>
+				<td>é›»å½±é¡å‹</td>
 				<td><input type="text" name="genre" value="${movie.genre}">
 				<font color="red" size="1">${errorMsg.genreError}</font></td>
+			</tr>
+			<tr>
+				<td>è©•åˆ†</td>
+				<td><input type="text" name="rating" value="${movie.rating}">
+				<font color="red" size="1">${errorMsg.ratingError}</font></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Save"></td>
