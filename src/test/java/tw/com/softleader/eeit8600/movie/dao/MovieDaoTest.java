@@ -2,15 +2,11 @@ package tw.com.softleader.eeit8600.movie.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -25,9 +21,9 @@ public class MovieDaoTest {
 	@Autowired
 	MovieDao movieDao;
 	List<Movie> movies;
-
 	
-	public void setup(){
+	@Before
+	public void initData(){
 		Movie movie1 = new Movie("Batman Begins", "Christian Bale", "Action");
 		Movie movie2 = new Movie("The Dark Knight", "Christian Bale", "Action");
 		Movie movie3 = new Movie("The Dark Knight Rises", "Christian Bale", "Action");
@@ -42,19 +38,32 @@ public class MovieDaoTest {
 		movieDao.save(movie6);
 	}
 	
+	@org.junit.After
+	public void dropData(){
+		movies = movieDao.findAll();
+		movieDao.delete(movies);
+	}
+	
 	@Test
 	public void testFindByActorIgnoreCase() {
-		movies = movieDao.findByActorIgnoreCase("Christian Bale");
+		movies = movieDao.findByActorIgnoreCase("christian Bale");
 		assertEquals(3, movies.size());
-//		movies = movieDao.findByActorIgnoreCase("Gillian Flynn");
-//		assertEquals(1, movies.size());
 	}
-
 	@Test
 	public void testFindByGenreIgnoreCase() {
-		movies = movieDao.findByGenreIgnoreCase("Biography");
+		movies = movieDao.findByGenreIgnoreCase("biography");
 		assertEquals(2, movies.size());
-		
 	}
+	@Test
+	public void testFindByActorIgnoreCaseStartingWith(){
+		movies = movieDao.findByActorIgnoreCaseStartingWith("christian");
+		assertEquals(3, movies.size());
+	}
+	@Test
+	public void testFindByActorIgnoreCaseEndingWith(){
+		movies = movieDao.findByActorIgnoreCaseEndingWith("bale");
+		assertEquals(3, movies.size());
+	}
+	
 
 }
