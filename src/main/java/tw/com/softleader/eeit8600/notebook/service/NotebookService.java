@@ -26,19 +26,19 @@ public class NotebookService {
 	
 	public List<Notebook> getAll(){
 	
-		List<Notebook> nbs = notebookDao.findAll();
-		if(nbs.isEmpty()){
-		Notebook nb1 = new Notebook("ASUS" ,"ZenBook-UX305FA" ,"Intel Core M 5Y10 處理器" ,40000);
-		Notebook nb2 = new Notebook("ASUS" ,"ROG-G751JY","Intel Core i7 4860HQ 處理器" ,50000);
-		Notebook nb3 = new Notebook("ASUS" ,"N551JB" ,"Intel Core	 i7 4720HQ 處理器" ,35000);
-		Notebook nb4 = new Notebook("acer" ,"VN7-792G-76Y0" ,"Intel Core i7-6700HQ 處理器 " ,40000);
-		Notebook nb5 = new Notebook("acer" ,"S7-393-55204G25ews" ,"Intel Core i5-5200U 處理器" ,30000);
+		List<Notebook> notebooks = notebookDao.findAll();
+		if(notebooks.isEmpty()){
+		Notebook notebook1 = new Notebook("ASUS" ,"ZenBook-UX305FA" ,"Intel Core M 5Y10 處理器" ,40000);
+		Notebook notebook2 = new Notebook("ASUS" ,"ROG-G751JY","Intel Core i7 4860HQ 處理器" ,50000);
+		Notebook notebook3 = new Notebook("ASUS" ,"N551JB" ,"Intel Core	 i7 4720HQ 處理器" ,35000);
+		Notebook notebook4 = new Notebook("acer" ,"VN7-792G-76Y0" ,"Intel Core i7-6700HQ 處理器 " ,40000);
+		Notebook notebook5 = new Notebook("acer" ,"S7-393-55204G25ews" ,"Intel Core i5-5200U 處理器" ,30000);
 		
-		notebookDao.save(nb1);
-		notebookDao.save(nb2);
-		notebookDao.save(nb3);
-		notebookDao.save(nb4);
-		notebookDao.save(nb5);
+		notebookDao.save(notebook1);
+		notebookDao.save(notebook2);
+		notebookDao.save(notebook3);
+		notebookDao.save(notebook4);
+		notebookDao.save(notebook5);
 		}
 		return notebookDao.findAll();
 	}
