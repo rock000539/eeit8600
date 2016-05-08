@@ -18,6 +18,22 @@ public class CoffeeService {
 	public List findById(Long id){
 		return coffeeDao.findById(id);
 	}
+	public List findByName(String name){
+		return coffeeDao.findByName(name);
+	}
+//	public List findByNameIgnoreCase(String name){
+//		return coffeeDao.findByNameIgnoreCase(name);
+//	}
+//	public List findByLocalIgnoreCase(String local){
+//		return coffeeDao.findByLocalIgnoreCase(local);
+//	}
+//	public List findByPriceIgnoreCase(int price){
+//		return coffeeDao.findByPriceIgnoreCase(price);
+//	}
+//	public List findByTestingIgnoreCase(String testing){
+//		return coffeeDao.findByTestingIgnoreCase(testing);
+//	}
+	
 	
 	public Coffee getById(Long id) {
 		return coffeeDao.findOne(id);		

@@ -26,11 +26,20 @@ public class Coffee {
 	private String local;
 	
 	@Column(name="PRICE")
-	private Integer price;
+	private int price;
 	
 	@Column(name="TESTING")
 	private String testing;	
 	
+	public Coffee(){};
+	public Coffee(Long id, String name, String local, int price, String testing) {
+		this.id=id;;
+		this.name=name;
+		this.local=local;
+		this.price=price;
+		this.testing=testing;
+	}
+
 	@Override
 	public String toString() {
 		return "coffeeByParker [id=" + id + ", name=" + name + ", local=" + local + ", price=" + price + ", testing="
