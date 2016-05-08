@@ -27,6 +27,7 @@ public class MovieController {
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		model.addAttribute("movies", movieService.getAll());
+		model.addAttribute("count", movieService.count());
 		return "/movie/movieList";
 	}
 	
@@ -64,7 +65,6 @@ public class MovieController {
 		Map<String, String> errorMsg = validateData(name, actor, genre, rating); 
 		if(!errorMsg.isEmpty()){
 			model.addAttribute("errorMsg", errorMsg);
-			System.out.println(id);
 			return "forward:/movies/edit?id="+id;
 		}
 		Movie movie = movieService.getById(id);
@@ -75,7 +75,7 @@ public class MovieController {
 		movieService.update(movie);
 		model.addAttribute("msg", "update : ");
 		model.addAttribute("result", movieService.getById(movie.getId()));
-		return "/movie/movieEdit";
+		return "forward:/movies/edit?id="+id;
 	}
 	
 	@RequestMapping("/delete")
@@ -90,9 +90,11 @@ public class MovieController {
 		if(movies.isEmpty()){
 			String msg = "sorry, we find nothing";
 			model.addAttribute("result", msg);
+			model.addAttribute("count", movies.size());
 			return "/movie/movieList";
 		}else{
 			model.addAttribute("movies", movies);
+			model.addAttribute("count", movies.size());
 			return "/movie/movieList";
 		}
 	}
@@ -103,9 +105,11 @@ public class MovieController {
 		if(movies.isEmpty()){
 			String msg = "sorry, we find nothing";
 			model.addAttribute("result", msg);
+			model.addAttribute("count", movies.size());
 			return "/movie/movieList";
 		}else{
 			model.addAttribute("movies", movies);
+			model.addAttribute("count", movies.size());
 			return "/movie/movieList";
 		}
 	}
@@ -116,9 +120,11 @@ public class MovieController {
 		if(movies.isEmpty()){
 			String msg = "sorry, we find nothing";
 			model.addAttribute("result", msg);
+			model.addAttribute("count", movies.size());
 			return "/movie/movieList";
 		}else{
 			model.addAttribute("movies", movies);
+			model.addAttribute("count", movies.size());
 			return "/movie/movieList";
 		}
 	}

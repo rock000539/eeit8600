@@ -42,5 +42,4 @@ public interface MovieDao extends JpaRepository<Movie, Long> {
 	public List<Movie> findTop3ByOrderByRatingDesc();
 	
 	
-	
 }

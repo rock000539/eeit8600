@@ -39,6 +39,7 @@ function query(name){
 	<th width="180">主要演員</th>
 	<th width="80">電影類型</th>
 	<th width="40">評分</th>
+	<th colspan="2" width="110">${count}筆資料</th>
 </tr>
 <c:forEach var="item" items="${movies}" varStatus="vs">
 	<tr>

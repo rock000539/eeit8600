@@ -23,6 +23,10 @@ public class MovieService {
 		return movieDao.findAll();
 	}
 	
+	public Long count(){
+		return movieDao.count();
+	}
+	
 	public void insert(Movie movie) {
 		movieDao.save(movie);
 	}
