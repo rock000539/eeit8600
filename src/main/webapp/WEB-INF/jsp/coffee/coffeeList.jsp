@@ -15,14 +15,12 @@ table,td{border: 1px solid black;
 <h1>CoffeeList in WEB-INF</h1>
 <a href="add" style="font-size: 200%"><input type="button" value="Add data" ></a><br>
 
-
-
 <br>
 
 <table>
-<form action="">
-<input type="text" name="findByName" >
-<input type="submit" value="Search">
+<form action="/coffees/findByName">
+<input type="text" name="name" >
+<input type="submit" value="Search By Name">
 <p>${errorMsg}
 </form>
 

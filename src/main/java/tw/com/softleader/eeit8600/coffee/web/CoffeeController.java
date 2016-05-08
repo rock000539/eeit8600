@@ -148,18 +148,20 @@ public class CoffeeController {
 	}
 
 	@RequestMapping("/findByName")
-	public String findById(@RequestParam String name,Model model) {
+	public String findByName(@RequestParam String name,Model model) {
 		List <Coffee> coffees=coffeeService.findByName(name);
 		if(coffees!=null){
 		model.addAttribute("coffees",coffees);
+		System.out.println(name);
 		//return "redirect:/coffees/list";
-		
+		//return "/coffees/list";
 		return "/coffee/coffeeList";
 		}else{
 			model.addAttribute("errorMsg", "No result");
-			//return "redirect:/coffees/list";
-			return "/coffee/coffeeList";
+			System.out.println(name);
+			//return "redirect:/coffees/list";			
 			//return "/coffees/list";
+			return "/coffee/coffeeList";			
 		}
 	}
 
