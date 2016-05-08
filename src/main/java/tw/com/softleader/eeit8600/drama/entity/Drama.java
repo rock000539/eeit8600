@@ -25,23 +25,23 @@ public class Drama {
 	@Column(name = "ACTOR", length = 50)
 	private String actor;
 
-	@Column(name = "CHANNEL")
-	private Integer channel;
+	@Column(name = "GENRE")
+	private String genre;
 
 	public Drama() {
 	}
 
-	public Drama(String name, Integer episodes, String actor, Integer channel) {
+	public Drama(String name, Integer episodes, String actor, String genre) {
 		this.name = name;
 		this.episodes = episodes;
 		this.actor = actor;
-		this.channel = channel;
+		this.genre = genre;
 	}
 
 	@Override
 	public String toString() {
-		return "Drama [id=" + id + ", name=" + name + ", episodes=" + episodes + ", actor=" + actor + ", channel="
-				+ channel + "]";
+		return "Drama [id=" + id + ", name=" + name + ", episodes=" + episodes + ", actor=" + actor + ", genre="
+				+ genre + "]";
 	}
 
 	public Long getId() {
@@ -76,12 +76,12 @@ public class Drama {
 		this.actor = actor;
 	}
 
-	public Integer getChannel() {
-		return channel;
+	public String getGenre() {
+		return genre;
 	}
 
-	public void setChannel(Integer channel) {
-		this.channel = channel;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 }

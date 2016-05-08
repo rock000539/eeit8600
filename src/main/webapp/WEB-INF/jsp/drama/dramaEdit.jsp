@@ -31,9 +31,9 @@
 			<td style="color:red;">${errorMsg.actor}</td>
 		</tr>
 		<tr>
-			<td>頻道：</td>
-			<td><input type="text" name="channel" value="${drama.channel}"></td>
-			<td style="color:red;">${errorMsg.channel}</td>
+			<td>類型：</td>
+			<td><input type="text" name="genre" value="${drama.genre}"></td>
+			<td style="color:red;">${errorMsg.genre}</td>
 		</tr>
 	</table>
 
@@ -47,7 +47,7 @@
 </c:if>
 <c:if test="${updateMsg=='更新成功'}">
 	Update Drama：<span>id=${drama.id}, name=${drama.name}, episodes=${drama.episodes}, 
-	actor=${drama.actor}, channel=${drama.channel}</span>
+	actor=${drama.actor}, genre=${drama.genre}</span>
 </c:if>
 </body>
 </html>

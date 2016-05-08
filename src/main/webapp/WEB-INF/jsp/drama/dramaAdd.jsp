@@ -27,9 +27,9 @@
 			<td style="color:red;">${errorMsg.actor}</td>
 		</tr>
 		<tr>
-			<td>頻道：</td>
-			<td><input type="text" name="channel" value="${param.channel}"></td>
-			<td style="color:red;">${errorMsg.channel}</td>
+			<td>類型：</td>
+			<td><input type="text" name="genre" value="${param.genre}"></td>
+			<td style="color:red;">${errorMsg.genre}</td>
 		</tr>
 	</table>
 <input type="submit" name="save" value="save" />
@@ -41,7 +41,7 @@
 </c:if>
 <c:if test="${insertMsg=='新增成功'}">
 	New Drama：<span>id=${drama.id}, name=${drama.name}, episodes=${drama.episodes}, 
-	actor=${drama.actor}, channel=${drama.channel}</span>
+	actor=${drama.actor}, genre=${drama.genre}</span>
 </c:if>
 
 </form>

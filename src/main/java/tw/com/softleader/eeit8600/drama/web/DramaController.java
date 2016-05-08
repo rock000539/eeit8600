@@ -2,6 +2,7 @@ package tw.com.softleader.eeit8600.drama.web;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,16 +37,16 @@ public class DramaController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@RequestParam String name, @RequestParam String episodes, @RequestParam String actor,
-			@RequestParam String channel, Model model, RedirectAttributes attr) {
+			@RequestParam String genre, Model model, RedirectAttributes attr) {
 
-		String[] data = { name, episodes, actor, channel };
+		String[] data = { name, episodes, actor, genre };
 		Map<String, String> errorMsg = validateData(data);
 		if (!errorMsg.isEmpty()) {
 			model.addAttribute("errorMsg", errorMsg);		
 			model.addAttribute("insertMsg","新增失敗,請依錯誤訊息更正輸入值");
 			return "forward:/dramas/add";
 		}
-		Drama drama = new Drama(name, Integer.valueOf(episodes), actor, Integer.valueOf(channel));
+		Drama drama = new Drama(name, Integer.valueOf(episodes), actor, genre);
 		dramaService.insert(drama);
 		
 		attr.addFlashAttribute("insertMsg","新增成功");
@@ -63,10 +64,10 @@ public class DramaController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(
 			@RequestParam Long id, @RequestParam String name, @RequestParam String episodes,
-			@RequestParam String actor, @RequestParam String channel, Model model ,RedirectAttributes attr
+			@RequestParam String actor, @RequestParam String genre, Model model ,RedirectAttributes attr
 			) {
 
-		String[] data = { name, episodes, actor, channel };
+		String[] data = { name, episodes, actor, genre };
 		Map<String, String> errorMsg = validateData(data);
 		if (!errorMsg.isEmpty()) {
 			model.addAttribute("errorMsg", errorMsg);
@@ -78,7 +79,7 @@ public class DramaController {
 		drama.setName(name);
 		drama.setEpisodes(Integer.valueOf(episodes));
 		drama.setActor(actor);
-		drama.setChannel(Integer.valueOf(channel));
+		drama.setGenre(genre);
 		dramaService.update(drama);
 		
 		attr.addAttribute("id", drama.getId());
@@ -93,6 +94,36 @@ public class DramaController {
 		dramaService.delete(id);
 		return "redirect:/dramas/list";
 	}
+	
+	@RequestMapping("/findname")
+	public String findByName(@RequestParam String inputbox, Model model){		
+		Set<Drama> dramas = dramaService.getByName(inputbox);
+		if(dramas.isEmpty()){
+			model.addAttribute("findMsg","目前尚無符合資料");
+			return "/drama/dramaList";
+		}else{
+			model.addAttribute("dramas", dramas);
+			return "/drama/dramaList";
+		}
+	}
+	
+	@RequestMapping("/findactor")
+	public String findByActor(@RequestParam String inputbox,Model model){
+		Set<Drama> dramas=dramaService.getByActor(inputbox);
+		if(dramas.isEmpty()){
+			model.addAttribute("findMsg","目前尚無符合資料");
+			return "/drama/dramaList";
+		}else{
+			model.addAttribute("dramas",dramas);
+			return "/drama/dramaList";
+		}			
+	}
+	
+//	@RequestMapping(value = "/findgenre" , method=RequestMethod.POST)
+//	public String findByGenre(@RequestParam String genresel,Model model){
+//		model.addAttribute("dramas",dramaService.getByGenre(genresel));
+//		return "/drama/dramaList";
+//	}
 
 	public Map<String, String> validateData(String[] data) {
 		Map<String, String> errorMsg = new HashMap<String, String>();
@@ -113,14 +144,8 @@ public class DramaController {
 			errorMsg.put("actor", "請輸入主演");
 		}
 		if (data[3] == null || data[3].trim().length() == 0) {
-			errorMsg.put("channel", "請輸入頻道");
-		} else {
-			try {
-				int chan = Integer.parseInt(data[3].trim());
-			} catch (NumberFormatException e) {
-				errorMsg.put("channel", "頻道必須為數字");
-			}
-		}
+			errorMsg.put("genre", "請輸入類型");
+		} 
 		return errorMsg;
 	}
 
