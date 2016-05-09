@@ -1,0 +1,1 @@
+INSERT INTO DRAMA (NAME, EPISODES, ACTOR, GENRE) VALUES ('The Walking Dead', 16,  'Andrew Lincoln', 'Horror' );

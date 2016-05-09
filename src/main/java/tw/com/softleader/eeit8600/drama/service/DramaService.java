@@ -20,29 +20,29 @@ public class DramaService {
 	}
 
 	public List<Drama> getAll() {
-		List<Drama> dramas = dramaDao.findAll();
-		if (dramas.isEmpty()) {
-			Drama d1 = new Drama("The Walking Dead", 16, "Andrew Lincoln", "Horror");
-			Drama d2 = new Drama("Ally McBeal", 50, "Audrey Tautou", "Drama");
-			Drama d3 = new Drama("Agents of S.H.I.E.L.D", 22, "Clark Gregg", "Action");
-			Drama d4 = new Drama("Drop Dead Diva", 13, "Brooke Elliott", "Comedy");
-			Drama d5 = new Drama("True Blood", 12, "Anna Paquin", "Supernatural");
-			Drama d6 = new Drama("Revenge", 22, "Emily VanCamp", "Mystery");
-			Drama d7 = new Drama("The Newsroom", 10, "Jeffrey Warren", "Drama");
-			Drama d8 = new Drama("The big bang theory", 17, "Jim Parsons", "Comedy");
-			Drama d9 = new Drama("Once Upon a Time", 22, "Jennifer Michelle Goodwin", "Drama");
-			Drama d10 = new Drama("How to Get Away with Murder", 15, "Viola Davis", "Mystery");		
-			dramaDao.save(d1);
-			dramaDao.save(d2);
-			dramaDao.save(d3);
-			dramaDao.save(d4);
-			dramaDao.save(d5);
-			dramaDao.save(d6);
-			dramaDao.save(d7);
-			dramaDao.save(d8);
-			dramaDao.save(d9);
-			dramaDao.save(d10);
-		}
+//		List<Drama> dramas = dramaDao.findAll();
+//		if (dramas.isEmpty()) {
+//			Drama d1 = new Drama("The Walking Dead", 16, "Andrew Lincoln", "Horror");
+//			Drama d2 = new Drama("Ally McBeal", 50, "Audrey Tautou", "Drama");
+//			Drama d3 = new Drama("Agents of S.H.I.E.L.D", 22, "Clark Gregg", "Action");
+//			Drama d4 = new Drama("Drop Dead Diva", 13, "Brooke Elliott", "Comedy");
+//			Drama d5 = new Drama("True Blood", 12, "Anna Paquin", "Supernatural");
+//			Drama d6 = new Drama("Revenge", 22, "Emily VanCamp", "Mystery");
+//			Drama d7 = new Drama("The Newsroom", 10, "Jeffrey Warren", "Drama");
+//			Drama d8 = new Drama("The big bang theory", 17, "Jim Parsons", "Comedy");
+//			Drama d9 = new Drama("Once Upon a Time", 22, "Jennifer Michelle Goodwin", "Drama");
+//			Drama d10 = new Drama("How to Get Away with Murder", 15, "Viola Davis", "Mystery");		
+//			dramaDao.save(d1);
+//			dramaDao.save(d2);
+//			dramaDao.save(d3);
+//			dramaDao.save(d4);
+//			dramaDao.save(d5);
+//			dramaDao.save(d6);
+//			dramaDao.save(d7);
+//			dramaDao.save(d8);
+//			dramaDao.save(d9);
+//			dramaDao.save(d10);
+//		}
 		return dramaDao.findAll();
 	}
 
