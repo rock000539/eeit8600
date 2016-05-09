@@ -15,6 +15,8 @@ import javax.persistence.Table;
  private Integer price;
  */
 
+
+
 @Entity
 @Table(name = "NOTEBOOK")
 public class Notebook {
