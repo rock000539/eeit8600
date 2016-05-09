@@ -23,6 +23,8 @@ public class NotebookController {
 	private NotebookService notebookService;
 	 
 	
+	
+	
 		//http://**.**.**/notebooks/list
 		@RequestMapping("/list")
 		public String listPage(Model model){
