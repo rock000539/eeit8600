@@ -21,9 +21,6 @@ public class NotebookController {
 
 	@Autowired  //new一個物件注入進來
 	private NotebookService notebookService;
-	 
-	
-	
 	
 		//http://**.**.**/notebooks/list
 		@RequestMapping("/list")
