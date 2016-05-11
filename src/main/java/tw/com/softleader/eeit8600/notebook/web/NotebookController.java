@@ -72,6 +72,7 @@ public class NotebookController {
 		}
 		
 		
+		
 		private Map<String, String> verifyData(String brand, String name,
 				String cpu, Integer price) {
 		
@@ -132,4 +133,5 @@ public class NotebookController {
 			
 			return "redirect:/notebooks/add";
 		}
+		
 }
