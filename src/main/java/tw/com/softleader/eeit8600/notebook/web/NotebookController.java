@@ -71,8 +71,6 @@ public class NotebookController {
 			return "redirect:/notebooks/edit";
 		}
 		
-		
-		
 		private Map<String, String> verifyData(String brand, String name,
 				String cpu, Integer price) {
 		
