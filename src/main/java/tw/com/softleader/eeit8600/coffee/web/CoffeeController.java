@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.eeit8600.coffee.entity.Coffee;
 import tw.com.softleader.eeit8600.coffee.service.CoffeeService;
@@ -37,7 +39,8 @@ public class CoffeeController {
 		return "/coffee/forCategoryAddPage";
 	}
 	
-	@RequestMapping(value = "/CategoryAdd",method = RequestMethod.POST)
+	@RequestMapping(value = "/CategoryAdd",method=RequestMethod.POST)
+	@ResponseBody
 	public String CategoryAdd(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
 				@RequestParam String price, @RequestParam String testing, Model model) {
 			System.out.println("IN add");

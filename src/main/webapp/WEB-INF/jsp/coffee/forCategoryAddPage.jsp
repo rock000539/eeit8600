@@ -16,18 +16,17 @@
 
         function send() {
         	alert("send");
+        	//---------------------------------------------------
+             
+        	//-------------------------------------------------
+        	
             var url="/coffees/CategoryAdd"
             xhr.open("post",url,true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
           //  xhr.send("id=" + id + "&kind=" + kind + "&level=" + level);
-          var data={
-        		  "id":$("#id").val(),
-        		  "name":$("#name").val(),
-        		  "local":$("#local").val(),
-        		  "price":$("#price").val(),
-        		  "testing":$("#testing").val(),  		  
-          }
+ 	  
           
+
             //xhr.send("id="+id+"&local="+local+"&name="+name+"&price="+price+"&testing="+testing);
           xhr.send(data);
         }
@@ -58,6 +57,21 @@
 
             }
         }
+    	
+        $.ajax({  
+            type: "POST",  
+            url: "/coffees/CategoryAdd",  
+            data: $('#userform').serialize(), 
+            success:function(data){  
+                alert("Success");  
+            } ,
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError); 
+             }
+     });
+        
+        
     </script>
    <style>
         form {
@@ -67,7 +81,7 @@
 </head>
 <body>
 <h1>Category AddPage</h1>
-   <form>
+   <form id="userform" action="coffees/CategoryAdd" method="post">
         <input type="text" name="id" /><br>
         <input type="text" name="kind" /><br>
         <input type="text" name="level"/><br>
