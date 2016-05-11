@@ -132,5 +132,4 @@ public class NotebookController {
 			
 			return "redirect:/notebooks/add";
 		}
-		
 }
