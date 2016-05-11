@@ -14,7 +14,7 @@ table,td{border: 1px solid black;
 <body>
 <h1>CoffeeList in WEB-INF</h1>
 <a href="add" style="font-size: 200%"><input type="button" value="Add data" ></a><br>
-
+<a href="${pageContext.request.contextPath}/forCategoryAddPage.jsp" style="font-size: 200%"><input type="button" value="Category AddPage" ></a><br>
 <br>
 
 <table>

@@ -28,6 +28,24 @@ public class CoffeeController {
 
 		return "/coffee/coffeeList";
 	}
+	
+	@RequestMapping("/CategoryAddPage")
+	public String CategoryAddPage(Model model) {
+
+		model.addAttribute("coffees", coffeeService.getAll());
+
+		return "/coffee/forCategoryAddPage";
+	}
+	
+	@RequestMapping(value = "/CategoryAdd",method = RequestMethod.POST)
+	public String CategoryAdd(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
+				@RequestParam String price, @RequestParam String testing, Model model) {
+			System.out.println("IN add");
+				return "IN add";
+		
+		}
+	
+//--------------------------------------------------------------------	
 
 	@RequestMapping("/addSampleData")
 	public String data() {
@@ -71,7 +89,7 @@ public class CoffeeController {
 
 	@RequestMapping("/add")
 	public String addPage() {
-
+		
 		return "/coffee/coffeeAdd";
 	}
 
