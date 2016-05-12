@@ -14,8 +14,12 @@ public class ProductCategoryService {
 	@Autowired
 	private ProductCategoryDao categoryDao;
 	
+	public ProductCategory getById(Long id){
+		return categoryDao.findOne(id);
+	}
+	
 	public List<ProductCategory> getAll(){
-		
+	
 		return categoryDao.findAll();
 	}
 	
@@ -23,7 +27,7 @@ public class ProductCategoryService {
 		categoryDao.save(category);
 	}
 	
-	public void udpate(ProductCategory category){
+	public void update(ProductCategory category){
 		categoryDao.save(category);
 	}
 	

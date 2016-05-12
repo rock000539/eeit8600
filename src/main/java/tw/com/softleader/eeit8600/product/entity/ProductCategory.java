@@ -22,6 +22,8 @@ public class ProductCategory {
 	@Column(name="CATEGORYLEVEL")
 	private Double categoryLevel;
 	
+	public ProductCategory(){}
+	
 	public ProductCategory(String categoryKind,Double categoryLevel){
 		this.categoryKind=categoryKind;
 		this.categoryLevel=categoryLevel;
