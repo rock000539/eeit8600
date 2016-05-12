@@ -10,4 +10,9 @@ public class IndexController {
 	public String indexPage() {
 		return "/index";
 	}
+
+	@RequestMapping("/beauty")
+	public String index2() {
+		return "/index_beauty";
+	}
 }

@@ -5,7 +5,7 @@
   <title>index</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="/src/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -46,7 +46,7 @@
   </script>
 </head>
 <body>
-
+<!-- navbar on Top -->
 <nav class="navbar navbar-inverse ">
   <div class="container-fluid">
     
@@ -100,9 +100,13 @@
     
   </div>
 </nav>
-  
+<!-- End of navbarTop -->
+
+
+
 <div class="container-fluid text-center">    
   <div class="row content">
+<!-- navbar on Left -->
     <div class="col-sm-2 sidenav">
     	<div class="panel-group" id="accordion">
     		<div class="panel panel-default">
@@ -113,7 +117,7 @@
 	        	</h4>
 	      		</div>
       		
-      			<div id="collapse1" class="panel-collapse collapse in">
+      			<div id="collapse1" class="panel-collapse collapse">
         		<div class="panel-body">testing</div>
 		      	</div>
 		      	
@@ -143,9 +147,14 @@
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
     </div>
+
+    
+<!-- Content -->
     <div class="col-sm-8 text-left"> 
       
     </div>
+    
+<!-- sidebar on Right -->
     <div class="col-sm-2 sidenav">
       <div class="well">
         <p>ADS</p>
