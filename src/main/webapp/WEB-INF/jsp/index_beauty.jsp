@@ -61,7 +61,7 @@
     
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="#">Dashboard</a></li>
         <li class="dropdown">
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">商品管理
 	        <span class="caret"></span></a>
@@ -106,47 +106,50 @@
 
 <div class="container-fluid text-center">    
   <div class="row content">
+  
 <!-- navbar on Left -->
-    <div class="col-sm-2 sidenav">
-    	<div class="panel-group" id="accordion">
-    		<div class="panel panel-default">
-      		
-	      		<div class="panel-heading">
-	        	<h4 class="panel-title">
-	          		<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">商品管理</a>
-	        	</h4>
-	      		</div>
-      		
-      			<div id="collapse1" class="panel-collapse collapse">
-        		<div class="panel-body">testing</div>
-		      	</div>
-		      	
-    		</div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">會員管理</a>
-        </h4>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">testing</div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">文章管理</a>
-        </h4>
-      </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">testing</div>
-      </div>
-    </div>
+<div class="col-sm-2 sidenav">
+   <div class="panel-group" id="accordion">
+    	<div class="panel panel-default">
+		    <div class="panel-heading">
+		       <h4 class="panel-title">
+		          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">商品管理</a>
+		       </h4>
+		    </div>
+	      	<div id="collapse1" class="panel-collapse collapse">
+	        	<div class="panel-body">
+	        		<ul class="list-group">
+	        			<li class="list-group-item"><a href="#">Brand</a></li>
+	        			<li class="list-group-item"><a href="#">Category</a></li>
+	        			<li class="list-group-item"><a href="#">Ingredient</a></li>
+	        		</ul>
+	        	</div>
+			</div>
+   		</div>
+   		
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+	        <h4 class="panel-title">
+	          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">會員管理</a>
+	        </h4>
+	      </div>
+	      <div id="collapse2" class="panel-collapse collapse">
+	        <div class="panel-body">testing</div>
+	      </div>
+	    </div>
+	    
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+	        <h4 class="panel-title">
+	          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">文章管理</a>
+	        </h4>
+	      </div>
+	      <div id="collapse3" class="panel-collapse collapse">
+	        <div class="panel-body">testing</div>
+	      </div>
+	    </div>
   </div> 
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-    </div>
+  </div><!-- end of navbarLeft -->
 
     
 <!-- Content -->
