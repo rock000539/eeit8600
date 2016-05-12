@@ -5,7 +5,28 @@
 <head>
 <
 <title>Category AddPage</title>
-<script src="../js/jquery-2.2.3.js">
+<script src="../src/jquery-2.2.3.js">
+$(function(){
+	$("#userform").click(function(){
+		
+	alert("send2");
+	$.ajax({
+		type : "POST",
+		url : "/coffees/CategoryAdd",
+		data : $('#userform').serialize(),
+		
+		success : function(data) {
+			alert("Success");
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
+			alert(xhr.status);
+			alert(thrownError);
+		}
+	});
+	});
+});
+</script>
+<script>
 
 	window.addEventListener("load", init, false);
 	var showDiv = document.getElementById("showArea");
@@ -17,7 +38,7 @@
 	
 	function send() {
 		alert("send");
-var url = "/CategoryAdd";
+        var url = "/CategoryAdd";
 		xhr.open("post", url, true);
 		xhr.send("id="+id+ "&local=" +local+ "&name=" +name+ "&price=" +price+ "&testing=" +testing);
 		alert(url);
@@ -54,27 +75,7 @@ var url = "/CategoryAdd";
 		}
 	}
 
-	$(function(){
-		$("#userform").click(function(){
-			
-		alert("send2");
-		$.ajax({
-			type : "POST",
-			url : "/coffees/CategoryAdd",
-			data : $('#userform').serialize(),
-			
-			success : function(data) {
-				alert("Success");
-			},
-			error : function(xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(thrownError);
-			}
-		});
-		
-		});
-		
-	});
+
 	
 </script>
 <style>

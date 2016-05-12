@@ -154,27 +154,6 @@ public class CoffeeController {
 
 	}
 
-	private Map checkData(Coffee coffee) {
-		Map err = new LinkedHashMap();
-
-		if (coffee.getId() == null) {
-			err.put("errorId", "Id不可空白");
-		}
-		if (coffee.getLocal() == null) {
-			err.put("errorLocal", "Local不可空白");
-		}
-		if (coffee.getPrice() == null) {
-			err.put("errorPrice", "Price不可空白");
-		}
-		if (coffee.getTesting() == null) {
-			err.put("errorTesting", "Testing不可空白");
-		}
-		if (coffee.getName() == null) {
-			err.put("errorName", "Name不可空白");
-		}
-
-		return err;
-	}
 
 	@RequestMapping("/findByName")
 	public String findByName(@RequestParam String name,Model model) {
