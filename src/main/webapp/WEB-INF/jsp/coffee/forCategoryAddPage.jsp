@@ -5,7 +5,7 @@
 <head>
 <
 <title>Category AddPage</title>
-<script src="../src/jquery-2.2.3.js">
+<script src="/src/jquery-2.2.3.js">
 $(function(){
 	$("#userform").click(function(){
 		
