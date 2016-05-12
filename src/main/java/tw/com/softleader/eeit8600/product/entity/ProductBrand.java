@@ -25,8 +25,7 @@ public class ProductBrand {
 	public ProductBrand() {
 	}
 
-	public ProductBrand(Long brandId, String brandName, Byte[] brandImg) {
-		this.brandId = brandId;
+	public ProductBrand(String brandName, Byte[] brandImg) {
 		this.brandName = brandName;
 		this.brandImg = brandImg;
 	}
