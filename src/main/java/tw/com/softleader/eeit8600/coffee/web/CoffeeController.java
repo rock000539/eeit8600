@@ -39,15 +39,23 @@ public class CoffeeController {
 		return "/coffee/forCategoryAddPage";
 	}
 	
-	@RequestMapping(value = "/CategoryAdd",method=RequestMethod.POST)
+	@RequestMapping("/CategoryAdd")
 	@ResponseBody
 	public String CategoryAdd(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
 				@RequestParam String price, @RequestParam String testing, Model model) {
 			System.out.println("IN add");
+			System.out.println(local);
+			System.out.println(name);
 				return "IN add";
-		
 		}
-	
+//	@RequestMapping(value = "/CategoryAddPage",method=RequestMethod.GET)
+//	@ResponseBody
+//	public String CategoryAdd2(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
+//				@RequestParam String price, @RequestParam String testing, Model model) {
+//			System.out.println("IN add2");
+//				return "IN add";
+//		
+//		}
 //--------------------------------------------------------------------	
 
 	@RequestMapping("/addSampleData")
