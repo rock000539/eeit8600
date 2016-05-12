@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.eeit8600.movie.entity.Movie;
 import tw.com.softleader.eeit8600.movie.service.MovieService;
@@ -23,6 +25,22 @@ import tw.com.softleader.eeit8600.movie.service.MovieService;
 public class MovieController {
 	@Autowired
 	private MovieService movieService;
+	
+	//---testing ajax-------------------
+	@RequestMapping(value = "/jList", produces="application/json")
+	public @ResponseBody List<Movie> jMovieList(Model model){
+		return movieService.getAll();
+	}
+	
+	@RequestMapping(value="jAdd", produces="application/json")
+	public String jMovieInsert(@RequestBody Movie movie, Model model){
+		movieService.insert(movie);
+		return "";
+	}
+	
+	
+	
+	//-----------------------------------
 	
 	@RequestMapping("/list")
 	public String listPage(Model model) {

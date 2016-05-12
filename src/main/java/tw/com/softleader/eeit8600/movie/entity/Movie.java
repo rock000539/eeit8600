@@ -21,13 +21,13 @@ public class Movie {
 	@Column(name="ID")
 	private Long id;
 	
-	@Column(name="NAME")
+	@Column(name="NAME", length=50)
 	private String name;
 	
-	@Column(name="ACTOR")
+	@Column(name="ACTOR", length=30)
 	private String actor;
 	
-	@Column(name="GENRE")
+	@Column(name="GENRE", length=20)
 	private String genre;
 	
 	@Column(name="RATING")
