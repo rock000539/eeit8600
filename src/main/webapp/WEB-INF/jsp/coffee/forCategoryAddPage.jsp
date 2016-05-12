@@ -5,7 +5,7 @@
 <head>
 <
 <title>Category AddPage</title>
-<script src="src/main/webapp/WEB-INF/jsp/coffee/js/jquery-2.2.3.js">
+<script src="../js/jquery-2.2.3.js">
 
 	window.addEventListener("load", init, false);
 	var showDiv = document.getElementById("showArea");
@@ -14,21 +14,17 @@
 		xhr.onloadend = action;
 		document.getElementById("send").onclick = send
 	}
+	
 	function send() {
 		alert("send");
-		//---------------------------------------------------
-
-		//-------------------------------------------------
-
-var url = "/CategoryAdd?id="+id+"&local="+local+"&name="+name+"&price="+price+"&testing="+testing;
-		xhr.open("get", url, true);
-		xhr.send();
+var url = "/CategoryAdd";
+		xhr.open("post", url, true);
+		xhr.send("id="+id+ "&local=" +local+ "&name=" +name+ "&price=" +price+ "&testing=" +testing);
 		alert(url);
 		//xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		//  xhr.send("id=" + id + "&kind=" + kind + "&level=" + level);
 		//xhr.send("id="+id+"&local="+local+"&name="+name+"&price="+price+"&testing="+testing);
 		//xhr.send(data);
-
 	}
 
 	function action() {
@@ -63,10 +59,10 @@ var url = "/CategoryAdd?id="+id+"&local="+local+"&name="+name+"&price="+price+"&
 			
 		alert("send2");
 		$.ajax({
-			type : "GET",
+			type : "POST",
 			url : "/coffees/CategoryAdd",
 			data : $('#userform').serialize(),
-			dataType:"json",
+			
 			success : function(data) {
 				alert("Success");
 			},
@@ -89,7 +85,7 @@ form {
 </head>
 <body>
 	<h1>Category AddPage</h1>
-	<form id="userformMain" action="/CategoryAdd" method="get">
+	<form id="userformMain" action="/CategoryAdd" method="post">
 		<input type="text" name="id" /><br> <input type="text"
 			name="kind" /><br> <input type="text" name="level" /><br>
 		<input type="submit" id="send1" />
@@ -98,7 +94,7 @@ form {
 		<table id="showArea"></table>
 	</div>
 	---------------------------------------------
-	<form id="userform"  name="uesrform" action="/coffees/CategoryAdd">
+	<form id="userform"  name="uesrform"  method="post">
 		<table>
 			<tr>
 				<td><input type="text" name="id" value="">ID</td>
@@ -121,7 +117,7 @@ form {
 				<td>${errorMsg.Testing}</td>
 			</tr>
 		</table>
-		<br> <input type="submit" id="send" />
+		<br> <input type="submit" id="send" name="send" />
 	</form>
 	----------------------------------------------
 </body>
