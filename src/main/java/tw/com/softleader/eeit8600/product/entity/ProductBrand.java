@@ -1,5 +1,7 @@
 package tw.com.softleader.eeit8600.product.entity;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,12 +22,12 @@ public class ProductBrand {
 	private String brandName;
 
 	@Column(name = "BRANDIMG")
-	private Byte[] brandImg;
+	private Blob brandImg;
 
 	public ProductBrand() {
 	}
 
-	public ProductBrand(String brandName, Byte[] brandImg) {
+	public ProductBrand(String brandName, Blob brandImg) {
 		this.brandName = brandName;
 		this.brandImg = brandImg;
 	}
@@ -46,11 +48,11 @@ public class ProductBrand {
 		this.brandName = brandName;
 	}
 
-	public Byte[] getBrandImg() {
+	public Blob getBrandImg() {
 		return brandImg;
 	}
 
-	public void setBrandImg(Byte[] brandImg) {
+	public void setBrandImg(Blob brandImg) {
 		this.brandImg = brandImg;
 	}
 
