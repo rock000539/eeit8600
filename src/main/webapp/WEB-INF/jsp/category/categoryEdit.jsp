@@ -17,14 +17,14 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>品牌 </td>
-				<td><input type="text" name="brand" value="${category.brand}"></td>
-				<td style="color: red;">${errorMsg.brand}</td>
+				<td>種類 </td>
+				<td><input type="text" name="kind" value="${category.kind}"></td>
+				<td style="color: red;">${errorMsg.kind}</td>
 			</tr>
 
 			<tr>
 				<td>權重 </td>
-				<td><input type="text" name="name" value="${category.level}"></td>
+				<td><input type="text" name="level" value="${category.level}"></td>
 				<td style="color: red;">${errorMsg.level}</td>
 			</tr>
 		</table>
@@ -41,12 +41,12 @@
 			<table border='1'>
 				<tr>
 					<th>編號</th>
-					<th>品牌</th>
+					<th>種類</th>
 					<th>權重</th>
 				</tr>
 				<tr style="text-align: center;">
 					<td>${category.id}</td>
-					<td>${category.brand}</td>
+					<td>${category.kind}</td>
 					<td>${category.level}</td>
 				</tr>
 			</table>
