@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.com.softleader.eeit8600.product.entity.ProductCategory;
 import tw.com.softleader.eeit8600.product.service.ProductCategoryService;
@@ -42,7 +42,7 @@ public class ProductCategoryController {
 	
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String update(@RequestParam Long id,@RequestParam String kind,@RequestParam Double level,Model model,RequestAttributes attr){
+	public String update(@RequestParam Long id,@RequestParam String kind,@RequestParam Double level,Model model,RedirectAttributes attr){
 		
 		Map<String,String> errorMsg =verifyData(kind,level);
 		if(!errorMsg.isEmpty()){
@@ -58,8 +58,12 @@ public class ProductCategoryController {
 		
 		categorySerivce.update(productCategory);
 		
+		attr.addAttribute("id",productCategory.getId());
+		attr.addFlashAttribute("category", productCategory);
+		attr.addFlashAttribute("result", "Success");
 		
-		return "";
+	
+		return "redirect:/categories/edit";
 	}
 
 	private Map<String, String> verifyData(String kind, Double level) {
@@ -74,5 +78,29 @@ public class ProductCategoryController {
 		return errorMsg;
 	}
 	
+	@RequestMapping("/add")
+	public String addPage(){
+		return "/category/categoryAdd";
+	}
 	
+	@RequestMapping(value="/insert",method=RequestMethod.POST)
+	public String insert(@RequestParam String kind,@RequestParam Double level,Model model,RedirectAttributes attr){
+		
+		Map<String,String> errorMsg=verifyData(kind, level);
+		if(!errorMsg.isEmpty()){
+			model.addAttribute("errorMsg", errorMsg);
+			model.addAttribute("result", "Fail");
+			return "forward:/categories/add";
+		}
+		ProductCategory productCategory=new ProductCategory();
+		productCategory.setKind(kind);
+		productCategory.setLevel(level);
+		
+		categorySerivce.insert(productCategory);
+		
+		attr.addAttribute("category",productCategory);
+		attr.addAttribute("result", "Success");
+		
+		return "redirect:/categories/add";
+	}
 }
