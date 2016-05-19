@@ -6,7 +6,7 @@
 <
 <title>Category AddPage</title>
 <script src="/src/jquery-2.2.3.js">
-$(function(){
+
 	$("#userform").click(function(){
 		
 	alert("send2");
@@ -14,34 +14,39 @@ $(function(){
 		type : "POST",
 		url : "/coffees/CategoryAdd",
 		data : $('#userform').serialize(),
+		dataType:jason,
 		
 		success : function(data) {
 			alert("Success");
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
-			alert(xhr.status);
-			alert(thrownError);
+			alert("error");
 		}
 	});
 	});
-});
 </script>
 <script>
 
 	window.addEventListener("load", init, false);
 	var showDiv = document.getElementById("showArea");
-	function init() {
-		var xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();
+	function init() {		
 		xhr.onloadend = action;
 		document.getElementById("send").onclick = send
 	}
 	
 	function send() {
 		alert("send");
+		var id=document.getElementById("id").value;
+		var local=document.getElementById("local").value;
+		var price=document.getElementById("price").value;
+		var testing=document.getElementById("testing").value;
+		alert(local);
+        //var url = "/coffees/CategoryAdd";
         var url = "/CategoryAdd";
-		xhr.open("post", url, true);
+		
+        xhr.open("post", url, true);
 		xhr.send("id="+id+ "&local=" +local+ "&name=" +name+ "&price=" +price+ "&testing=" +testing);
-		alert(url);
 		//xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		//  xhr.send("id=" + id + "&kind=" + kind + "&level=" + level);
 		//xhr.send("id="+id+"&local="+local+"&name="+name+"&price="+price+"&testing="+testing);
@@ -85,36 +90,38 @@ form {
 </style>
 </head>
 <body>
+<!--  
 	<h1>Category AddPage</h1>
 	<form id="userformMain" action="/CategoryAdd" method="post">
-		<input type="text" name="id" /><br> <input type="text"
+		<input type="text" name="Cid" /><br> <input type="text"
 			name="kind" /><br> <input type="text" name="level" /><br>
 		<input type="submit" id="send1" />
-	</form>
 	<div>
 		<table id="showArea"></table>
-	</div>
+	</div> 
+	</form>
+	-->
 	---------------------------------------------
 	<form id="userform"  name="uesrform"  method="post">
 		<table>
 			<tr>
-				<td><input type="text" name="id" value="">ID</td>
+				<td><input type="text" name="id" id="id" value="">ID</td>
 				<td>${errorMsg.Id}</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="name" value="">名字</td>
+				<td><input type="text" name="name" id="name" value="">名字</td>
 				<td>${errorMsg.Name}</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="local" value="">產地</td>
+				<td><input type="text" name="local" id="local" value="">產地</td>
 				<td>${errorMsg.Local}</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="price" value="">價錢</td>
+				<td><input type="text" name="price" id="price" value="">價錢</td>
 				<td>${errorMsg.Price}</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="testing" value="">試用</td>
+				<td><input type="text" name="testing" id="testing" value="">試用</td>
 				<td>${errorMsg.Testing}</td>
 			</tr>
 		</table>

@@ -40,8 +40,8 @@ public class CoffeeController {
 	}
 	
 	@RequestMapping(value = "/CategoryAdd",method = RequestMethod.POST)
-	@ResponseBody
-	public String CategoryAdd(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
+	public @ResponseBody
+	String CategoryAdd(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
 				@RequestParam String price, @RequestParam String testing, Model model) {
 			System.out.println("IN add");
 			System.out.println(local);
