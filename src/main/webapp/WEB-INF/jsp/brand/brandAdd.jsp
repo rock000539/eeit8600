@@ -14,9 +14,19 @@
 			<TD><input type="text" name="brandName" value="${param.brandName}" /></TD>
 			<TD style="color:red"></TD>
 		</TR>
+<!-- 		<TR> -->
+<!-- 			<TD>LOGO：</TD> -->
+<!-- 			<TD><input type="file" name="brandLogo" /></TD> -->
+<!-- 			<TD style="color:red"></TD> -->
+<!-- 		</TR> -->
 		<TR>
-			<TD>LOGO：</TD>
-			<TD><input type="file" name="brandLogo" /></TD>
+			<TD>官網：</TD>
+			<TD><input type="text" name="website" value="${param.website}" /></TD>
+			<TD style="color:red"></TD>
+		</TR>
+		<TR>
+			<TD>批號公式：</TD>
+			<TD><input type="text" name="bcFunc" value="${param.bcFunc}" /></TD>
 			<TD style="color:red"></TD>
 		</TR>
 	</TABLE>

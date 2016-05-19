@@ -21,15 +21,25 @@ public class ProductBrand {
 	@Column(name = "BRANDNAME", length = 50)
 	private String brandName;
 
-	@Column(name = "BRANDIMG")
-	private Blob brandImg;
+//	@Column(name = "BRANDIMG")
+//	private Blob brandImg;
+	
+	@Column(name = "WEBSITE", length = 200)
+	private String website;
+	
+	@Column(name = "BCFUNC" , length = 20)
+	private String bcFunc;
 
 	public ProductBrand() {
 	}
 
-	public ProductBrand(String brandName, Blob brandImg) {
+	public ProductBrand(String brandName, 
+			//Blob brandImg, 
+			String website, String bcFunc) {
 		this.brandName = brandName;
-		this.brandImg = brandImg;
+		//this.brandImg = brandImg;
+		this.website = website;
+		this.bcFunc = bcFunc;
 	}
 
 	public Long getBrandId() {
@@ -48,12 +58,28 @@ public class ProductBrand {
 		this.brandName = brandName;
 	}
 
-	public Blob getBrandImg() {
-		return brandImg;
+//	public Blob getBrandImg() {
+//		return brandImg;
+//	}
+//
+//	public void setBrandImg(Blob brandImg) {
+//		this.brandImg = brandImg;
+//	}
+	
+	public String getWebsite() {
+		return website;
 	}
 
-	public void setBrandImg(Blob brandImg) {
-		this.brandImg = brandImg;
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getBcFunc() {
+		return bcFunc;
+	}
+
+	public void setBcFunc(String bcFunc) {
+		this.bcFunc = bcFunc;
 	}
 
 }

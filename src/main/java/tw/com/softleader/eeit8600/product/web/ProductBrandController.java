@@ -5,6 +5,7 @@ import java.sql.Blob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,10 +37,7 @@ public class ProductBrandController {
 	}
 	
 	@RequestMapping("/insert")
-	public String insert(@RequestParam String brandName, @RequestParam Blob brandLogo
-			//@RequestBody ProductBrand productbrand
-			){
-		ProductBrand productbrand = new ProductBrand();
+	public String insert(@RequestBody ProductBrand productbrand){	
 		brandService.insert(productbrand);
 		return "redirect:/brands/list";
 	}

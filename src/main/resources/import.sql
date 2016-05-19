@@ -8,3 +8,9 @@ INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('皇室戰爭', 4, 10
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('神魔之塔', 5, 4000000, 'www.tos.com.tw')
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('爐石戰記', 4, 6000000, 'www.heartstone.com.tw')
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('列王的紛爭', 3, 2000000, 'www.cok.com.tw')
+
+INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('蜜妮', 'http://www.kao.com/tw/biore/' , 'biore')
+INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('倩碧', 'http://www.clinique.com.tw/' , 'elca')
+INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('M.A.C', 'https://www.maccosmetics.com.tw/' , 'elca')
+INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('蘭蔻', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal')
+INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('巴黎萊雅', 'http://www.loreal.com.tw/' , 'loreal')

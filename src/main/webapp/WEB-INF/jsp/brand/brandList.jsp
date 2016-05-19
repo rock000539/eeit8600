@@ -24,13 +24,18 @@ text-align:center;
 	<TR>
 		<TH>編號</TH>
 		<TH>品牌</TH>
-		<TH>LOGO</TH>
+<!-- 		<TH>LOGO</TH> -->
+		<TH>官網</TH>
+		<TH>批號公式</TH>
 	</TR>
 <c:forEach var="brand" items="${brands}">
 	<TR>
 		<TD>${brand.brandId}</TD>
 		<TD>${brand.brandName}</TD>
-		<TD>${brand.brandImg}</TD>
+<%-- 		<TD>${brand.brandImg}</TD> --%>
+		<TD>${brand.website}</TD>
+		<TD>${brand.bcFunc}</TD>
+		
 		<TD>
 		<input type="button" name="edit" value="edit" onclick="location='/brands/edit?brandId=${brand.brandId}'"/>
 		<input type="button" name="delete" value="delete" onclick="loation='/brands/delete?brandId=${brand.brandId}'"/>
