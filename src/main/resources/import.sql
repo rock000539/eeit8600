@@ -14,3 +14,9 @@ INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('倩碧', 'http://www.cli
 INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('M.A.C', 'https://www.maccosmetics.com.tw/' , 'elca')
 INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('蘭蔻', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal')
 INSERT INTO BRAND (BRANDNAME, WEBSITE, BCFUNC) VALUES ('巴黎萊雅', 'http://www.loreal.com.tw/' , 'loreal')
+
+INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('lotion ',10.0);
+INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('cream',13.0);
+INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('facial mask',8.0);
+INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('foundation ',20.0);
+INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('sun protection ',18.0);

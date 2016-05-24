@@ -48,4 +48,28 @@
 		</c:if>
 	</form>
 </body>
+<script>
+	var data='{"kind":"'+$('#kind').val()+
+			'","level":"'+$('#level').val()+'"}';
+			
+	$.ajax({
+		url:"/categories/insert",
+		type:"POST",
+		contentType:"application/json; charset=UTF-8",
+		dataType:"json",
+		data:data,
+		success:function(response){
+			if(response.redirect){
+				window.location.href=response.redirect;
+			}
+			else{
+				
+			}
+		}
+		
+		
+	})		
+		
+
+</script>
 </html>

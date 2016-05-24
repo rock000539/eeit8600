@@ -6,9 +6,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.com.softleader.eeit8600.product.entity.ProductCategory;
@@ -36,45 +38,58 @@ public class ProductCategoryController {
 	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long id,Model model){
-		model.addAttribute("categories",categorySerivce.getById(id));
+		model.addAttribute("category",categorySerivce.getById(id));
 		return "/category/categoryEdit";
 	}
 	
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String update(@RequestParam Long id,@RequestParam String kind,@RequestParam Double level,Model model,RedirectAttributes attr){
+	@ResponseBody
+	public Map<String,String> update(@RequestBody ProductCategory productCategory){
 		
-		Map<String,String> errorMsg =verifyData(kind,level);
+		// 接收資料
+		String[] data={
+			productCategory.getKind(),
+			productCategory.getLevel().toString()
+		};
+		
+		// 驗證資料
+		Map<String,String> errorMsg =verifyData(data);
 		if(!errorMsg.isEmpty()){
-			model.addAttribute("errorMsg",errorMsg);
-			model.addAttribute("result","Fail");
-			return "forword:/categories/edit?id="+id;
+
+			return errorMsg;
 		}
 		
-		ProductCategory productCategory=new ProductCategory();
-		productCategory.setId(id);
-		productCategory.setKind(kind);
-		productCategory.setLevel(level);
+		// 轉換並封裝資料
+		ProductCategory temp=new ProductCategory();
+		temp.setId(productCategory.getId());
+		temp.setKind(productCategory.getKind());
+		temp.setLevel(productCategory.getLevel());
 		
+		// 更新到資料庫
 		categorySerivce.update(productCategory);
 		
-		attr.addAttribute("id",productCategory.getId());
-		attr.addFlashAttribute("category", productCategory);
-		attr.addFlashAttribute("result", "Success");
-		
+		// 傳回成功的相關訊息
+		Map<String,String> successMsg= new HashMap<>();
+		successMsg.put("id", temp.getId().toString());
+		successMsg.put("kind", temp.getKind());
+		successMsg.put("level", temp.getLevel().toString());
 	
-		return "redirect:/categories/edit";
+		return successMsg;
 	}
 
-	private Map<String, String> verifyData(String kind, Double level) {
 
+	private Map<String, String> verifyData(String data[]) {
 		Map<String,String> errorMsg=new HashMap<String,String>();
-		if(kind == null || kind.trim().length()==0){
+		if(data[0] == null || data[0].trim().length()==0){
 			errorMsg.put("kindError", "請輸入種類欄位");
 		}
-		if(level == null){
-			errorMsg.put("levelError", "請輸入權重欄位");
+		try {
+			Double.parseDouble(data[1]);
+		} catch (NumberFormatException e) {
+			errorMsg.put("levelError", "請輸入正確的權重(不可空白或非數字)");
 		}
+
 		return errorMsg;
 	}
 	
@@ -84,23 +99,37 @@ public class ProductCategoryController {
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
-	public String insert(@RequestParam String kind,@RequestParam Double level,Model model,RedirectAttributes attr){
+	@ResponseBody
+	public Map<String,String> insert(@RequestBody ProductCategory productCategory){
 		
-		Map<String,String> errorMsg=verifyData(kind, level);
-		if(!errorMsg.isEmpty()){
-			model.addAttribute("errorMsg", errorMsg);
-			model.addAttribute("result", "Fail");
-			return "forward:/categories/add";
+		// 接收資料
+		String[] data={
+				productCategory.getKind(),
+				productCategory.getLevel().toString()
+		};
+				
+		// 驗證資料
+		Map<String,String> errorMsg=verifyData(data);
+		if(!errorMsg.isEmpty()){ // 傳回失敗的相關訊息
+			errorMsg.put("result", "Fail");
+			return errorMsg;
 		}
-		ProductCategory productCategory=new ProductCategory();
-		productCategory.setKind(kind);
-		productCategory.setLevel(level);
 		
+		// 轉換並封裝資料
+		ProductCategory temp=new ProductCategory();
+		temp.setKind(productCategory.getKind());
+		temp.setLevel(productCategory.getLevel());
+		
+		// 新增到資料庫
 		categorySerivce.insert(productCategory);
 		
-		attr.addAttribute("category",productCategory);
-		attr.addAttribute("result", "Success");
+		// 傳回成功的相關訊息
+		Map<String, String> successMsg = new HashMap<>();
+		successMsg.put("id",temp.getId().toString());
+		successMsg.put("kind", temp.getKind());
+		successMsg.put("level", temp.getLevel().toString());
 		
-		return "redirect:/categories/add";
+		
+		return successMsg;
 	}
 }
