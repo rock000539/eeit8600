@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <title>Brand Add</title>
 </head>
 <body>
-<FORM action="/brands/insert" method="post" enctype="multipart/form-data">
+<FORM id="theForm" name="" action="/brands/insert" method="post" enctype="multipart/form-data">
 	<TABLE>
 		<TR>
 			<TD>品牌：</TD>
@@ -32,6 +33,54 @@
 	</TABLE>
 <input type="submit" name="save" value="save">
 <input type="button" name="cancel" value="cancel" onclick="location='/brands/list'" />
+
+<input type="button" onclick="sendAjax()" value="send"/>
+
+<div>
+BrandName:<span id="brandName"></span><br/>
+Website:<span id="website"></span><br/>
+BatchCodeFunction:<span id="bcFunc"></span>
+</div>
+
+<script>
+
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+function sendAjax(){
+	$.ajax({
+		url: '/brands/insert',
+		contentType: 'application/json;charset=utf-8',
+		//data: JSON.stringify({brandName:'LA MER',website:'http://www.lamer.com.tw/',bcFunc:'elca'}),
+		data: JSON.stringify($('#theForm').serializeObject()),
+		//data: JSON.stringify('{'+$('#theForm').serializeArray()+'}'),
+		dataType: 'json',
+		type: 'post',
+		success: function(data){
+			console.log(data); 
+			$('#brandName').text(data.brandName);
+			$('#website').text(data.website);
+			$('#bcFunc').text(data.bcFunc);			
+		}
+	});
+	
+}
+
+</script>
 </FORM>
 
 </body>

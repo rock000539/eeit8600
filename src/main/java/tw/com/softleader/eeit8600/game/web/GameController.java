@@ -38,43 +38,45 @@ public class GameController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> insert(@RequestBody Game game) {
+	public Game insert(@RequestBody Game game) {
+		
+		System.out.println(game);
 		
 		// 接收資料
-		String[] data = { 
-				game.getName(), 
-				game.getEvaluation().toString(), 
-				game.getDownload().toString(),
-				game.getUrl() 
-		};
+//		String[] data = { 
+//				game.getName(), 
+//				game.getEvaluation().toString(), 
+//				game.getDownload().toString(),
+//				game.getUrl() 
+//		};
 
 		// 驗證資料
-		Map<String, String> errorMsg = verifyData(data);
-		if (!errorMsg.isEmpty()) { // 傳回失敗的相關訊息
-			errorMsg.put("result", "Fail");
-			return errorMsg;
-		}
+//		Map<String, String> errorMsg = verifyData(data);
+//		if (!errorMsg.isEmpty()) { // 傳回失敗的相關訊息
+//			errorMsg.put("result", "Fail");
+//			return errorMsg;
+//		}
 
 		// 轉換並封裝資料
-		Game temp = new Game();
-		temp.setName(game.getName());
-		temp.setEvaluation(game.getEvaluation());
-		temp.setDownload(game.getDownload());
-		temp.setUrl(game.getUrl());
+//		Game temp = new Game();
+//		temp.setName(game.getName());
+//		temp.setEvaluation(game.getEvaluation());
+//		temp.setDownload(game.getDownload());
+//		temp.setUrl(game.getUrl());
 
 		// 新增到資料庫
-		gameService.insert(temp);
+		gameService.insert(game);
 
 		// 傳回成功的相關訊息
-		Map<String, String> successMsg = new HashMap<>();
-		successMsg.put("id", temp.getId().toString());
-		successMsg.put("name", temp.getName());
-		successMsg.put("evalu", temp.getEvaluation().toString());
-		successMsg.put("dl", temp.getDownload().toString());
-		successMsg.put("url", temp.getUrl());
-		successMsg.put("result", "Success");
+//		Map<String, String> successMsg = new HashMap<>();
+//		successMsg.put("id", temp.getId().toString());
+//		successMsg.put("name", temp.getName());
+//		successMsg.put("evalu", temp.getEvaluation().toString());
+//		successMsg.put("dl", temp.getDownload().toString());
+//		successMsg.put("url", temp.getUrl());
+//		successMsg.put("result", "Success");
 		
-		return successMsg;
+		return game;
 	}
 
 	@RequestMapping("/edit")
@@ -85,43 +87,45 @@ public class GameController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> update(@RequestBody Game game) {
-
+	public Game update(@RequestBody Game game) {
+		
+		System.out.println(game);
+		
 		// 接收資料
-		String[] data = { 
-				game.getName(), 
-				game.getEvaluation().toString(),
-				game.getDownload().toString(),
-				game.getUrl()
-		};
+//		String[] data = { 
+//				game.getName(), 
+//				game.getEvaluation().toString(),
+//				game.getDownload().toString(),
+//				game.getUrl()
+//		};
 
 		// 驗證資料
-		Map<String, String> errorMsg = verifyData(data);
-		if (!errorMsg.isEmpty()) {
-			return errorMsg;
-		}
+//		Map<String, String> errorMsg = verifyData(data);
+//		if (!errorMsg.isEmpty()) {
+//			return errorMsg;
+//		}
 
 		// 轉換並封裝資料
-		Game temp = new Game();
-		temp.setId(game.getId());
-		temp.setName(game.getName());
-		temp.setEvaluation(game.getEvaluation());
-		temp.setDownload(game.getDownload());
-		temp.setUrl(game.getUrl());
+//		Game temp = new Game();
+//		temp.setId(game.getId());
+//		temp.setName(game.getName());
+//		temp.setEvaluation(game.getEvaluation());
+//		temp.setDownload(game.getDownload());
+//		temp.setUrl(game.getUrl());
 
 		// 更新到資料庫
-		gameService.update(temp);
+		gameService.update(game);
 
 		// 傳回成功的相關訊息
-		Map<String, String> successMsg = new HashMap<>();
-		successMsg.put("id", temp.getId().toString());
-		successMsg.put("name", temp.getName());
-		successMsg.put("evalu", temp.getEvaluation().toString());
-		successMsg.put("dl", temp.getDownload().toString());
-		successMsg.put("url", temp.getUrl());
-		successMsg.put("result", "Success");
+//		Map<String, String> successMsg = new HashMap<>();
+//		successMsg.put("id", temp.getId().toString());
+//		successMsg.put("name", temp.getName());
+//		successMsg.put("evalu", temp.getEvaluation().toString());
+//		successMsg.put("dl", temp.getDownload().toString());
+//		successMsg.put("url", temp.getUrl());
+//		successMsg.put("result", "Success");
 
-		return successMsg;
+		return game;
 	}
 
 	@RequestMapping("/delete")

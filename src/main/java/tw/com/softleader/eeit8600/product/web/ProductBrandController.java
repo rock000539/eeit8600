@@ -1,6 +1,5 @@
 package tw.com.softleader.eeit8600.product.web;
 
-import java.sql.Blob;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,16 +40,16 @@ public class ProductBrandController {
 	
 	@RequestMapping("/insert")
 	@ResponseBody
-	public String insert(@RequestBody ProductBrand productbrand){	
+	public ProductBrand insert(@RequestBody ProductBrand productbrand){	
 		
-		String[] data = {
-				productbrand.getBrandName(),
-				productbrand.getWebsite(),
-				productbrand.getBcFunc()
-		};
-		
-		brandService.insert(productbrand);
-		return "redirect:/brands/list";
+//		String[] data = {
+//				productbrand.getBrandName(),
+//				productbrand.getWebsite(),
+//				productbrand.getBcFunc()
+//		};
+//		
+//		brandService.insert(productbrand);
+		return productbrand;
 	}
 	
 	@RequestMapping("/delete")
