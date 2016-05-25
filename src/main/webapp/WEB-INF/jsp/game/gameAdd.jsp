@@ -264,26 +264,51 @@ footer {
 								'", "evaluation":"' + $('#evalu').val() +
 								'", "download":"' + $('#dl').val() + 
 								'", "url":"' + $('#url').val() + '"}';
-								
+							console.log(data);
+							
+							$.fn.serializeObject = function()
+							{
+							    var o = {};
+							    var a = this.serializeArray();
+							    $.each(a, function() {
+							        if (o[this.name] !== undefined) {
+							            if (!o[this.name].push) {
+							                o[this.name] = [o[this.name]];
+							            }
+							            o[this.name].push(this.value || '');
+							        } else {
+							            o[this.name] = this.value || '';
+							        }
+							    });
+							    return o;
+							};
+							
 							$.ajax({
 								url : "/games/insert",
 								type : "POST",
 								contentType : "application/json; charset=UTF-8",
 								dataType : "json",
-								data : data,
+								//data : data,
+								data : JSON.stringify({
+									name:$('#name').val(), 
+									evaluation:$('#evalu').val(),
+									download:$('#dl').val(),
+									url:$('#url').val()}),
+//								data : JSON.stringify("{"+$("#form_add").serialize()+"}"),
 								success:function(response){
 									//alert("Success");
 									if (response.redirect) {
 								    	window.location.href = response.redirect;
 									}
 								    else {
+								    	console.log(response);
 								    	document.querySelector(".well").style.display = "block";
-								    	document.getElementById("span_result").innerHTML = response.result;
+								    	document.getElementById("span_result").innerHTML = "Success";
 								    	var td_list = document.querySelectorAll("tbody>tr>td");
 								    	td_list[0].innerHTML = response.id;
 								    	td_list[1].innerHTML = response.name;
-								    	td_list[2].innerHTML = response.evalu;
-								    	td_list[3].innerHTML = response.dl;
+								    	td_list[2].innerHTML = response.evaluation;
+								    	td_list[3].innerHTML = response.download;
 								    	td_list[4].innerHTML = response.url;
 								    	
 								    	var txt_list = document.querySelectorAll(".input-group>.form-control");
@@ -295,7 +320,7 @@ footer {
 								    }
 								}, 
 								error: function(xhr, textStatus, errorThrown) { 
-								    alert('Error!  Status = ' + xhr.status); 
+								    alert('Error! Status = ' + xhr.status); 
 								} 
 							})
 						} else {
