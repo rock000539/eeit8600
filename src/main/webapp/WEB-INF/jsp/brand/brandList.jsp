@@ -37,8 +37,10 @@ text-align:center;
 		<TD>${brand.bcFunc}</TD>
 		
 		<TD>
-		<input type="button" name="edit" value="edit" onclick="location='/brands/edit?brandId=${brand.brandId}'"/>
-		<input type="button" name="delete" value="delete" onclick="loation='/brands/delete?brandId=${brand.brandId}'"/>
+		<input type="button" name="edit" value="edit" 
+		onclick="location='/brands/edit?brandId=${brand.brandId}'"/>
+		<input type="button" name="delete" value="delete" 
+		onclick="location='/brands/delete?brandId=${brand.brandId}'"/>
 		</TD>
 	</TR>
 </c:forEach>

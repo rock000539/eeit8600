@@ -14,8 +14,8 @@ public class ProductBrandService {
 	@Autowired
 	private ProductBrandDao brandDao;
 	
-	public ProductBrand getById(Long id){
-		return brandDao.findOne(id);
+	public ProductBrand getById(Long brandId){
+		return brandDao.findOne(brandId);
 	}
 	
 	public List<ProductBrand> getAll(){
@@ -30,7 +30,7 @@ public class ProductBrandService {
 		brandDao.save(brand);
 	}
 	
-	public void delete(Long id){
-		brandDao.delete(id);
+	public void delete(Long brandId){
+		brandDao.delete(brandId);
 	}
 }
