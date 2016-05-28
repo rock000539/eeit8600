@@ -20,3 +20,5 @@ INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('cream',13.0);
 INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('facial mask',8.0);
 INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('foundation ',20.0);
 INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('sun protection ',18.0);
+
+INSERT INTO Ingredient (INGREDName, INGREDCName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2)
