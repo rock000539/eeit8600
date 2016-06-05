@@ -3,31 +3,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<
-<title>Category AddPage</title>
-<script src="/src/jquery-2.2.3.js">
 
-	$("#userform").click(function(){
+<title>Category AddPage</title>
+
+<script src="/src/jquery-2.2.3.js">
+	onload{
+	 var test=document.getElementById("test");
+	 test.onclick=sendAjax;
+	}
+	$fn.serializeObject=function(){
+		var o={};
+		var a=this.serializeArray();
+		$.each(a,function(){
+			if(o[this.name]!==undefined){
+				if(!o[this.name].push){
+					o[this.name]=[o[this.name]];
+				}
+				o[this.name]=this.value||'';
+			}
+		})
+	return o;
+	};
 		
+	function sendAjax(){		
 	alert("send2");
 	$.ajax({
-		type : "POST",
 		url : "/coffees/CategoryAdd",
-		data : $('#userform').serialize(),
-		dataType:jason,
-		
+		contentType:'application/json;charset=utf-8',
+		date:Json.stringify($("#userform").serializeObject()),
+		dataType:'json',
+		type : "POST",
 		success : function(data) {
 			alert("Success");
+			$("#mess").text(data.mess);
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 			alert("error");
 		}
 	});
-	});
+}
 </script>
+
 <script>
 
 	window.addEventListener("load", init, false);
+	
 	var showDiv = document.getElementById("showArea");
 	var xhr = new XMLHttpRequest();
 	function init() {		
@@ -43,7 +63,7 @@
 		var testing=document.getElementById("testing").value;
 		alert(local);
         //var url = "/coffees/CategoryAdd";
-        var url = "/CategoryAdd";
+        var url = "/coffees/CategoryAdd";
 		
         xhr.open("post", url, true);
 		xhr.send("id="+id+ "&local=" +local+ "&name=" +name+ "&price=" +price+ "&testing=" +testing);
@@ -53,7 +73,7 @@
 		//xhr.send(data);
 	}
 
-	function action() {
+	function action(){
 		alert("get");
 		var json = JSON.parse(xhr.responseText);
 		alert("json");
@@ -76,11 +96,10 @@
 			tr.appendChild(td3);
 
 			showDiv.appendChild(tr);
-
 		}
 	}
-
-
+	
+	
 	
 </script>
 <style>
@@ -124,9 +143,13 @@ form {
 				<td><input type="text" name="testing" id="testing" value="">試用</td>
 				<td>${errorMsg.Testing}</td>
 			</tr>
-		</table>
+		</table>'
 		<br> <input type="submit" id="send" name="send" />
-	</form>
+		
+		<input type="button" onclick="sendAjax" value="send2" id="test"/>	
+		
+		</form>
 	----------------------------------------------
+
 </body>
 </html>

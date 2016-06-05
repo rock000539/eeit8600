@@ -41,12 +41,12 @@ public class CoffeeController {
 	
 	@RequestMapping(value = "/CategoryAdd",method = RequestMethod.POST)
 	public @ResponseBody
-	String CategoryAdd(@RequestParam Long id, @RequestParam String local, @RequestParam String name,
-				@RequestParam String price, @RequestParam String testing, Model model) {
+	String CategoryAdd(@RequestBody Coffee coffee, Model model) {
 			System.out.println("IN add");
-			System.out.println(local);
-			System.out.println(name);
-				return "IN add";
+			System.out.println(coffee.getLocal());
+			System.out.println(coffee.getName());
+			coffeeService.insert(coffee);
+			return "redirect:/coffees/list";
 		}
 //	@RequestMapping(value = "/CategoryAddPage",method=RequestMethod.GET)
 //	@ResponseBody

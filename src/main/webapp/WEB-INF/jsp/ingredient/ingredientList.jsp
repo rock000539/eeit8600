@@ -8,7 +8,7 @@
 <title>Ingredient listPage</title>
 </head>
 <body>
-
+<a href="/ingredients/add">新增資料</a>
 <table border="1" cellspacing="0" cellpadding="2">
 <thead align='center'>
 	<tr>
