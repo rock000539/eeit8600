@@ -1,18 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ingredient addPage</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		$('#ADDbutton').click(function() {
+			var ingredId=$('input[name*="ingredId"]').val();
+			var ingredName=$('input[name*="ingredName"]').val();
+			var ingredChName=$('input[name*="ingredChName"]').val();
+			var ingredChar=$('input[name*="ingredChar"]').val();
+			var ingredIrritant=$('input[name*="ingredIrritant"]').val();
+			var ingredAcne=$('input[name*="ingredAcne"]').val();
+			var ingredSafety=$('input[name*="ingredSafety"]').val();
+			alert("postAdd");
+			$.post('/ingredients/insert',
+				{'ingredId':ingredId,'ingredName':ingredName,'ingredChName':ingredChName,'ingredChar':ingredChar,
+				'ingredIrritant':ingredIrritant,'ingredAcne':ingredAcne,'ingredSafety':ingredSafety}, function(backdata) {				
+				alert("postAdd back");
+				$('#show').html(backdata);
+			})//success end
+		})//button click end
+
+	}); //onload end
+</script>
 </head>
 <body>
-	<form action="/ingredients/post" method="post">
+	<form action="/ingredients/post" id="addForm" method="post">
 		<table>
 			<%-- readonly="readonly" --%>
 			<tr>
-				
+
 				<td><input type="text" name="ingredId"
 					value="${ingredient.ingredId}"></td>
 				<td>${errorMsg.ingredId}</td>
@@ -54,9 +77,13 @@
 				<td>${errorMsg.ingredSafety}</td>
 			</tr>
 		</table>
-		<br>
-		<input type="submit" name="update" value="insert"><br>
-		<input type="button" name="cancel" value="Cancel" onclick='window.location="/ingredients/list"'><br>
-		</form>
+		<br> <input type="submit" name="update" value="insert"><br>
+		<input type="button" name="button" id="ADDbutton" value="ADDbutton" />
+
+		<input type="button" name="cancel" value="Cancel"
+			onclick='window.location="/ingredients/list"'><br>
+	</form>
+
+	<div id="show"></div>
 </body>
 </html>

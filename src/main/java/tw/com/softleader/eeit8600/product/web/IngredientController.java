@@ -1,5 +1,8 @@
 package tw.com.softleader.eeit8600.product.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.com.softleader.eeit8600.product.entity.Ingredient;
 import tw.com.softleader.eeit8600.product.service.IngredientService;
@@ -22,26 +28,76 @@ public class IngredientController {
 		model.addAttribute("ingredients", service.getAll());
 		return "/ingredient/ingredientList";
 	}
+	
+	@RequestMapping("/show")
+	public String listJson(int pageNumber,int pageCount){
+		
+		List<Ingredient> ingredients=service.getAll();
+		List<Ingredient> result=new ArrayList<Ingredient>();
+	
+		for(int i=((pageCount-1)*pageNumber);i<((pageCount*pageNumber)-1);i++){	
+			result.add(ingredients.get(i));
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonInString=null;
+		try {
+			jsonInString = mapper.writeValueAsString(result);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		};
+		return jsonInString;
+	}
 
+	
+	
 	@RequestMapping("/add")
 	public String addPage() {
 		return "/ingredient/ingredientAdd";
 	}
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public String post( Model model,@RequestBody Ingredient bean) {
-		service.insert(bean);
+	public String post( Model model,@RequestBody Ingredient ingredient) {
+		service.insert(ingredient);
 		return "redirect:/ingredient/ingredientList";
 	}
-
+//--------------------------------------------------------------------------------------
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String postAdd( Model model,@RequestParam Long ingredId,@RequestParam String ingredName,
+			@RequestParam String ingredChName,@RequestParam String ingredChar,
+			@RequestParam Integer ingredIrritant,@RequestParam Integer ingredAcne,@RequestParam Integer ingredSafety) {
+		
+		System.out.println("postAdd IN");
+		
+		Ingredient ingredient=new Ingredient();
+		ingredient.setIngredAcne(ingredAcne);
+		ingredient.setIngredChar(ingredChar);
+		ingredient.setIngredChName(ingredChName);
+		ingredient.setIngredId(ingredId);
+		ingredient.setIngredIrritant(ingredIrritant);
+		ingredient.setIngredName(ingredName);
+		ingredient.setIngredSafety(ingredSafety);		
+		System.out.println(ingredient);
+		try{service.insert(ingredient);
+		System.out.println("success");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonInString= mapper.writeValueAsString(ingredient);
+		
+		return jsonInString;
+		}catch(Exception e){
+			System.out.println("false");
+			return null;}
+	}
+//--------------------------------------------------------------------------------------
 	@RequestMapping("/update")
 	public String editPage() {
 		return "/ingredient/ingredientEdit";
 	}
 
 	@RequestMapping(value = "/put", method = RequestMethod.PUT)
-	public String put(Model model,@RequestBody Ingredient bean,@RequestParam Long ingredId ) {
-		service.update(bean);
+	public String put(Model model,@RequestBody Ingredient ingredient,@RequestParam Long ingredId ) {
+		service.update(ingredient);
 		return "redirect:/ingredient/ingredientList?id="+ingredId;
 	}
 
