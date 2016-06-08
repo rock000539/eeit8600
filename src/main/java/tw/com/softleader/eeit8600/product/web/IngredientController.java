@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,8 +64,8 @@ public class IngredientController {
 		return "redirect:/ingredient/ingredientList";
 	}
 //--------------------------------------------------------------------------------------
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String postAdd( Model model,@RequestParam Long ingredId,@RequestParam String ingredName,
+	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String postAdd(Model model,@RequestParam Long ingredId,@RequestParam String ingredName,
 			@RequestParam String ingredChName,@RequestParam String ingredChar,
 			@RequestParam Integer ingredIrritant,@RequestParam Integer ingredAcne,@RequestParam Integer ingredSafety) {
 		
@@ -85,9 +87,11 @@ public class IngredientController {
 		String jsonInString= mapper.writeValueAsString(ingredient);
 		
 		return jsonInString;
+		
 		}catch(Exception e){
 			System.out.println("false");
-			return null;}
+			return null;
+			}
 	}
 //--------------------------------------------------------------------------------------
 	@RequestMapping("/update")

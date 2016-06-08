@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,20 +12,28 @@
 	$(function() {
 
 		$('#ADDbutton').click(function() {
-			var ingredId=$('input[name*="ingredId"]').val();
-			var ingredName=$('input[name*="ingredName"]').val();
-			var ingredChName=$('input[name*="ingredChName"]').val();
-			var ingredChar=$('input[name*="ingredChar"]').val();
-			var ingredIrritant=$('input[name*="ingredIrritant"]').val();
-			var ingredAcne=$('input[name*="ingredAcne"]').val();
-			var ingredSafety=$('input[name*="ingredSafety"]').val();
+			var ingredId = $('input[name*="ingredId"]').val();
+			var ingredName = $('input[name*="ingredName"]').val();
+			var ingredChName = $('input[name*="ingredChName"]').val();
+			var ingredChar = $('input[name*="ingredChar"]').val();
+			var ingredIrritant = $('input[name*="ingredIrritant"]').val();
+			var ingredAcne = $('input[name*="ingredAcne"]').val();
+			var ingredSafety = $('input[name*="ingredSafety"]').val();
 			alert("postAdd");
-			$.post('/ingredients/insert',
-				{'ingredId':ingredId,'ingredName':ingredName,'ingredChName':ingredChName,'ingredChar':ingredChar,
-				'ingredIrritant':ingredIrritant,'ingredAcne':ingredAcne,'ingredSafety':ingredSafety}, function(backdata) {				
+			$.post('src/main/java/tw/com/softleader/eeit8600/product/web/IngredientAddController.java', {
+				'ingredId' : ingredId,
+				'ingredName' : ingredName,
+				'ingredChName' : ingredChName,
+				'ingredChar' : ingredChar,
+				'ingredIrritant' : ingredIrritant,
+				'ingredAcne' : ingredAcne,
+				'ingredSafety' : ingredSafety
+			}, function(backdata) {
 				alert("postAdd back");
-				$('#show').html(backdata);
-			})//success end
+				
+				$('#show').html("<td>"+backdata+"<td>");
+				
+			})//success function end
 		})//button click end
 
 	}); //onload end
@@ -83,7 +92,8 @@
 		<input type="button" name="cancel" value="Cancel"
 			onclick='window.location="/ingredients/list"'><br>
 	</form>
-
-	<div id="show"></div>
+	<table>
+		<div id="show">${show}</div>
+	</table>
 </body>
 </html>
