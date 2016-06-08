@@ -94,15 +94,20 @@ public class IngredientController {
 			}
 	}
 //--------------------------------------------------------------------------------------
-	@RequestMapping("/update")
-	public String editPage() {
+	@RequestMapping("/edit")
+	public String editPage(Long ingredId, Model model) {
+		model.addAttribute("ingredient", service.getById(ingredId));
 		return "/ingredient/ingredientEdit";
 	}
 
-	@RequestMapping(value = "/put", method = RequestMethod.PUT)
-	public String put(Model model,@RequestBody Ingredient ingredient,@RequestParam Long ingredId ) {
-		service.update(ingredient);
-		return "redirect:/ingredient/ingredientList?id="+ingredId;
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public Ingredient put(Model model,@RequestBody String data,@RequestParam Long ingredId ) {
+		System.out.println(data);
+		ObjectMapper mapper = new ObjectMapper();
+		
+		//service.update(ingredient);
+		return service.getById(ingredId);
 	}
 
 }

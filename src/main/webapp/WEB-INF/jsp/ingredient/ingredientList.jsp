@@ -29,6 +29,8 @@
 			<td>${ingredient.ingredIrritant}</td>
 			<td>${ingredient.ingredAcne}</td>
 			<td>${ingredient.ingredSafety}</td>
+			<td><input type="button" name="edit" value="edit" onclick='location="/ingredients/edit?ingredId=${ingredient.ingredId}"'></td>
+			<td><input type="button" name="delete" value="delete" onclick='location="/ingredients/delete?ingredId=${ingredient.ingredId}"'></td>
 		</tr>
 	</c:forEach>
 </tbody>

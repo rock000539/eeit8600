@@ -5,51 +5,85 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ingredient editPage</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
 </head>
 <body>
-	<form action="/ingredient/put" method="post">
+	<form>
 		<table>
-			<%-- readonly="readonly" --%>
 			<tr>
+				<td>ID</td>
 				<td><input type="text" name="ingredId"
-					value="${ingredient.ingredId}">ID</td>
-				<td>${errorMsg.ingredId}</td>
+					value="${ingredient.ingredId}" readonly="readonly"></td>
 			</tr>
 			<tr>
+				<td>成份</td>
 				<td><input type="text" name="ingredName"
-					value="${ingredient.ingredName}">成份</td>
-				<td>${errorMsg.ingredName}</td>
+					value="${ingredient.ingredName}"></td>
 			</tr>
 			<tr>
+				<td>中文名稱</td>
 				<td><input type="text" name="ingredChName"
-					value="${ingredient.ingredChName}">中文</td>
-				<td>${errorMsg.ingredChName}</td>
+					value="${ingredient.ingredChName}"></td>
 			</tr>
 			<tr>
+				<td>特性</td>
 				<td><input type="text" name="ingredChar"
-					value="${ingredient.ingredChar}">特性</td>
-				<td>${errorMsg.ingredChar}</td>
+					value="${ingredient.ingredChar}"></td>
 			</tr>
 			<tr>
+				<td>刺激度</td>
 				<td><input type="text" name="ingredIrritant"
-					value="${ingredient.ingredIrritant}">刺激</td>
-				<td>${errorMsg.ingredIrritant}</td>
+					value="${ingredient.ingredIrritant}"></td>
 			</tr>
 			<tr>
+				<td>致粉刺性</td>
 				<td><input type="text" name="ingredAcne"
-					value="${ingredient.ingredAcne}">致粉刺性</td>
-				<td>${errorMsg.ingredAcne}</td>
+					value="${ingredient.ingredAcne}"></td>
 			</tr>
 			<tr>
+				<td>安心度</td>
 				<td><input type="text" name="ingredSafety"
-					value="${ingredient.ingredSafety}">安心</td>
-				<td>${errorMsg.ingredSafety}</td>
+					value="${ingredient.ingredSafety}"></td>
 			</tr>
 		</table>
 		<br>
-		<input type="submit" name="update" value="update"><br>
-		<input type="button" name="cancel" value="Cancel" onclick='window.location="/ingredient/list"'><br>
+		<input id="editBtn" type="button" name="update" value="update">
+		<input type="button" name="cancel" value="Cancel" onclick='window.location="/ingredients/list"'><br>
 		</form>
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#editBtn').on('click', function(){
+		var data = JSON.stringify($('form').serializeObject());
+		console.log(data);
+		$.ajax({
+			url:"/ingredients/update",
+			type:"POST",
+			dataType:"application/json",
+			data:$('form').serialize(),
+			success:function(result){
+				console.log(result);
+			}
+		});
+	});
+	
+	
+	$.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+	
+});
+</script>
 </html>
