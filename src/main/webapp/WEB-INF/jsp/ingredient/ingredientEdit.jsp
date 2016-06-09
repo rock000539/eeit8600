@@ -6,6 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ingredient editPage</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+<style>
+	.temp1 {
+		border:1px solid black;
+		width:500px;
+	}
+	.temp2 {
+		border:1px solid black;
+		align:center;
+		background-color:yellow;
+	}
+	
+</style>
 </head>
 <body>
 	<form>
@@ -46,23 +58,39 @@
 					value="${ingredient.ingredSafety}"></td>
 			</tr>
 		</table>
+		<div>
 		<br>
 		<input id="editBtn" type="button" name="update" value="update">
 		<input type="button" name="cancel" value="Cancel" onclick='window.location="/ingredients/list"'><br>
+		</div>
 		</form>
+<div id="resultMsg"></div>
+<div id="data"></div>
 </body>
 <script type="text/javascript">
 $(function(){
 	$('#editBtn').on('click', function(){
-		var data = JSON.stringify($('form').serializeObject());
-		console.log(data);
 		$.ajax({
 			url:"/ingredients/update",
 			type:"POST",
-			dataType:"application/json",
-			data:$('form').serialize(),
+			contentType: 'application/json; charset=utf-8',
+			dataType:"json",
+			data:JSON.stringify($('form').serializeObject()),
 			success:function(result){
-				console.log(result);
+				//$(':text:gt(0)').val(" ");//clear the form except id
+				$('#resultMsg').empty().append("<h2>update success</h2>");
+				var tb = $('#data').append('<table></table>');
+				tb.empty();
+				tb.append('<tr align="center"><td>ID</td><td>成份</td><td>中文名稱</td><td>特性</td><td>刺激度</td><td>致粉刺性</td><td>安心度</td></tr>');
+				var row = $('<tr align="center"></tr>').appendTo(tb);
+				$('<td></td>').text(result.ingredId).appendTo(row);
+				$('<td></td>').text(result.ingredName).appendTo(row);
+				$('<td></td>').text(result.ingredChName).appendTo(row);
+				$('<td></td>').text(result.ingredChar).appendTo(row);
+				$('<td></td>').text(result.ingredIrritant).appendTo(row);
+				$('<td></td>').text(result.ingredAcne).appendTo(row);
+				$('<td></td>').text(result.ingredSafety).appendTo(row);
+			//	$('#data').children().addClass("temp1");
 			}
 		});
 	});
