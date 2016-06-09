@@ -31,6 +31,41 @@ public class IngredientController {
 		return "/ingredient/ingredientList";
 	}
 	
+	@RequestMapping("/add")
+	public String addPage() {
+		return "/ingredient/ingredientAdd";
+	}
+
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public Ingredient post(@RequestBody Ingredient ingredient) {
+		service.insert(ingredient);
+		return ingredient;
+	}
+	
+	@RequestMapping("/edit")
+	public String editPage(@RequestParam Long ingredId, Model model) {
+		model.addAttribute("ingredient", service.getById(ingredId));
+		return "/ingredient/ingredientEdit";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public Ingredient put(@RequestBody Ingredient ingredient ) {
+		service.update(ingredient);
+		return service.getById(ingredient.getIngredId());
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam Long ingredId){
+		System.out.println(ingredId);
+		service.delete(ingredId);
+		return "redirect:/ingredients/list";
+	}
+	
+	
+//--------------------------------------------------------------------------------------
+	
 	@RequestMapping("/show")
 	public String listJson(int pageNumber,int pageCount){
 		
@@ -52,19 +87,9 @@ public class IngredientController {
 	}
 
 	
-	
-	@RequestMapping("/add")
-	public String addPage() {
-		return "/ingredient/ingredientAdd";
-	}
 
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public String post( Model model,@RequestBody Ingredient ingredient) {
-		service.insert(ingredient);
-		return "redirect:/ingredient/ingredientList";
-	}
-//--------------------------------------------------------------------------------------
-	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	
+	@RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String postAdd(Model model,@RequestParam Long ingredId,@RequestParam String ingredName,
 			@RequestParam String ingredChName,@RequestParam String ingredChar,
 			@RequestParam Integer ingredIrritant,@RequestParam Integer ingredAcne,@RequestParam Integer ingredSafety) {
@@ -94,25 +119,6 @@ public class IngredientController {
 			}
 	}
 //--------------------------------------------------------------------------------------
-	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long ingredId, Model model) {
-		model.addAttribute("ingredient", service.getById(ingredId));
-		return "/ingredient/ingredientEdit";
-	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public Ingredient put(@RequestBody Ingredient ingredient ) {
-		service.update(ingredient);
-		return service.getById(ingredient.getIngredId());
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(@RequestParam Long ingredId){
-		System.out.println(ingredId);
-		service.delete(ingredId);
-		return "redirect:/ingredients/list";
-	}
-	
 
 }

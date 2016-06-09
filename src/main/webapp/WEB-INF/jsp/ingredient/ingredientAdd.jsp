@@ -40,15 +40,8 @@
 </script>
 </head>
 <body>
-	<form action="/ingredients/post" id="addForm" method="post">
+	<form>
 		<table>
-			<%-- readonly="readonly" --%>
-			<tr>
-
-				<td><input type="text" name="ingredId"
-					value="${ingredient.ingredId}"></td>
-				<td>${errorMsg.ingredId}</td>
-			</tr>
 			<tr>
 				<td>成分</td>
 				<td><input type="text" name="ingredName"
@@ -86,14 +79,59 @@
 				<td>${errorMsg.ingredSafety}</td>
 			</tr>
 		</table>
-		<br> <input type="submit" name="update" value="insert"><br>
-		<input type="button" name="button" id="ADDbutton" value="ADDbutton" />
-
+		<br>
+		<input type="button" name="insert" value="insert" id="insert">
 		<input type="button" name="cancel" value="Cancel"
 			onclick='window.location="/ingredients/list"'><br>
 	</form>
-	<table>
-		<div id="show">${show}</div>
-	</table>
+<div id="resultMsg"></div>
+<div id="data"></div>
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#insert').click(function(){
+		var data = JSON.stringify($('form').serializeObject());
+		console.log(data);
+		$.ajax({
+			url:'/ingredients/insert',
+			type:"POST",
+			contentType: 'application/json; charset=utf-8',
+			dataType:"json",
+			data:JSON.stringify($('form').serializeObject()),
+			success:function(result){
+				$(':text').val(" ");
+				$('#resultMsg').empty().append("<h2>insert success</h2>");
+				var tb = $('#data').append('<table></table>');
+				tb.empty();
+				tb.append('<tr align="center"><td>ID</td><td>成份</td><td>中文名稱</td><td>特性</td><td>刺激度</td><td>致粉刺性</td><td>安心度</td></tr>');
+				var row = $('<tr align="center"></tr>').appendTo(tb);
+				$('<td></td>').text(result.ingredId).appendTo(row);
+				$('<td></td>').text(result.ingredName).appendTo(row);
+				$('<td></td>').text(result.ingredChName).appendTo(row);
+				$('<td></td>').text(result.ingredChar).appendTo(row);
+				$('<td></td>').text(result.ingredIrritant).appendTo(row);
+				$('<td></td>').text(result.ingredAcne).appendTo(row);
+				$('<td></td>').text(result.ingredSafety).appendTo(row);
+			}
+		});
+	});
+	
+	$.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+});
+</script>
+
 </html>
