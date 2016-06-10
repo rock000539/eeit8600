@@ -6,92 +6,100 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ingredient addPage</title>
+<style type="text/css">
+.error{
+color:red;
+}
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="/src/js/jquery.validate.min.js"></script>
+
 <script type="text/javascript">
-	$(function() {
-
-		$('#ADDbutton').click(function() {
-			var ingredId = $('input[name*="ingredId"]').val();
-			var ingredName = $('input[name*="ingredName"]').val();
-			var ingredChName = $('input[name*="ingredChName"]').val();
-			var ingredChar = $('input[name*="ingredChar"]').val();
-			var ingredIrritant = $('input[name*="ingredIrritant"]').val();
-			var ingredAcne = $('input[name*="ingredAcne"]').val();
-			var ingredSafety = $('input[name*="ingredSafety"]').val();
-			alert("postAdd");
-			$.post('src/main/java/tw/com/softleader/eeit8600/product/web/IngredientAddController.java', {
-				'ingredId' : ingredId,
-				'ingredName' : ingredName,
-				'ingredChName' : ingredChName,
-				'ingredChar' : ingredChar,
-				'ingredIrritant' : ingredIrritant,
-				'ingredAcne' : ingredAcne,
-				'ingredSafety' : ingredSafety
-			}, function(backdata) {
-				alert("postAdd back");
-				
-				$('#show').html("<td>"+backdata+"<td>");
-				
-			})//success function end
-		})//button click end
-
+	$(function() {	
+		var validate= $('#Addform').validate({rules:
+		{
+			ingredName:{required:true},
+			ingredChar:{required:true},
+			ingredIrritant:{digits:true},
+			ingredAcne:{digits:true},
+			ingredSafety:{digits:true}
+			},
+	messages:{
+		ingredName:"必填項目",
+		ingredChName:"必填項目",
+		ingredChar:"必填項目",
+		ingredIrritant:"必須為數字",
+		ingredAcne:"必須為數字",
+		ingredSafety:"必須為數字"}
+		});
+		
+		$('#insert').click(function(){})
+		
 	}); //onload end
+
 </script>
 </head>
 <body>
-	<form>
+
+	<form id='Addform'>
+	<fieldset>
 		<table>
 			<tr>
 				<td>成分</td>
 				<td><input type="text" name="ingredName"
 					value="${ingredient.ingredName}"></td>
-				<td>${errorMsg.ingredName}</td>
+				<td><label for='ingredName' class='error'></label></td>
 			</tr>
 			<tr>
 				<td>中文名稱</td>
 				<td><input type="text" name="ingredChName"
 					value="${ingredient.ingredChName}"></td>
-				<td>${errorMsg.ingredChName}</td>
+				<td><label for='ingredChName' class='error'></label></td>
 			</tr>
 			<tr>
 				<td>特性</td>
 				<td><input type="text" name="ingredChar"
 					value="${ingredient.ingredChar}"></td>
-				<td>${errorMsg.ingredChar}</td>
+				<td><label for='ingredChar' class='error'></label></td>
 			</tr>
 			<tr>
 				<td>刺激度</td>
 				<td><input type="text" name="ingredIrritant"
 					value="${ingredient.ingredIrritant}"></td>
-				<td>${errorMsg.ingredIrritant}</td>
+				<td><label for='ingredIrritant' class='error'></label></td>
 			</tr>
 			<tr>
 				<td>致粉刺性</td>
-				<td><input type="text" name="ingredAcne"
-					value="${ingredient.ingredAcne}"></td>
-				<td>${errorMsg.ingredAcne}</td>
+				<td><input type="text" name="ingredAcne" 
+					value="${ingredient.ingredAcne}" ></td>
+				<td><label for='ingredAcne' class='error'></label></td>
 			</tr>
 			<tr>
 				<td>安心度</td>
 				<td><input type="text" name="ingredSafety"
 					value="${ingredient.ingredSafety}"></td>
-				<td>${errorMsg.ingredSafety}</td>
+				<td><label for='ingredSafety' class='error'></label></td>
 			</tr>
 		</table>
-		<br>
-		<input type="button" name="insert" value="insert" id="insert">
-		<input type="button" name="cancel" value="Cancel"
-			onclick='window.location="/ingredients/list"'><br>
+		<br> <input type="button" name="insert" value="insert" id="insert"> 
+			<input type="button" name="cancel"
+			value="Cancel" onclick='window.location="/ingredients/list"'><br>
+	</fieldset>
 	</form>
-<div id="resultMsg"></div>
-<div id="data"></div>
+	
+	
+	<div id="resultMsg"></div>
+	<div id="data"></div>
 </body>
 <script type="text/javascript">
 $(function(){
 	$('#insert').click(function(){
+		var validate=$('#Addform').validate().form();
 		var data = JSON.stringify($('form').serializeObject());
 		console.log(data);
+		if(validate){
+		
 		$.ajax({
 			url:'/ingredients/insert',
 			type:"POST",
@@ -114,6 +122,10 @@ $(function(){
 				$('<td></td>').text(result.ingredSafety).appendTo(row);
 			}
 		});
+		}//end of if
+		else{
+			alert("資料輸入錯誤");
+		}
 	});
 	
 	$.fn.serializeObject = function() {
