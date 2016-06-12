@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "BRAND")
-public class ProductBrand {
+public class Brand {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,25 +21,27 @@ public class ProductBrand {
 	@Column(name = "BRANDNAME", length = 50)
 	private String brandName;
 
-//	@Column(name = "BRANDIMG")
-//	private Blob brandImg;
-	
+	@Column(name = "BRANDIMG", length = 200)
+	private String brandImg;
+
 	@Column(name = "WEBSITE", length = 200)
 	private String website;
-	
-	@Column(name = "BCFUNC" , length = 20)
+
+	@Column(name = "BCFUNC", length = 20)
 	private String bcFunc;
 
-	public ProductBrand() {
+	@Column(name = "BRANDSHOW")
+	private boolean brandShow;
+
+	public Brand() {
 	}
 
-	public ProductBrand(String brandName, 
-			//Blob brandImg, 
-			String website, String bcFunc) {
+	public Brand(String brandName, String brandImg, String website, String bcFunc, boolean brandShow) {
 		this.brandName = brandName;
-		//this.brandImg = brandImg;
+		this.brandImg = brandImg;
 		this.website = website;
 		this.bcFunc = bcFunc;
+		this.brandShow = brandShow;
 	}
 
 	public Long getBrandId() {
@@ -58,14 +60,14 @@ public class ProductBrand {
 		this.brandName = brandName;
 	}
 
-//	public Blob getBrandImg() {
-//		return brandImg;
-//	}
-//
-//	public void setBrandImg(Blob brandImg) {
-//		this.brandImg = brandImg;
-//	}
-	
+	public String getBrandImg() {
+		return brandImg;
+	}
+
+	public void setBrandImg(String brandImg) {
+		this.brandImg = brandImg;
+	}
+
 	public String getWebsite() {
 		return website;
 	}
@@ -80,6 +82,14 @@ public class ProductBrand {
 
 	public void setBcFunc(String bcFunc) {
 		this.bcFunc = bcFunc;
+	}
+
+	public boolean isBrandShow() {
+		return brandShow;
+	}
+
+	public void setBrandShow(boolean brandShow) {
+		this.brandShow = brandShow;
 	}
 
 }

@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.softleader.eeit8600.product.entity.ProductBrand;
-import tw.com.softleader.eeit8600.product.service.ProductBrandService;
+import tw.com.softleader.eeit8600.product.entity.Brand;
+import tw.com.softleader.eeit8600.product.service.BrandService;
 
 @Controller
 @RequestMapping("/brands")
-public class ProductBrandController {
+public class BrandController {
 	
 	@Autowired
-	private ProductBrandService brandService;
+	private BrandService brandService;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -40,8 +40,8 @@ public class ProductBrandController {
 	
 	@RequestMapping("/insert")
 	@ResponseBody
-	public ProductBrand insert(@RequestBody ProductBrand productbrand){	
-		
+	public Brand insert(@RequestBody Brand brand){	
+		brandService.insert(brand);
 //		String[] data = {
 //				productbrand.getBrandName(),
 //				productbrand.getWebsite(),
@@ -49,7 +49,14 @@ public class ProductBrandController {
 //		};
 //		
 //		brandService.insert(productbrand);
-		return productbrand;
+		return brand;
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public Brand update(@RequestBody Brand brand){
+		brandService.update(brand);
+		return brand;
 	}
 	
 	@RequestMapping("/delete")
