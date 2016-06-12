@@ -2,9 +2,9 @@ package tw.com.softleader.eeit8600.product.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tw.com.softleader.eeit8600.product.entity.ProductCategory;
+import tw.com.softleader.eeit8600.product.entity.Category;
 
-public interface CategoryDao extends JpaRepository<ProductCategory, Long>{
+public interface CategoryDao extends JpaRepository<Category, Long>{
 
 	//public List<Category> findByPriceLessThan(Integer price);
 	
