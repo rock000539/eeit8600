@@ -12,6 +12,7 @@ th,td{border:1px solid black;
 	  text-align:center;}
 </style>
 </head>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <body>
 <h2>Notebook List</h2>
 <input type="button" name="add" value="add" onClick="location='/notebooks/add'"/>
@@ -33,8 +34,6 @@ th,td{border:1px solid black;
 	<td><input type="button" name="edit" value="edit" onClick="location='/notebooks/edit?id=${notebook.id}'"></td>
 	<td><input type="button" name="delete" value="delete" onClick="location='/notebooks/delete?id=${notebook.id}'"></td>
 </tr>
-	
 </c:forEach>
 </table>
-</body>
 </html>
