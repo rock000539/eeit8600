@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import tw.com.softleader.eeit8600.product.entity.ProductCategory;
-import tw.com.softleader.eeit8600.product.service.ProductCategoryService;
+import tw.com.softleader.eeit8600.product.entity.Category;
+import tw.com.softleader.eeit8600.product.service.CategoryService;
 
 @Controller
 @RequestMapping("/categories")
-public class ProductCategoryController {
+public class CategoryController {
 
 	@Autowired
-	private ProductCategoryService categorySerivce;
+	private CategoryService categorySerivce;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -45,7 +45,7 @@ public class ProductCategoryController {
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,String> update(@RequestBody ProductCategory productCategory){
+	public Map<String,String> update(@RequestBody Category productCategory){
 		
 		// 接收資料
 		String[] data={
@@ -61,7 +61,7 @@ public class ProductCategoryController {
 		}
 		
 		// 轉換並封裝資料
-		ProductCategory temp=new ProductCategory();
+		Category temp=new Category();
 		temp.setId(productCategory.getId());
 		temp.setKind(productCategory.getKind());
 		temp.setLevel(productCategory.getLevel());
@@ -100,7 +100,7 @@ public class ProductCategoryController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,String> insert(@RequestBody ProductCategory productCategory){
+	public Map<String,String> insert(@RequestBody Category productCategory){
 		
 		// 接收資料
 		String[] data={
@@ -116,7 +116,7 @@ public class ProductCategoryController {
 		}
 		
 		// 轉換並封裝資料
-		ProductCategory temp=new ProductCategory();
+		Category temp=new Category();
 		temp.setKind(productCategory.getKind());
 		temp.setLevel(productCategory.getLevel());
 		
