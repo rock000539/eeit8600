@@ -5,29 +5,29 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.softleader.eeit8600.product.dao.ProductCategoryDao;
-import tw.com.softleader.eeit8600.product.entity.ProductCategory;
+import tw.com.softleader.eeit8600.product.dao.CategoryDao;
+import tw.com.softleader.eeit8600.product.entity.Category;
 
 @Service
-public class ProductCategoryService {
+public class CategoryService {
 
 	@Autowired
-	private ProductCategoryDao categoryDao;
+	private CategoryDao categoryDao;
 	
-	public ProductCategory getById(Long id){
+	public Category getById(Long id){
 		return categoryDao.findOne(id);
 	}
 	
-	public List<ProductCategory> getAll(){
+	public List<Category> getAll(){
 	
 		return categoryDao.findAll();
 	}
 	
-	public void insert(ProductCategory category){
+	public void insert(Category category){
 		categoryDao.save(category);
 	}
 	
-	public void update(ProductCategory category){
+	public void update(Category category){
 		categoryDao.save(category);
 	}
 	
