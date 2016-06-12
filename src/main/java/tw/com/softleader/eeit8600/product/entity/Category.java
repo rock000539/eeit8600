@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CATEGORY")
-public class ProductCategory {
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,9 +22,9 @@ public class ProductCategory {
 	@Column(name="CATEGORYLEVEL")
 	private Double categoryLevel;
 	
-	public ProductCategory(){}
+	public Category(){}
 	
-	public ProductCategory(String categoryKind,Double categoryLevel){
+	public Category(String categoryKind,Double categoryLevel){
 		this.categoryKind=categoryKind;
 		this.categoryLevel=categoryLevel;
 	}
