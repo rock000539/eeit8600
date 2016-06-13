@@ -1,0 +1,8 @@
+1.Spring Boot Automatic Restart - Spring Boot Developer Tools
+
+<!-- http://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <version>1.3.5.RELEASE</version>
+</dependency>
