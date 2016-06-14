@@ -1,7 +1,12 @@
 package tw.com.softleader.eeit8600.product.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +69,18 @@ public class BrandController {
 		brandService.delete(brandId);
 		return "redirect:/brands/list";
 	}
+	
+	@RequestMapping("/show")
+	public void show(HttpServletResponse  resp){
+		try {
+			ServletOutputStream out = resp.getOutputStream();
+//			out.write(byte[]);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public Map<String,String> validate(String[] data){
 		Map<String,String> errorMsg = new HashMap<String,String>();
