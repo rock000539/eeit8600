@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import tw.com.softleader.eeit8600.product.service.DateService;
+import tw.com.queautiful.product.service.DateService;
+
+
 
 @Controller
 @RequestMapping("/date")

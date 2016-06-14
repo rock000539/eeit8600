@@ -1,7 +1,11 @@
 package tw.com.queautiful.product.web;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.softleader.eeit8600.product.entity.Brand;
-import tw.com.softleader.eeit8600.product.service.BrandService;
+import tw.com.queautiful.product.entity.Brand;
+import tw.com.queautiful.product.service.BrandService;
 
 @Controller
 @RequestMapping("/brands")
@@ -63,6 +67,17 @@ public class BrandController {
 	public String delete(@RequestParam Long brandId) {
 		brandService.delete(brandId);
 		return "redirect:/brands/list";
+	}
+	
+	@RequestMapping("/show")
+	public void show(HttpServletResponse  resp){
+		try {
+			ServletOutputStream out = resp.getOutputStream();
+//			out.write(byte[]);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Map<String,String> validate(String[] data){

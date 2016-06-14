@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.softleader.eeit8600.product.dao.DateDao;
-import tw.com.softleader.eeit8600.product.entity.Date;
+import tw.com.queautiful.product.dao.DateDao;
+import tw.com.queautiful.product.entity.Date;
 
 @Service
 public class DateService {

@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.softleader.eeit8600.product.dao.IngredientDao;
-import tw.com.softleader.eeit8600.product.entity.Ingredient;
+import tw.com.queautiful.product.dao.IngredientDao;
+import tw.com.queautiful.product.entity.Ingredient;
+
+
 
 @Service
 public class IngredientService {

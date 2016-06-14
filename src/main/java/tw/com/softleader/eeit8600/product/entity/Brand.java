@@ -44,8 +44,6 @@ public class Brand {
 	@Transient
 	private MultipartFile brandImgFile;
 	
-	
-	
 	public Long getBrandId() {
 		return brandId;
 	}

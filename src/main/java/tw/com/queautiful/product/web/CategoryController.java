@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import tw.com.softleader.eeit8600.product.entity.Category;
-import tw.com.softleader.eeit8600.product.service.CategoryService;
+import tw.com.queautiful.product.entity.Category;
+import tw.com.queautiful.product.service.CategoryService;
+
 
 @Controller
 @RequestMapping("/categories")

@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.softleader.eeit8600.product.dao.CategoryDao;
-import tw.com.softleader.eeit8600.product.entity.Category;
+import tw.com.queautiful.product.dao.CategoryDao;
+import tw.com.queautiful.product.entity.Category;
+
 
 @Service
 public class CategoryService {

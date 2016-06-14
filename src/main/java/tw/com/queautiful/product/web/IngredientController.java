@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import tw.com.softleader.eeit8600.product.entity.Ingredient;
-import tw.com.softleader.eeit8600.product.service.IngredientService;
+import tw.com.queautiful.product.entity.Ingredient;
+import tw.com.queautiful.product.service.IngredientService;
+
+
 
 @Controller
 @RequestMapping("/ingredients")

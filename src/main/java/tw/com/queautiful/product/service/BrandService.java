@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.softleader.eeit8600.product.dao.BrandDao;
-import tw.com.softleader.eeit8600.product.entity.Brand;
+import tw.com.queautiful.product.dao.BrandDao;
+import tw.com.queautiful.product.entity.Brand;
+
+
 
 @Service
 public class BrandService {

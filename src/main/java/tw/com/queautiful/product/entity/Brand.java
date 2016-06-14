@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "BRAND")
@@ -33,16 +36,11 @@ public class Brand {
 	@Column(name = "BRANDSHOW")
 	private boolean brandShow;
 
-	public Brand() {
-	}
-
-	public Brand(String brandName, String brandImg, String website, String bcFunc, boolean brandShow) {
-		this.brandName = brandName;
-		this.brandImg = brandImg;
-		this.website = website;
-		this.bcFunc = bcFunc;
-		this.brandShow = brandShow;
-	}
+//	@OneToMany
+//	private List<Product> products;
+	
+	@Transient
+	private MultipartFile brandImgFile;
 
 	public Long getBrandId() {
 		return brandId;
@@ -92,4 +90,11 @@ public class Brand {
 		this.brandShow = brandShow;
 	}
 
+	public MultipartFile getBrandImgFile() {
+		return brandImgFile;
+	}
+
+	public void setBrandImgFile(MultipartFile brandImgFile) {
+		this.brandImgFile = brandImgFile;
+	}
 }
