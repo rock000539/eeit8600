@@ -34,6 +34,7 @@
 			$('#jqGrid').jqGrid({
 				url: '/products/select',
 				datatype: 'json',
+//				prmNames: { page:'gridPage.page', rows:'gridPage.rows', sort:'gridPage.sidx', order:'gridPage.sord' },
 				colModel: [
 					{
 						label: '',

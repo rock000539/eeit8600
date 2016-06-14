@@ -3,6 +3,8 @@ package tw.com.queautiful.product.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ProductDao;
@@ -20,6 +22,10 @@ public class ProductService {
 
 	public List<Product> getAll() {
 		return dao.findAll();
+	}
+	
+	public Page<Product> getAll(Pageable pageable) {
+		return dao.findAll(pageable);
 	}
 
 	public void insert(Product product) {
