@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="PRODUCT")
@@ -53,6 +56,9 @@ public class Product {
 	
 	@Column(name="PRODIMG", length=100)
 	private String prodImg;
+	
+	@Transient
+	private MultipartFile prodImgFile;
 
 	public Long getProdId() {
 		return prodId;
@@ -158,4 +164,11 @@ public class Product {
 		this.prodImg = prodImg;
 	}
 	
+	public MultipartFile getProdImgFile() {
+		return prodImgFile;
+	}
+	
+	public void setProdImgFile(MultipartFile prodImgFile) {
+		this.prodImgFile = prodImgFile;
+	}
 }
