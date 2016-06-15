@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "DATE")
-public class Date {
+public class ExpDate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "dateId")
@@ -17,6 +17,9 @@ public class Date {
 	
 	@Column(name = "memberId")
 	private Long memberId;
+	
+	@Column(name = "BRANDID")
+	private Long brandId;
 	
 	@Column(name = "proId")
 	private Long proId;
@@ -30,12 +33,24 @@ public class Date {
 	@Column(name = "exp")
 	private java.sql.Date exp;
 
+	
+	
 	public Long getDateId() {
 		return dateId;
 	}
 
 	public void setDateId(Long dateId) {
 		this.dateId = dateId;
+	}
+
+	
+	public Long getBrandId() {
+		return brandId;
+	}
+	
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
 	}
 
 	public Long getMemberId() {
