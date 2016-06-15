@@ -29,16 +29,16 @@ input.error {
 			<TD><input type="text" name="brandName" value="${param.brandName}" class="required" title="請輸入品牌名稱" /></TD>
 			<TD></TD>
 		</TR>
-		<TR>
-			<TD>LOGO：</TD>
-			<TD><input type="text" name="brandImg" /></TD>
-			<TD></TD>
-		</TR>
 <!-- 		<TR> -->
 <!-- 			<TD>LOGO：</TD> -->
-<!-- 			<TD><input type="file" name="brandImg" id="brandImg" accept="image/*"/></TD> -->
-<!-- 			<TD><input type="button" id="start" value="開始上傳" /></TD> -->
+<!-- 			<TD><input type="text" name="brandImg" /></TD> -->
+<!-- 			<TD></TD> -->
 <!-- 		</TR> -->
+		<TR>
+			<TD>LOGO：</TD>
+			<TD><input type="file" name="brandImgFile" id="brandImgFile" accept="image/*"/></TD>
+			<TD><input type="button" id="start" value="開始上傳" /></TD>
+		</TR>
 		<TR>
 			<TD>官網：</TD>
 			<TD><input type="text" name="website" value="${param.website}" /></TD>
@@ -64,7 +64,7 @@ input.error {
 <div id='result'>
 <h2></h2>
 <span id="brandName"></span><br/>
-<span id="brandImg"></span><br/>
+<span id="brandImgFile"></span><br/>
 <span id="website"></span><br/>
 <span id="bcFunc"></span><br/>
 <span id="brandShow"></span>
@@ -92,7 +92,8 @@ $(function(){
 	});
 	
 	
-	$('#save').click(function(){
+	$('#save').click(function(){		
+		console.log(JSON.stringify($('#theForm').serializeObject()));
 		if($('#theForm').validate().form()){
 			$.ajax({
 				url: '/brands/insert',
@@ -108,7 +109,7 @@ $(function(){
 					$('#true').prop("checked",true);				
 					$('h2').text('Insert Success');
 					$('#brandName').text('BrandName:'+data.brandName);
-					$('#brandImg').text('Logo:'+data.brandImg);
+					$('#brandImgFile').text('Logo:'+data.brandImgFile);
 					$('#website').text('Website:'+data.website);
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
 					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
@@ -138,10 +139,7 @@ $(function(){
 	
 });
 
-
-
 </script>
-
 
 </body>
 </html>

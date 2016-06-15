@@ -45,6 +45,7 @@ public class BrandController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public Brand insert(@RequestBody Brand brand){	
+		System.out.println(brand.getBrandImgFile());
 		brandService.insert(brand);
 //		String[] data = {
 //				productbrand.getBrandName(),
