@@ -8,29 +8,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DATE")
+@Table(name ="EXPDATE")
 public class ExpDate {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "dateId")
 	private Long dateId;
 	
-	@Column(name = "memberId")
+	@Column(name = "MEMBERID")
 	private Long memberId;
 	
 	@Column(name = "BRANDID")
 	private Long brandId;
 	
-	@Column(name = "proId")
+	@Column(name = "PROID")
 	private Long proId;
 	
-	@Column(name = "batchCode")
+	@Column(name = "BATCHCODE")
 	private Integer batchCode;
 	
-	@Column(name = "mfd")
+	@Column(name = "MFD")
 	private java.sql.Date mfd;
 	
-	@Column(name = "exp")
+	@Column(name = "EXP")
 	private java.sql.Date exp;
 
 	

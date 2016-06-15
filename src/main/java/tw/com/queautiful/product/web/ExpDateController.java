@@ -15,8 +15,8 @@ import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.ProductService;
 
-//@Controller
-//@RequestMapping("/expdate")
+@Controller
+@RequestMapping("/expdate")
 public class ExpDateController {
 
 	
@@ -24,8 +24,6 @@ public class ExpDateController {
 	private ExpDateService expDateService;
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private ExpDate expDate;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model,int MemberId) {
