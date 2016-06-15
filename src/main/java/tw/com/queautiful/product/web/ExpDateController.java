@@ -1,6 +1,7 @@
 package tw.com.queautiful.product.web;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.ProductService;
 
-@Controller
-@RequestMapping("/expdate")
+//@Controller
+//@RequestMapping("/expdate")
 public class ExpDateController {
 
 	
@@ -28,27 +29,35 @@ public class ExpDateController {
 	
 	@RequestMapping("/list")
 	public String listPage(Model model,int MemberId) {
-		
+		MemberId=1;
 		List <Map> Dates =new ArrayList<Map>();
-
+		
+		Map<String, Object> beans=new LinkedHashMap<String, Object>();
+		
 		List <Product> products =new ArrayList<Product>();
 		
 		
-		List expDates=new ArrayList<ExpDate>();
+		List<ExpDate> expDates=new ArrayList<ExpDate>();
+		
 		
 		expDates=expDateService.getAll();
 		
 		for(int i=0;i<expDates.size();i++){
-
 			
-			Product product=products.get(i);
-			products.add(product);
-			//model.addAttribute("ProdName",product.getProdName());
-			//model.addAttribute("ProdImg",product.getProdImg());
+			ExpDate expDate=expDates.get(i);
+			
+			if(expDate.getMemberId()==MemberId){
+				long j=expDate.getProId();
+				Product product=products.get((int) j);
+				beans.put("expDate",expDate);
+				beans.put("product", product);
+				Dates.add(beans);
+			}	
+			
+				model.addAttribute("beans",beans);
 			
 		}
 		model.addAttribute("expDates",expDateService.getAll());
-		//---------------------------------------------------------
 		
 		return "/expDate/expDateList";
 	}
