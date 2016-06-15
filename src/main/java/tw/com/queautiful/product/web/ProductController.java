@@ -11,42 +11,43 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.commons.vo.GridPage;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ProductService;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-	
+
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private ProductService service;
-	
+
 	@RequestMapping("/list")
-	public String listPage(){
+	public String listPage() {
 		return "/product/productList";
 	}
-	
+
 	@RequestMapping("/select")
 	@ResponseBody
-	public List<Product> select(GridPage gridPage){
-		log.debug("{}", gridPage);
-		
-		
-		Pageable pageable = new PageRequest(gridPage.getPage()-1, gridPage.getRows());
-		
-		
-		//List<Product> list = service.getAll();
-		
-		Page<Product> page = service.getAll(pageable);
-		
-		return page.getContent();
+	public List<Product> select(@RequestParam Integer page, @RequestParam Integer rows) {
+
+		log.debug("{}", "page = " + page);
+		log.debug("{}", "rows = " + rows);
+
+		Pageable pageable = new PageRequest(page - 1, rows);
+		Page<Product> prodPage = service.getAll(pageable);
+		return prodPage.getContent();
 	}
 	
+	@RequestMapping("/add")
+	public String addPage() {
+		return "/product/productAdd";
+	}
+
 	@RequestMapping("/insert")
 	@ResponseBody
 	public Product insert(@RequestBody Product product) {
@@ -54,16 +55,21 @@ public class ProductController {
 		return product;
 	}
 	
+	@RequestMapping("/edit")
+	public String editPage() {
+		return "/product/productEdit";
+	}
+	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Product update(@RequestBody Product product){
+	public Product update(@RequestBody Product product) {
 		service.update(product);
 		return product;
 	}
-	
+
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String delete(@RequestBody Product product){
+	public String delete(@RequestBody Product product) {
 		service.delete(product.getProdId());
 		return "Success";
 	}
