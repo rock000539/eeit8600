@@ -13,18 +13,18 @@
 		<table>
 			<tr>
 				<td>種類</td>
-				<td><input type="text" name="kind" value="${param.kind}"></td>
-				<td style="color: red;">${errorMsg.kind}</td>
+				<td><input type="text" name="kind" value="${param.categoryName}"></td>
+				<td style="color: red;">${errorMsg.categoryName}</td>
 			</tr>
 
 			<tr>
-				<td>權重</td>
-				<td><input type="text" name="level" value="${param.level}"></td>
-				<td style="color: red;">${errorMsg.level}</td>
+				<td>PIC</td>
+				<td><input type="text" name="level" value="${param.categoryImg}"></td>
+				<td style="color: red;">${errorMsg.categoryImg}</td>
 			</tr>
 		</table>
 		<hr />
-		<input type="submit" name="save" value="save" /> 
+		<input type="button" name="save" value="save" /> 
 		<input type="button" name="cancel" value="cancel" 
 				onClick="location='/categories/list'"/> 
 		<br /><br />
@@ -37,39 +37,15 @@
 				<tr>
 					<th>編號</th>
 					<th>種類</th>
-					<th>權重</th>
+					<th>PIC</th>
 				</tr>
 				<tr style="text-align: center;">
-					<td>${category.id}</td>
-					<td>${category.kind}</td>
-					<td>${category.level}</td>
+					<td>${category.categoryId}</td>
+					<td>${category.categoryName}</td>
+					<td>${category.categoryImg}</td>
 				</tr>
 			</table>
 		</c:if>
 	</form>
 </body>
-<script>
-	var data='{"kind":"'+$('#kind').val()+
-			'","level":"'+$('#level').val()+'"}';
-			
-	$.ajax({
-		url:"/categories/insert",
-		type:"POST",
-		contentType:"application/json; charset=UTF-8",
-		dataType:"json",
-		data:data,
-		success:function(response){
-			if(response.redirect){
-				window.location.href=response.redirect;
-			}
-			else{
-				
-			}
-		}
-		
-		
-	})		
-		
-
-</script>
 </html>

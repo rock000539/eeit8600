@@ -22,36 +22,38 @@ import tw.com.queautiful.product.service.CategoryService;
 public class CategoryController {
 
 	@Autowired
-	private CategoryService categorySerivce;
+	private CategoryService service;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
-		model.addAttribute("categories", categorySerivce.getAll());
+		model.addAttribute("categories", service.getAll());
 		
 		return "/category/categoryList";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Long id,Model model){
-		categorySerivce.delete(id);
+	public String delete(Long categoryId,Model model){
+		service.delete(categoryId);
 		return "redirect:/categories/list";
 	}
 	
 	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long id,Model model){
-		model.addAttribute("category",categorySerivce.getById(id));
+	public String editPage(@RequestParam Long categoryId,Model model){
+		model.addAttribute("category",service.getById(categoryId));
 		return "/category/categoryEdit";
 	}
 	
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,String> update(@RequestBody Category productCategory){
-		
+	public Category update(@RequestBody Category category){
+		service.update(category);
+		return category;
+		/*	
 		// 接收資料
 		String[] data={
-			productCategory.getKind(),
-			productCategory.getLevel().toString()
+				category.getCategoryName(),
+				category.getCategoryImg()
 		};
 		
 		// 驗證資料
@@ -63,20 +65,19 @@ public class CategoryController {
 		
 		// 轉換並封裝資料
 		Category temp=new Category();
-		temp.setId(productCategory.getId());
-		temp.setKind(productCategory.getKind());
-		temp.setLevel(productCategory.getLevel());
+		temp.setCategoryId(category.getCategoryId());
+		temp.setCategoryName(category.getCategoryName());
+		temp.setCategoryImg(category.getCategoryImg());
 		
 		// 更新到資料庫
-		categorySerivce.update(productCategory);
+		service.update(category);
 		
 		// 傳回成功的相關訊息
 		Map<String,String> successMsg= new HashMap<>();
-		successMsg.put("id", temp.getId().toString());
-		successMsg.put("kind", temp.getKind());
-		successMsg.put("level", temp.getLevel().toString());
-	
-		return successMsg;
+		successMsg.put("id", temp.getCategoryId().toString());
+		successMsg.put("kind", temp.getCategoryName());
+		successMsg.put("level", temp.getCategoryImg());
+	*/
 	}
 
 
@@ -101,12 +102,14 @@ public class CategoryController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,String> insert(@RequestBody Category productCategory){
-		
+	public Category insert(@RequestBody Category category){
+		service.insert(category);
+		return category;
+		/*	
 		// 接收資料
 		String[] data={
-				productCategory.getKind(),
-				productCategory.getLevel().toString()
+				category.getCategoryName(),
+				category.getCategoryImg()
 		};
 				
 		// 驗證資料
@@ -118,20 +121,17 @@ public class CategoryController {
 		
 		// 轉換並封裝資料
 		Category temp=new Category();
-		temp.setKind(productCategory.getKind());
-		temp.setLevel(productCategory.getLevel());
+		temp.setCategoryName(category.getCategoryName());
+		temp.setCategoryImg(category.getCategoryImg());
 		
 		// 新增到資料庫
-		categorySerivce.insert(productCategory);
+		categorySerivce.insert(category);
 		
 		// 傳回成功的相關訊息
 		Map<String, String> successMsg = new HashMap<>();
-		successMsg.put("id",temp.getId().toString());
-		successMsg.put("kind", temp.getKind());
-		successMsg.put("level", temp.getLevel().toString());
-		
-		
-		return successMsg;
+		successMsg.put("id",temp.getCategoryId().toString());
+		successMsg.put("kind", temp.getCategoryName());
+		successMsg.put("level", temp.getCategoryImg());
+	*/	
 	}
-
 }

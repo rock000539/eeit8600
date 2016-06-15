@@ -13,23 +13,22 @@
 		<table>
 			<tr>
 				<td>編號 </td>
-				<td><input type="text" name="id" value="${category.id}" readonly></td>
+				<td><input type="text" name="id" value="${category.categoryId}" readonly='readonly'></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>種類 </td>
-				<td><input type="text" name="kind" value="${category.kind}"></td>
+				<td><input type="text" name="name" value="${category.categoryName}"></td>
 				<td style="color: red;">${errorMsg.kind}</td>
 			</tr>
-
 			<tr>
 				<td>權重 </td>
-				<td><input type="text" name="level" value="${category.level}"></td>
+				<td><input type="text" name="img" value="${category.categoryImg}"></td>
 				<td style="color: red;">${errorMsg.level}</td>
 			</tr>
 		</table>
 		<hr />
-		<input type="submit" name="save" value="save" /> 
+		<input type="button" name="save" value="save" id="save"/> 
 		<input type="button" name="cancel" value="cancel" 
 				onClick="location='/categories/list'"/> 
 		<br /><br />
@@ -42,12 +41,12 @@
 				<tr>
 					<th>編號</th>
 					<th>種類</th>
-					<th>權重</th>
+					<th>PIC</th>
 				</tr>
 				<tr style="text-align: center;">
-					<td>${category.id}</td>
-					<td>${category.kind}</td>
-					<td>${category.level}</td>
+					<td>${category.categoryId}</td>
+					<td>${category.categoryName}</td>
+					<td>${category.categoryImg}</td>
 				</tr>
 			</table>
 		</c:if>

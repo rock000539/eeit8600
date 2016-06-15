@@ -15,11 +15,11 @@ INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('M.A
 INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('蘭蔻', 'src/...', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal',1)
 INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('巴黎萊雅', 'src/...', 'http://www.loreal.com.tw/' , 'loreal',1)
 
-INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('lotion ',10.0);
-INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('cream',13.0);
-INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('facial mask',8.0);
-INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('foundation ',20.0);
-INSERT INTO Category (CATEGORYKIND, CATEGORYLEVEL) VALUES ('sun protection ',18.0);
+INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('lotion','src/...')
+INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('cream','src/...')
+INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('facial mask','src/...')
+INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('foundation','src/...')
+INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('sun protection','src/...')
 
 INSERT INTO Ingredient (INGREDName, INGREDCName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2)
 

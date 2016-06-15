@@ -19,15 +19,15 @@ th,td{border:1px solid black;
 <tr>
 	<th>編號</th>
 	<th>種類</th>
-	<th>權重</th>
+	<th>PIC</th>
 </tr>
 <c:forEach items="${categories}" var="category">
  <tr>
-	<td>${category.id}</td>
-	<td>${category.kind}</td>
-	<td>${category.level}</td>
-	<td><input type="button" name="edit" value="edit" onClick="location='/categories/edit?id=${category.id}'"></td>
-	<td><input type="button" name="delete" value="delete" onClick="location='/categories/delete?id=${category.id}'"></td>
+	<td>${category.categoryId}</td>
+	<td>${category.categoryName}</td>
+	<td>${category.categoryImg}</td>
+	<td><input type="button" name="edit" value="edit" onClick="location='/categories/edit?categoryId=${category.categoryId}'"></td>
+	<td><input type="button" name="delete" value="delete" onClick="location='/categories/delete?categoryId=${category.categoryId}'"></td>
 </tr>
 	
 </c:forEach>

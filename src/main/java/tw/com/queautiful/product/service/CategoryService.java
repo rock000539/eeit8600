@@ -15,8 +15,8 @@ public class CategoryService {
 	@Autowired
 	private CategoryDao categoryDao;
 	
-	public Category getById(Long id){
-		return categoryDao.findOne(id);
+	public Category getById(Long categoryId){
+		return categoryDao.findOne(categoryId);
 	}
 	
 	public List<Category> getAll(){
@@ -32,7 +32,7 @@ public class CategoryService {
 		categoryDao.save(category);
 	}
 	
-	public void delete(Long id){
-		categoryDao.delete(id);
+	public void delete(Long categoryId){
+		categoryDao.delete(categoryId);
 	}
 }

@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="CATEGORY")
@@ -16,43 +19,53 @@ public class Category {
 	@Column(name="CATEGORYID")
 	private Long categoryId;
 	
-	@Column(name="CATEGORYKIND",length=20)
-	private String categoryKind;
+	@Column(name="CATEGORYNAME",length=50)
+	private String categoryName;
 	
-	@Column(name="CATEGORYLEVEL")
-	private Double categoryLevel;
+	@Column(name="CATEGORYIMG",length=200)
+	private String categoryImg;
+
+	@Transient
+	private MultipartFile brandImgFile;
 	
-	public Category(){}
-	
-	public Category(String categoryKind,Double categoryLevel){
-		this.categoryKind=categoryKind;
-		this.categoryLevel=categoryLevel;
+	public MultipartFile getBrandImgFile() {
+		return brandImgFile;
 	}
-	
-	
-	public Long getId() {
+
+	public void setBrandImgFile(MultipartFile brandImgFile) {
+		this.brandImgFile = brandImgFile;
+	}
+
+	public Long getCategoryId() {
 		return categoryId;
 	}
-	public void setId(Long id) {
-		this.categoryId = id;
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
-	public String getKind() {
-		return categoryKind;
+
+	public String getCategoryName() {
+		return categoryName;
 	}
-	public void setKind(String kind) {
-		this.categoryKind = kind;
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-	public Double getLevel() {
-		return categoryLevel;
+
+	public String getCategoryImg() {
+		return categoryImg;
 	}
-	public void setLevel(Double level) {
-		this.categoryLevel = level;
+
+	public void setCategoryImg(String categoryImg) {
+		this.categoryImg = categoryImg;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [id=" + categoryId + ", kind=" + categoryKind + ", level=" + categoryLevel
-				+ "]";
+		return "Category [categoryId=" + categoryId + ", categoryName="
+				+ categoryName + ", categoryImg=" + categoryImg + "]";
 	}
+	
+
 
 }
