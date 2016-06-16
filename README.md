@@ -17,7 +17,7 @@
 6. 認養表格：(CRUD+3個頁面)
 		     日期 (Parker)
 		     成分 (Kate)
-	 	     產品 (ChiHao)
+	 	     產品 (CH)
 		     心得 (Hsiang)
 	 	     文章 (Charis)
 		     會員 (Kate)
