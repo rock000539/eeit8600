@@ -8,6 +8,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="/src/js/jquery.validate.min.js"></script>
 <title>Categories Edit</title>
+<style>
+.error {
+	color: red;
+	font-style: italic;
+}
+</style>
 </head>
 <body>
 <h1>Categories Edit</h1>
@@ -25,11 +31,12 @@
 			</tr>
 			<tr>
 				<td>PIC </td>
-				<td><input type="text" name="categoryImg" value="${category.categoryImg}"></td>
+				<td><input type="file" name="categoryImg" value="${category.categoryImg}"></td>
+				<td><input type="button" id="start" value="上傳" /></td>
 				<td style="color: red;">${errorMsg.level}</td>
 			</tr>
 		</table>
-		<hr />
+		<hr>
 		<input type="button" name="save" value="save" id="save"/> 
 		<input type="button" name="cancel" value="cancel" 
 				onClick="location='/categories/list'"/> 
@@ -60,19 +67,49 @@
 	</form>
 <script type="text/javascript">
 $(function(){
-	$.ajax({
-		url:'/categories/update',
-		type:'post',
-		contentType:'application/json;charset=utf-8',
-		data:JSON.stringify($('#theForm').serializeObject()),
-		dataType:'json',
-		success:function(data){
-			console.log(data);
-			$('h2').text('Update Success');
-			$('#categoryName').text('name'+data.categoryName);
-			$('#categoryImg').text('PIC'+data.categoryImg);
+	
+	$('#theForm').validate({
+		onfocusout : function(element){
+			$(element).valid();
+		},
+		rules:{
+			categoryName:{
+				required:true,
+			},
+		/*	categoryImg:{
+				required:true,
+			},
+*/		},//end of rules
+		messages:{
+			categoryName:{
+				required:"必填項目",
+			},
+	/*		categoryImg:{
+				required:"必填項目",
+			},
+*/		}//end of messages	
+	});//end of validate
+	
+
+	$('#save').click(function(){
+		if($('#theForm').validate().form()){
+			$.ajax({
+				url:'/categories/update',
+				type:'post',
+				contentType:'application/json;charset=utf-8',
+				data:JSON.stringify($('#theForm').serializeObject()),
+				dataType:'json',
+				success:function(data){
+					console.log(data);
+					$('h2').text('Update Success');
+					$('#categoryName').text('種類='+data.categoryName);
+					$('#categoryImg').text('PIC='+data.categoryImg);
+				}
+			});
+		}else{
+			alert('請依訊息更正錯誤');
 		}
-	});
+	})//end of click
 	
 	$.fn.serializeObject = function()
 	{
