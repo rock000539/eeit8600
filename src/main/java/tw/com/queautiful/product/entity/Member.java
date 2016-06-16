@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="MEMBER")
@@ -55,12 +58,23 @@ public class Member {
 	@Column(name="MEMBERSUSPENDEXP")
 	private java.sql.Date memberSuspendExp;
 	
+	@Transient
+	private MultipartFile memberImgFile;
+	
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", password=" + password + ", nickname=" + nickname + ", lastName=" + lastName
 				+ ", firstName=" + firstName + ", gender=" + gender + ", birthDay=" + birthDay + ", skinType="
 				+ skinType + ", memberImg=" + memberImg + ", phone=" + phone + ", addr=" + addr + ", memberSuspend="
 				+ memberSuspend + ", memberSuspendExp=" + memberSuspendExp + ", memberId=" + memberId + "]";
+	}
+	
+	public MultipartFile getMemberImgFile() {
+		return memberImgFile;
+	}
+
+	public void setMemberImgFile(MultipartFile memberImgFile) {
+		this.memberImgFile = memberImgFile;
 	}
 
 	public Long getMemberId() {

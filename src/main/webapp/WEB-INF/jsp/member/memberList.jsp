@@ -23,7 +23,7 @@
 		<th width="80">圖片</th>
 		<th width="80">電話</th>
 		<th width="80">地址</th>
-		<th width="80">會員狀態(停權)</th>
+		<th width="80">停權</th>
 		<th width="80">停權到期日</th>
 	</tr>
 </thead>

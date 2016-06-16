@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
@@ -19,6 +20,10 @@ public class MemberController {
 		return "/member/memberList";
 	}
 	
+	@RequestMapping("/add")
+	public String addPage(){
+		return "/member/memberAdd";
+	}
 	
 
 }
