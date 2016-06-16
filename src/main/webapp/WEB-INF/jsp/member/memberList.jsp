@@ -42,8 +42,8 @@
 			<td>${member.addr}</td>
 			<td>${member.memberSuspend}</td>
 			<td>${member.memberSuspendExp}</td>
-			<td><input type="button" name="edit" value="edit" onclick='location="/ingredients/edit?ingredId=${ingredient.ingredId}"'></td>
-			<td><input type="button" name="delete" value="delete" onclick='location="/ingredients/delete?ingredId=${ingredient.ingredId}"'></td>
+			<td><input type="button" name="edit" value="edit" onclick='location="/members/edit?memberId=${member.memberId}"'></td>
+			<td><input type="button" name="delete" value="delete" onclick='location="/members/delete?memberId=${member.memberId}"'></td>
 		</tr>
 	</c:forEach>
 </tbody>

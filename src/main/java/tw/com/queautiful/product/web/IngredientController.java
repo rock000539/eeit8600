@@ -53,7 +53,7 @@ public class IngredientController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Ingredient put(@RequestBody Ingredient ingredient ) {
+	public Ingredient update(@RequestBody Ingredient ingredient ) {
 		service.update(ingredient);
 		return service.getById(ingredient.getIngredId());
 	}

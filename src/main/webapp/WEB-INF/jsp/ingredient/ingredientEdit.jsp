@@ -38,7 +38,7 @@
 			}
 		})
 
-	})//end of function
+	})
 </script>
 <style>
 .temp1 {
