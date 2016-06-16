@@ -34,7 +34,8 @@ public class ProductController {
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Product> select(@RequestParam Integer page, @RequestParam Integer rows) {
-
+		
+		// slf4j
 		log.debug("{}", "page = " + page);
 		log.debug("{}", "rows = " + rows);
 
