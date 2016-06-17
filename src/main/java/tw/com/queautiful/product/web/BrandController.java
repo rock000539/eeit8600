@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.service.BrandService;
 
@@ -146,6 +148,10 @@ public class BrandController {
 	public String addPage2(){
 		return "/brand/brandAdd2";
 	}
+	@RequestMapping("/add3")
+	public String addPage3(){
+		return "/brand/brandAdd3";
+	}
 //	@RequestMapping("/insert2")
 //	@ResponseBody
 //	public Brand insert2(@RequestBody Brand brand){	
@@ -158,11 +164,11 @@ public class BrandController {
 			//,method = RequestMethod.POST, consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces="application/json"
 			)
 	@ResponseBody
-	public Brand insert2(@RequestBody Brand brand,
+	public Brand insert2(@RequestParam("brandJsonStr") String brandJsonStr,
 //			@RequestParam String brandName, 
 //			@RequestParam String website,
 //			@RequestParam String bcFunc,	
-			@RequestPart MultipartFile brandImgFile
+			@RequestPart("brandImgFile") MultipartFile brandImgFile
 			){	
 		//System.out.println(brand.getBrandImgFile());
 		//System.out.println(brandImgFile);
@@ -171,7 +177,16 @@ public class BrandController {
 //		brand.setBrandName(brandName);
 //		brand.setBcFunc(bcFunc);
 //		brand.setWebsite(website);
+		System.out.println(brandJsonStr);
 		System.out.println(brandImgFile);
+		//String brandName = brand.getBrandName();
+		ObjectMapper mapper = new ObjectMapper();
+		Brand brand = null;
+		try {
+			brand = mapper.readValue(brandJsonStr, Brand.class);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		String brandName = brand.getBrandName();
 		if (!brandImgFile.isEmpty()) {
 			try {
@@ -193,7 +208,7 @@ public class BrandController {
 				stream.close();
 
 				log.info("Server File Location=" + serverFile.getAbsolutePath());
-				brand.setBrandImg(dir.getAbsolutePath() + File.separator + brandName+".png");
+				//brand.setBrandImg(dir.getAbsolutePath() + File.separator + brandName+".png");
 
 				System.out.println("You successfully uploaded file=" + brandName);
 			} catch (Exception e) {

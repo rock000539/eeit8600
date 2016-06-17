@@ -20,6 +20,7 @@ text-align:center;
 </style>
 <body>
 <input type="button" name="add" value="add" onclick="location='/brands/add'"/><br>
+<input type="button" name="add" value="addbyjson" onclick="location='/brands/add2'"/><br>
 <TABLE>
 	<TR>
 		<TH>編號</TH>
