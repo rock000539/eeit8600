@@ -20,6 +20,7 @@ public class MemberController {
 		return "/member/memberList";
 	}
 	
+	
 	@RequestMapping("/add")
 	public String addPage(){
 		return "/member/memberAdd";
