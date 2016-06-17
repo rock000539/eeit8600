@@ -148,46 +148,24 @@ public class BrandController {
 	public String addPage2(){
 		return "/brand/brandAdd2";
 	}
-	@RequestMapping("/add3")
-	public String addPage3(){
-		return "/brand/brandAdd3";
-	}
-//	@RequestMapping("/insert2")
-//	@ResponseBody
-//	public Brand insert2(@RequestBody Brand brand){	
-//		System.out.println(brand.getBrandImgFile());
-//		brandService.insert(brand);
-//		return brand;
-//	}
 	
-	@RequestMapping(value = "/insert2"
-			//,method = RequestMethod.POST, consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces="application/json"
-			)
+	@RequestMapping(value = "/insert2")
 	@ResponseBody
 	public Brand insert2(@RequestParam("brandJsonStr") String brandJsonStr,
-//			@RequestParam String brandName, 
-//			@RequestParam String website,
-//			@RequestParam String bcFunc,	
-			@RequestPart("brandImgFile") MultipartFile brandImgFile
-			){	
-		//System.out.println(brand.getBrandImgFile());
-		//System.out.println(brandImgFile);
-		
-//		Brand brand=new Brand();
-//		brand.setBrandName(brandName);
-//		brand.setBcFunc(bcFunc);
-//		brand.setWebsite(website);
+			@RequestPart("brandImgFile") MultipartFile brandImgFile){	
 		System.out.println(brandJsonStr);
 		System.out.println(brandImgFile);
-		//String brandName = brand.getBrandName();
+
 		ObjectMapper mapper = new ObjectMapper();
 		Brand brand = null;
+		String brandName = null;
 		try {
 			brand = mapper.readValue(brandJsonStr, Brand.class);
+			brandName = brand.getBrandName();
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			System.out.println("Json convert to Javabean Failed");
 		}
-		String brandName = brand.getBrandName();
+		
 		if (!brandImgFile.isEmpty()) {
 			try {
 				byte[] bytes = brandImgFile.getBytes();
@@ -208,7 +186,7 @@ public class BrandController {
 				stream.close();
 
 				log.info("Server File Location=" + serverFile.getAbsolutePath());
-				//brand.setBrandImg(dir.getAbsolutePath() + File.separator + brandName+".png");
+				brand.setBrandImg(dir.getAbsolutePath() + File.separator + brandName+".png");
 
 				System.out.println("You successfully uploaded file=" + brandName);
 			} catch (Exception e) {

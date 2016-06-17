@@ -39,7 +39,7 @@ input.error {
 		<TR>
 			<TD>LOGO：</TD>
 			<TD><input type="file" name="brandImgFile" id="brandImgFile" accept="image/*"/></TD>
-			<TD><input type="button" id="start" value="開始上傳" /></TD>
+			<TD></TD>
 		</TR>
 		<TR>
 			<TD>官網：</TD>
@@ -66,7 +66,7 @@ input.error {
 <div id='result'>
 <h2></h2>
 <span id="brandName"></span><br/>
-<span id="brandImgFile"></span><br/>
+<!-- <span id="brandImgFile"></span><br/> -->
 <span id="website"></span><br/>
 <span id="bcFunc"></span><br/>
 <span id="brandShow"></span>
@@ -74,35 +74,56 @@ input.error {
 
 <script>
 $(function(){
+	$(':text:first').focus();
+	$('#theForm').validate({
+		onfocusout: function (element) {
+	        $(element).valid();
+	    },
+		rules:{
+			brandName:{required:true},
+			brandImgFile:'required',
+			website:{required:true,url:true},
+			bcFunc:'required'
+		},//end of rules
+		messages:{
+			brandName:'必填',
+			brandImgFile:'必填',
+			website:{required:'必填',url:'請輸入正確網址格式'},
+			bcFunc:'必填'
+		},//end of messages
+	});
+	
 	$('#save').click(function(){
-		console.log($('#brandImgFile').prop('files')[0]);
-		console.log('serializeObject--->'+$('#theForm').serializeObject());
-		console.log('JSON--->'+JSON.stringify($('#theForm').serializeObject()));
-		console.log('new Blob--->'+new Blob([JSON.stringify($('#theForm').serializeObject())]));
-		            //$('#brandImgFile').prop('files')[0]
-		var formData = new FormData();
-		formData.append('brandImgFile',$('#brandImgFile').prop('files')[0]);
-		formData.append('brandJsonStr',JSON.stringify($('#theForm').serializeObject()));
-		//formData.append('filename',$('#filename').val());
-		//formData.append('brand',$('#theForm').serializeObject());
-		//formData.append('brand',new Blob([JSON.stringify($('#theForm').serializeObject())]));
-		$.ajax({
-			url:'/brands/insert2',
-			type:'post',
-			contentType: false,
-			processData: false,
-			data:formData,
-			success:function(data){
-				console.log(data);
-				$('h2').text('Update Success');
-				$('#brandName').text('BrandName:'+data.brandName);
-				$('#brandImg').text('Logo:'+data.brandImg);
-				$('#website').text('Website:'+data.website);
-				$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
-				$('#brandShow').text('顯示隱藏:'+data.brandShow);
-			}
-		
-		});
+// 		console.log($('#brandImgFile').prop('files')[0]);
+// 		console.log('serializeObject--->'+$('#theForm').serializeObject());
+// 		console.log('JSON--->'+JSON.stringify($('#theForm').serializeObject()));
+// 		console.log('new Blob--->'+new Blob([JSON.stringify($('#theForm').serializeObject())]));
+		if($('#theForm').validate().form()){
+			var formData = new FormData();
+			formData.append('brandImgFile',$('#brandImgFile').prop('files')[0]);
+			formData.append('brandJsonStr',JSON.stringify($('#theForm').serializeObject()));
+			//formData.append('brand',$('#theForm').serializeObject());
+			//formData.append('brand',new Blob([JSON.stringify($('#theForm').serializeObject())]));
+			$.ajax({
+				url:'/brands/insert2',
+				type:'post',
+				contentType: false,
+				processData: false,
+				data:formData,
+				success:function(data){
+					console.log(data);
+					$('h2').text('Update Success');
+					$('#brandName').text('BrandName:'+data.brandName);
+// 					$('#brandImg').text('Logo:'+data.brandImg);
+					$('#website').text('Website:'+data.website);
+					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
+					$('#brandShow').text('顯示隱藏:'+data.brandShow);
+				}
+			
+			});
+		}else{
+			alert('請依訊息更正錯誤');
+	 	}
 	
 	});
 	

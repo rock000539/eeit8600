@@ -37,7 +37,7 @@ input.error {
 		<TR>
 			<TD>LOGO：</TD>
 			<TD><input type="file" name="brandImgFile" id="brandImgFile" accept="image/*"/></TD>
-			<TD><input type="button" id="start" value="開始上傳" /></TD>
+			<TD></TD>
 		</TR>
 		<TR>
 			<TD>官網：</TD>
@@ -71,61 +71,6 @@ input.error {
 </div>
 
 <script>
-
-// $(function(){
-	
-// 	$('#save').click(function(){	
-// 		var formData = new FormData();
-// 		formData.append("brandImgFile", document.getElementById("theForm").files[0]);
-// 		formData.append('brand', JSON.stringify($('#theForm').serializeObject()));
-// 		console.log(formData);
-// 		console.log(JSON.stringify($('#theForm').serializeObject()));
-// 		console.log(document.getElementById("theForm").files[0]);
-// 		if($('#theForm').validate().form()){
-// 			$.ajax({
-// 				url: '/brands/insert',
-// 				contentType: false,
-// 				processData: false,
-// 				//data: JSON.stringify({brandName:'LA MER',website:'http://www.lamer.com.tw/',bcFunc:'elca'}),
-// 				data: formData,
-// 				//data: JSON.stringify('{'+$('#theForm').serializeArray()+'}'),
-// 				dataType: 'json',
-// 				type: 'post',
-// 				success: function(data){
-// 					console.log(data); 
-// 					$(':text').val("");
-// 					$('#true').prop("checked",true);				
-// 					$('h2').text('Insert Success');
-// 					$('#brandName').text('BrandName:'+data.brandName);
-// 					$('#brandImgFile').text('Logo:'+data.brandImgFile);
-// 					$('#website').text('Website:'+data.website);
-// 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
-// 					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
-// 				}
-// 			});
-// 		}else{
-// 			alert('請依訊息更正錯誤');
-// 		}
-// 	});	
-	
-// 	$.fn.serializeObject = function()
-// 	{
-// 	    var o = {};
-// 	    var a = this.serializeArray();
-// 	    $.each(a, function() {
-// 	        if (o[this.name] !== undefined) {
-// 	            if (!o[this.name].push) {
-// 	                o[this.name] = [o[this.name]];
-// 	            }
-// 	            o[this.name].push(this.value || '');
-// 	        } else {
-// 	            o[this.name] = this.value || '';
-// 	        }
-// 	    });
-// 	    return o;
-// 	};
-// });
-
 
 // $(function(){
 // 	$(':text:first').focus();
