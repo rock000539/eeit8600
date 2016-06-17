@@ -29,8 +29,8 @@ public class MemberService {
 		memberDao.save(member);
 	}
 	
-	public void delete(Member member){
-		memberDao.delete(member);
+	public void delete(Long memberId){
+		memberDao.delete(memberId);
 	}
 	
 }
