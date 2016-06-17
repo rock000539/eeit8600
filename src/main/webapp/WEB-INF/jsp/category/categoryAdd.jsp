@@ -64,7 +64,7 @@
 	</form>
 <script type="text/javascript">
 $(function(){
-	
+	$(':text:first').focus();
 	$('#theForm').validate({
 		onfocusout : function(element){
 			$(element).valid();

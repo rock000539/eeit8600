@@ -67,7 +67,7 @@
 	</form>
 <script type="text/javascript">
 $(function(){
-	
+	$(':text:eq(1)').focus();
 	$('#theForm').validate({
 		onfocusout : function(element){
 			$(element).valid();
