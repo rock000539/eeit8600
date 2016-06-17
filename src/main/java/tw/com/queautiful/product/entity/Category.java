@@ -26,14 +26,14 @@ public class Category {
 	private String categoryImg;
 
 	@Transient
-	private MultipartFile brandImgFile;
+	private MultipartFile categoryImgFile;
 	
-	public MultipartFile getBrandImgFile() {
-		return brandImgFile;
+	public MultipartFile category() {
+		return categoryImgFile;
 	}
 
-	public void setBrandImgFile(MultipartFile brandImgFile) {
-		this.brandImgFile = brandImgFile;
+	public void setBrandImgFile(MultipartFile categoryImgFile) {
+		this.categoryImgFile = categoryImgFile;
 	}
 
 	public Long getCategoryId() {
