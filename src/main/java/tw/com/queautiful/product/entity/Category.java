@@ -28,11 +28,11 @@ public class Category {
 	@Transient
 	private MultipartFile categoryImgFile;
 	
-	public MultipartFile category() {
+	public MultipartFile getCategoryImgFile() {
 		return categoryImgFile;
 	}
 
-	public void setBrandImgFile(MultipartFile categoryImgFile) {
+	public void setCategoryImgFile(MultipartFile categoryImgFile) {
 		this.categoryImgFile = categoryImgFile;
 	}
 
