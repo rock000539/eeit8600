@@ -22,7 +22,7 @@ input.error {
 </style>
 </head>
 <body>
-<FORM id="theForm" enctype="multipart/form-data">
+<FORM id="theForm" enctype="multipart/form-data" action="/brands/insert" method="post">
 	<TABLE>
 		<TR>
 			<TD>品牌：</TD>
@@ -57,7 +57,7 @@ input.error {
 			<TD></TD>
 		</TR>
 	</TABLE>
-<input type="button" name="save" value="save" id="save"/>
+<input type="submit" name="save" value="save" id="save"/>
 <input type="button" name="cancel" value="cancel" onclick="location='/brands/list'" />
 </FORM>
 
@@ -71,73 +71,129 @@ input.error {
 </div>
 
 <script>
-$(function(){
-	$(':text:first').focus();
-	$('#theForm').validate({
-		onfocusout: function (element) {
-	        $(element).valid();
-	    },
-		rules:{
-			brandName:{required:true},
-			//brandImg:'required',
-			website:{required:true,url:true},
-			bcFunc:'required'
-		},//end of rules
-		messages:{
-			brandName:'必填',
-			//brandImg:'必填',
-			website:{required:'必填',url:'請輸入正確網址格式'},
-			bcFunc:'必填'
-		},//end of messages
-	});
+
+// $(function(){
+	
+// 	$('#save').click(function(){	
+// 		var formData = new FormData();
+// 		formData.append("brandImgFile", document.getElementById("theForm").files[0]);
+// 		formData.append('brand', JSON.stringify($('#theForm').serializeObject()));
+// 		console.log(formData);
+// 		console.log(JSON.stringify($('#theForm').serializeObject()));
+// 		console.log(document.getElementById("theForm").files[0]);
+// 		if($('#theForm').validate().form()){
+// 			$.ajax({
+// 				url: '/brands/insert',
+// 				contentType: false,
+// 				processData: false,
+// 				//data: JSON.stringify({brandName:'LA MER',website:'http://www.lamer.com.tw/',bcFunc:'elca'}),
+// 				data: formData,
+// 				//data: JSON.stringify('{'+$('#theForm').serializeArray()+'}'),
+// 				dataType: 'json',
+// 				type: 'post',
+// 				success: function(data){
+// 					console.log(data); 
+// 					$(':text').val("");
+// 					$('#true').prop("checked",true);				
+// 					$('h2').text('Insert Success');
+// 					$('#brandName').text('BrandName:'+data.brandName);
+// 					$('#brandImgFile').text('Logo:'+data.brandImgFile);
+// 					$('#website').text('Website:'+data.website);
+// 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
+// 					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
+// 				}
+// 			});
+// 		}else{
+// 			alert('請依訊息更正錯誤');
+// 		}
+// 	});	
+	
+// 	$.fn.serializeObject = function()
+// 	{
+// 	    var o = {};
+// 	    var a = this.serializeArray();
+// 	    $.each(a, function() {
+// 	        if (o[this.name] !== undefined) {
+// 	            if (!o[this.name].push) {
+// 	                o[this.name] = [o[this.name]];
+// 	            }
+// 	            o[this.name].push(this.value || '');
+// 	        } else {
+// 	            o[this.name] = this.value || '';
+// 	        }
+// 	    });
+// 	    return o;
+// 	};
+// });
+
+
+// $(function(){
+// 	$(':text:first').focus();
+// 	$('#theForm').validate({
+// 		onfocusout: function (element) {
+// 	        $(element).valid();
+// 	    },
+// 		rules:{
+// 			brandName:{required:true},
+// 			//brandImg:'required',
+// 			website:{required:true,url:true},
+// 			bcFunc:'required'
+// 		},//end of rules
+// 		messages:{
+// 			brandName:'必填',
+// 			//brandImg:'必填',
+// 			website:{required:'必填',url:'請輸入正確網址格式'},
+// 			bcFunc:'必填'
+// 		},//end of messages
+// 	});
 	
 	
-	$('#save').click(function(){		
-		console.log(JSON.stringify($('#theForm').serializeObject()));
-		if($('#theForm').validate().form()){
-			$.ajax({
-				url: '/brands/insert',
-				contentType: 'application/json;charset=utf-8',
-				//data: JSON.stringify({brandName:'LA MER',website:'http://www.lamer.com.tw/',bcFunc:'elca'}),
-				data: JSON.stringify($('#theForm').serializeObject()),
-				//data: JSON.stringify('{'+$('#theForm').serializeArray()+'}'),
-				dataType: 'json',
-				type: 'post',
-				success: function(data){
-					console.log(data); 
-					$(':text').val("");
-					$('#true').prop("checked",true);				
-					$('h2').text('Insert Success');
-					$('#brandName').text('BrandName:'+data.brandName);
-					$('#brandImgFile').text('Logo:'+data.brandImgFile);
-					$('#website').text('Website:'+data.website);
-					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
-					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
-				}
-			});
-		}else{
-			alert('請依訊息更正錯誤');
-		}
-	});	
+// 	$('#save').click(function(){		
+// 		console.log(JSON.stringify($('#theForm').serializeObject()));
+// 		if($('#theForm').validate().form()){
+// 			$.ajax({
+// 				url: '/brands/insert',
+// 				contentType: 'multipart/form-data',
+// 				//data: JSON.stringify({brandName:'LA MER',website:'http://www.lamer.com.tw/',bcFunc:'elca'}),
+// 				data: JSON.stringify($('#theForm').serializeObject()),
+// 				//data: JSON.stringify('{'+$('#theForm').serializeArray()+'}'),
+// 				dataType: 'json',
+// 				type: 'post',
+// 				success: function(data){
+// 					console.log(data); 
+// 					$(':text').val("");
+// 					$('#true').prop("checked",true);				
+// 					$('h2').text('Insert Success');
+// 					$('#brandName').text('BrandName:'+data.brandName);
+// 					$('#brandImgFile').text('Logo:'+data.brandImgFile);
+// 					$('#website').text('Website:'+data.website);
+// 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
+// 					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
+// 				}
+// 			});
+// 		}else{
+// 			alert('請依訊息更正錯誤');
+// 		}
+// 	});	
 	
-	$.fn.serializeObject = function()
-	{
-	    var o = {};
-	    var a = this.serializeArray();
-	    $.each(a, function() {
-	        if (o[this.name] !== undefined) {
-	            if (!o[this.name].push) {
-	                o[this.name] = [o[this.name]];
-	            }
-	            o[this.name].push(this.value || '');
-	        } else {
-	            o[this.name] = this.value || '';
-	        }
-	    });
-	    return o;
-	};
+// 	$.fn.serializeObject = function()
+// 	{
+// 	    var o = {};
+// 	    var a = this.serializeArray();
+// 	    $.each(a, function() {
+// 	        if (o[this.name] !== undefined) {
+// 	            if (!o[this.name].push) {
+// 	                o[this.name] = [o[this.name]];
+// 	            }
+// 	            o[this.name].push(this.value || '');
+// 	        } else {
+// 	            o[this.name] = this.value || '';
+// 	        }
+// 	    });
+// 	    return o;
+// 	};
 	
-});
+// });
 
 </script>
 
