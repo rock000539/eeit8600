@@ -48,8 +48,8 @@ public class Product {
 	@Column(name="PRODDESC", length=100)
 	private String prodDesc;
 	
-	@Column(name="MAINIGDT", length=100)
-	private String mainIgdt;
+	@Column(name="MAINIGDT")
+	private Integer mainIgdt;
 	
 	@Column(name="CONCENTRATION")
 	private Double concentration;
@@ -140,11 +140,11 @@ public class Product {
 		this.prodDesc = prodDesc;
 	}
 
-	public String getMainIgdt() {
+	public Integer getMainIgdt() {
 		return mainIgdt;
 	}
 
-	public void setMainIgdt(String mainIgdt) {
+	public void setMainIgdt(Integer mainIgdt) {
 		this.mainIgdt = mainIgdt;
 	}
 
