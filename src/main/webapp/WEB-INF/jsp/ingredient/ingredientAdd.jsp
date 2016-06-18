@@ -11,6 +11,11 @@
 color:red;
 }
 </style>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/css/bms-customize.css" rel="stylesheet" >
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="/src/js/jquery.validate.min.js"></script>
@@ -41,7 +46,18 @@ color:red;
 </script>
 </head>
 <body>
+<div id="wrapper">
 
+<c:import url="../bms_header.jsp" />
+<c:import url="../bms_navbar-side.jsp" />
+
+<!-- Page Content --> 
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Ingredient Add</h1>
+                
 	<form id='Addform'>
 	<fieldset>
 		<table>
@@ -91,7 +107,26 @@ color:red;
 	
 	<div id="resultMsg"></div>
 	<div id="data"></div>
-</body>
+	
+</div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+<!-- **加入4個js，請按照此順序** -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	$('#insert').click(function(){
@@ -145,5 +180,6 @@ $(function(){
     };
 });
 </script>
-
+	
+</body>
 </html>

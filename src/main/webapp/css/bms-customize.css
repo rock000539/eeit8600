@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+nav.navbar{
+	background-color: #00BCA4;
+}
+a.navbar-brand{
+	width: 250px;
+	background-color: #19C3AD;
+}
+a.navbar-brand>font{
+	color: #FFFFFF;
+	font-family:"Microsoft JhengHei";
+}
+a.dropdown-toggle>i{
+	color: #414C59;/*#CCF2ED*/
+}
+#sidebarColl{
+	background-color: #FFFFFF;
+	color: red;/*#8DA0AA;*/
+}
+#sidebarColl li>a{
+	/*color: #333333;*/
+	/*font-weight: 600;*/
+	font-family:"Microsoft JhengHei";
+}
+#sidebarColl i{
+	color: #00E3E3;/*00E3E3 FF8989;*/
+}
+.sidebar ul li a:hover{
+	background-color: #F0F0F0;
+}
+.sidebar ul li a.active{
+	background-color: #FAFCFE;
+}
+
+#page-wrapper{
+	background-color: #FAFCFE;
+	border-left: 0;
+}
+.page-header{
+	color: #414C59;
+}
+body{
+	background-color: #FFFFFF;;
+}
+
+
+
+
+
