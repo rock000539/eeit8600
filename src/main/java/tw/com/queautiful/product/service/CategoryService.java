@@ -20,7 +20,6 @@ public class CategoryService {
 	}
 	
 	public List<Category> getAll(){
-	
 		return categoryDao.findAll();
 	}
 	
