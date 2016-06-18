@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +30,7 @@
     	src="/js/bootstrap-dialog.min.js"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>productAdd</title>
+	<title>productEdit</title>
 	
 	<style>
 		.col-md-6 {
@@ -43,16 +43,29 @@
 		    resize: none;
 		}
 	</style>
-	
+
 </head>
 <body>
+
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Product Add Form</div>
+			<div class="panel-heading">Product Edit Form</div>
 			<div class="panel-body">
 				<form accept-charset="UTF-8"
-					action="" class="simple_form form-horizontal" id="addForm" method="post">
+					action="" class="simple_form form-horizontal" id="editForm" method="post">
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="prodId">
+							prodId
+						</label>
+						<div class="col-sm-8">
+							<input class="form-control" disabled="disabled"
+								id="prodId" name="prodId" type="text"
+								value="${product.prodId}" />
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
 					
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="prodName">
@@ -61,7 +74,8 @@
 						<div class="col-sm-8">
 							<input class="string required form-control"
 								id="prodName" name="prodName"
-								placeholder="請輸入prodName" type="text"/>
+								placeholder="請輸入prodName" type="text"
+								value="${product.prodName}" />
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -103,7 +117,8 @@
 						<div class="col-sm-8">
 							<input class="required number form-control"
 								id="weight" name="weight"
-								placeholder="請輸入weight" type="text"/>
+								placeholder="請輸入weight" type="text"
+								value="${product.weight}" />
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -115,7 +130,8 @@
 						<div class="col-sm-8">
 							<input class="required number form-control"
 								id="score" name="score"
-								placeholder="請輸入score" type="text"/>
+								placeholder="請輸入score" type="text"
+								value="${product.score}" />
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -127,7 +143,8 @@
 						<div class="col-sm-8">
 							<input class="required digits form-control"
 								id="price" name="price"
-								placeholder="請輸入price" type="text"/>
+								placeholder="請輸入price" type="text"
+								value="${product.price}" />
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -139,7 +156,8 @@
 						<div class="col-sm-8">
 							<input class="required digits form-control"
 								id="capacity" name="capacity"
-								placeholder="請輸入capacity" type="text"/>
+								placeholder="請輸入capacity" type="text"
+								value="${product.capacity}" />
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -152,7 +170,7 @@
 			                <div class="input-group date" id="datetimepicker">
 			                    <input class="form-control" 
 			                    	id="launchDate" name="launchDate"
-			                    	type="text" />
+			                    	type="text" value="${product.launchDate}" />
 			                    <span class="input-group-addon">
 			                        <span class="glyphicon glyphicon-calendar"></span>
 			                    </span>
@@ -168,7 +186,9 @@
 						</label>
 						<div class="col-sm-8">
 							<select class="form-control" id="mainIgdt" name="mainIgdt">
-								<option value="1">1. 二氧化鈦</option>
+								<option value="1">1. 主成分1</option>
+								<option value="2">2. 主成分2</option>
+								<option value="3">3. 主成分3</option>
 							</select>
 						</div>
 						<div class="col-sm-1"></div>
@@ -181,7 +201,8 @@
 						<div class="col-sm-8">
 							<input class="required number form-control"
 								id="concentration" name="concentration"
-								placeholder="請輸入concentration" type="text"/>
+								placeholder="請輸入concentration" type="text"
+								value="${product.concentration}" />
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -193,7 +214,7 @@
 						<div class="col-sm-8">
 							​<textarea class="string required form-control" 
 								id="prodDesc" name="prodDesc" 
-								rows="5" cols="50"></textarea>
+								rows="5" cols="50">${product.prodDesc}</textarea>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -231,7 +252,12 @@
 	
 		$(function() {
 			
-			// focus on first input
+			// Set select init value
+			$('#brandId').val("${product.brandId}");		
+			$('#categoryId').val("${product.categoryId}");
+			$('#mainIgdt').val("${product.mainIgdt}");
+			
+			// Focus on first input
 			$('#prodName').focus();
 			
 			// DateTimePicker
@@ -243,7 +269,7 @@
             });
 			
 			// Validate
-			var validate = $('#addForm').validate(
+			var validate = $('#editForm').validate(
 			{
 				onfocusout: function (element) {
 			        $(element).valid();
@@ -265,32 +291,26 @@
 			// Save Click
 			$('#save').click(function(){
 				
-				var validate = $('#addForm').validate().form();
+				var validate = $('#editForm').validate().form();
 				console.log(validate);
 				
 				var data = JSON.stringify($('form').serializeObject());
 				console.log(data);
 				
 				if(validate){
+					$('#prodId').prop('disabled', false);
 					$.ajax({
-						url: '/products/insert',
+						url: '/products/update',
 						type: 'POST',
 						contentType: 'application/json; charset=utf-8',
 						dataType: 'json',
 						data: JSON.stringify($('form').serializeObject()),
 						success:function(response){
+							$('#prodId').prop('disabled', true);
 							BootstrapDialog.show({
 					            size: BootstrapDialog.SIZE_SMALL,
 					            type: BootstrapDialog.TYPE_SUCCESS,
-					            message: 'Insert Product Success',
-					            /* buttons: [{
-					                label: 'Close',
-					            	icon: 'glyphicon glyphicon-remove-sign',
-					                cssClass: 'btn-default',
-					                action: function(dialogItself){
-					                    dialogItself.close();
-					                }
-					            }] */
+					            message: 'Update Product Success',
 					        });
 							console.log(response);
 						}, 
@@ -298,15 +318,7 @@
 							BootstrapDialog.show({
 					            size: BootstrapDialog.SIZE_SMALL,
 					            type: BootstrapDialog.TYPE_DANGER,
-					            message: 'Insert Product Fail, ' + 'Error! Status = ' + xhr.status,
-					            /* buttons: [{
-					                label: 'Close',
-					            	icon: 'glyphicon glyphicon-ban-circle',
-					                cssClass: 'btn-default',
-					                action: function(dialogItself){
-					                    dialogItself.close();
-					                }
-					            }] */
+					            message: 'Update Product Fail, ' + 'Error! Status = ' + xhr.status,
 					        });
 						} 
 					});
@@ -316,7 +328,7 @@
 			// Reset Click
 			$('#clear').click(
 				function(){
-					$("#addForm")[0].reset();
+					$("#editForm")[0].reset();
 				}
 			);
 			
@@ -340,6 +352,6 @@
 		});
 
 	</script>
-	
+
 </body>
 </html>

@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,41 +36,45 @@ public class ProductController {
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Product> select(@RequestParam Integer page, @RequestParam Integer rows) {
-		
-		// slf4j vs log4j
-		log.debug("{}", "page = " + page);
-		log.debug("{}", "rows = " + rows);
 
-		Pageable pageable = new PageRequest(page - 1, rows);
-		Page<Product> prodPage = service.getAll(pageable);
-		return prodPage.getContent();
+		if (page != null && rows != null) {
+			log.debug("{}", "page = " + page);
+			log.debug("{}", "rows = " + rows);
+
+			Pageable pageable = new PageRequest(page - 1, rows);
+			Page<Product> prodPage = service.getAll(pageable);
+			return prodPage.getContent();
+		} else {
+			return service.getAll();
+		}
 	}
-	
+
 	@RequestMapping("/add")
 	public String addPage() {
 		return "/product/productAdd";
 	}
 
-	@RequestMapping("/insert")
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public Product insert(@RequestBody Product product) {
 		service.insert(product);
 		return product;
 	}
-	
+
 	@RequestMapping("/edit")
-	public String editPage() {
+	public String editPage(@RequestParam Long prodId, Model model) {
+		model.addAttribute("product", service.getById(prodId));
 		return "/product/productEdit";
 	}
-	
-	@RequestMapping("/update")
+
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	@ResponseBody
 	public Product update(@RequestBody Product product) {
 		service.update(product);
 		return product;
 	}
 
-	@RequestMapping("/delete")
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(@RequestBody Product product) {
 		service.delete(product.getProdId());

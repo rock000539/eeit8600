@@ -31,10 +31,10 @@
     
 	    $(function () {
 			
+	    	// jQuery Grid
 			$('#jqGrid').jqGrid({
 				url: '/products/select',
 				datatype: 'json',
-//				prmNames: { page:'gridPage.page', rows:'gridPage.rows', sort:'gridPage.sidx', order:'gridPage.sord' },
 				colModel: [
 					{
 						label: '',
@@ -47,143 +47,105 @@
 					        delbutton : true,
 					        editformbutton: true,
 					        editOptions: {
-					            width: 'auto',
-					        	height: 'auto',
-					            modal: true,
-					            resize: false,
-					            bSubmit: 'Save',
-					            bCancel: 'Cancel',
-					            recreateForm: true,
-					            closeOnEscape: true,
-					            closeAfterEdit: true,
-					            reloadAfterSubmit: true,
-					            beforeShowForm: function() { $('#prodId').prop('disabled', true); },
-					            url: '/products/update',
-					            ajaxEditOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-					            serializeEditData: function(postdata) { return JSON.stringify(postdata); },
-					            afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log('afterSubmit'); console.log(response); return [true, '', false]; }
+					            beforeShowForm: function() {
+					            	$('#editmodjqGrid').remove();
+					            	document.location.href='/products/edit?prodId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
+					            },
 					        },
 					        delOptions: {
 					        	width: 'auto',
 					        	height: 'auto',
 					        	modal: true,
 					            resize: false,
+					            msg: '刪除此筆資料？',
 					        	bSubmit: 'Delete',
 					        	bCancel: 'Cancel',
 					        	closeOnEscape: true,
-					        	reloadAfterSubmit: true,
 					        	url: '/products/delete',
 					        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-					        	serializeDelData: function(postdata) { return JSON.stringify($(this).getRowData(postdata.id)); },
-					        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log('afterSubmit'); console.log('afterSubmit'); console.log(response); return [true, '', false]; }
+					        	serializeDelData: function(postdata) { return JSON.stringify({ 'prodId': $(this).getRowData(postdata.id).prodId }); },
+					        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
 					        },
 					    }       
 					},
 					{ 
-						label: 'ProdID', 
-						name: 'prodId', 
+						label: 'ProdID',
+						name: 'prodId',
 						width: 50,
 						align: 'center',
-						sorttype: 'integer',
 						key: true,
-						editable: true,
-						editrules: { required: true, number: true, },
 					},
 					{ 
-						label: 'ProdName', 
-						name: 'prodName', 
+						label: 'ProdName',
+						name: 'prodName',
 						width: 80,
 						align: 'center',
-						editable: true,
-						editoptions: { maxlength: 30 },
 					},
 					{ 
 						label: 'BrandID', 
 						name: 'brandId', 
 						width: 60,
 						align: 'center',
-						editable: true,
-						editrules: { required: true, number: true, },
 					},
 					{ 
 						label: 'CategoryID', 
 						name: 'categoryId', 
 						width: 70,
 						align: 'center',
-						editable: true,
-						editrules: { required: true, number: true, },
 					},
 					{ 
 						label: 'Weight', 
 						name: 'weight', 
 						width: 50,
 						align: 'center',
-						editable: true,
-						editrules: { number: true, },
 					},
 					{ 
 						label: 'Score', 
 						name: 'score', 
 						width: 50,
 						align: 'center',
-						editable: true,
-						editrules: { number: true, },
 					},
 					{ 
 						label: 'Price', 
 						name: 'price', 
 						width: 60,
 						align: 'center',
-						editable: true,
-						editrules: { number: true, },
 					},
 					{ 
 						label: 'Capacity', 
 						name: 'capacity', 
 						width: 60,
 						align: 'center',
-						editable: true,
-						editrules: { number: true, },
 					},
 					{ 
 						label: 'LaunchDate', 
 						name: 'launchDate', 
 						width: 90,
 						align: 'center',
-						editable: true,
-						editrules: { date: true, },
 					},
 					{ 
 						label: 'ProdDesc', 
 						name: 'prodDesc', 
 						width: 80,
 						align: 'center',
-						editable: true,
-						editoptions: { maxlength: 100 },
 					},
 					{ 
 						label: 'MainIgdt', 
 						name: 'mainIgdt', 
 						width: 80,
 						align: 'center',
-						editable: true,
-						editoptions: { maxlength: 100 },
 					},
 					{ 
 						label: 'Concentration', 
 						name: 'concentration', 
 						width: 90,
 						align: 'center',
-						editable: true,
-						editrules: { number: true, },
 					},
 					{ 
 						label: 'ProdImg', 
 						name: 'prodImg', 
 						width: 80,
 						align: 'center',
-						editable: true,
-						editoptions: { maxlength: 100 },
 					}
 				],
 				width: 'auto', // 寬度
@@ -197,6 +159,7 @@
 				pager: '#jqGridPager',
 			});
 			
+	    	// jQuery Grid Navigator
 			$('#jqGrid').navGrid('#jqGridPager', 
 			// the buttons to appear on the toolbar of the grid
 			{
@@ -215,21 +178,10 @@
             },
 	        // options for the Add Dialog
 	        {
-	            width: 'auto',
-	        	height: 'auto',
-	            modal: true,
-	            resize: false,
-	            bSubmit: 'Save',
-	            bCancel: 'Cancel',
-	            recreateForm: true,
-	            closeOnEscape: true,
-	            closeAfterAdd: true,
-	            reloadAfterSubmit: true,
-	            beforeShowForm: function() { $('#tr_prodId').empty(); },
-	            url: '/products/insert',
-	            ajaxEditOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-	            serializeEditData: function(postdata) { return JSON.stringify(postdata); },
-	            afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log('afterSubmit'); console.log(response); return [true, '', false]; },
+	        	beforeShowForm: function() { 
+	        		$('#editmodjqGrid').remove();
+	        		document.location.href="/products/add";
+	        	},
 	        },
 	     	// options for the Delete Dailog
             {
@@ -254,7 +206,13 @@
 	        	bClose: 'Close',
 	        	recreateForm: true,
 	        	closeOnEscape: true,
+	        	beforeShowForm: function(){
+	        		$('#trv_').remove();
+	        	},
 			});
+			
+	    	// Change Caption Position (TitleBar)
+			$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
 		});
    
    </script>

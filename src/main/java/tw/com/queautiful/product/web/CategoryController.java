@@ -27,12 +27,11 @@ public class CategoryController {
 	@RequestMapping("/list")
 	public String listPage(Model model){
 		model.addAttribute("categories", service.getAll());
-		
 		return "/category/categoryList";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Long categoryId,Model model){
+	public String delete(@RequestParam Long categoryId){
 		service.delete(categoryId);
 		return "redirect:/categories/list";
 	}
