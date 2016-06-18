@@ -12,9 +12,9 @@
 <table border="1" cellspacing="0" cellpadding="2">
 <thead align='center'>
 	<tr>
-
-		<th>電子信箱</th>
-		<th width="150">暱稱</th>
+		<th>ID</th>
+		<th width="150">電子信箱</th>
+		<th width="80">暱稱</th>
 		<th width="80">姓</th>
 		<th width="80">名</th>
 		<th width="80">性別</th>
@@ -30,6 +30,7 @@
 <tbody align='center'>
 	<c:forEach var="member" items="${members}">
 		<tr>
+			<td>${member.memberId}</td>
 			<td>${member.email}</td>
 			<td>${member.nickname}</td>
 			<td>${member.lastName}</td>

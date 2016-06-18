@@ -35,12 +35,13 @@ public class MemberController {
 		return "/member/memberAdd";
 	}
 	
-//	@RequestMapping(value="/insert", method=RequestMethod.POST)
-//	public String insert(Member member){
-//		System.out.println(member);
-//		service.insert(member);
-//		return "member/memberAdd";
-//	}
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	public String insert(Member member){
+		System.out.println(member);
+		member.setMemberImg("test");
+		service.insert(member);
+		return "/member/memberAdd";
+	}
 	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long memberId, Model model){

@@ -8,34 +8,31 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
 <script src="/src/js/jquery.validate.min.js"></script>
 <style>
-.temp1 {
-	border: 1px solid black;
-	width: 500px;
-}
-
-.temp2 {
-	border: 1px solid black;
-	align: center;
-	background-color: yellow;
-}
-
 .error {
 	color: red;
 }
 </style>
+<script>
+</script>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	<form id="editForm" action="/members/update" method="POST" enctype="multipart/form-data">
+<div id="header"></div>
+	<form id="addForm" action="/members/insert" method="POST" enctype="multipart/form-data">
 		<table>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" name="memberId"
-					value="${member.memberId}" readonly="readonly"></td>
-			</tr>
 			<tr>
 				<td>電子信箱</td>
 				<td><input type="text" name="email"
 					value="${member.email}"></td>
+			</tr>
+			<tr>
+				<td>密碼</td>
+				<td><input type="text" name="password"
+					value="${member.password}"></td>
 			</tr>
 			<tr>
 				<td>暱稱</td>
@@ -52,7 +49,7 @@
 				<td><input type="text" name="firstName"
 					value="${member.firstName}"></td>
 			</tr>
-			<tr>
+<tr>
 				<td>性別</td>
 				<td><input type="radio" name="gender"
 					value="M" ${member.gender=='M'? 'checked':''}>男
@@ -96,8 +93,8 @@
 			</tr>
 		</table>
 		<div>
-			<br> <input type="submit" id="editBtn" name="update"
-				value="update">
+			<br> <input type="submit" id="insertBtn" name="insert"
+				value="insert">
 				 <input type="button" name="cancel"
 				value="Cancel" onclick='window.location="/members/list"'><br>
 		</div>
@@ -108,7 +105,7 @@
 </body>
 <script type="text/javascript">
 /*	$(function() {
-		$('#editForm').validate(
+		$('#addForm').validate(
 			{rules:{
 				email:{required:true},
 				nickname:{required:true},
@@ -138,8 +135,8 @@
 			}}
 		);
 
-		$('#editBtn').on('click',function() {
-			var validate=$('#editForm').validate().form();
+		$('#insertBtn').on('click',function() {
+			var validate=$('#addForm').validate().form();
 			if(validate){
 			$.ajax({
 				url : "/members/update",
