@@ -4,10 +4,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/css/bms-customize.css" rel="stylesheet" >
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Member ListPage</title>
+<title>Member List</title>
+
 </head>
 <body>
+
+<div id="wrapper">
+
+<jsp:include page="../bms_header.jsp"></jsp:include>
+<jsp:include page="../bms_navbar-side.jsp"></jsp:include>
+
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Member List</h1>
+              
 <a href="/members/add">新增資料</a>
 <table border="1" cellspacing="0" cellpadding="2">
 <thead align='center'>
@@ -50,5 +70,23 @@
 </tbody>
 </table>
 
+                <!-- **每一頁不同的內容 end -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
 </body>
 </html>
