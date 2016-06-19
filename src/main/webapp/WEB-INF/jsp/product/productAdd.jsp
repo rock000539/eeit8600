@@ -168,7 +168,9 @@
 						</label>
 						<div class="col-sm-8">
 							<select class="form-control" id="mainIgdt" name="mainIgdt">
-								<option value="1">1. 二氧化鈦</option>
+								<option value="1">1. 主成分1</option>
+								<option value="2">2. 主成分2</option>
+								<option value="3">3. 主成分3</option>
 							</select>
 						</div>
 						<div class="col-sm-1"></div>

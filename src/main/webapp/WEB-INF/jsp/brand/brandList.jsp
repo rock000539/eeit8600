@@ -24,7 +24,8 @@ text-align:center;
 	<TR>
 		<TH>編號</TH>
 		<TH>品牌</TH>
-		<TH>LOGO</TH>
+		<TH width="50">LOGOPATH</TH>
+		<TH>LOGOIMG</TH>
 		<TH>官網</TH>
 		<TH>批號公式</TH>
 		<TH>顯示隱藏</TH>
@@ -34,6 +35,7 @@ text-align:center;
 		<TD>${brand.brandId}</TD>
 		<TD>${brand.brandName}</TD>
 		<TD>${brand.brandImg}</TD>
+		<TD><img height="30" src="/brands/show?brandId=${brand.brandId}"></TD>
 		<TD>${brand.website}</TD>
 		<TD>${brand.bcFunc}</TD>
 		<TD>${brand.brandShow}</TD>
