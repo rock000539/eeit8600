@@ -15,11 +15,11 @@
                  </div>
                  <!-- /input-group -->
              </li>
-            	<li>
+             <li>
                  <a href="<% request.getContextPath(); %>/bms"><i class="fa fa-tachometer fa-fw"></i> DashBoard</a>
                  <!-- /.nav-second-level -->
              </li>
-             <li >
+             <li>
                  <a href="#"><i class="fa fa-pencil fa-fw"></i> 維護美妝產品相關資訊<span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
                      <li>
@@ -44,7 +44,7 @@
                  <a href="#"><i class="fa fa-flag fa-fw"></i> 檢舉系統<span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
                      <li>
-                         <a href=".jsp"> 設定檢舉條件</a>
+                         <a href="#"> 設定檢舉條件</a>
                      </li>
                      <li>
                          <a href="#"> 管理檢舉事件<span class="fa arrow"></span></a>

@@ -5,12 +5,14 @@
 <html>
 <head>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/metisMenu.min.css" rel="stylesheet">
+
 <link href="/css/sb-admin-2.css" rel="stylesheet">
+<link href="/css/metisMenu.min.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/css/bms-customize.css" rel="stylesheet" >
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>後台管理系統</title> 
+
 </head>
 <body>
 <div id="wrapper">
@@ -42,6 +44,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/sb-admin-2.js"></script>
+<script src="/js/bms-customize.js"></script>
 
 </body>
 </html>

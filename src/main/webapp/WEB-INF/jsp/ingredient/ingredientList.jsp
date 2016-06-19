@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Member List</h1>
+                <h1 class="page-header">Ingredient List</h1>
                <!-- **每一頁不同的內容寫在這: start -->
 
 
