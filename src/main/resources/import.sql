@@ -9,11 +9,11 @@ INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('神魔之塔', 5, 40
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('爐石戰記', 4, 6000000, 'www.heartstone.com.tw')
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('列王的紛爭', 3, 2000000, 'www.cok.com.tw')
 
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('蜜妮', 'src/...', 'http://www.kao.com/tw/biore/' , 'biore',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('倩碧', 'src/...', 'http://www.clinique.com.tw/' , 'elca',1)
+INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Biore', 'src/...', 'http://www.kao.com/tw/biore/' , 'biore',1)
+INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Clinique', 'src/...', 'http://www.clinique.com.tw/' , 'elca',1)
 INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('M.A.C', 'src/...', 'https://www.maccosmetics.com.tw/' , 'elca',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('蘭蔻', 'src/...', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('巴黎萊雅', 'src/...', 'http://www.loreal.com.tw/' , 'loreal',1)
+INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Lancome', 'src/...', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal',1)
+INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('L''Oreal', 'src/...', 'http://www.loreal.com.tw/' , 'loreal',1)
 
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('lotion','src/...')
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('cream','src/...')

@@ -63,7 +63,8 @@ input.error {
 <span id="brandImg"></span><br/>
 <span id="website"></span><br/>
 <span id="bcFunc"></span><br/>
-<span id="brandShow"></span>
+<span id="brandShow"></span><br/>
+<img name="brandImgFile" width="100">
 </div>
 
 <script>
@@ -96,7 +97,7 @@ $(function(){
 			formData.append('brandImgFile',$('#brandImgFile').prop('files')[0]);
 			formData.append('brand',
 					new Blob([JSON.stringify($('#addForm').serializeObject())],
-					{type: "application/json"}));
+							{type: 'application/json'}));
 			$.ajax({
 				url: '/brands/insert',
 				type: 'post',
@@ -107,12 +108,13 @@ $(function(){
 				success: function(data){
 					console.log(data); 
 					$('#addForm')[0].reset();			
-					$('h2').text('Insert Success');
+					$('#result>h2').text('Insert Success');
 					$('#brandName').text('BrandName:'+data.brandName);
 					$('#brandImg').text('Logo:'+data.brandImg);
 					$('#website').text('Website:'+data.website);
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
-					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
+					$('#brandShow').text('顯示隱藏:'+data.brandShow);
+					$('img[name="brandImgFile"]').attr('src','/brands/show?brandId='+data.brandId);
 				}
 			});
 		}else{
