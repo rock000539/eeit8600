@@ -121,7 +121,6 @@ color:red;
 <!-- /#wrapper -->
 
 
-<!-- **加入4個js，請按照此順序** -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
