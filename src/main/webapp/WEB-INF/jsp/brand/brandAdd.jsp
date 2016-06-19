@@ -22,18 +22,14 @@ input.error {
 </style>
 </head>
 <body>
-<FORM id="theForm" enctype="multipart/form-data" action="/brands/insert" method="post">
+<h1>Brand AddPage</h1>
+<FORM id="addForm" enctype="multipart/form-data" action="/brands/insert" method="post">
 	<TABLE>
 		<TR>
 			<TD>品牌：</TD>
 			<TD><input type="text" name="brandName" value="${param.brandName}" class="required" title="請輸入品牌名稱" /></TD>
 			<TD></TD>
 		</TR>
-<!-- 		<TR> -->
-<!-- 			<TD>LOGO：</TD> -->
-<!-- 			<TD><input type="text" name="brandImg" /></TD> -->
-<!-- 			<TD></TD> -->
-<!-- 		</TR> -->
 		<TR>
 			<TD>LOGO：</TD>
 			<TD><input type="file" name="brandImgFile" id="brandImgFile" accept="image/*"/></TD>
@@ -57,14 +53,14 @@ input.error {
 			<TD></TD>
 		</TR>
 	</TABLE>
-<input type="submit" name="save" value="save" id="save"/>
+<input type="button" name="save" value="save" id="save"/>
 <input type="button" name="cancel" value="cancel" onclick="location='/brands/list'" />
 </FORM>
 
 <div id='result'>
 <h2></h2>
 <span id="brandName"></span><br/>
-<span id="brandImgFile"></span><br/>
+<span id="brandImg"></span><br/>
 <span id="website"></span><br/>
 <span id="bcFunc"></span><br/>
 <span id="brandShow"></span>
@@ -72,73 +68,76 @@ input.error {
 
 <script>
 
-// $(function(){
-// 	$(':text:first').focus();
-// 	$('#theForm').validate({
-// 		onfocusout: function (element) {
-// 	        $(element).valid();
-// 	    },
-// 		rules:{
-// 			brandName:{required:true},
-// 			//brandImg:'required',
-// 			website:{required:true,url:true},
-// 			bcFunc:'required'
-// 		},//end of rules
-// 		messages:{
-// 			brandName:'必填',
-// 			//brandImg:'必填',
-// 			website:{required:'必填',url:'請輸入正確網址格式'},
-// 			bcFunc:'必填'
-// 		},//end of messages
-// 	});
+$(function(){
+	$(':text:first').focus();
+	$('#addForm').validate({
+		onfocusout: function (element) {
+	        $(element).valid();
+	    },
+		rules:{
+			brandName:{required:true},
+			brandImgFile:'required',
+			website:{required:true,url:true},
+			bcFunc:'required'
+		},//end of rules
+		messages:{
+			brandName:'必填',
+			brandImgFile:'必填',
+			website:{required:'必填',url:'請輸入正確網址格式'},
+			bcFunc:'必填'
+		},//end of messages
+	});
 	
 	
-// 	$('#save').click(function(){		
-// 		console.log(JSON.stringify($('#theForm').serializeObject()));
-// 		if($('#theForm').validate().form()){
-// 			$.ajax({
-// 				url: '/brands/insert',
-// 				contentType: 'multipart/form-data',
-// 				//data: JSON.stringify({brandName:'LA MER',website:'http://www.lamer.com.tw/',bcFunc:'elca'}),
-// 				data: JSON.stringify($('#theForm').serializeObject()),
-// 				//data: JSON.stringify('{'+$('#theForm').serializeArray()+'}'),
-// 				dataType: 'json',
-// 				type: 'post',
-// 				success: function(data){
-// 					console.log(data); 
-// 					$(':text').val("");
-// 					$('#true').prop("checked",true);				
-// 					$('h2').text('Insert Success');
-// 					$('#brandName').text('BrandName:'+data.brandName);
-// 					$('#brandImgFile').text('Logo:'+data.brandImgFile);
-// 					$('#website').text('Website:'+data.website);
-// 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
-// 					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
-// 				}
-// 			});
-// 		}else{
-// 			alert('請依訊息更正錯誤');
-// 		}
-// 	});	
+	$('#save').click(function(){		
+		console.log(JSON.stringify($('#addForm').serializeObject()));
+		if($('#addForm').validate().form()){
+			var formData = new FormData();
+			formData.append('brandImgFile',$('#brandImgFile').prop('files')[0]);
+			formData.append('brand',
+					new Blob([JSON.stringify($('#addForm').serializeObject())],
+					{type: "application/json"}));
+			$.ajax({
+				url: '/brands/insert',
+				type: 'post',
+				contentType: false,
+				processData: false,
+				data:formData,
+				dataType: 'json',
+				success: function(data){
+					console.log(data); 
+					$('#addForm')[0].reset();			
+					$('h2').text('Insert Success');
+					$('#brandName').text('BrandName:'+data.brandName);
+					$('#brandImg').text('Logo:'+data.brandImg);
+					$('#website').text('Website:'+data.website);
+					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
+					$('#brandShow').text('顯示隱藏:'+data.brandShow);			
+				}
+			});
+		}else{
+			alert('請依訊息更正錯誤');
+		}
+	});	
 	
-// 	$.fn.serializeObject = function()
-// 	{
-// 	    var o = {};
-// 	    var a = this.serializeArray();
-// 	    $.each(a, function() {
-// 	        if (o[this.name] !== undefined) {
-// 	            if (!o[this.name].push) {
-// 	                o[this.name] = [o[this.name]];
-// 	            }
-// 	            o[this.name].push(this.value || '');
-// 	        } else {
-// 	            o[this.name] = this.value || '';
-// 	        }
-// 	    });
-// 	    return o;
-// 	};
+	$.fn.serializeObject = function()
+	{
+	    var o = {};
+	    var a = this.serializeArray();
+	    $.each(a, function() {
+	        if (o[this.name] !== undefined) {
+	            if (!o[this.name].push) {
+	                o[this.name] = [o[this.name]];
+	            }
+	            o[this.name].push(this.value || '');
+	        } else {
+	            o[this.name] = this.value || '';
+	        }
+	    });
+	    return o;
+	};
 	
-// });
+});
 
 </script>
 
