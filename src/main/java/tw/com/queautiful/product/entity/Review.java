@@ -43,7 +43,10 @@ public class Review {
 	private Date reviewTime;
 	
 	@Column(name="REWCOLLECT")
-	private Integer RewCollect;
+	private Integer rewCollect;
+	
+	@Column(name="REVIEWSHOW")
+	private String reviewShow;
 	
 	@Override
 	public String toString() {
@@ -51,13 +54,10 @@ public class Review {
 				+ ", prodId=" + prodId + ", reviewTitle=" + reviewTitle
 				+ ", review=" + review + ", reviewRating=" + reviewRating
 				+ ", reviewImg=" + reviewImg + ", reviewTime=" + reviewTime
-				+ ", RewCollect=" + RewCollect + ", reviewShow=" + reviewShow
+				+ ", RewCollect=" + rewCollect + ", reviewShow=" + reviewShow
 				+ ", reviewImgFile=" + reviewImgFile + "]";
 	}
 
-	@Column(name="REVIEWSHOW")
-	private String reviewShow;
-	
 	@Transient
 	private MultipartFile reviewImgFile;
 
@@ -126,11 +126,11 @@ public class Review {
 	}
 
 	public Integer getRewCollect() {
-		return RewCollect;
+		return rewCollect;
 	}
 
 	public void setRewCollect(Integer rewCollect) {
-		RewCollect = rewCollect;
+		rewCollect = rewCollect;
 	}
 
 	public String getReviewShow() {

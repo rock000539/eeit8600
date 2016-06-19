@@ -22,7 +22,7 @@ public class ReviewController {
 	@RequestMapping("/list")
 	public String listPage(Model model){
 		model.addAttribute("reviews", service.getAll());
-		return "/reviews/reviewlist";
+		return "/review/reviewList";
 	}
 	
 	@RequestMapping("/delete")
