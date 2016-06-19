@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Review List</title>
 <style>
-table{border:1px solid black; 
- 	  width:600px;} 
+table{border:3px solid black; 
+ 	  width:900px;} 
 
-/* th,td{borfer:1px solid black; */
-/* 	  text-align:center;} */
+th,td{border:1px solid black; 
+ 	  text-align:center;} 
 
 </style>
 </head>
@@ -45,9 +45,8 @@ table{border:1px solid black;
 		<td>${review.reviewTime}</td>
 		<td>${review.rewCollect}</td>
 		<td>${review.reviewShow}</td>
-	
 		<td><input type="button" name="edit" value="edit" onClick="Location='/reviews/edit?reviewId=${review.reviewId}'"></td>	
-		<td><input type="button" name="delete" value="delete" onClick="Location='/reviews/delete?reviewId=${review.reviewId}'"></td>
+		<td><input type="button" name="delete" value="delete" onClick="location='/reviews/delete?reviewId=${review.reviewId}'"></td>
 	</tr>	
 </c:forEach>
 </tbody>
