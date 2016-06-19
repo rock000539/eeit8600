@@ -58,18 +58,12 @@ public class BrandController {
 			//,method = RequestMethod.POST, consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces="application/json"
 			)
 	@ResponseBody
-	public Brand insert(@RequestParam String brandName, 
-			@RequestParam String website,
-			@RequestParam String bcFunc,	
-			@RequestPart MultipartFile brandImgFile){	
-		//System.out.println(brand.getBrandImgFile());
-		//System.out.println(brandImgFile);
+	public Brand insert(@RequestPart("brand") Brand brand,	
+			@RequestPart("brandImgFile") MultipartFile brandImgFile){	
+		System.out.println(brand);
+		System.out.println(brandImgFile);
 		
-		Brand brand=new Brand();
-		brand.setBrandName(brandName);
-		brand.setBcFunc(bcFunc);
-		brand.setWebsite(website);
-		
+		String brandName = brand.getBrandName();
 		if (!brandImgFile.isEmpty()) {
 			try {
 				byte[] bytes = brandImgFile.getBytes();
