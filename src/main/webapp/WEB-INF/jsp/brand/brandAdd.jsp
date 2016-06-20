@@ -76,13 +76,13 @@ $(function(){
 	        $(element).valid();
 	    },
 		rules:{
-			brandName:{required:true},
+			//brandName:{required:true},
 			brandImgFile:'required',
 			website:{required:true,url:true},
 			bcFunc:'required'
 		},//end of rules
 		messages:{
-			brandName:'必填',
+			//brandName:'必填',
 			brandImgFile:'必填',
 			website:{required:'必填',url:'請輸入正確網址格式'},
 			bcFunc:'必填'
