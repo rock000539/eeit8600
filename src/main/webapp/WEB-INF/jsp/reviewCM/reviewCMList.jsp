@@ -34,7 +34,7 @@ th,td{border:1px solid black;
 		<td>${reviewCM.rcmMsg}</td>
 		<td>${reviewCM.memberId}</td>
 		<td>${reviewCM.rcmShow}</td>
-		<td>${reviewCM.rcmPort}</td>
+		<td>${reviewCM.rcmReport}</td>
 
 		<td><input type="button" name="edit" value="edit" onClick="location='/reviewCMs/edit?rcmId=${reviewCM.rcmId}'"></td>
 		<td><input type="button" name="delete" value="delete" onClick="location='/reviewCMs/delete?rcmId=${reviewCM.rcmId}'"></td>

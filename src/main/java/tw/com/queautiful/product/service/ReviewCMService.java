@@ -16,8 +16,8 @@ public class ReviewCMService {
 	@Autowired
 	private ReviewCMDao reviewCMDao;
 	
-	public ReviewCM getById(Long reviewCMId){
-		return reviewCMDao.findOne(reviewCMId);
+	public ReviewCM getById(Long rcmId){
+		return reviewCMDao.findOne(rcmId);
 	}
 	
 	public List<ReviewCM> getAll(){
@@ -32,7 +32,7 @@ public class ReviewCMService {
 		reviewCMDao.save(reviewCM);
 	}
 	
-	public void delete(Long reviewCMId){
-		reviewCMDao.delete(reviewCMId);
+	public void delete(Long rcmId){
+		reviewCMDao.delete(rcmId);
 	}
 }

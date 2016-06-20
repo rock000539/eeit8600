@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 @Table(name="REVIEWCM")
@@ -27,10 +27,10 @@ public class ReviewCM {
 	private Long memberId;
 	
 	@Column(name="REVIEWCMSHOW")
-	private Boolean rcmShow;
+	private String rcmShow;
 	
 	@Column(name="REVIEWCMREPORT")
-	private Integer rcmPort;
+	private Integer rcmReport;
 
 	public Long getRcmId() {
 		return rcmId;
@@ -64,27 +64,27 @@ public class ReviewCM {
 		this.memberId = memberId;
 	}
 
-	public Boolean isRcmShow() {
+	public String getRcmShow() {
 		return rcmShow;
 	}
 
-	public void setRcmShow(Boolean rcmShow) {
+	public void setRcmShow(String rcmShow) {
 		this.rcmShow = rcmShow;
 	}
 
-	public Integer getRcmPort() {
-		return rcmPort;
+	public Integer getRcmReport() {
+		return rcmReport;
 	}
 
-	public void setRcmPort(Integer rcmPort) {
-		this.rcmPort = rcmPort;
+	public void setRcmReport(Integer rcmReport) {
+		this.rcmReport = rcmReport;
 	}
 
 	@Override
 	public String toString() {
 		return "ReviewCM [rcmId=" + rcmId + ", reviewId=" + reviewId
 				+ ", rcmMsg=" + rcmMsg + ", memberId=" + memberId
-				+ ", rcmShow=" + rcmShow + ", rcmPort=" + rcmPort + "]";
+				+ ", rcmShow=" + rcmShow + ", rcmReport=" + rcmReport + "]";
 	}
 
 }
