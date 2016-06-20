@@ -5,12 +5,18 @@
 <html>
 <head>
 
-	<script type="text/ecmascript" src="<c:url value='/js/jquery.min.js'/>"></script> 
-    <script type="text/ecmascript" src="<c:url value='/js/trirand/jquery.jqGrid.min.js'/>"></script>
-    <script type="text/ecmascript" src="<c:url value='/js/trirand/i18n/grid.locale-tw.js'/>"></script>
+	<script src="/js/jquery.min.js"></script> 
+    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
+    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
     
-    <link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/css/jquery-ui.min.css'/>" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/css/trirand/ui.jqgrid.css'/>" />
+    <!-- BootStrap -->
+<!--     <script src="/js/bootstrap.min.js"></script>  -->
+<!--     <link rel="stylesheet" href="/css/bootstrap.min.css">  -->
+<!--     <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" /> -->
+    
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="<c:url value='/css/jquery-ui.min.css'/>" />
+	<link rel="stylesheet" href="<c:url value='/css/trirand/ui.jqgrid.css'/>" />
 	
 	<script>
 		$.jgrid.defaults.width = 780;
@@ -31,11 +37,27 @@
     
 	    $(function () {
 			
+	    	$.ajax({
+				url: '/products/select_jqgrid?page=1&rows=10',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					console.log(response);
+				}
+			});
+	    	
 	    	// jQuery Grid
 			$('#jqGrid').jqGrid({
-				url: '/products/select',
+				url: '/products/select_jqgrid',
 				datatype: 'json',
-				colModel: [
+				jsonReader: {
+					root: "content",
+			      	page: "number"+1, 
+			      	total: "totalPages", 
+			      	records: "totalElements", 
+				    repeatitems: false,
+			    },
+				colModel: [ // 定義各列的具體格式, 請參考 http://goo.gl/lph9u
 					{
 						label: '',
 					    name: '',
@@ -46,6 +68,7 @@
 					        editbutton : true,
 					        delbutton : true,
 					        editformbutton: true,
+					        // 各項option請參考 http://goo.gl/FV6iq
 					        editOptions: {
 					            beforeShowForm: function() {
 					            	$('#editmodjqGrid').remove();
@@ -154,7 +177,7 @@
 				rownumbers: true, // 第n列
 				rownumWidth: 35, // 第n列寬度
 				caption: 'Products Grid View', // 最上方的標題和收合Table
-				loadonce: true, // 資料是否只載入一次
+				loadonce: false, // 資料是否只載入一次
 				viewrecords: true, // 右下角的 1-10 共n條
 				pager: '#jqGridPager',
 			});
@@ -162,6 +185,7 @@
 	    	// jQuery Grid Navigator
 			$('#jqGrid').navGrid('#jqGridPager', 
 			// the buttons to appear on the toolbar of the grid
+			// 請參考 http://goo.gl/gBYXSe
 			{
 	            edit: false,
 	            add: true,

@@ -72,11 +72,7 @@
 							brandId
 						</label>
 						<div class="col-sm-8">
-							<select class="form-control" id="brandId" name="brandId">
-								<option value="1">1. 蜜妮</option>
-								<option value="2">2. 蘭蔻</option>
-								<option value="3">3. 巴黎萊雅</option>
-							</select>
+							<select class="form-control" id="brandId" name="brandId"></select>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -87,11 +83,7 @@
 							categoryId
 						</label>
 						<div class="col-sm-8">
-							<select class="form-control" id="categoryId" name="categoryId">
-								<option value="1">1. lotion</option>
-								<option value="2">2. cream</option>
-								<option value="3">3. sun protection</option>
-							</select>
+							<select class="form-control" id="categoryId" name="categoryId"></select>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -232,6 +224,31 @@
 	<script type="text/javascript">
 	
 		$(function() {
+			
+			// Set select init value
+			$.ajax({
+				url: '/brands/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					var select = $('#brandId').empty();
+					for(i=0; i<response.length; i++){
+						select.append($('<option></option>').attr('value', response[i].brandId).text(i+1 + '. ' + response[i].brandName));
+					}
+				}
+			});
+			
+			$.ajax({
+				url: '/categories/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					var select = $('#categoryId').empty();
+					for(i=0; i<response.length; i++){
+						select.append($('<option></option>').attr('value', response[i].categoryId).text(i+1 + '. ' + response[i].categoryName));
+					}
+				}
+			});
 			
 			// focus on first input
 			$('#prodName').focus();

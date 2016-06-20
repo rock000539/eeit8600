@@ -33,20 +33,33 @@ public class ProductController {
 		return "/product/productList";
 	}
 
+	// 提供一般抓取資料使用
 	@RequestMapping("/select")
 	@ResponseBody
-	public List<Product> select(@RequestParam Integer page, @RequestParam Integer rows) {
+	public List<Product> select() {
+		return service.getAll();
+	}
 
-		if (page != null && rows != null) {
-			log.debug("{}", "page = " + page);
-			log.debug("{}", "rows = " + rows);
+	// 提供jqGrid抓取資料使用
+	@RequestMapping("/select_jqgrid")
+	@ResponseBody
+	public Page<Product> select(@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer rows) {
 
-			Pageable pageable = new PageRequest(page - 1, rows);
-			Page<Product> prodPage = service.getAll(pageable);
-			return prodPage.getContent();
-		} else {
-			return service.getAll();
-		}
+		log.debug("page = {}", page);
+		log.debug("rows = {}", rows);
+
+		Pageable pageable = new PageRequest(page - 1, rows);
+		Page<Product> prodPage = service.getAll(pageable);
+
+		log.debug("getSize = {}", prodPage.getSize()); // 列數(資料筆數)
+		log.debug("getNumber = {}", prodPage.getNumber()); // 頁數-1
+		log.debug("getTotalPages() = {}", prodPage.getTotalPages()); // 總共幾頁
+		log.debug("getTotalElements = {}", prodPage.getTotalElements()); // 全部有幾筆資料
+		log.debug("getNumberOfElements = {}", prodPage.getNumberOfElements()); // 列數(資料筆數)
+		log.debug("----------------------------------------------------------");
+
+		return prodPage;
 	}
 
 	@RequestMapping("/add")
@@ -54,7 +67,7 @@ public class ProductController {
 		return "/product/productAdd";
 	}
 
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public Product insert(@RequestBody Product product) {
 		service.insert(product);
@@ -67,17 +80,18 @@ public class ProductController {
 		return "/product/productEdit";
 	}
 
-	@RequestMapping(value="/update", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public Product update(@RequestBody Product product) {
 		service.update(product);
 		return product;
 	}
 
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public String delete(@RequestBody Product product) {
 		service.delete(product.getProdId());
 		return "Success";
 	}
+
 }

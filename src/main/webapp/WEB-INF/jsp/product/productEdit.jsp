@@ -86,11 +86,7 @@
 							brandId
 						</label>
 						<div class="col-sm-8">
-							<select class="form-control" id="brandId" name="brandId">
-								<option value="1">1. 蜜妮</option>
-								<option value="2">2. 蘭蔻</option>
-								<option value="3">3. 巴黎萊雅</option>
-							</select>
+							<select class="form-control" id="brandId" name="brandId"></select>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -101,11 +97,7 @@
 							categoryId
 						</label>
 						<div class="col-sm-8">
-							<select class="form-control" id="categoryId" name="categoryId">
-								<option value="1">1. lotion</option>
-								<option value="2">2. cream</option>
-								<option value="3">3. sun protection</option>
-							</select>
+							<select class="form-control" id="categoryId" name="categoryId"></select>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -253,8 +245,32 @@
 		$(function() {
 			
 			// Set select init value
-			$('#brandId').val("${product.brandId}");		
-			$('#categoryId').val("${product.categoryId}");
+			$.ajax({
+				url: '/brands/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					var select = $('#brandId').empty();
+					for(i=0; i<response.length; i++){
+						select.append($('<option></option>').attr('value', response[i].brandId).text(i+1 + '. ' + response[i].brandName));
+					}
+					select.val("${product.brandId}");
+				}
+			});
+			
+			$.ajax({
+				url: '/categories/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					var select = $('#categoryId').empty();
+					for(i=0; i<response.length; i++){
+						select.append($('<option></option>').attr('value', response[i].categoryId).text(i+1 + '. ' + response[i].categoryName));
+					}
+					select.val("${product.categoryId}");
+				}
+			});
+			
 			$('#mainIgdt').val("${product.mainIgdt}");
 			
 			// Focus on first input
@@ -329,6 +345,8 @@
 			$('#clear').click(
 				function(){
 					$("#editForm")[0].reset();
+					$('#brandId').val("${product.brandId}");
+					$('#categoryId').val("${product.categoryId}");
 				}
 			);
 			
