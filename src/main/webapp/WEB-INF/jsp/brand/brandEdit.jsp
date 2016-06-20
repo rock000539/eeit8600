@@ -20,7 +20,7 @@ input.error {
 </head>
 <body>
 <h1>Brand EditPage</h1>
-<FORM id="editForm"  enctype="multipart/form-data">
+<FORM id="editForm"  enctype="multipart/form-data" >
 	<TABLE>
 		<TR>
 			<TD>ID：</TD>
@@ -40,7 +40,7 @@ input.error {
 		<TR>
 			<TD>LOGO：</TD>
 			<TD>
-<%-- 			<img id="imgShow" height="100" src="/brands/show?brandId=${brand.brandId}"/><br/> --%>
+			<img id="imgShow" height="100" src="/brands/show?brandId=${brand.brandId}"/><br/>
 			<input type="file" name="brandImgFile" id="brandImgFile" accept="image/*" /></TD>
 			<TD></TD>
 		</TR>
@@ -133,7 +133,9 @@ $(function(){
 					$('#website').text('Website:'+data.website);
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
 					$('#brandShow').text('顯示隱藏:'+data.brandShow);
-					$('img[name="brandImgFile"]').removeAttr('src').attr('src','/brands/show?brandId='+data.brandId);
+					var d = new Date();
+					$('#imgShow').removeAttr('src').attr('src','/brands/show?brandId='+data.brandId);
+					$('img[name="brandImgFile"]').removeAttr('src').attr('src','/brands/show?brandId='+data.brandId+'&'+d.getTime());
 				}
 				
 			});
