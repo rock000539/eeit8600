@@ -73,7 +73,7 @@ public class BrandController {
 		if (!brandImgFile.isEmpty()) {
 			try {
 				byte[] bytes = brandImgFile.getBytes();
-
+				
 				// Creating the directory to store file			
 				File dir = new File(imgPath+"/img/brand");				
 				if (!dir.exists())
@@ -135,7 +135,6 @@ public class BrandController {
 				System.out.println("Failed to upload " + brandName + " because the file was empty.");
 			}
 		}
-		
 		brandService.update(brand);
 		return brand;
 	}
