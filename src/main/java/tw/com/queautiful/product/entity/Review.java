@@ -130,7 +130,7 @@ public class Review {
 	}
 
 	public void setRewCollect(Integer rewCollect) {
-		rewCollect = rewCollect;
+		this.rewCollect = rewCollect;
 	}
 
 	public String getReviewShow() {
