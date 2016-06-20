@@ -40,7 +40,7 @@ input.error {
 		<TR>
 			<TD>LOGO：</TD>
 			<TD>
-			<img id="imgShow" height="100" src="/brands/show?brandId=${brand.brandId}"/><br/>
+			<img name="brandImgFile" height="100" src="/brands/show?brandId=${brand.brandId}"/><br/>
 			<input type="file" name="brandImgFile" id="brandImgFile" accept="image/*" /></TD>
 			<TD></TD>
 		</TR>
@@ -86,13 +86,11 @@ $(function(){
 		},
 		rules:{
 			brandName:{required:true},
-			//brandImg:'required',
 			website:{required:true,url:true},
 			bcFunc:'required'
 		},//end of rules
 		messages:{
 			brandName:'必填',
-			//brandImg:'必填',
 			website:{required:'必填',url:'請輸入正確網址格式'},
 			bcFunc:'必填'
 		},//end of messages	
@@ -105,15 +103,7 @@ $(function(){
 		//console.log(typeof($('#brandImgFile').prop('files')[0])=='undefined');
 		if($('#editForm').validate().form()){
 			var formData = new FormData();
-			var brandImgFile= $('#brandImgFile').prop('files')[0];
-			
-			//console.log(typeof(brandImgFile)!='undefined');
-			//if(typeof(brandImgFile)!='undefined'){
-				formData.append("brandImgFile", brandImgFile);
-			//}
-// 			else{
-// 				formData.append("brandImgFile", null);
-// 		    }
+			formData.append("brandImgFile", $('#brandImgFile').prop('files')[0]);
 			formData.append("brand", 
 					new Blob([JSON.stringify($("#editForm").serializeObject())],
 							{type:'application/json'}));
@@ -134,16 +124,13 @@ $(function(){
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
 					$('#brandShow').text('顯示隱藏:'+data.brandShow);
 					var d = new Date();
-					$('#imgShow').removeAttr('src').attr('src','/brands/show?brandId='+data.brandId);
-					$('img[name="brandImgFile"]').removeAttr('src').attr('src','/brands/show?brandId='+data.brandId+'&'+d.getTime());
+					$('img[name="brandImgFile"]').attr('src','/brands/show?brandId='+data.brandId+'&'+d.getTime());					
 				}
-				
 			});
 		}else{
 			alert('請依訊息更正錯誤');
 		}
-	})
-	
+	})	
 	
 	$.fn.serializeObject = function()
 	{

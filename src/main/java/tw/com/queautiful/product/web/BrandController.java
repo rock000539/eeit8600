@@ -1,9 +1,7 @@
 package tw.com.queautiful.product.web;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -16,18 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.service.BrandService;
@@ -60,83 +53,29 @@ public class BrandController {
 		return "/brand/brandEdit";
 	}
 	
-	@RequestMapping(value = "/insert"
-			//,method = RequestMethod.POST, consumes=MediaType.MULTIPART_FORM_DATA_VALUE, produces="application/json"
-			)
+	@RequestMapping("/insert")
 	@ResponseBody
 	public Brand insert(@RequestPart("brand") Brand brand,	
 			@RequestPart("brandImgFile") MultipartFile brandImgFile){	
-//		System.out.println(brand);
-//		System.out.println(brandImgFile);
-		
-		String brandName = brand.getBrandName();
-		if (!brandImgFile.isEmpty()) {
-			try {
-				byte[] bytes = brandImgFile.getBytes();
-				
-				// Creating the directory to store file			
-				File dir = new File(imgPath+"/img/brand");				
-				if (!dir.exists())
-					dir.mkdirs();
 
-				// Create the file on server
-				File file = new File(dir.getAbsolutePath()
-						+ File.separator + brandName+".png");
-				BufferedOutputStream bos = new BufferedOutputStream(
-						new FileOutputStream(file));
-				bos.write(bytes);
-				bos.close();
-
-				log.info("Server File Location=" + file.getAbsolutePath());
-				brand.setBrandImg("img/brand/" + brandName+".png");
-
-				System.out.println("Successfully uploaded file=" + brandName);
-			} catch (IOException e) {
-				System.out.println("Failed to upload " + brandName + " => " + e.getMessage());
-			}
-		} else {
-			System.out.println("Failed to upload " + brandName + " because the file was empty.");
-		}
+		brandService.saveImg(brand, brandImgFile);
 		brandService.insert(brand);
 		return brand;
+		
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
 	public Brand update(@RequestPart("brand") Brand brand, 
-			@RequestPart(value="brandImgFile") List<MultipartFile> brandImgFiles){
+			@RequestPart("brandImgFile") List<MultipartFile> brandImgFiles){
+		
 		if(!brandImgFiles.isEmpty()){
 			MultipartFile brandImgFile = brandImgFiles.get(0);
-			String brandName = brand.getBrandName();
-			
-			if(!brandImgFile.isEmpty()){
-				try {
-					byte[] bytes = brandImgFile.getBytes();
-					File dir = new File(imgPath+"/img/brand");
-					if(!dir.exists()){
-						dir.mkdirs();
-					}
-									
-					File file = new File(dir.getAbsolutePath()
-							+ File.separator + brandName+".png");
-					FileOutputStream fos = new FileOutputStream(file);
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					bos.write(bytes);
-					bos.close();
-					
-					log.info("Server File Location=" + file.getAbsolutePath());
-					brand.setBrandImg("img/brand/" + brandName+".png");
-				} catch (IOException e) {
-					System.out.println("Failed to upload " + brandName + " => " + e.getMessage());
-					e.printStackTrace();
-				}
-				
-			}else{
-				System.out.println("Failed to upload " + brandName + " because the file was empty.");
-			}
+			brandService.saveImg(brand, brandImgFile);
 		}
 		brandService.update(brand);
 		return brand;
+		
 	}
 	
 	@RequestMapping("/delete")
@@ -157,7 +96,6 @@ public class BrandController {
 			out.write(b, 0, len);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
