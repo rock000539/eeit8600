@@ -45,7 +45,7 @@ th,td{border:1px solid black;
 		<td>${review.reviewTime}</td>
 		<td>${review.rewCollect}</td>
 		<td>${review.reviewShow}</td>
-		<td><input type="button" name="edit" value="edit" onClick="Location='/reviews/edit?reviewId=${review.reviewId}'"></td>	
+		<td><input type="button" name="edit" value="edit" onClick="location='/reviews/edit?reviewId=${review.reviewId}'"></td>
 		<td><input type="button" name="delete" value="delete" onClick="location='/reviews/delete?reviewId=${review.reviewId}'"></td>
 	</tr>	
 </c:forEach>
