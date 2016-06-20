@@ -10,7 +10,7 @@
 <style>
 *{margin:5px;}
 table{
-width: 1000px;
+width: 1050px;
 border-collapse:collapse;
 }
 th,td{
@@ -24,16 +24,17 @@ text-align:center;
 	<TR>
 		<TH>編號</TH>
 		<TH>品牌</TH>
-		<TH width="50">LOGOPATH</TH>
-		<TH>LOGOIMG</TH>
-		<TH>官網</TH>
+		<TH width="50">Logo Path</TH>
+		<TH>Logo Img</TH>
+		<TH >官網</TH>
 		<TH>批號公式</TH>
 		<TH>顯示隱藏</TH>
 	</TR>
 <c:forEach var="brand" items="${brands}">
 	<TR>
 		<TD>${brand.brandId}</TD>
-		<TD>${brand.brandName}</TD>
+		<TD>${brand.brandName}</br>
+		${brand.brandCName}</TD>
 		<TD>${brand.brandImg}</TD>
 		<TD><img height="30" src="/brands/show?brandId=${brand.brandId}"></TD>
 		<TD>${brand.website}</TD>

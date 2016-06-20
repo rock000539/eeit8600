@@ -44,7 +44,7 @@ public class BrandService {
 		if(!brandImgFile.isEmpty()){
 			try {
 				byte[] bytes = brandImgFile.getBytes();
-				String path = "src/main/webapp/WEB-INF/img/brand";
+				String path = "src\\main\\webapp\\WEB-INF\\img\\brand";
 				File dir = new File(path);
 
 				if(!dir.exists())
@@ -69,5 +69,6 @@ public class BrandService {
 			System.out.println("Failed to upload " + brandName + " because the file was empty.");
 		}
 	}
+	
 	
 }

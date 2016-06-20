@@ -33,6 +33,11 @@ input.error {
 			<TD></TD>
 		</TR>
 		<TR>
+			<TD>品牌(中文名)：</TD>
+			<TD><input type="text" name="brandCName" value="${brand.brandCName}" /></TD>
+			<TD></TD>
+		</TR>
+		<TR>
 			<TD>LOGOPATH：</TD>
 			<TD><input type="text" name="brandImg" value="${brand.brandImg}" readonly='readonly' /></TD>
 			<TD></TD>
@@ -68,6 +73,7 @@ input.error {
 <div id='result'>
 <h2></h2>
 <span id="brandName"></span><br/>
+<span id="brandCName"></span><br/>
 <span id="brandImg"></span><br/>
 <span id="website"></span><br/>
 <span id="bcFunc"></span><br/>
@@ -119,7 +125,8 @@ $(function(){
 					console.log(data);
 					$('#result>h2').text('Update Success');
 					$('#brandName').text('BrandName:'+data.brandName);
-					$('#brandImg').text('Logo:'+data.brandImg);
+					$('#brandCName').text('BrandName(中文):'+data.brandCName);
+					$('#brandImg').text('LogoPath:'+data.brandImg);
 					$('#website').text('Website:'+data.website);
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
 					$('#brandShow').text('顯示隱藏:'+data.brandShow);

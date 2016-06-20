@@ -31,6 +31,11 @@ input.error {
 			<TD></TD>
 		</TR>
 		<TR>
+			<TD>品牌(中文名)：</TD>
+			<TD><input type="text" name="brandCName" value="${param.brandCName}" /></TD>
+			<TD></TD>
+		</TR>
+		<TR>
 			<TD>LOGO：</TD>
 			<TD><input type="file" name="brandImgFile" id="brandImgFile" accept="image/*"/></TD>
 			<TD></TD>
@@ -60,6 +65,7 @@ input.error {
 <div id='result'>
 <h2></h2>
 <span id="brandName"></span><br/>
+<span id="brandCName"></span><br/>
 <span id="brandImg"></span><br/>
 <span id="website"></span><br/>
 <span id="bcFunc"></span><br/>
@@ -91,7 +97,7 @@ $(function(){
 	
 	
 	$('#save').click(function(){		
-		console.log(JSON.stringify($('#addForm').serializeObject()));
+// 		console.log(JSON.stringify($('#addForm').serializeObject()));
 		if($('#addForm').validate().form()){
 			var formData = new FormData();
 			formData.append('brandImgFile',$('#brandImgFile').prop('files')[0]);
@@ -110,7 +116,8 @@ $(function(){
 					$('#addForm')[0].reset();			
 					$('#result>h2').text('Insert Success');
 					$('#brandName').text('BrandName:'+data.brandName);
-					$('#brandImg').text('Logo:'+data.brandImg);
+					$('#brandCName').text('BrandName(中文):'+data.brandCName);
+					$('#brandImg').text('LogoPath:'+data.brandImg);
 					$('#website').text('Website:'+data.website);
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
 					$('#brandShow').text('顯示隱藏:'+data.brandShow);

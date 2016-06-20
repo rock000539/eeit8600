@@ -24,6 +24,9 @@ public class Brand {
 	@Column(name = "BRANDNAME", length = 50)
 	private String brandName;
 
+	@Column(name = "BRANDCNAME", length =20)
+	private String brandCName;
+	
 	@Column(name = "BRANDIMG", length = 200)
 	private String brandImg;
 
@@ -56,6 +59,14 @@ public class Brand {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	public String getBrandCName() {
+		return brandCName;
+	}
+
+	public void setBrandCName(String brandCName) {
+		this.brandCName = brandCName;
 	}
 
 	public String getBrandImg() {

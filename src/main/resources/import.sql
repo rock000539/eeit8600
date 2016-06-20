@@ -9,11 +9,11 @@ INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('神魔之塔', 5, 40
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('爐石戰記', 4, 6000000, 'www.heartstone.com.tw')
 INSERT INTO GAME (NAME, EVALUATION, DOWNLOAD, URL) VALUES ('列王的紛爭', 3, 2000000, 'www.cok.com.tw')
 
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Biore', 'src/main/webapp/WEB-INF/img/brand/Biore.png', 'http://www.kao.com/tw/biore/' , 'biore',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Clinique', 'src/main/webapp/WEB-INF/img/brand/Clinique.png', 'http://www.clinique.com.tw/' , 'elca',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('M.A.C', 'src/main/webapp/WEB-INF/img/brand/M.A.C.png', 'https://www.maccosmetics.com.tw/' , 'elca',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Lancome', 'src/main/webapp/WEB-INF/img/brand/Lancome.png', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal',1)
-INSERT INTO BRAND (BRANDNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('L''Oreal', 'src/main/webapp/WEB-INF/img/brand/L''Oreal.png', 'http://www.loreal.com.tw/' , 'loreal',1)
+INSERT INTO BRAND (BRANDNAME, BRANDCNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Biore', '蜜妮', 'src\main\webapp\WEB-INF\img\brand\Biore.png', 'http://www.kao.com/tw/biore/' , 'biore',1)
+INSERT INTO BRAND (BRANDNAME, BRANDCNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Clinique', '倩碧', 'src\main\webapp\WEB-INF\img\brand\Clinique.png', 'http://www.clinique.com.tw/' , 'elca',1)
+INSERT INTO BRAND (BRANDNAME, BRANDCNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('M.A.C', '', 'src\main\webapp\WEB-INF\img\brand\M.A.C.png', 'https://www.maccosmetics.com.tw/' , 'elca',1)
+INSERT INTO BRAND (BRANDNAME, BRANDCNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('Lancome', '蘭蔻', 'src\main\webapp\WEB-INF\img\brand\Lancome.png', 'http://www.lancome.com.tw/lancome/_zh/_tw/index.aspx' , 'loreal',1)
+INSERT INTO BRAND (BRANDNAME, BRANDCNAME, BRANDIMG, WEBSITE, BCFUNC, BRANDSHOW) VALUES ('L''Oreal', '巴黎萊雅', 'src\main\webapp\WEB-INF\img\brand\L''Oreal.png', 'http://www.loreal.com.tw/' , 'loreal',1)
 
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('lotion','src/...')
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG) VALUES ('cream','src/...')
