@@ -171,10 +171,8 @@ public class BrandController {
 //	}
 	
 	public Map<String,String> validate(String[] data){
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		
-		return null;
-		
+		Map<String,String> errorMsg = new HashMap<String,String>();		
+		return null;		
 	}
 
 }
