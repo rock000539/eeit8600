@@ -18,8 +18,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 您已登出 
         </div>
         <form th:action="@{/login}" method="post">
-            <div><label> 帳戶 : <input type="text" name="username"/> </label></div>
-            <div><label> 密  码 : <input type="password" name="password"/> </label></div>
+            <div><label> 帳號: <input type="text" name="username"/> </label></div>
+            <div><label> 密碼 : <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="登录"/></div>
         </form>
     

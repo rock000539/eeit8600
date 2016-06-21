@@ -19,8 +19,8 @@ import org.springframework.security.web.savedrequest.*;
 import tw.com.queautiful.product.entity.*;
 import tw.com.queautiful.product.service.*;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
     @Autowired
