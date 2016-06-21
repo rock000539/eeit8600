@@ -9,8 +9,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "book_detail")
-public class BookDetail {
+@Table(name = "BOOKDETAIL")
+public class Detail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +20,14 @@ public class BookDetail {
 	@Column(name = "NUMBEROFPAGES")
 	private Integer numberOfPages;
 	
-	//@OneToOne(mappedBy="bookDetail")
+	@OneToOne(mappedBy="bookDetail")
 	private Book book;
 
-	public BookDetail() {
+	public Detail() {
 		
 	}
 
-	public BookDetail(Integer numberOfPages) {
+	public Detail(Integer numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
 
@@ -53,6 +53,11 @@ public class BookDetail {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	@Override
+	public String toString() {
+		return "BookDetail [detailId=" + detailId + ", numberOfPages=" + numberOfPages + ", book=" + book + "]";
 	}
 
 }
