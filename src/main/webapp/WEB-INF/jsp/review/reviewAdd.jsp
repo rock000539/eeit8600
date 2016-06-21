@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Reviews Add</title>
+<title>Review Add</title>
 <style>
 .error {
 	color: red;
@@ -15,7 +15,7 @@
 <script src="/src/js/jquery.validate.min.js"></script>
 </head>
 <body>
-<h2>Reviews Add</h2>
+<h2>Review Add</h2>
 	<form id="theForm" enctype="multipart/form-data">
 		<table>
 			<tr>

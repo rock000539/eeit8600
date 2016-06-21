@@ -27,7 +27,7 @@ public class ReviewCM {
 	private Long memberId;
 	
 	@Column(name="REVIEWCMSHOW")
-	private String rcmShow;
+	private Boolean rcmShow;
 	
 	@Column(name="REVIEWCMREPORT")
 	private Integer rcmReport;
@@ -64,11 +64,11 @@ public class ReviewCM {
 		this.memberId = memberId;
 	}
 
-	public String getRcmShow() {
+	public Boolean getRcmShow() {
 		return rcmShow;
 	}
 
-	public void setRcmShow(String rcmShow) {
+	public void setRcmShow(Boolean rcmShow) {
 		this.rcmShow = rcmShow;
 	}
 

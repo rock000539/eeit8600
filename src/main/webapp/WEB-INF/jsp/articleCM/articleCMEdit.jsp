@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="/src/js/jquery.validate.min.js"></script>
-<title>ReviewCM Edit</title>
+<title>ArticleCM Edit</title>
 <style>
 .error {
 	color: red;
@@ -15,48 +15,48 @@
 </style>
 </head>
 <body>
-<h1>ReviewCM Edit</h1>
+<h1>ArticleCM Edit</h1>
 <form id="theForm" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>心得留言id </td>
-				<td><input type="text" name="rcmId" value="${reviewCM.rcmId}" readonly='readonly'></td>
+				<td>文章留言id</td>
+				<td><input type="text" name="acmId" value="${articleCM.acmId}" readonly='readonly'></td>
 			</tr>
 			<tr>
-				<td>心得id</td>
-				<td><input type="text" name="reviewId" value="${reviewCM.reviewId}"></td>
+				<td>文章id</td>
+				<td><input type="text" name="articleId" value="${articleCM.articleId}"></td>
 			</tr>
 			<tr>
 				<td>內容</td>
-				<td><input type="text" name="rcmMsg" value="${reviewCM.rcmMsg}"></td>
+				<td><input type="text" name="acmMsg" value="${articleCM.acmMsg}"></td>
 			</tr>
 			<tr>
 				<td>會員id </td>
-				<td><input type="text" name="memberId" value="${reviewCM.memberId}"></td>
+				<td><input type="text" name="memberId" value="${articleCM.memberId}"></td>
 			</tr>			
 			<tr>
 				<td>顯示 </td>
-				<td><input type="text" name="rcmShow" value="${reviewCM.rcmShow}"></td>
+				<td><input type="text" name="acmShow" value="${articleCM.acmShow}"></td>
 			</tr>			
 			<tr>
 				<td>被檢舉次數</td>
-				<td><input type="text" name="rcmReport" value="${reviewCM.rcmReport}"></td>
+				<td><input type="text" name="acmReport" value="${articleCM.acmReport}"></td>
 			</tr>			
 			
 		</table>
 		<hr>
 		<input type="button" name="save" value="save" id="save"/> 
 		<input type="button" name="cancel" value="cancel" 
-				onClick="location='/reviewCMs/list'"/> 
+				onClick="location='/articleCMs/list'"/> 
 
 		<div id='result'>
 		<h2></h2>
-		<span id="rcmId"></span><br/>
-		<span id="reviewId"></span><br/>
-		<span id="rcmMsg"></span><br/>
+		<span id="acmId"></span><br/>
+		<span id="articleId"></span><br/>
+		<span id="acmMsg"></span><br/>
 		<span id="memberId"></span><br/>
-		<span id="rcmShow"></span><br/>
-		<span id="rcmReport"></span><br/>
+		<span id="acmShow"></span><br/>
+		<span id="acmReport"></span><br/>
 		</div>
 
 </form>
@@ -68,36 +68,36 @@ $(function(){
 			$(element).valid();
 		},
 		rules:{
-			reviewId:{
+			articleId:{
 				required:true,
 			},
-			rcmMsg:{
+			acmMsg:{
 				required:true,
 			},
 			memberId:{
 				required:true,
 			},
-			rcmShow:{
+			acmShow:{
 				required:true,
 			},
-			rcmReport:{
+			acmReport:{
 				required:true,
 			},
 		},//end of rules
 		messages:{
-			reviewId:{
+			articleId:{
 				required:"必填項目",
 			},
-			rcmMsg:{
+			acmMsg:{
 				required:"必填項目",
 			},
 			memberId:{
 				required:"必填項目",
 			},
-			rcmShow:{
+			acmShow:{
 				required:"必填項目",
 			},
-			rcmReport:{
+			acmReport:{
 				required:"必填項目",
 			},
 		}//end of messages	
@@ -107,7 +107,7 @@ $(function(){
 	$('#save').click(function(){
 		if($('#theForm').validate().form()){
 			$.ajax({
-				url:'/reviewCMs/update',
+				url:'/articleCMs/update',
 				type:'post',
 				contentType:'application/json;charset=utf-8',
 				data:JSON.stringify($('#theForm').serializeObject()),
@@ -116,11 +116,11 @@ $(function(){
 					console.log(data);
 					$('h2').text('Update Success');
 					
-					$('#reviewId').text('心得id='+data.reviewId);
-					$('#rcmMsg').text('內容='+data.rcmMsg);
+					$('#articleId').text('文章id='+data.articleId);
+					$('#acmMsg').text('內容='+data.acmMsg);
 					$('#memberId').text('會員id='+data.memberId);
-					$('#rcmShow').text('顯示='+data.rcmShow);
-					$('#rcmReport').text('被檢舉次數='+data.rcmReport);
+					$('#acmShow').text('顯示='+data.acmShow);
+					$('#acmReport').text('被檢舉次數='+data.acmReport);
 				}
 			});
 		}else{

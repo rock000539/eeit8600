@@ -9,50 +9,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.product.entity.ReviewCM;
-import tw.com.queautiful.product.service.ReviewCMService;
+import tw.com.queautiful.product.entity.ArticleCM;
+import tw.com.queautiful.product.service.ArticleCMService;
 
 @Controller
-@RequestMapping("/reviewCMs")
-public class ReviewCMController {
+@RequestMapping("/articleCMs")
+public class ArticleCMController {
 
 	@Autowired
-	private ReviewCMService service;
+	private ArticleCMService service;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
-		model.addAttribute("reviewCMs", service.getAll());
-		return "/reviewCM/reviewCMList";
+		model.addAttribute("articleCMs",service.getAll());
+		return"/articleCM/articleCMList";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam Long rcmId){
-		service.delete(rcmId);
-		return"redirect:/reviewCMs/list";
+	public String delete(@RequestParam Long acmId){
+		service.delete(acmId);
+		return"redirect:/articleCMs/list";
 	}
 	
 	@RequestMapping("/add")
 	public String addPage(){
-		return"/reviewCM/reviewCMAdd";
+		return"/articleCM/articleCMAdd";
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public ReviewCM insert(@RequestBody ReviewCM reviewCM){
-		service.insert(reviewCM);
-		return reviewCM;
+	public ArticleCM insert(@RequestBody ArticleCM articleCM){
+		service.insert(articleCM);
+		return articleCM;
 	}
 	
 	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long rcmId,Model model){
-		model.addAttribute("reviewCM", service.getById(rcmId));
-		return "/reviewCM/reviewCMEdit";
+	public String editPage(@RequestParam Long acmId,Model model){
+		model.addAttribute("articleCM", service.getById(acmId));
+		return"/articleCM/articleCMEdit";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
-	public ReviewCM update(@RequestBody ReviewCM reviewCM){
-		service.update(reviewCM);
-		return reviewCM;
+	public ArticleCM update(@RequestBody ArticleCM articleCM){
+		service.update(articleCM);
+		return articleCM;
 	}
 }

@@ -1,103 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
-<title>ReviewCM Edit</title>
+<title>ArticleCM Add</title>
 <style>
 .error {
 	color: red;
 	font-style: italic;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="/src/js/jquery.validate.min.js"></script>
 </head>
 <body>
-<h1>ReviewCM Edit</h1>
-<form id="theForm" enctype="multipart/form-data">
+<h1>ArticleCM Add</h1>
+	<form id="theForm" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>心得留言id </td>
-				<td><input type="text" name="rcmId" value="${reviewCM.rcmId}" readonly='readonly'></td>
-			</tr>
-			<tr>
-				<td>心得id</td>
-				<td><input type="text" name="reviewId" value="${reviewCM.reviewId}"></td>
+				<td>文章id</td>
+				<td><input type="text" name="articleId" value="${param.articleId}"></td>
 			</tr>
 			<tr>
 				<td>內容</td>
-				<td><input type="text" name="rcmMsg" value="${reviewCM.rcmMsg}"></td>
+				<td><input type="text" name="acmMsg" value="${param.acmMsg}"></td>
 			</tr>
 			<tr>
-				<td>會員id </td>
-				<td><input type="text" name="memberId" value="${reviewCM.memberId}"></td>
-			</tr>			
+				<td>會員id</td>
+				<td><input type="text" name="memberId" value="${param.memberId}"></td>
+			</tr>
 			<tr>
-				<td>顯示 </td>
-				<td><input type="text" name="rcmShow" value="${reviewCM.rcmShow}"></td>
-			</tr>			
+				<td>顯示</td>
+				<td><input type="text" name="acmShow" value="${param.acmShow}"></td>
+			</tr>
 			<tr>
 				<td>被檢舉次數</td>
-				<td><input type="text" name="rcmReport" value="${reviewCM.rcmReport}"></td>
-			</tr>			
-			
+				<td><input type="text" name="acmReport" value="${param.acmReport}"></td>
+			</tr>
 		</table>
-		<hr>
+		<hr />
 		<input type="button" name="save" value="save" id="save"/> 
 		<input type="button" name="cancel" value="cancel" 
-				onClick="location='/reviewCMs/list'"/> 
-
+				onClick="location='/articleCMs/list'"/> 
+		
 		<div id='result'>
 		<h2></h2>
-		<span id="rcmId"></span><br/>
-		<span id="reviewId"></span><br/>
-		<span id="rcmMsg"></span><br/>
+		<span id="articleId"></span><br/>
+		<span id="acmMsg"></span><br/>
 		<span id="memberId"></span><br/>
-		<span id="rcmShow"></span><br/>
-		<span id="rcmReport"></span><br/>
+		<span id="acmShow"></span><br/>
+		<span id="acmReport"></span><br/>
 		</div>
-
-</form>
+	</form>
 <script type="text/javascript">
 $(function(){
-	$(':text:eq(1)').focus();
+	$(':text:first').focus();
 	$('#theForm').validate({
 		onfocusout : function(element){
 			$(element).valid();
 		},
 		rules:{
-			reviewId:{
+			articleId:{
 				required:true,
 			},
-			rcmMsg:{
+			acmMsg:{
 				required:true,
 			},
 			memberId:{
 				required:true,
 			},
-			rcmShow:{
+			acmShow:{
 				required:true,
 			},
-			rcmReport:{
+			acmReport:{
 				required:true,
 			},
 		},//end of rules
 		messages:{
-			reviewId:{
+			articleId:{
 				required:"必填項目",
 			},
-			rcmMsg:{
+			acmMsg:{
 				required:"必填項目",
 			},
 			memberId:{
 				required:"必填項目",
 			},
-			rcmShow:{
+			acmShow:{
 				required:"必填項目",
 			},
-			rcmReport:{
+			acmReport:{
 				required:"必填項目",
 			},
 		}//end of messages	
@@ -105,22 +98,24 @@ $(function(){
 	
 
 	$('#save').click(function(){
+		console.log(JSON.stringify($('#theForm').serializeObject()));
 		if($('#theForm').validate().form()){
 			$.ajax({
-				url:'/reviewCMs/update',
+				url:'/articleCMs/insert',
 				type:'post',
 				contentType:'application/json;charset=utf-8',
 				data:JSON.stringify($('#theForm').serializeObject()),
 				dataType:'json',
 				success:function(data){
 					console.log(data);
-					$('h2').text('Update Success');
+					$(':text').val("");
+					$('h2').text('Insert Success');
 					
-					$('#reviewId').text('心得id='+data.reviewId);
-					$('#rcmMsg').text('內容='+data.rcmMsg);
+					$('#articleId').text('文章id='+data.articleId);
+					$('#acmMsg').text('內容='+data.acmMsg);
 					$('#memberId').text('會員id='+data.memberId);
-					$('#rcmShow').text('顯示='+data.rcmShow);
-					$('#rcmReport').text('被檢舉次數='+data.rcmReport);
+					$('#acmShow').text('顯示='+data.acmShow);
+					$('#acmReport').text('被檢舉次數='+data.acmReport);
 				}
 			});
 		}else{
