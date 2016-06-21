@@ -1,6 +1,7 @@
 package tw.com.queautiful.product.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class CategoryController {
 	public String listPage(Model model){
 		model.addAttribute("categories", service.getAll());
 		return "/category/categoryList";
+	}
+	
+	@RequestMapping("/select")
+	@ResponseBody
+	public List<Category> select() {
+		return service.getAll();
 	}
 	
 	@RequestMapping("/delete")

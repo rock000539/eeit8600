@@ -42,6 +42,12 @@ public class BrandController {
 		return "/brand/brandList";
 	}
 	
+	@RequestMapping("/select")
+	@ResponseBody
+	public List<Brand> select() {
+		return brandService.getAll();
+	}
+	
 	@RequestMapping("/add")
 	public String addPage(){
 		return "/brand/brandAdd";
