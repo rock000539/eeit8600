@@ -119,7 +119,7 @@ $(function(){
 			//type=file
 			formData.append("brandImgFile", $('#brandImgFile').prop('files')[0]);
 			
-			//type=text--> 表單序列化 + 設定格式為json
+			//type=text--> now Blob ([表單序列化] , {設定格式為json})
 			formData.append("brand", 
 					new Blob([JSON.stringify($("#editForm").serializeObject())],
 							{type:'application/json'}));
