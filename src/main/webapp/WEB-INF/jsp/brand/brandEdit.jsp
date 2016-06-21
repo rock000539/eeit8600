@@ -86,6 +86,7 @@ input.error {
 $(function(){
 	$('#'+$('#brandShowStatus').val()).attr("checked",true);
 	
+	// 驗證表單資料
 	$('#editForm').validate({
 		onfocusout: function(element){
 			$(element).valid();
@@ -103,13 +104,22 @@ $(function(){
 	});
 	
 	
-	
 	$('#save').click(function(){
 		//console.log($('#brandImgFile').prop('files')[0]);
 		//console.log(typeof($('#brandImgFile').prop('files')[0])=='undefined');
+		
+		//if表單驗證通過(true)	
 		if($('#editForm').validate().form()){
+			
+			//create一個空的FormData
 			var formData = new FormData();
+			console.log(formData)
+			
+			//append表單資料
+			//type=file
 			formData.append("brandImgFile", $('#brandImgFile').prop('files')[0]);
+			
+			//type=text--> 表單序列化 + 設定格式為json
 			formData.append("brand", 
 					new Blob([JSON.stringify($("#editForm").serializeObject())],
 							{type:'application/json'}));
@@ -117,6 +127,7 @@ $(function(){
 			$.ajax({
 				url:'/brands/update',
 				type:'post',
+				//contentType 和 processData都要設為false
 				contentType: false,
 				processData: false,
 				data:formData,
@@ -130,6 +141,7 @@ $(function(){
 					$('#website').text('Website:'+data.website);
 					$('#bcFunc').text('BatchCodeFunction:'+data.bcFunc);			
 					$('#brandShow').text('顯示隱藏:'+data.brandShow);
+					//避免圖片被cache, 在圖片src後面加上"時間"
 					var d = new Date();
 					$('img[name="brandImgFile"]').attr('src','/brands/show?brandId='+data.brandId+'&'+d.getTime());					
 				}
