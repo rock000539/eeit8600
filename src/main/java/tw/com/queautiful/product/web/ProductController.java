@@ -57,7 +57,7 @@ public class ProductController {
 		log.debug("getTotalPages() = {}", prodPage.getTotalPages()); // 總共幾頁
 		log.debug("getTotalElements = {}", prodPage.getTotalElements()); // 全部有幾筆資料
 		log.debug("getNumberOfElements = {}", prodPage.getNumberOfElements()); // 列數(資料筆數)
-		log.debug("----------------------------------------------------------");
+		log.debug("----------------------------------------------------------"); // 測試
 
 		return prodPage;
 	}
