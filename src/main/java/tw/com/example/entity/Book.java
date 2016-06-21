@@ -25,13 +25,13 @@ public class Book {
 
 	@Column(name = "NAME", length = 50)
 	private String name;
-	
+
 	@OneToOne
-	@JoinColumn(name="detailId")
-	private Detail bookDetail;
+	@JoinColumn(name = "detailId")
+	private Detail detail;
 	
 	@ManyToOne
-	@JoinColumn(name="categoryId")
+	@JoinColumn(name = "categoryId")
 	private Category category;
 
 	@ManyToMany
@@ -45,16 +45,16 @@ public class Book {
 	public Book(String name) {
 		this.name = name;
 	}
-	
-	public Book(String name, Detail bookDetail){
-        this.name = name;
-        this.bookDetail = bookDetail;
-    }
-	
+
+	public Book(String name, Detail detail) {
+		this.name = name;
+		this.detail = detail;
+	}
+
 	public Book(String name, Category category) {
-        this.name = name;
-        this.category = category;
-    }
+		this.name = name;
+		this.category = category;
+	}
 
 	public Book(String name, Set<Publisher> publishers) {
 		this.name = name;
@@ -76,16 +76,16 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Detail getBookDetail() {
-		return bookDetail;
+
+	public Detail getDetail() {
+		return detail;
 	}
 
-	public void setBookDetail(Detail bookDetail) {
-		this.bookDetail = bookDetail;
+	public void setDetail(Detail detail) {
+		this.detail = detail;
 	}
-	
-	public Category getBookCategory() {
+
+	public Category getCategory() {
 		return category;
 	}
 
@@ -103,8 +103,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", name=" + name + ", bookDetail=" + bookDetail + ", Category="
-				+ category + ", publishers=" + publishers + "]";
+		return "Book [bookId=" + bookId + ", name=" + name + ", category=" + category + "]";
 	}
 
 }

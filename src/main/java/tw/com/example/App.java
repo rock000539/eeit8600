@@ -1,7 +1,9 @@
 package tw.com.example;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -30,7 +32,7 @@ public class App implements CommandLineRunner {
 
 	@Autowired
 	private DetailDao detailDao;
-	
+
 	@Autowired
 	private CategoryDao categoryDao;
 
@@ -44,51 +46,57 @@ public class App implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... strings) throws Exception {
-		
-		// OneToOne Example
-//		// save a couple of bookDetails
-//		List<Detail> details = new ArrayList<>();
-//		details.add(new Detail(49));
-//		details.add(new Detail(59));
-//		details.add(new Detail(69));
-//		detailDao.save(details);
-//		
-//		// save a couple of books
-//        List<Book> books = new ArrayList<>();
-//        // 新增時就寫入FK
-//        books.add(new Book("Book A", DetailDao.findOne(1)));
-//        books.add(new Book("Book B", DetailDao.findOne(2))); 
-//        books.add(new Book("Book C"));
-//        bookDao.save(books);
-//
-//        // 修改時才寫入FK
-//        Book bookC = bookDao.findOne(3L);
-//        bookC.setBookDetail(DetailDao.findOne(3));
-//        bookDao.save(bookC);
-//
-//        // fetch all books
-//        for (Book book : bookDao.findAll()) {
-//            logger.info("{}", book.getBookDetail().toString());
-//        }
-		
+
+		// // OneToOne Example
+		// // save a couple of bookDetails
+		// List<Detail> details = new ArrayList<>();
+		// details.add(new Detail(49));
+		// details.add(new Detail(59));
+		// details.add(new Detail(69));
+		// detailDao.save(details);
+		//
+		// // save a couple of books
+		// List<Book> books = new ArrayList<>();
+		// // 新增時就寫入FK
+		// books.add(new Book("Book A", detailDao.findOne(1)));
+		// books.add(new Book("Book B", detailDao.findOne(2)));
+		// books.add(new Book("Book C"));
+		// bookDao.save(books);
+		//
+		// // 修改時才寫入FK
+		// Book bookC = bookDao.findOne(3L);
+		// bookC.setDetail(detailDao.findOne(3));
+		// bookDao.save(bookC);
+		//
+		// // fetch all books
+		// for (Book book : bookDao.findAll()) {
+		// logger.info("{}", book.toString());
+		// }
+
 		// OneToMany / ManyToOne
 		List<Category> categories = new ArrayList<>();
 		categories.add(new Category("category1"));
 		categories.add(new Category("category2"));
 		categories.add(new Category("category3"));
 		categoryDao.save(categories);
-		
+
 		// save a couple of books
-//		List<Book> books = new ArrayList<>();
-//		books.add(new Book("Book A", categoryDao.findOne(1)));
-//	    books.add(new Book("Book B", categoryDao.findOne(2))); 
-//	    books.add(new Book("Book C", categoryDao.findOne(3)));
-//	    bookDao.save(books);
-		
+		List<Book> books = new ArrayList<>();
+		books.add(new Book("Book A", categoryDao.findOne(1)));
+		books.add(new Book("Book B", categoryDao.findOne(1)));
+		books.add(new Book("Book C", categoryDao.findOne(1)));
+		bookDao.save(books);
+
+		// fetch all books
+		for (Book book : bookDao.findAll()) {
+			logger.info("{}", book);
+		}
+
 		// fetch all categories
-        for (Category category : categoryDao.findAll()) {
-            logger.info(category.toString());
-        }
+		for (Category category : categoryDao.findAll()) {
+			logger.info(category.toString());
+		}
+		
 	}
 
 }

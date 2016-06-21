@@ -20,11 +20,11 @@ public class Detail {
 	@Column(name = "NUMBEROFPAGES")
 	private Integer numberOfPages;
 	
-	@OneToOne(mappedBy="bookDetail")
+	@OneToOne(mappedBy = "detail")
 	private Book book;
 
 	public Detail() {
-		
+
 	}
 
 	public Detail(Integer numberOfPages) {
@@ -46,7 +46,7 @@ public class Detail {
 	public void setNumberOfPages(Integer numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
-
+	
 	public Book getBook() {
 		return book;
 	}
@@ -57,7 +57,7 @@ public class Detail {
 
 	@Override
 	public String toString() {
-		return "BookDetail [detailId=" + detailId + ", numberOfPages=" + numberOfPages + ", book=" + book + "]";
+		return "Detail [detailId=" + detailId + ", numberOfPages=" + numberOfPages + ", book=" + book + "]";
 	}
 
 }
