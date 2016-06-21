@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="/src/js/jquery.validate.min.js"></script>
-<title>Categories Edit</title>
+<title>Category Edit</title>
 <style>
 .error {
 	color: red;
@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<h1>Categories Edit</h1>
+<h1>Category Edit</h1>
 	<form id="theForm" enctype="multipart/form-data">
 		<table>
 			<tr>

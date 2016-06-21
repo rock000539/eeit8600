@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="/src/js/jquery.validate.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Categories Add</title>
+<title>Category Add</title>
 <style>
 .error {
 	color: red;
@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<h2>Categories Add</h2>
+<h2>Category Add</h2>
 	<form id="theForm" enctype="multipart/form-data">
 		<table>
 			<tr>
@@ -27,7 +27,7 @@
 
 			<tr>
 				<td>PIC</td>
-				<td><input type="file" name="categoryImg" value="${param.categoryImg}"></td>\
+				<td><input type="file" name="categoryImg" value="${param.categoryImg}"></td>
 				<td><input type="button" id="start" value="上傳" /></td>
 				<td style="color: red;">${errorMsg.categoryImg}</td>
 			</tr>
