@@ -47,8 +47,8 @@ this is list
 	<td>${items.mfd}</td> 
 	<td>${items.exp}</td> 	
 	<td>${items.product.prodImg}</td>
-	<td><input type="button" name="edit" value="edit" id="edit" ></td>
-	<td><input type="submit" name="${items.expDate.dateId}" value="delete" class="delete" ></td>
+	<td><input type="button" name="edit" value="edit" id="edit" onclick='location="/expdate/edit?dateId=${items.expDate.dateId}"'></td>
+	<td><input type="button" name="${items.expDate.dateId}" value="delete" class="delete" ></td>
 	
 </tr>
 </c:forEach>

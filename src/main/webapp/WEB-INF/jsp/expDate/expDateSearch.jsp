@@ -14,7 +14,7 @@
 <style>
 table {
 	margin: 10px;
-	border: 2px solid red;
+	
 }
 
 td {
@@ -46,7 +46,7 @@ td {
 
 					$('#mfd').empty().prepend(data.mfdDate);
 					$('#exp').empty().prepend(data.expDate);
-
+					$('#proList').empty();
 					for(var i=0;i<data.productList.length;i++){
 						var prodName=data.productList[i].prodName;
 						var prodImg=data.productList[i].prodImg
@@ -56,7 +56,7 @@ td {
 	'</td><td><input type="button" class="saveDate" name='+data.productList[i].prodId+' value="加入最愛"/></td>')     
 	   }
 
- //-------------------------------------------------
+ //-------------------------------------------------登入問題尚未解決
 	 	$('.saveDate').click(function (e){
 		var prodId=e.target.name;
 
@@ -68,7 +68,8 @@ td {
 				"mfdStr":data.mfdDate,
 				"expStr":data.expDate
 			},
-			success : function(date){alert(date);}
+			success : function(date){alert(date);
+			$('#proList').empty();}
 		});		
         })
  //------------------------------------------------      
