@@ -6,14 +6,14 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>ProductList</title>
 	
 	<!-- Header、NavBar js、css -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/sb-admin-2.js"></script>
 	
-	<!-- jqGrdi js、css -->
+	<!-- jqGrid js、css -->
     <script type="text/ecmascript" src="/js/trirand/i18n/grid.locale-tw.js"></script>
     <script type="text/ecmascript" src="/js/trirand/jquery.jqGrid.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
