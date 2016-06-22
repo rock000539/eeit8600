@@ -11,26 +11,42 @@
 		color: red;
 	}
 </style>
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/metisMenu.min.css" rel="stylesheet">
-<link href="/css/sb-admin-2.css" rel="stylesheet">
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/css/bms-customize.css" rel="stylesheet" >
-
-<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
-<script src='/js/bootstrap-datetimepicker.min.js'></script>
-
-<script	src="/js/bootstrap.min.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
-
-	<!-- DatePicker 
-	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
-	<link rel="stylesheet" href="/css/bootstrap-dialog.min.css" />
-    <script src="/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
-    <script src="/js/bootstrap-dialog.min.js"></script>-->
+	<!-- Header, NavBar -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/metisMenu.min.css" rel="stylesheet">
+	<link href="/css/sb-admin-2.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/bms-customize.css" rel="stylesheet" >
+	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/sb-admin-2.js"></script>
+	
+	<!-- BootStrap 基本檔案  -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<!-- 表單驗證  -->
+	<script 
+		src="/js/jquery.validate.min.js"></script>
+	
+	<!-- DatePicker -->
+	<link rel="stylesheet" 
+		href="/css/bootstrap-datetimepicker.min.css" />
+    <script
+    	src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script
+    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+    	
+    <link rel="stylesheet" 
+		href="/css/bootstrap-dialog.min.css" />
+    <script
+    	src="/js/bootstrap-dialog.min.js"></script>
+    	
+    <script src="/js/metisMenu.min.js"></script>
+    
 </head>
 <body>
 <div id="wrapper">
@@ -44,83 +60,69 @@
                 <h1 class="page-header">Member AddPage</h1>
                 <!-- **每頁不同的內容從這裡開始** -->
 
-<div id="header"></div>
-	<form id="addForm" method="POST">
-		<table>
-			<tr>
-				<td>電子信箱</td>
-				<td><input type="text" name="email"
-					value="${member.email}"></td>
-			</tr>
-			<tr>
-				<td>密碼</td>
-				<td><input type="text" name="password"
-					value="${member.password}"></td>
-			</tr>
-			<tr>
-				<td>暱稱</td>
-				<td><input type="text" name="nickname"
-					value="${member.nickname}"></td>
-			</tr>
-			<tr>
-				<td>姓</td>
-				<td><input type="text" name="lastName"
-					value="${member.lastName}"></td>
-			</tr>
-			<tr>
-				<td>名</td>
-				<td><input type="text" name="firstName"
-					value="${member.firstName}"></td>
-			</tr>
-<tr>
-				<td>性別</td>
-				<td><input type="radio" name="gender"
-					value="M" ${member.gender=='M'? 'checked':''}>男
-					<input type="radio" name="gender"
-					value="F" ${member.gender=='F'? 'checked':''}>女</td>
-			</tr>
-			<tr>
-				<td>生日</td>
-				<td><input type="text" name="birthDay" id="datetimepicker"
-					value="${member.birthDay}"></td>
-			</tr>
-			<tr>
-				<td>肌膚性質</td>
-				<td><input type="text" name="skinType"
-					value="${member.skinType}"></td>
-			</tr>
-			<tr>
-				<td>圖片</td>
-				<td><input type="file" name="memberImgFile" id="memberImgFile"
-					value=""></td>
-			</tr>
-			<tr>
-				<td>電話</td>
-				<td><input type="text" name="phone"
-					value="${member.phone}"></td>
-			</tr>
-			<tr>
-				<td>地址</td>
-				<td><input type="text" name="addr"
-					value="${member.addr}"></td>
-			</tr>
-			<tr>
-				<td>停權</td>
-				<td><input type="text" name="memberSuspend"
-					value="${member.memberSuspend}"></td>
-			</tr>
-			<tr>
-				<td>停權到期日</td>
-				<td><input type="text" name="memberSuspendExp"
-					value="${member.memberSuspendExp}"></td>
-			</tr>
-		</table>
-		<div>
-			<br> <input type="button" id="insertBtn" name="insert"
-				value="insert">
-				 <input type="button" name="cancel"
-				value="Cancel" onclick='window.location="/members/list"'><br>
-		</div>
+<form accept-charset="UTF-8" class="form-horizontal" id="addForm">
+	<div class="form-group">
+	    <label for="email">電子信箱</label>
+	    <input type="text" class="form-control" id="email" name="email" value="${member.email}">
+	</div>
+	<div class="form-group">
+	    <label for="password">密碼</label>
+	    <input type="text" class="form-control" id="password" name="password" value="${member.password}">
+	</div>
+	<div class="form-group">
+	    <label for="nickname">暱稱</label>
+	    <input type="text" class="form-control" id="nickname" name="nickname" value="${member.nickname}">
+	</div>
+	<div class="form-group">
+	    <label for="lastName">姓</label>
+	    <input type="text" class="form-control" id="lastName" name="lastName" value="${member.lastName}">
+	</div>
+	<div class="form-group">
+	    <label for="firstName">名</label>
+	    <input type="text" class="form-control" id="firstName" name="firstName" value="${member.firstName}">
+	</div>
+	<div class="form-group">
+	    <label class="radio-inline">
+	    <input type="radio" name="gender" value="${member.gender=='M'? 'checked':''}"> 男
+	    </label>
+	    <label class="radio-inline">
+	    <input type="radio" name="gender" value="${member.gender=='F'? 'checked':''}"> 女
+		</label>
+	</div>
+	<div class="form-group">
+	    <label for="birthDay">生日</label>
+	    <input type="text" class="form-control" id="birthDay" name="birthDay" value="${member.birthDay}">
+	</div>
+	<div class="form-group">
+	    <label for="skinType">肌膚性質</label>
+	    <input type="text" class="form-control" id="skinType" name="skinType" value="${member.skinType}">
+	</div>
+	<div class="form-group">
+	    <label for="memberImgFile">圖片</label>
+	    <input type="file" class="form-control" id="memberImgFile" name="memberImgFile" value="${member.memberImgFile}">
+	</div>
+	<div class="form-group">
+	    <label for="phone">電話</label>
+	    <input type="text" class="form-control" id="phone" name="phone" value="${member.phone}">
+	</div>
+	<div class="form-group">
+	    <label for="addr">地址</label>
+	    <input type="text" class="form-control" id="addr" name="addr" value="${member.addr}">
+	</div>
+	<div class="form-group">
+	    <label for="memberSuspend">停權</label>
+	    <input type="text" class="form-control" id="memberSuspend" name="memberSuspend" value="${member.memberSuspend}">
+	</div>
+	<div class="form-group">
+	    <label for="memberSuspendExp">停權到期日</label>
+	    <input type="text" class="form-control" id="memberSuspendExp" name="memberSuspendExp" value="${member.memberSuspendExp}">
+	</div>
+	<div>
+		<input type="button" id="insertBtn" name="insert"
+		value="insert">
+		 <input type="button" name="cancel"
+		value="Cancel" onclick='window.location="/members/list"'>
+	</div>
 	</form>
 	<br>
 	<div id="resultMsg"></div>
@@ -143,12 +145,15 @@
 
 <script type="text/javascript">
 	$(function() {
-/*		$('#datetimepicker').datetimepicker(
-           {
-           	format: 'yyyy-mm-dd',
-           	autoclose: true,
-           	minView: 2,
-	    });
+		// DateTimePicker
+        $('#datetimepicker').datetimepicker(
+        {
+        	format: 'yyyy-mm-dd',
+        	autoclose: true,
+        	minView: 2,
+        });
+		
+/*		
 		
 		$('#addForm').validate(
 			{event: "blur",
@@ -236,9 +241,5 @@
 	});	
 </script>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/metisMenu.min.js"></script>
-<script src="/js/sb-admin-2.js"></script>
 </body>
 </html>

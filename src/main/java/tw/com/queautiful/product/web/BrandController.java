@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -29,15 +33,27 @@ public class BrandController {
 	private BrandService brandService;
 
 	@RequestMapping("/list")
-	public String listPage(Model model) {
-		model.addAttribute("brands", brandService.getAll());
-		return "/brand/brandList";
+	public String listPage(
+			//Model model
+			) {
+		//model.addAttribute("brands", brandService.getAll());
+		return "/brand/brandListjqGrid";
 	}
 
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Brand> select() {
 		return brandService.getAll();
+	}
+	
+	@RequestMapping("/select_jqgrid")
+	@ResponseBody
+	public Page<Brand> select(@RequestParam(required=false) Integer page,
+			@RequestParam(required=false) Integer rows){
+		
+		Pageable pageble = new PageRequest(page-1, rows);
+		Page<Brand> brandPages = brandService.getAll(pageble);
+		return brandPages;		
 	}
 
 	@RequestMapping("/add")
@@ -94,9 +110,9 @@ public class BrandController {
 	}
 
 	@RequestMapping("/delete")
-	public String delete(@RequestParam Long brandId) {
-		brandService.delete(brandId);
-		return "redirect:/brands/list";
+	@ResponseBody
+	public void delete(@RequestBody Brand brand) {
+		brandService.delete(brand.getBrandId());
 	}
 
 	@RequestMapping("/show")
