@@ -37,7 +37,7 @@ public class BrandController {
 			//Model model
 			) {
 		//model.addAttribute("brands", brandService.getAll());
-		return "/brand/brandListjqGrid";
+		return "/brand/brandList";
 	}
 
 	@RequestMapping("/select")

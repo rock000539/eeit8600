@@ -37,7 +37,7 @@ public class Brand {
 	private String bcFunc;
 
 	@Column(name = "BRANDSHOW")
-	private boolean brandShow;
+	private Boolean brandShow;
 
 //	@OneToMany
 //	private List<Product> products;
@@ -93,11 +93,11 @@ public class Brand {
 		this.bcFunc = bcFunc;
 	}
 
-	public boolean isBrandShow() {
+	public Boolean getBrandShow() {
 		return brandShow;
 	}
 
-	public void setBrandShow(boolean brandShow) {
+	public void setBrandShow(Boolean brandShow) {
 		this.brandShow = brandShow;
 	}
 
