@@ -25,6 +25,12 @@ public class ReviewController {
 		return "/review/reviewList";
 	}
 	
+	@RequestMapping("/listgrid")
+	public String listGridPage(Model model){
+		model.addAttribute("reviews", service.getAll());
+		return "/review/reviewListGrid";
+	}
+	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam Long reviewId){
 		service.delete(reviewId);
