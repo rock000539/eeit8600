@@ -83,13 +83,13 @@ $(function(){
 	    },
 		rules:{
 			//brandName:{required:true},
-			brandImgFile:'required',
+			//brandImgFile:'required',
 			website:{required:true,url:true},
 			bcFunc:'required'
 		},//end of rules
 		messages:{
 			//brandName:'必填',
-			brandImgFile:'必填',
+			//brandImgFile:'必填',
 			website:{required:'必填',url:'請輸入正確網址格式'},
 			bcFunc:'必填'
 		},//end of messages
