@@ -34,6 +34,12 @@
 		$.jgrid.defaults.width = 780;
 	</script>
 	
+	<style>
+		.ui-th-column {
+			text-align: center;
+		}
+	</style>
+	
 </head>
 <body>
 	
@@ -91,6 +97,7 @@
 					    name: '',
 					    width: 100,
 					    align: 'center',
+					    resizable: false,
 					    formatter: 'actions',
 					    formatoptions: {
 					        keys: true,
@@ -123,8 +130,9 @@
 					{ 
 						label: 'ID',
 						name: 'prodId',
-						width: 40,
+						width: 50,
 						align: 'center',
+						resizable: false,
 						key: true,
 					},
 					{ 
@@ -132,48 +140,56 @@
 						name: 'prodName',
 						width: 80,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'BID', 
 						name: 'brandId', 
 						width: 40,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'CID', 
 						name: 'categoryId', 
 						width: 40,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Weight', 
 						name: 'weight', 
 						width: 50,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Score', 
 						name: 'score', 
 						width: 50,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Price', 
 						name: 'price', 
 						width: 60,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Capacity', 
 						name: 'capacity', 
 						width: 60,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Date', 
 						name: 'launchDate', 
 						width: 90,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'ProdDesc', 
@@ -187,18 +203,21 @@
 						name: 'mainIgdt', 
 						width: 80,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Concn', 
 						name: 'concentration', 
 						width: 90,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
 						label: 'Img', 
 						name: 'prodImg', 
 						width: 80,
 						align: 'center',
+						resizable: false,
 					}
                 ],
                 width: 'auto', // 寬度
@@ -210,6 +229,7 @@
 				loadonce: false, // 資料是否只載入一次
 				viewrecords: true, // 右下角的 1-10 共n條
 				pager: '#jqGridPager',
+				sortable: false,
 				beforeRequest: function () {
                     responsive_jqgrid($(".jqGrid"));
                 }
