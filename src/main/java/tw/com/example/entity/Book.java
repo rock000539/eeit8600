@@ -31,7 +31,7 @@ public class Book {
 	private Detail detail;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "CATEGORYID")
 	private Category category;
 
 	@ManyToMany
