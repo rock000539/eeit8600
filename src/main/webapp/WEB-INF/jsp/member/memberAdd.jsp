@@ -6,21 +6,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member AddPage</title>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
 <style>
-.error {
-	color: red;
-}
+	.error {
+		color: red;
+	}
 </style>
-
-<script>
-</script>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/metisMenu.min.css" rel="stylesheet">
 <link href="/css/sb-admin-2.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/css/bms-customize.css" rel="stylesheet" >
+
+<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+<script src='/js/bootstrap-datetimepicker.min.js'></script>
+
+<script	src="/js/bootstrap.min.js"></script>
+<script src="/src/js/jquery.validate.min.js"></script>
+
+	<!-- DatePicker 
+	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="/css/bootstrap-dialog.min.css" />
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+    <script src="/js/bootstrap-dialog.min.js"></script>-->
 </head>
 <body>
 <div id="wrapper">
@@ -35,7 +45,7 @@
                 <!-- **每頁不同的內容從這裡開始** -->
 
 <div id="header"></div>
-	<form id="addForm" action="/members/insert" method="POST" enctype="multipart/form-data">
+	<form id="addForm" method="POST">
 		<table>
 			<tr>
 				<td>電子信箱</td>
@@ -71,7 +81,7 @@
 			</tr>
 			<tr>
 				<td>生日</td>
-				<td><input type="text" name="birthDay"
+				<td><input type="text" name="birthDay" id="datetimepicker"
 					value="${member.birthDay}"></td>
 			</tr>
 			<tr>
@@ -81,7 +91,7 @@
 			</tr>
 			<tr>
 				<td>圖片</td>
-				<td><input type="file" name="memberImgFile"
+				<td><input type="file" name="memberImgFile" id="memberImgFile"
 					value=""></td>
 			</tr>
 			<tr>
@@ -106,7 +116,7 @@
 			</tr>
 		</table>
 		<div>
-			<br> <input type="submit" id="insertBtn" name="insert"
+			<br> <input type="button" id="insertBtn" name="insert"
 				value="insert">
 				 <input type="button" name="cancel"
 				value="Cancel" onclick='window.location="/members/list"'><br>
@@ -115,6 +125,7 @@
 	<br>
 	<div id="resultMsg"></div>
 	<div id="data"></div>
+	<img name="memberImgFile" width="100">
 	
 <!-- **每頁不同的內容 end** -->
             </div>
@@ -131,10 +142,18 @@
 
 
 <script type="text/javascript">
-/*	$(function() {
+	$(function() {
+/*		$('#datetimepicker').datetimepicker(
+           {
+           	format: 'yyyy-mm-dd',
+           	autoclose: true,
+           	minView: 2,
+	    });
+		
 		$('#addForm').validate(
-			{rules:{
-				email:{required:true},
+			{event: "blur",
+			 rules:{
+				email:{required:true, email:true},
 				nickname:{required:true},
 				lastName:{required:true},
 				firstName:{required:true},
@@ -161,16 +180,19 @@
 				memberSuspendExp:""
 			}}
 		);
-
+*/
 		$('#insertBtn').on('click',function() {
-			var validate=$('#addForm').validate().form();
-			if(validate){
+			var formdata = new FormData(); 
+			formdata.append('memberImgFile', $('#memberImgFile').prop('files')[0]); 
+			formdata.append('member', new Blob([JSON.stringify($('#addForm').serializeObject())],
+							{type: 'application/json'})); 			
 			$.ajax({
-				url : "/members/update",
+				url : "/members/insert",
 				type : "POST",
-				//contentType : 'multipart/form-data',
-				//dataType : "json",
-				data : $('form').serialize(),
+				contentType : false,
+				processData : false, 
+				data : formdata,
+				dataType: 'json',
 				success : function(result) {
 				//$(':text:gt(0)').val(" ");//clear the form except id
 				$('#resultMsg').empty().append("<h2>update success</h2>");
@@ -191,10 +213,8 @@
 				$('<td></td>').text(result.addr).appendTo(row);
 				$('<td></td>').text(result.memberSuspend).appendTo(row);
 				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
-				//	$('#data').children().addClass("temp1");
 										}
 									});
-			}else{$('#resultMsg').empty().append("資料格式不正確");}
 		});
 
 		$.fn.serializeObject = function() {
@@ -213,7 +233,7 @@
 			return o;
 		};
 
-	});	*/
+	});	
 </script>
 
 <script src="/js/jquery.min.js"></script>

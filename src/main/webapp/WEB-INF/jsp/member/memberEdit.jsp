@@ -30,7 +30,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">DashBoard</h1>
                 <!-- **每頁不同的內容從這裡開始** -->
-	<form id="editForm" action="/members/update" method="POST" enctype="multipart/form-data">
+	<form id="editForm" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>ID</td>
@@ -41,6 +41,11 @@
 				<td>電子信箱</td>
 				<td><input type="text" name="email"
 					value="${member.email}"></td>
+			</tr>
+			<tr>
+				<td>密碼</td>
+				<td><input type="text" name="password"
+					value="${member.password}"></td>
 			</tr>
 			<tr>
 				<td>暱稱</td>
@@ -76,7 +81,7 @@
 			</tr>
 			<tr>
 				<td>圖片</td>
-				<td><input type="file" name="memberImgFile"
+				<td><input type="file" name="memberImgFile" id="memberImgFile"
 					value=""></td>
 			</tr>
 			<tr>
@@ -101,8 +106,7 @@
 			</tr>
 		</table>
 		<div>
-			<br> <input type="submit" id="editBtn" name="update"
-				value="update">
+			<br> <input type="button" id="editBtn" name="update" value="update">
 				 <input type="button" name="cancel"
 				value="Cancel" onclick='window.location="/members/list"'><br>
 		</div>
@@ -125,8 +129,8 @@
 	
 
 <script type="text/javascript">
-/*	$(function() {
-		$('#editForm').validate(
+	$(function() {
+/*		$('#editForm').validate(
 			{rules:{
 				email:{required:true},
 				nickname:{required:true},
@@ -155,41 +159,46 @@
 				memberSuspendExp:""
 			}}
 		);
-
+*/
 		$('#editBtn').on('click',function() {
-			var validate=$('#editForm').validate().form();
-			if(validate){
+			
+			var formdata = new FormData(); 
+			formdata.append('memberImgFile', $('#memberImgFile').prop('files')[0]); 
+			formdata.append('member', new Blob([JSON.stringify($('#editForm').serializeObject())],
+							{type: 'application/json'}));  	
+			console.log(formdata);
 			$.ajax({
 				url : "/members/update",
 				type : "POST",
-				//contentType : 'multipart/form-data',
-				//dataType : "json",
-				data : $('form').serialize(),
+				contentType : false,
+				processData : false, 
+				data : formdata,
+				dataType: 'json',
 				success : function(result) {
-				//$(':text:gt(0)').val(" ");//clear the form except id
-				$('#resultMsg').empty().append("<h2>update success</h2>");
-				var tb = $('#data').append('<table></table>');
-				tb.empty();
-				tb.append('<tr align="center"><td>ID</td><td>電子信箱</td><td>暱稱</td><td>姓</td><td>名</td><td>性別</td><td>生日</td><td>肌膚性質</td><td>圖片</td><td>電話</td><td>地址</td><td>停權</td><td>停權到期日</td></tr>');
-				var row = $('<tr align="center"></tr>').appendTo(tb);
-				$('<td></td>').text(result.memberId).appendTo(row);
-				$('<td></td>').text(result.nickname).appendTo(row);
-				$('<td></td>').text(result.ingredChName).appendTo(row);
-				$('<td></td>').text(result.lastName).appendTo(row);
-				$('<td></td>').text(result.firstName).appendTo(row);
-				$('<td></td>').text(result.gender).appendTo(row);
-				$('<td></td>').text(result.birthDay).appendTo(row);
-				$('<td></td>').text(result.skinType).appendTo(row);
-				$('<td></td>').text(result.memberImg).appendTo(row);
-				$('<td></td>').text(result.phone).appendTo(row);
-				$('<td></td>').text(result.addr).appendTo(row);
-				$('<td></td>').text(result.memberSuspend).appendTo(row);
-				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
-				//	$('#data').children().addClass("temp1");
-										}
-									});
-			}else{$('#resultMsg').empty().append("資料格式不正確");}
-		});
+					console.log(result);
+					//$(':text:gt(0)').val(" ");//clear the form except id
+					$('#resultMsg').empty().append("<h2>update success</h2>");
+					var tb = $('#data').append('<table></table>');
+					tb.empty();
+					tb.append('<tr align="center"><td>ID</td><td>電子信箱</td><td>暱稱</td><td>姓</td><td>名</td><td>性別</td><td>生日</td><td>肌膚性質</td><td>圖片</td><td>電話</td><td>地址</td><td>停權</td><td>停權到期日</td></tr>');
+					var row = $('<tr align="center"></tr>').appendTo(tb);
+					$('<td></td>').text(result.memberId).appendTo(row);
+					$('<td></td>').text(result.nickname).appendTo(row);
+					$('<td></td>').text(result.ingredChName).appendTo(row);
+					$('<td></td>').text(result.lastName).appendTo(row);
+					$('<td></td>').text(result.firstName).appendTo(row);
+					$('<td></td>').text(result.gender).appendTo(row);
+					$('<td></td>').text(result.birthDay).appendTo(row);
+					$('<td></td>').text(result.skinType).appendTo(row);
+					$('<td></td>').text(result.memberImg).appendTo(row);
+					$('<td></td>').text(result.phone).appendTo(row);
+					$('<td></td>').text(result.addr).appendTo(row);
+					$('<td></td>').text(result.memberSuspend).appendTo(row);
+					$('<td></td>').text(result.memberSuspendExp).appendTo(row);
+				}
+			});//result
+			
+		}); //onclick
 
 		$.fn.serializeObject = function() {
 			var o = {};
@@ -207,7 +216,7 @@
 			return o;
 		};
 
-	});	*/
+	});	
 </script>
 
 <script src="/js/jquery.min.js"></script>
