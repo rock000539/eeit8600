@@ -1,8 +1,8 @@
 package tw.com.example.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,15 +17,15 @@ import javax.persistence.Table;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CATEGORYID")
 	private Integer categoryId;
 
 	@Column(name = "NAME")
 	private String name;
-	
-	@OneToMany(mappedBy = "category", fetch=FetchType.EAGER)
-	private Set<Book> books = new HashSet<>();
+
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Book> books;
 
 	public Category() {
 
@@ -50,7 +50,7 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Set<Book> getBooks() {
 		return books;
 	}
@@ -61,18 +61,16 @@ public class Category {
 
 	@Override
 	public String toString() {
-		String result = String.format(
-                "Category[id=%d, name='%s']",
-                categoryId, name);
-        if (books != null) {
-            for(Book book : books) {
-                result += String.format(
-                        " Book[id=%d, name='%s']",
-                        book.getBookId(), book.getName());
-            }
-        }
+		String result = String.format("Category[id=%d, name='%s']", categoryId, name);
+		if (books != null) {
+			for (Book book : books) {
+				result += String.format(" Book[id=%d, name='%s']", book.getBookId(), book.getName());
+			}
+		} else {
+			result += " Books is null";
+		}
 
-        return result;
+		return result;
 	}
 
 }

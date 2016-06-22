@@ -27,7 +27,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-
+	
 	@RequestMapping("/list")
 	public String listPage() {
 		return "/product/productList";
@@ -89,9 +89,8 @@ public class ProductController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public String delete(@RequestBody Product product) {
+	public void delete(@RequestBody Product product) {
 		service.delete(product.getProdId());
-		return "Success";
 	}
 
 }

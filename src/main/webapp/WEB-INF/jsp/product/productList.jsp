@@ -5,69 +5,97 @@
 <html>
 <head>
 
-	<script src="/js/jquery.min.js"></script> 
-    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
-    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
-    
-    <!-- BootStrap -->
-<!--     <script src="/js/bootstrap.min.js"></script>  -->
-<!--     <link rel="stylesheet" href="/css/bootstrap.min.css">  -->
-<!--     <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" /> -->
-    
-    <!-- jQuery UI -->
-    <link rel="stylesheet" href="<c:url value='/css/jquery-ui.min.css'/>" />
-	<link rel="stylesheet" href="<c:url value='/css/trirand/ui.jqgrid.css'/>" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	
+	<!-- Header、NavBar js、css -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/sb-admin-2.js"></script>
+	
+	<!-- jqGrdi js、css -->
+    <script type="text/ecmascript" src="/js/trirand/i18n/grid.locale-tw.js"></script>
+    <script type="text/ecmascript" src="/js/trirand/jquery.jqGrid.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/trirand/ui.jqgrid-bootstrap.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<script src="/js/metisMenu.min.js"></script>
+	
+	<!-- Header、NavBar js、css -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/metisMenu.min.css" rel="stylesheet">
+	<link href="/css/sb-admin-2.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/bms-customize.css" rel="stylesheet" >
 	
 	<script>
 		$.jgrid.defaults.width = 780;
-		$.jgrid.defaults.responsive = true;
 	</script>
-
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ProductList</title>
+	
 </head>
 <body>
-
-	<div style="margin-left:20px">
-	  	<table id="jqGrid"></table>
-	    <div id="jqGridPager"></div>
+	
+	<!-- 內文全部用wrapper包起來 -->
+	<div id="wrapper">
+	
+	<!-- 加入上方及側邊Nav-Bar -->
+	<c:import url="../bms_header.jsp" />
+	<c:import url="../bms_navbar-side.jsp" />
+	
+	<!-- Page Content --> 
+	<div id="page-wrapper">
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <!-- **每頁不同的內容從這裡開始** -->
+	                
+	                <div id="grid" class="jqGrid" style="margin-top:20px">
+					    <table id="jqGrid"></table>
+					    <div id="jqGridPager"></div>
+					</div>
+	                
+	                <!-- **每頁不同的內容 end** -->
+	            </div>
+	            <!-- /.col-lg-12 -->
+	        </div>
+	        <!-- /.row -->
+	    </div>
+	    <!-- /.container-fluid -->
 	</div>
-
-	<script type="text/javascript">
+	<!-- /#page-wrapper -->
+	
+	</div>
+	<!-- /#wrapper -->
+	
+    <script type="text/javascript">
     
-	    $(function () {
+        $(function () {
 			
-	    	$.ajax({
-				url: '/products/select_jqgrid?page=1&rows=10',
-				type: 'GET',
-				dataType: 'json',
-				success:function(response){
-					console.log(response);
-				}
-			});
-	    	
-	    	// jQuery Grid
-			$('#jqGrid').jqGrid({
-				url: '/products/select_jqgrid',
-				datatype: 'json',
-				jsonReader: {
+            $("#jqGrid").jqGrid({
+                url: '/products/select_jqgrid',
+                mtype: "GET",
+				styleUI : 'Bootstrap',
+                datatype: "json",
+                jsonReader: {
 					root: "content",
 			      	page: "number"+1, 
 			      	total: "totalPages", 
 			      	records: "totalElements", 
 				    repeatitems: false,
 			    },
-				colModel: [ // 定義各列的具體格式, 請參考 http://goo.gl/lph9u
+                colModel: [
 					{
 						label: '',
 					    name: '',
-					    width: 60,
+					    width: 100,
+					    align: 'center',
 					    formatter: 'actions',
 					    formatoptions: {
 					        keys: true,
 					        editbutton : true,
 					        delbutton : true,
-					        editformbutton: true,
+					        editformbutton: false,
 					        // 各項option請參考 http://goo.gl/FV6iq
 					        editOptions: {
 					            beforeShowForm: function() {
@@ -92,28 +120,28 @@
 					    }       
 					},
 					{ 
-						label: 'ProdID',
+						label: 'ID',
 						name: 'prodId',
-						width: 50,
+						width: 40,
 						align: 'center',
 						key: true,
 					},
 					{ 
-						label: 'ProdName',
+						label: 'Name',
 						name: 'prodName',
 						width: 80,
 						align: 'center',
 					},
 					{ 
-						label: 'BrandID', 
+						label: 'BID', 
 						name: 'brandId', 
-						width: 60,
+						width: 40,
 						align: 'center',
 					},
 					{ 
-						label: 'CategoryID', 
+						label: 'CID', 
 						name: 'categoryId', 
-						width: 70,
+						width: 40,
 						align: 'center',
 					},
 					{ 
@@ -141,7 +169,7 @@
 						align: 'center',
 					},
 					{ 
-						label: 'LaunchDate', 
+						label: 'Date', 
 						name: 'launchDate', 
 						width: 90,
 						align: 'center',
@@ -151,6 +179,7 @@
 						name: 'prodDesc', 
 						width: 80,
 						align: 'center',
+						hidden: true,
 					},
 					{ 
 						label: 'MainIgdt', 
@@ -159,19 +188,19 @@
 						align: 'center',
 					},
 					{ 
-						label: 'Concentration', 
+						label: 'Concn', 
 						name: 'concentration', 
 						width: 90,
 						align: 'center',
 					},
 					{ 
-						label: 'ProdImg', 
+						label: 'Img', 
 						name: 'prodImg', 
 						width: 80,
 						align: 'center',
 					}
-				],
-				width: 'auto', // 寬度
+                ],
+                width: 'auto', // 寬度
 				height: 250, // 高度
 				rowNum: 10, // 每頁顯示列數
 				rownumbers: true, // 第n列
@@ -180,9 +209,12 @@
 				loadonce: false, // 資料是否只載入一次
 				viewrecords: true, // 右下角的 1-10 共n條
 				pager: '#jqGridPager',
-			});
-			
-	    	// jQuery Grid Navigator
+				beforeRequest: function () {
+                    responsive_jqgrid($(".jqGrid"));
+                }
+            });
+            
+         	// jQuery Grid Navigator
 			$('#jqGrid').navGrid('#jqGridPager', 
 			// the buttons to appear on the toolbar of the grid
 			// 請參考 http://goo.gl/gBYXSe
@@ -234,11 +266,22 @@
 	        		$('#trv_').remove();
 	        	},
 			});
-			
-	    	// Change Caption Position (TitleBar)
+         	
+			// Change Caption Position (TitleBar)
 			$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
-		});
-   
+        });
+        
+        // jqGrid RWD
+        function responsive_jqgrid(jqgrid) {
+            jqgrid.find('.ui-jqgrid').addClass('clear-margin span12').css('width', '');
+            jqgrid.find('.ui-jqgrid-view').addClass('clear-margin span12').css('width', '');
+            jqgrid.find('.ui-jqgrid-view > div').eq(1).addClass('clear-margin span12').css('width', '').css('min-height', '0');
+            jqgrid.find('.ui-jqgrid-view > div').eq(2).addClass('clear-margin span12').css('width', '').css('min-height', '0');
+            jqgrid.find('.ui-jqgrid-sdiv').addClass('clear-margin span12').css('width', '');
+            jqgrid.find('.ui-jqgrid-pager').addClass('clear-margin span12').css('width', '');
+        }
+ 
    </script>
+	
 </body>
 </html>

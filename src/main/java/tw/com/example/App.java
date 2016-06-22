@@ -1,9 +1,7 @@
 package tw.com.example;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -47,7 +45,7 @@ public class App implements CommandLineRunner {
 	@Transactional
 	public void run(String... strings) throws Exception {
 
-		// // OneToOne Example
+		// // @OneToOne Example
 		// // save a couple of bookDetails
 		// List<Detail> details = new ArrayList<>();
 		// details.add(new Detail(49));
@@ -73,18 +71,18 @@ public class App implements CommandLineRunner {
 		// logger.info("{}", book.toString());
 		// }
 
-		// OneToMany / ManyToOne
+		// @OneToMany / @ManyToOne Example
 		List<Category> categories = new ArrayList<>();
-		categories.add(new Category("category1"));
-		categories.add(new Category("category2"));
-		categories.add(new Category("category3"));
+		categories.add(new Category("category4"));
+		categories.add(new Category("category5"));
+		categories.add(new Category("category6"));
 		categoryDao.save(categories);
 
 		// save a couple of books
 		List<Book> books = new ArrayList<>();
-		books.add(new Book("Book A", categoryDao.findOne(1)));
-		books.add(new Book("Book B", categoryDao.findOne(1)));
-		books.add(new Book("Book C", categoryDao.findOne(1)));
+		books.add(new Book("bookD", categoryDao.findOne(1)));
+		books.add(new Book("bookE", categoryDao.findOne(1)));
+		books.add(new Book("bookF", categoryDao.findOne(1)));
 		bookDao.save(books);
 
 		// fetch all books
@@ -94,9 +92,11 @@ public class App implements CommandLineRunner {
 
 		// fetch all categories
 		for (Category category : categoryDao.findAll()) {
-			logger.info(category.toString());
+			logger.info("{}", category.toString());
 		}
-		
+
+		// @ManyToMany Example
+
 	}
 
 }
