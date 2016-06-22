@@ -14,12 +14,13 @@
 	<script src="/js/sb-admin-2.js"></script>
 	
 	<!-- jqGrid js、css -->
-    <script type="text/ecmascript" src="/js/trirand/i18n/grid.locale-tw.js"></script>
-    <script type="text/ecmascript" src="/js/trirand/jquery.jqGrid.min.js"></script>
+    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
+    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
     <link rel="stylesheet" type="text/css" media="screen" href="/css/trirand/ui.jqgrid-bootstrap.css" />
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
+	<!-- 一定要放在jqGrid的後面  -->
 	<script src="/js/metisMenu.min.js"></script>
 	
 	<!-- Header、NavBar js、css -->
