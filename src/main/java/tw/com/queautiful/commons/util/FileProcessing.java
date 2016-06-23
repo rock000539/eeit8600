@@ -20,11 +20,11 @@ public class FileProcessing {
 	//存圖片
 	//傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
 	//傳回檔案儲存的路徑
-	public static String saveImg(String imgName, String folderName, MultipartFile brandImgFile){
+	public static String saveImg(String imgName, String folderName, MultipartFile multipartFile){
 		String imgPath = null;
-		if(!brandImgFile.isEmpty()){
+		if(!multipartFile.isEmpty()){
 			try {
-				byte[] bytes = brandImgFile.getBytes();
+				byte[] bytes = multipartFile.getBytes();
 				File dir = new File( path + folderName );
 
 				if(!dir.exists())

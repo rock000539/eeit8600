@@ -97,9 +97,9 @@
 			},
 			colModel:[
 				{
-					label:'edit delete',
+					label:'',
 					name: '',
-					width:90,
+					width:75,
 					align: 'center',
 					formatter:'actions',
 					formatoptions:{
@@ -136,28 +136,28 @@
 				{
 					label: 'BrandID',
 					name: 'brandId',
-					width: 60,
+					width: 80,
 					align: 'center',
 					key: true,											
 				},
 				{
 					label: 'BrandName',
 					name: 'brandName',
-					width: 80,
+					width: 100,
 					align: 'center',
 					//editable:true
 				},
 				{
 					label: 'BrandCName',
 					name: 'brandCName',
-					width: 80,
+					width: 110,
 					align: 'center'	
 				},
 				{
 					label: 'brandImgPath',
 					name: 'brandImg',
-					width: 120,
-					align: 'center'							
+					width: 350,
+					//align: 'center'							
 				},
 				{
 					label: 'Logo',
@@ -173,8 +173,8 @@
 				{
 					label: 'website',
 					name: 'website',
-					width: 120,
-					align: 'center'	
+					width: 250,
+					//align: 'center'	
 				},
 				{
 					label: 'bcFunc',
@@ -185,13 +185,14 @@
 				{
 					label: 'brandShow',
 					name: 'brandShow',
-					width: 80,
+					width: 100,
 					align: 'center'	
 				}
 	          
 			],
-			width: 'auto', // 寬度
+			width: 950, // 寬度
 			height: 250, // 高度
+			shrinkToFit: false,
 			rowNum: 3, // 每頁顯示列數
 			rownumbers: true, // 第n列
 			rownumWidth: 35, // 第n列寬度
