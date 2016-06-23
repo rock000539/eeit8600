@@ -56,9 +56,6 @@ public class Product {
 	
 	@Column(name="PRODIMG", length=100)
 	private String prodImg;
-	
-	@Transient
-	private MultipartFile prodImgFile;
 
 	public Long getProdId() {
 		return prodId;
@@ -164,11 +161,4 @@ public class Product {
 		this.prodImg = prodImg;
 	}
 	
-	public MultipartFile getProdImgFile() {
-		return prodImgFile;
-	}
-	
-	public void setProdImgFile(MultipartFile prodImgFile) {
-		this.prodImgFile = prodImgFile;
-	}
 }

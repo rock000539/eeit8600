@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ProductService;
 
@@ -67,9 +70,19 @@ public class ProductController {
 		return "/product/productAdd";
 	}
 
+//	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Product insert(@RequestBody Product product) {
+//		service.insert(product);
+//		return product;
+//	}
+	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public Product insert(@RequestBody Product product) {
+	public Product insert(@RequestPart Product product, @RequestPart MultipartFile prodImgFile) {
+		String prodName = product.getProdName();
+		String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
+		product.setProdImg(prodImg);
 		service.insert(product);
 		return product;
 	}
