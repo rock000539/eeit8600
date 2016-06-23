@@ -39,12 +39,17 @@
     	src="/js/bootstrap-datetimepicker.min.js"></script>
     <script
     	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
-    	
+    
+    <!-- Dialog -->
     <link rel="stylesheet" 
 		href="/css/bootstrap-dialog.min.css" />
     <script
     	src="/js/bootstrap-dialog.min.js"></script>
     	
+    <!-- FileInput -->
+    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
+    <script src="/js/fileinput.min.js"></script>
+    
     <script src="/js/metisMenu.min.js"></script>
     
 </head>
@@ -59,71 +64,121 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Member AddPage</h1>
                 <!-- **每頁不同的內容從這裡開始** -->
-
+<div class="col-md-8">
 <form accept-charset="UTF-8" class="form-horizontal" id="addForm">
 	<div class="form-group">
-	    <label for="email">電子信箱</label>
-	    <input type="text" class="form-control" id="email" name="email" value="${member.email}">
+	    <label class="col-sm-2 control-label" for="email">電子信箱</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="email" 
+	    		name="email" value="${member.email}">
+		</div>
 	</div>
 	<div class="form-group">
-	    <label for="password">密碼</label>
-	    <input type="text" class="form-control" id="password" name="password" value="${member.password}">
+	    <label class="col-sm-2 control-label" for="password">密碼</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="password" 
+	    		name="password" value="${member.password}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="nickname">暱稱</label>
-	    <input type="text" class="form-control" id="nickname" name="nickname" value="${member.nickname}">
+	    <label class="col-sm-2 control-label" for="nickname">暱稱</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="nickname" 
+	    		name="nickname" value="${member.nickname}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="lastName">姓</label>
-	    <input type="text" class="form-control" id="lastName" name="lastName" value="${member.lastName}">
+	    <label class="col-sm-2 control-label" for="lastName">姓</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="lastName" 
+	    		name="lastName" value="${member.lastName}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="firstName">名</label>
-	    <input type="text" class="form-control" id="firstName" name="firstName" value="${member.firstName}">
+	    <label class="col-sm-2 control-label" for="firstName">名</label>
+	    <div class="col-sm-10">
+		    <input type="text" class="form-control" id="firstName" 
+		    	name="firstName" value="${member.firstName}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="radio-inline">
-	    <input type="radio" name="gender" value="${member.gender=='M'? 'checked':''}"> 男
-	    </label>
-	    <label class="radio-inline">
-	    <input type="radio" name="gender" value="${member.gender=='F'? 'checked':''}"> 女
-		</label>
+		<label class="col-sm-2 control-label" for="firstName">性別</label>
+		<div class="col-sm-10">
+	    	<label class="radio-inline">
+		    <input type="radio"
+		    	name="gender" value="M" ${member.gender=='M'? 'checked':''}> 男性
+		    </label>
+		    <label class="radio-inline">
+		    <input type="radio"
+		    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
+			</label>
+		</div>
+	</div>
+											
+	<div class="form-group">
+	    <label class="col-sm-2 control-label" for="birthDay">生日</label>
+	    <div class="col-sm-10">
+	    	<div class="input-group date" id="datetimepicker">
+			    <input type="text" class="form-control" id="birthDay" 
+			    	name="birthDay" value="${member.birthDay}">
+			    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+			</div>
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="birthDay">生日</label>
-	    <input type="text" class="form-control" id="birthDay" name="birthDay" value="${member.birthDay}">
+	    <label class="col-sm-2 control-label" for="skinType">肌膚性質</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="skinType" 
+	    		name="skinType" value="${member.skinType}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="skinType">肌膚性質</label>
-	    <input type="text" class="form-control" id="skinType" name="skinType" value="${member.skinType}">
+	    <label class="col-sm-2 control-label" for="memberImgFile">大頭貼照</label>
+	    <div class="col-sm-10">
+	    	<input type="file" id="memberImgFile" 
+	    		name="memberImgFile" value="${member.memberImgFile}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="memberImgFile">圖片</label>
-	    <input type="file" class="form-control" id="memberImgFile" name="memberImgFile" value="${member.memberImgFile}">
+	    <label class="col-sm-2 control-label" for="phone">電話</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="phone" 
+	    		name="phone" value="${member.phone}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="phone">電話</label>
-	    <input type="text" class="form-control" id="phone" name="phone" value="${member.phone}">
+	    <label class="col-sm-2 control-label" for="addr">地址</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="addr" 
+	    		name="addr" value="${member.addr}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="addr">地址</label>
-	    <input type="text" class="form-control" id="addr" name="addr" value="${member.addr}">
+	    <label class="col-sm-2 control-label" for="memberSuspend">停權</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="memberSuspend" 
+	    		name="memberSuspend" value="${member.memberSuspend}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="memberSuspend">停權</label>
-	    <input type="text" class="form-control" id="memberSuspend" name="memberSuspend" value="${member.memberSuspend}">
+	    <label class="col-sm-2 control-label" for="memberSuspendExp">停權到期日</label>
+	    <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="memberSuspendExp" 
+	    		name="memberSuspendExp" value="${member.memberSuspendExp}">
+	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="memberSuspendExp">停權到期日</label>
-	    <input type="text" class="form-control" id="memberSuspendExp" name="memberSuspendExp" value="${member.memberSuspendExp}">
+	    <div class="col-sm-offset-2 col-sm-10">
+	      <input type="button" id="insertBtn" name="insert"
+			value="insert">
+		  <input type="button" name="cancel"
+			value="Cancel" onclick='window.location="/members/list"'>
+	    </div>
 	</div>
-	<div>
-		<input type="button" id="insertBtn" name="insert"
-		value="insert">
-		 <input type="button" name="cancel"
-		value="Cancel" onclick='window.location="/members/list"'>
-	</div>
-	</form>
+</form>
+</div>
 	<br>
 	<div id="resultMsg"></div>
 	<div id="data"></div>
@@ -145,6 +200,8 @@
 
 <script type="text/javascript">
 	$(function() {
+		$('#email').focus();
+		
 		// DateTimePicker
         $('#datetimepicker').datetimepicker(
         {

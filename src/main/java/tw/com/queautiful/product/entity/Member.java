@@ -27,12 +27,12 @@ public class Member {
 	
 	@Column(name="NICKNAME", length=50)
 	private String nickname;
+
+	@Column(name="FIRSTNAME", length=50)
+	private String firstName;
 	
 	@Column(name="LASTNAME", length=50)
 	private String lastName;
-	
-	@Column(name="FIRSTNAME", length=50)
-	private String firstName;
 	
 	@Column(name="GENDER", length=10)
 	private String gender;
@@ -53,10 +53,13 @@ public class Member {
 	private String addr;
 	
 	@Column(name="MEMBERSUSPEND")
-	private Integer memberSuspend;
+	private Boolean memberSuspend;
 	
 	@Column(name="MEMBERSUSPENDEXP")
 	private java.sql.Date memberSuspendExp;
+	
+	@Column(name="MEMBERREGIDATE")
+	private java.sql.Date memberRegiDate;
 	
 	@Transient
 	private MultipartFile memberImgFile;
@@ -173,11 +176,11 @@ public class Member {
 		this.addr = addr;
 	}
 
-	public Integer getMemberSuspend() {
+	public Boolean getMemberSuspend() {
 		return memberSuspend;
 	}
 
-	public void setMemberSuspend(Integer memberSuspend) {
+	public void setMemberSuspend(Boolean memberSuspend) {
 		this.memberSuspend = memberSuspend;
 	}
 
@@ -187,6 +190,14 @@ public class Member {
 
 	public void setMemberSuspendExp(java.sql.Date memberSuspendExp) {
 		this.memberSuspendExp = memberSuspendExp;
+	}
+
+	public java.sql.Date getMemberRegiDate() {
+		return memberRegiDate;
+	}
+
+	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+		this.memberRegiDate = memberRegiDate;
 	}
 	
 	

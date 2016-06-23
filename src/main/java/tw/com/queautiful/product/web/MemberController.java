@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.Member;
+import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
@@ -32,6 +36,27 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
+	// 提供jqGrid抓取資料使用
+	@RequestMapping("/select_jqgrid")
+	@ResponseBody
+	public Page<Member> select(@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer rows) {
+
+		log.debug("page = {}", page);
+		log.debug("rows = {}", rows);
+
+		Pageable pageable = new PageRequest(page - 1, rows);
+		Page<Member> memberPage = service.getAll(pageable);
+		log.debug(memberPage.toString());
+		log.debug("getSize = {}", memberPage.getSize()); // 列數(資料筆數)
+		log.debug("getNumber = {}", memberPage.getNumber()); // 頁數-1
+		log.debug("getTotalPages() = {}", memberPage.getTotalPages()); // 總共幾頁
+		log.debug("getTotalElements = {}", memberPage.getTotalElements()); // 全部有幾筆資料
+		log.debug("getNumberOfElements = {}", memberPage.getNumberOfElements()); // 列數(資料筆數)
+		log.debug("----------------------------------------------------------"); // 測試
+		return memberPage;
+	}
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
