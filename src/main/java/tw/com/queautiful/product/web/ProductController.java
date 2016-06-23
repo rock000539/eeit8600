@@ -2,6 +2,8 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +106,12 @@ public class ProductController {
 	@ResponseBody
 	public void delete(@RequestBody Product product) {
 		service.delete(product.getProdId());
+	}
+	
+	@RequestMapping("/show")
+	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
+		String prodImg = service.getById(prodId).getProdImg();
+		FileProcessing.showImg(resp, prodImg);
 	}
 
 }

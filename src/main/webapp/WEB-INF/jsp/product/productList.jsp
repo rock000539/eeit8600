@@ -221,6 +221,17 @@
 						align: 'center',
 						resizable: false,
 					},
+					{
+						label: 'Logo',
+			            name: '',
+			            width: 100,
+			            fixed: true,
+			            formatter: function (cellvalue, options, rowObject) {
+			            	var str = '/products/show?prodId='+ rowObject.prodId;
+			                return "<img height='30' src=" + str + " />";
+			            },
+						align: 'center'
+			        },
 					{ 
 						label: 'Img', 
 						name: 'prodImg', 
