@@ -1,27 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
-<!-- <script src="/src/js/jquery.ui.widget.js"></script> -->
-<!-- <script src="/src/js/jquery.iframe-transport.js"></script> -->
-<!-- <script src="/src/js/jquery.fileupload.js"></script> -->
-<title>Brand AddPage</title>
-<style>
-.error {
-	color: red;
-	font-style: italic;
-}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Brand AddPage</title>
+	
+	<!-- Header, NavBar -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/metisMenu.min.css" rel="stylesheet">
+	<link href="/css/sb-admin-2.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/bms-customize.css" rel="stylesheet" >
+	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/sb-admin-2.js"></script>
+	
+	<!-- BootStrap 基本檔案  -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<!-- 表單驗證  -->
+	<script 
+		src="/js/jquery.validate.min.js"></script>
+	
+	<!-- DatePicker -->
+	<link rel="stylesheet" 
+		href="/css/bootstrap-datetimepicker.min.css" />
+    <script
+    	src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script
+    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+    
+    <!-- Dialog -->
+    <link rel="stylesheet" 
+		href="/css/bootstrap-dialog.min.css" />
+    <script
+    	src="/js/bootstrap-dialog.min.js"></script>
+    	
+    <!-- FileInput -->
+    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
+    <script src="/js/fileinput.min.js"></script>
+    
+    <script src="/js/metisMenu.min.js"></script>
+    <!-- <script src="/src/js/jquery.ui.widget.js"></script> -->
+	<!-- <script src="/src/js/jquery.iframe-transport.js"></script> -->
+	<!-- <script src="/src/js/jquery.fileupload.js"></script> -->
+	
+	<style>
+		.col-md-6 {
+			margin-top: 20px;
+		}
+		.error {
+			color: red;
+			font-style: italic;
+		}
+		input.error {
+			border: 1px red solid;
+		}
+		.panel {
+			margin-top: 20px;
+		}
+		textarea {
+		    resize: none;
+		}
+	</style>
+	
+</head>
 
-input.error {
-	border: 1px red solid;
-}
-</style>
 </head>
 <body>
+<!-- 內文全部用wrapper包起來 -->
+<div id="wrapper">
+
+<!-- 加入上方及側邊Nav-Bar -->	
+<c:import url="../bms_header.jsp" />
+<c:import url="../bms_navbar-side.jsp" />
+<!-- ?? url有沒有更好的寫法 ?? -->
+
+
+<!-- Page Content --> 
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">DashBoard</h1>   <!-- **內文中的標題，請修改** -->
+                <!-- **每頁不同的內容從這裡開始** -->
+                
 <h1>Brand AddPage</h1>
 <FORM id="addForm" enctype="multipart/form-data" action="/brands/insert" method="post">
 	<TABLE>
@@ -72,7 +142,19 @@ input.error {
 <span id="brandShow"></span><br/>
 <img name="brandImgFile" width="100">
 </div>
+                
+                <!-- **每頁不同的內容 end** -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
 
+</div>
+<!-- /#wrapper -->
 <script>
 
 $(function(){
@@ -149,6 +231,6 @@ $(function(){
 });
 
 </script>
-
 </body>
 </html>
+

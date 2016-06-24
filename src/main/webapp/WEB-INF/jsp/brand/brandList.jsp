@@ -6,32 +6,49 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>BrandList JQGrid</title>
+	<title>Brand ListPage</title>
 	
-	<!-- Header、NavBar js、css -->
+	<!-- Header、NavBar js -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/sb-admin-2.js"></script>
 	
-	<!-- jqGrdi js、css -->
-    <script type="text/ecmascript" src="/js/trirand/i18n/grid.locale-tw.js"></script>
-    <script type="text/ecmascript" src="/js/trirand/jquery.jqGrid.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/trirand/ui.jqgrid-bootstrap.css" />
+	<!-- jqGrid js、css -->
+    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
+    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
 	
+	<!-- 一定要放在jqGrid的js後面  -->
 	<script src="/js/metisMenu.min.js"></script>
 	
-	<!-- Header、NavBar js、css -->
+	<!-- Header、NavBar css -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/metisMenu.min.css" rel="stylesheet">
 	<link href="/css/sb-admin-2.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/bms-customize.css" rel="stylesheet" >
 	
+	<!-- 一定要放在Header、NavBar css的後面  -->
+    <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
+	
 	<script>
-		$.jgrid.defaults.width = 1000;
+		$.jgrid.defaults.width = 780;
 	</script>
+	
+	<style>
+		.ui-th-column {
+			text-align: center;
+		}
+		.center .ui-jqgrid {
+    		margin-left: auto;
+    		margin-right: auto;
+		}
+/* 		.ui-jqgrid tr.jqgrow td { */
+/* 			line-height: 50px; */
+/* 			text-align: center; */
+/* 		} */
+	</style>
 	
 </head>
 <body>
@@ -190,7 +207,7 @@
 				}
 	          
 			],
-			width: 950, // 寬度
+			width: 'auto', // 寬度
 			height: 250, // 高度
 			shrinkToFit: false,
 			rowNum: 3, // 每頁顯示列數
@@ -200,6 +217,10 @@
 			loadonce: false, // 資料是否只載入一次  --> 設false就無法使用搜尋功能
 			viewrecords: true, // 右下角的 1-10 共n條
 			pager: '#jqGridPager',
+			sortable: false,
+			beforeRequest: function () {
+                 responsive_jqgrid($(".jqGrid"));
+             }
 		
 		});
 		
