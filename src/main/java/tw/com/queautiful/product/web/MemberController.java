@@ -1,10 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -24,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
-import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.Member;
-import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
@@ -56,6 +49,12 @@ public class MemberController {
 		log.debug("getNumberOfElements = {}", memberPage.getNumberOfElements()); // 列數(資料筆數)
 		log.debug("----------------------------------------------------------"); // 測試
 		return memberPage;
+	}
+	
+	@RequestMapping("/check_email")
+	@ResponseBody
+	public String accountCheck(String email){
+		return service.accountCheck(email);
 	}
 	
 	@RequestMapping("/list")

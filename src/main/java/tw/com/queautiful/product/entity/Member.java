@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.entity;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

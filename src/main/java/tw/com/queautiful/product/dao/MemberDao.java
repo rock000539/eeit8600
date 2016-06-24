@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import tw.com.queautiful.product.entity.Member;
 
 public interface MemberDao extends JpaRepository<Member, Long> {
-
+	
+	public Member findByEmailIs(String email);
+	
 }

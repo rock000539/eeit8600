@@ -4,38 +4,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member List</title>
 
-<!-- Header、NavBar js、css -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/sb-admin-2.js"></script>
-
-<!-- jqGrid js、css -->
-   <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
-   <script src="/js/trirand/jquery.jqGrid.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-   <link rel="stylesheet" type="text/css" media="screen" href="/css/trirand/ui.jqgrid-bootstrap.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-<!-- 一定要放在jqGrid的後面  -->
-<script src="/js/metisMenu.min.js"></script>
-
-<!-- Header、NavBar js、css -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/metisMenu.min.css" rel="stylesheet">
-<link href="/css/sb-admin-2.css" rel="stylesheet">
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/css/bms-customize.css" rel="stylesheet" >
-
-<script>
-	$.jgrid.defaults.width = 780;
-</script>
-
-<style>
-	.ui-th-column {
+	<!-- Header、NavBar js -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/sb-admin-2.js"></script>
+	
+	<!-- jqGrid js、css -->
+    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
+    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+	
+	<!-- 一定要放在jqGrid的js後面  -->
+	<script src="/js/metisMenu.min.js"></script>
+	
+	<!-- Header、NavBar css -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/metisMenu.min.css" rel="stylesheet">
+	<link href="/css/sb-admin-2.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bms-customize.css" rel="stylesheet" >
+	
+	<!-- 一定要放在Header、NavBar css的後面  -->
+    <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
+	
+	<script>
+		$.jgrid.defaults.width = 780;
+	</script>
+	
+	<style>
+		.ui-th-column {
 			text-align: center;
 		}
 		.center .ui-jqgrid {
@@ -43,8 +44,6 @@
     		margin-right: auto;
 		}
 </style>
-
-
 </head>
 <body>
 
@@ -105,7 +104,7 @@ $(function () {
 		        keys: true,
 		        editbutton : true,
 		        delbutton : true,
-		        editformbutton: false,
+		        editformbutton: true, //test
 		        // 各項option請參考 http://goo.gl/FV6iq
 		        editOptions: {
 		            beforeShowForm: function() {
@@ -228,7 +227,7 @@ $(function () {
 		
              ],
             width: 'auto', // 寬度
-			height: 250, // 高度
+			height: 380, // 高度
 			rowNum: 10, // 每頁顯示列數
 			rownumbers: true, // 第n列
 			rownumWidth: 35, // 第n列寬度
@@ -282,24 +281,23 @@ $(function () {
 		closeAfterSearch: true,
 	},
 	// options for the View Dailog
-	         {
-		width: 300,
-		height: 'auto',
+         {
+			height: 'auto',
 	      	modal: true,
-	          resize: false,
+	        resize: false,
 	      	bClose: 'Close',
 	      	recreateForm: true,
 	      	closeOnEscape: true,
 	      	beforeShowForm: function(){
 	      		$('#trv_').remove();
-	      	},
+	      },
 	});
 	      	
 	// Change Caption Position (TitleBar)
 	$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
 	     });
 	     
-	// jqGrid RWD
+	//jqGrid RWD
 	function responsive_jqgrid(jqgrid) {
 	    jqgrid.find('.ui-jqgrid').addClass('clear-margin span12').css('width', '');
 	    jqgrid.find('.ui-jqgrid-view').addClass('clear-margin span12').css('width', '');

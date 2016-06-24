@@ -3,7 +3,12 @@ package tw.com.queautiful.product.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.com.queautiful.product.entity.Ingredient;
+import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.IngredientService;
 
 
@@ -24,8 +30,31 @@ import tw.com.queautiful.product.service.IngredientService;
 @Controller
 @RequestMapping("/ingredients")
 public class IngredientController {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	IngredientService service;
+	
+	// 提供jqGrid抓取資料使用
+		@RequestMapping("/select_jqgrid")
+		@ResponseBody
+		public Page<Ingredient> select(@RequestParam(required = false) Integer page,
+				@RequestParam(required = false) Integer rows) {
+
+			log.debug("page = {}", page);
+			log.debug("rows = {}", rows);
+
+			Pageable pageable = new PageRequest(page - 1, rows);
+			Page<Ingredient> ingredPage = service.getAll(pageable);
+			log.debug(ingredPage.toString());
+			log.debug("getSize = {}", ingredPage.getSize()); // 列數(資料筆數)
+			log.debug("getNumber = {}", ingredPage.getNumber()); // 頁數-1
+			log.debug("getTotalPages() = {}", ingredPage.getTotalPages()); // 總共幾頁
+			log.debug("getTotalElements = {}", ingredPage.getTotalElements()); // 全部有幾筆資料
+			log.debug("getNumberOfElements = {}", ingredPage.getNumberOfElements()); // 列數(資料筆數)
+			log.debug("----------------------------------------------------------"); // 測試
+			return ingredPage;
+		}
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {

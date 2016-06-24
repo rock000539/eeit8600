@@ -53,4 +53,13 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
+	public String accountCheck(String email){
+		Member member = memberDao.findByEmailIs(email);
+		if(member!=null){
+			return "此帳號已經有人使用";
+		}else{
+			return "此帳號可以使用";
+		}
+	}
+	
 }
