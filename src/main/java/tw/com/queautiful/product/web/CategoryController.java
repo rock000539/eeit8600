@@ -31,6 +31,7 @@ public class CategoryController {
 		return "/category/categoryList";
 	}
 	
+	// 提供一般抓取資料使用
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Category> select() {

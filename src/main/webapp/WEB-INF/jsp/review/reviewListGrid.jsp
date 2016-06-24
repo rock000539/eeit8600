@@ -5,7 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Review List</title>
+<style> 
+  table{border:3px solid black;   
+  	  width:900px;}   
 
+  th,td{border:1px solid black;   
+  	  text-align:center;}   
+</style> 
 
 	<!-- Header、NavBar js、css -->
 	<script src="/js/jquery.min.js"></script>
@@ -33,15 +39,6 @@
 		$.jgrid.defaults.width = 780;
 	</script>
 
-
-<style>
-table{border:3px solid black; 
- 	  width:900px;} 
-
-th,td{border:1px solid black; 
- 	  text-align:center;} 
-
-</style>
 </head>
 <body>
 

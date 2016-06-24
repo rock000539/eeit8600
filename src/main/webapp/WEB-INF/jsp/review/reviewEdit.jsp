@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>Review Edit</h1>
-<form id="theForm" enctype="multipart/form-data">
+<FORM id="editForm"  enctype="multipart/form-data" >
 		<table>
 			<tr>
 				<td>編號 </td>
@@ -44,8 +44,8 @@
 			</tr>			
 			<tr>
 				<td>PIC </td>
-				<td><input type="file" name="reviewImg" value="${review.reviewImg}"></td>
-				<td><input type="button" id="start" value="上傳" /></td>
+				<td><img name="reviewImgFile" height="50" src="/reviews/show?reviewId=${review.reviewId}"/><br/>
+				<input type="file" name="reviewImgFile" id="reviewImgFile" accept="image/*" /></TD>
 			</tr>
 			<tr>
 				<td>發布時間</td>
@@ -76,12 +76,15 @@
 		<span id="reviewTime"></span><br/>
 		<span id="rewCollect"></span><br/>
 		<span id="reviewShow"></span><br/>
+		<img name="reviewImgFile" width="50">
 		</div>
 
 </form>
 <script type="text/javascript">
 $(function(){
 	$(':text:eq(1)').focus();
+	
+	// 驗證表單資料
 	$('#theForm').validate({
 		onfocusout : function(element){
 			$(element).valid();
@@ -148,12 +151,33 @@ $(function(){
 	
 
 	$('#save').click(function(){
-		if($('#theForm').validate().form()){
+		
+		//if表單驗證通過(true)
+		if($('#editForm').validate().form()){
+			
+			//create一個空的FormData
+			var formData = new FormData();
+			console.log(formData)
+			
+			//append表單資料
+			//type=file
+			formData.append("reviewImgFile", $('#reviewImgFile').prop('files')[0]);
+			
+			//type=text--> now Blob ([表單序列化] , {設定格式為json})
+			formData.append("review", 
+					new Blob([JSON.stringify($("#editForm").serializeObject())],
+							{type:'application/json'}));
+			
+			
 			$.ajax({
 				url:'/reviews/update',
 				type:'post',
-				contentType:'application/json;charset=utf-8',
-				data:JSON.stringify($('#theForm').serializeObject()),
+				
+				//contentType 和 processData都要設為false
+				contentType: false,
+				processData: false,
+				
+				data:formData,
 				dataType:'json',
 				success:function(data){
 					console.log(data);
@@ -164,10 +188,14 @@ $(function(){
 					$('#reviewTitle').text('心得標題='+data.reviewTitle);
 					$('#review').text('內文='+data.review);
 					$('#reviewRating').text('評分='+data.reviewRating);
-					$('#reviewImg').text('圖片='+data.reviewImg);
 					$('#reviewTime').text('發布時間='+data.reviewTime);
 					$('#rewCollect').text('收藏數='+data.rewCollect);
 					$('#reviewShow').text('flag='+data.reviewShow);
+					//$('#reviewImg').text('圖片='+data.reviewImg);
+					
+					//避免圖片被cache, 在圖片src後面加上"時間"
+					var d = new Date();
+					$('img[name="reviewImgFile"]').attr('src','/reviews/show?reviewId='+data.reviewId+'&'+d.getTime());					
 				}
 			});
 		}else{

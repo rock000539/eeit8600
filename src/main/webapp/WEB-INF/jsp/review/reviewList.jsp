@@ -26,7 +26,8 @@ th,td{border:1px solid black;
 		<th>心得標題</th>
 		<th>內文</th>
 		<th>評分</th>
-		<th>圖片</th>			
+		<th>圖片</th>	
+		<th width="50">Img Path</th>		
 		<th>發布時間</th>
 		<th>收藏數</th>
 		<th>flag</th>
@@ -42,6 +43,7 @@ th,td{border:1px solid black;
 		<td>${review.review}</td>
 		<td>${review.reviewRating}</td>
 		<td>${review.reviewImg}</td>
+		<td><img height="30" src="/reviews/show?reviewId=${review.reviewId}"></td>
 		<td>${review.reviewTime}</td>
 		<td>${review.rewCollect}</td>
 		<td>${review.reviewShow}</td>

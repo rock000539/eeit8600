@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.ArticleCM;
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.ArticleCMService;
 
 @Controller
@@ -54,5 +57,12 @@ public class ArticleCMController {
 	public ArticleCM update(@RequestBody ArticleCM articleCM){
 		service.update(articleCM);
 		return articleCM;
+	}
+	
+	// 提供一般抓取資料使用
+	@RequestMapping("/select")
+	@ResponseBody
+	public List<ArticleCM> select() {
+		return service.getAll();
 	}
 }
