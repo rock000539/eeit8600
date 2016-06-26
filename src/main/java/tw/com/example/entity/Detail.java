@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "BOOKDETAIL")
+@Table(name = "DETAIL")
 public class Detail {
 
 	@Id
@@ -53,11 +53,14 @@ public class Detail {
 
 	public void setBook(Book book) {
 		this.book = book;
+		if(book.getDetail()!=this) {
+			book.setDetail(this);
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "Detail [detailId=" + detailId + ", numberOfPages=" + numberOfPages + ", book=" + book + "]";
+		return "Detail [detailId=" + detailId + ", numberOfPages=" + numberOfPages + "]";
 	}
 
 }

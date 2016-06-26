@@ -1,6 +1,6 @@
 package tw.com.example.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ public class Publisher {
 	private String name;
 	
 	@ManyToMany(mappedBy = "publishers")
-	private Set<Book> books;
+	private List<Book> books;
 	
 	public Publisher(){
 
@@ -33,7 +33,7 @@ public class Publisher {
         this.name = name;
     }
     
-    public Publisher(String name, Set<Book> books){
+    public Publisher(String name, List<Book> books){
         this.name = name;
         this.books = books;
     }
@@ -54,12 +54,15 @@ public class Publisher {
 		this.name = name;
 	}
 
-	public Set<Book> getBooks() {
+	public List<Book> getBooks() {
 		return books;
 	}
 
-	public void setBooks(Set<Book> books) {
+	public void setBooks(List<Book> books) {
 		this.books = books;
+		if(!this.getBooks().contains(books)) {
+			this.getBooks().addAll(books);
+		}
 	}
 	
 }

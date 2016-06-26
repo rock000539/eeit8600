@@ -59,6 +59,13 @@ public class Category {
 		this.books = books;
 	}
 
+	public void addBook(Book book) {
+		this.books.add(book);
+		if (book.getCategory() != this) {
+			book.setCategory(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		String result = String.format("Category[id=%d, name='%s']", categoryId, name);

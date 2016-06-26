@@ -19,6 +19,7 @@ import tw.com.example.dao.PublisherDao;
 import tw.com.example.entity.Book;
 import tw.com.example.entity.Category;
 import tw.com.example.entity.Detail;
+import tw.com.example.entity.Publisher;
 
 @SpringBootApplication
 public class App implements CommandLineRunner {
@@ -45,58 +46,95 @@ public class App implements CommandLineRunner {
 	@Transactional
 	public void run(String... strings) throws Exception {
 
-		// // @OneToOne Example
-		// // save a couple of bookDetails
-		// List<Detail> details = new ArrayList<>();
-		// details.add(new Detail(49));
-		// details.add(new Detail(59));
-		// details.add(new Detail(69));
-		// detailDao.save(details);
-		//
-		// // save a couple of books
-		// List<Book> books = new ArrayList<>();
-		// // 新增時就寫入FK
-		// books.add(new Book("Book A", detailDao.findOne(1)));
-		// books.add(new Book("Book B", detailDao.findOne(2)));
-		// books.add(new Book("Book C"));
-		// bookDao.save(books);
-		//
-		// // 修改時才寫入FK
-		// Book bookC = bookDao.findOne(3L);
-		// bookC.setDetail(detailDao.findOne(3));
-		// bookDao.save(bookC);
-		//
-		// // fetch all books
-		// for (Book book : bookDao.findAll()) {
-		// logger.info("{}", book.toString());
-		// }
+		// @OneToOne Example
+//		// save a couple of bookDetails
+//		List<Detail> details = new ArrayList<>();
+//		details.add(new Detail(49));
+//		details.add(new Detail(59));
+//		details.add(new Detail(69));
+//		detailDao.save(details);
+//
+//		// save a couple of books
+//		List<Book> books = new ArrayList<>();
+//		// 新增時就寫入FK
+//		Book book1 = new Book("BookA");
+//		book1.setDetail(detailDao.findOne(1));
+//		books.add(book1);
+//		Book book2 = new Book("BookB");
+//		book2.setDetail(detailDao.findOne(1));
+//		books.add(book2);
+//		Book book3 = new Book("BookC");
+//		books.add(book3);
+//		bookDao.save(books);
+//
+//		// 修改時才寫入FK
+//		Book bookC = bookDao.findOne(3L);
+//		bookC.setDetail(detailDao.findOne(1));
+//		bookDao.save(bookC);
+//
+//		// fetch all books
+//		for (Book book : bookDao.findAll()) {
+//			logger.info("{}", book.toString());
+//		}
 
 		// @OneToMany / @ManyToOne Example
-		List<Category> categories = new ArrayList<>();
-		categories.add(new Category("category4"));
-		categories.add(new Category("category5"));
-		categories.add(new Category("category6"));
-		categoryDao.save(categories);
+//		List<Category> categories = new ArrayList<>();
+//		categories.add(new Category("category4"));
+//		categories.add(new Category("category5"));
+//		categories.add(new Category("category6"));
+//		categoryDao.save(categories);
+//
+//		// save a couple of books
+//		List<Book> books = new ArrayList<>();
+//		Book book4 = new Book("bookD");
+//		book4.setCategory(categoryDao.findOne(1));
+//		books.add(book4);
+//		Book book5 = new Book("bookE");
+//		book5.setCategory(categoryDao.findOne(1));
+//		books.add(book5);
+//		Book book6 = new Book("bookF");
+//		book6.setCategory(categoryDao.findOne(1));
+//		books.add(book6);
+//		bookDao.save(books);
+//
+//		// fetch all books
+//		for (Book book : bookDao.findAll()) {
+//			logger.info("{}", book);
+//		}
+//
+//		// fetch all categories
+//		for (Category category : categoryDao.findAll()) {
+//			logger.info("{}", category.toString());
+//		}
 
-		// save a couple of books
+		// @ManyToMany Example
+		List<Publisher> publishers = new ArrayList<>();
+		Publisher publisher1 = new Publisher("publisher1");
+		Publisher publisher2 = new Publisher("publisher2");
+		Publisher publisher3 = new Publisher("publisher3");
+		publishers.add(publisher1);
+		publishers.add(publisher2);
+		publishers.add(publisher3);
+		publisherDao.save(publishers);
+		
 		List<Book> books = new ArrayList<>();
-		books.add(new Book("bookD", categoryDao.findOne(1)));
-		books.add(new Book("bookE", categoryDao.findOne(1)));
-		books.add(new Book("bookF", categoryDao.findOne(1)));
+		Book book1 = new Book("book1");
+		Book book2 = new Book("book2");
+		Book book3 = new Book("book3");
+		books.add(book1);
+		books.add(book2);
+		books.add(book3);
 		bookDao.save(books);
+		
+		Book temp = bookDao.findOne(1L);
+		temp.setPublishers(publisherDao.findAll());
+		bookDao.save(temp);
 
 		// fetch all books
 		for (Book book : bookDao.findAll()) {
 			logger.info("{}", book);
 		}
-
-		// fetch all categories
-		for (Category category : categoryDao.findAll()) {
-			logger.info("{}", category.toString());
-		}
-
-		// @ManyToMany Example
-
+		
 	}
 
 }

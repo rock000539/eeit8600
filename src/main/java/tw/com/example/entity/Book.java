@@ -1,6 +1,6 @@
 package tw.com.example.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,16 +27,16 @@ public class Book {
 	private String name;
 
 	@OneToOne
-	@JoinColumn(name = "detailId")
+	@JoinColumn(name = "detailid")
 	private Detail detail;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
 	private Category category;
 
 	@ManyToMany
 	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID"), inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID"))
-	private Set<Publisher> publishers;
+	private List<Publisher> publishers;
 
 	public Book() {
 
@@ -56,7 +56,7 @@ public class Book {
 		this.category = category;
 	}
 
-	public Book(String name, Set<Publisher> publishers) {
+	public Book(String name, List<Publisher> publishers) {
 		this.name = name;
 		this.publishers = publishers;
 	}
@@ -83,6 +83,9 @@ public class Book {
 
 	public void setDetail(Detail detail) {
 		this.detail = detail;
+		if (detail.getBook() != this) {
+			detail.setBook(this);
+		}
 	}
 
 	public Category getCategory() {
@@ -91,19 +94,30 @@ public class Book {
 
 	public void setCategory(Category category) {
 		this.category = category;
+		if (!category.getBooks().contains(this)) {
+			category.getBooks().add(this);
+		}
 	}
 
-	public Set<Publisher> getPublishers() {
+	public List<Publisher> getPublishers() {
 		return publishers;
 	}
 
-	public void setPublishers(Set<Publisher> publishers) {
+	public void setPublishers(List<Publisher> publishers) {
 		this.publishers = publishers;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", name=" + name + ", category=" + category + "]";
+		
+		String result = String.format("Book [id=%d, name='%s']%n", bookId, name);
+		if (publishers != null) {
+			for (Publisher publisher : publishers) {
+				result += String.format("Publisher[id=%d, name='%s']%n", publisher.getPubId(), publisher.getName());
+			}
+		}
+
+		return result;
 	}
 
 }

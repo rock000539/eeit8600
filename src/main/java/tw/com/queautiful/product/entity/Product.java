@@ -8,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="PRODUCT")
@@ -159,6 +156,14 @@ public class Product {
 
 	public void setProdImg(String prodImg) {
 		this.prodImg = prodImg;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [prodId=" + prodId + ", prodName=" + prodName + ", brandId=" + brandId + ", categoryId="
+				+ categoryId + ", weight=" + weight + ", score=" + score + ", price=" + price + ", capacity=" + capacity
+				+ ", launchDate=" + launchDate + ", prodDesc=" + prodDesc + ", mainIgdt=" + mainIgdt
+				+ ", concentration=" + concentration + ", prodImg=" + prodImg + "]";
 	}
 	
 }
