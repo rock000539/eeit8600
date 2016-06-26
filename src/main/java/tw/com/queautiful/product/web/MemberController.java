@@ -1,7 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -53,9 +51,10 @@ public class MemberController {
 		return memberPage;
 	}
 	
+	//check whether the account has been taken
 	@RequestMapping("/check_email")
 	@ResponseBody
-	public String accountCheck(String email){
+	public Boolean accountCheck(String email){
 		return service.accountCheck(email);
 	}
 	
@@ -68,7 +67,7 @@ public class MemberController {
 	
 	@RequestMapping("/add")
 	public String addPage(){
-		return "/member/memberAdd";
+		return "/member/memberRegister";
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
@@ -82,6 +81,7 @@ public class MemberController {
 			member.setMemberImg(memberImg);
 		}
 		log.debug("memberImg: {}", member.getMemberImg());//test
+		member.setMemberRegiDate(new java.sql.Date(new java.util.Date().getTime()));
 		service.update(member);
 		return service.getById(member.getMemberId());
 	}
@@ -107,10 +107,11 @@ public class MemberController {
 		return service.getById(member.getMemberId());
 	}
 	
-	@RequestMapping("/delete")
-	public String delete(@RequestParam Long memberId){
-		service.delete(memberId);
-		return "redirect:/members/list";
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void delete(@RequestBody Member member){
+		log.debug(member.toString());
+		service.delete(member.getMemberId());
 	}
 	
 	@RequestMapping("/show")
@@ -120,11 +121,4 @@ public class MemberController {
 		FileProcessing.showImg(resp, memberImg);
 	}
 
-	// Kate:reviewEdit會要抓會員id所以要建select方法(目前)，謝謝。
-	// 提供一般抓取資料使用
-	@RequestMapping("/select")
-	@ResponseBody
-	public List<Member> select() {
-		return service.getAll();
-	}
 }

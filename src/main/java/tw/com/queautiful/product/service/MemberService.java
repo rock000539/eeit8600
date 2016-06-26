@@ -34,6 +34,9 @@ public class MemberService {
 	
 	public void insert(Member member){
 //		member.setPassword(Base64Utils.encodeToString(member.getPassword().getBytes()));
+		if(member.getMemberImg()==null){
+			member.setMemberImg("src/main/webapp/WEB-INF/img/member/member_default.png");
+		}
 		memberDao.save(member);
 	}
 	
@@ -53,13 +56,27 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
-	public String accountCheck(String email){
+	public Boolean accountCheck(String email){
 		Member member = memberDao.findByEmailIs(email);
 		if(member!=null){
-			return "此帳號已經有人使用";
+			return false;
 		}else{
-			return "此帳號可以使用";
+			return true;
 		}
+	}
+	
+	//    要改成傳Member，且前端可以傳特定日期
+	public void memberSuspend(Long id, Integer memberSuspendDays){
+		Member member = memberDao.findOne(id);
+		Long milliToday = new java.util.Date().getTime();
+		java.sql.Date today = new java.sql.Date(milliToday);
+		Long milliSuspend = memberSuspendDays*24*60*60*1000L;
+		new java.sql.Date(milliToday+milliSuspend);
+		member.setMemberSuspendStart(today);
+//		member.setMemberSuspendDays(memberSuspendDays);
+		member.setMemberSuspendNum(member.getMemberSuspendNum()+1);
+		member.setMemberSuspendExp(new java.sql.Date(milliToday+milliSuspend));
+		
 	}
 	
 }

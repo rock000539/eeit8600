@@ -51,26 +51,41 @@ public class Member {
 	@Column(name="ADDR", length=200)
 	private String addr;
 	
-	@Column(name="MEMBERSUSPEND")
-	private Boolean memberSuspend;
-	
-	@Column(name="MEMBERSUSPENDEXP")
-	private java.sql.Date memberSuspendExp;
-	
 	@Column(name="MEMBERREGIDATE")
-	private java.sql.Date memberRegiDate;
+	private java.sql.Date memberRegiDate; //會員註冊日期
+	
+	@Column(name="MEMBERSUSPEND")
+	private Boolean memberSuspend; //會員停權狀態
+	
+	@Column(name="MEMBERSUSPENDSTART")
+	private java.sql.Date memberSuspendStart; //會員停權日期
+	
+	@Column(name="MEMBERSUSPENDDAYS")
+	private Integer memberSuspendDays; //會員停權天數
+	
+	@Column(name="MEMBERSUSPENDNUM")
+	private Integer memberSuspendNum; //會員累計停權次數
+	
+	
+	@Transient
+	private java.sql.Date memberSuspendExp; //會員停權到期日
 	
 	@Transient
 	private MultipartFile memberImgFile;
 	
+	
+
 	@Override
 	public String toString() {
-		return "Member [email=" + email + ", password=" + password + ", nickname=" + nickname + ", lastName=" + lastName
-				+ ", firstName=" + firstName + ", gender=" + gender + ", birthDay=" + birthDay + ", skinType="
-				+ skinType + ", memberImg=" + memberImg + ", phone=" + phone + ", addr=" + addr + ", memberSuspend="
-				+ memberSuspend + ", memberSuspendExp=" + memberSuspendExp + ", memberId=" + memberId + "]";
+		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthDay="
+				+ birthDay + ", skinType=" + skinType + ", memberImg=" + memberImg + ", phone=" + phone + ", addr="
+				+ addr + ", memberRegiDate=" + memberRegiDate + ", memberSuspend=" + memberSuspend
+				+ ", memberSuspendStart=" + memberSuspendStart + ", memberSuspendDays=" + memberSuspendDays
+				+ ", memberSuspendNum=" + memberSuspendNum + ", memberSuspendExp=" + memberSuspendExp
+				+ ", memberImgFile=" + memberImgFile + "]";
 	}
-	
+
 	public MultipartFile getMemberImgFile() {
 		return memberImgFile;
 	}
@@ -79,6 +94,15 @@ public class Member {
 		this.memberImgFile = memberImgFile;
 	}
 
+	public java.sql.Date getMemberSuspendExp() {
+		return memberSuspendExp;
+	}
+
+	public void setMemberSuspendExp(java.sql.Date memberSuspendExp) {
+		this.memberSuspendExp = memberSuspendExp;
+	}
+
+	
 	public Long getMemberId() {
 		return memberId;
 	}
@@ -174,6 +198,14 @@ public class Member {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+	
+	public java.sql.Date getMemberRegiDate() {
+		return memberRegiDate;
+	}
+
+	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+		this.memberRegiDate = memberRegiDate;
+	}
 
 	public Boolean getMemberSuspend() {
 		return memberSuspend;
@@ -183,21 +215,28 @@ public class Member {
 		this.memberSuspend = memberSuspend;
 	}
 
-	public java.sql.Date getMemberSuspendExp() {
-		return memberSuspendExp;
+	public java.sql.Date getMemberSuspendStart() {
+		return memberSuspendStart;
 	}
 
-	public void setMemberSuspendExp(java.sql.Date memberSuspendExp) {
-		this.memberSuspendExp = memberSuspendExp;
+	public void setMemberSuspendStart(java.sql.Date memberSuspendStart) {
+		this.memberSuspendStart = memberSuspendStart;
 	}
 
-	public java.sql.Date getMemberRegiDate() {
-		return memberRegiDate;
+	public Integer getMemberSuspendDays() {
+		return memberSuspendDays;
 	}
 
-	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
-		this.memberRegiDate = memberRegiDate;
+	public void setMemberSuspendDays(Integer memberSuspendDays) {
+		this.memberSuspendDays = memberSuspendDays;
 	}
-	
-	
+
+	public Integer getMemberSuspendNum() {
+		return memberSuspendNum;
+	}
+
+	public void setMemberSuspendNum(Integer memberSuspendNum) {
+		this.memberSuspendNum = memberSuspendNum;
+	}
+
 }

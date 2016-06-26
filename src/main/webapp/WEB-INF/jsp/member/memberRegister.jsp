@@ -6,11 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member AddPage</title>
-<style>
-	.error {
-		color: red;
-	}
-</style>
 	<!-- Header, NavBar -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/metisMenu.min.css" rel="stylesheet">
@@ -51,7 +46,20 @@
     <script src="/js/fileinput.min.js"></script>
     
     <script src="/js/metisMenu.min.js"></script>
-    
+<style>
+	label{
+		font-family: Microsoft JhengHei;
+		color: #414C59;
+	}
+	label.error {
+		color: #FF8989; /*#A94442;*/
+		font-size: 0.9em;
+		margin-left: 3px;
+	}
+	.popover {
+    	white-space: pre-line;    
+	}
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -62,61 +70,88 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Member AddPage</h1>
+                <h1 class="page-header">會員註冊</h1>
                 <!-- **每頁不同的內容從這裡開始** -->
-<div class="col-md-8">
-<form accept-charset="UTF-8" class="form-horizontal" id="addForm">
+<div class="col-md-10">
+<form accept-charset="UTF-8" class="form-horizontal" id="signup">
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="email">電子信箱</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="email" 
-	    		name="email" value="${member.email}">
+	    <div class="col-sm-7" >
+	    	<div class=" input-group">
+		    	<input type="text" class="form-control" id="email" 
+		    		name="email" value="${member.email}">
+		    	<span class="input-group-addon" data-toggle="popover" data-placement="right" 
+	    			data-content="此電子信箱將成為您的登入帳號 ">
+                <span class="fa fa-info-circle"></span>
+            </span>
+            </div>
+            <label class="error" for="email"></label>
 		</div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="password">密碼</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="password" 
-	    		name="password" value="${member.password}">
+	    <div class="col-sm-7">
+	    	<div class=" input-group">
+		    	<input type="text" class="form-control" id="password" 
+		    		name="password" value="${member.password}">
+		    	<span class="input-group-addon" data-toggle="popover" data-placement="right" 
+		    		data-content="請輸入6-12位數密碼 且使用數字及英文">
+	            <span class="fa fa-info-circle"></span>
+            </div>
+	    	<label class="error" for="password"></label>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-2 control-label" for="psw_confirm">密碼確認</label>
+	    <div class="col-sm-7">
+	    	<div class=" input-group">
+		    	<input type="text" class="form-control" id="psw_confirm" 
+		    		name="psw_confirm" value="${member.password}">
+		    	<span class="input-group-addon" data-toggle="popover" data-placement="right" 
+		    		data-content="請再輸入一次密碼">
+	            <span class="fa fa-info-circle"></span>
+	    	</div>
+	    	<label class="error" for="psw_confirm"></label>
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="nickname">暱稱</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="nickname" 
 	    		name="nickname" value="${member.nickname}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="lastName">姓</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="lastName" 
 	    		name="lastName" value="${member.lastName}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="firstName">名</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 		    <input type="text" class="form-control" id="firstName" 
 		    	name="firstName" value="${member.firstName}">
 	    </div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="firstName">性別</label>
-		<div class="col-sm-10">
+		<div class="col-sm-7">
+			<label class="radio-inline">
+		    <input type="radio" checked
+		    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
+			</label>
 	    	<label class="radio-inline">
 		    <input type="radio"
 		    	name="gender" value="M" ${member.gender=='M'? 'checked':''}> 男性
 		    </label>
-		    <label class="radio-inline">
-		    <input type="radio"
-		    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
-			</label>
 		</div>
 	</div>
+											
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="birthDay">生日</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<div class="input-group date" id="datetimepicker">
 			    <input type="text" class="form-control" id="birthDay" 
 			    	name="birthDay" value="${member.birthDay}">
@@ -124,55 +159,43 @@
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
 			</div>
+			<label class="error" for="birthDay"></label>
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="skinType">肌膚性質</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="skinType" 
 	    		name="skinType" value="${member.skinType}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="memberImgFile">大頭貼照</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<input type="file" id="memberImgFile" 
 	    		name="memberImgFile" value="${member.memberImgFile}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="phone">電話</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="phone" 
 	    		name="phone" value="${member.phone}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-2 control-label" for="addr">地址</label>
-	    <div class="col-sm-10">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="addr" 
 	    		name="addr" value="${member.addr}">
 	    </div>
 	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="memberSuspend">停權</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="memberSuspend" 
-	    		name="memberSuspend" value="${member.memberSuspend}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="memberSuspendExp">停權到期日</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="memberSuspendExp" 
-	    		name="memberSuspendExp" value="${member.memberSuspendExp}">
-	    </div>
-	</div>
+	
 	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <input type="button" id="insertBtn" name="insert"
+	      <input type="button" id="insertBtn" name="insert" class="btn btn-default"
 			value="insert">
-		  <input type="button" name="cancel"
+		  <input type="button" name="cancel" class="btn btn-default" 
 			value="Cancel" onclick='window.location="/members/list"'>
 	    </div>
 	</div>
@@ -201,6 +224,50 @@
 	$(function() {
 		$('#email').focus();
 		
+		$('[data-toggle="popover"]').popover({
+			trigger:"hover",
+			container: 'body'
+		});
+		
+		$('#signup').validate({
+			onkeyup: true,
+			onfocusout: function (element) {
+		        $(element).valid();
+		    },
+		    focusInvalid: true,
+		    rules:{
+		    	email: {required: true, email: true, remote:'/members/check_email'},
+		    	password:{required: true, minlength: 6, maxlength: 12, pswrule: true},
+		    	psw_confirm:{required: true, equalTo: '#password'},
+		    	nickname:{required: true},
+		    	birthDay:{required: true},
+		    },
+		    messages:{
+				email:{required:'請輸入您的電子信箱', email:'請輸入正確格式', remote:'此帳號已經有人使用'},
+				password:{required:'請輸入6-12位數密碼', minlength:'密碼長度請大於6',
+					maxlength:'密碼長度請小於12'},
+				psw_confirm:{required: '請再輸入一次密碼', equalTo: '密碼不符，請再試一次'},
+		    	nickname:{required: '請輸入您在網頁中的顯示名稱'},
+		    	birthDay:{required: '請輸入您的生日'}
+		    },
+		    
+		    /*	        errorPlacement: function(error, element){
+			    	error.appendTo(element.parent('div.input-group'));
+			    	element.attr('title', error.text());
+			        $('.error').tooltip({   
+			        	trigger: 'focusout',
+			            placement: 'top',
+		        }); 
+		    },*/
+		   
+		    
+		});
+		//additional password customized rule
+		$.validator.addMethod('pswrule', function(value, element){
+			var reg = /^(?=.*[A-Za-z])(?=.*[0-9])(?!.*[!@#$%^&*])(?!.*\s)(?!.*[\u4E00-\u9FA5]).{6,}$/;
+			return this.optional( element ) || reg.test(value);
+		}, '密碼請由數字及英文大小寫組成');
+		
 		// DateTimePicker
         $('#datetimepicker').datetimepicker(
         {
@@ -208,45 +275,15 @@
         	autoclose: true,
         	todayBtn: "linked",
         	minView: 2,
+        	pickerPosition: "bottom-left",
         });
 		
-/*		
-		
-		$('#addForm').validate(
-			{event: "blur",
-			 rules:{
-				email:{required:true, email:true},
-				nickname:{required:true},
-				lastName:{required:true},
-				firstName:{required:true},
-				gender:{required:true},
-				birthDay:{required:true},
-				skinType:{required:true},
-				memberImg:{required:true},
-				phone:{required:true},
-				addr:{required:true},
-				memberSuspend:{required:true},
-				memberSuspendExp:{required:true}
-			},messages:{
-				email:"必填項目",
-				nickname:"",
-				lastName:"",
-				firstName:"",
-				gender:"",
-				birthDay:"",
-				skinType:"",
-				memberImg:"",
-				phone:"",
-				addr:"",
-				memberSuspend:"",
-				memberSuspendExp:""
-			}}
-		);
-*/
+		//submit
 		$('#insertBtn').on('click',function() {
+			if($('#signup').validate().form()){
 			var formdata = new FormData(); 
 			formdata.append('memberImgFile', $('#memberImgFile').prop('files')[0]); 
-			formdata.append('member', new Blob([JSON.stringify($('#addForm').serializeObject())],
+			formdata.append('member', new Blob([JSON.stringify($('#signup').serializeObject())],
 							{type: 'application/json'})); 			
 			$.ajax({
 				url : "/members/insert",
@@ -277,7 +314,7 @@
 				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
 										}
 									});
-		});
+		}});
 
 		$.fn.serializeObject = function() {
 			var o = {};
