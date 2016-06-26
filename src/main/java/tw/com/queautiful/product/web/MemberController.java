@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -118,4 +120,11 @@ public class MemberController {
 		FileProcessing.showImg(resp, memberImg);
 	}
 
+	// Kate:reviewEdit會要抓會員id所以要建select方法(目前)，謝謝。
+	// 提供一般抓取資料使用
+	@RequestMapping("/select")
+	@ResponseBody
+	public List<Member> select() {
+		return service.getAll();
+	}
 }

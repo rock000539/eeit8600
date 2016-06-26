@@ -99,6 +99,12 @@ public class ReviewController {
 		return "/review/reviewEdit";
 	}
 	
+	@RequestMapping("/editgrid")
+	public String editPageGrid(@RequestParam Long reviewId,Model model){
+		model.addAttribute("review", service.getById(reviewId));
+		return "/review/reviewEditGrid";
+	}
+	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
 	public Review update(@RequestPart("review") Review review,

@@ -1,225 +1,406 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
-<title>Review Edit</title>
-<style>
-.error {
-	color: red;
-	font-style: italic;
-}
-</style>
+	
+	<!-- Header, NavBar -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/metisMenu.min.css" rel="stylesheet">
+	<link href="/css/sb-admin-2.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/bms-customize.css" rel="stylesheet" >
+	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/sb-admin-2.js"></script>
+
+	<!-- BootStrap 基本檔案  -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<!-- 表單驗證  -->
+	<script 
+		src="/js/jquery.validate.min.js"></script>
+		
+	<!-- DatePicker -->
+	<link rel="stylesheet" 
+		href="/css/bootstrap-datetimepicker.min.css" />
+    <script
+    	src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script
+    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+    	
+    <link rel="stylesheet" 
+		href="/css/bootstrap-dialog.min.css" />
+    <script
+    	src="/js/bootstrap-dialog.min.js"></script>
+    	
+    <script src="/js/metisMenu.min.js"></script>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Reivew Edit</title>
+	
+	<style>
+		.col-md-6 {
+			margin-top: 20px;
+		}
+		.error{
+			color:red;
+			font-style: italic;
+		}
+		.panel {
+			margin-top: 20px;
+		}
+		textarea {
+		    resize: none;
+		}
+	</style>
+
 </head>
 <body>
-<h1>Review Edit</h1>
-<FORM id="editForm"  enctype="multipart/form-data" >
-		<table>
-			<tr>
-				<td>編號 </td>
-				<td><input type="text" name="reviewId" value="${review.reviewId}" readonly='readonly'></td>
-			</tr>
-			<tr>
-				<td>會員id</td>
-				<td><input type="text" name="memberId" value="${review.memberId}"></td>
-			</tr>
-			<tr>
-				<td>產品id</td>
-				<td><input type="text" name="prodId" value="${review.prodId}"></td>
-			</tr>
-			<tr>
-				<td>心得標題 </td>
-				<td><input type="text" name="reviewTitle" value="${review.reviewTitle}"></td>
-			</tr>			
-			<tr>
-				<td>內文 </td>
-				<td><input type="text" name="review" value="${review.review}"></td>
-			</tr>			
-			<tr>
-				<td>評分</td>
-				<td><input type="text" name="reviewRating" value="${review.reviewRating}"></td>
-			</tr>			
-			<tr>
-				<td>PIC </td>
-				<td><img name="reviewImgFile" height="50" src="/reviews/show?reviewId=${review.reviewId}"/><br/>
-				<input type="file" name="reviewImgFile" id="reviewImgFile" accept="image/*" /></TD>
-			</tr>
-			<tr>
-				<td>發布時間</td>
-				<td><input type="text" name="reviewTime" value="${review.reviewTime}"></td>
-			</tr>
-			<tr>
-				<td>收藏數</td>
-				<td><input type="text" name="rewCollect" value="${review.rewCollect}"></td>
-			</tr>
-			<tr>
-				<td>flag</td>
-				<td><input type="text" name="reviewShow" value="${review.reviewShow}"></td>
-			</tr>	
-		</table>
-		<hr>
-		<input type="button" name="save" value="save" id="save"/> 
-		<input type="button" name="cancel" value="cancel" 
-				onClick="location='/reviews/list'"/> 
-
-		<div id='result'>
-		<h2></h2>
-		<span id="memberId"></span><br/>
-		<span id="prodId"></span><br/>
-		<span id="reviewTitle"></span><br/>
-		<span id="review"></span><br/>
-		<span id="reviewRating"></span><br/>
-		<span id="reviewImg"></span><br/>
-		<span id="reviewTime"></span><br/>
-		<span id="rewCollect"></span><br/>
-		<span id="reviewShow"></span><br/>
-		<img name="reviewImgFile" width="50">
-		</div>
-
-</form>
-<script type="text/javascript">
-$(function(){
-	$(':text:eq(1)').focus();
 	
-	// 驗證表單資料
-	$('#theForm').validate({
-		onfocusout : function(element){
-			$(element).valid();
-		},
-		rules:{
-			memberId:{
-				required:true,
-			},
-			prodId:{
-				required:true,
-			},
-			reviewTitle:{
-				required:true,
-			},
-			review:{
-				required:true,
-			},
-			reviewRating:{
-				required:true,
-			},
-	/*		reviewImg:{
-				required:true,
-			},
-	*/		reviewTime:{
-				required:true,
-			},
-			rewCollect:{
-				required:true,
-			},
-			reviewShow:{
-				required:true,
-			},
-		},//end of rules
-		messages:{
-			memberId:{
-				required:"必填項目",
-			},
-			prodId:{
-				required:"必填項目",
-			},
-			reviewTitle:{
-				required:"必填項目",
-			},
-			review:{
-				required:"必填項目",
-			},
-			reviewRating:{
-				required:"必填項目",
-			},
-	/*		reviewImg:{
-				required:"必填項目",
-			},
-	*/		reviewTime:{
-				required:"必填項目",
-			},
-			rewCollect:{
-				required:"必填項目",
-			},
-			reviewShow:{
-				required:"必填項目",
-			},
-		}//end of messages	
-	});//end of validate
+	<!-- 內文全部用wrapper包起來 -->
+	<div id="wrapper">
 	
+	<!-- 加入上方及側邊Nav-Bar -->	
+	<c:import url="../bms_header.jsp" />
+	<c:import url="../bms_navbar-side.jsp" />
+	
+	<!-- Page Content --> 
+	<div id="page-wrapper">
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-lg-12">
+	                
+                	<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Review Edit Form</div>
+							<div class="panel-body">
+								<form accept-charset="UTF-8"
+									action="" class="simple_form form-horizontal" id="editForm" method="post">
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewId">
+											ID
+										</label>
+										<div class="col-sm-8">
+											<input class="form-control" disabled="disabled"
+												id="reviewId" name="reviewId" type="text"
+												value="${review.reviewId}" />
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+				
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="memberId">
+											<abbr title="required">*</abbr>
+											MemberId
+										</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="memberId" name="memberId"></select>
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">	
+										<label class="col-sm-3 control-label" for="prodId">
+											<abbr title="required">*</abbr>
+											ProdID
+										</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="prodId" name="prodId"></select>
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewTitle">
+											ReviewTitle
+										</label>
+										<div class="col-sm-8">
+											<input class="string required form-control"
+												id="reviewTitle" name="reviewTitle"
+												placeholder="請輸入reviewTitle" type="text"
+												value="${review.reviewTitle}" />
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									
+									<!-- reviewRating 改用下拉是選單?-->
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewRating">
+											ReviewRating
+										</label>
+										<div class="col-sm-8">
+											<input class="required number form-control"
+												id="reviewRating" name="reviewRating"
+												placeholder="請輸入reviewRating" type="text"
+												value="${review.reviewRating}" />
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
 
-	$('#save').click(function(){
-		
-		//if表單驗證通過(true)
-		if($('#editForm').validate().form()){
-			
-			//create一個空的FormData
-			var formData = new FormData();
-			console.log(formData)
-			
-			//append表單資料
-			//type=file
-			formData.append("reviewImgFile", $('#reviewImgFile').prop('files')[0]);
-			
-			//type=text--> now Blob ([表單序列化] , {設定格式為json})
-			formData.append("review", 
-					new Blob([JSON.stringify($("#editForm").serializeObject())],
-							{type:'application/json'}));
-			
-			
+
+									<!--  圖片路徑 和 圖片
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewImg">
+											ReviewImgPath
+										</label>
+										<div class="col-sm-8">
+											<input class="required number form-control"
+												id="reviewImg" name="reviewImg"
+												placeholder="請輸入reviewImg" 
+												type="text" value="${review.reviewImg}" />
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="prodImgFile">File</label>
+										<div class="col-sm-9">
+											<input class="file optional" id="user_horizontal_file"
+												name="user_horizontal[file]" type="file" />
+										</div>
+									</div>
+									-->
+										
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewTime">
+											ReviewTime
+										</label>
+										<div class="col-sm-8">
+							                <div class="input-group date" id="datetimepicker">
+							                    <input class="form-control" 
+							                    	id="reviewTime" name="reviewTime"
+							                    	type="text" value="${review.reviewTime}" />
+							                    <span class="input-group-addon">
+							                        <span class="glyphicon glyphicon-calendar"></span>
+							                    </span>
+							                </div>
+								        </div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="rewCollect">
+											ReviewCollect
+										</label>
+										<div class="col-sm-8">
+											<input class="required digits form-control"
+												id="price" name="rewCollect"
+												placeholder="請輸入rewCollect" type="text"
+												value="${review.rewCollect}" />
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewShow">
+											ReviewShow
+										</label>
+										<div class="col-sm-8">		
+										<label class="radio-inline">
+									    	<input type="radio"
+									    		name="reviewShow" value="Show" ${review.reviewShow=='true'? 'checked':''}> Show
+									    </label>
+									    <label class="radio-inline">
+									    	<input type="radio"
+									    		name="reviewShow" value="Hide" ${review.reviewShow=='false'? 'checked':''}> Hide
+										</label>										
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="review">
+											Review
+										</label>
+										<div class="col-sm-8">
+											​<textarea class="string required form-control" 
+												id="review" name="review" 
+												rows="8" cols="50">${review.review}</textarea>
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+
+
+						
+									
+									<div class="form-group">
+										<div class="col-sm-3"></div>	
+										<div class="col-sm-7">
+											<input class="btn btn-primary" type="button" 
+												id="save" name="save" value="Save" />
+											<input class="btn btn-primary" type="button" 
+												id="clear" name="clear" value="Reset" />
+											<input class="btn btn-primary" type="button" 
+												id="cancel" name="cancel" value="Cancel" 
+												onClick="location='/reviews/listgrid'" />
+										</div>
+										<div class="col-sm-2"></div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2"></div>
+	                
+	                <!-- **每頁不同的內容 end** -->
+	            </div>
+	            <!-- /.col-lg-12 -->
+	        </div>
+	        <!-- /.row -->
+	    </div>
+	    <!-- /.container-fluid -->
+	</div>
+	<!-- /#page-wrapper -->
+	
+	</div>
+	<!-- /#wrapper -->
+	
+	<script type="text/javascript">
+	
+		$(function() {
+			// Set select init value
 			$.ajax({
-				url:'/reviews/update',
-				type:'post',
-				
-				//contentType 和 processData都要設為false
-				contentType: false,
-				processData: false,
-				
-				data:formData,
-				dataType:'json',
-				success:function(data){
-					console.log(data);
-					$('h2').text('Update Success');
-					
-					$('#memberId').text('會員id='+data.memberId);
-					$('#prodId').text('產品id='+data.prodId);
-					$('#reviewTitle').text('心得標題='+data.reviewTitle);
-					$('#review').text('內文='+data.review);
-					$('#reviewRating').text('評分='+data.reviewRating);
-					$('#reviewTime').text('發布時間='+data.reviewTime);
-					$('#rewCollect').text('收藏數='+data.rewCollect);
-					$('#reviewShow').text('flag='+data.reviewShow);
-					//$('#reviewImg').text('圖片='+data.reviewImg);
-					
-					//避免圖片被cache, 在圖片src後面加上"時間"
-					var d = new Date();
-					$('img[name="reviewImgFile"]').attr('src','/reviews/show?reviewId='+data.reviewId+'&'+d.getTime());					
+				url: '/members/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					var select = $('#memberId').empty();
+					for(i=0; i<response.length; i++){
+						select.append($('<option></option>').attr('value', response[i].memberId).text(i+1 + '. ' + response[i].firstName + response[i].lastName));
+					}
+					select.val("${review.memberId}");
 				}
 			});
-		}else{
-			alert('請依訊息更正錯誤');
-		}
-	})//end of click
-	
-	$.fn.serializeObject = function()
-	{
-	    var o = {};
-	    var a = this.serializeArray();
-	    $.each(a, function() {
-	        if (o[this.name] !== undefined) {
-	            if (!o[this.name].push) {
-	                o[this.name] = [o[this.name]];
-	            }
-	            o[this.name].push(this.value || '');
-	        } else {
-	            o[this.name] = this.value || '';
-	        }
-	    });
-	    return o;
-	};
-})
-</script>
+			
+			$.ajax({
+				url: '/products/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					var select = $('#prodId').empty();
+					for(i=0; i<response.length; i++){
+						select.append($('<option></option>').attr('value', response[i].prodId).text(i+1 + '. ' + response[i].prodName));
+					}
+					select.val("${review.prodId}");
+				}
+			});
+			
+			
+			//$('#mainIgdt').val("${product.mainIgdt}");   //??????
+			
+			// Focus on first input
+			$('#reviewTitle').focus();
+			
+			// DateTimePicker
+            $('#datetimepicker').datetimepicker(
+            {
+            	format: 'yyyy-mm-dd',
+            	autoclose: true,
+            	minView: 20,
+            });
+			
+			
+			//start  start  start  start   start  start
+			
+			
+			// Validate
+			var validate = $('#editForm').validate(
+			{
+				onfocusout: function (element) {
+			        $(element).valid();
+			    },
+				rules: {
+					reviewRating: { range: [0,1,2,3,4, 5] },  //this is ok
+					score: { range: [0, 5] },
+					concentration: { range: [0, 1] },
+					prodDesc: { rangelength: [1, 100] },
+				},
+				messages: {
+					reviewRating: { range: "select 0,1,2,3,4,5" }, //this is ok
+					score: { range: "range 0-5" },
+					concentration: { range: "range 0-1" },
+					prodDesc: { rangelength: "text length 1-100" },
+				}
+			});
+			
+			// Save Click
+			$('#save').click(function(){
+				
+				var validate = $('#editForm').validate().form();
+				console.log(validate);
+				
+				var data = JSON.stringify($('form').serializeObject());
+				console.log(data);
+				
+				if(validate){
+					$('#prodId').prop('disabled', false);
+					$.ajax({
+						url: '/products/update',
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						dataType: 'json',
+						data: JSON.stringify($('form').serializeObject()),
+						success:function(response){
+							$('#prodId').prop('disabled', true);
+							BootstrapDialog.show({
+					            size: BootstrapDialog.SIZE_SMALL,
+					            type: BootstrapDialog.TYPE_SUCCESS,
+					            message: 'Update Product Success',
+					        });
+							console.log(response);
+						}, 
+						error: function(xhr, textStatus, errorThrown) {
+							BootstrapDialog.show({
+					            size: BootstrapDialog.SIZE_SMALL,
+					            type: BootstrapDialog.TYPE_DANGER,
+					            message: 'Update Product Fail, ' + 'Error! Status = ' + xhr.status,
+					        });
+						} 
+					});
+				}
+			});
+			
+			// Reset Click
+			$('#clear').click(
+				function(){
+					$("#editForm")[0].reset();
+					$('#brandId').val("${product.brandId}");
+					$('#categoryId').val("${product.categoryId}");
+				}
+			);
+			
+			// Serialize
+			$.fn.serializeObject = function() {
+		        var o = {};
+		        var a = this.serializeArray();
+		        $.each(a, function() {
+		            if (o[this.name]) {
+		                if (!o[this.name].push) {
+		                    o[this.name] = [o[this.name]];
+		                }
+		                o[this.name].push(this.value || '');
+		            } else {
+		                o[this.name] = this.value || '';
+		            }
+		        });
+		        return o;
+		    };
+		    
+		});
+
+	</script>
+
 </body>
 </html>
