@@ -16,7 +16,7 @@
 </head>
 <body>
 <h2>Review Add</h2>
-	<form id="theForm" enctype="multipart/form-data">
+	<form id="addForm" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>會員id</td>
@@ -40,8 +40,7 @@
 			</tr>
 			<tr>
 				<td>圖片</td>
-				<td><input type="file" name="reviewImg" value="${param.reviewImg}"></td>
-				<td><input type="button" id="start" value="上傳" /></td>
+				<td><input type="file" name="reviewImgFile" id="reviewImgFile" accept="image/*"/></td>
 			</tr>
 			<tr>
 				<td>發布時間</td>
@@ -68,16 +67,17 @@
 		<span id="reviewTitle"></span><br/>
 		<span id="review"></span><br/>
 		<span id="reviewRating"></span><br/>
-		<span id="reviewImg"></span><br/>
+<!-- 		<span id="reviewImg"></span><br/> -->
 		<span id="reviewTime"></span><br/>
 		<span id="rewCollect"></span><br/>
 		<span id="reviewShow"></span><br/>
+		<img name="reviewImgFile" width="50">
 		</div>
 	</form>
 <script type="text/javascript">
 $(function(){
 	$(':text:first').focus();
-	$('#theForm').validate({
+	$('#addForm').validate({
 		onfocusout : function(element){
 			$(element).valid();
 		},
@@ -144,16 +144,29 @@ $(function(){
 
 	$('#save').click(function(){
 		console.log(JSON.stringify($('#theForm').serializeObject()));
-		if($('#theForm').validate().form()){
+		if($('#addForm').validate().form()){
+			
+			//create一個空的FormData
+			var formData = new FormData();
+			//append表單資料
+			//type=file
+			formData.append('reviewImgFile',$('#reviewImgFile').prop('files')[0]);
+			//type=text--> now Blob ([表單序列化] , {設定格式為json})
+			formData.append('review',
+					new Blob([JSON.stringify($('#addForm').serializeObject())],
+							{type: 'application/json'}));
+			
 			$.ajax({
 				url:'/reviews/insert',
 				type:'post',
-				contentType:'application/json;charset=utf-8',
-				data:JSON.stringify($('#theForm').serializeObject()),
+				
+				contentType: false,
+				processData: false,
+				data:formData,
 				dataType:'json',
 				success:function(data){
 					console.log(data);
-					$(':text').val("");
+					$(':text').val(""); //$('#addForm')[0].reset();	????
 					$('h2').text('Insert Success');
 					
 					$('#memberId').text('會員id='+data.memberId);
@@ -161,10 +174,13 @@ $(function(){
 					$('#reviewTitle').text('心得標題='+data.reviewTitle);
 					$('#review').text('內文='+data.review);
 					$('#reviewRating').text('評分='+data.reviewRating);
-					$('#reviewImg').text('圖片='+data.reviewImg);
 					$('#reviewTime').text('發布時間='+data.reviewTime);
 					$('#rewCollect').text('收藏數='+data.rewCollect);
 					$('#reviewShow').text('flag='+data.reviewShow);
+					$('img[name="reviewImgFile"]').attr('src','/reviews/show?reviewId='+data.reviewId);
+					//$('#reviewImg').text('圖片='+data.reviewImg);
+					
+					
 				}
 			});
 		}else{

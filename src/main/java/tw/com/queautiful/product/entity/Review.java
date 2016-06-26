@@ -46,7 +46,7 @@ public class Review {
 	private Integer rewCollect;
 	
 	@Column(name="REVIEWSHOW")
-	private String reviewShow;
+	private Boolean reviewShow;
 	
 	@Override
 	public String toString() {
@@ -133,11 +133,11 @@ public class Review {
 		this.rewCollect = rewCollect;
 	}
 
-	public String getReviewShow() {
+	public Boolean getReviewShow() {
 		return reviewShow;
 	}
 
-	public void setReviewShow(String reviewShow) {
+	public void setReviewShow(Boolean reviewShow) {
 		this.reviewShow = reviewShow;
 	}
 
