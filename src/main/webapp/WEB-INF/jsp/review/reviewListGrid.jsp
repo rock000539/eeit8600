@@ -1,19 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Review List</title>
-<style> 
-  table{border:3px solid black;   
-  	  width:900px;}   
 
-  th,td{border:1px solid black;   
-  	  text-align:center;}   
-</style> 
-
-	<!-- Header、NavBar js、css -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Review List</title>
+	
+	<!-- Header、NavBar js -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/sb-admin-2.js"></script>
@@ -21,27 +16,43 @@
 	<!-- jqGrid js、css -->
     <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
     <script src="/js/trirand/jquery.jqGrid.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/trirand/ui.jqgrid-bootstrap.css" />
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
 	
-	<!-- 一定要放在jqGrid的後面  -->
+	<!-- 一定要放在jqGrid的js後面  -->
 	<script src="/js/metisMenu.min.js"></script>
 	
-	<!-- Header、NavBar js、css -->
+	<!-- Header、NavBar css -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/metisMenu.min.css" rel="stylesheet">
 	<link href="/css/sb-admin-2.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/bms-customize.css" rel="stylesheet" >
+	
+	<!-- 一定要放在Header、NavBar css的後面  -->
+    <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
 	
 	<script>
 		$.jgrid.defaults.width = 780;
 	</script>
-
+	
+	<style>
+		.ui-th-column {
+			text-align: center;
+		}
+		.center .ui-jqgrid {
+    		margin-left: auto;
+    		margin-right: auto;
+		}
+/* 		.ui-jqgrid tr.jqgrow td { */
+/* 			line-height: 50px; */
+/* 			text-align: center; */
+/* 		} */
+	</style>
+	
 </head>
 <body>
-
+	
 	<!-- 內文全部用wrapper包起來 -->
 	<div id="wrapper">
 	
@@ -56,46 +67,12 @@
 	            <div class="col-lg-12">
 	                <!-- **每頁不同的內容從這裡開始** -->
 	                
+	                <div id="grid" class="jqGrid" style="margin-top:20px">
+					    <table id="jqGrid"></table>
+					    <div id="jqGridPager"></div>
+					</div>
 	                
-					<h2>Review List</h2>
-					<input type="button" name="add" value="add" onClick="location='/reviews/add'">
-					<table>
-					<thead align='center'>
-						<tr>
-							<th>心得id</th>
-							<th>會員id</th>
-							<th>產品id</th>
-							<th>心得標題</th>
-							<th>內文</th>
-							<th>評分</th>
-							<th>圖片</th>			
-							<th>發布時間</th>
-							<th>收藏數</th>
-							<th>flag</th>
-						</tr>
-					</thead>
-					<tbody align='center'>
-						<c:forEach var='review' items="${reviews}">
-						<tr>
-							<td>${review.reviewId}</td>
-							<td>${review.memberId}</td>
-							<td>${review.prodId}</td>
-							<td>${review.reviewTitle}</td>
-							<td>${review.review}</td>
-							<td>${review.reviewRating}</td>
-							<td>${review.reviewImg}</td>
-							<td>${review.reviewTime}</td>
-							<td>${review.rewCollect}</td>
-							<td>${review.reviewShow}</td>
-							<td><input type="button" name="edit" value="edit" onClick="location='/reviews/edit?reviewId=${review.reviewId}'"></td>
-							<td><input type="button" name="delete" value="delete" onClick="location='/reviews/delete?reviewId=${review.reviewId}'"></td>
-						</tr>	
-					</c:forEach>
-					</tbody>
-					</table>
-					
-					
-					<!-- **每頁不同的內容 end** -->
+	                <!-- **每頁不同的內容 end** -->
 	            </div>
 	            <!-- /.col-lg-12 -->
 	        </div>
@@ -113,7 +90,7 @@
         $(function () {
 			
             $("#jqGrid").jqGrid({
-                url: '/products/select_jqgrid',
+                url: '/reviews/select_jqgrid',
                 mtype: "GET",
 				styleUI : 'Bootstrap',
                 datatype: "json",
@@ -128,21 +105,24 @@
 					{
 						label: '',
 					    name: '',
-					    width: 100,
+					    width: 75, //member100
 					    align: 'center',
+					    //resizable: false, //brand沒有
 					    formatter: 'actions',
 					    formatoptions: {
 					        keys: true,
 					        editbutton : true,
 					        delbutton : true,
-					        editformbutton: false,
+					        editformbutton: true, ////若設為false(預設)，則可以在當頁當列直接修改-->欄位要加 editable:true
 					        // 各項option請參考 http://goo.gl/FV6iq
 					        editOptions: {
 					            beforeShowForm: function() {
 					            	$('#editmodjqGrid').remove();
-					            	document.location.href='/products/edit?prodId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
+					            	document.location.href='/reviews/edit?reviewId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
 					            },
 					        },
+					        
+					      //設定delbutton點擊後彈出視窗的格式
 					        delOptions: {
 					        	width: 'auto',
 					        	height: 'auto',
@@ -152,103 +132,108 @@
 					        	bSubmit: 'Delete',
 					        	bCancel: 'Cancel',
 					        	closeOnEscape: true,
-					        	url: '/products/delete',
+					        	url: '/reviews/delete',
 					        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-					        	serializeDelData: function(postdata) { return JSON.stringify({ 'prodId': $(this).getRowData(postdata.id).prodId }); },
-					        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
+					        	serializeDelData: function(postdata) { return JSON.stringify({ 'reviewId': $(this).getRowData(postdata.id).reviewId }); },
+					        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); 
+					        	console.log(response); return [true, '', false]; }
 					        },
 					    }       
 					},
 					{ 
 						label: 'ID',
-						name: 'prodId',
-						width: 40,
+						name: 'reviewId',
+						width: 35, //brand 80,member.product50
 						align: 'center',
+						resizable: false,
 						key: true,
 					},
 					{ 
-						label: 'Name',
-						name: 'prodName',
+						label: 'MemberID',
+						name: 'memberId',
 						width: 80,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
-						label: 'BID', 
-						name: 'brandId', 
-						width: 40,
-						align: 'center',
-					},
-					{ 
-						label: 'CID', 
-						name: 'categoryId', 
-						width: 40,
-						align: 'center',
-					},
-					{ 
-						label: 'Weight', 
-						name: 'weight', 
-						width: 50,
-						align: 'center',
-					},
-					{ 
-						label: 'Score', 
-						name: 'score', 
-						width: 50,
-						align: 'center',
-					},
-					{ 
-						label: 'Price', 
-						name: 'price', 
+						label: 'ProdID', 
+						name: 'prodId', 
 						width: 60,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
-						label: 'Capacity', 
-						name: 'capacity', 
-						width: 60,
-						align: 'center',
-					},
-					{ 
-						label: 'Date', 
-						name: 'launchDate', 
+						label: 'ReviewTitle', 
+						name: 'reviewTitle', 
 						width: 90,
 						align: 'center',
+						resizable: false,
 					},
 					{ 
-						label: 'ProdDesc', 
-						name: 'prodDesc', 
-						width: 80,
+						label: 'Review', 
+						name: 'review', 
+						width: 65,
 						align: 'center',
-						hidden: true,
+						//resizable: false,
 					},
 					{ 
-						label: 'MainIgdt', 
-						name: 'mainIgdt', 
-						width: 80,
+						label: 'ReviewRating', 
+						name: 'reviewRating', 
+						width: 105,
 						align: 'center',
+						//resizable: false,
 					},
 					{ 
-						label: 'Concn', 
-						name: 'concentration', 
+						label: 'ReviewImgPath', 
+						name: 'reviewImg', 
+						width: 150,
+						align: 'center',
+						//resizable: false,
+					},
+					{ 
+						label: 'ReviewImg', 
+						//name: '', 
 						width: 90,
 						align: 'center',
+						resizable: false,
+						fixed: true,
+			            formatter: function (cellvalue, options, rowObject) {
+			            	var str = '/reviews/show?reviewId='+ rowObject.reviewId;
+			                return "<img height='30' src=" + str + " />";
+			            },
 					},
 					{ 
-						label: 'Img', 
-						name: 'prodImg', 
-						width: 80,
+						label: 'ReviewTime', 
+						name: 'reviewTime', 
+						width: 95,
 						align: 'center',
-					}
+						resizable: false,
+					},
+					{ 
+						label: 'ReviewCollect', 
+						name: 'rewCollect', 
+						width: 110,
+						align: 'center',
+					},
+					{ 
+						label: 'ReviewShow', 
+						name: 'reviewShow', 
+						width: 100,
+						align: 'center',
+						resizable: false,
+					},
                 ],
                 width: 'auto', // 寬度
-				height: 250, // 高度
-				rowNum: 10, // 每頁顯示列數
+				height: 380, // 高度
+				shrinkToFit: false,
+				rowNum: 3, // 每頁顯示列數
 				rownumbers: true, // 第n列
 				rownumWidth: 35, // 第n列寬度
-				caption: 'Products Grid View', // 最上方的標題和收合Table
+				caption: 'Reviews Grid View', // 最上方的標題和收合Table
 				loadonce: false, // 資料是否只載入一次
 				viewrecords: true, // 右下角的 1-10 共n條
 				pager: '#jqGridPager',
+				sortable: false,
 				beforeRequest: function () {
                     responsive_jqgrid($(".jqGrid"));
                 }
@@ -260,7 +245,7 @@
 			// 請參考 http://goo.gl/gBYXSe
 			{
 	            edit: false,
-	            add: true,
+	            add: false, //true
 	            del: false,
 	            search: true,
 	            refresh: true,
@@ -274,10 +259,11 @@
             },
 	        // options for the Add Dialog
 	        {
-	        	beforeShowForm: function() { 
+	         /*	beforeShowForm: function() { 
 	        		$('#editmodjqGrid').remove();
-	        		document.location.href="/products/add";
+	        		document.location.href="/reviews/add";
 	        	},
+	         */
 	        },
 	     	// options for the Delete Dailog
             {
@@ -295,7 +281,6 @@
 			},
 			// options for the View Dailog
             {
-				width: 300,
 				height: 'auto',
 	        	modal: true,
 	            resize: false,
@@ -308,7 +293,9 @@
 			});
          	
 			// Change Caption Position (TitleBar)
-			$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
+			$("#jqGrid").closest("div.ui-jqgrid-view")
+			.children("div.ui-jqgrid-titlebar")
+			.css("text-align", "center");
         });
         
         // jqGrid RWD

@@ -4,7 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +29,33 @@ import tw.com.queautiful.product.service.ReviewService;
 @Controller
 @RequestMapping("/reviews")
 public class ReviewController {
+	
+	private Logger log=LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ReviewService service;
+	
+	// 提供jqGrid抓取資料使用
+	@RequestMapping("/select_jqgrid")
+	@ResponseBody
+	public Page<Review> select(@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer rows) {
+
+		log.debug("page = {}", page);
+		log.debug("rows = {}", rows);
+
+		Pageable pageable = new PageRequest(page - 1, rows);
+		Page<Review> reviewPage = service.getAll(pageable);
+	
+		log.debug("getSize = {}", reviewPage.getSize()); // 列數(資料筆數)
+		log.debug("getNumber = {}", reviewPage.getNumber()); // 頁數-1
+		log.debug("getTotalPages() = {}", reviewPage.getTotalPages()); // 總共幾頁
+		log.debug("getTotalElements = {}", reviewPage.getTotalElements()); // 全部有幾筆資料
+		log.debug("getNumberOfElements = {}", reviewPage.getNumberOfElements()); // 列數(資料筆數)
+		log.debug("----------------------------------------------------------"); // 測試
+
+		return reviewPage;
+	}
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -34,9 +63,14 @@ public class ReviewController {
 		return "/review/reviewList";
 	}
 	
-	@RequestMapping("/listgrid")
-	public String listGridPage(Model model){
+	@RequestMapping("/listoriginal")
+	public String listOriginal(Model model){
 		model.addAttribute("reviews", service.getAll());
+		return "/review/reviewListOriginal";
+	}
+	
+	@RequestMapping("/listgrid")
+	public String listGrid(){
 		return "/review/reviewListGrid";
 	}
 	
@@ -46,10 +80,17 @@ public class ReviewController {
 		return "/review/reviewTestBoostrap";
 	}
 	
-	@RequestMapping("/delete")
-	public String delete(@RequestParam Long reviewId){
-		service.delete(reviewId);
-		return "redirect:/reviews/list";
+//	@RequestMapping("/delete")
+//	public String delete(@RequestParam Long reviewId){
+//		service.delete(reviewId);
+//		return "redirect:/reviews/list";
+//	}
+	
+	@RequestMapping(value="delete",method=RequestMethod.POST)
+	@ResponseBody	
+	public void delete(@RequestBody Review review){
+		service.delete(review.getReviewId());
+		
 	}
 	
 	@RequestMapping("/edit")
@@ -87,9 +128,21 @@ public class ReviewController {
 		return"/review/reviewAdd";
 	}
 	
-	@RequestMapping(value="/insert",method=RequestMethod.POST)
+	@RequestMapping("/insert")
 	@ResponseBody
-	public Review insert(@RequestBody Review review){
+	public Review insert(@RequestPart("review") Review review, 
+			@RequestPart("reviewImgFile") MultipartFile reviewImgFile){
+		//取得品牌名稱當作檔名
+		String reviewTitle = review.getReviewTitle();
+		
+		//存圖片-->直接使用FileProcessing檔的saveImg方法
+		//傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
+		//傳回檔案儲存的路徑
+		String reviewImg = FileProcessing.saveImg(reviewTitle, "review", reviewImgFile);
+		
+		//將檔案路徑存成Entity的屬性
+		review.setReviewImg(reviewImg);
+		
 		service.insert(review);
 		return review;
 	}

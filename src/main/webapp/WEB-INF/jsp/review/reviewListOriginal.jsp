@@ -3,15 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<!-- **加入5個css ref，請按照此順序** -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/metisMenu.min.css" rel="stylesheet">
-<link href="/css/sb-admin-2.css" rel="stylesheet">
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/css/bms-customize.css" rel="stylesheet" >
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Review List</title>
 <style>
@@ -24,26 +15,8 @@ th,td{border:1px solid black;
 </style>
 </head>
 <body>
-
-<!-- 內文全部用wrapper包起來 -->
-<div id="wrapper">
-
-<!-- 加入上方及側邊Nav-Bar -->	
-<c:import url="../bms_header.jsp" />
-<c:import url="../bms_navbar-side.jsp" />
-<!-- ?? url有沒有更好的寫法 ?? -->
-
-
-<!-- Page Content --> 
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">DashBoard</h1>   <!-- **內文中的標題，請修改** -->
-                <!-- **每頁不同的內容從這裡開始** -->
-
 <h2>Review List</h2>
-<!-- <input type="button" name="add" value="add" onClick="location='/reviews/add'"> -->
+<input type="button" name="add" value="add" onClick="location='/reviews/add'">
 <table>
 <thead align='center'>
 	<tr>
@@ -80,27 +53,5 @@ th,td{border:1px solid black;
 </c:forEach>
 </tbody>
 </table>
-
-
-<!-- **每頁不同的內容 end** -->
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-
-
-<!-- **加入4個js，請按照此順序** -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/metisMenu.min.js"></script>
-<script src="/js/sb-admin-2.js"></script>
-
 </body>
 </html>
