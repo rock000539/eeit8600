@@ -5,23 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Member AddPage</title>
-	<!-- Header, NavBar -->
+
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/metisMenu.min.css" rel="stylesheet">
-	<link href="/css/sb-admin-2.css" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="/css/bms-customize.css" rel="stylesheet" >
 	
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/sb-admin-2.js"></script>
-	
-	<!-- BootStrap 基本檔案  -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
 	<!-- 表單驗證  -->
 	<script 
@@ -35,21 +24,10 @@
     <script
     	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     
-    <!-- Dialog -->
-    <link rel="stylesheet" 
-		href="/css/bootstrap-dialog.min.css" />
-    <script
-    	src="/js/bootstrap-dialog.min.js"></script>
-    	
-    <!-- FileInput -->
-    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
-    <script src="/js/fileinput.min.js"></script>
-    
-    <script src="/js/metisMenu.min.js"></script>
 <style>
 	label{
 		font-family: Microsoft JhengHei;
-		color: #414C59;
+		color: #00BCA4;
 	}
 	label.error {
 		color: #FF8989; /*#A94442;*/
@@ -59,23 +37,28 @@
 	.popover {
     	white-space: pre-line;    
 	}
+	span.fa{
+		color: #00CACA;
+	}
+	.page-header{
+		font-family: monospace;
+	}
+	#datetimepicker {
+		overflow: scroll;
+    	position: relative;
+	}
+	
 </style>
 </head>
 <body>
-<div id="wrapper">
-<c:import url="../bms_header.jsp" />
-<c:import url="../bms_navbar-side.jsp" />
-<!-- Page Content --> 
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">會員註冊</h1>
-                <!-- **每頁不同的內容從這裡開始** -->
-<div class="col-md-10">
+
+<div class="col-md-12">
+<div class="page-header">
+  <h2>MemberRegister <small>SignUp TestPage </small></h2>
+</div>
 <form accept-charset="UTF-8" class="form-horizontal" id="signup">
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="email">電子信箱</label>
+	    <label class="col-sm-3 control-label" for="email">電子信箱</label>
 	    <div class="col-sm-7" >
 	    	<div class=" input-group">
 		    	<input type="text" class="form-control" id="email" 
@@ -89,7 +72,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="password">密碼</label>
+	    <label class="col-sm-3 control-label" for="password">密碼</label>
 	    <div class="col-sm-7">
 	    	<div class=" input-group">
 		    	<input type="text" class="form-control" id="password" 
@@ -102,7 +85,7 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="psw_confirm">密碼確認</label>
+	    <label class="col-sm-3 control-label" for="psw_confirm">密碼確認</label>
 	    <div class="col-sm-7">
 	    	<div class=" input-group">
 		    	<input type="text" class="form-control" id="psw_confirm" 
@@ -115,28 +98,28 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="nickname">暱稱</label>
+	    <label class="col-sm-3 control-label" for="nickname">暱稱</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="nickname" 
 	    		name="nickname" value="${member.nickname}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="lastName">姓</label>
+	    <label class="col-sm-3 control-label" for="lastName">姓</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="lastName" 
 	    		name="lastName" value="${member.lastName}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="firstName">名</label>
+	    <label class="col-sm-3 control-label" for="firstName">名</label>
 	    <div class="col-sm-7">
 		    <input type="text" class="form-control" id="firstName" 
 		    	name="firstName" value="${member.firstName}">
 	    </div>
 	</div>
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="firstName">性別</label>
+		<label class="col-sm-3 control-label" for="firstName">性別</label>
 		<div class="col-sm-7">
 			<label class="radio-inline">
 		    <input type="radio" checked
@@ -150,41 +133,41 @@
 	</div>
 											
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="birthDay">生日</label>
+	    <label class="col-sm-3 control-label" for="birthDay">生日</label>
 	    <div class="col-sm-7">
 	    	<div class="input-group date" id="datetimepicker">
 			    <input type="text" class="form-control" id="birthDay" 
 			    	name="birthDay" value="${member.birthDay}">
 			    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="fa fa-calendar"></span>
                 </span>
 			</div>
 			<label class="error" for="birthDay"></label>
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="skinType">肌膚性質</label>
+	    <label class="col-sm-3 control-label" for="skinType">肌膚性質</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="skinType" 
 	    		name="skinType" value="${member.skinType}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="memberImgFile">大頭貼照</label>
+	    <label class="col-sm-3 control-label" for="memberImgFile">大頭貼照</label>
 	    <div class="col-sm-7">
 	    	<input type="file" id="memberImgFile" 
 	    		name="memberImgFile" value="${member.memberImgFile}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="phone">電話</label>
+	    <label class="col-sm-3 control-label" for="phone">電話</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="phone" 
 	    		name="phone" value="${member.phone}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="addr">地址</label>
+	    <label class="col-sm-3 control-label" for="addr">地址</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="addr" 
 	    		name="addr" value="${member.addr}">
@@ -192,7 +175,7 @@
 	</div>
 	
 	<div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
+	    <div class="col-sm-offset-4 col-sm-10">
 	      <input type="button" id="insertBtn" name="insert" class="btn btn-default"
 			value="insert">
 		  <input type="button" name="cancel" class="btn btn-default" 
@@ -205,20 +188,6 @@
 	<div id="resultMsg"></div>
 	<div id="data"></div>
 	<img name="memberImgFile" width="100">
-	
-<!-- **每頁不同的內容 end** -->
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-
 
 <script type="text/javascript">
 	$(function() {
@@ -250,17 +219,6 @@
 		    	nickname:{required: '請輸入您在網頁中的顯示名稱'},
 		    	birthDay:{required: '請輸入您的生日'}
 		    },
-		    
-		    /*	        errorPlacement: function(error, element){
-			    	error.appendTo(element.parent('div.input-group'));
-			    	element.attr('title', error.text());
-			        $('.error').tooltip({   
-			        	trigger: 'focusout',
-			            placement: 'top',
-		        }); 
-		    },*/
-		   
-		    
 		});
 		//additional password customized rule
 		$.validator.addMethod('pswrule', function(value, element){
@@ -275,7 +233,10 @@
         	autoclose: true,
         	todayBtn: "linked",
         	minView: 2,
-        	pickerPosition: "bottom-left",
+        	pickerPosition: "top-left",
+        	beforeShow: function(input, obj) {
+                $(input).after($(input).datetimepicker('widget'));
+            }
         });
 		
 		//submit

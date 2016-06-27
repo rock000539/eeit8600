@@ -61,16 +61,22 @@ public class MemberController {
 		return service.accountCheck(email);
 	}
 	
+	
+	
 	@RequestMapping("/list")
 	public String listPage(Model model){
 		model.addAttribute("members", service.getAll());
 		return "/member/memberList";
 	}
 	
+	@RequestMapping("/register")
+	public String memberRegister(){
+		return "/member/memberRegister";
+	}
 	
 	@RequestMapping("/add")
 	public String addPage(){
-		return "/member/memberRegister";
+		return "/member/memberAdd";
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
