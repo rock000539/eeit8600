@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Member;
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
@@ -58,16 +61,22 @@ public class MemberController {
 		return service.accountCheck(email);
 	}
 	
+	
+	
 	@RequestMapping("/list")
 	public String listPage(Model model){
 		model.addAttribute("members", service.getAll());
 		return "/member/memberList";
 	}
 	
+	@RequestMapping("/register")
+	public String memberRegister(){
+		return "/member/memberRegister";
+	}
 	
 	@RequestMapping("/add")
 	public String addPage(){
-		return "/member/memberRegister";
+		return "/member/memberAdd";
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
@@ -119,6 +128,13 @@ public class MemberController {
 		Member member = service.getById(memberId);
 		String memberImg = member.getMemberImg();
 		FileProcessing.showImg(resp, memberImg);
+	}
+	
+	// 提供一般抓取資料使用
+	@RequestMapping("/select")
+	@ResponseBody
+	public List<Member> select() {
+		return service.getAll();
 	}
 
 }

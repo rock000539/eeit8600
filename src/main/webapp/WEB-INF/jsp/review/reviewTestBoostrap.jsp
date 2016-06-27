@@ -1,32 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="/js/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <!-- **taglib沒有的話記得要加入** -->
+<!-- **加入2個css，請按照此順序** -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" >
+<link href="/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/css/review-customize.css" rel="stylesheet">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+
+<title>Review List</title>
 </head>
 <body>
+
+
 <div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="" alt="">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
+	<c:forEach var='review' items="${reviews}">
+
+	  <div class="col-sm-6 col-md-3">
+	    <div class="thumbnail">
+	      	<img src="/reviews/show?reviewId=${review.reviewId}">
+	      	<span class="reviewtime">${review.reviewTime}</span>
+	      	<div class="caption">
+<!-- 		        <h3>Thumbnail label</h3> -->
+				<div>
+					
+					<img src="/img/loading.gif">
+					
+				</div>
+		        <p>${review.review}Some sample text. Some sample textSome sample text. Some sample textSome sample text.
+		        Some sample textSome sample text.Some sample textSome sample text. Some sample textSome sample text. 
+		        </p>
+<!-- 		        <p> -->
+<!-- 			        <a href="http://www.google.com" class="btn btn-primary" role="button">Button</a>  -->
+<!-- 			        <a href="http://www.yahoo.com.tw" class="btn btn-default" role="button">Button</a> -->
+<!-- 		        </p> -->
+	        </div>
+	        <!-- caption end --> 
+	    </div>
+	    <!-- thumbnail end --> 
+	  </div>
+	  <!-- col-sm-6 col-md-3 end --> 
+	  </c:forEach>
+
 </div>
+<!-- row end --> 
+
+
+
+<!-- **加入2個js，請按照此順序** -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

@@ -64,124 +64,21 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Member AddPage</h1>
                 <!-- **每頁不同的內容從這裡開始** -->
-<div class="col-md-8">
-<form accept-charset="UTF-8" class="form-horizontal" id="addForm">
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="email">電子信箱</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="email" 
-	    		name="email" value="${member.email}">
-		</div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="password">密碼</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="password" 
-	    		name="password" value="${member.password}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="nickname">暱稱</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="nickname" 
-	    		name="nickname" value="${member.nickname}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="lastName">姓</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="lastName" 
-	    		name="lastName" value="${member.lastName}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="firstName">名</label>
-	    <div class="col-sm-10">
-		    <input type="text" class="form-control" id="firstName" 
-		    	name="firstName" value="${member.firstName}">
-	    </div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-2 control-label" for="firstName">性別</label>
-		<div class="col-sm-10">
-	    	<label class="radio-inline">
-		    <input type="radio"
-		    	name="gender" value="M" ${member.gender=='M'? 'checked':''}> 男性
-		    </label>
-		    <label class="radio-inline">
-		    <input type="radio"
-		    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
-			</label>
-		</div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="birthDay">生日</label>
-	    <div class="col-sm-10">
-	    	<div class="input-group date" id="datetimepicker">
-			    <input type="text" class="form-control" id="birthDay" 
-			    	name="birthDay" value="${member.birthDay}">
-			    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-			</div>
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="skinType">肌膚性質</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="skinType" 
-	    		name="skinType" value="${member.skinType}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="memberImgFile">大頭貼照</label>
-	    <div class="col-sm-10">
-	    	<input type="file" id="memberImgFile" 
-	    		name="memberImgFile" value="${member.memberImgFile}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="phone">電話</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="phone" 
-	    		name="phone" value="${member.phone}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="addr">地址</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="addr" 
-	    		name="addr" value="${member.addr}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="memberSuspend">停權</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="memberSuspend" 
-	    		name="memberSuspend" value="${member.memberSuspend}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-2 control-label" for="memberSuspendExp">停權到期日</label>
-	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="memberSuspendExp" 
-	    		name="memberSuspendExp" value="${member.memberSuspendExp}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <input type="button" id="insertBtn" name="insert"
-			value="insert">
-		  <input type="button" name="cancel"
-			value="Cancel" onclick='window.location="/members/list"'>
-	    </div>
-	</div>
-</form>
+
+<!-- Button trigger modal -->
+<a href="/members/register" type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#regiForm">
+  Member Regiser
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="regiForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+  		
+    <div class="modal-content">
+     
+    </div>
+  </div>
 </div>
-	<br>
-	<div id="resultMsg"></div>
-	<div id="data"></div>
-	<img name="memberImgFile" width="100">
 	
 <!-- **每頁不同的內容 end** -->
             </div>

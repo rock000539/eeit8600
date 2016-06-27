@@ -1,7 +1,5 @@
 package tw.com.queautiful.product.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
 
 import tw.com.queautiful.product.dao.MemberDao;
 import tw.com.queautiful.product.entity.Member;

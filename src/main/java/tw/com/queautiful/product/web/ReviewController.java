@@ -24,6 +24,7 @@ import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewService;
 
 @Controller
@@ -34,6 +35,8 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService service;
+	@Autowired
+	private ProductService service1;
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -76,6 +79,7 @@ public class ReviewController {
 	
 	@RequestMapping("/testboostrap")
 	public String testBoostrap(Model model){
+		model.addAttribute("produts", service1.getAll());
 		model.addAttribute("reviews", service.getAll());
 		return "/review/reviewTestBoostrap";
 	}
