@@ -39,6 +39,9 @@ public class Member {
 	@Column(name="BIRTHDAY")
 	private java.sql.Date birthDay;
 	
+	@Column(name="age")
+	private Integer age;
+	
 	@Column(name="SKINTYPE", length=30)
 	private String skinType;
 	
@@ -73,14 +76,13 @@ public class Member {
 	@Transient
 	private MultipartFile memberImgFile;
 	
-	
 
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", nickname=" + nickname
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthDay="
-				+ birthDay + ", skinType=" + skinType + ", memberImg=" + memberImg + ", phone=" + phone + ", addr="
-				+ addr + ", memberRegiDate=" + memberRegiDate + ", memberSuspend=" + memberSuspend
+				+ birthDay + ", age=" + age + ", skinType=" + skinType + ", memberImg=" + memberImg + ", phone=" + phone
+				+ ", addr=" + addr + ", memberRegiDate=" + memberRegiDate + ", memberSuspend=" + memberSuspend
 				+ ", memberSuspendStart=" + memberSuspendStart + ", memberSuspendDays=" + memberSuspendDays
 				+ ", memberSuspendNum=" + memberSuspendNum + ", memberSuspendExp=" + memberSuspendExp
 				+ ", memberImgFile=" + memberImgFile + "]";
@@ -165,6 +167,14 @@ public class Member {
 
 	public void setBirthDay(java.sql.Date birthDay) {
 		this.birthDay = birthDay;
+	}
+	
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public String getSkinType() {

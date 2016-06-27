@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 
@@ -33,7 +36,10 @@ public class MemberService {
 	}
 	
 	public void insert(Member member){
-//		member.setPassword(Base64Utils.encodeToString(member.getPassword().getBytes()));
+		//password encode
+//		member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+		
+		//memberimg set default_img
 		if(member.getMemberImg()==null){
 			member.setMemberImg("src/main/webapp/WEB-INF/img/member/member_default.png");
 		}
@@ -41,19 +47,17 @@ public class MemberService {
 	}
 	
 	public void update(Member member){
-//		Member memberInDB =  memberDao.findOne(member.getMemberId());
-//		log.debug("psw in DB: {}",memberInDB.getPassword());//test
-//		log.debug("member new password: {}",member.getPassword());//test
-//		if(memberInDB!=null)
-//			if(!memberInDB.getPassword().equals(member.getPassword())){
-//				member.setPassword(Base64Utils.encodeToString(member.getPassword().getBytes()));
-//				log.debug("member update encode: {}", member.getPassword().toString());//test
-//			}
 		memberDao.save(member);
 	}
 	
 	public void delete(Long memberId){
 		memberDao.delete(memberId);
+	}
+	
+	public void changePassword(Long memberId, String newPassword){
+		Member member = memberDao.getOne(memberId);
+		member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+		memberDao.save(member);
 	}
 	
 	public Boolean accountCheck(String email){
