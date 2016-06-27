@@ -12,7 +12,7 @@ import tw.com.queautiful.product.entity.ExpDate;
 public class ExpDateService {
 	@Autowired
 	private ExpDateDao DateDao;
-
+	
 	public ExpDate getById(Long dateId) {
 
 		return DateDao.findOne(dateId);
@@ -21,7 +21,7 @@ public class ExpDateService {
 	public List<ExpDate> getAll() {
 		return DateDao.findAll();
 	}
-
+	
 	public void update(ExpDate date) {
 		DateDao.save(date);
 	}
@@ -29,7 +29,7 @@ public class ExpDateService {
 	public void insert(ExpDate date){
 		DateDao.save(date);
 	}
-
+	
 	public void delete(Long dateId) {
 		DateDao.delete(dateId);
 	}

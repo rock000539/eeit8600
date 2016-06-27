@@ -41,8 +41,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 }
 </style>
 </head>
-<body onload='document.loginForm.username.focus();''>
-    <h1>前台登入頁面</h1>    
+<body >
+    <h1>後台登入頁面</h1>    
  <div id="login-box">
     <h2>Login with Username and Password</h2>
     

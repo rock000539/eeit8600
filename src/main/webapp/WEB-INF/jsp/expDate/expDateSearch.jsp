@@ -43,17 +43,19 @@ td {
 					"batchCode" : batchCode
 				},
 				success : function(data) {
-
+				
 					$('#mfd').empty().prepend(data.mfdDate);
 					$('#exp').empty().prepend(data.expDate);
 					$('#proList').empty();
 					for(var i=0;i<data.productList.length;i++){
 						var prodName=data.productList[i].prodName;
 						var prodImg=data.productList[i].prodImg
+						if(prodName!=undefined){
 						$('#proList').append(
 	'<tr><td>'+prodImg+'</td><td>'+prodName+'</td></tr>'+
 	'<td><input type="submit" id="checkProduct" value=觀看產品資料/>'+
-	'</td><td><input type="button" class="saveDate" name='+data.productList[i].prodId+' value="加入最愛"/></td>')     
+	'</td><td><input type="button" class="saveDate" name='+data.productList[i].prodId+' value="加入最愛"/></td>')}   
+	  
 	   }
 
  //-------------------------------------------------登入問題尚未解決
@@ -62,7 +64,7 @@ td {
 
 		$.ajax({
 			url : '/expdate/post',
-			type : 'post',
+			type : 'get',
 			data : {
 				"proIdStr":prodId,
 				"mfdStr":data.mfdDate,
