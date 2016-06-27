@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tw.com.queautiful.App;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.specification.ProductSpecification;
+import tw.com.queautiful.product.specification.ProductSpecs;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(App.class)
@@ -37,10 +38,11 @@ public class ProductServiceTest {
 
 		Product filter = new Product();
 		filter.setProdName("產品1");
-		filter.setBrandId(1L);
+		filter.setBrandId(2L);
 		filter.setProdDesc("說明2");
 
-		Specification<Product> spec = new ProductSpecification(filter);
+		//Specification<Product> spec = new ProductSpecification(filter);
+		Specification<Product> spec = ProductSpecs.byAuto(em, filter);
 		List<Product> list = service.getAll(spec);
 
 		for (Product product : list) {
