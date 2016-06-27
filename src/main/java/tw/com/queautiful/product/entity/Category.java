@@ -5,10 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="CATEGORY")
@@ -24,17 +23,10 @@ public class Category {
 	
 	@Column(name="CATEGORYIMG",length=200)
 	private String categoryImg;
-
-	@Transient
-	private MultipartFile categoryImgFile;
 	
-	public MultipartFile getCategoryImgFile() {
-		return categoryImgFile;
-	}
-
-	public void setCategoryImgFile(MultipartFile categoryImgFile) {
-		this.categoryImgFile = categoryImgFile;
-	}
+	@ManyToOne
+	@JoinColumn(name="TITLEID")
+	private CategoryTitle title;
 
 	public Long getCategoryId() {
 		return categoryId;
@@ -60,12 +52,21 @@ public class Category {
 		this.categoryImg = categoryImg;
 	}
 
+	public CategoryTitle getTitle() {
+		return title;
+	}
+
+	public void setTitle(CategoryTitle title) {
+		this.title = title;
+		if(!title.getCategories().contains(this)) {
+			title.getCategories().add(this);
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "Category [categoryId=" + categoryId + ", categoryName="
-				+ categoryName + ", categoryImg=" + categoryImg + "]";
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryImg=" + categoryImg
+				+ ", title=" + title + "]";
 	}
 	
-
-
 }

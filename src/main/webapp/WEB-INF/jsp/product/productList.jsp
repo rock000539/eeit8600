@@ -16,8 +16,8 @@
 	<!-- jqGrid js、css -->
     <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
     <script src="/js/trirand/jquery.jqGrid.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+	<script src="/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css"> 
 	
 	<!-- 一定要放在jqGrid的js後面  -->
 	<script src="/js/metisMenu.min.js"></script>
@@ -44,10 +44,12 @@
     		margin-left: auto;
     		margin-right: auto;
 		}
-/* 		.ui-jqgrid tr.jqgrow td { */
-/* 			line-height: 50px; */
-/* 			text-align: center; */
-/* 		} */
+		/*
+		.ui-jqgrid tr.jqgrow td {
+			line-height: 50px;
+ 			text-align: center;
+ 		}
+ 		*/
 	</style>
 	
 </head>
@@ -201,7 +203,7 @@
 						align: 'center',
 						resizable: false,
 					},
-					{ 
+					{
 						label: 'ProdDesc', 
 						name: 'prodDesc', 
 						width: 100,
@@ -263,10 +265,14 @@
 			{
 	            edit: false,
 	            add: true,
+	            addtext: '新增',
 	            del: false,
 	            search: true,
+	            searchtext: '搜尋',
 	            refresh: true,
+	            refreshtext: '更新',
 	            view: true,
+	            viewtext: '查詢',
 	            position: 'left',
 	            cloneToTop: false
 	        },

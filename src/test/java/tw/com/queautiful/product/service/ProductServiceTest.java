@@ -24,31 +24,31 @@ import tw.com.queautiful.product.specification.ProductSpecification;
 @SpringApplicationConfiguration(App.class)
 public class ProductServiceTest {
 
-private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private ProductService service;
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Test
 	public void test() {
-		
+
 		Product filter = new Product();
 		filter.setProdName("產品1");
 		filter.setBrandId(1L);
 		filter.setProdDesc("說明2");
-		
+
 		Specification<Product> spec = new ProductSpecification(filter);
 		List<Product> list = service.getAll(spec);
-		
+
 		for (Product product : list) {
 			log.debug("{}", product);
 		}
-		
+
 		log.debug("{}", em);
-		
+
 	}
 
 }
