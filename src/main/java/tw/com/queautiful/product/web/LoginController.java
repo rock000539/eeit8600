@@ -14,7 +14,7 @@ import tw.com.queautiful.product.service.*;
 
 @Controller
 @RequestMapping("/")
-public class loginController
+public class LoginController
 {
     @Autowired
     private MemberService memberService;
