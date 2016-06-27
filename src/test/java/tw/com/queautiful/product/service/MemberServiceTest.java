@@ -24,9 +24,19 @@ public class MemberServiceTest {
 
 	@Test
 	public void testAccountCheck() {
-		assertEquals("此帳號已經有人使用", service.accountCheck("jenny@gmail.com"));
-		assertEquals("此帳號可以使用", service.accountCheck("test@gmail.com"));
-		assertEquals("此帳號可以使用", service.accountCheck(null));
+		assertEquals(false, service.accountCheck("jenny@gmail.com"));
+		assertEquals(true, service.accountCheck("test@gmail.com"));
+		assertEquals(true, service.accountCheck(null));
 	}
+	
+//	@Test
+//	public void testChangePassword(){
+//		service.changePassword(1L, "test1");
+//		assertEquals("test1", service.getById(1L).getPassword());
+//	}
+
+	
+	
+	
 
 }

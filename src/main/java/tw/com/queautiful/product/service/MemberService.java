@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 
@@ -54,11 +53,11 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
-	public void changePassword(Long memberId, String newPassword){
-		Member member = memberDao.getOne(memberId);
-		member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
-		memberDao.save(member);
-	}
+//	public void changePassword(Long memberId, String newPassword){
+//		Member member = memberDao.getOne(memberId);
+//		member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+//		memberDao.save(member);
+//	}
 	
 	public Boolean accountCheck(String email){
 		Member member = memberDao.findByEmailIs(email);
