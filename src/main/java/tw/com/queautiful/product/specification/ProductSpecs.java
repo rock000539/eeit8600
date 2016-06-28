@@ -35,12 +35,15 @@ public class ProductSpecs {
 
 				for (Attribute<T, ?> attr : entityType.getDeclaredAttributes()) {
 					Object attrValue = getValue(example, attr);
-					if(attrValue != null) {
-						if(attr.getJavaType() == String.class) {
-							if(StringUtils.isNotEmpty(attrValue.toString())) {
-								predicates.add(cb.like(root.get(attribute(entityType, attr.getName(), String.class)), pattern((String) attrValue)));
+					if (attrValue != null) {
+						if (attr.getJavaType() == String.class) {
+							if (StringUtils.isNotEmpty(attrValue.toString())) {
+								predicates.add(cb.like(root.get(attribute(entityType, attr.getName(), String.class)),
+										pattern((String) attrValue)));
 							} else {
-								predicates.add(cb.equal(root.get(attribute(entityType, attr.getName(), attrValue.getClass())), attrValue));
+								predicates.add(
+										cb.equal(root.get(attribute(entityType, attr.getName(), attrValue.getClass())),
+												attrValue));
 							}
 						}
 					}

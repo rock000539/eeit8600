@@ -139,7 +139,7 @@
 					        },
 					    }       
 					},
-					{ 
+					{
 						label: 'ID',
 						name: 'prodId',
 						width: 50,
@@ -147,7 +147,7 @@
 						resizable: false,
 						key: true,
 					},
-					{ 
+					{
 						label: 'Name',
 						name: 'prodName',
 						width: 80,
@@ -240,7 +240,7 @@
 						width: 150,
 						align: 'center',
 						resizable: false,
-					}
+					},
                 ],
                 width: 'auto', // 寬度
 				height: 380, // 高度

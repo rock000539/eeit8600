@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="CATEGORY")
 public class Category {
@@ -26,6 +28,7 @@ public class Category {
 	
 	@ManyToOne
 	@JoinColumn(name="TITLEID")
+	@JsonBackReference
 	private CategoryTitle title;
 
 	public Long getCategoryId() {

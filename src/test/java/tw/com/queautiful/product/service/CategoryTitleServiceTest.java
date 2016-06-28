@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tw.com.queautiful.App;
 import tw.com.queautiful.product.entity.CategoryTitle;
@@ -27,6 +30,11 @@ public class CategoryTitleServiceTest {
 	public void test() {
 		List<CategoryTitle> list = service.getAll();
 		for(CategoryTitle categoryTitle : list) {
+			log.debug("{}", categoryTitle);
+		}
+		
+		Page<CategoryTitle> pages = service.getAll(new PageRequest(0, 10));
+		for(CategoryTitle categoryTitle : pages.getContent()) {
 			log.debug("{}", categoryTitle);
 		}
 	}

@@ -2,6 +2,8 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,8 @@ import tw.com.queautiful.product.service.CategoryTitleService;
 @Controller
 @RequestMapping("/categorytitles")
 public class CategoryTitleController {
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private CategoryTitleService service;
@@ -38,8 +42,14 @@ public class CategoryTitleController {
 	@RequestMapping("/select_jqgrid")
 	@ResponseBody
 	public Page<CategoryTitle> select(@RequestParam Integer page, @RequestParam Integer rows) {
-		Pageable pageable = new PageRequest(page, rows);
+		
+		Pageable pageable = new PageRequest(page-1, rows);
 		Page<CategoryTitle> titlePage = service.getAll(pageable);
+		
+		for(CategoryTitle categoryTitle : titlePage.getContent()) {
+			log.debug("{}", categoryTitle);
+		}
+		
 		return titlePage;
 	}
 	

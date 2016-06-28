@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "CATEGORYTITLE")
 public class CategoryTitle {
@@ -24,6 +26,7 @@ public class CategoryTitle {
 	private String titleName;
 
 	@OneToMany(mappedBy = "title", fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private List<Category> categories;
 
 	public Long getTitleId() {

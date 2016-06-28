@@ -71,20 +71,17 @@ public class ProductController {
 	public String addPage() {
 		return "/product/productAdd";
 	}
-
-//	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Product insert(@RequestBody Product product) {
-//		service.insert(product);
-//		return product;
-//	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public Product insert(@RequestPart Product product, @RequestPart MultipartFile prodImgFile) {
-		String prodName = product.getProdName();
-		String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
-		product.setProdImg(prodImg);
+		
+		if(prodImgFile!=null) {
+			String prodName = product.getProdName();
+			String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
+			product.setProdImg(prodImg);
+		}
+		
 		service.insert(product);
 		return product;
 	}
@@ -97,7 +94,14 @@ public class ProductController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Product update(@RequestBody Product product) {
+	public Product update(@RequestPart Product product, @RequestPart MultipartFile prodImgFile) {
+		
+		if(prodImgFile!=null) {
+			String prodName = product.getProdName();
+			String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
+			product.setProdImg(prodImg);
+		}
+		
 		service.update(product);
 		return product;
 	}
