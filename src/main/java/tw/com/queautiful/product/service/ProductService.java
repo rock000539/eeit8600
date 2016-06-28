@@ -44,4 +44,8 @@ public class ProductService {
 	public void delete(Long productId) {
 		dao.delete(productId);
 	}
+	
+	public List<Product> findByProdNameEndsWith(String prodName){
+		return dao.findByProdNameEndsWith(prodName);
+	}
 }
