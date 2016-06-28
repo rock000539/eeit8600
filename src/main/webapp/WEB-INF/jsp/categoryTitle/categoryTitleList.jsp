@@ -81,161 +81,173 @@
 	</div>
 	<!-- /#wrapper -->
 	
-<!--     <script type="text/javascript"> -->
+	<script type="text/javascript">
     
-//         $(function () {
+    	$(function () {
 			
-//             $("#jqGrid").jqGrid({
-//                 url: '/categorytitles/select',
-//                 mtype: "GET",
-// 				styleUI : 'Bootstrap',
-//                 datatype: "json",
-// //                 jsonReader: {
-// // 					root: "content",
-// // 			      	page: "number"+1,
-// // 			      	total: "totalPages",
-// // 			      	records: "totalElements",
-// // 				    repeatitems: false,
-// // 			    },
-//                 colModel: [
-// 					{
-// 						label: '',
-// 					    name: '',
-// 					    width: 75,
-// 					    align: 'center',
-// 					    resizable: false,
-// 					    formatter: 'actions',
-// 					    formatoptions: {
-// 					        keys: true,
-// 					        editbutton : true,
-// 					        delbutton : true,
-// 					        editformbutton: true,
-// 					        // 各項option請參考 http://goo.gl/FV6iq
-// 					        editOptions: {
-// 					            beforeShowForm: function() {
-// 					            	$('#editmodjqGrid').remove();
-// 					            	document.location.href='/categorytitles/edit?titleId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
-// 					            },
-// 					        },
-// 					        delOptions: {
-// 					        	width: 'auto',
-// 					        	height: 'auto',
-// 					        	modal: true,
-// 					            resize: false,
-// 					            msg: '刪除此筆資料？',
-// 					        	bSubmit: 'Delete',
-// 					        	bCancel: 'Cancel',
-// 					        	closeOnEscape: true,
-// 					        	url: '/categorytitles/delete',
-// 					        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-// 					        	serializeDelData: function(postdata) { return JSON.stringify({ 'titleId': $(this).getRowData(postdata.id).titleId }); },
-// 					        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
-// 					        },
-// 					    }       
-// 					},
-// 					{ 
-// 						label: 'ID',
-// 						name: 'titleId',
-// 						width: 80,
-// 						align: 'center',
-// 						resizable: false,
-// 						key: true,
-// 					},
-// 					{ 
-// 						label: 'Name',
-// 						name: 'titleName',
-// 						width: 100,
-// 						align: 'center',
-// 						resizable: false,
-// 					},
-//                 ],
-//                 width: 'auto', // 寬度
-// 				height: 380, // 高度
-// 				shrinkToFit: false,
-// 				rowNum: 10, // 每頁顯示列數
-// 				rownumbers: true, // 第n列
-// 				rownumWidth: 35, // 第n列寬度
-// 				caption: 'CategoryTitles Grid View', // 最上方的標題和收合Table
-// 				loadonce: false, // 資料是否只載入一次
-// 				viewrecords: true, // 右下角的 1-10 共n條
-// 				pager: '#jqGridPager',
-// 				sortable: false,
-// 				beforeRequest: function () {
-//                     responsive_jqgrid($(".jqGrid"));
-//                 }
-//             });
+         	$("#jqGrid").jqGrid({
+            	url: '/categorytitles/select',
+                mtype: "GET",
+ 				styleUI : 'Bootstrap',
+                datatype: "json",
+                jsonReader: {
+ 					root: "content",
+			      	page: "number"+1,
+			      	total: "totalPages",
+ 			      	records: "totalElements",
+ 				    repeatitems: false,
+ 				    subgrid : { repeatitems: false },
+ 			    },
+                colModel: [
+ 					{
+ 						label: '',
+					    name: '',
+					    width: 75,
+					    align: 'center',
+					    resizable: false,
+					    formatter: 'actions',
+					    formatoptions: {
+					        keys: true,
+					        editbutton : true,
+					        delbutton : true,
+					        editformbutton: true,
+					        // 各項option請參考 http://goo.gl/FV6iq
+					        editOptions: {
+					            beforeShowForm: function() {
+					            	$('#editmodjqGrid').remove();
+					            	document.location.href='/categorytitles/edit?titleId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
+					            },
+					        },
+					        delOptions: {
+					        	width: 'auto',
+					        	height: 'auto',
+					        	modal: true,
+					            resize: false,
+					            msg: '刪除此筆資料？',
+					        	bSubmit: 'Delete',
+					        	bCancel: 'Cancel',
+					        	closeOnEscape: true,
+					        	url: '/categorytitles/delete',
+					        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
+					        	serializeDelData: function(postdata) { return JSON.stringify({ 'titleId': $(this).getRowData(postdata.id).titleId }); },
+					        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
+					        },
+					    }       
+					},
+					{ 
+						label: 'ID',
+						name: 'titleId',
+						width: 250,
+						align: 'center',
+						resizable: false,
+						key: true,
+					},
+					{ 
+						label: 'Name',
+						name: 'titleName',
+						width: 250,
+						align: 'center',
+						resizable: false,
+					},
+                ],
+                width: 'auto', // 寬度
+				height: 380, // 高度
+				shrinkToFit: false,
+				rowNum: 10, // 每頁顯示列數
+				rownumbers: true, // 第n列
+				rownumWidth: 35, // 第n列寬度
+				caption: 'CategoryTitles Grid View', // 最上方的標題和收合Table
+				loadonce: false, // 資料是否只載入一次
+				viewrecords: true, // 右下角的 1-10 共n條
+				pager: '#jqGridPager',
+				sortable: false,
+				beforeRequest: function () {
+                    responsive_jqgrid($(".jqGrid"));
+                },
+ 			   	subGrid: true, // http://goo.gl/F3B9S8
+				subgridtype: 'json',
+				subGridUrl: function( params ) {
+					console.log(params);
+				},
+				subGridModel:[{
+					name: [ "categoryId", "categoryName", "categoryImg", ],
+					width: [ 100, 100, 150, ],
+					align: [ "center", "center", "center", ],
+					params: false,
+				}],
+            });
             
-//          	// jQuery Grid Navigator
-// 			$('#jqGrid').navGrid('#jqGridPager', 
-// 			// the buttons to appear on the toolbar of the grid
-// 			// 請參考 http://goo.gl/gBYXSe
-// 			{
-// 	            edit: false,
-// 	            add: true,
-// 	            addtext: '新增',
-// 	            del: false,
-// 	            search: true,
-// 	            searchtext: '搜尋',
-// 	            refresh: true,
-// 	            refreshtext: '更新',
-// 	            view: true,
-// 	            viewtext: '查詢',
-// 	            position: 'left',
-// 	            cloneToTop: false
-// 	        },
-// 	     	// options for the Edit Dialog
-//             {
+         	// jQuery Grid Navigator
+			$('#jqGrid').navGrid('#jqGridPager', 
+			// the buttons to appear on the toolbar of the grid
+			// 請參考 http://goo.gl/gBYXSe
+			{
+	            edit: false,
+	            add: true,
+	            addtext: '新增',
+	            del: false,
+	            search: true,
+	            searchtext: '搜尋',
+	            refresh: true,
+	            refreshtext: '更新',
+	            view: true,
+	            viewtext: '查詢',
+	            position: 'left',
+	            cloneToTop: false
+	        },
+	     	// options for the Edit Dialog
+            {
 	     		
-//             },
-// 	        // options for the Add Dialog
-// 	        {
-// 	        	beforeShowForm: function() { 
-// 	        		$('#editmodjqGrid').remove();
-// 	        		document.location.href="/categorytitles/add";
-// 	        	},
-// 	        },
-// 	     	// options for the Delete Dailog
-//             {
+            },
+	        // options for the Add Dialog
+	        {
+	        	beforeShowForm: function() { 
+	        		$('#editmodjqGrid').remove();
+	        		document.location.href="/categorytitles/add";
+	        	},
+	        },
+	     	// options for the Delete Dailog
+            {
 	     		
-//             },
-//          	// options for the Search Dailog
-//             {
-// 				width: 'auto',
-// 				height: 'auto',
-// 				modal: true,
-// 				resize: false,
-// 				searchOnEnter: true,
-// 				closeOnEscape: true,
-// 				closeAfterSearch: true,
-// 			},
-// 			// options for the View Dailog
-//             {
-// 				height: 'auto',
-// 	        	modal: true,
-// 	            resize: false,
-// 	        	bClose: 'Close',
-// 	        	recreateForm: true,
-// 	        	closeOnEscape: true,
-// 	        	beforeShowForm: function(){
-// 	        		$('#trv_').remove();
-// 	        	},
-// 			});
+            },
+         	// options for the Search Dailog
+            {
+				width: 'auto',
+				height: 'auto',
+				modal: true,
+				resize: false,
+				searchOnEnter: true,
+				closeOnEscape: true,
+				closeAfterSearch: true,
+			},
+			// options for the View Dailog
+            {
+				height: 'auto',
+	        	modal: true,
+	            resize: false,
+	        	bClose: 'Close',
+	        	recreateForm: true,
+	        	closeOnEscape: true,
+	        	beforeShowForm: function(){
+	        		$('#trv_').remove();
+	        	},
+			});
          	
-// 			// Change Caption Position (TitleBar)
-// 			$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
-//         });
+			// Change Caption Position (TitleBar)
+			$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
+        });
         
-//         // jqGrid RWD
-//         function responsive_jqgrid(jqgrid) {
-//             jqgrid.find('.ui-jqgrid').addClass('clear-margin span12').css('width', '');
-//             jqgrid.find('.ui-jqgrid-view').addClass('clear-margin span12').css('width', '');
-//             jqgrid.find('.ui-jqgrid-view > div').eq(1).addClass('clear-margin span12').css('width', '').css('min-height', '0');
-//             jqgrid.find('.ui-jqgrid-view > div').eq(2).addClass('clear-margin span12').css('width', '').css('min-height', '0');
-//             jqgrid.find('.ui-jqgrid-sdiv').addClass('clear-margin span12').css('width', '');
-//             jqgrid.find('.ui-jqgrid-pager').addClass('clear-margin span12').css('width', '');
-//         }
+        // jqGrid RWD
+        function responsive_jqgrid(jqgrid) {
+            jqgrid.find('.ui-jqgrid').addClass('clear-margin span12').css('width', '');
+            jqgrid.find('.ui-jqgrid-view').addClass('clear-margin span12').css('width', '');
+            jqgrid.find('.ui-jqgrid-view > div').eq(1).addClass('clear-margin span12').css('width', '').css('min-height', '0');
+            jqgrid.find('.ui-jqgrid-view > div').eq(2).addClass('clear-margin span12').css('width', '').css('min-height', '0');
+            jqgrid.find('.ui-jqgrid-sdiv').addClass('clear-margin span12').css('width', '');
+            jqgrid.find('.ui-jqgrid-pager').addClass('clear-margin span12').css('width', '');
+        }
  
-<!--    </script> -->
+	</script>
 	
 </body>
 </html>
