@@ -178,8 +178,8 @@
 	    <div class="col-sm-offset-4 col-sm-10">
 	      <input type="button" id="insertBtn" name="insert" class="btn btn-default"
 			value="insert">
-		  <input type="button" name="cancel" class="btn btn-default" 
-			value="Cancel" onclick='window.location="/members/list"'>
+		  <input type="button" name="cancel" class="btn btn-default" data-dismiss="modal"
+			value="Cancel" >
 	    </div>
 	</div>
 </form>
@@ -276,7 +276,6 @@
 										}
 									});
 		}});
-
 		$.fn.serializeObject = function() {
 			var o = {};
 			var a = this.serializeArray();
@@ -292,7 +291,6 @@
 			});
 			return o;
 		};
-
 	});	
 </script>
 
