@@ -17,27 +17,33 @@
 <body>
 
 
-<div class="row">
+<div class="row row-body">
 	<c:forEach var='review' items="${reviews}">
 
-	  <div class="col-sm-6 col-md-3">
+	  <div class="col-sm-6 col-md-3 body">
 	    <div class="thumbnail">
-	      	<img src="/reviews/show?reviewId=${review.reviewId}">
-	      	<span class="reviewtime">${review.reviewTime}</span>
+					<!-- Img start -->
+	    	<div class="reviewImg">
+	      		<img class="reviewImg-Img" src="/reviews/show?reviewId=${review.reviewId}">
+	      	</div>
+	      			<!-- Img end -->
+	      	<div class="reviewTime">${review.reviewTime}</div>
+					<!--(心得table要再加"推"?,心得留言table要再加"數量") -->
+	      	<div class="reviewState">1推,1留言</div>
+	      	
 	      	<div class="caption">
-<!-- 		        <h3>Thumbnail label</h3> -->
-				<div>
+					<!--心得發布者資訊start -->
+				<div class="user-info">
 					
 					<img src="/img/loading.gif">
 					
 				</div>
-		        <p>${review.review}Some sample text. Some sample textSome sample text. Some sample textSome sample text.
-		        Some sample textSome sample text.Some sample textSome sample text. Some sample textSome sample text. 
+		        <p>${review.review}
 		        </p>
-<!-- 		        <p> -->
-<!-- 			        <a href="http://www.google.com" class="btn btn-primary" role="button">Button</a>  -->
-<!-- 			        <a href="http://www.yahoo.com.tw" class="btn btn-default" role="button">Button</a> -->
-<!-- 		        </p> -->
+		        <p>
+			        <a href="http://www.google.com" class="btn btn-primary" role="button">Button</a> 
+			        <a href="http://www.yahoo.com.tw" class="btn btn-default" role="button">Button</a>
+		        </p>
 	        </div>
 	        <!-- caption end --> 
 	    </div>

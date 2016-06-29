@@ -10,13 +10,16 @@
 	.error {
 		color: red;
 	}
+	body.modal-open {
+	  padding-right: 0 !important;
+	}
 </style>
 	<!-- Header, NavBar -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/metisMenu.min.css" rel="stylesheet">
 	<link href="/css/sb-admin-2.css" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="/css/bms-customize.css" rel="stylesheet" >
+	<link href="/css/metisMenu.min.css" rel="stylesheet">
 	
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -40,22 +43,25 @@
     <script
     	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     
-    <!-- Dialog -->
-    <link rel="stylesheet" 
-		href="/css/bootstrap-dialog.min.css" />
-    <script
-    	src="/js/bootstrap-dialog.min.js"></script>
-    	
-    <!-- FileInput -->
-    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
-    <script src="/js/fileinput.min.js"></script>
-    
+  
     <script src="/js/metisMenu.min.js"></script>
     
 </head>
-<body>
+<body class="modal-open">
 <div id="wrapper">
-<c:import url="../bms_header.jsp" />
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/bms"><font>Queautiful 後台管理系統</font></a>
+    </div>
+    <!-- /.navbar-header -->
+</nav>
 <c:import url="../bms_navbar-side.jsp" />
 <!-- Page Content --> 
 <div id="page-wrapper">
@@ -67,15 +73,15 @@
 
 <!-- Button trigger modal -->
 <a href="/members/register" type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#regiForm">
-  Member Regiser
+  SignUp
 </a>
 
 <!-- Modal -->
 <div class="modal fade" id="regiForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-  		
     <div class="modal-content">
-     
+	    <div class="modal-body">
+	    </div>
     </div>
   </div>
 </div>
@@ -94,106 +100,6 @@
 <!-- /#wrapper -->
 
 
-<script type="text/javascript">
-	$(function() {
-		$('#email').focus();
-		
-		// DateTimePicker
-        $('#datetimepicker').datetimepicker(
-        {
-        	format: 'yyyy-mm-dd',
-        	autoclose: true,
-        	todayBtn: "linked",
-        	minView: 2,
-        });
-		
-/*		
-		
-		$('#addForm').validate(
-			{event: "blur",
-			 rules:{
-				email:{required:true, email:true},
-				nickname:{required:true},
-				lastName:{required:true},
-				firstName:{required:true},
-				gender:{required:true},
-				birthDay:{required:true},
-				skinType:{required:true},
-				memberImg:{required:true},
-				phone:{required:true},
-				addr:{required:true},
-				memberSuspend:{required:true},
-				memberSuspendExp:{required:true}
-			},messages:{
-				email:"必填項目",
-				nickname:"",
-				lastName:"",
-				firstName:"",
-				gender:"",
-				birthDay:"",
-				skinType:"",
-				memberImg:"",
-				phone:"",
-				addr:"",
-				memberSuspend:"",
-				memberSuspendExp:""
-			}}
-		);
-*/
-		$('#insertBtn').on('click',function() {
-			var formdata = new FormData(); 
-			formdata.append('memberImgFile', $('#memberImgFile').prop('files')[0]); 
-			formdata.append('member', new Blob([JSON.stringify($('#addForm').serializeObject())],
-							{type: 'application/json'})); 			
-			$.ajax({
-				url : "/members/insert",
-				type : "POST",
-				contentType : false,
-				processData : false, 
-				data : formdata,
-				dataType: 'json',
-				success : function(result) {
-				//$(':text:gt(0)').val(" ");//clear the form except id
-				$('#resultMsg').empty().append("<h2>update success</h2>");
-				var tb = $('#data').append('<table></table>');
-				tb.empty();
-				tb.append('<tr align="center"><td>ID</td><td>電子信箱</td><td>暱稱</td><td>姓</td><td>名</td><td>性別</td><td>生日</td><td>肌膚性質</td><td>圖片</td><td>電話</td><td>地址</td><td>停權</td><td>停權到期日</td></tr>');
-				var row = $('<tr align="center"></tr>').appendTo(tb);
-				$('<td></td>').text(result.memberId).appendTo(row);
-				$('<td></td>').text(result.nickname).appendTo(row);
-				$('<td></td>').text(result.ingredChName).appendTo(row);
-				$('<td></td>').text(result.lastName).appendTo(row);
-				$('<td></td>').text(result.firstName).appendTo(row);
-				$('<td></td>').text(result.gender).appendTo(row);
-				$('<td></td>').text(result.birthDay).appendTo(row);
-				$('<td></td>').text(result.skinType).appendTo(row);
-				$('<td></td>').text(result.memberImg).appendTo(row);
-				$('<td></td>').text(result.phone).appendTo(row);
-				$('<td></td>').text(result.addr).appendTo(row);
-				$('<td></td>').text(result.memberSuspend).appendTo(row);
-				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
-										}
-									});
-		});
-
-		$.fn.serializeObject = function() {
-			var o = {};
-			var a = this.serializeArray();
-			$.each(a, function() {
-				if (o[this.name]) {
-					if (!o[this.name].push) {
-						o[this.name] = [ o[this.name] ];
-					}
-					o[this.name].push(this.value || '');
-				} else {
-					o[this.name] = this.value || '';
-				}
-			});
-			return o;
-		};
-
-	});	
-</script>
 
 </body>
 </html>

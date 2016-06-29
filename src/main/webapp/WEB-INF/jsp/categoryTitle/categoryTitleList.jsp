@@ -96,7 +96,7 @@
 			      	total: "totalPages",
  			      	records: "totalElements",
  				    repeatitems: false,
- 				    subgrid : { repeatitems: false },
+//  				    subgrid : { repeatitems: false },
  			    },
                 colModel: [
  					{
@@ -164,17 +164,17 @@
 				beforeRequest: function () {
                     responsive_jqgrid($(".jqGrid"));
                 },
- 			   	subGrid: true, // http://goo.gl/F3B9S8
-				subgridtype: 'json',
-				subGridUrl: function( params ) {
-					console.log(params);
-				},
-				subGridModel:[{
-					name: [ "categoryId", "categoryName", "categoryImg", ],
-					width: [ 100, 100, 150, ],
-					align: [ "center", "center", "center", ],
-					params: false,
-				}],
+//  			   	subGrid: true, // http://goo.gl/F3B9S8
+// 				subgridtype: 'json',
+// 				subGridUrl: function( params ) {
+// 					console.log(params);
+// 				},
+// 				subGridModel:[{
+// 					name: [ "categoryId", "categoryName", "categoryImg", ],
+// 					width: [ 100, 100, 150, ],
+// 					align: [ "center", "center", "center", ],
+// 					params: false,
+// 				}],
             });
             
          	// jQuery Grid Navigator
