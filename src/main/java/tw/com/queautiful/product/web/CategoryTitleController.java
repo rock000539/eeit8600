@@ -61,18 +61,21 @@ public class CategoryTitleController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public CategoryTitle insert(@RequestBody CategoryTitle title) {
+		System.out.println("insert");
 		service.insert(title);
 		return title;
 	}
 	
 	@RequestMapping("/edit")
-	public String editPage() {
+	public String editPage(@RequestParam Long titleId, Model model) {
+		model.addAttribute("title", service.getById(titleId));
 		return "/categoryTitle/categoryTitleEdit";
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
 	public CategoryTitle update(@RequestBody CategoryTitle title) {
+		System.out.println("update");
 		service.update(title);
 		return title;
 	}
