@@ -74,7 +74,9 @@ public class ProductController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public Product insert(@RequestPart Product product, @RequestPart MultipartFile prodImgFile) {
+	public Product insert(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
+		
+		log.debug("{}", product);
 		
 		if(prodImgFile!=null) {
 			String prodName = product.getProdName();
@@ -94,7 +96,9 @@ public class ProductController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Product update(@RequestPart Product product, @RequestPart MultipartFile prodImgFile) {
+	public Product update(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
+		
+		log.debug("{}", product);
 		
 		if(prodImgFile!=null) {
 			String prodName = product.getProdName();
@@ -115,7 +119,9 @@ public class ProductController {
 	@RequestMapping("/show")
 	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
 		String prodImg = service.getById(prodId).getProdImg();
-		FileProcessing.showImg(resp, prodImg);
+		if(prodImg!=null) {
+			FileProcessing.showImg(resp, prodImg);
+		}
 	}
 
 }

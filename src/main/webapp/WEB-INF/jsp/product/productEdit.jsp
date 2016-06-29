@@ -34,10 +34,15 @@
     <script
     	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     	
+    <!-- Dialog -->
     <link rel="stylesheet" 
 		href="/css/bootstrap-dialog.min.css" />
     <script
     	src="/js/bootstrap-dialog.min.js"></script>
+    	
+    <!-- FileInput -->
+    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
+    <script src="/js/fileinput.min.js"></script>
     	
     <script src="/js/metisMenu.min.js"></script>
 	
@@ -239,15 +244,24 @@
 										<div class="col-sm-1"></div>
 									</div>
 									
-									<!--
 									<div class="form-group">
-										<label class="col-sm-3 control-label" for="prodImgFile">File</label>
-										<div class="col-sm-9">
-											<input class="file optional" id="user_horizontal_file"
-												name="user_horizontal[file]" type="file" />
+										<label class="col-sm-3 control-label" for="prodDesc">
+											prodImgFile
+										</label>
+										<div class="col-sm-8">
+											<input id="prodImgFile" name="prodImgFile" type="file" class="file-loading">
+											<script>
+											$(document).on('ready', function() {
+											    $("#prodImgFile").fileinput({
+											        showUpload: false,
+											        maxFileCount: 1,
+											        mainClass: "input-group-sm",
+											    });
+											});
+											</script>
 										</div>
+										<div class="col-sm-1"></div>
 									</div>
-									-->
 									
 									<div class="form-group">
 										<div class="col-sm-3"></div>	
@@ -355,15 +369,26 @@
 				console.log(data);
 				
 				if(validate){
+					
 					$('#prodId').prop('disabled', false);
+					
+					var formData = new FormData();
+					formData.append('prodImgFile',$('#prodImgFile').prop('files')[0]);
+					formData.append('product',
+							new Blob([JSON.stringify($('#addForm').serializeObject())],
+									{type: 'application/json'}));
+					
 					$.ajax({
 						url: '/products/update',
 						type: 'POST',
-						contentType: 'application/json; charset=utf-8',
+						contentType: false,
+						processData: false,
+						data:formData,
 						dataType: 'json',
-						data: JSON.stringify($('form').serializeObject()),
+// 						contentType: 'application/json; charset=utf-8',
+// 						data: JSON.stringify($('form').serializeObject()),
 						success:function(response){
-							$('#prodId').prop('disabled', true);
+							//$('#prodId').prop('disabled', true);
 							BootstrapDialog.show({
 					            size: BootstrapDialog.SIZE_SMALL,
 					            type: BootstrapDialog.TYPE_SUCCESS,

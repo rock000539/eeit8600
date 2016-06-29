@@ -76,7 +76,7 @@ public class MemberController {
 	
 	@RequestMapping("/add")
 	public String addPage(){
-		return "/member/memberAdd";
+		return "/member/memberAdd";//
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
