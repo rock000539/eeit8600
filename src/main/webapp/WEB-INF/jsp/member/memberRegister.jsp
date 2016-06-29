@@ -47,6 +47,10 @@
 		overflow: scroll;
     	position: relative;
 	}
+	.modal-backdrop
+	{
+	    opacity:0.5 !important;
+	}
 	
 </style>
 </head>
@@ -255,24 +259,28 @@
 				dataType: 'json',
 				success : function(result) {
 				//$(':text:gt(0)').val(" ");//clear the form except id
-				$('#resultMsg').empty().append("<h2>update success</h2>");
-				var tb = $('#data').append('<table></table>');
-				tb.empty();
-				tb.append('<tr align="center"><td>ID</td><td>電子信箱</td><td>暱稱</td><td>姓</td><td>名</td><td>性別</td><td>生日</td><td>肌膚性質</td><td>圖片</td><td>電話</td><td>地址</td><td>停權</td><td>停權到期日</td></tr>');
-				var row = $('<tr align="center"></tr>').appendTo(tb);
-				$('<td></td>').text(result.memberId).appendTo(row);
-				$('<td></td>').text(result.nickname).appendTo(row);
-				$('<td></td>').text(result.ingredChName).appendTo(row);
-				$('<td></td>').text(result.lastName).appendTo(row);
-				$('<td></td>').text(result.firstName).appendTo(row);
-				$('<td></td>').text(result.gender).appendTo(row);
-				$('<td></td>').text(result.birthDay).appendTo(row);
-				$('<td></td>').text(result.skinType).appendTo(row);
-				$('<td></td>').text(result.memberImg).appendTo(row);
-				$('<td></td>').text(result.phone).appendTo(row);
-				$('<td></td>').text(result.addr).appendTo(row);
-				$('<td></td>').text(result.memberSuspend).appendTo(row);
-				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
+				console.log("before");	
+					$('#regiForm').modal('hide');
+					console.log("after");
+				
+// 				$('#resultMsg').empty().append("<h2>update success</h2>");
+// 				var tb = $('#data').append('<table></table>');
+// 				tb.empty();
+// 				tb.append('<tr align="center"><td>ID</td><td>電子信箱</td><td>暱稱</td><td>姓</td><td>名</td><td>性別</td><td>生日</td><td>肌膚性質</td><td>圖片</td><td>電話</td><td>地址</td><td>停權</td><td>停權到期日</td></tr>');
+// 				var row = $('<tr align="center"></tr>').appendTo(tb);
+// 				$('<td></td>').text(result.memberId).appendTo(row);
+// 				$('<td></td>').text(result.nickname).appendTo(row);
+// 				$('<td></td>').text(result.ingredChName).appendTo(row);
+// 				$('<td></td>').text(result.lastName).appendTo(row);
+// 				$('<td></td>').text(result.firstName).appendTo(row);
+// 				$('<td></td>').text(result.gender).appendTo(row);
+// 				$('<td></td>').text(result.birthDay).appendTo(row);
+// 				$('<td></td>').text(result.skinType).appendTo(row);
+// 				$('<td></td>').text(result.memberImg).appendTo(row);
+// 				$('<td></td>').text(result.phone).appendTo(row);
+// 				$('<td></td>').text(result.addr).appendTo(row);
+// 				$('<td></td>').text(result.memberSuspend).appendTo(row);
+// 				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
 										}
 									});
 		}});
