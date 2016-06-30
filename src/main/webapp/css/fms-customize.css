@@ -1,0 +1,218 @@
+/* @import url("font-awesome.min.css"); */
+/* @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Raleway:400,800,900"); */
+@import url("font-awesome.min.css");
+
+@import
+	url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700");
+
+li {
+	list-style-type: none;
+}
+
+a:hover {
+	border-bottom-color: transparent;
+	color: #2ebaae !important;
+}
+
+a:hover:before {
+	color: #2ebaae !important;
+}
+
+/* #header */
+#header h1 a {
+	font-size: 1em;
+}
+
+#header .links ul li a {
+	font-size: 1em;
+	font-family: "Microsoft YaHei";
+}
+
+#header .main ul li span {
+	font-family: "Courier New", monospace;
+	margin-right: 18px;
+	text-align: center;
+}
+
+#header .main ul li .user{
+	border-radius: 100%;
+	/* 	    display: block; */
+	margin: 8px 10px 8px 18px;
+	width: 2.5em;
+}
+
+
+#header .main ul li>div>a {
+	border-bottom: 0;
+}
+
+#header .main ul li>div>a>span {
+	float: right;
+/* 	margin-top: 15px; */
+	font-family: "Courier New", monospace;
+	margin-right: 18px;
+	text-align: center;
+}
+
+
+/* 		上右二inputbox */
+#header form input {
+	margin-top: 10px;
+	font-family: "Microsoft YaHei";
+}
+
+/* 		上右一inputbox */
+form.search>input:first-child {
+	font-family: "Microsoft YaHei";
+}
+
+
+/* #menu */
+#menu>:first-child, #menu>:last-child {
+	padding: 1.5em 2.5em 1.5em 2.5em;
+}
+
+/* 改右側menu內部的樣式 */
+#menu>* {
+	/* 	width:300px; */
+	/* 	margin-right:0; */
+	/* 	padding-right:0; */
+	/* 	padding: 1.5em; */	
+}
+
+#menu .links>li a h3 {
+	font-family: "Microsoft YaHei";
+	font-size: 1em;
+}
+
+#menu .links>li a {
+	font-family: "Microsoft YaHei";
+	font-size: 10px;
+	margin: 0;
+}
+
+ul.actions.vertical li > div >a {
+	border-bottom: 0;
+	text-align: center;
+}
+
+ul.actions.vertical li > div > a > span {
+	float: right;
+/* 	margin-top: 15px; */
+	font-family: "Courier New", monospace;
+	margin-right: 18px;
+	text-align: center;
+	margin: 8px 40% 8px 10%;
+}
+
+ul.actions.vertical li> div> a > .user{
+	border-radius: 100%;
+	width: 2.5em;
+}
+
+
+/* 整個右側menu */
+body.is-menu-visible #menu {
+	width: 300px;
+}
+
+/* .dropotron */
+.dropotron {
+	text-align: left;
+	border: solid 1px #e5e5e5;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.965);
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+	padding: 1em 0 0.5em 0;
+	min-width: 10em; /*調整dropotron寬度 */
+	/* 					margin-top: calc(-0.5em + 1px); */
+	/* 					margin-left: -2px; */
+}
+
+/*調整dropotron位置 */
+.dropotron.level-0 {
+	margin-top: 1em;
+	margin-left: -0.2em;
+}
+
+.dropotron.level-0:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 1.25em;
+	top: calc(-0.75em + 1px);
+	border-left: solid 0.75em rgba(255, 255, 255, 0);
+	border-right: solid 0.75em rgba(255, 255, 255, 0);
+	border-bottom: solid 0.75em #fff;
+}
+
+.dropotron.level-0:before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 1.25em;
+	top: -0.75em;
+	border-left: solid 0.75em rgba(255, 255, 255, 0);
+	border-right: solid 0.75em rgba(255, 255, 255, 0);
+	border-bottom: solid 0.75em #ccc;
+}
+
+.dropotron a {
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	display: block;
+	padding: 0.3em 1em 0.3em 1em;
+	border: 0;
+	border-top: solid 1px #f0f0f0;
+	outline: 0;
+	letter-spacing: 2px;
+}
+
+.dropotron li:first-child>a {
+	border-top: 0;
+	padding-top: 0;
+}
+
+.dropotron li:hover>a {
+	-moz-transition: color 0.25s ease-in-out, border-bottom-color 0.25s
+		ease-in-out;
+	-webkit-transition: color 0.25s ease-in-out, border-bottom-color 0.25s
+		ease-in-out;
+	-ms-transition: color 0.25s ease-in-out, border-bottom-color 0.25s
+		ease-in-out;
+	transition: color 0.25s ease-in-out, border-bottom-color 0.25s
+		ease-in-out;
+}
+
+@media screen and (max-width: 1680px) {
+	#wrapper {
+		padding: 2em 3em 2em 3em;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	#intro {
+		margin-bottom: 0px;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	#intro header h2 {
+		margin-bottom: 10px;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	#header .main ul li .user {
+		border-radius: 100%;
+		/* 	    display: block; */
+		margin: 8px 12px;
+		width: 1.8em;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#header .main .login {
+		display: none;
+	}
+}
