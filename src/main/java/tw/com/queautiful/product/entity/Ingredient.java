@@ -20,7 +20,7 @@ public class Ingredient {
 	@Column(name="INGREDName", length=50)
 	private String ingredName;
 	
-	@Column(name="INGREDCName", length=50)
+	@Column(name="INGREDCHName", length=50)
 	private String ingredChName;
 	
 	@Column(name="INGREDChar", length=100)
