@@ -27,7 +27,7 @@
 <style>
 	label{
 		font-family: Microsoft JhengHei;
-		color: #00BCA4;
+		color: #29AFBB;
 	}
 	label.error {
 		color: #FF8989; /*#A94442;*/
@@ -40,26 +40,33 @@
 	span.fa{
 		color: #00CACA;
 	}
-	.page-header{
+	div.modal-header{
+		margin-bottom:40px;
 		font-family: monospace;
+		color: #FFFFFF;
+		background-color: #98DaD6;
+		text-align: center;
+	}
+	div.modal-footer{
+		background-color: #98DaD6;
+		text-align: center;
 	}
 	#datetimepicker {
 		overflow: scroll;
     	position: relative;
-	}
-	.modal-backdrop
-	{
-	    opacity:0.5 !important;
+    	margin-bottom:0px;
 	}
 	
 </style>
 </head>
 <body>
 
-<div class="col-md-12">
-<div class="page-header">
-  <h2>MemberRegister <small>SignUp TestPage </small></h2>
-</div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h3 class="modal-title">MemberRegister<small>SignUp TestPage </small></h3>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
+            
 <form accept-charset="UTF-8" class="form-horizontal" id="signup">
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="email">電子信箱</label>
@@ -177,20 +184,16 @@
 	    		name="addr" value="${member.addr}">
 	    </div>
 	</div>
-	
-	<div class="form-group">
-	    <div class="col-sm-offset-4 col-sm-10">
-	      <input type="button" id="insertBtn" name="insert" class="btn btn-default"
-			value="insert">
-		  <input type="button" name="cancel" class="btn btn-default" data-dismiss="modal"
-			value="Cancel" >
-	    </div>
-	</div>
 </form>
+            </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button"class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" id="insertBtn" name="insert" >SignUp</button>
+            </div>			<!-- /modal-footer -->
+
+
 </div>
 	<br>
-	<div id="resultMsg"></div>
-	<div id="data"></div>
 	<img name="memberImgFile" width="100">
 
 <script type="text/javascript">

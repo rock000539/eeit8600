@@ -47,7 +47,7 @@
     <script src="/js/metisMenu.min.js"></script>
     
 </head>
-<body class="modal-open">
+<body>
 <div id="wrapper">
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
@@ -72,19 +72,24 @@
                 <!-- **每頁不同的內容從這裡開始** -->
 
 <!-- Button trigger modal -->
-<a href="/members/register" type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#regiForm">
-  SignUp
-</a>
-
+<a data-toggle="modal" class="btn btn-info" href="/members/register" data-target="#regiModal">SignUp !</a>
 <!-- Modal -->
-<div class="modal fade" id="regiForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-	    <div class="modal-body">
-	    </div>
-    </div>
-  </div>
-</div>
+<div class="modal fade" id="regiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
 	
 <!-- **每頁不同的內容 end** -->
             </div>
