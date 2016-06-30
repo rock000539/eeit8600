@@ -24,8 +24,8 @@ INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, TITLEID) VALUES ('facial mask',
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, TITLEID) VALUES ('foundation','src/...', 2)
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, TITLEID) VALUES ('sun protection','src/...', 2)
 
-INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (1000, 10, '心得標題1', '內文1', '5', 'src\main\webapp\WEB-INF\img\review\心得標題1.png', '2016-06-19', '99', 1)
-INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (2000, 20, '心得標題2', '內文2', '4', 'src\main\webapp\WEB-INF\img\review\心得標題2.png', '2016-06-19', '88', 0)
+INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (1000, 10, '(心得標題1)Biore 蜜妮 [防曬系列] 含水防曬美白水凝露', '蜜妮防曬【內文1】前幾年有用過基本款保濕型那款防曬凝露，是個不錯的身體防曬選擇但後來也是換來換去，不固定幾個開架品牌在使用，今年又輪到蜜妮這次買的是新推出的「美白型」防曬凝露，看到美白總是忍不住一試囉含水防曬美白水凝露，$230，容量90ml，容臉和身體都可使用那時候是特價$179時買的，不外乎是看上它容量大又便宜啦它聞起來有些微花香味，凝露質地很好推、不起屑，只是開口的設計不好，很容易擠太多出來..我都拿來塗脖子跟手臂，平常待在室外時間短，使用spf30系數就夠了頂多是買個早餐跟溜小孩而以，所以也不太需要用到高防曬系數囉蠻喜歡它擦起來的觸感，清爽易抹的質地，塗起來又不會太乾聞起來有淡花香味，而不是濃濃的防曬乳液味道，蠻適合夏天擦的眼看夏天快結束了，明年再回購吧', '2', 'src\main\webapp\WEB-INF\img\review\心得標題1.png', '2016-06-18', '99', 0)
+INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (2000, 20, '(心得標題2)[CLINIQUE 倩碧] 水磁場保濕精華霜', '倩碧水磁場【內文2】這罐霜前前後後也用了10罐去了,超好用。。。雖然它的名字是霜,卻像是很濃稠的凝膠,無香精.無色素.無酒精。延展性好,很好推勻。三年前冬天剛使用它時,皮膚因酒糟皮膚炎發作,臉部極度乾燥脫皮紅癢,因成分中有凡士林和吉拉索蘆薈,可以舒緩修護肌膚,想說死馬當活馬醫試試,結果一用超驚豔,一擦上肌膚就感覺很舒緩也很潤澤。原本擦什麼都刺痛紅癢脫皮的臉,不痛也不癢了,過二三天紅疹也變不明顯了,它的修復能力很好。再過一星期,因為保濕做夠了,皮膚變很穩定,皮膚慢慢恢復健康!!!嘴角.人中.鼻翼處也不脫皮了,連之後上妝也很服貼哩~.~...後來,因老公長年是指漏性皮膚炎,冬天也是擦什麼就脫皮紅癢,我就拿這罐給他用,他也感到很舒服很好用,已經使用二年冬天都沒再復發,現在他的皮膚也被這罐保溼精華霜調理的很穩定,膚質水嫩水嫩的^o^肌膚保養最重要就是保濕,保濕只要做好皮膚就會健康。這罐成分單純,會繼續回購,是我冬季的必備品!!!', '4', 'src\main\webapp\WEB-INF\img\review\心得標題2.png', '2016-06-19', '88', 0)
 INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (3000, 30, '心得標題3', '內文3', '3', 'src\main\webapp\WEB-INF\img\review\心得標題3.png', '2016-06-26', '77', 1)
 INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (4000, 40, '心得標題4', '內文4', '3', 'src\main\webapp\WEB-INF\img\review\心得標題4.png', '2016-06-26', '66', 0)
 INSERT INTO REVIEW (MEMBERID, PRODID, REVIEWTITLE, REVIEW, REVIEWRATING, REVIEWIMG, REVIEWTIME, REWCOLLECT, REVIEWSHOW) VALUES (5000, 50, '心得標題5', '內文5', '4', 'src\main\webapp\WEB-INF\img\review\心得標題5.png', '2016-06-26', '55', 1)
@@ -38,7 +38,14 @@ INSERT INTO ARTICLECM (ARTICLEID, ARTICLECMMSG, MEMBERID, ARTICLECMSHOW, ARTICLE
 INSERT INTO ARTICLECM (ARTICLEID, ARTICLECMMSG, MEMBERID, ARTICLECMSHOW, ARTICLECMREPORT) VALUES (88, '內容2', 22, 0, 22)
 INSERT INTO ARTICLECM (ARTICLEID, ARTICLECMMSG, MEMBERID, ARTICLECMSHOW, ARTICLECMREPORT) VALUES (77, '內容3', 33, 1, 33)
 
-INSERT INTO Ingredient (INGREDName, INGREDCName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Water', '水', '溶劑', 0, 0, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Carbomer', '卡波莫, 卡波姆, 聚羧乙烯, 卡波樹脂', '黏度控制,乳化劑', 0, 1, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Cyclomethicone', '矽靈, 環聚二甲基矽氧烷, 環甲矽脂, 環甲基矽氧烷', '溶劑,黏度控制,抗靜電,保溼,柔潤劑', 0, 0, 2)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Natto gum', '納托膠',null, 0, 0, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Glycyrrhiza Glabra Root Extract','光果甘草根萃取', '香料,鎮靜消炎,柔潤劑', 0, 0, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Dimethicone','矽靈,地美司康,二甲基矽酮,二甲矽油,聚二甲基矽氧烷', '柔潤劑', 1, 0, 1)
+
 
 INSERT INTO PRODUCT (PRODNAME, BRANDID, CATEGORYID, WEIGHT, SCORE, PRICE, CAPACITY, LAUNCHDATE, PRODDESC, MAINIGDT, CONCENTRATION, PRODIMG) VALUES ('產品1', 1, 1, 1.0, 1.5, 150, 100, '2016-06-12', '產品說明1', 1, 0.3, 'src\main\webapp\WEB-INF\img\product\產品1.png')
 INSERT INTO PRODUCT (PRODNAME, BRANDID, CATEGORYID, WEIGHT, SCORE, PRICE, CAPACITY, LAUNCHDATE, PRODDESC, MAINIGDT, CONCENTRATION, PRODIMG) VALUES ('產品1', 2, 2, 2.0, 2.5, 250, 200, '2016-06-12', '產品說明2', 2, 0.2, 'src\main\webapp\WEB-INF\img\product\產品2.png')
@@ -75,3 +82,8 @@ INSERT INTO ARTICLE (MEMBERID, ARTICLETYPE, ARTICLETITLE, ARTICLE, ARTICLETIME, 
 --INSERT INTO BOOK(NAME, CATEGORYID) VALUES ('bookA', 1)
 --INSERT INTO BOOK(NAME, CATEGORYID) VALUES ('bookB', 2)
 --INSERT INTO BOOK(NAME, CATEGORYID) VALUES ('bookC', 3)
+
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,1)
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,2)
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,3)
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,4)

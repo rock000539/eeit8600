@@ -256,6 +256,11 @@
 											        showUpload: false,
 											        maxFileCount: 1,
 											        mainClass: "input-group-sm",
+											        initialPreview: [
+											        	"http://localhost:8080/products/show?prodId="+$('#prodId').val(),
+											        ],
+						                     		initialPreviewAsData: true,
+						                     		initialPreviewFileType: 'image',
 											    });
 											});
 											</script>
@@ -375,7 +380,7 @@
 					var formData = new FormData();
 					formData.append('prodImgFile',$('#prodImgFile').prop('files')[0]);
 					formData.append('product',
-							new Blob([JSON.stringify($('#addForm').serializeObject())],
+							new Blob([JSON.stringify($('#editForm').serializeObject())],
 									{type: 'application/json'}));
 					
 					$.ajax({

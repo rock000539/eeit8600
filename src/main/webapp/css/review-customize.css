@@ -1,78 +1,182 @@
 @CHARSET "UTF-8";
 
-* {margin:0;
-   padding:0;
-   font-size:100%;}
-   
-.thumbnail{
-	width:200px;
-}
-.img-thumbnail {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+.row-body{
+	margin-left:15px;
 }
 
-/* .row-customize{ */
-/* 	height:2px; */
+.body{
+	border:1px solid;
+	border-color:#BEBEBE;
+	border-radius:5px;
+    height: 450px;
+	width:270px;
+	margin-right:10px;
+	margin-top:20px;
+	padding-right:0px;
+    padding-left: 0px;
+    background: #fff;
+/*     下面還看不出效果*/;
+    display: inline-block;
+    box-shadow: 0px 0px 5px #CCC;
+    overflow: hidden;
+    position: relative; 
+}
+
+.thumbnail {
+	padding: 0;
+	/*     下面還看不出效果 */;
+    display: block;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+.reviewImg{
+	width:270px;
+	height: 190px;
+	border:2px solid;
+	border-color:red;
+	display: table-cell;
+    text-align: center;
+    /*     下面還看不出效果 */;
+	overflow: hidden;
+    margin: 0px auto;
+    padding: 0px;
+    vertical-align: middle;
+}
+
+.reviewImg-Img{
+	max-width: 270px;
+	max-height: 190px;
+	/*     下面還看不出效果 */;
+	position: relative;
+    left: 0px;
+    top: 0px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    opacity: 1;
+}
+/* ???去除文字超連結所設的div還沒好  start*/
+.info{
+	width: 250px;
+    height: 240px;
+    margin: 5px 10px 15px 10px;
+    overflow: hidden;
+}
+/* ???去除文字超連結所設的div還沒好  end*/
+.reviewTime{
+    display: inline-block;
+    font-size: 12px;
+    color: #808080;
+    width: 100px;
+    margin-left: 5px;
+    /*     下面還看不出效果 */;
+    line-height: 16px;
+    text-align: left;
+}
+
+.reviewState{
+	display: inline-block;
+    font-size: 12px;
+    color: #808080;
+    text-align: right;
+    width: 150px;
+     /*     下面還看不出效果 */;
+    line-height: 16px;
+}
+
+/* ---------------------------------- */
+.user-info{
+	position: relative;
+    width: 250px;
+    height: 70px;
+    margin: 5px auto;
+    overflow: hidden;
+    background-color: #F2F2F2;
+}
+
+.card-header-circle{
+	border: 1px solid #ccc;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    margin-top: 9px;
+    margin-left: 9px;
+    overflow: hidden;
+}
+
+.memeberImg{
+	max-width: 52px;
+	max-height: 52px;
+	margin-left: 5px;
+/*     width: auto; */
+/*     height: auto; */
+    text-align: center;
+    /*     下面還看不出效果 */;
+	position: relative;
+    left: 0px;
+    top: 0px;
+    vertical-align: middle;
+    opacity: 1;
+}
+
+.user-name{
+	position: absolute;
+    top: 0;
+    left: 70px
+}
+
+.review-uc-heart {
+	position: absolute;
+    top: 32px;
+    left: 70px;
+    color: #4D4D4D;
+    font-size: 12px;
+    letter-spacing:1px;
+	}
 	
-/* } */
+.urcosme-score-display{
+	display: inline-block;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
 
-/* .reviewtime{ */
-/* 	margin:0; */
-/*    padding:0; */
-/* } */
+.inline-block-heart{
+	margin-right: 1px;
+    display: inline-block;
+    zoom: 1;
+}
 
-/* .caption{ */
-/*    margin:0; */
-/*    padding:0; */
-	
-/* } */
+.review-rating{
+	letter-spacing:3px;
+}
 
-/* nav.navbar{ */
-/* 	background-color: #00BCA4; */
-/* } */
-/* a.navbar-brand{ */
-/* 	width: 250px; */
-/* 	background-color: #19C3AD; */
-/* } */
-/* a.navbar-brand>font{ */
-/* 	color: #FFFFFF; */
-/* 	font-family:"Microsoft JhengHei"; */
-/* } */
-/* a.dropdown-toggle>i{ */
-/* 	color: #414C59;#CCF2ED */
-/* } */
-/* #sidebarColl{ */
-/* 	background-color: #FFFFFF; */
-/* 	color: red;#8DA0AA; */
-/* } */
-/* #sidebarColl li>a{ */
-/* 	/*color: #333333;*/ */
-/* 	/*font-weight: 600;*/ */
-/* 	font-family:"Microsoft JhengHei"; */
-/* } */
-/* #sidebarColl i{ */
-/* 	color: #00E3E3;00E3E3 FF8989; */
-/* } */
-/* .sidebar ul li a:hover{ */
-/* 	background-color: #F0F0F0; */
-/* } */
-/* .sidebar ul li a.active{ */
-/* 	background-color: #FAFCFE; */
-/* } */
+.user-skin{
+	position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #808080;
+}
 
-/* #page-wrapper{ */
-/* 	background-color: #FAFCFE; */
-/* 	border-left: 0; */
-/* } */
-/* .page-header{ */
-/* 	color: #414C59; */
-/* } */
-/* body{ */
-/* 	background-color: #FFFFFF;; */
-/* } */
-
-
-
-
-
+.review{
+	font-size: 16px;
+    line-height: 22px;
+    color: #4D4D4D;
+    margin-top: 16px;
+    width: 250px;
+    white-space: normal;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
