@@ -13,6 +13,7 @@
 	body.modal-open {
 	  padding-right: 0 !important;
 	}
+	
 </style>
 	<!-- Header, NavBar -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +44,6 @@
     <script
     	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     
-  
     <script src="/js/metisMenu.min.js"></script>
     
 </head>
@@ -73,7 +73,7 @@
 
 <!-- Button trigger modal -->
 <a data-toggle="modal" class="btn btn-info" href="/members/register" data-target="#regiModal">SignUp !</a>
-<!-- Modal -->
+<!-- modal -->
 <div class="modal fade" id="regiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -86,10 +86,9 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
-        </div> <!-- /.modal-content -->
-    </div> <!-- /.modal-dialog -->
-</div> <!-- /.modal -->
-
+        </div> <!-- content -->
+    </div> <!-- dialog -->
+</div> <!-- m -->
 	
 <!-- **每頁不同的內容 end** -->
             </div>
@@ -100,11 +99,8 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-
 </div>
 <!-- /#wrapper -->
-
-
 
 </body>
 </html>

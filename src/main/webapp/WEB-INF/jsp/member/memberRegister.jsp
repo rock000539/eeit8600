@@ -4,26 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	
-	<!-- 表單驗證  -->
-	<script 
-		src="/js/jquery.validate.min.js"></script>
-	
-	<!-- DatePicker -->
-	<link rel="stylesheet" 
-		href="/css/bootstrap-datetimepicker.min.css" />
-    <script
-    	src="/js/bootstrap-datetimepicker.min.js"></script>
-    <script
-    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
-    
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
 <style>
 	label{
 		font-family: Microsoft JhengHei;
@@ -56,15 +37,20 @@
     	position: relative;
     	margin-bottom:0px;
 	}
-	
+	.icon1 {
+		 color:white;
+		 opacity: 1;
+		 font-size: 5em;
+		 text-align:center;
+		 margin-top: 15%;
+	}
 </style>
 </head>
 <body>
-
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                  <h3 class="modal-title">MemberRegister<small>SignUp TestPage </small></h3>
-            </div>			<!-- /modal-header -->
+            </div>			<!-- modal header -->
             <div class="modal-body">
             
 <form accept-charset="UTF-8" class="form-horizontal" id="signup">
@@ -185,16 +171,13 @@
 	    </div>
 	</div>
 </form>
-            </div>			<!-- /modal-body -->
+            </div>			<!-- m body -->
             <div class="modal-footer">
-                <button type="button"class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" id="insertBtn" name="insert" >SignUp</button>
-            </div>			<!-- /modal-footer -->
-
-
+                <button type="button" class="btn btn-default" id="insertBtn" name="insert" 
+                	 >SignUp</button>
+            </div>			<!-- m footer --> <!-- data-dismiss="modal" -->
 </div>
-	<br>
-	<img name="memberImgFile" width="100">
+
 
 <script type="text/javascript">
 	$(function() {
@@ -248,7 +231,7 @@
 		
 		//submit
 		$('#insertBtn').on('click',function() {
-			if($('#signup').validate().form()){
+ 			if($('#signup').validate().form()){
 			var formdata = new FormData(); 
 			formdata.append('memberImgFile', $('#memberImgFile').prop('files')[0]); 
 			formdata.append('member', new Blob([JSON.stringify($('#signup').serializeObject())],
@@ -261,32 +244,20 @@
 				data : formdata,
 				dataType: 'json',
 				success : function(result) {
-				//$(':text:gt(0)').val(" ");//clear the form except id
-				console.log("before");	
-					$('#regiForm').modal('hide');
-					console.log("after");
-				
-// 				$('#resultMsg').empty().append("<h2>update success</h2>");
-// 				var tb = $('#data').append('<table></table>');
-// 				tb.empty();
-// 				tb.append('<tr align="center"><td>ID</td><td>電子信箱</td><td>暱稱</td><td>姓</td><td>名</td><td>性別</td><td>生日</td><td>肌膚性質</td><td>圖片</td><td>電話</td><td>地址</td><td>停權</td><td>停權到期日</td></tr>');
-// 				var row = $('<tr align="center"></tr>').appendTo(tb);
-// 				$('<td></td>').text(result.memberId).appendTo(row);
-// 				$('<td></td>').text(result.nickname).appendTo(row);
-// 				$('<td></td>').text(result.ingredChName).appendTo(row);
-// 				$('<td></td>').text(result.lastName).appendTo(row);
-// 				$('<td></td>').text(result.firstName).appendTo(row);
-// 				$('<td></td>').text(result.gender).appendTo(row);
-// 				$('<td></td>').text(result.birthDay).appendTo(row);
-// 				$('<td></td>').text(result.skinType).appendTo(row);
-// 				$('<td></td>').text(result.memberImg).appendTo(row);
-// 				$('<td></td>').text(result.phone).appendTo(row);
-// 				$('<td></td>').text(result.addr).appendTo(row);
-// 				$('<td></td>').text(result.memberSuspend).appendTo(row);
-// 				$('<td></td>').text(result.memberSuspendExp).appendTo(row);
-										}
-									});
-		}});
+					//$(':text:gt(0)').val(" ");//clear the form except id
+					console.log(result);//test
+					var bg = $('.modal-back-drop');
+					console.log(bg);
+					$('#regiModal').modal('hide');
+					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Thank You!!</div>")
+						.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+					setTimeout(function() {
+						window.location.reload();
+					  }, 1000);
+				}
+			});
+ 		}
+		});
 		$.fn.serializeObject = function() {
 			var o = {};
 			var a = this.serializeArray();
