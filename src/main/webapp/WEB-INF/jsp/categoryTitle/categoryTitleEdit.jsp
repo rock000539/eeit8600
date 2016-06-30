@@ -85,7 +85,7 @@
 								<div class="panel-heading">Product Add Form</div>
 								<div class="panel-body">
 									<form accept-charset="UTF-8"
-										action="" class="simple_form form-horizontal" id="addForm" method="post">
+										action="" class="simple_form form-horizontal" id="editForm" method="post">
 										
 										<div class="form-group">
 											<label class="col-sm-3 control-label" for="prodId">
@@ -151,7 +151,7 @@
 			$('#titleName').focus();
 			
 			// Validate
-			var validate = $('#addForm').validate(
+			var validate = $('#editForm').validate(
 			{
 				onfocusout: function (element) {
 			        $(element).valid();
@@ -167,7 +167,7 @@
 			// Save Click
 			$('#save').click(function(){
 				
-				var validate = $('#addForm').validate().form();
+				var validate = $('#editForm').validate().form();
 				console.log(validate);
 				var data = JSON.stringify($('form').serializeObject());
 				console.log(data);
@@ -205,7 +205,7 @@
 			// Reset Click
 			$('#clear').click(
 				function(){
-					$("#addForm")[0].reset();
+					$("#editForm")[0].reset();
 				}
 			);
 			

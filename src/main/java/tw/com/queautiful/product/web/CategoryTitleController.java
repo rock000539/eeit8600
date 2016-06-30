@@ -61,7 +61,6 @@ public class CategoryTitleController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public CategoryTitle insert(@RequestBody CategoryTitle title) {
-		System.out.println("insert");
 		service.insert(title);
 		return title;
 	}
@@ -75,7 +74,6 @@ public class CategoryTitleController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public CategoryTitle update(@RequestBody CategoryTitle title) {
-		System.out.println("update");
 		service.update(title);
 		return title;
 	}

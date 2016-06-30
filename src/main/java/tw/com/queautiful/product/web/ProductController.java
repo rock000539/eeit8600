@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.web;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -76,8 +77,6 @@ public class ProductController {
 	@ResponseBody
 	public Product insert(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
 		
-		log.debug("{}", product);
-		
 		if(prodImgFile!=null) {
 			String prodName = product.getProdName();
 			String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
@@ -97,8 +96,6 @@ public class ProductController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public Product update(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
-		
-		log.debug("{}", product);
 		
 		if(prodImgFile!=null) {
 			String prodName = product.getProdName();
@@ -122,6 +119,11 @@ public class ProductController {
 		if(prodImg!=null) {
 			FileProcessing.showImg(resp, prodImg);
 		}
+	}
+	
+	@RequestMapping("/select_fms")
+	public String selectFmsPage() {
+		return "/product/productSelectFms";
 	}
 
 }

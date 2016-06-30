@@ -38,7 +38,14 @@ INSERT INTO ARTICLECM (ARTICLEID, ARTICLECMMSG, MEMBERID, ARTICLECMSHOW, ARTICLE
 INSERT INTO ARTICLECM (ARTICLEID, ARTICLECMMSG, MEMBERID, ARTICLECMSHOW, ARTICLECMREPORT) VALUES (88, '內容2', 22, 0, 22)
 INSERT INTO ARTICLECM (ARTICLEID, ARTICLECMMSG, MEMBERID, ARTICLECMSHOW, ARTICLECMREPORT) VALUES (77, '內容3', 33, 1, 33)
 
-INSERT INTO Ingredient (INGREDName, INGREDCName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Water', '水', '溶劑', 0, 0, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Carbomer', '卡波莫, 卡波姆, 聚羧乙烯, 卡波樹脂', '黏度控制,乳化劑', 0, 1, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Cyclomethicone', '矽靈, 環聚二甲基矽氧烷, 環甲矽脂, 環甲基矽氧烷', '溶劑,黏度控制,抗靜電,保溼,柔潤劑', 0, 0, 2)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Natto gum', '納托膠',null, 0, 0, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Glycyrrhiza Glabra Root Extract','光果甘草根萃取', '香料,鎮靜消炎,柔潤劑', 0, 0, 1)
+INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety) values ('Dimethicone','矽靈,地美司康,二甲基矽酮,二甲矽油,聚二甲基矽氧烷', '柔潤劑', 1, 0, 1)
+
 
 INSERT INTO PRODUCT (PRODNAME, BRANDID, CATEGORYID, WEIGHT, SCORE, PRICE, CAPACITY, LAUNCHDATE, PRODDESC, MAINIGDT, CONCENTRATION, PRODIMG) VALUES ('產品1', 1, 1, 1.0, 1.5, 150, 100, '2016-06-12', '產品說明1', 1, 0.3, 'src\main\webapp\WEB-INF\img\product\產品1.png')
 INSERT INTO PRODUCT (PRODNAME, BRANDID, CATEGORYID, WEIGHT, SCORE, PRICE, CAPACITY, LAUNCHDATE, PRODDESC, MAINIGDT, CONCENTRATION, PRODIMG) VALUES ('產品1', 2, 2, 2.0, 2.5, 250, 200, '2016-06-12', '產品說明2', 2, 0.2, 'src\main\webapp\WEB-INF\img\product\產品2.png')
@@ -75,3 +82,8 @@ INSERT INTO ARTICLE (MEMBERID, ARTICLETYPE, ARTICLETITLE, ARTICLE, ARTICLETIME, 
 --INSERT INTO BOOK(NAME, CATEGORYID) VALUES ('bookA', 1)
 --INSERT INTO BOOK(NAME, CATEGORYID) VALUES ('bookB', 2)
 --INSERT INTO BOOK(NAME, CATEGORYID) VALUES ('bookC', 3)
+
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,1)
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,2)
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,3)
+INSERT INTO PROINGRELIST(prodId,ingredId) values (1,4)
