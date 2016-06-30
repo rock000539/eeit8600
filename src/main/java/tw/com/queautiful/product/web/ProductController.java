@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -124,6 +123,16 @@ public class ProductController {
 	@RequestMapping("/select_fms")
 	public String selectFmsPage() {
 		return "/product/productSelectFms";
+	}
+	
+	@RequestMapping("/list_fms")
+	public String listFmsPage() {
+		return "/product/productListFms";
+	}
+	
+	@RequestMapping("/view_fms")
+	public String viewFmsPage() {
+		return "/product/productViewFms";
 	}
 
 }
