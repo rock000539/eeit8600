@@ -1,30 +1,23 @@
 package tw.com.queautiful.product.web;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.*;
+import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.annotation.security.*;
+import javax.servlet.http.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
+import org.springframework.security.config.annotation.method.configuration.*;
+import org.springframework.security.core.context.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.util.*;
+import org.springframework.web.bind.annotation.*;
 
-import tw.com.queautiful.product.entity.Brand;
-import tw.com.queautiful.product.entity.ExpDate;
-import tw.com.queautiful.product.entity.Product;
-import tw.com.queautiful.product.service.BrandService;
-import tw.com.queautiful.product.service.ExpDateSearchService;
-import tw.com.queautiful.product.service.ExpDateService;
-import tw.com.queautiful.product.service.MemberService;
-import tw.com.queautiful.product.service.ProductService;
+import tw.com.queautiful.product.entity.*;
+import tw.com.queautiful.product.service.*;
 
 @Controller
 @RequestMapping("/expdate")
@@ -43,7 +36,6 @@ public class ExpDateController
     @Autowired
     private ExpDateSearchService expDateSearchService;
 
-  
     @RequestMapping("/search")
     public String search(Model model)
     {
@@ -71,6 +63,8 @@ public class ExpDateController
     public String listPage(Model model, HttpServletRequest request)
     {
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("username is " + username);
 
 
         List<Map> result = new ArrayList<Map>();
@@ -152,6 +146,8 @@ public class ExpDateController
             @RequestParam String mfdStr, @RequestParam String expStr)
     {
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("username is " + username);
         long memberId = (long) request.getSession().getAttribute("memberId");
         System.out.println("in post");
 
@@ -199,7 +195,7 @@ public class ExpDateController
         return "/expDate/expDateEdit";
     }
 
- 
+    @PostAuthorize("hasPermission('USER', 'parker')")
     @RequestMapping("/delete")
     @ResponseBody
     public String delete(String dateIdStr)

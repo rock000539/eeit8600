@@ -25,10 +25,10 @@ $(function(){
 			$("#productList").append(
 					
 	'<tr><td>'+data.products[i].prodName+'</td><td>'
-	+data.categorys[i].categoryName+'</td></tr>'
+	+data.categorys[i].categoryName+'</td>'
 	+'<td><input type="submit" class="checkIngredient btn btn-primary " data-toggle="modal"  data-target="#myModal"  name="'
-	+data.products[i].prodId+'" value=查看成份/>'
-	+'</td>')
+	+data.products[i].prodId+'" value=查看成份>'
+	+'</td></tr>')
 		}//end of for
 		//------------------------------------------------------------------------------
 		$(".checkIngredient").click(function(e){
@@ -39,7 +39,12 @@ $(function(){
 				type : 'get',
 				data : {"proIdStr":prodId},
 				success : function(data){
+					$('#showArea').empty();
+					$('#myModalLabel').empty();
 					$('#myModalLabel').append(data.productName);
+					if(data.ingredients.length==0){
+						$('#showArea').append("<h4>抱歉目前沒有此產品成份資料<h4>");
+					}else{
 					for(var i=0;i<data.ingredients.length;i++){							
  						$('#showArea').append(
  						'<tr><td>'+data.ingredients[i].ingredName
@@ -49,9 +54,9 @@ $(function(){
  						+'</td><td>'+data.ingredients[i].ingredAcne
  						+'</td><td>'+data.ingredients[i].ingredSafety+'</td></tr>')
  					}//end for 
-					
+					}//end if else
 					$('#findIngredient').modal('show');
-				$('#productList').empty();
+				
 				}//end of success
 			});	
 			
@@ -67,22 +72,43 @@ $(function(){
 })//end function
 
 </script>
+<style>
+h3{   text-align: center;
+}
+.form-inline{
+ width: 320px;
+ margin-top:100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#productArea{
+width: 500px;
+margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+</style>
 </head>
 <body>
-<form action="">
-<input type="text" name="prodName" id="prodName" > 
-<input type="button" id="search" value="search">
+<form action="" class="form-inline">
+<table>
+<tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr>
+<tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
+<td><input type="button" id="search" value="search" class="btn btn-default" style="margin-bottom: 10px;"></td></tr>
+</table>
 </form>
 
 <!-- Button trigger modal -->
-<h2>(Create Modal）</h2>
-<!-- 按钮触发模态框 -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" 
+
+
+
+<!-- <button class="btn btn-primary btn-lg" data-toggle="modal" 
    data-target="#myModal">
   button
-</button>
+</button>  這示button的範例-->
 
-<!-- 模态框（Modal） -->
+<!-- （Modal部分） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-dialog">
@@ -111,8 +137,8 @@ $(function(){
 </div>
 <!-- **每頁不同的內容 end** -->
 
-
-<table id="productList" ></table>
-
+<div id="productArea">
+<table id="productList" class="table  table-hover"></table>
+</div>
 </body>
 </html>

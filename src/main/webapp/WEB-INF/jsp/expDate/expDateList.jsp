@@ -7,16 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-            table {
-                margin: 10px;
-                border: 2px solid red;
-            }
-            td {
-                border: 2px solid black;
-            }
+#mainSpace{
+  width: 500px;
+  margin-top:100px;
+  margin-left: auto;
+  margin-right: auto;
+  }
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script>
 $(function(){
 $('.delete').click(function(e){
@@ -27,7 +27,8 @@ $('.delete').click(function(e){
 		url:'/expdate/delete',
 		type : 'GET',
 		data : {dateIdStr:dateIdStr},
-		success : function(date){alert(date);
+		success : function(date){
+		alert(date);
 		$(target).parent().parent().remove();
 		}
 		})
@@ -37,8 +38,8 @@ $('.delete').click(function(e){
 </script>	
 </head>
 <body>
-this is list
-<table>
+<div id="mainSpace">
+<table class="table table-hover">
 <tr><td>產品名稱</td><td>製造日</td><td>到期日</td><td></td></tr>
 <c:forEach items="${beans}" var="items">
  <tr>
@@ -54,6 +55,6 @@ this is list
 </c:forEach>
 
 </table>
-
+</div>
 </body>
 </html>
