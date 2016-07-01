@@ -142,6 +142,13 @@ $(function () {
 			width: 60,
 			align: 'center',
 			resizable: false,
+			formatter: function (cellvalue, options, rowObject) {
+            	if(rowObject.memberSuspend==true){
+            		return "停權";
+            	}else{
+                	return "正常";
+            	}
+            },
 		},
 		{ 
 			label: '停權到期日', 
@@ -160,7 +167,7 @@ $(function () {
 		{ 
 			label: '暱稱', 
 			name: 'nickname', 
-			width: 80,
+			width: 100,
 			align: 'center',
 			resizable: false,
 		},
@@ -181,21 +188,28 @@ $(function () {
 		{ 
 			label: '性別', 
 			name: 'gender', 
-			width: 40,
+			width: 60,
 			align: 'center',
 			resizable: false,
+			formatter: function (cellvalue, options, rowObject) {
+            	if(rowObject.gender=="F"){
+            		return "女";
+            	}else{
+                	return "男";
+            	}
+            },
 		},
 		{ 
 			label: '生日', 
 			name: 'birthDay', 
-			width: 100,
+			width: 110,
 			align: 'center',
 			resizable: false,
 		},
 		{ 
 			label: '膚質', 
 			name: 'skinType', 
-			width: 80,
+			width: 90,
 			align: 'center',
 			resizable: false,
 		},
@@ -220,7 +234,7 @@ $(function () {
 		{ 
 			label: '地址', 
 			name: 'addr', 
-			width: 100,
+			width: 110,
 			align: 'center',
 			resizable: false,
 		},
