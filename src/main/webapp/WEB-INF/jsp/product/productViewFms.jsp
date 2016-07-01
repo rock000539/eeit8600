@@ -4,11 +4,18 @@
 <html>
 <head>
 
+	<script src="/js/jquery.min.js"></script>
+	
+	<link href="/css/bootstrap.min.css" rel="stylesheet">	
+	<script src="/js/bootstrap.min.js"></script>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ProductListPage</title>
+	<title>ProductViewPage</title>
 
 </head>
 <body>
+	
+	
 	
 </body>
 </html>

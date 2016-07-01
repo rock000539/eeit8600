@@ -18,7 +18,7 @@
 	<script src="/js/bootstrap-tabs-x.min.js" type="text/javascript"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ProductSelect</title>
+	<title>ProductSelectPage</title>
 	
 	<style type="text/css">
 	
@@ -41,6 +41,10 @@
 		.row > .btn {
 			background-color: #FF95CA;
 			color: white;
+		}
+		
+		.nav-tabs a {
+			color: #FF95CA;
 		}
 		
 	</style>
@@ -79,25 +83,20 @@
 	<div>
 		<div class="col-lg-3"></div>
 		<div class="col-lg-6">
-			<div class='tabs-x tabs-above tab-bordered tabs-krajee'>
-			    <ul id="myTab-5" class="nav nav-tabs" role="tablist">
-			        <li class="active"><a href="#home-5" role="tab" data-toggle="tab">Home</a></li>
-			        <li><a href="#profile-5" role="tab-kv" data-toggle="tab">Profile</a></li>
-			        <li class="dropdown">
-			            <a href="#" id="myTabDrop-5" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-			            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop-1">
-			                <li><a href="#dropdown-5-1" tabindex="-1" role="tab" data-toggle="tab">Option 1</a></li>
-			                <li><a href="#dropdown-5-2" tabindex="-1" role="tab" data-toggle="tab">Option 2</a></li>
-			            </ul>
-			        </li>
-			        <li class="disabled"><a href="#disabled-5"><i class="glyphicon glyphicon-knight"></i> Disabled</a></li>
+			<div class='tabs-x tabs-above tab-align-center tab-bordered tab-height-md tabs-krajee'>
+			    <ul id="tabTitle" class="nav nav-tabs" role="tablist">
+			        <li class="active"><a href="#home" role="tab" data-toggle="tab">基礎保養</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">加強保養</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">特別護理</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">底妝產品</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">重點彩妝</a></li>
 			    </ul>
-			    <div id="myTabContent-5" class="tab-content">
-			        <div class="tab-pane fade in active" id="home-5"><p>...</p></div>
-			        <div class="tab-pane fade" id="profile-5"><p>...</p></div>
-			        <div class="tab-pane fade" id="dropdown-5-1"><p>...</p></div>
-			        <div class="tab-pane fade" id="dropdown-5-2"><p>...</p></div>
-			        <div class="tab-pane fade" id="disabled-5">Disabled Content</div>
+			    <div id="tabContent" class="tab-content">
+			        <div class="tab-pane fade in active" id="tab1"><p>...</p></div>
+			        <div class="tab-pane fade" id="tab2"><p>...</p></div>
+			        <div class="tab-pane fade" id="tab3"><p>...</p></div>
+			        <div class="tab-pane fade" id="tab4"><p>...</p></div>
+			        <div class="tab-pane fade" id="tab5">...</div>
 			    </div>
 			</div>
 		</div>
@@ -107,6 +106,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			// select-brand init
 			$('#sbrand').select2({
 				placeholder: 'Select a brand',
 				allowClear: true,
@@ -131,6 +131,7 @@
 				
 			});
 			
+			// select-product init
 			$('#sprod').select2({
 				placeholder: 'Select a Product',
 				allowClear: true,
@@ -138,6 +139,11 @@
 			});
 			
 			$('#sprod').attr('disabled', true);
+			
+			// tabs click
+			$('div.tabs-x .nav-tabs [data-toggle="tab"]').on('tabsX.click', function (event) {
+				
+			});
 			
 		});
 	</script>
