@@ -32,24 +32,31 @@ public class ProductSpecs {
 
 				List<Predicate> predicates = new ArrayList<>();
 				EntityType<T> entityType = entityManager.getMetamodel().entity(type);
-
+				
 				for (Attribute<T, ?> attr : entityType.getDeclaredAttributes()) {
 					Object attrValue = getValue(example, attr);
+					
+					System.out.println("attr = " + attr.getJavaType());
+					System.out.println("attrValue = " + attrValue);
+					
 					if (attrValue != null) {
 						if (attr.getJavaType() == String.class) {
 							if (StringUtils.isNotEmpty(attrValue.toString())) {
 								predicates.add(cb.like(root.get(attribute(entityType, attr.getName(), String.class)),
 										pattern((String) attrValue)));
-							} else {
-								predicates.add(
-										cb.equal(root.get(attribute(entityType, attr.getName(), attrValue.getClass())),
-												attrValue));
 							}
+						} else {
+							predicates.add(cb.equal(
+									root.get(attribute(entityType, attr.getName(), attrValue.getClass())), attrValue));
 						}
 					}
 				}
 
-				return predicates.isEmpty() ? cb.conjunction() : cb.and(toArray(predicates, Predicate.class));
+				System.out.println(cb.and(toArray(predicates, Predicate.class)).toString());
+
+				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+				// return predicates.isEmpty() ? cb.conjunction() :
+				// cb.and(toArray(predicates, Predicate.class));
 			}
 
 			private <T> Object getValue(T example, Attribute<T, ?> attr) {
