@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,11 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import tw.com.queautiful.product.entity.Ingredient;
-import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.IngredientService;
 
 
@@ -93,63 +88,27 @@ public class IngredientController {
 		service.delete(ingredId);
 		return "redirect:/ingredients/list";
 	}
-	
-	
-//--------------------------------------------------------------------------------------
-	
-	@RequestMapping("/show")
-	public String listJson(int pageNumber,int pageCount){
 		
-		List<Ingredient> ingredients=service.getAll();
+	
+	@RequestMapping("/search") //進入成份找成份頁面
+	public String searchPage(){
+		return "/ingredient/ingredientSearch";
+	}
+	
+	
+
+	@RequestMapping("/SearchIngredient") //開始成份找成份
+	public String search(String ingredName,Model model){
+		System.out.println("in contorller");
 		List<Ingredient> result=new ArrayList<Ingredient>();
-	
-		for(int i=((pageCount-1)*pageNumber);i<((pageCount*pageNumber)-1);i++){	
-			result.add(ingredients.get(i));
+				result=service.findByIngredName(ingredName);
+		List resultCn=service.findByIngredChName(ingredName);
+		for(int i=0;i<resultCn.size();i++){
+			result.add((Ingredient) resultCn.get(i));
 		}
-		
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonInString=null;
-		try {
-			jsonInString = mapper.writeValueAsString(result);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		};
-		return jsonInString;
+		System.out.println(result);
+		model.addAttribute("result", result);
+		return "/ingredient/ingredientSearch";
 	}
-
-	
-
-	
-	@RequestMapping(value = "/post", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String postAdd(Model model,@RequestParam Long ingredId,@RequestParam String ingredName,
-			@RequestParam String ingredChName,@RequestParam String ingredChar,
-			@RequestParam Integer ingredIrritant,@RequestParam Integer ingredAcne,@RequestParam Integer ingredSafety) {
-		
-		System.out.println("postAdd IN");
-		
-		Ingredient ingredient=new Ingredient();
-		ingredient.setIngredAcne(ingredAcne);
-		ingredient.setIngredChar(ingredChar);
-		ingredient.setIngredChName(ingredChName);
-		ingredient.setIngredId(ingredId);
-		ingredient.setIngredIrritant(ingredIrritant);
-		ingredient.setIngredName(ingredName);
-		ingredient.setIngredSafety(ingredSafety);		
-		System.out.println(ingredient);
-		try{service.insert(ingredient);
-		System.out.println("success");
-		
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonInString= mapper.writeValueAsString(ingredient);
-		
-		return jsonInString;
-		
-		}catch(Exception e){
-			System.out.println("false");
-			return null;
-			}
-	}
-//--------------------------------------------------------------------------------------
-
 
 }

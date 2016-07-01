@@ -75,7 +75,7 @@ public class MemberService {
 		new java.sql.Date(milliToday+milliSuspend);
 		member.setMemberSuspendStart(today);
 //		member.setMemberSuspendDays(memberSuspendDays);
-		member.setMemberSuspendNum(member.getMemberSuspendNum()+1);
+		member.setMemberSuspendCount(member.getMemberSuspendCount()+1);
 		member.setMemberSuspendExp(new java.sql.Date(milliToday+milliSuspend));
 		
 	}
