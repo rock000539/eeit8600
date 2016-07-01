@@ -36,7 +36,7 @@ public class ProdIngreListController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping("/list") // 後台秀出所有成分用
+	@RequestMapping("/list") // 後台修改成分產品對應用
 	public String listPage(Model model) {
 		List<ProdIngreList> prodIngreLists = prodIngreListService.getAll();
 		List<Map> result = new ArrayList<Map>();
@@ -60,9 +60,10 @@ public class ProdIngreListController {
 
 		model.addAttribute("prodIngreList", result);
 		System.out.println(result);
-		return "/ingredient/ProdIngreList";
+		return "/ingredient/ProductAndIngredientMenu";
 	}
 
+	
 	@RequestMapping("/post") // 後台新增資料用
 	public String listPage(Model model, String prodIdStr, String ingredIdStr) {
 		long prodId = Long.parseLong(prodIdStr);
@@ -70,17 +71,19 @@ public class ProdIngreListController {
 		prodIngreListService.insert(prodId, ingredId);
 
 		model.addAttribute("prodIngreListService", prodIngreListService.getAll());
-		return "/ingerdient/ProdIngreList";
+		return "/ingerdient/IngredientSearchIngredient";
 	}
+	
+	
 
-	@RequestMapping("/search") // 前台進入收詢頁面
+	@RequestMapping("/search") // 前台進入搜尋頁面
 	public String searchPage() {
 
 		return "/ingredient/prodNameSearchIngred";
 
 	}
 
-	@RequestMapping("/get") // 前台產品成分用
+	@RequestMapping("/get") // 前台產品找成分用
 	@ResponseBody
 	public Map<String, Object> search(@RequestParam String prodName) {
 
@@ -105,7 +108,7 @@ public class ProdIngreListController {
 		return resultMap;
 	}
 
-	@RequestMapping("/showIngredient") // 前台產品成分用
+	@RequestMapping("/showIngredient") // 前台產品找成分用
 	@ResponseBody
 	public Map<String, Object> showIngredient(@RequestParam String proIdStr) {
 

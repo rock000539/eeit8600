@@ -44,6 +44,21 @@
 		 text-align:center;
 		 margin-top: 15%;
 	}
+	#insertBtn, #insertBtn:focus {
+		width: 10em;
+		border-radius: 24px;
+		font-family:cursive;
+		background-color: #FFFFFF;
+		color:#84786C;
+		font-weight: bold;
+		border: 2px double white;
+		box-shadow: 0 3px 0 0 #84D2CE;
+	}
+	#insertBtn:hover, #insertBtn.active{
+		border:2px double white;
+		background-color: #98DaD6;
+		color: white;
+	}
 </style>
 </head>
 <body>

@@ -42,5 +42,11 @@ public class IngredientService {
 		ingredientDao.delete(ingredId);
 	}
 	
+	public List<Ingredient> findByIngredName(String ingredName){
+		return (List<Ingredient>) ingredientDao.findByIngredNameEndsWith(ingredName);
+	}
 	
+	public List<Ingredient> findByIngredChName(String ingredName){
+		return (List<Ingredient>) ingredientDao.findByIngredChNameEndsWith(ingredName);
+	}
 }

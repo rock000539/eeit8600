@@ -137,9 +137,37 @@ $(function () {
 			key: true,
 		},
 		{ 
-			label: '停權', 
+			label: 'EMAIL',
+			name: 'email',
+			width: 180,
+			align: 'center',
+			resizable: false,
+		},
+		{ 
+			label: '停權狀態', 
 			name: 'memberSuspend', 
-			width: 60,
+			width: 80,
+			align: 'center',
+			resizable: false,
+			formatter: function (cellvalue, options, rowObject) {
+            	if(rowObject.memberSuspend==true){
+            		return "停權";
+            	}else{
+                	return "正常";
+            	}
+            },
+		},
+		{ 
+			label: '停權天數', 
+			name: 'memberSuspendDays', 
+			width: 100,
+			align: 'center',
+			resizable: false,
+		},
+		{ 
+			label: '停權日期', 
+			name: 'memberSuspendStart', 
+			width: 100,
 			align: 'center',
 			resizable: false,
 		},
@@ -151,16 +179,16 @@ $(function () {
 			resizable: false,
 		},
 		{ 
-			label: 'EMAIL',
-			name: 'email',
-			width: 180,
+			label: '累計停權次數', 
+			name: 'memberSuspendCount', 
+			width: 120,
 			align: 'center',
 			resizable: false,
 		},
 		{ 
 			label: '暱稱', 
 			name: 'nickname', 
-			width: 80,
+			width: 100,
 			align: 'center',
 			resizable: false,
 		},
@@ -181,21 +209,28 @@ $(function () {
 		{ 
 			label: '性別', 
 			name: 'gender', 
-			width: 40,
+			width: 60,
 			align: 'center',
 			resizable: false,
+			formatter: function (cellvalue, options, rowObject) {
+            	if(rowObject.gender=="F"){
+            		return "女";
+            	}else{
+                	return "男";
+            	}
+            },
 		},
 		{ 
 			label: '生日', 
 			name: 'birthDay', 
-			width: 100,
+			width: 110,
 			align: 'center',
 			resizable: false,
 		},
 		{ 
 			label: '膚質', 
 			name: 'skinType', 
-			width: 80,
+			width: 90,
 			align: 'center',
 			resizable: false,
 		},
@@ -220,7 +255,7 @@ $(function () {
 		{ 
 			label: '地址', 
 			name: 'addr', 
-			width: 100,
+			width: 110,
 			align: 'center',
 			resizable: false,
 		},
