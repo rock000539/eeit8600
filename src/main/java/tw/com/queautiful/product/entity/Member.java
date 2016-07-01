@@ -66,8 +66,8 @@ public class Member {
 	@Column(name="MEMBERSUSPENDDAYS")
 	private Integer memberSuspendDays; //會員停權天數
 	
-	@Column(name="MEMBERSUSPENDNUM")
-	private Integer memberSuspendNum; //會員累計停權次數
+	@Column(name="MEMBERSUSPENDCOUNT")
+	private Integer memberSuspendCount; //會員累計停權次數
 	
 	
 	@Transient
@@ -75,6 +75,7 @@ public class Member {
 	
 	@Transient
 	private MultipartFile memberImgFile;
+	
 	
 
 	@Override
@@ -84,10 +85,12 @@ public class Member {
 				+ birthDay + ", age=" + age + ", skinType=" + skinType + ", memberImg=" + memberImg + ", phone=" + phone
 				+ ", addr=" + addr + ", memberRegiDate=" + memberRegiDate + ", memberSuspend=" + memberSuspend
 				+ ", memberSuspendStart=" + memberSuspendStart + ", memberSuspendDays=" + memberSuspendDays
-				+ ", memberSuspendNum=" + memberSuspendNum + ", memberSuspendExp=" + memberSuspendExp
+				+ ", memberSuspendCount=" + memberSuspendCount + ", memberSuspendExp=" + memberSuspendExp
 				+ ", memberImgFile=" + memberImgFile + "]";
 	}
 
+	
+	
 	public MultipartFile getMemberImgFile() {
 		return memberImgFile;
 	}
@@ -241,12 +244,14 @@ public class Member {
 		this.memberSuspendDays = memberSuspendDays;
 	}
 
-	public Integer getMemberSuspendNum() {
-		return memberSuspendNum;
+	public Integer getMemberSuspendCount() {
+		return memberSuspendCount;
 	}
 
-	public void setMemberSuspendNum(Integer memberSuspendNum) {
-		this.memberSuspendNum = memberSuspendNum;
+	public void setMemberSuspendCount(Integer memberSuspendCount) {
+		this.memberSuspendCount = memberSuspendCount;
 	}
+
+	
 
 }

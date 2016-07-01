@@ -137,9 +137,16 @@ $(function () {
 			key: true,
 		},
 		{ 
-			label: '停權', 
+			label: 'EMAIL',
+			name: 'email',
+			width: 180,
+			align: 'center',
+			resizable: false,
+		},
+		{ 
+			label: '停權狀態', 
 			name: 'memberSuspend', 
-			width: 60,
+			width: 80,
 			align: 'center',
 			resizable: false,
 			formatter: function (cellvalue, options, rowObject) {
@@ -151,6 +158,20 @@ $(function () {
             },
 		},
 		{ 
+			label: '停權天數', 
+			name: 'memberSuspendDays', 
+			width: 100,
+			align: 'center',
+			resizable: false,
+		},
+		{ 
+			label: '停權日期', 
+			name: 'memberSuspendStart', 
+			width: 100,
+			align: 'center',
+			resizable: false,
+		},
+		{ 
 			label: '停權到期日', 
 			name: 'memberSuspendExp', 
 			width: 100,
@@ -158,9 +179,9 @@ $(function () {
 			resizable: false,
 		},
 		{ 
-			label: 'EMAIL',
-			name: 'email',
-			width: 180,
+			label: '累計停權次數', 
+			name: 'memberSuspendCount', 
+			width: 120,
 			align: 'center',
 			resizable: false,
 		},
