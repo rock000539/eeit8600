@@ -26,7 +26,12 @@
 			<div id="main">
 			
 			<!-- **每頁不同的內容從這裡開始** -->
+				
+				<!-- 內容若要有方框效果，請用下面的article包起來 -->
+                <article class="post">
                 
+                
+                </article>
                 
             <!-- **每頁不同的內容結束** -->
 
@@ -40,7 +45,7 @@
 	<script src="/js/jquery.dropotron.min.js"></script>
 	<script src="/js/skel.min.js"></script>
 	<script src="/js/util.js"></script>
-	<script src="/js/main.js"></script>
+	<script src="/js/fms-main.js"></script>
 			
 	</body>
 </html>

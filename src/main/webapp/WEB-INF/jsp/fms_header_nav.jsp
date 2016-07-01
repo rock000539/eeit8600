@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
+
+<!-- Header -->
 <header id="header">
 	<h1>
 		<a href="#">Queautiful</a>
@@ -11,7 +13,7 @@
 			<li><a href="#" class="icon fa-flask">成分</a>
 				<ul>
 					<li><a href="https://www.google.com.tw">依成份查詢產品</a></li>
-					<li><a href="#">依成份查詢產品</a></li>
+					<li><a href="#">依產品查詢成分</a></li>
 				</ul></li>
 			<li><a href="#" class="icon fa-retweet">順序</a></li>
 			<li><a href="#" class="icon fa-heart-o">產品</a></li>
@@ -58,9 +60,9 @@
 					<h3>日期</h3>
 			</a></li>
 			<li><a href="#">
-					<h3>成分</h3> <span><a href="https://www.google.com.tw">依成份查詢產品</a></span>
-					<span><a href="#">依成份查詢產品</a></span>
-			</a></li>
+					<h3>成分</h3>
+			</a> <a href="https://www.google.com.tw"><span>依成份查詢產品</span></a> <a
+				href="#"><span>依產品查詢成分</span></a></li>
 			<li><a href="#">
 					<h3>順序</h3>
 			</a></li>
@@ -80,7 +82,8 @@
 	<section>
 		<ul class="actions vertical">
 			<li>
-				<!-- 									<a href="#" class="button big fit">Log In</a> -->
+				<!--未登入 --> <!-- 									<a href="#" class="button big fit">Log In</a> -->
+				<!--已登入 -->
 				<div>
 					<a href="#"> <img class="user" src="img/testuser.jpg" alt="" />
 						<span>user</span>

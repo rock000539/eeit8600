@@ -77,12 +77,13 @@ form.search>input:first-child {
 	/* 	width:300px; */
 	/* 	margin-right:0; */
 	/* 	padding-right:0; */
-	/* 	padding: 1.5em; */	
+	padding: 1.7em 3em;	
 }
 
 #menu .links>li a h3 {
 	font-family: "Microsoft YaHei";
-	font-size: 1em;
+	font-size: 1.5em;
+	margin:0;
 }
 
 #menu .links>li a {
@@ -110,6 +111,12 @@ ul.actions.vertical li> div> a > .user{
 	width: 2.5em;
 }
 
+.post {
+    padding: 4em 5em 2em 5em;
+    margin-left: 4em;
+    margin-right: 4em;
+}
+
 
 /* 整個右側menu */
 body.is-menu-visible #menu {
@@ -127,6 +134,11 @@ body.is-menu-visible #menu {
 	min-width: 10em; /*調整dropotron寬度 */
 	/* 					margin-top: calc(-0.5em + 1px); */
 	/* 					margin-left: -2px; */
+}
+
+#main-nav ul li.active a { 
+	color: #2ebaae; 
+	text-decoration: none; 
 }
 
 /*調整dropotron位置 */
@@ -185,7 +197,8 @@ body.is-menu-visible #menu {
 }
 
 @media screen and (max-width: 1680px) {
-	#wrapper {
+	#wrapper {		
+/* 		padding: 2em 7em 2em 7em; */
 		padding: 2em 3em 2em 3em;
 	}
 }

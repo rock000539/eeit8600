@@ -119,6 +119,12 @@
 				menuClass: 'dropotron',
 			});
 
+			$('#menu .links>li a').hover(function(){
+				$(this).parent().children(':first-child').children().css('color','#2ebaae');				
+			},function(){
+				$(this).parent().children(':first-child').children().css('color','');				
+			});
+
 	});
 
 })(jQuery);
