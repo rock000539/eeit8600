@@ -30,87 +30,132 @@
             <div class="col-lg-12">
                 <h1 class="page-header">DashBoard</h1>
                 <!-- **每頁不同的內容從這裡開始** -->
-	<form id="editForm" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" name="memberId"
-					value="${member.memberId}" readonly="readonly"></td>
-			</tr>
-			<tr>
-				<td>電子信箱</td>
-				<td><input type="text" name="email"
-					value="${member.email}"></td>
-			</tr>
-			<tr>
-				<td>密碼</td>
-				<td><input type="text" name="password"
-					value="${member.password}"></td>
-			</tr>
-			<tr>
-				<td>暱稱</td>
-				<td><input type="text" name="nickname"
-					value="${member.nickname}"></td>
-			</tr>
-			<tr>
-				<td>姓</td>
-				<td><input type="text" name="lastName"
-					value="${member.lastName}"></td>
-			</tr>
-			<tr>
-				<td>名</td>
-				<td><input type="text" name="firstName"
-					value="${member.firstName}"></td>
-			</tr>
-			<tr>
-				<td>性別</td>
-				<td><input type="radio" name="gender"
-					value="M" ${member.gender=='M'? 'checked':''}>男
-					<input type="radio" name="gender"
-					value="F" ${member.gender=='F'? 'checked':''}>女</td>
-			</tr>
-			<tr>
-				<td>生日</td>
-				<td><input type="text" name="birthDay"
-					value="${member.birthDay}"></td>
-			</tr>
-			<tr>
-				<td>肌膚性質</td>
-				<td><input type="text" name="skinType"
-					value="${member.skinType}"></td>
-			</tr>
-			<tr>
-				<td>圖片</td>
-				<td><input type="file" name="memberImgFile" id="memberImgFile"
-					value=""></td>
-			</tr>
-			<tr>
-				<td>電話</td>
-				<td><input type="text" name="phone"
-					value="${member.phone}"></td>
-			</tr>
-			<tr>
-				<td>地址</td>
-				<td><input type="text" name="addr"
-					value="${member.addr}"></td>
-			</tr>
-			<tr>
-				<td>停權</td>
-				<td><input type="text" name="memberSuspend"
-					value="${member.memberSuspend}"></td>
-			</tr>
-			<tr>
-				<td>停權到期日</td>
-				<td><input type="text" name="memberSuspendExp"
-					value="${member.memberSuspendExp}"></td>
-			</tr>
-		</table>
-		<div>
-			<br> <input type="button" id="editBtn" name="update" value="update">
-				 <input type="button" name="cancel"
-				value="Cancel" onclick='window.location="/members/list"'><br>
-		</div>
+
+<form accept-charset="UTF-8" class="form-horizontal" id="editForm">
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">ID</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberId" 
+	    		name="lastName" value="${member.memberId}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">EMAIL</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="email" 
+	    		name="lastName" value="${member.email}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">停權狀態</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberSuspend" 
+	    		name="lastName" value="${member.memberSuspend}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">停權天數</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberSuspendDays" 
+	    		name="lastName" value="${member.memberSuspendDays}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">停權日期</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberSuspendStart" 
+	    		name="lastName" value="${member.memberSuspendStart}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">停權到期日</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberSuspendExp" 
+	    		name="lastName" value="${member.memberSuspendExp}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">累計停權次數</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberSuspendCount" 
+	    		name="lastName" value="${member.memberSuspendCount}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">暱稱</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="nickname" 
+	    		name="lastName" value="${member.nickname}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">名字</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="firstName" 
+	    		name="lastName" value="${member.firstName}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">姓氏</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="lastName" 
+	    		name="lastName" value="${member.lastName}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">性別</label>
+	    <div class="col-sm-7">
+	    	<label class="radio-inline">
+			    <input type="radio" checked
+			    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
+			</label>
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="gender" value="M" ${member.gender=='M'? 'checked':''}> 男性
+		    </label>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">生日</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="birthDay" 
+	    		name="lastName" value="${member.birthDay}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">膚質</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="skinType" 
+	    		name="lastName" value="${member.skinType}">
+	    </div>
+	
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">大頭貼照</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="memberImg" 
+	    		name="lastName" value="${member.memberImg}">
+	    </div>
+	</div>
+	</div><div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">電話</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="phone" 
+	    		name="lastName" value="${member.phone}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">地址</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="addr" 
+	    		name="lastName" value="${member.addr}">
+	    </div>
+	</div>
 	</form>
+</div>			
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="editBtn" name="insert">Edit</button>
+    </div>			
+
 	<br>
 	<div id="resultMsg"></div>
 	<div id="data"></div>
@@ -168,7 +213,7 @@
 							{type: 'application/json'}));  	
 			console.log(formdata);
 			$.ajax({
-				url : "/members/update",
+				url : "/members/suspend",
 				type : "POST",
 				contentType : false,
 				processData : false, 

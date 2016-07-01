@@ -60,18 +60,23 @@ public class MemberController {
 	public Boolean accountCheck(String email){
 		return service.accountCheck(email);
 	}
+
+	//return signUp page
+	@RequestMapping("/register")
+	public String memberRegister(){
+		return "/member/memberRegister";
+	}
 	
-	
+	@RequestMapping("/suspend")
+	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){
+		log.debug("inside controller");//test
+		service.memberSuspend(memberId, memberSuspendDays);
+	}
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
 		model.addAttribute("members", service.getAll());
 		return "/member/memberList";
-	}
-	
-	@RequestMapping("/register")
-	public String memberRegister(){
-		return "/member/memberRegister";
 	}
 	
 	@RequestMapping("/add")

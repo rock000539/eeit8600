@@ -68,16 +68,18 @@ public class MemberService {
 	
 	//    要改成傳Member，且前端可以傳特定日期
 	public void memberSuspend(Long id, Integer memberSuspendDays){
+		log.debug("inside service{}, {}", id, memberSuspendDays); //test
 		Member member = memberDao.findOne(id);
 		Long milliToday = new java.util.Date().getTime();
 		java.sql.Date today = new java.sql.Date(milliToday);
 		Long milliSuspend = memberSuspendDays*24*60*60*1000L;
 		new java.sql.Date(milliToday+milliSuspend);
+		member.setMemberSuspend(true);
 		member.setMemberSuspendStart(today);
-//		member.setMemberSuspendDays(memberSuspendDays);
+		member.setMemberSuspendDays(memberSuspendDays);
 		member.setMemberSuspendCount(member.getMemberSuspendCount()+1);
 		member.setMemberSuspendExp(new java.sql.Date(milliToday+milliSuspend));
-		
+		memberDao.save(member);
 	}
 	
 }

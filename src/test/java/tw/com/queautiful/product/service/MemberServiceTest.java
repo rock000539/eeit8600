@@ -35,8 +35,14 @@ public class MemberServiceTest {
 //		assertEquals("test1", service.getById(1L).getPassword());
 //	}
 
-	
-	
+	@Test
+	public void testMemberSuspend(){
+		assertEquals(Integer.valueOf(0), service.getById(1L).getMemberSuspendDays());
+		service.memberSuspend(1L, 60);
+		Member member = service.getById(1L);
+		assertEquals(Integer.valueOf(60), service.getById(1L).getMemberSuspendDays());
+		System.out.println(member);
+	}
 	
 
 }

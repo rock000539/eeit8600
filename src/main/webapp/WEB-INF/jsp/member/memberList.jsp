@@ -93,41 +93,45 @@ $(function () {
 			    repeatitems: false,
    			 },
              colModel: [
-		{
-			label: '',
-		    name: '',
-		    width: 100,
-		    align: 'center',
-		    resizable: false,
-		    formatter: 'actions',
-		    formatoptions: {
-		        keys: true,
-		        editbutton : true,
-		        delbutton : true,
-		        editformbutton: true, //test
-		        // 各項option請參考 http://goo.gl/FV6iq
-		        editOptions: {
-		            beforeShowForm: function() {
-		            	$('#editmodjqGrid').remove();
-		            	document.location.href='/members/edit?memberId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
-		            },
-		        },
-		        delOptions: {
-		        	width: 'auto',
-		        	height: 'auto',
-		        	modal: true,
-		            resize: false,
-		            msg: '刪除此筆資料？',
-		        	bSubmit: 'Delete',
-		        	bCancel: 'Cancel',
-		        	closeOnEscape: true,
-		        	url: '/members/delete',
-		        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-		        	serializeDelData: function(postdata) { return JSON.stringify({ 'memberId': $(this).getRowData(postdata.id).memberId }); },
-		        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
-		        },
-		    }       
-		},
+			{
+				label: '',
+			    name: '',
+			    width: 100,
+			    align: 'center',
+			    resizable: false,
+			    formatter: 'actions',
+			    formatoptions: {
+			        keys: true,
+			        editbutton : true,
+			        delbutton : true,
+			        editformbutton: true, //test inline edit
+			        // 各項option請參考 http://goo.gl/FV6iq
+			        editOptions: {
+			            beforeShowForm: function() {
+			            	$('#editmodjqGrid').remove();
+			            	document.location.href='/members/edit?memberId=' + $('#jqGrid').jqGrid('getGridParam', 'selrow');
+			            },
+			            afterSubmit: function(response, postdata) {
+			            	console.log(response);
+			            	console.log(postdata);
+			            }
+			        },
+			        delOptions: {
+			        	width: 'auto',
+			        	height: 'auto',
+			        	modal: true,
+			            resize: false,
+			            msg: '刪除此筆資料？',
+			        	bSubmit: 'Delete',
+			        	bCancel: 'Cancel',
+			        	closeOnEscape: true,
+			        	url: '/members/delete',
+			        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
+			        	serializeDelData: function(postdata) { return JSON.stringify({ 'memberId': $(this).getRowData(postdata.id).memberId }); },
+			        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
+			        },
+			    }       
+			},
 		{ 
 			label: 'ID',
 			name: 'memberId',
@@ -146,9 +150,12 @@ $(function () {
 		{ 
 			label: '停權狀態', 
 			name: 'memberSuspend', 
-			width: 80,
+			width: 100,
 			align: 'center',
 			resizable: false,
+			editable:true,
+			edittype:'select',
+			editoptions:{value:{'true':'停權','false':'正常'} },
 			formatter: function (cellvalue, options, rowObject) {
             	if(rowObject.memberSuspend==true){
             		return "停權";
@@ -163,6 +170,7 @@ $(function () {
 			width: 100,
 			align: 'center',
 			resizable: false,
+			editable:true,
 		},
 		{ 
 			label: '停權日期', 
@@ -181,6 +189,13 @@ $(function () {
 		{ 
 			label: '累計停權次數', 
 			name: 'memberSuspendCount', 
+			width: 120,
+			align: 'center',
+			resizable: false,
+		},
+		{ 
+			label: '會員註冊日期', 
+			name: 'memberRegiDate', 
 			width: 120,
 			align: 'center',
 			resizable: false,
