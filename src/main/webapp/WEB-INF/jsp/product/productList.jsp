@@ -115,7 +115,7 @@
 					        keys: true,
 					        editbutton : true,
 					        delbutton : true,
-					        editformbutton: true,
+					        editformbutton: false,
 					        // 各項option請參考 http://goo.gl/FV6iq
 					        editOptions: {
 					            beforeShowForm: function() {
@@ -153,6 +153,7 @@
 						width: 80,
 						align: 'center',
 						resizable: false,
+						editable: true,
 					},
 					{ 
 						label: 'BID', 
@@ -255,7 +256,33 @@
 				sortable: false,
 				beforeRequest: function () {
                     responsive_jqgrid($(".jqGrid"));
-                }
+                },
+                onSelectRow: function (rowid) {
+                	
+                    var $grid = $('#jqGrid');
+                    var iRow = $("#" + rowid)[0].rowIndex;
+
+                    $grid.jqGrid('editRow', iRow, {
+                    	keys : true,
+                    	oneditfunc: function() {
+                    		alert('onedit');
+                            return true;
+                        },
+                    	successfunc: function() {
+                            alert('success');
+                            return true;
+                        },
+                    	url: '/products/add',
+                        extraparam: {},
+                    	aftersavefunc : function() {
+                    		alert('aftersavefunc');
+                    	},
+                    	errorfunc: null,
+                    	afterrestorefunc: null,
+                    	restoreAfterError: true,
+                    	mtype: "POST",
+                    });
+                },
             });
             
          	// jQuery Grid Navigator
