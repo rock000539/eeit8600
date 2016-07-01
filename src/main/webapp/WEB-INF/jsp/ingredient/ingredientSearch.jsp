@@ -17,14 +17,13 @@
     background: #fff;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    border: 1px solid #000;
 }
 </style>
 </head>
 <body>
 <div id="searchbox">
 
-<form action="/ingredients/startSearch">
+<form action="/ingredients/SearchIngredient">
 <table class="table">
 <tr>輸入成分之中英文 / 完整 / 部份名稱皆可</tr>
 <tr>
