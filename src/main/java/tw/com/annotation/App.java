@@ -1,4 +1,4 @@
-package tw.com.example;
+package tw.com.annotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import tw.com.example.dao.BookDao;
-import tw.com.example.dao.CategoryDao;
-import tw.com.example.dao.DetailDao;
-import tw.com.example.dao.PublisherDao;
-import tw.com.example.entity.Book;
-import tw.com.example.entity.Category;
-import tw.com.example.entity.Detail;
-import tw.com.example.entity.Publisher;
+import tw.com.annotation.dao.BookDao;
+import tw.com.annotation.dao.CategoryDao;
+import tw.com.annotation.dao.DetailDao;
+import tw.com.annotation.dao.PublisherDao;
+import tw.com.annotation.entity.Book;
+import tw.com.annotation.entity.Category;
+import tw.com.annotation.entity.Detail;
+import tw.com.annotation.entity.Publisher;
 
 @SpringBootApplication
 public class App implements CommandLineRunner {

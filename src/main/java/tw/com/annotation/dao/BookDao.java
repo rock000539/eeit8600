@@ -1,8 +1,8 @@
-package tw.com.example.dao;
+package tw.com.annotation.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tw.com.example.entity.Book;
+import tw.com.annotation.entity.Book;
 
 public interface BookDao extends JpaRepository<Book, Long> {
 

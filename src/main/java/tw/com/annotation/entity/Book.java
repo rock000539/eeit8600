@@ -1,4 +1,4 @@
-package tw.com.example.entity;
+package tw.com.annotation.entity;
 
 import java.util.List;
 

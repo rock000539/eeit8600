@@ -1,8 +1,8 @@
-package tw.com.example.dao;
+package tw.com.annotation.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tw.com.example.entity.Category;
+import tw.com.annotation.entity.Category;
 
 public interface CategoryDao extends JpaRepository<Category, Integer> {
 
