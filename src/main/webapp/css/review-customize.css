@@ -5,7 +5,7 @@
 }
 
 .body{
-	border:1px solid;
+/* 	border:1px solid; */
 	border-color:#BEBEBE;
 	border-radius:5px;
     height: 450px;
@@ -62,14 +62,14 @@
     vertical-align: middle;
     opacity: 1;
 }
-/* ???去除文字超連結所設的div還沒好  start*/
+
 .info{
 	width: 250px;
     height: 240px;
     margin: 5px 10px 15px 10px;
     overflow: hidden;
 }
-/* ???去除文字超連結所設的div還沒好  end*/
+
 .reviewTime{
     display: inline-block;
     font-size: 12px;
@@ -134,13 +134,24 @@
     left: 70px
 }
 
-.user-name>a:hover{
-	text-decoration:none;
-}
-
-/* .user-name>a:link{ */
-/* 	color:black; */
-/* } */
+	.user-name>a:link{
+		color:#4D4D4D;
+	}
+	
+	.user-name>a:visited{
+		color:#4D4D4D;
+	}
+	
+	.user-name>a:hover{
+		text-decoration:none;
+		color:#eb8ca9;
+	}
+	
+	.user-name>a:active{
+		text-decoration:none;
+		color:#eb8ca9;
+	}
+	
 
 .review-uc-diamond {
 	position: absolute;
@@ -167,8 +178,8 @@
 
 .diamond{
 	font-size: 14px;
-	color:#FF5151;/*有得分(紅色)*/
-/* 	color:#BEBEBE; *//*沒有得分(灰色)*/
+/* 	color:#FF5151;有得分(紅色) */
+	color:#BEBEBE; /*沒有得分(灰色)*/
 }
 
 .review-rating{
@@ -201,9 +212,39 @@
     padding-right:5px ;
 }
 
-.review-link:hover{
-	color:#4D4D4D;
-	text-decoration:none;
-}
+	.review-link:hover{
+		color:#4D4D4D;
+		text-decoration:none;
+	}
 
-
+.review-bottom-title{
+	position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+    background-color: rgba(45, 42, 42, 0.69);
+    overflow: hidden;
+    text-align: left;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
+    opacity: 0;
+    z-index: 10;
+}	
+	.review-bottom-title:link{
+		color:#FFFFFF;
+	}
+	
+	.review-bottom-title:visited{
+		color:#FFFFFF;
+	}
+	
+	.review-bottom-title:hover{
+		text-decoration:none;
+		color:#FFFFFF;
+	}
+	
+	.review-bottom-title:active{
+		text-decoration:none;
+		color:#FFFFFF;
+	}

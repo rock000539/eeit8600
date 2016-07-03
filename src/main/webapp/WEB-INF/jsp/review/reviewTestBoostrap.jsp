@@ -9,7 +9,7 @@
 <!-- **加入2個css，請按照此順序** -->
 <link href="/css/bootstrap.min.css" rel="stylesheet" >
 <link href="/css/bootstrap-theme.css" rel="stylesheet">
-<link href="/css/font-awesome.min-4.6.3.css" rel="stylesheet" type="text/css"/> <!--**new**-->
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
 <link href="/css/review-customize.css" rel="stylesheet">
 
 <title>Review List</title>
@@ -17,10 +17,10 @@
 <body>
 
 <div class="row row-body">
-	<c:forEach var='review' items="${reviews}">
+	<c:forEach var='review' items="${reviews}" varStatus="vs">
 
-	  <div class="col-sm-6 col-md-3 body">
-	    <div class="thumbnail" id="thumbnail">
+	  <div class="col-sm-6 col-md-3 body" name="body">
+	    <div class="thumbnail" >
 					<!-- Img start -->
 			<a href="/reviews/list" > <!-- ???連結要換成去一篇的心得頁面 -->
 	    	<div class="reviewImg">
@@ -48,12 +48,12 @@
 						<!--心得評分 end-->
 						<div class="review-uc-diamond">
 							<div class="urcosme-score-display">
-								<span class=" fa fa-diamond diamond"></span>
-								<span class=" fa fa-diamond diamond"></span>
-								<span class=" fa fa-diamond diamond"></span>
-								<span class=" fa fa-diamond diamond"></span>
-								<span class=" fa fa-diamond diamond"></span>						
-							 </div>&nbsp;&nbsp;&nbsp;<span class="review-rating">${review.reviewRating}分</span>  
+								<span class=" fa fa-diamond diamond" id="diamond1"></span>
+								<span class=" fa fa-diamond diamond" id="diamond2"></span>
+								<span class=" fa fa-diamond diamond" id="diamond3"></span>
+								<span class=" fa fa-diamond diamond" id="diamond4"></span>
+								<span class=" fa fa-diamond diamond" id="diamond5"></span>						
+							 </div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
 						</div>
 						<!--心得評分  end -->
 						<!-- ???到時候抓會員的肌膚和年齡 -->
@@ -62,17 +62,20 @@
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				
 				<!--心得內容Start -->
-				<a class="review-link" href="/reviews/list" > <!-- ???連結要換成去一篇的心得頁面 -->
-		      		<div class="review"> ${review.review}</div>
-		        </a>
+				<a class="review-link" href="/reviews/list" > ${review.review}</a>
+				<!-- ???連結要換成去一篇的心得頁面 -->
 				 <!--心得內容end -->
+				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/list" > ${review.reviewTitle}</a>
+					<!-- ???連結要換成去一篇的心得頁面 -->
+<%-- 		      		<div  name="review-bottom-title" class="review-bottom-title" id="review-bottom-title">${review.reviewTitle}</div> --%>
+<!-- 		        </a> -->
 	        </div>
 	        <!-- caption end --> 
 	    </div>
 	    <!-- thumbnail end --> 
 	  </div>
 	  <!-- col-sm-6 col-md-3 end --> 
-	  </c:forEach>
+	  </c:forEach>	  
 </div>
 <!-- row end --> 
 
@@ -81,15 +84,34 @@
 <!-- **加入2個js，請按照此順序** -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 		
-		  $(function () {
-		 	$("#thumbnail").hover()
-		 
+
+		  $(function () {  //=$(document.)ready
+			  //只有第一個有效果
+			  for(var i = 1; i <= $("span[name='review-rating']").text().substr(0,1); i++){
+				  $("#diamond"+i).css('color','#FF5151');
+			  }
+		  
+ 		 	$("div[name='body']").hover(function(){
+				$(this).find("#review-bottom-title").css('opacity','1');
+		 		$(this).css('border','0.5px solid');
+		 		$(this).css('border-color','#BEBEBE');
+		 	},function(){
+				$(this).find("#review-bottom-title").css('opacity','0');
+		 		$(this).css('border','');
+		 		$(this).css('border-color','#BEBEBE');
+		 	});//hover end
+		 	
+		 	
 		  });
+		
+		  
+
+		  console.log($("span[name='review-rating']").text().substr(0,1));
 
 </script>
+
 
 </body>
 </html>
