@@ -89,10 +89,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">DashBoard</h1>   <!-- **內文中的標題，請修改** -->
+                <h1 class="page-header">Brand AddPage</h1>   <!-- **內文中的標題，請修改** -->
                 <!-- **每頁不同的內容從這裡開始** -->
                 
-<h1>Brand AddPage</h1>
 <FORM id="addForm" enctype="multipart/form-data" action="/brands/insert" method="post">
 	<TABLE>
 		<TR>
@@ -164,14 +163,14 @@ $(function(){
 	        $(element).valid();
 	    },
 		rules:{
-			//brandName:{required:true},
-			//brandImgFile:'required',
+			brandName:{required:true},
+			brandImgFile:'required',
 			website:{required:true,url:true},
 			bcFunc:'required'
 		},//end of rules
 		messages:{
-			//brandName:'必填',
-			//brandImgFile:'必填',
+			brandName:'必填',
+			brandImgFile:'必填',
 			website:{required:'必填',url:'請輸入正確網址格式'},
 			bcFunc:'必填'
 		},//end of messages
@@ -179,7 +178,7 @@ $(function(){
 	
 	
 	$('#save').click(function(){		
-// 		console.log(JSON.stringify($('#addForm').serializeObject()));
+		console.log(JSON.stringify($('#addForm').serializeObject()));
 		if($('#addForm').validate().form()){
 			var formData = new FormData();
 			formData.append('brandImgFile',$('#brandImgFile').prop('files')[0]);
