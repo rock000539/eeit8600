@@ -4,9 +4,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
+<title>收藏產品清單</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<!-- CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/fms-main.css" />
+	<link rel="stylesheet" href="/css/fms-customize.css" />		
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.dropotron.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/fms-main.js"></script>
+<style>
+
 #mainSpace{
   width: 500px;
   margin-top:100px;
@@ -14,12 +27,10 @@
   margin-right: auto;
   }
 </style>
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
 <script>
 $(function(){
-$('.delete').click(function(e){
+$('.deleteDate').click(function(e){
 	var dateIdStr=e.target.name;
 	var target=e.target;
 
@@ -36,8 +47,19 @@ $('.delete').click(function(e){
 	
 })
 </script>	
+
 </head>
 <body>
+
+	<!-- Wrapper -->
+		<div id="wrapper">
+<!--加入header&nav -->
+<c:import url="../fms_header_nav.jsp" />
+				
+			<!-- Main -->
+			<div id="main">
+<!-- ////////////////////////////////////////////////////////////////////-->
+
 <div id="mainSpace">
 <table class="table table-hover">
 <tr><td>產品名稱</td><td>製造日</td><td>到期日</td><td></td></tr>
@@ -48,13 +70,21 @@ $('.delete').click(function(e){
 	<td>${items.mfd}</td> 
 	<td>${items.exp}</td> 	
 	<td>${items.product.prodImg}</td>
-	<td><input type="button" name="edit" value="edit" id="edit" onclick='location="/expdate/edit?dateId=${items.expDate.dateId}"'></td>
-	<td><input type="button" name="${items.expDate.dateId}" value="delete" class="delete" ></td>
+	<td><input type="button" name="edit" value="edit" id="editDate" onclick='location="/expdate/edit?dateId=${items.expDate.dateId}"'></td>
+	<td><input type="button" name="${items.expDate.dateId}" value="deleteDate" class="delete" ></td>
 	
 </tr>
 </c:forEach>
 
 </table>
 </div>
+
+<!-- ////////////////////////////////////////////////////////////////////-->
+
+<!--加入intro&footer -->
+<c:import url="../fms_intro_footer.jsp" />
+			 </div>
+		</div>
+			
 </body>
 </html>

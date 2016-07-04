@@ -3,11 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <head>
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<!-- CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/fms-main.css" />
+	<link rel="stylesheet" href="/css/fms-customize.css" />		
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.dropotron.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/fms-main.js"></script>   
 <style>
 
+/*//////////////////////////////////////////////////////////////////////////// */
 #proList {
 	padding-left: 100px;
 }
@@ -17,8 +28,10 @@
 	$(function() {
 		var mfdDate;
 		var expDate;
-
-		$('#search').click(function() {
+			
+		
+		$("#searchDate").click(function() {
+		
 		var brandId = $('#brandId').val();
 		var batchCode = $('#batchCode').val();
 		$.ajax({
@@ -27,7 +40,7 @@
 				data : {"brandIdstr" : brandId,
 						"batchCode" : batchCode},
 				success : function(data) {
-
+				
 				$('#mfd').empty().prepend(data.mfdDate);
 				$('#exp').empty().prepend(data.expDate);
 				$('#proList').empty();
@@ -82,6 +95,15 @@
 </head>
 <body>
 
+<!-- Wrapper -->
+<div id="wrapper">
+<!--加入header&nav -->
+<c:import url="../fms_header_nav.jsp" />
+				
+<!-- Main -->
+<div id="main">
+			
+<!-- ////////////////////////////////////////////////////////////////////-->
 	<div id="mainSpace">
 
 			<table class="table table-hover">
@@ -94,7 +116,7 @@
 							</c:forEach>
 							</select></td>
 					<td><input type="text" name="batchCode" id="batchCode" /></td>
-					<td colspan="2"><input type="button" id="search" value="查詢" /></td>
+					<td colspan="2"><input type="button" id="searchDate" value="查詢" /></td>
 					
 					</tr>
 				</form>
@@ -113,5 +135,15 @@
 			</div>
 
 	</div>
+	<!-- ////////////////////////////////////////////////////////////////////-->
+	            <!-- **每頁不同的內容結束** -->
+
+<!--加入intro&footer -->
+<c:import url="../fms_intro_footer.jsp" />
+	</div>
+	</div>
+			
+
+			
 </body>
 </html>

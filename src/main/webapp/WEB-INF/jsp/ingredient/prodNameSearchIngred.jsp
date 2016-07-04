@@ -6,12 +6,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+  
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/fms-main.css" />
+	<link rel="stylesheet" href="/css/fms-customize.css" />		
+	<!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+
+	
+	<script src="/js/jquery.dropotron.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/fms-main.js"></script>  
+	<script src="/js/bootstrap.min.js"></script>
+
 <script>
 $(function(){
-	$(search).click(function (){
+	$('#searchIngredient').click(function (){
 		var prodName=$("#prodName").val();
 
 		$.ajax({
@@ -75,8 +86,13 @@ $(function(){
 <style>
 h3{   text-align: center;
 }
+.modal {
+height: 900px;
+margin-top:100px; }
+.modal-header{
+font-size: 50px;}
 .form-inline{
- width: 320px;
+ width: 400px;
  margin-top:100px;
   margin-left: auto;
   margin-right: auto;
@@ -91,11 +107,20 @@ margin-top: 50px;
 </style>
 </head>
 <body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+<!--加入header&nav -->
+<c:import url="../fms_header_nav.jsp" />
+				
+<!-- Main -->
+<div id="main">
+<!-- top ////////////////////////////////////////////////////-->			
 <form action="" class="form-inline">
 <table>
 <tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr>
 <tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
-<td><input type="button" id="search" value="search" class="btn btn-default" style="margin-bottom: 10px;"></td></tr>
+<td><input type="button" id="searchIngredient" value="Search" class="btn btn-default" style="margin-bottom: 10px;"></td></tr>
 </table>
 </form>
 
@@ -140,5 +165,13 @@ margin-top: 50px;
 <div id="productArea">
 <table id="productList" class="table  table-hover"></table>
 </div>
+<!-- top ////////////////////////////////////////////////////-->	
+	            <!-- **每頁不同的內容結束** -->
+
+<!--加入intro&footer -->
+<c:import url="../fms_intro_footer.jsp" />
+	</div>
+	</div>
+			
 </body>
 </html>

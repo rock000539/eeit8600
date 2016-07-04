@@ -1,63 +1,71 @@
 package tw.com.queautiful.product.web;
 
-import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.*;
-
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
-
-import tw.com.queautiful.product.entity.*;
-import tw.com.queautiful.product.service.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
 public class LoginController
 {
-    @Autowired
-    private MemberService memberService;
+//    @Autowired
+//    private MemberService memberService;
+    
+    @RequestMapping("loginBms")    
+    public String loginBms(){        
+        return "/member/loginBms";
+    }
     
     @RequestMapping("login")    
     public String login(){
         
         return "/member/login";
     }
-    //--------------------------------------------
-    @RequestMapping("out")    
-    public String logoutPage(){
-        
-        return "/member/logout";
-    }
-    //*********************************************
-    @RequestMapping("login?logout")    
-    public String logout(){
-        
-        return "/expdate/search";
+    @RequestMapping("loginBmsDenied")  
+    public String bmsDenied(){
+    	return "/member/loginBmsDenied";
     }
     
-    @RequestMapping("login?error")    
-    public String loginError(Model model){
-        model.addAttribute("param", "用戶或密碼錯誤");
-        return "/member/login";
-    }
+    //-------------------------------------------
     
-    
-    @RequestMapping("/check")   
-    public String check(HttpServletRequest request,String memberEmail){
-        List<Member> list=new ArrayList<Member>();
-        list=memberService.getAll();
-        
-        for(int i=0;i<list.size();i++){
-            String Email=list.get(i).getEmail();
-            if(memberEmail==Email){
-                request.getSession().setAttribute("memberId", list.get(i).getMemberId());
-            }
+    @RequestMapping(value = "loginBms", method = RequestMethod.GET)
+    public String loginBms(HttpServletRequest req,
+        @RequestParam(value = "error", required = false) String error,
+        @RequestParam(value = "logout", required = false) String logout) {
+
+       if (error != null) {
+           req.setAttribute("error", "輸入錯誤內容");
         }
-       
-        return null;
+
+       if (logout != null) {
+           req.setAttribute("msg", "成功登出");
+           //可註解想轉的登出頁面
+        }
+
+        return "/member/loginBms";//回傳驗證錯誤的資訊
+
     }
     
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login(HttpServletRequest req,
+        @RequestParam(value = "error", required = false) String error,
+        @RequestParam(value = "logout", required = false) String logout) {
+
+       if (error != null) {
+           req.setAttribute("error", "輸入錯誤內容");
+        }
+
+       if (logout != null) {
+           req.setAttribute("msg", "成功登出");
+           //可註解想轉的登出頁面
+        }
+
+        return "/member/login";//回傳驗證錯誤的資訊
+
+    }
+ 
     
 }

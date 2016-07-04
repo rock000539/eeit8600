@@ -38,33 +38,35 @@ public class ProdIngreListController {
 
 	@RequestMapping("/list") // 後台修改成分產品對應用
 	public String listPage(Model model) {
-		List<ProdIngreList> prodIngreLists = prodIngreListService.getAll();
-		List<Map> result = new ArrayList<Map>();
-
-		for (int i = 0; i < prodIngreLists.size(); i++) {
-
-			Map<String, Object> resultMap = new HashMap<String, Object>();
-			ProdIngreList prodIngreList = prodIngreLists.get(i);
-
-			long j = prodIngreList.getProdId();
-			long k = prodIngreList.getIngredId();
-
-			Product product = productService.getById(j);
-			Ingredient ingredient = ingredientService.getById(k);
-
-			resultMap.put("product", product);
-			resultMap.put("ingredient", ingredient);
-
-			result.add(resultMap);
-		}
-
-		model.addAttribute("prodIngreList", result);
-		System.out.println(result);
 		return "/ingredient/ProductAndIngredientMenu";
 	}
-
 	
-	@RequestMapping("/post") // 後台新增資料用
+	
+	@RequestMapping("/editIngredient") // 後台修改成分產品對應ajax用 step1
+	public String listPageSearchProduct(Model model,@RequestParam String proIdStr) {
+
+		List<Ingredient> ingredients = new ArrayList<Ingredient>();
+
+		long prodId = Long.parseLong(proIdStr);
+
+		String productName = productService.getById(prodId).getProdName();
+
+		ingredients = prodIngreListService.findByProdIdEndsWith(prodId);
+
+
+		model.addAttribute("ingredients", ingredients);
+		
+		return "/ingredient/editIngredient";
+	}
+	
+	
+	@RequestMapping("/put") // 後台新增資料頁面用
+	public String editProductIngredient(Model model, @RequestParam String prodId) {
+
+		return "/ingerdient/IngredientSearchIngredient";
+	}
+
+	@RequestMapping("/post") // 後台新增資料ajax用
 	public String listPage(Model model, String prodIdStr, String ingredIdStr) {
 		long prodId = Long.parseLong(prodIdStr);
 		long ingredId = Long.parseLong(ingredIdStr);
@@ -75,15 +77,15 @@ public class ProdIngreListController {
 	}
 	
 	
-
-	@RequestMapping("/search") // 前台進入搜尋頁面
+//*--------------------------------------------------------------
+	@RequestMapping("/prodNameSearchIngred") // 前台進入搜尋頁面
 	public String searchPage() {
 
 		return "/ingredient/prodNameSearchIngred";
 
 	}
 
-	@RequestMapping("/get") // 前台產品找成分用
+	@RequestMapping("/get") // 前後台產品找成分ajax用
 	@ResponseBody
 	public Map<String, Object> search(@RequestParam String prodName) {
 
@@ -108,7 +110,7 @@ public class ProdIngreListController {
 		return resultMap;
 	}
 
-	@RequestMapping("/showIngredient") // 前台產品找成分用
+	@RequestMapping("/showIngredient") // 前台產品找成分ajax用
 	@ResponseBody
 	public Map<String, Object> showIngredient(@RequestParam String proIdStr) {
 

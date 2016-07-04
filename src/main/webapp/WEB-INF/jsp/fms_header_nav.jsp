@@ -30,7 +30,7 @@
 				<!--已登入 -->
 				<div>
 					<a href="https://www.google.com.tw"> <img class="user"
-						src="img/testuser.jpg" alt="" /> <span>username</span>
+						src="/img/testuser.jpg" alt="" /> <span>username</span>
 					</a>
 				</div>
 			</li>
@@ -85,7 +85,7 @@
 				<!--未登入 --> <!-- 									<a href="#" class="button big fit">Log In</a> -->
 				<!--已登入 -->
 				<div>
-					<a href="#"> <img class="user" src="img/testuser.jpg" alt="" />
+					<a href="#"> <img class="user" src="/img/testuser.jpg" alt="" />
 						<span>user</span>
 					</a>
 				</div>
