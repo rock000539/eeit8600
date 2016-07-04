@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -26,7 +26,7 @@ public class Category {
 	private String name;
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-	@JsonManagedReference
+	@JsonIgnore
 	private Set<Book> books;
 
 	public Category() {

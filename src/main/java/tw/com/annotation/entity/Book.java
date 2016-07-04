@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,18 +29,19 @@ public class Book {
 	@Column(name = "NAME", length = 50)
 	private String name;
 
-	@OneToOne
-	@JoinColumn(name = "detailid")
-	@JsonBackReference
-	private Detail detail;
+	@OneToOne(targetEntity = Detail.class)
+	@JoinColumn(name = "detailId")
+	private Integer detailId;
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
-	@JsonBackReference
 	private Category category;
 
+	@Transient
+	private Integer categoryId;
+
 	@ManyToMany
-	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID"), inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID"))
+	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID") , inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID") )
 	private List<Publisher> publishers;
 
 	public Book() {
@@ -52,7 +54,7 @@ public class Book {
 
 	public Book(String name, Detail detail) {
 		this.name = name;
-		this.detail = detail;
+		// this.detail = detail;
 	}
 
 	public Book(String name, Category category) {
@@ -63,6 +65,14 @@ public class Book {
 	public Book(String name, List<Publisher> publishers) {
 		this.name = name;
 		this.publishers = publishers;
+	}
+
+	public Integer getCategoryId() {
+		return this.category.getCategoryId();
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public Long getBookId() {
@@ -81,19 +91,27 @@ public class Book {
 		this.name = name;
 	}
 
-	public Detail getDetail() {
-		return detail;
-	}
-
-	public void setDetail(Detail detail) {
-		this.detail = detail;
-		if (detail.getBook() != this) {
-			detail.setBook(this);
-		}
-	}
+	// public Detail getDetail() {
+	// return detail;
+	// }
+	//
+	// public void setDetail(Detail detail) {
+	// this.detail = detail;
+	// if (detail.getBook() != this) {
+	// detail.setBook(this);
+	// }
+	// }
 
 	public Category getCategory() {
 		return category;
+	}
+
+	public Integer getDetailId() {
+		return detailId;
+	}
+
+	public void setDetailId(Integer detailId) {
+		this.detailId = detailId;
 	}
 
 	public void setCategory(Category category) {
@@ -113,15 +131,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		
-		String result = String.format("Book [id=%d, name='%s']%n", bookId, name);
-		if (publishers != null) {
-			for (Publisher publisher : publishers) {
-				result += String.format("Publisher[id=%d, name='%s']%n", publisher.getPubId(), publisher.getName());
-			}
-		}
-
-		return result;
+		return "Book [bookId=" + bookId + ", name=" + name + ", detailId=" + detailId + "]";
 	}
 
 }

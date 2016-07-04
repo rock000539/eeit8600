@@ -97,14 +97,14 @@ public class App implements CommandLineRunner {
 //		}
 
 		// @ManyToMany Example
-		Book temp = bookDao.findOne(1L);
-		temp.setPublishers(publisherDao.findAll());
-		bookDao.save(temp);
-
-		// fetch all books
-		for (Book book : bookDao.findAll()) {
-			logger.info("{}", book);
-		}
+//		Book temp = bookDao.findOne(1L);
+//		temp.setPublishers(publisherDao.findAll());
+//		bookDao.save(temp);
+//
+//		// fetch all books
+//		for (Book book : bookDao.findAll()) {
+//			logger.info("{}", book);
+//		}
 		
 	}
 
