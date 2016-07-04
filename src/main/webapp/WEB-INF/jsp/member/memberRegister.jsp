@@ -5,6 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+	<!-- 表單驗證  -->
+	<script 
+		src="/js/jquery.validate.min.js"></script>
+	
+	<!-- DatePicker -->
+	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
 <style>
 	label{
 		font-family: Microsoft JhengHei;
@@ -22,15 +30,17 @@
 		color: #00CACA;
 	}
 	div.modal-header{
-		margin-bottom:40px;
+		margin-bottom:20px;
 		font-family: monospace;
 		color: #FFFFFF;
 		background-color: #98DaD6;
 		text-align: center;
+		height: 80px;
 	}
 	div.modal-footer{
 		background-color: #98DaD6;
 		text-align: center;
+		height: 100px;
 	}
 	#datetimepicker {
 		overflow: scroll;
@@ -46,25 +56,23 @@
 	}
 	#insertBtn, #insertBtn:focus {
 		width: 10em;
-		border-radius: 24px;
-		font-family:cursive;
+/*  	border-radius: 24px;  */
+ 		font-family:cursive; 
 		background-color: #FFFFFF;
 		color:#84786C;
 		font-weight: bold;
-		border: 2px double white;
-		box-shadow: 0 3px 0 0 #84D2CE;
+/* 		border: 2px double white; */
+/* 		box-shadow: 0 3px 0 0 #84D2CE; */
 	}
-	#insertBtn:hover, #insertBtn.active{
-		border:2px double white;
-		background-color: #98DaD6;
-		color: white;
+	.modal-dialog {
+	  padding-top:5%;
 	}
 </style>
 </head>
 <body>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h3 class="modal-title">MemberRegister<small>SignUp TestPage </small></h3>
+                 <h3 class="modal-title">MemberRegister<small>Sign Up TestPage </small></h3>
             </div>			<!-- modal header -->
             <div class="modal-body">
             
@@ -188,7 +196,7 @@
 </form>
             </div>			<!-- m body -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="insertBtn" name="insert" 
+                <button type="button" id="insertBtn" name="insert" 
                 	 >SignUp</button>
             </div>			<!-- m footer --> <!-- data-dismiss="modal" -->
 </div>
