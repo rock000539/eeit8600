@@ -4,9 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Brand AddPage</title>
 	
 	<!-- Header, NavBar -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -52,6 +49,9 @@
 	<!-- <script src="/src/js/jquery.iframe-transport.js"></script> -->
 	<!-- <script src="/src/js/jquery.fileupload.js"></script> -->
 	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Brand AddPage</title>
+	
 	<style>
 		.col-md-6 {
 			margin-top: 20px;
@@ -73,7 +73,6 @@
 	
 </head>
 
-</head>
 <body>
 <!-- 內文全部用wrapper包起來 -->
 <div id="wrapper">
