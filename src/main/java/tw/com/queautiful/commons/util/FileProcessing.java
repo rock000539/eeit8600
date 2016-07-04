@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -20,8 +21,14 @@ public class FileProcessing {
 	//存圖片
 	//傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
 	//傳回檔案儲存的路徑
-	public static String saveImg(String imgName, String folderName, MultipartFile multipartFile){
+	public static String saveImg(String imgName, String folderName, MultipartFile multipartFile
+//			, HttpServletRequest req
+			){
 		String imgPath = null;
+		
+//		String realPath = req.getServletContext().getRealPath("/WEB-INF/img");
+//		System.out.println("realPath----->" + realPath);
+		
 		if(!multipartFile.isEmpty()){
 			try {
 				byte[] bytes = multipartFile.getBytes();

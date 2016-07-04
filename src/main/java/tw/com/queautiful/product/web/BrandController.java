@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -70,14 +71,16 @@ public class BrandController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public Brand insert(@RequestPart("brand") Brand brand, 
-			@RequestPart("brandImgFile") MultipartFile brandImgFile) {
+			@RequestPart("brandImgFile") MultipartFile brandImgFile, HttpServletRequest req) {
 		//取得品牌名稱當作檔名
 		String brandName = brand.getBrandName();
-		
+		System.out.println("getOriginalFilename---->"+brandImgFile.getOriginalFilename());
+		System.out.println("getContentType---->"+brandImgFile.getContentType());
 		//存圖片-->直接使用FileProcessing檔的saveImg方法
 		//傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
 		//傳回檔案儲存的路徑
 		String brandImg = FileProcessing.saveImg(brandName, "brand", brandImgFile);
+//		String brandImg = FileProcessing.saveImg(brandName, "brand", brandImgFile ,req);
 		
 		//將檔案路徑存成Entity的屬性
 		brand.setBrandImg(brandImg);
@@ -89,17 +92,19 @@ public class BrandController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Brand update(@RequestPart("brand") Brand brand,
-			@RequestPart(value = "brandImgFile", required = false) MultipartFile brandImgFile) {
+			@RequestPart(value = "brandImgFile", required = false) MultipartFile brandImgFile, HttpServletRequest req) {
 		
 		//判斷是否有傳入圖片
 		if (brandImgFile != null) {
 			//取得品牌名稱當作檔名
 			String brandName = brand.getBrandName();
 			
+			
 			//存圖片-->直接使用FileProcessing檔的saveImg方法
 			//傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
 			//傳回檔案儲存的路徑
 			String brandImg = FileProcessing.saveImg(brandName, "brand", brandImgFile);
+//			String brandImg = FileProcessing.saveImg(brandName, "brand", brandImgFile ,req);
 			
 			//將檔案路徑存成Entity的屬性
 			brand.setBrandImg(brandImg);
