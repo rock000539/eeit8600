@@ -1,23 +1,31 @@
 package tw.com.queautiful.product.web;
 
-import java.text.*;
-import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.annotation.security.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
-import org.springframework.security.config.annotation.method.configuration.*;
-import org.springframework.security.core.context.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.util.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.product.entity.*;
-import tw.com.queautiful.product.service.*;
+import tw.com.queautiful.product.entity.Brand;
+import tw.com.queautiful.product.entity.ExpDate;
+import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.service.BrandService;
+import tw.com.queautiful.product.service.ExpDateSearchService;
+import tw.com.queautiful.product.service.ExpDateService;
+import tw.com.queautiful.product.service.ProductService;
 
 @Controller
 @RequestMapping("/expdate")
@@ -62,8 +70,8 @@ public class ExpDateController
     public String listPage(Model model, HttpServletRequest request)
     {
 
-//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-//        System.out.println("username is " + username);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("username is " + username);
 
 
         List<Map> result = new ArrayList<Map>();
