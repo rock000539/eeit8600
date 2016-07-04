@@ -38,7 +38,7 @@ public class ProdIngreListController {
 
 	@RequestMapping("/list") // 後台修改成分產品對應用
 	public String listPage(Model model) {
-		return "/ingredient/ProductAndIngredientMenu";
+		return "/ingredient/ProductAndIngredientManagement";
 	}
 	
 	
