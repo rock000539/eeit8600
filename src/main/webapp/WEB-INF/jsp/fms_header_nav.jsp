@@ -61,7 +61,7 @@
 			</a></li>
 			<li><a href="#">
 					<h3>成分</h3>
-			</a> <a href="https://www.google.com.tw"><span>依成份查詢產品</span></a> <a
+			</a> <a href="/prodIngreList/showIngredient"><span>依成份查詢產品</span></a> <a
 				href="/prodIngreList/prodNameSearchIngred"><span>依產品查詢成分</span></a></li>
 			<li><a href="#">
 					<h3>順序</h3>
