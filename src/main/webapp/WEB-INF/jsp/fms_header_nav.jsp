@@ -56,13 +56,13 @@
 	<!-- Links -->
 	<section>
 		<ul class="links">
-			<li><a href="#">
+			<li><a href="/expdate/list">
 					<h3>日期</h3>
 			</a></li>
 			<li><a href="#">
 					<h3>成分</h3>
 			</a> <a href="https://www.google.com.tw"><span>依成份查詢產品</span></a> <a
-				href="#"><span>依產品查詢成分</span></a></li>
+				href="/prodIngreList/prodNameSearchIngred"><span>依產品查詢成分</span></a></li>
 			<li><a href="#">
 					<h3>順序</h3>
 			</a></li>
