@@ -6,8 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
 	<!-- 表單驗證  -->
-	<script 
-		src="/js/jquery.validate.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
 	
 	<!-- DatePicker -->
 	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />

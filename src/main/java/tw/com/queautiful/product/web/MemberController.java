@@ -67,6 +67,21 @@ public class MemberController {
 		return "/member/memberRegister";
 	}
 	
+	//return forgot password page
+	@RequestMapping("/forgotpsw")
+	public String forgotPswPage(){
+		return "/member/member_forgotPsw"; 
+	}
+	
+	@RequestMapping("/resetPsw")
+	@ResponseBody
+	public String resetPsw(@RequestParam String email){
+		if(service.accountCheck(email)){
+			return "The email doesn't exit";
+		}
+		return "Please check your email and follow the instructions.";
+	}
+	
 	@RequestMapping("/suspend")
 	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){
 		log.debug("inside controller");//test

@@ -38,8 +38,8 @@
 <div id="wrapper">
 
 <!-- 加入上方及側邊Nav-Bar -->	
-<c:import url="../bms_header.jsp" />
-<c:import url="../bms_navbar-side.jsp" />
+<c:import url="/WEB-INF/jsp/bms_header.jsp" />
+<c:import url="/WEB-INF/jsp/bms_navbar-side.jsp" />
 <!-- ?? url有沒有更好的寫法 ?? -->
 
 

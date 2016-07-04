@@ -26,6 +26,7 @@
 </style>
 </head>
 <body>
+
 	<!-- Wrapper -->
 		<div id="wrapper">
 <!--加入header&nav -->
@@ -36,19 +37,18 @@
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 
-
 <!-- Button trigger modal -->
 <a data-toggle="modal" class="btn btn-info" href="/members/register" data-target="#regiModal">SignUp !</a>
 <!-- modal -->
 <c:import url="../register_modal.jsp" />
 	
-
-<!-- **每頁不同的內容結束** -->
+<a href="/members/forgotpsw">Forgot Password</a>
+            <!-- **每頁不同的內容結束** -->
 
 <!--加入intro&footer -->
 <c:import url="../fms_intro_footer.jsp" />
 			 </div>
 		</div>
-
+			
 </body>
 </html>

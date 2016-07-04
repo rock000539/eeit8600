@@ -49,8 +49,8 @@
 
 <div id="wrapper">
 
-<jsp:include page="../bms_header.jsp"></jsp:include>
-<jsp:include page="../bms_navbar-side.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/jsp/bms_header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/jsp/bms_navbar-side.jsp"></jsp:include>
 
 <!-- Page Content -->
 <div id="page-wrapper">
