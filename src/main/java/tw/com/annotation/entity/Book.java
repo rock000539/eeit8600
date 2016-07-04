@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "BOOK")
 public class Book {
@@ -28,10 +30,12 @@ public class Book {
 
 	@OneToOne
 	@JoinColumn(name = "detailid")
+	@JsonBackReference
 	private Detail detail;
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
+	@JsonBackReference
 	private Category category;
 
 	@ManyToMany

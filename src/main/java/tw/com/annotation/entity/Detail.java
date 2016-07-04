@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "DETAIL")
 public class Detail {
@@ -21,6 +23,7 @@ public class Detail {
 	private Integer numberOfPages;
 	
 	@OneToOne(mappedBy = "detail")
+	@JsonManagedReference
 	private Book book;
 
 	public Detail() {
