@@ -11,14 +11,15 @@
 <link href="/css/bootstrap-theme.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
 <link href="/css/review-customize.css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
+
 
 <title>Review List</title>
 </head>
 <body>
 
 <div class="row row-body">
-	<c:forEach var='review' items="${reviews}" varStatus="vs">
-
+	<c:forEach var='review' items="${reviews}" >
 	  <div class="col-sm-6 col-md-3 body" name="body">
 	    <div class="thumbnail" >
 					<!-- Img start -->
@@ -48,12 +49,21 @@
 						<!--心得評分 end-->
 						<div class="review-uc-diamond">
 							<div class="urcosme-score-display">
-								<span class=" fa fa-diamond diamond" id="diamond1"></span>
-								<span class=" fa fa-diamond diamond" id="diamond2"></span>
-								<span class=" fa fa-diamond diamond" id="diamond3"></span>
-								<span class=" fa fa-diamond diamond" id="diamond4"></span>
-								<span class=" fa fa-diamond diamond" id="diamond5"></span>						
-							 </div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
+								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>
+								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond2"></span>
+								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond3"></span>
+								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
+								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>						
+								<script type="text/javascript">
+									$(function(){
+										console.log("${review.reviewId}");
+										for(var i=0;i<"${review.reviewRating}";i++){
+											$("#tb${review.reviewId}diamond"+(i+1)).css('color','#FF5151');
+// 										console.log($("#tb${review.reviewId}diamond"+(i+1)));
+										}
+									});
+								</script>
+							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
 						</div>
 						<!--心得評分  end -->
 						<!-- ???到時候抓會員的肌膚和年齡 -->
@@ -82,17 +92,41 @@
 
 
 <!-- **加入2個js，請按照此順序** -->
-<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 		
 
 		  $(function () {  //=$(document.)ready
-			  //只有第一個有效果
-			  for(var i = 1; i <= $("span[name='review-rating']").text().substr(0,1); i++){
-				  $("#diamond"+i).css('color','#FF5151');
-			  }
-		  
+			  //
+// 			for(var j=0 ; j <$("span[name='review-rating']").size();j++){
+// 			  for(var i = 1; i <= $($("span[name='review-rating']")[j]).text().substr(0,1); i++){
+				 	 
+// 				  $("#tn"+(j+1)+"diamond"+i).css('color','#FF5151');
+// 			  };
+// 			};
+
+			$.ajax({
+				url:'/reviews/select',
+				type:'get',
+				dataType:'json',
+				success:function(result){
+// 					console.log(result);
+					for(var i=0;i<result.length;i++){
+						var ratecount = result[i].reviewRating;
+						var reviewid = result[i].reviewId;
+						console.log("rate"+ratecount);
+						console.log("id"+reviewid);
+						 for(var j = 1; j <= result[i].reviewRating; j++){
+							  $("#tn"+reviewid+"diamond"+j).css('color','#FF5151');
+// 							  console.log($($("#diamond"+j)[i]));
+						  };
+					}
+				}
+				
+				
+			});
+			
+			
  		 	$("div[name='body']").hover(function(){
 				$(this).find("#review-bottom-title").css('opacity','1');
 		 		$(this).css('border','0.5px solid');
@@ -107,8 +141,10 @@
 		  });
 		
 		  
-
-		  console.log($("span[name='review-rating']").text().substr(0,1));
+		  var span = $($("span[name='review-rating']")[0]);
+// 		  console.log(span.text().substr(0,1));
+// console.log($('#tb1'))
+// console.log($('#tb1>diamond1'))
 
 </script>
 
