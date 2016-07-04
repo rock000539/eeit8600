@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>收藏產品清單</title>
 <style type="text/css">
 #mainSpace{
   width: 500px;
@@ -14,9 +14,18 @@
   margin-right: auto;
   }
 </style>
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/fms-main.css" />
+<link rel="stylesheet" href="/css/fms-customize.css" />		
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>	
+	<script src="/js/jquery.validate.min.js"></script>		
+	<script src="/js/jquery.dropotron.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/fms-main.js"></script>
 <script>
 $(function(){
 $('.delete').click(function(e){
@@ -36,8 +45,19 @@ $('.delete').click(function(e){
 	
 })
 </script>	
+
 </head>
 <body>
+
+	<!-- Wrapper -->
+		<div id="wrapper">
+<!--加入header&nav -->
+<c:import url="../fms_header_nav.jsp" />
+				
+			<!-- Main -->
+			<div id="main">
+<!-- ////////////////////////////////////////////////////////////////////-->
+
 <div id="mainSpace">
 <table class="table table-hover">
 <tr><td>產品名稱</td><td>製造日</td><td>到期日</td><td></td></tr>
@@ -56,5 +76,19 @@ $('.delete').click(function(e){
 
 </table>
 </div>
+
+<!-- ////////////////////////////////////////////////////////////////////-->
+
+<!--加入intro&footer -->
+<c:import url="../fms_intro_footer.jsp" />
+			 </div>
+		</div>
+			
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.dropotron.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/fms-main.js"></script>
 </body>
 </html>

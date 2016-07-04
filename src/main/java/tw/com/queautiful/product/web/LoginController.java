@@ -22,7 +22,7 @@ public class LoginController
     @RequestMapping("login")    
     public String login(){
         
-        return "/member/login";
+        return "/test/fms_Template";
     }
     //--------------------------------------------
     @RequestMapping("out")    

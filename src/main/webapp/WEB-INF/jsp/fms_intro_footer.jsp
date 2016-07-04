@@ -5,7 +5,7 @@
 
 	<!-- Intro -->
 	<section id="intro">
-		<a href="#" class="logo"><img src="img/logo.jpg" alt="" /></a>
+		<a href="#" class="logo"><img src="/img/logo.jpg" alt="" /></a>
 		<header>
 			<h2>Queautiful</h2>
 			<p>Quick | Query | Quality | Question</p>

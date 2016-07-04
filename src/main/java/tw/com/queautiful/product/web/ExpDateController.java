@@ -30,8 +30,7 @@ public class ExpDateController
     private ProductService productService;
     @Autowired
     private BrandService brandService;
-    @Autowired
-    private MemberService memberService;
+
 
     @Autowired
     private ExpDateSearchService expDateSearchService;
@@ -63,8 +62,8 @@ public class ExpDateController
     public String listPage(Model model, HttpServletRequest request)
     {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("username is " + username);
+//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        System.out.println("username is " + username);
 
 
         List<Map> result = new ArrayList<Map>();

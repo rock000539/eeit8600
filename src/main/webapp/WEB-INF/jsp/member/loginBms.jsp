@@ -53,19 +53,19 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             <div class="msg">${msg}</div>
         </c:if>
         
-        <form th:action="<c:url value='j_spring_security_check' />"  method="post">
+        <form th:action='j_spring_security_check'  method="post">
             <table>
             <tr>
                 <td>User:</td>
-                <td><input type='text' name='username' value=''></td>
+                <td><input type='text' name='j_username' value=''></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type='password' name='password' /></td>
+                <td><input type='password' name='j_password' /></td>
             </tr>
             <tr>
                     <td colspan='2'>
-                                <input name="submit" type="submit" value="submit" />
+                                <input name="Login" type="submit" value="Login" />
                                 </td>
                                                      <td colspan='2'>
                                 <input type="button" value="log out" onclick="location='/logout'"/>

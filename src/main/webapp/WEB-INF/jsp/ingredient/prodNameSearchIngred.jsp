@@ -11,7 +11,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script>
 $(function(){
-	$(search).click(function (){
+	$('#search').click(function (){
 		var prodName=$("#prodName").val();
 
 		$.ajax({
