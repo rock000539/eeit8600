@@ -2,7 +2,6 @@ package tw.com.annotation.entity;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -24,7 +25,8 @@ public class Category {
 	@Column(name = "NAME")
 	private String name;
 
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Book> books;
 
 	public Category() {

@@ -5,13 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<title>後台管理系統</title> 
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/css/bms-customize.css" rel="stylesheet" >
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
 <style>
 #editArea{
-margin: 250px auto;
+margin: auto auto;
 width: 350px;
 border: solid 1px black; 
 }
@@ -20,8 +26,9 @@ li{
 margin:5px;
 float: top;
 background-color: #DDDDDD;
-
 }
+#insertArea{
+margin: 150px 300px;}
 </style>
 <script>
 $(function(){
@@ -43,7 +50,23 @@ $(function(){
 </script>
 </head>
 <body>
+<!-- 內文全部用wrapper包起來 -->
+<div id="wrapper">
 
+<!-- 加入上方及側邊Nav-Bar -->	
+<c:import url="../bms_header.jsp" />
+<c:import url="../bms_navbar-side.jsp" />
+<!-- ?? url有沒有更好的寫法 ?? -->
+
+
+<!-- Page Content --> 
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">DashBoard</h1>   
+                <!-- **內文中的標題，請修改** -->
+                                <!-- **每頁不同的內容從這裡開始** -->
 <form action="" id="insertArea">
 <input type="text" id="IngredientName" >
 <input type="button" id="insertIngredient" value="新增">
@@ -67,6 +90,19 @@ ${items.ingredName}
 
 </ol>
 </div>
+                <!-- **每頁不同的內容 end** -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
 
 </body>
 </html>

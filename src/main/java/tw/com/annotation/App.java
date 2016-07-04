@@ -21,7 +21,12 @@ import tw.com.annotation.entity.Category;
 import tw.com.annotation.entity.Detail;
 import tw.com.annotation.entity.Publisher;
 
-@SpringBootApplication
+@SpringBootApplication(
+		exclude = {
+				org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
+				org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class
+		}		
+)
 public class App implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -47,35 +52,19 @@ public class App implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
 
 		// @OneToOne Example
-//		// save a couple of bookDetails
-//		List<Detail> details = new ArrayList<>();
-//		details.add(new Detail(49));
-//		details.add(new Detail(59));
-//		details.add(new Detail(69));
-//		detailDao.save(details);
-//
 //		// save a couple of books
 //		List<Book> books = new ArrayList<>();
 //		// 新增時就寫入FK
-//		Book book1 = new Book("BookA");
+//		Book book1 = bookDao.findOne(1L);
 //		book1.setDetail(detailDao.findOne(1));
 //		books.add(book1);
-//		Book book2 = new Book("BookB");
+//		Book book2 = bookDao.findOne(2L);
 //		book2.setDetail(detailDao.findOne(1));
 //		books.add(book2);
-//		Book book3 = new Book("BookC");
+//		Book book3 = bookDao.findOne(3L);
+//		book3.setDetail(detailDao.findOne(1));
 //		books.add(book3);
 //		bookDao.save(books);
-//
-//		// 修改時才寫入FK
-//		Book bookC = bookDao.findOne(3L);
-//		bookC.setDetail(detailDao.findOne(1));
-//		bookDao.save(bookC);
-//
-//		// fetch all books
-//		for (Book book : bookDao.findAll()) {
-//			logger.info("{}", book.toString());
-//		}
 
 		// @OneToMany / @ManyToOne Example
 //		List<Category> categories = new ArrayList<>();
@@ -108,24 +97,6 @@ public class App implements CommandLineRunner {
 //		}
 
 		// @ManyToMany Example
-		List<Publisher> publishers = new ArrayList<>();
-		Publisher publisher1 = new Publisher("publisher1");
-		Publisher publisher2 = new Publisher("publisher2");
-		Publisher publisher3 = new Publisher("publisher3");
-		publishers.add(publisher1);
-		publishers.add(publisher2);
-		publishers.add(publisher3);
-		publisherDao.save(publishers);
-		
-		List<Book> books = new ArrayList<>();
-		Book book1 = new Book("book1");
-		Book book2 = new Book("book2");
-		Book book3 = new Book("book3");
-		books.add(book1);
-		books.add(book2);
-		books.add(book3);
-		bookDao.save(books);
-		
 		Book temp = bookDao.findOne(1L);
 		temp.setPublishers(publisherDao.findAll());
 		bookDao.save(temp);

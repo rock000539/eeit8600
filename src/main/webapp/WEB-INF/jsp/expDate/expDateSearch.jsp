@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- CSS -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/fms-main.css" />
 	<link rel="stylesheet" href="/css/fms-customize.css" />		
 	<!-- Scripts -->
@@ -15,9 +15,10 @@
 	<script src="/js/jquery.dropotron.min.js"></script>
 	<script src="/js/skel.min.js"></script>
 	<script src="/js/util.js"></script>
-	<script src="/js/fms-main.js"></script>
+	<script src="/js/fms-main.js"></script>   
 <style>
 
+/*//////////////////////////////////////////////////////////////////////////// */
 #proList {
 	padding-left: 100px;
 }
@@ -27,8 +28,10 @@
 	$(function() {
 		var mfdDate;
 		var expDate;
-
-		$('#search').click(function() {
+			
+		
+		$("#searchDate").click(function() {
+		
 		var brandId = $('#brandId').val();
 		var batchCode = $('#batchCode').val();
 		$.ajax({
@@ -37,7 +40,7 @@
 				data : {"brandIdstr" : brandId,
 						"batchCode" : batchCode},
 				success : function(data) {
-
+				
 				$('#mfd').empty().prepend(data.mfdDate);
 				$('#exp').empty().prepend(data.expDate);
 				$('#proList').empty();
@@ -113,7 +116,7 @@
 							</c:forEach>
 							</select></td>
 					<td><input type="text" name="batchCode" id="batchCode" /></td>
-					<td colspan="2"><input type="button" id="search" value="查詢" /></td>
+					<td colspan="2"><input type="button" id="searchDate" value="查詢" /></td>
 					
 					</tr>
 				</form>
@@ -142,6 +145,5 @@
 			
 
 			
-	</body>
 </body>
 </html>

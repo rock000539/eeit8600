@@ -32,10 +32,10 @@
                          <a href="<% request.getContextPath(); %>/ingredients/list"> 管理成分資料</a>
                      </li>
                      <li>
-                         <a href="<% request.getContextPath(); %>/categories/list"> 管理分類資料</a>
+                         <a href="<% request.getContextPath(); %>/prodIngreList/list"> 管理產品成份關聯資料</a>
                      </li>
                      <li>
-                         <a href="<% request.getContextPath(); %>/expdate/list"> 管理產品批號轉換製造日期</a>
+                         <a href="<% request.getContextPath(); %>/categories/list"> 管理分類資料</a>
                      </li>
                  </ul>
                  <!-- /.nav-second-level -->

@@ -5,14 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="/js/jquery.min.js"></script>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/metisMenu.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/css/bms-customize.css" rel="stylesheet" >
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>後台管理系統</title> 	
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
+
+	<script src="/js/jquery.dropotron.min.js"></script>
+
 
 <script>
 $(function(){
-	$('#search').click(function (){
+	$('#searchIngerdinet').click(function (){
 		var prodName=$("#prodName").val();
 
 		$.ajax({
@@ -48,18 +60,57 @@ $(function(){
 	})//end function
 
 </script>
+<style >
+#mainSpace{
+width:500px;
+margin: auto auto;}
+#buttonTd{
+width: 80px;}
+</style>
 </head>
 <body>
+<!-- 內文全部用wrapper包起來 -->
+<div id="wrapper">
 
+<!-- 加入上方及側邊Nav-Bar -->	
+<c:import url="../bms_header.jsp" />
+<c:import url="../bms_navbar-side.jsp" />
+<!-- ?? url有沒有更好的寫法 ?? -->
+
+
+<!-- Page Content --> 
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">產品成分清單管理</h1>   <!-- **內文中的標題，請修改** -->
+<!-- ////////////////////////////////////////////////////////////////////-->
+<table id="mainSpace" >
+<tr><td colspan="2">請輸入產品名/部分產品名，查詢成份</td></tr>
 <form action="">
+
 <tr>
 <td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
-<td><input type="button" id="search" value="search" class="btn btn-default" style="margin-bottom: 10px;"></td>
+<td id="buttonTd"><input type="button" id="searchIngerdinet" value="Search" class="btn btn-default" style="margin-bottom: 10px;"></td>
 </tr>
 </form>
-
+</table>	
 <table id="productList" class="table  table-hover"></table>
 <div id="showArea"></div>
+	<!-- ////////////////////////////////////////////////////////////////////-->
+           </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
 
 
 </body>
