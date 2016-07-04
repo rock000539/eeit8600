@@ -29,9 +29,9 @@ public class Book {
 	@Column(name = "NAME", length = 50)
 	private String name;
 
-	@OneToOne(targetEntity = Detail.class)
-	@JoinColumn(name = "detailId")
-	private Integer detailId;
+	@OneToOne
+	@JoinColumn(name = "DETAILID")
+	private Detail detail;
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
@@ -41,7 +41,7 @@ public class Book {
 	private Integer categoryId;
 
 	@ManyToMany
-	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID") , inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID") )
+	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID"), inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID"))
 	private List<Publisher> publishers;
 
 	public Book() {
@@ -54,7 +54,7 @@ public class Book {
 
 	public Book(String name, Detail detail) {
 		this.name = name;
-		// this.detail = detail;
+		this.detail = detail;
 	}
 
 	public Book(String name, Category category) {
@@ -91,27 +91,19 @@ public class Book {
 		this.name = name;
 	}
 
-	// public Detail getDetail() {
-	// return detail;
-	// }
-	//
-	// public void setDetail(Detail detail) {
-	// this.detail = detail;
-	// if (detail.getBook() != this) {
-	// detail.setBook(this);
-	// }
-	// }
+	public Detail getDetail() {
+		return detail;
+	}
+
+	public void setDetail(Detail detail) {
+		this.detail = detail;
+		if (detail.getBook() != this) {
+			detail.setBook(this);
+		}
+	}
 
 	public Category getCategory() {
 		return category;
-	}
-
-	public Integer getDetailId() {
-		return detailId;
-	}
-
-	public void setDetailId(Integer detailId) {
-		this.detailId = detailId;
 	}
 
 	public void setCategory(Category category) {
@@ -131,7 +123,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", name=" + name + ", detailId=" + detailId + "]";
+		return "Book [bookId=" + bookId + ", name=" + name + ", detail=" + detail + "]";
 	}
 
 }

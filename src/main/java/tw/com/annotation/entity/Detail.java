@@ -23,7 +23,7 @@ public class Detail {
 	@Column(name = "NUMBEROFPAGES")
 	private Integer numberOfPages;
 	
-	@OneToOne(mappedBy = "detailId", targetEntity = Book.class)
+	@OneToOne(mappedBy = "detail")
 	@JsonIgnore
 	private Book book;
 
@@ -56,13 +56,9 @@ public class Detail {
 	}
 
 	public void setBook(Book book) {
-		this.book = book;
-		if(book.getDetailId()!=this.getDetailId()) {
-			book.setDetailId(this.detailId);
+		if(book.getDetail()!=this) {
+			book.setDetail(this);
 		}
-//		if(book.getDetail()!=this) {
-//			book.setDetail(this);
-//		}
 	}
 
 	@Override
