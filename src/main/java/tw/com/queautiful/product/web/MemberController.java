@@ -2,6 +2,7 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -32,8 +33,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
-	@Autowired
-	private EmailSender emailSender;
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -69,19 +68,27 @@ public class MemberController {
 		return "/member/memberRegister";
 	}
 	
-	//return forgot password page
+	//return forgotPassword page
 	@RequestMapping("/forgotpsw")
 	public String forgotPswPage(){
 		return "/member/member_forgotPsw"; 
 	}
 	
+	//send reset-psw email
 	@RequestMapping("/resetPsw")
 	@ResponseBody
-	public String resetPsw(@RequestParam String email){
-		log.debug("resetPsw");
-		emailSender.sendResetPsw(email);
+	public String resetPsw(@RequestParam String email, HttpServletRequest req){
+		service.requestForResetPassword(email, req);
 		return "Please check your email and follow the instructions.";
 	}
+	
+	//reset password received from email
+	@RequestMapping("/resetpassword")
+	public String resetPsw(@RequestParam String token){
+		log.debug(token);
+		return "/fms";
+	}
+	
 	@RequestMapping("/check_emailexist")
 	@ResponseBody
 	public Boolean emailCheck(String email){

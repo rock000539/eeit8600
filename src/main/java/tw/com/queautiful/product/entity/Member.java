@@ -69,6 +69,12 @@ public class Member {
 	@Column(name="MEMBERSUSPENDCOUNT")
 	private Integer memberSuspendCount; //會員累計停權次數
 	
+	@Column(name="RESETPSWTOKEN")
+	private String resetPswToken; //重設密碼token
+	
+	@Column(name="RESETPSWEXP")
+	private java.sql.Date resetPswExp; //重設密碼期限
+	
 	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
@@ -250,6 +256,22 @@ public class Member {
 
 	public void setMemberSuspendCount(Integer memberSuspendCount) {
 		this.memberSuspendCount = memberSuspendCount;
+	}
+
+	public String getResetPswToken() {
+		return resetPswToken;
+	}
+
+	public void setResetPswToken(String resetPswToken) {
+		this.resetPswToken = resetPswToken;
+	}
+
+	public java.sql.Date getResetPswExp() {
+		return resetPswExp;
+	}
+
+	public void setResetPswExp(java.sql.Date resetPswExp) {
+		this.resetPswExp = resetPswExp;
 	}
 
 	

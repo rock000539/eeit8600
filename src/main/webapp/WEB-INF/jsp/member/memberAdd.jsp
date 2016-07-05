@@ -8,9 +8,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- CSS -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/fms-main.css" />
 	<link rel="stylesheet" href="/css/fms-customize.css" />	
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+
 	
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
