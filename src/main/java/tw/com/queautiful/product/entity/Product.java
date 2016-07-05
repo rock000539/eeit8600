@@ -44,8 +44,8 @@ public class Product {
 
 	@Transient
 	private Long categoryId;
-	
-	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private List<Review> reviews;
 
 	@Column(name = "WEIGHT")
@@ -143,15 +143,15 @@ public class Product {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
-	}	
-	
+	}
+
 	public void addReviews(Review review) {
 		this.reviews.add(review);
 		if (review.getProduct() != this) {
 			review.setProduct(this);
 		}
 	}
-	
+
 	public Double getWeight() {
 		return weight;
 	}

@@ -16,10 +16,13 @@ import tw.com.annotation.dao.BookDao;
 import tw.com.annotation.dao.BookCategoryDao;
 import tw.com.annotation.dao.DetailDao;
 import tw.com.annotation.dao.PublisherDao;
+import tw.com.annotation.dao.TesterDao;
 import tw.com.annotation.entity.Book;
 import tw.com.annotation.entity.BookCategory;
 import tw.com.annotation.entity.Detail;
 import tw.com.annotation.entity.Publisher;
+import tw.com.annotation.entity.Tester;
+import tw.com.annotation.util.Gender;
 
 @SpringBootApplication(
 		exclude = {
@@ -42,6 +45,9 @@ public class App implements CommandLineRunner {
 
 	@Autowired
 	private PublisherDao publisherDao;
+	
+	@Autowired
+	private TesterDao testerDao;
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(App.class, args);
@@ -50,6 +56,20 @@ public class App implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... strings) throws Exception {
+		
+		Tester tester = new Tester();
+		tester.setName("USER2");
+		tester.setAge(25);
+		tester.setGender(Gender.MALE);
+		testerDao.save(tester);
+		
+		logger.info("{}", Gender.MALE);
+		logger.info("{}", Gender.FEMALE);
+		
+		List<Tester> testers = testerDao.findAll();
+		for(Tester tmp : testers) {
+			logger.info("{}", tmp);
+		}
 
 		// @OneToOne Example
 //		// save a couple of books
