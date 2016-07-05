@@ -174,8 +174,13 @@
 								</tr>
 								<tr>
 									<td>品牌</td>
-									<td><select id="sbrand" name="sbrand">
-									</select></td>
+									<td>
+										<!--select要用div class="select-wrapper"包起來 -->
+										<div class="select-wrapper">
+										<select id="sbrand" name="sbrand">
+										</select>
+										</div>
+									</td>
 								</tr>
 								<tr>
 									<td>批號</td>
