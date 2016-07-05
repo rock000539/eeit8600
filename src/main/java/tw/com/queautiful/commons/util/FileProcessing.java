@@ -26,6 +26,15 @@ public class FileProcessing {
 			){
 		String imgPath = null;
 		
+//		System.out.println("getOriginalFilename---->"+brandImgFile.getOriginalFilename());
+//		System.out.println("getContentType---->"+brandImgFile.getContentType());
+//		
+		String fileName = multipartFile.getOriginalFilename();
+//		int lastpoint = fileName.lastIndexOf(".");
+//		String mimeType = fileName.substring(lastpoint);
+		String mimeType = fileName.substring(fileName.lastIndexOf("."));
+		System.out.println("mimeType---->"+mimeType);
+
 //		String realPath = req.getServletContext().getRealPath("/WEB-INF/img");
 //		System.out.println("realPath----->" + realPath);
 		
@@ -37,7 +46,8 @@ public class FileProcessing {
 				if(!dir.exists())
 					dir.mkdirs();
 				System.out.println();
-				imgPath = path + folderName + File.separator + imgName + ".png";
+//				imgPath = path + folderName + File.separator + imgName + ".png";
+				imgPath = path + folderName + File.separator + imgName + mimeType;
 				
 				File file = new File(imgPath);
 				FileOutputStream fos = new FileOutputStream(file);

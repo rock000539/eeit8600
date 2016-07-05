@@ -74,8 +74,7 @@ public class BrandController {
 			@RequestPart("brandImgFile") MultipartFile brandImgFile, HttpServletRequest req) {
 		//取得品牌名稱當作檔名
 		String brandName = brand.getBrandName();
-		System.out.println("getOriginalFilename---->"+brandImgFile.getOriginalFilename());
-		System.out.println("getContentType---->"+brandImgFile.getContentType());
+		
 		//存圖片-->直接使用FileProcessing檔的saveImg方法
 		//傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
 		//傳回檔案儲存的路徑
