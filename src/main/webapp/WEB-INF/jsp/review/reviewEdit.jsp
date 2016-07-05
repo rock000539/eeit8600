@@ -17,28 +17,19 @@
 	<script src="/js/sb-admin-2.js"></script>
 
 	<!-- BootStrap 基本檔案  -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
 	<!-- 表單驗證  -->
-	<script 
-		src="/js/jquery.validate.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
 		
 	<!-- DatePicker -->
-	<link rel="stylesheet" 
-		href="/css/bootstrap-datetimepicker.min.css" />
-    <script
-    	src="/js/bootstrap-datetimepicker.min.js"></script>
-    <script
-    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+	<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     	
-    <link rel="stylesheet" 
-		href="/css/bootstrap-dialog.min.css" />
-    <script
-    	src="/js/bootstrap-dialog.min.js"></script>
-    	
+    <link href="/css/bootstrap-dialog.min.css" rel="stylesheet" />
+    <script src="/js/bootstrap-dialog.min.js"></script>
     <script src="/js/metisMenu.min.js"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -75,7 +66,8 @@
 	    <div class="container-fluid">
 	        <div class="row">
 	            <div class="col-lg-12">
-	                
+	                 <!-- **每頁不同的內容從這裡開始** -->
+	                 
                 	<div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="panel panel-primary">
