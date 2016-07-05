@@ -7,19 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.annotation.entity.Category;
-import tw.com.annotation.service.CategoryService;
+import tw.com.annotation.entity.BookCategory;
+import tw.com.annotation.service.BookCategoryService;
 
 @Controller
 @RequestMapping("/categories")
-public class CategoryController {
+public class BookCategoryController {
 	
 	@Autowired
-	private CategoryService service;
+	private BookCategoryService service;
 	
 	@RequestMapping("/select")
 	@ResponseBody
-	public List<Category> select() {
+	public List<BookCategory> select() {
 		return service.getAll();
 	}
 }

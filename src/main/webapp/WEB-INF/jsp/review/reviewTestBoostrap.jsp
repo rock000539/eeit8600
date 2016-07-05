@@ -56,10 +56,8 @@
 								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>						
 								<script type="text/javascript">
 									$(function(){
-										console.log("${review.reviewId}");
 										for(var i=0;i<"${review.reviewRating}";i++){
 											$("#tb${review.reviewId}diamond"+(i+1)).css('color','#FF5151');
-// 										console.log($("#tb${review.reviewId}diamond"+(i+1)));
 										}
 									});
 								</script>
@@ -97,36 +95,7 @@
 		
 
 		  $(function () {  //=$(document.)ready
-			  //
-// 			for(var j=0 ; j <$("span[name='review-rating']").size();j++){
-// 			  for(var i = 1; i <= $($("span[name='review-rating']")[j]).text().substr(0,1); i++){
-				 	 
-// 				  $("#tn"+(j+1)+"diamond"+i).css('color','#FF5151');
-// 			  };
-// 			};
-
-			$.ajax({
-				url:'/reviews/select',
-				type:'get',
-				dataType:'json',
-				success:function(result){
-// 					console.log(result);
-					for(var i=0;i<result.length;i++){
-						var ratecount = result[i].reviewRating;
-						var reviewid = result[i].reviewId;
-						console.log("rate"+ratecount);
-						console.log("id"+reviewid);
-						 for(var j = 1; j <= result[i].reviewRating; j++){
-							  $("#tn"+reviewid+"diamond"+j).css('color','#FF5151');
-// 							  console.log($($("#diamond"+j)[i]));
-						  };
-					}
-				}
 				
-				
-			});
-			
-			
  		 	$("div[name='body']").hover(function(){
 				$(this).find("#review-bottom-title").css('opacity','1');
 		 		$(this).css('border','0.5px solid');
@@ -139,12 +108,7 @@
 		 	
 		 	
 		  });
-		
-		  
-		  var span = $($("span[name='review-rating']")[0]);
-// 		  console.log(span.text().substr(0,1));
-// console.log($('#tb1'))
-// console.log($('#tb1>diamond1'))
+
 
 </script>
 

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "BOOKCATEGORY")
-public class Category {
+public class BookCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ public class Category {
 	@JsonIgnore
 	private Set<Book> books;
 
-	public Category() {
+	public BookCategory() {
 
 	}
 
-	public Category(String name) {
+	public BookCategory(String name) {
 		this.name = name;
 	}
 

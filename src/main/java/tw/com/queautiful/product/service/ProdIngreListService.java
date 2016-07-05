@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class ProdIngreListService {
 		List<Ingredient> dataList = new ArrayList<Ingredient>();
 		for (Object[] datas : resultList) {
 			Ingredient ingredient = new Ingredient();
+			BigInteger bigId= (BigInteger) datas[0];
+			long BigInteger=bigId.longValue();
+			ingredient.setIngredId(BigInteger);
 			ingredient.setIngredName((String) datas[1]);
 			ingredient.setIngredChName((String) datas[2]);
 			ingredient.setIngredChar((String) datas[3]);

@@ -13,11 +13,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import tw.com.annotation.dao.BookDao;
-import tw.com.annotation.dao.CategoryDao;
+import tw.com.annotation.dao.BookCategoryDao;
 import tw.com.annotation.dao.DetailDao;
 import tw.com.annotation.dao.PublisherDao;
 import tw.com.annotation.entity.Book;
-import tw.com.annotation.entity.Category;
+import tw.com.annotation.entity.BookCategory;
 import tw.com.annotation.entity.Detail;
 import tw.com.annotation.entity.Publisher;
 
@@ -38,7 +38,7 @@ public class App implements CommandLineRunner {
 	private DetailDao detailDao;
 
 	@Autowired
-	private CategoryDao categoryDao;
+	private BookCategoryDao categoryDao;
 
 	@Autowired
 	private PublisherDao publisherDao;

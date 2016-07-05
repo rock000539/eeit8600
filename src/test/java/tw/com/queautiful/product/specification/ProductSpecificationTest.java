@@ -31,7 +31,7 @@ public class ProductSpecificationTest {
 		
 		Product filter = new Product();
 		filter.setProdName("產品1");
-		filter.setBrandId(1L);
+		filter.getBrand().setBrandId(1L);
 		filter.setProdDesc("說明2");
 		
 		Specification<Product> spec = new ProductSpecification(filter);

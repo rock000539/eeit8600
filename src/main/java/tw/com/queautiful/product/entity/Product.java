@@ -1,57 +1,78 @@
 package tw.com.queautiful.product.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="PRODUCT")
+@Table(name = "PRODUCT")
 public class Product {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="PRODID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PRODID")
 	private Long prodId;
-	
-	@Column(name="PRODNAME", length=30)
+
+	@Column(name = "PRODNAME", length = 30)
 	private String prodName;
-	
-	@Column(name="BRANDID")
+
+	@ManyToOne
+	@JoinColumn(name = "BRANDID")
+	@JsonIgnore
+	private Brand brand;
+
+	@Transient
 	private Long brandId;
-	
-	@Column(name="CATEGORYID")
+
+	@ManyToOne
+	@JoinColumn(name = "CATEGORYID")
+	@JsonIgnore
+	private Category category;
+
+	@Transient
 	private Long categoryId;
 	
-	@Column(name="WEIGHT")
+	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
+	private List<Review> reviews;
+
+	@Column(name = "WEIGHT")
 	private Double weight;
-	
-	@Column(name="SCORE")
+
+	@Column(name = "SCORE")
 	private Double score;
-	
-	@Column(name="PRICE")
+
+	@Column(name = "PRICE")
 	private Integer price;
-	
-	@Column(name="CAPACITY")
+
+	@Column(name = "CAPACITY")
 	private Integer capacity;
-	
-	@Column(name="LAUNCHDATE")
+
+	@Column(name = "LAUNCHDATE")
 	private Date launchDate;
-	
-	@Column(name="PRODDESC", length=100)
+
+	@Column(name = "PRODDESC", length = 100)
 	private String prodDesc;
-	
-	@Column(name="MAINIGDT")
+
+	@Column(name = "MAINIGDT")
 	private Integer mainIgdt;
-	
-	@Column(name="CONCENTRATION")
+
+	@Column(name = "CONCENTRATION")
 	private Double concentration;
-	
-	@Column(name="PRODIMG", length=100)
+
+	@Column(name = "PRODIMG", length = 100)
 	private String prodImg;
 
 	public Long getProdId() {
@@ -70,22 +91,67 @@ public class Product {
 		this.prodName = prodName;
 	}
 
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+		if (!brand.getProducts().contains(this)) {
+			brand.getProducts().add(this);
+		}
+	}
+
 	public Long getBrandId() {
-		return brandId;
+		if (this.brandId == null && brand != null) { // select
+			return this.getBrand().getBrandId();
+		} else { // insert&update
+			return this.brandId;
+		}
 	}
 
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+		if (!category.getProducts().contains(this)) {
+			category.getProducts().add(this);
+		}
+	}
+
 	public Long getCategoryId() {
-		return categoryId;
+		if (this.categoryId == null && category != null) { // select
+			return this.getCategory().getCategoryId();
+		} else { // insert&update
+			return this.categoryId;
+		}
 	}
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}	
+	
+	public void addReviews(Review review) {
+		this.reviews.add(review);
+		if (review.getProduct() != this) {
+			review.setProduct(this);
+		}
+	}
+	
 	public Double getWeight() {
 		return weight;
 	}
@@ -160,10 +226,10 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [prodId=" + prodId + ", prodName=" + prodName + ", brandId=" + brandId + ", categoryId="
-				+ categoryId + ", weight=" + weight + ", score=" + score + ", price=" + price + ", capacity=" + capacity
-				+ ", launchDate=" + launchDate + ", prodDesc=" + prodDesc + ", mainIgdt=" + mainIgdt
-				+ ", concentration=" + concentration + ", prodImg=" + prodImg + "]";
+		return "Product [prodId=" + prodId + ", prodName=" + prodName + ", brand=" + brand + ", brandId=" + brandId
+				+ ", categoryId=" + categoryId + ", weight=" + weight + ", score=" + score + ", price=" + price
+				+ ", capacity=" + capacity + ", launchDate=" + launchDate + ", prodDesc=" + prodDesc + ", mainIgdt="
+				+ mainIgdt + ", concentration=" + concentration + ", prodImg=" + prodImg + "]";
 	}
-	
+
 }

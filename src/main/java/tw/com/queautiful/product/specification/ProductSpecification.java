@@ -36,8 +36,8 @@ public class ProductSpecification implements Specification<Product> {
 			predicates.add(cb.equal(root.get("prodName"), filter.getProdName()));
 		}
 
-		if (filter.getBrandId() != null) {
-			predicates.add(cb.equal(root.get("brandId"), filter.getBrandId()));
+		if (filter.getBrand().getBrandId() != null) {
+			predicates.add(cb.equal(root.get("brandId"), filter.getBrand().getBrandId()));
 		}
 
 		if (filter.getCategoryId() != null) {

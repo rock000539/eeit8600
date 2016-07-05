@@ -38,10 +38,10 @@ public class ReviewController {
 	private ReviewService service;
 	
 	@Autowired
-	private ProductService serviceProd;
+	private ProductService prodService;
 	
 	@Autowired
-	private MemberService serviceMem;
+	private MemberService memberService;
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -84,9 +84,9 @@ public class ReviewController {
 	
 	@RequestMapping("/testboostrap")
 	public String testBoostrap(Model model){
-		model.addAttribute("produts", serviceProd.getAll());
+		model.addAttribute("produts", prodService.getAll());
 		model.addAttribute("reviews", service.getAll());
-		model.addAttribute("members", serviceMem.getAll());
+		model.addAttribute("members", memberService.getAll());
 		return "/review/reviewTestBoostrap";
 	}
 	
@@ -119,6 +119,8 @@ public class ReviewController {
 	@ResponseBody
 	public Review update(@RequestPart("review") Review review,
 			@RequestPart(value = "reviewImgFile", required = false) MultipartFile reviewImgFile) {
+		//FK設定
+		review.setProduct(prodService.getById(review.getProdId()));
 		
 		//判斷是否有傳入圖片
 		if (reviewImgFile != null) {
@@ -136,6 +138,8 @@ public class ReviewController {
 		
 		service.update(review);
 		return review;
+		
+				
 	}
 
 	
@@ -148,6 +152,11 @@ public class ReviewController {
 	@ResponseBody
 	public Review insert(@RequestPart("review") Review review, 
 			@RequestPart("reviewImgFile") MultipartFile reviewImgFile){
+		
+		//FK設定
+		review.setProduct(prodService.getById(review.getProdId()));
+		
+		
 		//取得品牌名稱當作檔名
 		String reviewTitle = review.getReviewTitle();
 		

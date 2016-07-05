@@ -15,8 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "BOOK")
 public class Book {
@@ -35,7 +33,7 @@ public class Book {
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
-	private Category category;
+	private BookCategory category;
 
 	@Transient
 	private Integer categoryId;
@@ -57,7 +55,7 @@ public class Book {
 		this.detail = detail;
 	}
 
-	public Book(String name, Category category) {
+	public Book(String name, BookCategory category) {
 		this.name = name;
 		this.category = category;
 	}
@@ -102,11 +100,11 @@ public class Book {
 		}
 	}
 
-	public Category getCategory() {
+	public BookCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(BookCategory category) {
 		this.category = category;
 		if (!category.getBooks().contains(this)) {
 			category.getBooks().add(this);
