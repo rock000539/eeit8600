@@ -145,7 +145,19 @@
 										</div>
 										<div class="col-sm-1"></div>
 									</div>
-
+				
+<!--
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="reviewRating">
+											<abbr title="required"></abbr>
+											ReviewRating
+										</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="reviewRating" name="reviewRating"></select>
+										</div>
+										<div class="col-sm-1"></div>
+									</div>
+-->
 
 									<!--  圖片路徑 和 圖片
 									<div class="form-group">
@@ -297,6 +309,22 @@
 				}
 			});
 			
+/*			$.ajax({
+				url: '/reviews/select',
+				type: 'GET',
+				dataType: 'json',
+				success:function(response){
+					console.log(response);
+					var select = $('#reviewRating').empty();
+					for(i=1; i<=5; i++){
+						select.append($('<option></option>').attr('value',i)
+								.text(i));
+					}
+					select.val("${review.reviewRating}");
+// 					select.val(response.reviewRating);
+				}
+			});
+*/			
 			
 			//$('#mainIgdt').val("${product.mainIgdt}");   //??????
 			
@@ -322,13 +350,13 @@
 			        $(element).valid();
 			    },
 				rules: {
-					reviewRating: { range: [0,1,2,3,4, 5] },  //this is ok
+// 					reviewRating: { range: [0,1,2,3,4,5] },  //this is ok
 					score: { range: [0, 5] },
 					concentration: { range: [0, 1] },
 					prodDesc: { rangelength: [1, 100] },
 				},
 				messages: {
-					reviewRating: { range: "select 0,1,2,3,4,5" }, //this is ok
+// 					reviewRating: { range: "select 0,1,2,3,4,5" }, //this is ok
 					score: { range: "range 0-5" },
 					concentration: { range: "range 0-1" },
 					prodDesc: { rangelength: "text length 1-100" },

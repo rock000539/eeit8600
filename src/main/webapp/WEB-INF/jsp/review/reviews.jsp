@@ -25,7 +25,8 @@
 					<!-- Img start -->
 			<a href="/reviews/list" > <!-- ???連結要換成去一篇的心得頁面 -->
 	    	<div class="reviewImg">
-	      		<img class="reviewImg-Img" src="/reviews/show?reviewId=${review.reviewId}">
+<%-- 	      		<img class="reviewImg-Img" src="/reviews/show?reviewId=${review.reviewId}"> --%>
+	      		<img class="reviewImg-Img" src="/products/show?prodId=${review.prodId}">
 	      	</div></a>
 	      			<!-- Img end -->
 <!--???去除文字超連結所設的div還沒好-->	
@@ -55,6 +56,7 @@
 								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
 								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>						
 								<script type="text/javascript">
+// 								console.log("${review.product.reviews}");
 									$(function(){
 										for(var i=0;i<"${review.reviewRating}";i++){
 											$("#tb${review.reviewId}diamond"+(i+1)).css('color','#FF5151');
@@ -93,7 +95,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 		
-
+		
 		  $(function () {  //=$(document.)ready
 				
  		 	$("div[name='body']").hover(function(){

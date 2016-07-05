@@ -82,12 +82,12 @@ public class ReviewController {
 		return "/review/reviewListGrid";
 	}
 	
-	@RequestMapping("/testboostrap")
+	@RequestMapping("/reviews")
 	public String testBoostrap(Model model){
-		model.addAttribute("produts", prodService.getAll());
+//		model.addAttribute("produts", prodService.getAll());
 		model.addAttribute("reviews", service.getAll());
-		model.addAttribute("members", memberService.getAll());
-		return "/review/reviewTestBoostrap";
+//		model.addAttribute("members", memberService.getAll());
+		return "/review/reviews";
 	}
 	
 //	@RequestMapping("/delete")
