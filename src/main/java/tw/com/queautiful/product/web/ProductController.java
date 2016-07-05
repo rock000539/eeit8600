@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.service.BrandService;
+import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.ProductService;
 
 @Controller
@@ -31,7 +33,13 @@ public class ProductController {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ProductService service;
+	private ProductService prodService;
+	
+	@Autowired
+	private BrandService brandService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	@RequestMapping("/list")
 	public String listPage() {
@@ -42,7 +50,7 @@ public class ProductController {
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Product> select() {
-		return service.getAll();
+		return prodService.getAll();
 	}
 
 	// 提供jqGrid抓取資料使用
@@ -55,7 +63,7 @@ public class ProductController {
 		log.debug("rows = {}", rows);
 
 		Pageable pageable = new PageRequest(page - 1, rows);
-		Page<Product> prodPage = service.getAll(pageable);
+		Page<Product> prodPage = prodService.getAll(pageable);
 
 		log.debug("getSize = {}", prodPage.getSize()); // 列數(資料筆數)
 		log.debug("getNumber = {}", prodPage.getNumber()); // 頁數-1
@@ -82,13 +90,19 @@ public class ProductController {
 			product.setProdImg(prodImg);
 		}
 		
-		service.insert(product);
+		// FK設定
+		product.setBrand(brandService.getById(product.getBrandId()));
+		product.setCategory(categoryService.getById(product.getCategoryId()));
+		
+		log.debug("{}", product);
+		
+		prodService.insert(product);
 		return product;
 	}
 
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long prodId, Model model) {
-		model.addAttribute("product", service.getById(prodId));
+		model.addAttribute("product", prodService.getById(prodId));
 		return "/product/productEdit";
 	}
 
@@ -96,25 +110,31 @@ public class ProductController {
 	@ResponseBody
 	public Product update(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
 		
-		if(prodImgFile!=null) {
+		if(prodImgFile != null ) {
 			String prodName = product.getProdName();
 			String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
 			product.setProdImg(prodImg);
 		}
 		
-		service.update(product);
+		// FK設定
+		product.setBrand(brandService.getById(product.getBrandId()));
+		product.setCategory(categoryService.getById(product.getCategoryId()));
+		
+		log.debug("{}", product);
+		
+		prodService.update(product);
 		return product;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public void delete(@RequestBody Product product) {
-		service.delete(product.getProdId());
+		prodService.delete(product.getProdId());
 	}
 	
 	@RequestMapping("/show")
 	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
-		String prodImg = service.getById(prodId).getProdImg();
+		String prodImg = prodService.getById(prodId).getProdImg();
 		if(prodImg!=null) {
 			FileProcessing.showImg(resp, prodImg);
 		}
@@ -132,7 +152,7 @@ public class ProductController {
 	
 	@RequestMapping("/view_fms")
 	public String viewFmsPage(Model model) {
-		model.addAttribute("product", service.getById(1L));
+		model.addAttribute("product", prodService.getById(1L));
 		return "/product/productViewFms";
 	}
 

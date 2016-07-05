@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.annotation.dao.CategoryDao;
-import tw.com.annotation.entity.Category;
+import tw.com.annotation.dao.BookCategoryDao;
+import tw.com.annotation.entity.BookCategory;
 
 @Service
-public class CategoryService {
+public class BookCategoryService {
 	
 	@Autowired
-	private CategoryDao dao;
+	private BookCategoryDao dao;
 	
-	public Category getById(Integer categoryId) {
+	public BookCategory getById(Integer categoryId) {
 		return dao.findOne(categoryId);
 	}
 	
-	public List<Category> getAll() {
+	public List<BookCategory> getAll() {
 		return dao.findAll();
 	}
 	

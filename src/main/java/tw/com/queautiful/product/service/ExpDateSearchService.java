@@ -74,7 +74,7 @@ public class ExpDateSearchService {
 		products = productServ.getAll();
 		for (int i = 0; i < products.size(); i++) {
 
-			if (products.get(i).getBrandId() == brandId) {
+			if (products.get(i).getBrand().getBrandId() == brandId) {
 
 				productList.add(products.get(i));
 			}

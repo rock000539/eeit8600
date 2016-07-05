@@ -1,33 +1,40 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="CATEGORY")
+@Table(name = "CATEGORY")
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="CATEGORYID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CATEGORYID")
 	private Long categoryId;
-	
-	@Column(name="CATEGORYNAME",length=50)
+
+	@Column(name = "CATEGORYNAME", length = 50)
 	private String categoryName;
-	
-	@Column(name="CATEGORYIMG",length=200)
+
+	@Column(name = "CATEGORYIMG", length = 200)
 	private String categoryImg;
-	
+
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	private List<Product> products;
+
 	@ManyToOne
-	@JoinColumn(name="TITLEID")
+	@JoinColumn(name = "TITLEID")
 	@JsonBackReference
 	private CategoryTitle title;
 
@@ -55,13 +62,28 @@ public class Category {
 		this.categoryImg = categoryImg;
 	}
 
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
 	public CategoryTitle getTitle() {
 		return title;
 	}
 
+	public void addProducts(Product product) {
+		this.products.add(product);
+		if (product.getCategory() != this) {
+			product.setCategory(this);
+		}
+	}
+
 	public void setTitle(CategoryTitle title) {
 		this.title = title;
-		if(!title.getCategories().contains(this)) {
+		if (!title.getCategories().contains(this)) {
 			title.getCategories().add(this);
 		}
 	}
@@ -71,5 +93,5 @@ public class Category {
 		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryImg=" + categoryImg
 				+ ", title=" + title + "]";
 	}
-	
+
 }
