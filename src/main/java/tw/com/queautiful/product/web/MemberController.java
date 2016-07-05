@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Member;
-import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
@@ -32,6 +32,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private EmailSender emailSender;
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -76,11 +78,16 @@ public class MemberController {
 	@RequestMapping("/resetPsw")
 	@ResponseBody
 	public String resetPsw(@RequestParam String email){
-		if(service.accountCheck(email)){
-			return "The email doesn't exit";
-		}
+		log.debug("resetPsw");
+		emailSender.sendResetPsw(email);
 		return "Please check your email and follow the instructions.";
 	}
+	@RequestMapping("/check_emailexist")
+	@ResponseBody
+	public Boolean emailCheck(String email){
+		return !service.accountCheck(email);
+	}
+	
 	
 	@RequestMapping("/suspend")
 	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){

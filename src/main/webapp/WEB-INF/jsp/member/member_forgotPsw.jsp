@@ -17,7 +17,6 @@
 	<script src="/js/jquery.dropotron.min.js"></script>
 	<script src="/js/skel.min.js"></script>
 	<script src="/js/util.js"></script>
-	<script src="/js/fms-main.js"></script>
 	
 	<!-- 表單驗證  -->
 	<script src="/js/jquery.validate.min.js"></script>
@@ -46,7 +45,7 @@
 </div>
 <br>
 <div class="form-group">
-<button type="submit" id="resetPsw" class="btn btn-default">Submit</button>
+<button type="button" id="resetPswBtn" class="btn btn-default">Submit</button>
 </div>
 </form>
                 </article>
@@ -60,14 +59,31 @@
 
 <script>
 $(function(){
-	$('#email').focus();
+ 	$('#email').focus();
 	
 	$('#resetPsw').validate({
-		rules:{email: {required: true, email: true, remote:'/members/check_email'}},
+		rules:{email: {required: true, email: true, remote:'/members/check_emailexist'}},
 		messages:{email:{required:'Please enter your email',
-				email:'Please enter correct email', 
-				remote:'此帳號已經有人使用'}}
+				email:'Please enter correct email',
+				remote:'Sorry, the email does not exit'}}
 	});
+	
+	
+	$('#resetPswBtn').click(function(){
+		var email=$('#email').val();
+		var validateform = $('#resetPsw').validate().form();
+		if(validateform){
+		$.ajax({
+			url:"/members/resetPsw",
+			data:{"email":email},
+			type : "Get",
+			success : function(result){
+				console.log(result);//test
+			}
+		});//ajax
+		}//validate
+	});//click
+
 });
 
 </script>

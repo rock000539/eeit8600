@@ -243,8 +243,7 @@
 					$('<td></td>').text(result.memberSuspend).appendTo(row);
 					$('<td></td>').text(result.memberSuspendExp).appendTo(row);
 				}
-			});//result
-			
+			});//ajax
 		}); //onclick
 
 		$.fn.serializeObject = function() {

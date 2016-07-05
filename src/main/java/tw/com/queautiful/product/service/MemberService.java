@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +66,10 @@ public class MemberService {
 		}else{
 			return true;
 		}
+	}
+	
+	public Member getByEmail(String email){
+		return memberDao.findByEmailIs(email);
 	}
 	
 	//    要改成傳Member，且前端可以傳特定日期
