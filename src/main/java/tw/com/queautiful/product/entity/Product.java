@@ -1,14 +1,17 @@
 package tw.com.queautiful.product.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -41,6 +44,9 @@ public class Product {
 
 	@Transient
 	private Long categoryId;
+	
+	@OneToMany(mappedBy="product",fetch=FetchType.EAGER)
+	private List<Review> reviews;
 
 	@Column(name = "WEIGHT")
 	private Double weight;
@@ -131,6 +137,21 @@ public class Product {
 		this.categoryId = categoryId;
 	}
 
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}	
+	
+	public void addReviews(Review review) {
+		this.reviews.add(review);
+		if (review.getProduct() != this) {
+			review.setProduct(this);
+		}
+	}
+	
 	public Double getWeight() {
 		return weight;
 	}

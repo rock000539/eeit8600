@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="REVIEW")
@@ -24,7 +28,12 @@ public class Review {
 	@Column(name="MEMBERID")
 	private Long memberId;
 	
-	@Column(name="PRODID")
+	@ManyToOne
+	@JoinColumn(name="PRODID")
+	@JsonIgnore
+	private Product product;
+
+	@Transient
 	private Long prodId;
 
 	@Column(name="REVIEWTITLE",length=200)
@@ -77,8 +86,23 @@ public class Review {
 		this.memberId = memberId;
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+		if(!product.getReviews().contains(this)){
+			product.getReviews().add(this);
+		}
+	}	
+	
 	public Long getProdId() {
-		return prodId;
+		if(this.prodId == null && product !=null){// select
+			return this.getProduct().getProdId();
+		}else{ // insert&update
+			return this.prodId;			
+		}
 	}
 
 	public void setProdId(Long prodId) {
