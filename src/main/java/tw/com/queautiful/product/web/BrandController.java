@@ -114,7 +114,6 @@ public class BrandController {
 	}
 
 	@RequestMapping("/delete")
-	@ResponseBody
 	public void delete(@RequestBody Brand brand) {
 		brandService.delete(brand.getBrandId());
 	}

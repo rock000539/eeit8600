@@ -25,14 +25,6 @@
 	<!-- 表單驗證  -->
 	<script 
 		src="/js/jquery.validate.min.js"></script>
-	
-	<!-- DatePicker -->
-	<link rel="stylesheet" 
-		href="/css/bootstrap-datetimepicker.min.css" />
-    <script
-    	src="/js/bootstrap-datetimepicker.min.js"></script>
-    <script
-    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     
     <!-- Dialog -->
     <link rel="stylesheet" 
@@ -45,9 +37,6 @@
     <script src="/js/fileinput.min.js"></script>
     
     <script src="/js/metisMenu.min.js"></script>
-    <!-- <script src="/src/js/jquery.ui.widget.js"></script> -->
-	<!-- <script src="/src/js/jquery.iframe-transport.js"></script> -->
-	<!-- <script src="/src/js/jquery.fileupload.js"></script> -->
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Brand AddPage</title>
@@ -57,11 +46,11 @@
 			margin-top: 20px;
 		}
 		.error {
-			color: red;
-			font-style: italic;
+			color: #FF8989;
+/* 			font-style: italic; */
 		}
 		input.error {
-			border: 1px red solid;
+			border: 1px red #FF8989;
 		}
 		.panel {
 			margin-top: 20px;
