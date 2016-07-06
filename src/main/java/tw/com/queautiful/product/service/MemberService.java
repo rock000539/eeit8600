@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.product.dao.MemberDao;
 import tw.com.queautiful.product.entity.Member;
 
@@ -22,8 +21,6 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDao memberDao;
-	@Autowired
-	private EmailSender mailSender;
 	
 	public Member getById(Long memberId){
 		return memberDao.findOne(memberId);
@@ -56,12 +53,6 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
-	public void requestForResetPassword(String email, HttpServletRequest req){
-		String resetPswUrl = createPswResetUrl(email, req);
-		log.debug("URL: {}", resetPswUrl);
-		mailSender.sendResetPsw(email, resetPswUrl);
-	}
-	
 	//產生reset-password URL
 	public String createPswResetUrl(String email, HttpServletRequest req){
 	    String path = req.getServerName()+":"+req.getServerPort()+req.getContextPath();
@@ -76,16 +67,34 @@ public class MemberService {
 	    java.sql.Date expDate = new java.sql.Date(new java.util.Date().getTime()+7*24*60*60*1000);
 	    member.setResetPswExp(expDate);
 	    memberDao.save(member);
-	    log.debug(token);
-	    log.debug(expDate.toString());
+	    log.debug("token saved: {}", member.getResetPswToken());
+	    log.debug("expDate saved: {}", member.getResetPswExp().toString());
 	    return token;
 	}
 	
-//	public void changePassword(Long memberId, String newPassword){
-//		Member member = memberDao.getOne(memberId);
-//		member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
-//		memberDao.save(member);
-//	}
+	//驗證token及token期限
+	public String validateResetPswToken(String token){
+		Member member = memberDao.findByResetPswToken(token);
+		java.util.Date today = new java.util.Date();
+		if(member==null){
+			return "invalid token";
+		}else if((member.getResetPswExp().getTime()-today.getTime())<=0){
+			return "token expired";
+		}
+		return null;
+	}
+	
+	public Member getByResetPswToken(String resetPswToken){
+		return memberDao.findByResetPswToken(resetPswToken);
+	}
+	
+	public void updatePassword(Member member, String newPassword){
+		member.setPassword(newPassword);
+		member.setResetPswToken(null);
+		member.setResetPswExp(null);
+		log.debug("after-reset-psw member clear token:{}, token-exp: {}", member.getResetPswToken(), member.getResetPswExp());
+		memberDao.save(member);
+	}
 	
 	public Boolean accountCheck(String email){
 		Member member = memberDao.findByEmailIs(email);

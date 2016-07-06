@@ -17,6 +17,7 @@
 	<script src="/js/jquery.dropotron.min.js"></script>
 	<script src="/js/skel.min.js"></script>
 	<script src="/js/util.js"></script>
+	<script src="/js/fms-main.js"></script>
 	
 	<!-- 表單驗證  -->
 	<script src="/js/jquery.validate.min.js"></script>
@@ -38,14 +39,14 @@
                 <article class="post">
               
 <p>Please enter your EMAIL you have registered</p>
-<form id="resetPsw">
+<form id="forgotPsw">
 <div class="form-group">
 <label for="email">Email address</label>
 <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 </div>
 <br>
 <div class="form-group">
-<button type="button" id="resetPswBtn" class="btn btn-default">Submit</button>
+<button type="button" id="forgotPswBtn" class="btn btn-default" >Submit</button>
 </div>
 </form>
                 </article>
@@ -61,7 +62,7 @@
 $(function(){
  	$('#email').focus();
 	
-	$('#resetPsw').validate({
+	$('#forgotPsw').validate({
 		rules:{email: {required: true, email: true, remote:'/members/check_emailexist'}},
 		messages:{email:{required:'Please enter your email',
 				email:'Please enter correct email',
@@ -69,22 +70,22 @@ $(function(){
 	});
 	
 	
-	$('#resetPswBtn').click(function(){
+	$('#forgotPswBtn').click(function(){
 		var email=$('#email').val();
-		var validateform = $('#resetPsw').validate().form();
+		var validateform = $('#forgotPsw').validate().form();
 		if(validateform){
 		$.ajax({
-			url:"/members/resetPsw",
+			url:"/members/requestforpsw",
 			data:{"email":email},
 			type : "Get",
 			success : function(result){
-				console.log(result);//test
+				alert(result);//test
 			}
 		});//ajax
 		}//validate
 	});//click
 
-});
+});//onload
 
 </script>
 

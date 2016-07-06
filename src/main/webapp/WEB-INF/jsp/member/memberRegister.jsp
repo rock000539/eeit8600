@@ -19,7 +19,7 @@
 	}
 	label.error {
 		color: #FF8989; /*#A94442;*/
-		font-size: 0.9em;
+		font-size: 0.7em;
 		margin-left: 3px;
 	}
 	.popover {

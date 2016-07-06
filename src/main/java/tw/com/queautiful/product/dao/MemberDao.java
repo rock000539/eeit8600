@@ -8,4 +8,6 @@ public interface MemberDao extends JpaRepository<Member, Long> {
 	
 	public Member findByEmailIs(String email);
 	
+	public Member findByResetPswToken(String resetPswToken);
+	
 }
