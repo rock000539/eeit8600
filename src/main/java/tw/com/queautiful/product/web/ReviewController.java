@@ -3,6 +3,8 @@ package tw.com.queautiful.product.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,20 +107,20 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long reviewId,Model model){
+	public String editPage(@RequestPart Long reviewId,Model model){
 		model.addAttribute("review", service.getById(reviewId));
 		return "/review/reviewEdit";
 	}
 	
 	@RequestMapping("/editgrid")
-	public String editPageGrid(@RequestParam Long reviewId,Model model){
+	public String editPageGrid(@RequestParam Long reviewId,Model model){ //@RequestParam  類似getParameter
 		model.addAttribute("review", service.getById(reviewId));
 		return "/review/reviewEditGrid";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	@ResponseBody
-	public Review update(@RequestPart("review") Review review,
+	@ResponseBody //傳回json字串
+	public Review update(@RequestPart("review") Review review,  //@RequestPart類似RequestParam ,
 			@RequestPart(value = "reviewImgFile", required = false) MultipartFile reviewImgFile) {
 		//FK設定
 		review.setProduct(prodService.getById(review.getProdId()));
