@@ -33,6 +33,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private EmailSender mailSender;
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -75,18 +77,40 @@ public class MemberController {
 	}
 	
 	//send reset-psw email
-	@RequestMapping("/resetPsw")
+	@RequestMapping("/requestforpsw")
 	@ResponseBody
-	public String resetPsw(@RequestParam String email, HttpServletRequest req){
-		service.requestForResetPassword(email, req);
+	public String requestForResetPsw(@RequestParam String email, HttpServletRequest req){
+		String resetPswUrl = service.createPswResetUrl(email, req);
+		log.debug("URL: {}", resetPswUrl);
+		mailSender.sendResetPsw(email, resetPswUrl);
 		return "Please check your email and follow the instructions.";
 	}
 	
-	//reset password received from email
+	//return reset-password Page
 	@RequestMapping("/resetpassword")
-	public String resetPsw(@RequestParam String token){
-		log.debug(token);
+	public String changePswPage(@RequestParam String token, Model model){
+		Member member = service.getByResetPswToken(token);
+		log.debug("email token: {}", token);
+		String validToken = service.validateResetPswToken(token);
+		log.debug("validToken: {}", validToken);
+		if(validToken==null){
+			model.addAttribute("email", member.getEmail());
+			return "/member/resetPassword";
+		}
+		//xxxxxxxxxx   回傳validToken訊息
 		return "/fms";
+	}
+	
+	//update password
+	@RequestMapping(value="/updatepassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String resetPassword(@RequestParam String email, @RequestParam String password){
+		Member member = service.getByEmail(email);
+		if(member != null){
+			service.updatePassword(member, password);
+			return "success";
+		}
+		return "failure";
 	}
 	
 	@RequestMapping("/check_emailexist")

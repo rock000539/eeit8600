@@ -1,6 +1,7 @@
 package tw.com.queautiful.commons.util;
 
-import org.crsh.console.jline.internal.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,6 +12,7 @@ import tw.com.queautiful.product.service.MemberService;
 
 @Component
 public class EmailSender {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -29,7 +31,7 @@ public class EmailSender {
 			resetPswUrl
 				);
 		mailSender.send(simpleMsg);
-		Log.debug("mail sent");
+		log.debug("mail sent to {}", email);
 	}
 	
 }

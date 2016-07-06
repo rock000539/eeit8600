@@ -8,26 +8,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- CSS -->
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/fms-main.css" />
 	<link rel="stylesheet" href="/css/fms-customize.css" />	
 
-	
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.dropotron.min.js"></script>
 	<script src="/js/skel.min.js"></script>
 	<script src="/js/util.js"></script>
 	<script src="/js/fms-main.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	
 	
 <style type="text/css">
 
 </style>
 </head>
 <body>
-
 	<!-- Wrapper -->
 		<div id="wrapper">
 <!--加入header&nav -->
@@ -37,6 +34,9 @@
 			<div id="main">
 			
 			<!-- **每頁不同的內容從這裡開始** -->
+				
+				<!-- 內容若要有方框效果，請用下面的article包起來 -->
+                <article class="post">
 
 <!-- Button trigger modal -->
 <a data-toggle="modal" class="btn btn-info" href="/members/register" data-target="#regiModal">SignUp !</a>
@@ -44,6 +44,8 @@
 <c:import url="../register_modal.jsp" />
 	
 <a href="/members/forgotpsw">Forgot Password</a>
+                </article>
+                
             <!-- **每頁不同的內容結束** -->
 
 <!--加入intro&footer -->
