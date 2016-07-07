@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
+import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
@@ -138,6 +139,13 @@ public class ProductController {
 		if(prodImg!=null) {
 			FileProcessing.showImg(resp, prodImg);
 		}
+	}
+	
+	@RequestMapping("/searchbybrand")
+	@ResponseBody
+	public List<Product> searchByBrand(@RequestParam Long brandId) {
+		Brand brand = brandService.getById(brandId);
+		return brand.getProducts();
 	}
 	
 	@RequestMapping("/select_fms")

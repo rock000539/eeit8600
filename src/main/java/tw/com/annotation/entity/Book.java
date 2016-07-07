@@ -15,6 +15,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 @Table(name = "BOOK")
 public class Book {
@@ -41,7 +44,7 @@ public class Book {
 	@ManyToMany
 	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID"), inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID"))
 	private List<Publisher> publishers;
-
+	
 	public Book() {
 
 	}
@@ -117,11 +120,18 @@ public class Book {
 
 	public void setPublishers(List<Publisher> publishers) {
 		this.publishers = publishers;
+		Logger log = LoggerFactory.getLogger(this.getClass());
+		for(Publisher publisher : publishers) {
+			if(!publisher.getBooks().contains(this)) {
+				publisher.getBooks().add(this);
+			}
+			log.info("{}", publisher);
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", name=" + name + ", detail=" + detail + "]";
+		return "Book [bookId=" + bookId + "]";
 	}
-
+	
 }

@@ -57,19 +57,19 @@ public class App implements CommandLineRunner {
 	@Transactional
 	public void run(String... strings) throws Exception {
 		
-		Tester tester = new Tester();
-		tester.setName("USER2");
-		tester.setAge(25);
-		tester.setGender(Gender.MALE);
-		testerDao.save(tester);
-		
-		logger.info("{}", Gender.MALE);
-		logger.info("{}", Gender.FEMALE);
-		
-		List<Tester> testers = testerDao.findAll();
-		for(Tester tmp : testers) {
-			logger.info("{}", tmp);
-		}
+//		Tester tester = new Tester();
+//		tester.setName("USER2");
+//		tester.setAge(25);
+//		tester.setGender(Gender.MALE);
+//		testerDao.save(tester);
+//		
+//		logger.info("{}", Gender.MALE);
+//		logger.info("{}", Gender.FEMALE);
+//		
+//		List<Tester> testers = testerDao.findAll();
+//		for(Tester tmp : testers) {
+//			logger.info("{}", tmp);
+//		}
 
 		// @OneToOne Example
 //		// save a couple of books
@@ -117,14 +117,20 @@ public class App implements CommandLineRunner {
 //		}
 
 		// @ManyToMany Example
-//		Book temp = bookDao.findOne(1L);
-//		temp.setPublishers(publisherDao.findAll());
-//		bookDao.save(temp);
-//
-//		// fetch all books
-//		for (Book book : bookDao.findAll()) {
-//			logger.info("{}", book);
-//		}
+		Book temp = bookDao.findOne(1L);
+		temp.setPublishers(publisherDao.findAll());
+		bookDao.save(temp);
+		
+		List<Publisher> publishers = new ArrayList<>();
+		publishers.add(publisherDao.findOne(1L));
+		publishers.add(publisherDao.findOne(2L));
+		temp.setPublishers(publishers);
+		bookDao.save(temp);
+		
+		// fetch all books
+		for (Book book : bookDao.findAll()) {
+			logger.info("{}", book);
+		}
 		
 	}
 

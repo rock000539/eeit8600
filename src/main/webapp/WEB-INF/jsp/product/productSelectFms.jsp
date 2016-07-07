@@ -34,6 +34,10 @@
     		text-align: center;
 		}
 		
+		.panel > .panel-body {
+			height: 160px;
+		}
+		
 		li {
 			text-align: center
 		}
@@ -104,7 +108,13 @@
 	</div>
 		
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
+			
+			// hide btn & select
+			$('#search').hide();
+			$('#contact').hide();
+			$('#sprod').hide();
 			
 			// select-brand init
 			$('#sbrand').select2({
@@ -118,7 +128,7 @@
 				url: '/brands/select',
 				type: 'GET',
 				dataType: 'json',
-				success:function(response){
+				success:function(response) {
 					var select = $('#sbrand').empty();
 					select.append($('<option></option>'));
 					for(i=0; i<response.length; i++){
@@ -128,24 +138,60 @@
 			});
 			
 			$('#sbrand').on('select2:select', function (evt) {
+				// select-product init
+				$('#sprod').select2({
+					placeholder: 'Select a Product',
+					allowClear: true,
+					theme: 'classic',
+				});
+			});
+			
+			$('#sbrand').on('select2:select', function (evt) {
+				// show btn
+				$('#search').show();
+				$('#contact').show();
 				
+				// append data to select #sprod
+				$.ajax({
+					url: '/products/searchbybrand',
+					type: 'POST',
+					dataType: 'json',
+					contextType: 'application/json; charset=utf-8;',
+					data: { 'brandId': $(this).val() },
+					success:function(response){
+						console.log(response);
+						var select = $('#sprod').empty();
+						select.append($('<option></option>'));
+						for(i=0; i<response.length; i++){
+							select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
+						}
+					}
+				});
 			});
 			
-			// select-product init
-			$('#sprod').select2({
-				placeholder: 'Select a Product',
-				allowClear: true,
-				theme: 'classic',
+			// Search Button Click
+			$('#search').on('click', function() {
+				console.log('search');
+				if($('#sprod').val() == '') {
+					
+				} else {
+					
+				}
 			});
 			
-			$('#sprod').attr('disabled', true);
+			// Contact Button Click
+			$('#contact').on('click', function() {
+				console.log('contact');				
+			});
 			
 			// tabs click
 			$('div.tabs-x .nav-tabs [data-toggle="tab"]').on('tabsX.click', function (event) {
 				
 			});
 			
+			
 		});
+		
 	</script>
 	
 </body>

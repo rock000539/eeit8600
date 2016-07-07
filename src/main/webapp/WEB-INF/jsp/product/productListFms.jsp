@@ -187,6 +187,7 @@ button + label{
 	</div>
 
 	<script>
+	
 		$(function() {
 
 			 // We will be using MixItUp's 'changeLayout' API method to add and remove a 'list' class to the container. This class changes the styling of our target elements (see CSS).
@@ -243,6 +244,7 @@ button + label{
 			});
 
 		});
+		
 	</script>
 
 </body>
