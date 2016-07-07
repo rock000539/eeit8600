@@ -44,7 +44,7 @@ public class MemberController {
 
 		log.debug("page = {}", page);
 		log.debug("rows = {}", rows);
-
+		
 		Pageable pageable = new PageRequest(page - 1, rows);
 		Page<Member> memberPage = service.getAll(pageable);
 		log.debug(memberPage.toString());

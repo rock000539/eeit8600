@@ -1,11 +1,18 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ARTICLE")
@@ -16,7 +23,7 @@ public class Article {
 	@Column(name = "ARTICLEID")
 	private Long articleId;
 	
-	@Column(name = "MEMBERID")
+	@Column(name = "MEMBER_ID")	//與many to one重覆
 	private Long memberId;
 	
 	@Column(name = "ARTICLETYPE" ,length=10)
@@ -39,6 +46,14 @@ public class Article {
 	
 	@Column(name = "ARTICLEREPORT")
 	private Integer articleReport;
+	
+	@ManyToMany(mappedBy = "articles_save") //文章收藏
+	@JsonIgnore
+	private List<Member> members;
+	
+	@ManyToOne
+	@JoinColumn(name="MEMBERID")	//文章撰寫作者
+	private Member member;
 
 	@Override
 	public String toString() {
@@ -119,6 +134,22 @@ public class Article {
 
 	public void setArticleReport(Integer articleReport) {
 		this.articleReport = articleReport;
+	}
+
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	
 	

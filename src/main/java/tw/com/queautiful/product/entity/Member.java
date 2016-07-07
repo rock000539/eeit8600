@@ -1,14 +1,23 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MEMBER")
@@ -75,6 +84,15 @@ public class Member {
 	@Column(name="RESETPSWEXP")
 	private java.sql.Date resetPswExp; //重設密碼期限
 	
+	//文章收藏
+	@ManyToMany
+	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
+	private List<Article> articles_save;
+	
+	//文章撰寫作者
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@JsonIgnore
+	private List<Article> articles_write;
 	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
@@ -272,6 +290,22 @@ public class Member {
 
 	public void setResetPswExp(java.sql.Date resetPswExp) {
 		this.resetPswExp = resetPswExp;
+	}
+
+	public List<Article> getArticles_save() {
+		return articles_save;
+	}
+
+	public void setArticles_save(List<Article> articles_save) {
+		this.articles_save = articles_save;
+	}
+
+	public List<Article> getArticles_write() {
+		return articles_write;
+	}
+
+	public void setArticles_write(List<Article> articles_write) {
+		this.articles_write = articles_write;
 	}
 
 	

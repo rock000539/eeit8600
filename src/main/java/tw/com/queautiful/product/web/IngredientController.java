@@ -82,11 +82,11 @@ public class IngredientController {
 		return service.getById(ingredient.getIngredId());
 	}
 	
-	@RequestMapping("/delete")
-	public String delete(@RequestParam Long ingredId){
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public void delete(@RequestParam Long ingredId){
 		System.out.println(ingredId);
 		service.delete(ingredId);
-		return "redirect:/ingredients/list";
 	}
 		
 	

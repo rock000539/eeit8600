@@ -141,6 +141,14 @@ $(function () {
 			key: true,
 		},
 		{ 
+			label: 'ID',
+			name: 'articles.articleTitle',
+			width: 50,
+			align: 'center',
+			resizable: false,
+			key: true,
+		},
+		{ 
 			label: 'EMAIL',
 			name: 'email',
 			width: 180,

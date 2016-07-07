@@ -96,29 +96,29 @@
 </body>
 <script>
 $(function(){
-	$('#addForm').validate({
-		onfocusout: function (element) {
-	        $(element).valid();
-	    },
-		rules:{
-			memberId:{required:true},
-			articleTitle:{required:true},
-			article:{required:true},
-		},//end of rules
-		messages:{
-			memberId:'必填',
-			articleTitle:'必填',
-			article:'必填'
-		},//end of messages
+// 	$('#addForm').validate({
+// 		onfocusout: function (element) {
+// 	        $(element).valid();
+// 	    },
+// 		rules:{
+// 			memberId:{required:true},
+// 			articleTitle:{required:true},
+// 			article:{required:true},
+// 		},//end of rules
+// 		messages:{
+// 			memberId:'必填',
+// 			articleTitle:'必填',
+// 			article:'必填'
+// 		},//end of messages
 		
-	});
+// 	});
 	
 	
 	$('#save').click(function(){
 		
 		console.log(JSON.stringify($('#addForm').serializeObject()));
 		
-		if($('#addForm').validate().form()){
+//  		if($('#addForm').validate().form()){
 			$.ajax({
 				url:'/articles/insert',
 				type:'post',
@@ -140,10 +140,10 @@ $(function(){
 					$('#articleCollect').text('articleCollect:'+data.articleCollect);
 					$('#articleShow').text('articleShow:'+data.articleShow);
 					$('#articleReport').text('articleReport:'+data.articleReport);
-				}
+ 				}
 			})
 		
-		}
+// 		}
 	
 	});
 
