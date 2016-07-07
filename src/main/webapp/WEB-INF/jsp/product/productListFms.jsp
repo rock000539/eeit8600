@@ -189,7 +189,9 @@ button + label{
 	<script>
 	
 		$(function() {
-
+			
+			console.log("${products}");
+			
 			 // We will be using MixItUp's 'changeLayout' API method to add and remove a 'list' class to the container. This class changes the styling of our target elements (see CSS).
 			  
 			 // NB: Changing layout doesn't have to be between grid/list only, we can add any class we want and use it to affect the styling of our elements.
