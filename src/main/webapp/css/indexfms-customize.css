@@ -1,0 +1,62 @@
+/* @import url("font-awesome.min.css"); */
+/* @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Raleway:400,800,900"); */
+@import url("font-awesome.min.css");
+
+@import
+	url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700");
+
+
+
+.navbar {
+/* 	padding:0px; */
+background-color: #2ebaae ;
+}
+
+a:hover {
+	border-bottom-color: transparent;
+	background-color: #ffffff;
+	color: red !important;
+}
+
+a:hover:before {
+/* 	background-color:white; */
+	color: #2ebaae !important;
+	background-color: #ffffff;
+}
+
+.navbar-default .navbar-brand {
+    font-size: x-large;
+/*     border-right:1px solid #d0d0d0; */
+    text-transform: uppercase;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-left:30px;
+    margin-right:10px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    font-size: 18px;
+/*     border-left:1px solid #d0d0d0; */
+	color: #ffffff;
+    letter-spacing: 4px;
+    font-family: "Microsoft JhengHei";
+/*     font-weight: 600; */
+}
+
+.navbar-default .navbar-nav>li:FIRST-CHILD>a{
+    border-left:0;
+}
+
+.navbar-right>li{
+	width:70px;
+	text-align:center;
+/* 	border-left:1px solid #d0d0d0;	 */
+}
+
+@media (min-width: 768px){
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: 0px;
+}
+}
