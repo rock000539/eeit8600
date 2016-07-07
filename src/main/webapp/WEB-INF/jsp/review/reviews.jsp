@@ -7,6 +7,7 @@
 <!-- **taglib沒有的話記得要加入** -->
 
 <!-- **加入2個css，請按照此順序** -->
+
 <link href="/css/bootstrap.min.css" rel="stylesheet" >
 <link href="/css/bootstrap-theme.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
@@ -17,8 +18,9 @@
 <title>Review List</title>
 </head>
 <body>
-
-<div class="row row-body">
+<!-- <div class="container text-center" style="text-align: center"> -->
+<div class="container-body container ">
+<!-- <div class="row row-body"> -->
 	<c:forEach var='review' items="${reviews}" >
 	  <div class="col-sm-6 col-md-3 body" name="body">
 	    <div class="thumbnail" >
@@ -86,10 +88,9 @@
 	  </div>
 	  <!-- col-sm-6 col-md-3 end --> 
 	  </c:forEach>	  
-</div>
+<!-- </div> -->
 <!-- row end --> 
-
-
+</div>
 
 <!-- **加入2個js，請按照此順序** -->
 <script src="/js/bootstrap.min.js"></script>
@@ -111,6 +112,11 @@
 		 	
 		  });
 
+		  //瀑布流 no ok
+// 		  $('.row').masonry({
+// 			    itemSelector: '.item',  //選擇要做佈局的項目方塊
+// 			    columnWidth: 30,        //網格對齊的寬度 
+// 			})
 
 </script>
 

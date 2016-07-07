@@ -154,7 +154,19 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/list_fms")
-	public String listFmsPage() {
+	public String listFmsPage(
+			@RequestParam(required=false) Long brandId,
+			@RequestParam(required=false) Long categoryId, 
+			Model model) {
+		
+		log.debug("brandId = {}", brandId);
+		log.debug("categoryId = {}", categoryId);
+		
+		if(brandId != null) {
+			model.addAttribute("products", brandService.getById(brandId).getProducts());
+		} else if(categoryId != null) {
+			model.addAttribute("products", categoryService.getById(categoryId).getProducts());
+		}
 		return "/product/productListFms";
 	}
 	

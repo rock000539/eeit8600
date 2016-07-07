@@ -16,6 +16,9 @@
 	<!-- Tabs Plugin --> <!-- http://goo.gl/rw6ooU -->
 	<link href="/css/bootstrap-tabs-x.min.css" media="all" rel="stylesheet" type="text/css" />
 	<script src="/js/bootstrap-tabs-x.min.js" type="text/javascript"></script>
+
+	<!-- jQuery Redirect Plugin -->
+	<script src="/js/jquery.redirect.js" type="text/javascript"></script>	
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductSelectPage</title>
@@ -49,6 +52,11 @@
 		
 		.nav-tabs a {
 			color: #FF95CA;
+			width: 120px;
+		}
+		
+		.tab-content {
+			border-left: 0px;
 		}
 		
 	</style>
@@ -89,11 +97,10 @@
 		<div class="col-lg-6">
 			<div class='tabs-x tabs-above tab-align-center tab-bordered tab-height-md tabs-krajee'>
 			    <ul id="tabTitle" class="nav nav-tabs" role="tablist">
-			        <li class="active"><a href="#home" role="tab" data-toggle="tab">基礎保養</a></li>
-			        <li><a href="#profile" role="tab-kv" data-toggle="tab">加強保養</a></li>
-			        <li><a href="#profile" role="tab-kv" data-toggle="tab">特別護理</a></li>
-			        <li><a href="#profile" role="tab-kv" data-toggle="tab">底妝產品</a></li>
-			        <li><a href="#profile" role="tab-kv" data-toggle="tab">重點彩妝</a></li>
+			        <li class="active"><a href="#home" role="tab" data-toggle="tab">MakeUp</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">Skin Care</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">Bath & Body</a></li>
+			        <li><a href="#profile" role="tab-kv" data-toggle="tab">Hair</a></li>
 			    </ul>
 			    <div id="tabContent" class="tab-content">
 			        <div class="tab-pane fade in active" id="tab1"><p>...</p></div>
@@ -138,15 +145,14 @@
 			});
 			
 			$('#sbrand').on('select2:select', function (evt) {
+				
 				// select-product init
 				$('#sprod').select2({
 					placeholder: 'Select a Product',
 					allowClear: true,
 					theme: 'classic',
 				});
-			});
-			
-			$('#sbrand').on('select2:select', function (evt) {
+				
 				// show btn
 				$('#search').show();
 				$('#contact').show();
@@ -173,9 +179,9 @@
 			$('#search').on('click', function() {
 				console.log('search');
 				if($('#sprod').val() == '') {
-					
-				} else {
-					
+					$.redirect('/products/list_fms', { 'brandId': $('#sbrand').val() });
+				} else if($('#sprod').val() != '') {
+					$.redirect('', { 'prodId': $('#sprod').val() });
 				}
 			});
 			
@@ -188,7 +194,6 @@
 			$('div.tabs-x .nav-tabs [data-toggle="tab"]').on('tabsX.click', function (event) {
 				
 			});
-			
 			
 		});
 		

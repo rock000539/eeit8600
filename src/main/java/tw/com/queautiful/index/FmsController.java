@@ -10,5 +10,9 @@ public class FmsController {
 	public String fmsPage(){
 		return "/fms";
 	}
+	@RequestMapping("/indexfms")
+	public String indexfmsPage(){
+		return "/indexfms";
+	}
 	
 }
