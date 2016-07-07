@@ -13,4 +13,11 @@ public interface IngredientDao extends JpaRepository<Ingredient, Long>{
 	
 	@Query("select s from Ingredient s where s.ingredChName like %?1%")
 	List<Ingredient> findByIngredChNameEndsWith(String ingredChName);
+	
+	@Query("select s from Ingredient s where s.ingredChName = ?")
+	Ingredient findByIngredChCorrectName(String ingredChName);
+	
+	@Query("select s from Ingredient s where s.ingredName = ?")
+	Ingredient findByIngredCorrectName(String ingredName);
+	
 }

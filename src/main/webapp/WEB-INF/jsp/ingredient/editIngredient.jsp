@@ -11,41 +11,185 @@
 <link href="/css/sb-admin-2.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/css/bms-customize.css" rel="stylesheet" >
+<link href="/css/jquery-ui.min.css" rel="stylesheet" >
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/sb-admin-2.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+
 <style>
+#mainTable{
+width: 500px;
+margin: 50px 195px;
+font-size: 20px;
+}
+
+#insertArea{
+margin:20px;
+font-size: 15px;
+margin-left:195px}
+
 #editArea{
 margin: auto auto;
-width: 350px;
-border: solid 1px black; 
+width: 550px;
+border: solid 1px black;
+font-size: 20px; 
 }
 fieldset{display:inline;}
-li{
+#editArea li{
 margin:5px;
 float: top;
 background-color: #DDDDDD;
 }
-#insertArea{
-margin: 150px 300px;}
+
+
+
+#submitArea{
+margin: 30px 450px;}
 </style>
 <script>
 $(function(){
+	//-------功能1: 在下方列加入欲新增成份-------------------------------
 	$("#insertIngredient").click(function(){
 		var IngredientName=$("#IngredientName").val();
 		
 		var Ingredients=document.getElementsByClassName("info");
+		
+		var Insterpossible=false;
 
 		for(var i=0;i<Ingredients.length;i++){
 		 var intName = Ingredients[i].getAttribute("name");
-			if(intName==IngredientName){  alert("test");  
+			if(intName==IngredientName){  
+				alert("已經有這些成份了喔");  
+				Insterpossible=false;
+				break;
+			}else if(IngredientName==""||IngredientName==null){
+				Insterpossible=false;
+				break;
+			}
+			else{ 
+				Insterpossible=true;
+			}//end of else			
+				
+			}//end of for loop
+			
+		if(Insterpossible)	{
+		$("#IngredientName").val("");	
+		
+		$('#IngredientArea')
+		.append("<fieldset><li class='list-inline'><span class='info' ingredId='New"+(Ingredients.length+1)
+		+"' name='"+IngredientName+"'> "
+		+IngredientName
+		+"</span><span class='close' aria-label='Close' ingredId='New"
+		+(Ingredients.length+1)+"' >&times;</span></li></fieldset>" );
+		}
+		//-------功能1-2: 按下close 刪除即將加入的成份-------------------------------	
+		$(".close").click(function(e){
+			var closeBtn=e.target.getAttribute('ingredId');	
+			var spans=$(".info");
+			
+			for(var i=0;i<spans.length;i++){
+				var spanIngredId=spans[i].getAttribute('ingredId');
+				if(spanIngredId==closeBtn){
+					$(spans[i]).parent().parent().remove();			
+					break;
+				}
+			}
+			});//end $(".close").click(function(e)	
+			
+	});//end of $("#insertIngredient").click(function(){
+		
+	//-------功能2: 按下close 可刪除已加入成份-------------------------------
+	
+	$(".close").click(function(e){
+	var closeBtn=e.target.getAttribute('ingredId');	
+	var spans=$(".info");
+	
+	for(var i=0;i<spans.length;i++){
+		var spanIngredId=spans[i].getAttribute('ingredId');
+		
+		if(spans.length!=1){
+		if(spanIngredId==closeBtn){
+			$(spans[i]).parent().parent().remove();			
+			break;
+		}// 會有刪除共同項目的BUG
+		}
+	}
+	
+	
+	
+	
+	
+	});//end $(".close").click(function(e)
+	//-------功能3: 送出成份資料並修改----------------------
+	$('#editIngredient').click(function(){
+		
+		var proName=$("#mainTable span").html();
+		var proId=$("#mainTable span").attr("proid");
+		
+		var Ingredients=document.getElementsByClassName('info');
+		var IngredientNames=[];
+		
+		for(var i=0;i<Ingredients.length;i++){
+			IngredientNames[i]=Ingredients[i].getAttribute('name');
+		}
+					
+	$.ajax({
+		'url':'/prodIngreList/put',
+		'data':{"IngredientNames":IngredientNames,"proName":proName,"proId":proId},
+		'type' : 'POST',
+		traditional: true,
+		success : function(data){//data是尚未加入成份的名稱
+						
+			if(data[0]!=undefined){		
+				
+			for(var i=0;i<data.length;i++){
+			
+			var NewName=data[i];		
+			$("#modal-body").append();	
+			$('#NewingredName').val(data[i]);
+			$('#myModal').modal({backdrop:false,keyboard: false});
+
 			}
 			
+			}else{
+			$("#modal-body2").append("資料新增完畢");
+			$('#myModal2').modal('toggle');
 			}
-		
-		
-	});//end of $("#insertIngredient").click(function(){
+		} //end of success : function(data){
+	})	//end of $.ajax({
+	
+	});//end of 	$('#editIngredient').click(function()
+	
+	
+	//------功能4:自動完成 來查找已經有的成份
+			var request=$('#IngredientName').val();
+		    $( "#IngredientName" ).autocomplete({delay: 500,
+		        source:  function(request, response) {
+					var autocompleteData=[];
+		        	var IngredientName = $('#IngredientName').val();	
+					$.ajax({
+						url : '/prodIngreList/autocomplete',
+						type : 'get',
+						data : {"IngredientName":IngredientName},
+						success : function(data){ 
+							
+							for(var i=0;i<data.length;i++){
+								autocompleteData[i]=data[i].ingredName;
+							}
+							response(autocompleteData);
+						}
+					});
+		      } 
+		      });
+
+	//-------------------------------
 })//end of $(function)
 </script>
 </head>
@@ -66,13 +210,23 @@ $(function(){
             <div class="col-lg-12">
                 <h1 class="page-header">DashBoard</h1>   
                 <!-- **內文中的標題，請修改** -->
-                                <!-- **每頁不同的內容從這裡開始** -->
+<!------------------------------ **每頁不同的內容從這裡開始**------------------- -->
+                                
+                                
+<teble id="mainTable"><tr><td ><span proid="${productId}">${productName}</span></td></tr>      
+<tr><td>                       
 <form action="" id="insertArea">
-<input type="text" id="IngredientName" >
+<input class="ui-widget ui-autocomplete-input" autocomplete="on" id="IngredientName" >
+
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none; top: 29px; left: 44px; width: 159px;">
+<li class="ui-menu-item" id="ui-id-12" tabindex="-1">AppleScript</li></ul>
+<span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
+
 <input type="button" id="insertIngredient" value="新增">
 </form>
+</td></tr>
 
-
+<tr><td>    
 <div id="editArea" class="bg-info">
 <ol id="IngredientArea">
 
@@ -89,7 +243,84 @@ ${items.ingredName}
 </c:forEach>
 
 </ol>
-</div>
+</div></td></tr>
+
+<tr><td>    
+<div id="submitArea">
+<input type="button" class="btn btn-default" id="editIngredient" value="確認修改">
+</div> 
+</td></tr>
+
+<!-- 使用model1 ----------------------------------------------------------------->
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+            您輸入了新的成份，請填寫詳細成份資料
+            </h4>
+         </div>
+         <div class="modal-body" id="modal-body">
+<!--在这里添加一些文本-->				
+				<table><form>
+				<tr><td>成份</td><td><input type="text" name="ingredName" id="NewingredName"></td></tr>
+				<tr><td>中文名稱</td><td><input type="text" name="ingredChName"></td></tr>
+				<tr><td>特性</td><td><input type="text" name="ingredChar"></td></tr>
+				<tr><td>刺激度</td><td><input type="text" name="ingredIrritant"></td></tr>
+				<tr><td>致粉刺性</td><td><input type="text" name="ingredAcne"></td></tr>
+				<tr><td>安心度</td><td><input type="text" name="ingredSafety"></td></tr>
+				</form></table>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary">
+               提交更改
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+<!-- 結束model1 ----------------------------------------------------------------->
+<!-- 使用model2 ----------------------------------------------------------------->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel2" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">
+               模态框（Modal）标题
+            </h4>
+         </div>
+         <div class="modal-body" id="modal-body2">
+在这里添加一些文本			
+			
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary">
+               提交更改
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+<!-- 結束model2 ----------------------------------------------------------------->
+
                 <!-- **每頁不同的內容 end** -->
             </div>
             <!-- /.col-lg-12 -->
