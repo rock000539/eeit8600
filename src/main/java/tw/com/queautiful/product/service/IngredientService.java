@@ -49,4 +49,13 @@ public class IngredientService {
 	public List<Ingredient> findByIngredChName(String ingredName){
 		return (List<Ingredient>) ingredientDao.findByIngredChNameEndsWith(ingredName);
 	}
+	
+	public Ingredient findByIngredCorrectName(String ingredName){		
+		return ingredientDao.findByIngredCorrectName(ingredName);
+	}
+	
+	public Ingredient findByIngredChCorrectName(String ingredName){
+		return ingredientDao.findByIngredChCorrectName(ingredName);
+	}
+	
 }

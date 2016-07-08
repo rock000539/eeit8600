@@ -77,9 +77,7 @@ public class ProdIngreListController {
 	public List<String>  editProductIngredient(Model model, @RequestParam String[] IngredientNames ,@RequestParam String proName,@RequestParam String proId  ) {
 		String findAllProductAndIngredietRelativeWithProId="select [ingredid] from [proingrelist] where [prodid]="+proId;
 		
-		
 		List<Object> oleResultList=manager.createNativeQuery(findAllProductAndIngredietRelativeWithProId).getResultList();
-		System.out.println("begin== "+oleResultList);
 		
 		List<String> result=new ArrayList();
 		
@@ -107,13 +105,11 @@ public class ProdIngreListController {
 		}//end if and else loop
 		}//end of 	for(int i=0;i<IngredientNames.length;i++)
 		
-		System.out.println("finish editProductIngredient "+result);
 		if(result.size()==0){
 			//result.add("無成份修改");
 		}
 		
 		
-		System.out.println("finish== "+oleResultList);
 		for(int i=0;i<oleResultList.size();i++){//case 4 比對完資料做刪除動作
 		String oldIngredientId=oleResultList.get(i).toString();
 		String deleteProductAndIngredietRelative="delete from [proingrelist] where [ingredid]="+oldIngredientId+" and [prodid]="+proId;	
@@ -149,6 +145,17 @@ public class ProdIngreListController {
 		return result;
 	}
 	
+	@RequestMapping("/checkIngredientName") //功能1  檢查資料用
+	@ResponseBody
+	public Ingredient checkIngredientName(@RequestParam String IngredientName){
+		Ingredient ingredient=ingredientService.findByIngredCorrectName(IngredientName);		
+		
+		Ingredient ingredientCh=ingredientService.findByIngredChCorrectName(IngredientName);
+		
+		if(ingredient!=null){return ingredient;}
+		else if(ingredientCh!=null){return ingredientCh;}
+		else{return null;}
+	}
 
 	
 //*--------------------------------------------------------------
