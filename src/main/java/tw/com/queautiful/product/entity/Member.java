@@ -87,12 +87,12 @@ public class Member {
 	//文章收藏
 	@ManyToMany
 	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
-	private List<Article> articles_save;
+	private List<Article> articlesSavedByMember;
 	
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private List<Article> articles_write;
+	private List<Article> articlesWorteByAuthor;
 	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
@@ -101,20 +101,14 @@ public class Member {
 	private MultipartFile memberImgFile;
 	
 	
-
+	
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", nickname=" + nickname
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthDay="
-				+ birthDay + ", age=" + age + ", skinType=" + skinType + ", memberImg=" + memberImg + ", phone=" + phone
-				+ ", addr=" + addr + ", memberRegiDate=" + memberRegiDate + ", memberSuspend=" + memberSuspend
-				+ ", memberSuspendStart=" + memberSuspendStart + ", memberSuspendDays=" + memberSuspendDays
-				+ ", memberSuspendCount=" + memberSuspendCount + ", memberSuspendExp=" + memberSuspendExp
-				+ ", memberImgFile=" + memberImgFile + "]";
+		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password
+				+ ", articlesSavedByMember=" + articlesSavedByMember + ", articlesWorteByAuthor="
+				+ articlesWorteByAuthor + "]";
 	}
 
-	
-	
 	public MultipartFile getMemberImgFile() {
 		return memberImgFile;
 	}
@@ -292,21 +286,23 @@ public class Member {
 		this.resetPswExp = resetPswExp;
 	}
 
-	public List<Article> getArticles_save() {
-		return articles_save;
+	public List<Article> getArticlesSavedByMember() {
+		return articlesSavedByMember;
 	}
 
-	public void setArticles_save(List<Article> articles_save) {
-		this.articles_save = articles_save;
+	public void setArticlesSavedByMember(List<Article> articlesSavedByMember) {
+		this.articlesSavedByMember = articlesSavedByMember;
 	}
 
-	public List<Article> getArticles_write() {
-		return articles_write;
+	public List<Article> getArticlesWorteByAuthor() {
+		return articlesWorteByAuthor;
 	}
 
-	public void setArticles_write(List<Article> articles_write) {
-		this.articles_write = articles_write;
+	public void setArticlesWorteByAuthor(List<Article> articlesWorteByAuthor) {
+		this.articlesWorteByAuthor = articlesWorteByAuthor;
 	}
+
+	
 
 	
 

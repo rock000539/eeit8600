@@ -23,7 +23,7 @@ public class Article {
 	@Column(name = "ARTICLEID")
 	private Long articleId;
 	
-	@Column(name = "MEMBER_ID")	//與many to one重覆
+	@Column(name = "MEMBERID")	
 	private Long memberId;
 	
 	@Column(name = "ARTICLETYPE" ,length=10)
@@ -47,12 +47,12 @@ public class Article {
 	@Column(name = "ARTICLEREPORT")
 	private Integer articleReport;
 	
-	@ManyToMany(mappedBy = "articles_save") //文章收藏
+	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏
 	@JsonIgnore
 	private List<Member> members;
 	
 	@ManyToOne
-	@JoinColumn(name="MEMBERID")	//文章撰寫作者
+	@JoinColumn(name="memberID_author")	//文章撰寫作者
 	private Member member;
 
 	@Override
