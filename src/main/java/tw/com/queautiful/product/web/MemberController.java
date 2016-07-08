@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
+import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.MemberService;
 
@@ -35,6 +36,18 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private EmailSender mailSender;
+	
+	//member個人頁面
+	@RequestMapping("/personal")
+	public String memberPersonal(Model model){
+		Member member = service.getById(1L);
+		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
+		model.addAttribute("articles", articles);
+		model.addAttribute("member", member);
+		log.debug(member.toString());
+		return "/member/memberPersonal";
+	}
+	
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -119,7 +132,7 @@ public class MemberController {
 		return !service.accountCheck(email);
 	}
 	
-	
+	//設定停權天數
 	@RequestMapping("/suspend")
 	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){
 		log.debug("inside controller");//test
