@@ -85,9 +85,9 @@ public class Member {
 	private java.sql.Date resetPswExp; //重設密碼期限
 	
 	//文章收藏
-	@ManyToMany
-	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
-	private List<Article> articlesSavedByMember;
+//	@ManyToMany
+//	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
+//	private List<Article> articlesSavedByMember;
 	
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
@@ -105,7 +105,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password
-				+ ", articlesSavedByMember=" + articlesSavedByMember + ", articlesWorteByAuthor="
+				 + ", articlesWorteByAuthor="
 				+ articlesWorteByAuthor + "]";
 	}
 
@@ -286,13 +286,13 @@ public class Member {
 		this.resetPswExp = resetPswExp;
 	}
 
-	public List<Article> getArticlesSavedByMember() {
-		return articlesSavedByMember;
-	}
-
-	public void setArticlesSavedByMember(List<Article> articlesSavedByMember) {
-		this.articlesSavedByMember = articlesSavedByMember;
-	}
+//	public List<Article> getArticlesSavedByMember() {
+//		return articlesSavedByMember;
+//	}
+//
+//	public void setArticlesSavedByMember(List<Article> articlesSavedByMember) {
+//		this.articlesSavedByMember = articlesSavedByMember;
+//	}
 
 	public List<Article> getArticlesWorteByAuthor() {
 		return articlesWorteByAuthor;
