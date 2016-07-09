@@ -36,7 +36,7 @@
 		var batchCode = $('#batchCode').val();
 		$.ajax({
 				url : '/expdate/batchCodeController',
-				type : 'GET',
+				type : 'POST',
 				data : {"brandIdstr" : brandId,
 						"batchCode" : batchCode},
 				success : function(data) {
@@ -49,8 +49,8 @@
 				var prodImg = data.productList[i].prodImg
 				if (prodName != undefined) {
 					$('#proList').append(
-'<tr><td rowspan="2">' + prodImg+ '</td><td  colspan="2">'+ prodName+ '</td></tr>'
-+ '<td><input type="submit" id="checkProduct" class="btn btn-default" value=觀看產品資料/>'
+'<tr><td rowspan="2"><img src="/' + prodImg+ '"/></td><td  colspan="2">'+ prodName+ '</td></tr>'
++ '<td><input type="submit" id="checkProduct" class="btn btn-default" value="觀看產品資料">'
 + '</td><td><input type="button" class="saveDate btn btn-default" name='
 +data.productList[i].prodId+' value="加入最愛"/></td>')
 												}
@@ -81,7 +81,7 @@
 </script>
 <style>
 #mainSpace{
- width: 400px;
+ width: 800px;
  margin-top:100px;
   margin-left: auto;
   margin-right: auto;
@@ -90,6 +90,10 @@
   margin-top: 25px;
   margin-left: auto;
   margin-right: auto;
+}
+#proList img{
+width: 120px;
+height: 120px;
 }
 </style>
 </head>
@@ -108,7 +112,7 @@
 
 			<table class="table table-hover">
 			<tr><td colspan="4"><h1>輸入產品品號查詢</h1></td></tr>
-				<form action="/expdate/batchCodeController" id='ExpDateForm'>
+				<form  id='ExpDateForm'>
 					<tr>
 					<td><select id="brandId">
 							<c:forEach items='${Brands}' var="items">
@@ -116,7 +120,8 @@
 							</c:forEach>
 							</select></td>
 					<td><input type="text" name="batchCode" id="batchCode" /></td>
-					<td colspan="2"><input type="button" id="searchDate" value="查詢" /></td>
+					<td colspan="2"><input type="button" id="searchDate" value="查詢" />
+					</td>
 					
 					</tr>
 				</form>

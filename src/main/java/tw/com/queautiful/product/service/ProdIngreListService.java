@@ -2,11 +2,12 @@ package tw.com.queautiful.product.service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ public class ProdIngreListService {
 	private ProdIngreListDao prodIngreListDao;
 	
 	@Autowired
-	IngredientDao ingredientDao;
+	private ProductService productService;
+	
+	@Autowired
+	private IngredientDao ingredientDao;
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -126,4 +130,25 @@ public class ProdIngreListService {
 		return result;// case1回傳null 不對result作處理
 	}
 
+	//前台成分找產品用	
+	public List<Map<String, Object>> IngredientFindProducts(String IngredientId){
+		List<Map<String, Object>> result=new ArrayList<Map<String, Object>>();
+		String findProductsByIngredientId=
+"  select t.prodimg,t.prodname,b.brandcname,t.mainigdt from brand b  join (select p.prodimg,p.prodname,p.mainigdt,p.brandid  from [proingrelist] pl join product p  on pl.prodid=p.prodid  where pl.ingredid="
+		+IngredientId+
+") t   on b.brandid=t.brandid";
+		List<Object[]> resultList = manager.createNativeQuery(findProductsByIngredientId).getResultList();
+		
+		for (int i=0;i<resultList.size();i++) {
+			Map<String, Object> resultMap=new HashMap<String, Object>();
+			Object[] datas=resultList.get(i);
+			resultMap.put("prodimg",datas[0]);
+			resultMap.put("prodname",datas[1]);
+			resultMap.put("brandcname",datas[2]);
+			resultMap.put("mainigdt",datas[3]);
+			result.add(resultMap);
+		}
+
+		return result;
+	}
 }
