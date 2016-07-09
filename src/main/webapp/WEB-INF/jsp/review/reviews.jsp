@@ -6,20 +6,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- **taglib沒有的話記得要加入** -->
 
-<!-- **加入2個css，請按照此順序** -->
-
-<link href="/css/bootstrap.min.css" rel="stylesheet" >
+<!-- **加入4個css，請按照此順序** -->
+<link href="/css/bootstrap-reviews.css" rel="stylesheet" >
 <link href="/css/bootstrap-theme.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
-<link href="/css/review-customize.css" rel="stylesheet">
+<link href="/css/reviews-customize.css" rel="stylesheet">
 <script src="/js/jquery.min.js"></script>
 
 
-<title>Review List</title>
+<title>Reviews</title>
 </head>
 <body>
 <!-- <div class="container text-center" style="text-align: center"> -->
-<div class="container-body container ">
+<div class="container">
 <!-- <div class="row row-body"> -->
 	<c:forEach var='review' items="${reviews}" >
 	  <div class="col-sm-6 col-md-3 body" name="body">
@@ -31,7 +30,6 @@
 	      		<img class="reviewImg-Img" src="/products/show?prodId=${review.prodId}">
 	      	</div></a>
 	      			<!-- Img end -->
-<!--???去除文字超連結所設的div還沒好-->	
 		      	<div class="reviewTime">${review.reviewTime}</div>
 						<!--(???心得table要再加"推"?,心得留言table要再加"數量") -->
 		      	<div class="reviewState">1推,1留言</div>
@@ -101,7 +99,7 @@
 				
  		 	$("div[name='body']").hover(function(){
 				$(this).find("#review-bottom-title").css('opacity','1');
-		 		$(this).css('border','0.5px solid');
+		 		$(this).css('border','1px solid');
 		 		$(this).css('border-color','#BEBEBE');
 		 	},function(){
 				$(this).find("#review-bottom-title").css('opacity','0');

@@ -86,11 +86,15 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/reviews")
-	public String testBoostrap(Model model){
-//		model.addAttribute("produts", prodService.getAll());
+	public String reviews(Model model){
 		model.addAttribute("reviews", service.getAll());
-//		model.addAttribute("members", memberService.getAll());
 		return "/review/reviews";
+	}
+	
+	@RequestMapping("/review")
+	public String review(Model model){
+		model.addAttribute("review", service.getAll());
+		return "/review/review";
 	}
 	
 //	@RequestMapping("/delete")
