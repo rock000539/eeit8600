@@ -92,8 +92,7 @@ $(function(){
 	<td colspan="2"></td></tr>
 <c:forEach items="${beans}" var="items">
  <tr>
- 
- 	<td>${items.product.prodImg}</td>
+ 	<td><img src="${items.product.prodImg}"/></td>
  	<td>${items.product.prodName}</td>
 	<td>${items.mfd}</td> 
 	<td>${items.exp}</td> 	
