@@ -39,7 +39,7 @@ public class MemberController {
 	
 	//member個人頁面
 	@RequestMapping("/personal")
-	public String memberPersonal(Model model){
+	public String memberPersonalPage(Model model){
 		Member member = service.getById(1L);
 		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
 		model.addAttribute("articles", articles);
@@ -48,6 +48,27 @@ public class MemberController {
 		return "/member/memberPersonal";
 	}
 	
+	//member文章頁面
+	@RequestMapping("/post")
+	public String memberPostPage(Model model){
+		Member member = service.getById(1L);
+		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
+		model.addAttribute("articles", articles);
+		model.addAttribute("member", member);
+		log.debug(member.toString());
+		return "/member/memberPost";
+	}
+	
+	//member文章頁面
+	@RequestMapping("/post1")
+	public String memberPostPage1(Model model){
+		Member member = service.getById(1L);
+		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
+		model.addAttribute("articles", articles);
+		model.addAttribute("member", member);
+		log.debug(member.toString());
+		return "/member/memberPostV1";
+	}
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")

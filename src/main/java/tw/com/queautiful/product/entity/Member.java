@@ -286,14 +286,6 @@ public class Member {
 		this.resetPswExp = resetPswExp;
 	}
 
-//	public List<Article> getArticlesSavedByMember() {
-//		return articlesSavedByMember;
-//	}
-//
-//	public void setArticlesSavedByMember(List<Article> articlesSavedByMember) {
-//		this.articlesSavedByMember = articlesSavedByMember;
-//	}
-
 	public List<Article> getArticlesWorteByAuthor() {
 		return articlesWorteByAuthor;
 	}
