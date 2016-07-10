@@ -3,248 +3,356 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+	
+	<!-- jQuery -->
 	<script src="/js/jquery.min.js"></script>
 	
+	<!-- BootStrap -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<script src="/js/bootstrap.min.js"></script>
 	
-	<!-- mixItUp -->
-	<script src="/js/jquery.mixitup.min.js"></script>
+	<!-- Edge Template -->
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/animate.css"/>
+	
+	<!-- CheckBox Plugin -->
+	<link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductListPage</title>
 
 	<style>
-	
-		*{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body{
-  background: #68b8c4;
-}
-
-body, button{
-  font-family: 'Helvetica Neue', arial, sans-serif;
-}
-
-.controls{
-  padding: 2%;
-  background: #333;
-  color: #eee;
-}
-
-label{
-  font-weight: 300;
-  margin: 0 .4em 0 0;
-}
-
-button{
-  display: inline-block;
-  padding: .4em .8em;
-  background: #666;
-  border: 0;
-  color: #ddd;
-  font-size: 16px;
-  font-weight: 300;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button.active{
-  background: #68b8c4;
-}
-
-button:focus{
-  outline: 0 none;
-}
-
-button + label{
-  margin-left: 1em;
-}
-
-.container{
-  padding: 2% 2% 0;
-  text-align: justify;
-  font-size: 0.1px;
-  
-  -webkit-transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-}
-
-.container:after{
-  content: '';
-  display: inline-block;
-  width: 100%;
-}
-
-.container .mix,
-.container .gap{
-  display: inline-block;
-  width: 49%;
-  overflow: hidden;
-}
-
-.container .mix{
-  text-align: left;
-  background: #03899c;
-  margin-bottom: 2%;
-  display: none;
-}
-
-.container .mix.category-1{
-  border-top: 2px solid limegreen;
-}
-
-.container .mix.category-2{
-  border-top: 2px solid yellow;
-}
-
-.container .mix:after{
-  content: attr(data-myorder);
-  color: white;
-  font-size: 16px;
-  display: inline-block;
-  vertical-align: top;
-  padding: 4% 6%;
-  font-weight: 700;
-}
-
-.container .mix:before{
-  content: '';
-  display: inline-block;
-  padding-top: 60%;
-}
-
-@media all and (min-width: 420px){
-  .container .mix,
-  .container .gap{
-    width: 32%;
-  }
-}
-
-@media all and (min-width: 640px){
-  .container .mix,
-  .container .gap{
-    width: 23.5%;
-  }
-}
-
-/**
- * List Styles
- */
-
-.container.list .mix{
-  width: 100%;
-}
-
-.container.list .mix:before{
-  padding-top: 40px;
-}
+		
+		.blog_medium .post {
+		    padding-bottom: 25px;
+		    margin-bottom: 30px;
+		    border-bottom: 3px solid #f2f2f2;
+		}
 		
 	</style>
 
 </head>
 <body>
-
-	<div class="controls">
-		<label>Filter:</label>
-	  
-		<button class="filter" data-filter="all">All</button>
-		<button class="filter" data-filter=".category-1">Category 1</button>
-		<button class="filter active" data-filter=".category-2">Category 2</button>
-		<button class="filter" data-filter="none">None</button>
-		
-		<label>Sort:</label>
-		
-		<button class="sort" data-sort="default">Default</button>
-		<button class="sort" data-sort="random">Random</button>
-		<button class="sort" data-sort="myorder:asc">Asc</button>
-		<button class="sort" data-sort="myorder:desc">Desc</button>
-		
-		<label>Change Layout:</label>
-		<button id="ChangeLayout">Grid</button>
-		
-		<button id="ToggleLayout" class="btn toggle-layout">&nbsp;<i></i></button>
-		<button id="ToggleConfig" class="btn toggle-config">&nbsp;</button>
+	
+	<div class="col-lg-2"></div>
+	
+	<div class="col-lg-2">
+		<div class="widget_title" style="margin-top:50px;">
+			<h4><span>Date</span></h4>
+		</div>
+		<div id="Date" class="pre-scrollable" style="max-height:200px;">
+			<div class="checkbox">
+                <input id="checkbox1" class="styled" type="checkbox" checked>
+                <label for="checkbox1">
+                    Default
+                </label>
+            </div>
+            <div class="checkbox checkbox-primary">
+                <input id="checkbox2" class="styled" type="checkbox" checked>
+                <label for="checkbox2">
+                    Primary
+                </label>
+            </div>
+            <div class="checkbox checkbox-success">
+                <input id="checkbox3" class="styled" type="checkbox" checked>
+                <label for="checkbox3">
+                    Success
+                </label>
+            </div>
+            <div class="checkbox checkbox-info">
+                <input id="checkbox4" class="styled" type="checkbox" checked>
+                <label for="checkbox4">
+                    Info
+                </label>
+            </div>
+            <div class="checkbox checkbox-warning">
+                <input id="checkbox5" type="checkbox" class="styled" checked>
+                <label for="checkbox5">
+                    Warning
+                </label>
+            </div>
+            <div class="checkbox checkbox-danger">
+                <input id="checkbox6" type="checkbox" class="styled" checked>
+                <label for="checkbox6">
+                    Check me out
+                </label>
+            </div>
+		</div>
+		<div class="widget_title">
+			<h4><span>Brand</span></h4>
+		</div>
+		<div id="Brand" class="pre-scrollable" style="max-height:200px;">
+			<div class="checkbox">
+                <input id="checkbox1" class="styled" type="checkbox" checked>
+                <label for="checkbox1">
+                    Default
+                </label>
+            </div>
+            <div class="checkbox checkbox-primary">
+                <input id="checkbox2" class="styled" type="checkbox" checked>
+                <label for="checkbox2">
+                    Primary
+                </label>
+            </div>
+            <div class="checkbox checkbox-success">
+                <input id="checkbox3" class="styled" type="checkbox" checked>
+                <label for="checkbox3">
+                    Success
+                </label>
+            </div>
+            <div class="checkbox checkbox-info">
+                <input id="checkbox4" class="styled" type="checkbox" checked>
+                <label for="checkbox4">
+                    Info
+                </label>
+            </div>
+            <div class="checkbox checkbox-warning">
+                <input id="checkbox5" type="checkbox" class="styled" checked>
+                <label for="checkbox5">
+                    Warning
+                </label>
+            </div>
+            <div class="checkbox checkbox-danger">
+                <input id="checkbox6" type="checkbox" class="styled" checked>
+                <label for="checkbox6">
+                    Check me out
+                </label>
+            </div>
+		</div>
+		<div class="widget_title">
+			<h4><span>Score</span></h4>
+		</div>
+		<div id="Score" class="pre-scrollable" style="max-height:200px;">
+			<div class="checkbox">
+                <input id="checkbox1" class="styled" type="checkbox" checked>
+                <label for="checkbox1">
+                    Default
+                </label>
+            </div>
+            <div class="checkbox checkbox-primary">
+                <input id="checkbox2" class="styled" type="checkbox" checked>
+                <label for="checkbox2">
+                    Primary
+                </label>
+            </div>
+            <div class="checkbox checkbox-success">
+                <input id="checkbox3" class="styled" type="checkbox" checked>
+                <label for="checkbox3">
+                    Success
+                </label>
+            </div>
+            <div class="checkbox checkbox-info">
+                <input id="checkbox4" class="styled" type="checkbox" checked>
+                <label for="checkbox4">
+                    Info
+                </label>
+            </div>
+            <div class="checkbox checkbox-warning">
+                <input id="checkbox5" type="checkbox" class="styled" checked>
+                <label for="checkbox5">
+                    Warning
+                </label>
+            </div>
+            <div class="checkbox checkbox-danger">
+                <input id="checkbox6" type="checkbox" class="styled" checked>
+                <label for="checkbox6">
+                    Check me out
+                </label>
+            </div>
+		</div>
 	</div>
 	
-	<div id="Container" class="container">
-		<div class="mix category-1" data-myorder="1"></div>
-		<div class="mix category-1" data-myorder="2"></div>
-		<div class="mix category-1" data-myorder="3"></div>
-		<div class="mix category-2" data-myorder="4"></div>
-		<div class="mix category-1" data-myorder="5"></div>
-		<div class="mix category-1" data-myorder="6"></div>
-		<div class="mix category-2" data-myorder="7"></div>
-		<div class="mix category-2" data-myorder="8"></div>
+	<div class="col-lg-6 blog_medium row wow fadeInDown" style="margin-top:50px;">
 		
-		<div class="gap"></div>
-		<div class="gap"></div>
+		<article class="post">
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
+				
+				<div class="option">
+				    <a href="portfolio_single.html" class="fa fa-link"></a>
+				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
+				</div>
+				
+				<figcaption>
+				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
+		        </figcaption>
+			</figure>
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						<a href="#">產品名稱1</a>
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
+						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
+						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
+				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
+				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+            </div>
+				
+		</article>
+		
+		<article class="post">
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
+				
+				<div class="option">
+				    <a href="portfolio_single.html" class="fa fa-link"></a>
+				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
+				</div>
+				
+				<figcaption>
+				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
+		        </figcaption>
+			</figure>
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						<a href="#">產品名稱1</a>
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
+						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
+						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
+				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
+				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+            </div>
+				
+		</article>
+		
+		<article class="post">
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
+				
+				<div class="option">
+				    <a href="portfolio_single.html" class="fa fa-link"></a>
+				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
+				</div>
+				
+				<figcaption>
+				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
+		        </figcaption>
+			</figure>
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						<a href="#">產品名稱1</a>
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
+						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
+						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
+				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
+				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+            </div>
+				
+		</article>
+		
+		<article class="post">
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
+				
+				<div class="option">
+				    <a href="portfolio_single.html" class="fa fa-link"></a>
+				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
+				</div>
+				
+				<figcaption>
+				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
+		        </figcaption>
+			</figure>
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						<a href="#">產品名稱1</a>
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
+						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
+						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
+				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
+				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+            </div>
+				
+		</article>
+		
+		<article class="post">
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
+				
+				<div class="option">
+				    <a href="portfolio_single.html" class="fa fa-link"></a>
+				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
+				</div>
+				
+				<figcaption>
+				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
+		        </figcaption>
+			</figure>
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						<a href="#">產品名稱1</a>
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
+						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
+						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
+				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
+				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+            </div>
+				
+		</article>
+		
+		<div class="col-sm-12 text-center">
+	        <ul class="pagination">
+	            <li><a href="#">&laquo;</a></li>
+	            <li class="active"><a href="#">1</a></li>
+	            <li><a href="#">2</a></li>
+	            <li><a href="#">3</a></li>
+	            <li><a href="#">4</a></li>
+	            <li><a href="#">5</a></li>
+	            <li><a href="#">&raquo;</a></li>
+	        </ul>
+    	</div>
+		
 	</div>
-
+	
+	<div class="col-lg-1"></div>
+	
+    <script src="/js/product/jquery-scrolltofixed-min.js"></script>
+    <script src="/js/product/jflickrfeed.js"></script>
+    <script src="/js/product/jquery.magnific-popup.min.js"></script>
+    <script src="/js/product/swipe.js"></script>
+    <script src="/js/product/main.js"></script>
+	
+	<script src="/js/product/wow.min.js"></script>
+    <script>
+        // WOW Animation
+        new WOW().init();
+    </script>
+	
 	<script>
 	
 		$(function() {
 			
 			console.log("${products}");
-			
-			 // We will be using MixItUp's 'changeLayout' API method to add and remove a 'list' class to the container. This class changes the styling of our target elements (see CSS).
-			  
-			 // NB: Changing layout doesn't have to be between grid/list only, we can add any class we want and use it to affect the styling of our elements.
-
-			$(function(){
-
-			  var layout = 'list', // Store the current layout as a variable
-			      $container = $('#Container'), // Cache the MixItUp container
-			      $changeLayout = $('#ChangeLayout'); // Cache the changeLayout button
-			  
-			  // Instantiate MixItUp with some custom options:
-			  
-			  $container.mixItUp({
-			    animation: {
-			      animateChangeLayout: true, // Animate the positions of targets as the layout changes
-			      animateResizeTargets: true, // Animate the width/height of targets as the layout changes
-			      effects: 'fade rotateX(-40deg) translateZ(-100px)'
-			    },
-			    layout: {
-			      containerClass: 'list' // Add the class 'list' to the container on load
-			    }
-			  });
-			  
-			  // MixItUp does not provide a default "change layout" button, so we need to make our own and bind it with a click handler:
-			  
-			  $changeLayout.on('click', function(){
-			    
-			    // If the current layout is a list, change to grid:
-			    
-			    if(layout == 'list'){
-			      layout = 'grid';
-			      
-			      $changeLayout.text('List'); // Update the button text
-			      
-			      $container.mixItUp('changeLayout', {
-			        containerClass: layout // change the container class to "grid"
-			      });
-			      
-			    // Else if the current layout is a grid, change to list:  
-			    
-			    } else {
-			      layout = 'list';
-			      
-			      $changeLayout.text('Grid'); // Update the button text
-			      
-			      $container.mixItUp('changeLayout', {
-			        containerClass: layout // Change the container class to 'list'
-			      });
-			    }
-			  });
-			  
-			});
-
+		
 		});
 		
 	</script>

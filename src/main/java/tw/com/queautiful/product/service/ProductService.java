@@ -45,6 +45,10 @@ public class ProductService {
 		dao.delete(productId);
 	}
 	
+	public List<Product> findTop10ByOrderByScoreDesc() {
+		return dao.findTop10ByOrderByScoreDesc();
+	}
+	
 	public List<Product> findByProdNameEndsWith(String prodName){
 		return dao.findByProdNameEndsWith(prodName);
 	}

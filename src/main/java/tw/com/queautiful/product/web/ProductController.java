@@ -159,14 +159,17 @@ public class ProductController {
 			@RequestParam(required=false) Long categoryId, 
 			Model model) {
 		
-		log.debug("brandId = {}", brandId);
-		log.debug("categoryId = {}", categoryId);
+//		log.debug("brandId = {}", brandId);
+//		log.debug("categoryId = {}", categoryId);
 		
-		if(brandId != null) {
-			model.addAttribute("products", brandService.getById(brandId).getProducts());
-		} else if(categoryId != null) {
-			model.addAttribute("products", categoryService.getById(categoryId).getProducts());
-		}
+//		if(brandId != null) {
+//			model.addAttribute("products", brandService.getById(brandId).getProducts());
+//		} else if(categoryId != null) {
+//			model.addAttribute("products", categoryService.getById(categoryId).getProducts());
+//		}
+		
+		model.addAttribute("products", prodService.getById(1L));
+		
 		return "/product/productListFms";
 	}
 	
@@ -174,6 +177,12 @@ public class ProductController {
 	public String viewFmsPage(Model model) {
 		model.addAttribute("product", prodService.getById(1L));
 		return "/product/productViewFms";
+	}
+	
+	@RequestMapping("/rank_fms")
+	public String rankFmsPage(Model model) {
+		//model.addAttribute("products", prodService.findTop10ByOrderByScoreDesc());
+		return "/product/productRankFms";
 	}
 
 }
