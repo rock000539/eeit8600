@@ -69,15 +69,14 @@
 	   color: #ffffff;
 	   text-align: center;
 	   position: relative;
-	   font-size: 17px;
-	   margin-top: 20px;
+	   font-size: 20px;
+	   font-weight:bold;
+	   margin-top: 20%;
 	   line-height: 1.6;
 	}
 	.mask .btndiv{
-		height: 50%;
 		margin-top: 30px;
 	}
-
 
 /* animate */
 .view1 div {
@@ -85,25 +84,28 @@
 }
 .view1 .mask {
    opacity: 0;
-   background-color: rgba(0, 0, 0, 0.8);
+   background-color: rgba(0, 0, 0, 0.7);
    transition: all 0.4s ease-in-out;
 }
-.view1 h2 {
+.mask h2 {
    transform: translateY(-100px); 
    opacity: 0;
-   transition: all 0.2s ease;
+   transition: all 0.4s ease-in-out;
 }
-.view1 a.info {
+.mask a.info {
    opacity: 0;
-   transition: all 0.2s ease-in-out;
+   transition: all 0.4s ease-in-out;
 }
 .view1:hover div.title1, 
 .view1:hover div.content1 {
-   transform: scale(3, 3);
-   opacity: 0.1;
+/*    transform: scale(3, 3); */
+   opacity: 0;
 }
+
+
 .view1:hover .mask {
    opacity: 1;
+   border: 1px solid #fff;
 }
 .view1:hover h2,
 .view1:hover a.info {
@@ -115,22 +117,52 @@
    transition-delay: 0.2s;
 }
 
+
 .view1 a.info {
    display: inline-block;
    text-decoration: none;
-   padding: 7px 14px;
-   border: 2px solid #ffffff;
+   padding: 5px 10px;
+   border: 1px solid #ffffff;
    color: #fff;
 }
 .view1 a.info:hover {
    transition-delay: 0s;
    display: inline-block;
    text-decoration: none;
-   padding: 7px 14px;
-   border: 2px solid #fff;
+   padding: 5px 14px;
+   border: 1px solid #fff;
    background-color: #fff;
    color: #000;
 
+}
+
+.hvr-trim {
+/*   display: inline-block; */
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+}
+.hvr-trim:before {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.8);;
+  top: 30px;
+  left: 25px;
+  right: 25px;
+  bottom: 30px;
+  opacity: 0.5;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {
+  opacity: 1;
 }
 </style>
 </head>
@@ -161,7 +193,7 @@
 		            <p>${item.article}</p>
 	            </div>
 	            
-	            <div class="mask">
+	            <div class="mask hvr-trim">
 	            	<h2>${item.articleTitle}</h2>
 	            	<div class="btndiv">
 		           	<a href="#" class="info">觀看文章</a><br> <!--連結到單篇文章 -->

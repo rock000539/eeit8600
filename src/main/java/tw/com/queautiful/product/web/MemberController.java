@@ -37,15 +37,15 @@ public class MemberController {
 	@Autowired
 	private EmailSender mailSender;
 	
-	//member個人頁面
-	@RequestMapping("/personal")
+	//member文章收藏頁面
+	@RequestMapping("/like")
 	public String memberPersonalPage(Model model){
-		Member member = service.getById(1L);
-		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
+		Member member = service.getById(1L); //test
+		List<Article> articles = service.getById(1L).getArticlesSavedByMember();
 		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
-		return "/member/memberPersonal";
+		return "/member/memberLike";
 	}
 	
 	//member文章頁面
@@ -57,17 +57,6 @@ public class MemberController {
 		model.addAttribute("member", member);
 		log.debug(member.toString());
 		return "/member/memberPost";
-	}
-	
-	//member文章頁面
-	@RequestMapping("/post1")
-	public String memberPostPage1(Model model){
-		Member member = service.getById(1L);
-		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
-		model.addAttribute("articles", articles);
-		model.addAttribute("member", member);
-		log.debug(member.toString());
-		return "/member/memberPostV1";
 	}
 	
 	// 提供jqGrid抓取資料使用
