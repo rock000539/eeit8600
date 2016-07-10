@@ -85,9 +85,10 @@ public class Member {
 	private java.sql.Date resetPswExp; //重設密碼期限
 	
 	//文章收藏
-//	@ManyToMany
-//	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
-//	private List<Article> articlesSavedByMember;
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
+	private List<Article> articlesSavedByMember;
 	
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
@@ -294,8 +295,12 @@ public class Member {
 		this.articlesWorteByAuthor = articlesWorteByAuthor;
 	}
 
-	
+	public List<Article> getArticlesSavedByMember() {
+		return articlesSavedByMember;
+	}
 
-	
+	public void setArticlesSavedByMember(List<Article> articlesSavedByMember) {
+		this.articlesSavedByMember = articlesSavedByMember;
+	}
 
 }

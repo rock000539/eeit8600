@@ -47,9 +47,8 @@ public class Article {
 	@Column(name = "ARTICLEREPORT")
 	private Integer articleReport;
 	
-//	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏
-//	@JsonIgnore
-//	private List<Member> members;
+	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏
+	private List<Member> members;
 	
 	@ManyToOne
 	@JoinColumn(name="memberID_author")	//文章撰寫作者
@@ -135,14 +134,6 @@ public class Article {
 	public void setArticleReport(Integer articleReport) {
 		this.articleReport = articleReport;
 	}
-
-//	public List<Member> getMembers() {
-//		return members;
-//	}
-//
-//	public void setMembers(List<Member> members) {
-//		this.members = members;
-//	}
 
 	public Member getMember() {
 		return member;
