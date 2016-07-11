@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "ARTICLE")
 public class Article {
@@ -148,6 +150,8 @@ public class Article {
 	public void setMembers(Set<Member> members) {
 		this.members = members;
 	}
+	
+	
 	
 	
 }

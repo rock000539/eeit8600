@@ -248,7 +248,7 @@ $(function(){
 			type:'get',
 			success:function(result){
 				console.log(result);
-				window.reload();
+				location.reload();
 			}
 		});
 	});
