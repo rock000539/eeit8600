@@ -14,4 +14,5 @@ public interface ProductDao extends JpaRepository<Product, Long>, JpaSpecificati
 	List<Product> findByProdNameEndsWith(String prodName);
 	
 	List<Product> findTop10ByOrderByScoreDesc();
+	
 }
