@@ -46,10 +46,10 @@
 				$('#proList').empty();
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
-				var prodImg = data.productList[i].prodImg
+				var prodId = data.productList[i].prodId
 				if (prodName != undefined) {
 					$('#proList').append(
-'<tr><td rowspan="2"><img src="/' + prodImg+ '"/></td><td  colspan="2">'+ prodName+ '</td></tr>'
+'<tr><td rowspan="2"><img src="/products/show?prodId=' + prodId+ '"/></td><td  colspan="2">'+ prodName+ '</td></tr>'
 + '<td><input type="submit" id="checkProduct" class="btn btn-default" value="觀看產品資料">'
 + '</td><td><input type="button" class="saveDate btn btn-default" name='
 +data.productList[i].prodId+' value="加入最愛"/></td>')
