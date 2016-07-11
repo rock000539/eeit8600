@@ -31,7 +31,7 @@
 			<h2>${item.articleTitle}</h2>
 			<small>${item.articleType}</small>
 			<p>${item.article}</p>
-			<a href="#" class="cd-info">觀看文章</a>  <!--連結到單篇文章 -->
+			<a href="/articles/article-page?articleId=${item.articleId}" class="cd-info">觀看文章</a>
             <a href="/articles/edit?articleId=${item.articleId}" class="cd-info">編輯文章</a>
 			<span class="cd-date">${item.articleTime}</span>
 		</div> <!-- cd-timeline-content -->

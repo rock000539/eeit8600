@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.service.ArticleService;
+import tw.com.queautiful.product.service.MemberService;
 
 @Controller
 @RequestMapping("/articles")
@@ -19,6 +20,8 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -35,6 +38,9 @@ public class ArticleController {
 	@ResponseBody
 	public Article insert(@RequestBody Article article){
 		article.setArticleTime(new Date(System.currentTimeMillis()));
+		//insert FK : memberID 
+		Long memberId = 1L; //test
+		article.setMember(memberService.getById(memberId));
 		articleService.insert(article);	
 		return article;
 	}
@@ -60,5 +66,10 @@ public class ArticleController {
 		return "redirect:/articles/list";
 	}
 	
+	@RequestMapping("/article-page")
+	public String articlePage(@RequestParam Long articleId, Model model){
+		model.addAttribute("article", articleService.getById(articleId));
+		return "/article/articlePage";
+	}
 	
 }

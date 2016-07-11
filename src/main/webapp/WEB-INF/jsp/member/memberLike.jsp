@@ -98,7 +98,7 @@
 }
 .view1:hover div.title1, 
 .view1:hover div.content1 {
-/*    transform: scale(3, 3); */
+/*    transform: scale(3, 3);  */
    opacity: 0;
 }
 
@@ -133,7 +133,7 @@
    border: 1px solid #fff;
    background-color: #fff;
    color: #000;
-
+   cursor: pointer;
 }
 
 .hvr-trim {
@@ -196,8 +196,9 @@
 	            <div class="mask hvr-trim">
 	            	<h2>${item.articleTitle}</h2>
 	            	<div class="btndiv">
-		           	<a href="#" class="info">觀看文章</a><br> <!--連結到單篇文章 -->
-	            	<a href="/articles/edit?articleId=${item.articleId}" class="info">編輯文章</a>
+		           	<a href="/articles/article-page?articleId=${item.articleId}" class="info">觀看文章</a><br>
+	            	<a class="btnDislike info">取消收藏</a>
+	            	<input type="hidden" value="${item.articleId}" >
 	            	</div>
             	</div>
             </div>
@@ -237,5 +238,22 @@
         <!-- Pagination /.row -->
 </div>	<!-- /.col-md --> 
 </div> <!-- /.container -->
+<script>
+$(function(){
+	$('.btnDislike').click(function(event){
+		var articleId = $(this).next().val();
+		$.ajax({
+			url:"/members/like/delete",
+			data:{"articleId": articleId},
+			type:'get',
+			success:function(result){
+				console.log(result);
+				window.reload();
+			}
+		});
+	});
+});
+</script>
+
 </body>
 </html>

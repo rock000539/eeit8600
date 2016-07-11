@@ -1,6 +1,7 @@
 package tw.com.queautiful.product.web;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.Member;
+import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
@@ -36,28 +38,63 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private EmailSender mailSender;
+	@Autowired
+	private ArticleService articleService;
 	
 	//member文章收藏頁面
 	@RequestMapping("/like")
-	public String memberPersonalPage(Model model){
+	public String memberLikedPage(Model model){
 		Member member = service.getById(1L); //test
-		List<Article> articles = service.getById(1L).getArticlesSavedByMember();
+		Set<Article> articles = service.getById(1L).getArticlesSavedByMember();
 		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
 		return "/member/memberLike";
 	}
 	
+	//取消文章收藏
+	@RequestMapping("/like/delete")
+	@ResponseBody
+	public Member memberLikedDelete(@RequestParam Long articleId, Model model){
+		Long memberId = 1L;//test
+		Member member = service.getById(memberId); //test
+		Set<Article> articles = member.getArticlesSavedByMember();
+		Article article = articleService.getById(articleId);
+		log.debug("before delete: {}", articles.contains(article));
+		if(articles.contains(article)){
+			articles.remove(article);
+			member.setArticlesSavedByMember(articles);
+			service.update(member);
+		}
+		log.debug("after delete: {} ,target: {}", articles.contains(article), article.getArticleId().toString());
+		return service.getById(memberId);
+	}
+	
+	@RequestMapping("/like/insert")
+	@ResponseBody
+	public Boolean memberLikedInsert(@RequestParam Long articleId){
+		Long memberId = 1L;
+		Member member = service.getById(memberId);
+		Set<Article> articles = member.getArticlesSavedByMember();
+		Article article = articleService.getById(articleId);
+		articles.add(article);
+		member.setArticlesSavedByMember(articles);
+		service.update(member);
+		return true;
+	}
+	
 	//member文章頁面
 	@RequestMapping("/post")
 	public String memberPostPage(Model model){
-		Member member = service.getById(1L);
-		List<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
+		Member member = service.getById(1L); //test
+		Set<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
 		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
 		return "/member/memberPost";
 	}
+	
+
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")

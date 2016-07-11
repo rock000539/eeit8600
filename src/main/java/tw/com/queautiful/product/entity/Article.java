@@ -1,6 +1,6 @@
 package tw.com.queautiful.product.entity;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ARTICLE")
@@ -48,7 +46,7 @@ public class Article {
 	private Integer articleReport;
 	
 	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏
-	private List<Member> members;
+	private Set<Member> members;
 	
 	@ManyToOne
 	@JoinColumn(name="memberID_author")	//文章撰寫作者
@@ -141,6 +139,14 @@ public class Article {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public Set<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(Set<Member> members) {
+		this.members = members;
 	}
 	
 	

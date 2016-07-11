@@ -1,7 +1,9 @@
 package tw.com.queautiful.product.entity;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -85,15 +87,15 @@ public class Member {
 	private java.sql.Date resetPswExp; //重設密碼期限
 	
 	//文章收藏
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JsonIgnore
 	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
-	private List<Article> articlesSavedByMember;
+	private Set<Article> articlesSavedByMember;
 	
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private List<Article> articlesWorteByAuthor;
+	private Set<Article> articlesWorteByAuthor;
 	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
@@ -102,12 +104,10 @@ public class Member {
 	private MultipartFile memberImgFile;
 	
 	
-	
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password
-				 + ", articlesWorteByAuthor="
-				+ articlesWorteByAuthor + "]";
+		return "Member [memberId=" + memberId + ", email=" + email + ", articlesSavedByMember=" + articlesSavedByMember
+				+ ", articlesWorteByAuthor=" + articlesWorteByAuthor + "]";
 	}
 
 	public MultipartFile getMemberImgFile() {
@@ -287,20 +287,21 @@ public class Member {
 		this.resetPswExp = resetPswExp;
 	}
 
-	public List<Article> getArticlesWorteByAuthor() {
-		return articlesWorteByAuthor;
-	}
-
-	public void setArticlesWorteByAuthor(List<Article> articlesWorteByAuthor) {
-		this.articlesWorteByAuthor = articlesWorteByAuthor;
-	}
-
-	public List<Article> getArticlesSavedByMember() {
+	public Set<Article> getArticlesSavedByMember() {
 		return articlesSavedByMember;
 	}
 
-	public void setArticlesSavedByMember(List<Article> articlesSavedByMember) {
+	public void setArticlesSavedByMember(Set<Article> articlesSavedByMember) {
 		this.articlesSavedByMember = articlesSavedByMember;
 	}
 
+	public Set<Article> getArticlesWorteByAuthor() {
+		return articlesWorteByAuthor;
+	}
+
+	public void setArticlesWorteByAuthor(Set<Article> articlesWorteByAuthor) {
+		this.articlesWorteByAuthor = articlesWorteByAuthor;
+	}
+
+	
 }
