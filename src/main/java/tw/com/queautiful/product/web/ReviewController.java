@@ -88,6 +88,7 @@ public class ReviewController {
 	@RequestMapping("/reviews")
 	public String reviews(Model model){
 		model.addAttribute("reviews", service.getAll());
+//		model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 		return "/review/reviews";
 	}
 	
