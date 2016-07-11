@@ -300,6 +300,9 @@ $(function(){
 		        return o;
 		    };	
 		
+		    $( "#IngredientArea" ).sortable();
+	        $( "#IngredientArea" ).disableSelection();
+		    
 }) //--end of $(function)
 </script>
 </head>
@@ -341,7 +344,7 @@ $(function(){
 <ol id="IngredientArea">
 
 <c:forEach var="items" items="${ingredients}">
-<fieldset>
+<fieldset >
 <li class="list-inline">
 <span class="info" ingredId="${items.ingredId}" name="${items.ingredName}">
 ${items.ingredName}
