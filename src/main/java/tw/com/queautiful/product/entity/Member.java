@@ -13,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.sortSkipAndLimit;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -95,6 +97,7 @@ public class Member {
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	@JsonIgnore
+	@OrderBy("ARTICLETIME DESC")
 	private Set<Article> articlesWorteByAuthor;
 	
 	@Transient

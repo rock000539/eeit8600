@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,7 +77,7 @@ public class MemberController {
 	@RequestMapping("/like/insert")
 	@ResponseBody
 	public Boolean memberLikedInsert(@RequestParam Long articleId){
-		Long memberId = 1L;
+		Long memberId = 1L;//test
 		Member member = service.getById(memberId);
 		Set<Article> articles = member.getArticlesSavedByMember();
 		Article article = articleService.getById(articleId);
@@ -95,8 +97,6 @@ public class MemberController {
 		log.debug(member.toString());
 		return "/member/memberPost";
 	}
-	
-
 	
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
