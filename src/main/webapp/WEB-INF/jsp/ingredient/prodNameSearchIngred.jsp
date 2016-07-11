@@ -35,11 +35,13 @@ $(function(){
 		for(var i=0;i<data.products.length;i++){
 			$("#productList").append(
 					
-	'<tr><td>'+data.products[i].prodName+'</td><td>'
-	+data.categorys[i].categoryName+'</td>'
-	+'<td><input type="submit" class="checkIngredient btn btn-primary " data-toggle="modal"  data-target="#myModal"  name="'
-	+data.products[i].prodId+'" value=查看成份>'
-	+'</td></tr>')
+	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
+	+data.products[i].prodName+"</td><td>"
+	+data.categorys[i].categoryName+"</td>"
+	+"<td><input type='submit' class='checkIngredient btn btn-primary'"+ 
+	"data-toggle='modal'  data-target='#myModal' name='"
+	+data.products[i].prodId+"' value=查看成份>"
+	+"</td></tr>")
 		}//end of for
 		//------------------------------------------------------------------------------
 		$(".checkIngredient").click(function(e){
@@ -98,11 +100,14 @@ font-size: 50px;}
   margin-right: auto;
 }
 #productArea{
-width: 500px;
+width: 800px;
 margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-
+}
+#productList img{
+width:100px;
+height: 100px;
 }
 </style>
 </head>

@@ -47,7 +47,7 @@ $(".searchProducts").click(function(e){//#1-2
  				$("#productTable tr[name*='productRow']").remove();
  				for(var i=0;i<data.length;i++){
  					$('#productTable').append(
- 		 			"<tr name='productRow'><td><img src='../"+data[i].prodimg+"'/>"
+ 		 			"<tr name='productRow'><td><img src='/products/show?prodId="+data[i].prodId+"'/>"
  					+"</td><td>"+data[i].prodname
  					+"</td><td>"+data[i].brandcname
  					+"</td><td>"+data[i].mainigdt+"</td></tr>"

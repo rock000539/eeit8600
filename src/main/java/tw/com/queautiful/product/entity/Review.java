@@ -29,8 +29,8 @@ public class Review {
 	private Long memberId;
 	
 	@ManyToOne
-	@JoinColumn(name="PRODID")
-	@JsonIgnore
+	@JoinColumn(name="PRODID")//對應PRODUCT table的欄位PRODID
+	@JsonIgnore  //停止再返查回去product
 	private Product product;
 
 	@Transient
@@ -92,7 +92,7 @@ public class Review {
 
 	public void setProduct(Product product) {
 		this.product = product;
-		if(!product.getReviews().contains(this)){
+		if(!product.getReviews().contains(this)){  //如果this product裡不包含Review，就手動加進去
 			product.getReviews().add(this);
 		}
 	}	

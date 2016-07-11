@@ -45,7 +45,9 @@ public class Product {
 	@Transient
 	private Long categoryId;
 
+	         //雙向(對應Review Entity的@ManyToOne 設的變數名)
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+	                                //difference-between-fetchtype-lazy-and-eager
 	private List<Review> reviews;
 
 	@Column(name = "WEIGHT")
@@ -145,9 +147,9 @@ public class Product {
 		this.reviews = reviews;
 	}
 
-	public void addReviews(Review review) {
-		this.reviews.add(review);
-		if (review.getProduct() != this) {
+	public void addReviews(Review review) {  //自己設的method,可以新增review對應的product
+		this.reviews.add(review); //改變product的review list
+		if (review.getProduct() != this) { //review對應的product不是對應到review的list的product就重設product
 			review.setProduct(this);
 		}
 	}
