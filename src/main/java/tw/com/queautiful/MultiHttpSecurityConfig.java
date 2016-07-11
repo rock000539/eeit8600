@@ -21,11 +21,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.RequestCache;
 
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.MemberService;
+import tw.com.queautiful.product.service.MyUserDetailsService;
 
 @EnableGlobalAuthentication
 @EnableGlobalMethodSecurity(securedEnabled = true) 
@@ -35,8 +37,16 @@ public class MultiHttpSecurityConfig {
     MemberService memberService;
     
     @Autowired
+    MyUserDetailsService myUserDetailsService;
+    
+    @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
     {  
+    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    	//--使用userdtilservice------------------------------------
+   	 	auth.userDetailsService(myUserDetailsService);
+//   	 	.passwordEncoder(encoder);//加密功能-------------
+    	//---------------------------------------------------
     	auth.inMemoryAuthentication().withUser("parker").password("p").roles("PARKER");
     	
         auth.inMemoryAuthentication()
