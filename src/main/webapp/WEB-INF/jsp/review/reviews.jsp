@@ -7,10 +7,10 @@
 <!-- **taglib沒有的話記得要加入** -->
 
 <!-- **加入4個css，請按照此順序** -->
-<link href="/css/bootstrap-reviews.css" rel="stylesheet" >
-<link href="/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/css/review/bootstrap-reviews.css" rel="stylesheet" >
+<link href="/css/review/bootstrap-theme.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
-<link href="/css/reviews-customize.css" rel="stylesheet">
+<link href="/css/review/reviews-customize.css" rel="stylesheet">
 <script src="/js/jquery.min.js"></script>
 
 

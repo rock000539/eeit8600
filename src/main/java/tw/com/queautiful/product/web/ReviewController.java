@@ -98,6 +98,12 @@ public class ReviewController {
 		return "/review/review";
 	}
 	
+	@RequestMapping("/reviewjQueryRain")
+	public String reviewjQueryRain(Model model){
+		model.addAttribute("review", service.getAll());
+		return "/review/reviewjQueryRain";
+	}
+	
 //	@RequestMapping("/delete")
 //	public String delete(@RequestParam Long reviewId){
 //		service.delete(reviewId);
