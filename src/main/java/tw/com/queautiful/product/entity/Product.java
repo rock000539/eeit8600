@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -48,6 +49,7 @@ public class Product {
 	//雙向(對應Review Entity的@ManyToOne 設的變數名)
 	//difference-between-fetchtype-lazy-and-eager
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@OrderBy("REVIEWTIME DESC")
 	private List<Review> reviews;
 
 	@Column(name = "WEIGHT")

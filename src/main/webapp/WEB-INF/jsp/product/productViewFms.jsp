@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,6 +13,7 @@
 	
     <link rel="stylesheet" href="/css/pview/wide.css">
     <link rel="stylesheet" href="/css/pview/style.css">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductViewPage</title>
@@ -238,22 +240,22 @@
 							
 			                <a href="#fakelink" class="btn btn-sm btn-social-facebook" style="border-radius:5px;">
 			                    <i class="fa fa-facebook"></i>
-			                    <span class="btn-tip">&nbsp;&nbsp;&nbsp;分享</span>
+			                    <span class="btn-tip">&nbsp;&nbsp;分享</span>
 			                </a>
 			
 			                <a href="#fakelink" class="btn btn-sm btn-social-linkedin" style="border-radius:5px;">
 			                    <i class="fa fa-pencil"></i>
-			                    <span class="btn-tip">&nbsp;&nbsp;心得</span>
+			                    <span class="btn-tip">&nbsp;心得</span>
 			                </a>
 			
 			                <a href="#fakelink" class="btn btn-sm btn-social-pinterest" style="border-radius:5px;">
 			                    <i class="glyphicon glyphicon-fire"></i>
-			                    <span class="btn-tip">&nbsp;&nbsp;升火</span>
+			                    <span class="btn-tip">&nbsp;升火</span>
 			                </a>
 	
 			                <a href="#fakelink" class="btn btn-sm btn-social-stumbleupon" style="border-radius:5px;">
 			                    <i class="glyphicon glyphicon-floppy-open"></i>
-			                    <span class="btn-tip">&nbsp;&nbsp;收藏</span>
+			                    <span class="btn-tip">&nbsp;收藏</span>
 			                </a>
 				            
 						</div>
@@ -297,376 +299,60 @@
 				</div>
 				
 				<div class="row">
+					
+					<c:forEach items="${product.reviews}" var="review">
+					
+						<div class="col-lg-3 rec_blog">
+							<div class="blogPic">
+								<img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:263px; height:133px; border: 1px solid #f2f2f2;">
+								<div class="blog-hover">
+									<a href="#">
+										<span class="icon">
+											<i class="fa fa-link"></i>
+										</span>
+									</a>
+								</div>
+							</div>
+							<div class="blogDetail" style="width:263px; height:211px;">
+								<div class="blogTitle">
+									<a href="#">
+										<h4>${review.reviewTitle}</h4>
+									</a>
+									<span>
+										<i class="fa fa-calendar"></i>
+										${review.reviewTime} &nbsp;
+									</span>
+									<span>
+										<c:forEach begin="1" end="${review.reviewRating}">
+											<i class="fa fa-diamond"></i>
+										</c:forEach>
+									</span>
+								</div>
+								<div class="blogContent">
+									<c:if test="${fn:substring(review.review, 0, 2) == '內文' }">
+										<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
+									</c:if>
+									<c:if test="${fn:substring(review.review, 0, 2) != '內文' }">
+										<p>${fn:substring(review.review, 0, 50)} ...</p>
+									</c:if>
+								</div>
+								<div class="blogMeta">
+									<a href="#">
+										<i class="fa fa-user"></i>
+										Here Author Name
+									</a>
+									<a href="#">
+										<i class="fa fa-comment"></i>
+										${review.rewCollect}
+									</a>
+								</div>
+							</div>
+						</div>
+						
+					</c:forEach>
+					
+				</div>
 				
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 rec_blog">
-						<div class="blogPic">
-							<img src="/images/blog/blog_6.png">
-							<div class="blog-hover">
-								<a href="#">
-									<span class="icon">
-										<i class="fa fa-link"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-						<div class="blogDetail">
-							<div class="blogTitle">
-								<a href="#">
-									<h2>This title in post blogs</h2>
-								</a>
-								<span>
-									<i class="fa fa-calendar"></i>
-									30 June, 20:43 PM
-								</span>
-							</div>
-							<div class="blogContent">
-								<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren. </p>
-							</div>
-							<div class="blogMeta">
-								<a href="#">
-									<i class="fa fa-user"></i>
-									Here Author Name
-								</a>
-								<a href="#">
-									<i class="fa fa-comment"></i>
-									1980
-								</a>
-							</div>
-						</div>
-					</div>
 			</div>
 		</section>
 	</section>
