@@ -1,96 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
-<!-- Header -->
+<!--start wrapper-->
+<section class="wrapper container">
+<!--Start Header-->
 <header id="header">
-	<h1>
-		<a href="#">Queautiful</a>
-	</h1>
-	<nav class="links" id="main-nav">
-		<ul>
-			<li><a href="#" class="icon fa-calendar">日期</a></li>
-			<li><a href="#" class="icon fa-flask">成分</a>
-				<ul>
-					<li><a href="https://www.google.com.tw">依成份查詢產品</a></li>
-					<li><a href="#">依產品查詢成分</a></li>
-				</ul></li>
-			<li><a href="#" class="icon fa-retweet">順序</a></li>
-			<li><a href="#" class="icon fa-heart-o">產品</a></li>
-			<li><a href="#" class="icon fa-heart">使用心得</a></li>
-			<li><a href="#" class="icon fa-pencil">討論區</a></li>
-			<li><a href="#" class="icon fa-trophy">排行</a></li>
+    <div class="col-sm-12 top-nav">
+        <ul>
+        <!-- 登入前 -->
+            <!-- <li>
+                <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
+                <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
+                </a>
+            </li> -->
+        <!-- 登入後 -->
+            <li>
+                <a href="#"><span>username</span></a>
+            </li>
+            <li>
+                <a class="" href="#">
+                <div class="userdiv img-circle"><img id="userimg" src="/images/fms/userh.png"/></div>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-		</ul>
-	</nav>
-	<nav class="main">
-		<ul>
-			<li class="login">
-				<!--未登入 --> <!-- 										<a class="fa-user" href="#login">Login</a> -->
-				<!--已登入 -->
-				<div>
-					<a href="https://www.google.com.tw"> <img class="user"
-						src="/img/testuser.jpg" alt="" /> <span>username</span>
-					</a>
-				</div>
-			</li>
-			<li class="search"><a class="fa-search" href="#search">Search</a>
-				<form id="search" method="get" action="#">
-					<input type="text" name="query" placeholder="Search" />
-				</form></li>
-			<li class="menu"><a class="fa-bars" href="#menu">Menu</a></li>
-		</ul>
-	</nav>
+    <div class="col-sm-12">
+        <div id="logo">
+            <h1><a href="index.html"><img src="/images/fms/logo_qutie.jpg"/></a></h1>
+        </div>
+    </div>
+
+    <!-- Navigation
+    ================================================== -->
+
+    <div class="navbar navbar-default navbar-static-top col-sm-12" role="navigation">
+        <span class="nav-caption">Navigation Menu...</span>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+
+                <li><a href="#">Date</a></li>
+
+                <li><a href="#">Ingredient</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Via Product</a></li>
+                        <li><a href="#">Via Ingredient</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Order</a></li>
+
+                <li><a href="#"><span class="data-hover" data-hover="blog">Product</span></a></li>
+
+                <li><a href="#">Review</a></li>
+                <li><a href="#">Article</a></li>
+                <li><a href="#">Ranking</a></li>
+            </ul>
+        </div>
+    </div>
 </header>
-<!--右側選單 -->
-<!-- Menu -->
-<section id="menu">
-
-	<!-- Search -->
-	<section>
-		<form class="search" method="get" action="#">
-			<input type="text" name="query" placeholder="Search" />
-		</form>
-	</section>
-
-	<!-- Links -->
-	<section>
-		<ul class="links">
-			<li><a href="/expdate/list">
-					<h3>日期</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>成分</h3>
-			</a> <a href="/prodIngreList/showIngredient"><span>依成份查詢產品</span></a> <a
-				href="/prodIngreList/prodNameSearchIngred"><span>依產品查詢成分</span></a></li>
-			<li><a href="#">
-					<h3>順序</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>產品</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>使用心得</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>討論區</h3>
-			</a></li>
-		</ul>
-	</section>
-
-	<!-- Actions -->
-	<section>
-		<ul class="actions vertical">
-			<li>
-				<!--未登入 --> <!-- 									<a href="#" class="button big fit">Log In</a> -->
-				<!--已登入 -->
-				<div>
-					<a href="#"> <img class="user" src="/img/testuser.jpg" alt="" />
-						<span>user</span>
-					</a>
-				</div>
-			</li>
-		</ul>
-	</section>
-
-</section>
+<!--End Header-->
