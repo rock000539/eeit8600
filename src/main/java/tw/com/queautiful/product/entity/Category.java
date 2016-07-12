@@ -34,7 +34,7 @@ public class Category {
 	@Enumerated(EnumType.STRING)
 	private CategoryTitle categoryTitle;
 
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Product> products;
 
 	public Long getCategoryId() {

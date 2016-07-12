@@ -41,7 +41,7 @@ public class Brand {
 	@Column(name = "BRANDSHOW")
 	private Boolean brandShow;
 
-	@OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
 	private List<Product> products;
 	
 	@Transient

@@ -38,7 +38,7 @@ $(function(){
 	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
 	+data.products[i].prodName+"</td><td>"
 	+data.categorys[i].categoryName+"</td>"
-	+"<td><input type='submit' class='checkIngredient btn btn-primary'"+ 
+	+"<td><input type='submit' class='checkIngredient btn'"+ 
 	"data-toggle='modal'  data-target='#myModal' name='"
 	+data.products[i].prodId+"' value=查看成份>"
 	+"</td></tr>")
@@ -125,7 +125,7 @@ height: 100px;
 <table>
 <tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr>
 <tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
-<td><input type="button" id="searchIngredient" value="Search" class="btn btn-default" style="margin-bottom: 10px;"></td></tr>
+<td><input type="button" id="searchIngredient" value="Search" class="btn" style="margin-bottom: 10px;"></td></tr>
 </table>
 </form>
 
@@ -153,7 +153,7 @@ height: 100px;
             </h4>
          </div>
          <div class="modal-body" >
-           <table id="showArea" class="table table-hover">
+           <table id="showArea" class="table">
            <tr><td>成份</td><td>中文名稱</td><td>概略特性</td><td>粉刺</td><td>刺激</td><td>安心度</td></tr>
            </table>
          </div>
