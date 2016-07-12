@@ -8,19 +8,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" type="text/css" href="/css/switcher.css" media="screen" />
+
+	<link rel="stylesheet" href="/css/fms-main.css" />
+	<link rel="stylesheet" href="/css/fms-customize.css" />		
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
-	<script src="/js/fms-main.js"></script>   
 <style>
 
 /*//////////////////////////////////////////////////////////////////////////// */
-#proList {
-	padding-left: 100px;
-}
+
 
 </style>
 <script>
@@ -46,7 +44,7 @@
 				$('#proList').empty();
 				$(".dividerHeading h4").empty();
 				$(".dividerHeading h4").append("<span>"+brandName+"</span><br>");
-				$(".dividerHeading").append("<h3><p>請在下方選擇產品加入最愛<p></h3>");
+				$(".dividerHeading").append("<h5><p>請在下方選擇產品加入最愛<p></h5>");
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
 				var prodId = data.productList[i].prodId
@@ -54,10 +52,9 @@
 				if (prodName != undefined) {
 										
 $('#proList').append(	
-'<tr><td rowspan="2"><img src="/products/show?prodId=' + prodId+ '"/></td><td  colspan="2">'+ prodName+ '</td></tr>'
-+ '<td><input type="submit" id="checkProduct" class="btn btn-default" value="觀看產品資料">'
-+ '</td><td><input type="button" class="saveDate btn btn-default" name='
-+data.productList[i].prodId+' value="加入最愛"/></td>'
+'<tr><td ><a href="#"><img src="/products/show?prodId=' + prodId+ '"/></a></td><td><a href="#">'+ prodName+ '</a></td>'
++ '</td><td><input type="button" class="saveDate btn" name='
++data.productList[i].prodId+' value="加入最愛"/></td></tr>'
 
 )
 												}
@@ -101,10 +98,13 @@ $('#proList').append(
   margin-left: auto;
   margin-right: auto;
 }
+
 #proList{
   margin-top: 25px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 100px;
+font-size: 24px;
 }
 #proList img{
 width: 120px;
@@ -114,8 +114,8 @@ height: 120px;
 width:300px;
 margin: auto auto;
 }
-.dividerHeading h3{
-margin-left:200px; }
+.dividerHeading h5{
+margin-left:180px; }
 
 </style>
 </head>
@@ -130,8 +130,8 @@ margin-left:200px; }
 </sec:authorize>
 	<div id="mainSpace">
 
-			<table class="table table-striped table-hover">
-			<tr><td colspan="4"><h1>輸入產品品號查詢</h1></td></tr>
+			<table class="table">
+			<tr><td colspan="4"><h1>產品品號查詢</h1></td></tr>
 				<form  id='ExpDateForm'>
 					<tr>
 					<td><select id="brandId">
@@ -162,14 +162,13 @@ margin-left:200px; }
 				</tr>
 			</table>
 			<!-- 分隔線用 -->
-			
+			<br>
 			<div class="dividerHeading">
 			<h4></h4>
 			</div>
 			<!-- 分隔線用 -->
-			
-			<div >
-				<table id="proList" class="table table-hover" ></table>
+			<div ><br>
+				<table id="proList" class="table" ></table>
 			</div>
 
 	</div>

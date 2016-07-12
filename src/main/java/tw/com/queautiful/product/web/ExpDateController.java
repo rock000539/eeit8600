@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.ExpDate;
+import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.ExpDateSearchService;
@@ -48,8 +49,20 @@ public class ExpDateController
     {
         List<Brand> brands = new ArrayList<Brand>();
         brands = brandService.getAll();
-        System.out.println(brands);
         model.addAttribute("Brands", brands);
+        return "/expDate/expDateSearch";
+    }
+    
+    @RequestMapping("/reloadsearch")
+    public String reloadSearch(Model model,String reloadBatchCode,String brandId)
+    {
+    	System.out.println("test "+reloadBatchCode+"  "+brandId);
+        List<Brand> brands = new ArrayList<Brand>();
+        brands = brandService.getAll();
+        model.addAttribute("Brands", brands);
+        model.addAttribute("reloadBrandId", brandId);
+        model.addAttribute("reloadBatchCode", reloadBatchCode);
+        
         return "/expDate/expDateSearch";
     }
 
@@ -71,8 +84,7 @@ public class ExpDateController
     {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("username is " + username);
-
+        
 
         List<Map> result = new ArrayList<Map>();
 
@@ -86,7 +98,6 @@ public class ExpDateController
         
         }
         
-        System.out.println(expDates.size() + " " + expDates);
 
         for (int i = 0; i < expDates.size(); i++)
         {

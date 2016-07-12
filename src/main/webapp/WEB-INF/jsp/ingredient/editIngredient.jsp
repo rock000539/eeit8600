@@ -26,19 +26,19 @@
 <style>
 #mainTable{
 width: 500px;
-margin: 50px 195px;
+margin: 50px 255px;
 font-size: 20px;
 }
 
 #insertArea{
 margin:20px;
 font-size: 15px;
-margin-left:195px}
+margin-left:255px}
 
 #editArea{
 margin: auto auto;
-width: 550px;
-border: solid 1px black;
+ width: 550px; 
+/*  border: solid 1px black;  */
 font-size: 20px; 
 }
 fieldset{display:inline;}
@@ -51,7 +51,7 @@ background-color: #DDDDDD;
 color:red;
 }
 #submitArea{
-margin: 30px 450px;}
+margin: 30px 350px;}
 </style>
 <script>
 $(function(){
@@ -340,7 +340,7 @@ $(function(){
 </td></tr>
 
 <tr><td>    
-<div id="editArea" class="bg-info">
+<div id="editArea" >
 <ol id="IngredientArea">
 
 <c:forEach var="items" items="${ingredients}">
