@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.Category;
 import tw.com.queautiful.product.entity.Ingredient;
 import tw.com.queautiful.product.entity.ProdIngreList;
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.IngredientService;
 import tw.com.queautiful.product.service.ProdIngreListService;
@@ -41,6 +43,9 @@ public class ProdIngreListController {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private BrandService brandService;
 	
 	@PersistenceContext
 	private EntityManager manager;
@@ -177,16 +182,21 @@ public class ProdIngreListController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		List<Category> categorys = new ArrayList<Category>();
+		
+		List<Brand> brands= new ArrayList<Brand>();;
 
 		for (int i = 0; i < products.size(); i++) {
 
 			Product product = products.get(i);
 			Category category = categoryService.getById(product.getCategoryId());
+			Brand brand=brandService.getById(product.getBrandId());
 			categorys.add(category);
+			brands.add(brand);
 
 		}
 		resultMap.put("products", products);
 		resultMap.put("categorys", categorys);
+		resultMap.put("brands", brands);
 
 		return resultMap;
 	}

@@ -50,10 +50,10 @@ $(".searchProducts").click(function(e){//#1-2
  				$("#productTable tr[name*='productRow']").remove();
  				for(var i=0;i<data.length;i++){
  					$('#productTable').append(
- 		 			"<tr name='productRow'><td><img src='/products/show?prodId="+data[i].prodId+"'/>"
- 					+"</td><td>"+data[i].prodname
- 					+"</td><td>"+data[i].brandcname
- 					+"</td><td>"+data[i].mainigdt+"</td></tr>"
+ 		 			"<tr name='productRow'><td><a href='#'><img src='/products/show?prodId="+data[i].prodId+"'/>"
+ 					+"</a></td><td><a href='#'>"+data[i].prodname
+ 					+"</td></a><td>"+data[i].brandcname
+ 					+"</td><td>"+data[i].mainigdt+"</td><td>"+data[i].concentration+"</td></tr>"
  					);//end of for 
  					}
 				
@@ -137,7 +137,7 @@ $(".searchProducts").click(function(e){//#1-2
          <div class="modal-body" id="modal-body">
 <!--在这里添加一些文本-->				
 				<table id="productTable" class="table">
-				<tr><th>產品圖片</th><th>產品名稱</th><th>品牌</th><th>主成分</th></tr>
+				<tr><th>產品圖片</th><th>產品名稱</th><th>品牌</th><th>主成分</th><th>主成分濃度</th></tr>
 				</table>
          </div>
          </form>

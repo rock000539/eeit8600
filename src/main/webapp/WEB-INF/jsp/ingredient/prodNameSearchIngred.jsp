@@ -24,7 +24,7 @@
 $(function(){
 	$('#searchIngredient').click(function (){
 		var prodName=$("#prodName").val();
-
+	if(prodName!=""){
 		$.ajax({
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
@@ -36,7 +36,7 @@ $(function(){
 			$("#productList").append(
 					
 	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
-	+data.products[i].prodName+"</td><td>"
+	+data.products[i].prodName+"</td><td><p><small>"+data.brands[i].brandName+"</small></p></td><td>"
 	+data.categorys[i].categoryName+"</td>"
 	+"<td><input type='submit' class='checkIngredient btn'"+ 
 	"data-toggle='modal'  data-target='#myModal' name='"
@@ -52,7 +52,8 @@ $(function(){
 				type : 'get',
 				data : {"proIdStr":prodId},
 				success : function(data){
-					$('#showArea').empty();
+					$('#showArea td').remove();
+					$('#showArea h4').remove();
 					$('#myModalLabel').empty();
 					$('#myModalLabel').append(data.productName);
 					if(data.ingredients.length==0){
@@ -79,7 +80,9 @@ $(function(){
 		}
 
 	});	
-	
+	}else{
+		alert("請輸入部分或全部產品名");
+	}
 	})//end search click
 		
 })//end function
@@ -154,7 +157,7 @@ height: 100px;
          </div>
          <div class="modal-body" >
            <table id="showArea" class="table">
-           <tr><td>成份</td><td>中文名稱</td><td>概略特性</td><td>粉刺</td><td>刺激</td><td>安心度</td></tr>
+           <tr><th>成份</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
            </table>
          </div>
          <div class="modal-footer">
