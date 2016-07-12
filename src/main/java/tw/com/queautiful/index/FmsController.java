@@ -15,4 +15,9 @@ public class FmsController {
 		return "/indexfms";
 	}
 	
+	@RequestMapping("/indexjr")
+	public String indexjrPage(){
+		return "/indexjr";
+	}
+	
 }

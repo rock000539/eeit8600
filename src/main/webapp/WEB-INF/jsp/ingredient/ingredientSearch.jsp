@@ -9,7 +9,10 @@
 
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/jquery-ui.min.css" rel="stylesheet" >
-
+	<link rel="stylesheet" href="/css/fms-main.css" />
+	<link rel="stylesheet" href="/css/fms-customize.css" />		
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
@@ -110,7 +113,7 @@ $(".searchProducts").click(function(e){//#1-2
 <td>${items.ingredIrritant}</td>
 <td>${items.ingredAcne}</td>
 <td>${items.ingredSafety}</td>
-<td ><input type="button" class="btn btn-default searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}"></td>
+<td ><input type="button" class="btn searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}"></td>
 </tr>
 </c:forEach>
 </table>
@@ -133,13 +136,13 @@ $(".searchProducts").click(function(e){//#1-2
          <form id="NewIngredientForm">
          <div class="modal-body" id="modal-body">
 <!--在这里添加一些文本-->				
-				<table id="productTable" class="table-hover table-bordered">
+				<table id="productTable" class="table">
 				<tr><th>產品圖片</th><th>產品名稱</th><th>品牌</th><th>主成分</th></tr>
 				</table>
          </div>
          </form>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default"   id="cancelInsert"   data-dismiss="modal" >
+            <button type="button" class="btn"   id="cancelInsert"   data-dismiss="modal" >
          	   關閉視窗
             </button>
 <!--             <button type="button" class="btn btn-primary" id="insertNewIngredient" > -->

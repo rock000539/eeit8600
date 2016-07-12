@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="/css/pselect/wide.css">
 	
 	<!-- jQuery Redirect Plugin -->
-	<script src="/js/jquery.redirect.js" type="text/javascript"></script>	
+	<script src="/js/jquery.redirect.js"></script>	
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductSelectPage</title>
@@ -39,7 +40,13 @@
 		}
 		
 		.box {
-			padding: 20px;
+			padding: 10px;
+			text-align: center;
+		}
+		
+		.box > img {
+			width: 200px;
+			height: 200px;
 		}
 		
 	</style>
@@ -47,7 +54,7 @@
 </head>
 <body>
 
-	<section class="content service">
+	<section class="content service" style="padding-bottom: 10px;">
 		<div class="container">
 			<div class="row sub_content">
 			    <div class="col-lg-3"></div>
@@ -68,8 +75,8 @@
 						</div>
 						<br/>
 			            <div class="read">
-			                <a class="btn btn-default"><i class="fa fa-search"></i>&nbsp;搜尋商品</a>
-			                <a class="btn btn-default"><i class="glyphicon glyphicon-question-sign"></i>&nbsp;找不到商品嗎？</a>
+			                <a id="search" class="btn btn-default"><i class="fa fa-search"></i>&nbsp;搜尋商品</a>
+			                <a id="contact" class="btn btn-default"><i class="glyphicon glyphicon-question-sign"></i>&nbsp;找不到商品嗎？</a>
 			            </div>
 			        </div>
 			    </div>
@@ -78,156 +85,43 @@
 		</div>
 	</section>
 	
-	<section class="super_sub_content">
+	<section class="super_sub_content" style="padding-top: 0px;">
+	
         <div class="dividerHeading text-center">
-            <h4><span>RECENT PORTFOLIO ITEMS</span></h4>
+            <h4><span>RECENT CATEGORIES ITEMS</span></h4>
         </div>
 
         <nav class="clearfix">
             <ul id="filter">
-                <li data-filter="*" class="selected"><a href="#">All Works</a></li>
-                <li data-filter=".mockups"><a href="#">Mockups</a></li>
-                <li data-filter=".graphic-design"><a href="#">Graphics</a></li>
-                <li data-filter=".web-design"><a href="#">Web Projects</a></li>
-                <li data-filter=".flayers"><a href="#">Flayers</a></li>
+                <li data-filter="*" class="selected"><a href="#">All Categories</a></li>
+                <li data-filter=".MAKEUP"><a href="#">MakeUp</a></li>
+                <li data-filter=".SKINCARE"><a href="#">Skin Care</a></li>
+                <li data-filter=".BATHBODY"><a href="#">Bath & Body</a></li>
+                <li data-filter=".HAIR"><a href="#">Hair</a></li>
             </ul>
         </nav>
 
         <div class="portfolio-centered">
-            <div class="recentitems portfolio">
+            <div id="categoryContainer" class="recentitems portfolio">
 
-                <div class="portfolio-item mockups">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_1.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>A Graphic Design Item</h5>
-                                <a href="/images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
+				<c:forEach items="${categories}" var="item">
+	                <div class="portfolio-item ${item.categoryTitle}">
+	                    <div class="box">
+	                        <img src="http://localhost:8080/categories/show?categoryId=${item.categoryId}">
+	                        <div class="option inner">
+	                            <div>
+	                                <h5>${item.categoryName}</h5>
+	                                <a href="http://localhost:8080/categories/show?categoryId=${item.categoryId}" class="fa fa-search mfp-image"></a>
+	                                <a href="portfolio_single.html" class="fa fa-link"></a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				</c:forEach>
 
-                <div class="portfolio-item web-design graphic-design">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_2.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>New Flayer Design Item</h5>
-                                <a href="/images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item graphic-design">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_3.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Gray and Pink</h5>
-                                <a href="/images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item mockups">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_4.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Amazing Keyboard Desin</h5>
-                                <a href="/images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item flayers">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_5.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Our Favorite Colors</h5>
-                                <a href="/images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item flayers">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_6.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Not War Make Design</h5>
-                                <a href="/images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item graphic-design mockups">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_7.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>A GREAT MOCK-UPS</h5>
-                                <a href="/images/portfolio/full/portfolio_5.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item web-design mockups">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_8.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Missis Of 2014</h5>
-                                <a href="/images/portfolio/full/portfolio_4.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item web-design mockups">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_9.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Light Carpet</h5>
-                                <a href="/images/portfolio/full/portfolio_1.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-                <div class="portfolio-item web-design mockups">
-                    <div class="box">
-                        <img src="/images/portfolio/portfolio_10.png" alt="">
-                        <div class="option inner">
-                            <div>
-                                <h5>Business Card Mock-Up</h5>
-                                <a href="/images/portfolio/full/portfolio_8.png" class="fa fa-search mfp-image"></a>
-                                <a href="portfolio_single.html" class="fa fa-link"></a>
-                            </div>
-                        </div>
-                    </div><!-- box -->
-                </div>
-
-            </div><!-- portfolio -->
-        </div><!-- portfolio container -->
+            </div>
+        </div>
+        
     </section>
 	
 	<script src="/js/product/pselect/jquery-hoverdirection.min.js"></script>
@@ -239,9 +133,9 @@
     <script src="/js/product/swipe.js"></script>
 	<script src="/js/product/pselect/main.js"></script>
 	
-	<script type="text/javascript">
+	<script>
 	
-		$(document).ready(function() {
+		$(function() {
 			
 			// hide btn & select
 			$('#search').hide();
@@ -319,11 +213,13 @@
 		
 	</script>
 	
+	<!-- Categories Items Animate -->
 	<script>
 	
-        /*Portfolio*/
-        (function($) {
+        $(function() {
+        	
             "use strict";
+            
             var $container = $('.portfolio'),
                     $items = $container.find('.portfolio-item'),
                     portfolioLayout = 'fitRows';
@@ -400,7 +296,8 @@
             $(window).on('resize', function () {
                 setPortfolio();
             });
-    	})(jQuery);
+            
+    	});
         
     </script>
 	

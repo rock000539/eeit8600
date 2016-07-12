@@ -231,7 +231,7 @@
 					<div class="col-lg-4 col-md-4 col-sm-4" style="margin-top:0px;">
 						
 						<div class="images-style-inner">
-							<img class="img-thumbnail img-responsive" src="/images/portfolio/portfolio_1.png" />
+							<img class="img-thumbnail img-responsive" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:360px; height:275px;" />
 						</div>
 						
 						<div class="" style="margin-top:20px; text-align:center;">
@@ -265,11 +265,11 @@
 								<h4><span>Product Details</span></h4>
 							</div>
 							<ul class="details">
-								<li><span>Name :</span>Louis</li>
-								<li><span>Date :</span> Rain Technologies inc.</li>
-								<li><span>Brand :</span> Web Design, Photography</li>
-								<li><span>Category :</span> 05 September 2014</li>
-								<li><span>Ingredient :</span> <a href="#">www.bestjquery.com</a></li>
+								<li><span>Name :</span>${product.prodName}</li>
+								<li><span>Date :</span>${product.launchDate}</li>
+								<li><span>Brand :</span>${product.brand.brandName}</li>
+								<li><span>Category :</span>${product.category.categoryName}</li>
+								<li><span>Ingredient :</span> <a href="#">${product.mainIgdt}</a></li>
 							</ul>
 						</div>
 						<div class="project_description">
@@ -277,7 +277,7 @@
 								<h4><span>Product Descriptions</span></h4>
 							</div>
 
-							<p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut reiciendise voluptat maiores alias aut et perferendis doloribus asperiores ut labore.</p>
+							<p>${product.prodDesc}</p>
 						</div>
 					</div>
 					
@@ -681,7 +681,10 @@
 	
 	<script>
 	
-		console.log('${product}');
+		//console.log('${product}');
+		console.log('${product.category.categoryName}');
+		console.log('${product.brand.brandName}');
+		console.log('${product.reviews.size()}');
 		
 		var timelineBlocks = $('.rec_blog'),
 		offset = 0.9;

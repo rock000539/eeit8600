@@ -45,9 +45,9 @@ public class Product {
 	@Transient
 	private Long categoryId;
 
-	         //雙向(對應Review Entity的@ManyToOne 設的變數名)
-	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-	                                //difference-between-fetchtype-lazy-and-eager
+	//雙向(對應Review Entity的@ManyToOne 設的變數名)
+	//difference-between-fetchtype-lazy-and-eager
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Review> reviews;
 
 	@Column(name = "WEIGHT")
@@ -229,9 +229,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [prodId=" + prodId + ", prodName=" + prodName + ", brand=" + brand + ", brandId=" + brandId
-				+ ", categoryId=" + categoryId + ", weight=" + weight + ", score=" + score + ", price=" + price
-				+ ", capacity=" + capacity + ", launchDate=" + launchDate + ", prodDesc=" + prodDesc + ", mainIgdt="
-				+ mainIgdt + ", concentration=" + concentration + ", prodImg=" + prodImg + "]";
+				+ ", category=" + category + ", categoryId=" + categoryId + ", reviews=" + reviews + ", weight="
+				+ weight + ", score=" + score + ", price=" + price + ", capacity=" + capacity + ", launchDate="
+				+ launchDate + ", prodDesc=" + prodDesc + ", mainIgdt=" + mainIgdt + ", concentration=" + concentration
+				+ ", prodImg=" + prodImg + "]";
 	}
 
 }

@@ -1,8 +1,8 @@
 package tw.com.queautiful.product.web;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,22 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Category;
 import tw.com.queautiful.product.service.CategoryService;
-
 
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
 
 	@Autowired
-	private CategoryService service;
+	private CategoryService categoryService;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
-		model.addAttribute("categories", service.getAll());
+		model.addAttribute("categories", categoryService.getAll());
 		return "/category/categoryList";
 	}
 	
@@ -35,18 +34,18 @@ public class CategoryController {
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Category> select() {
-		return service.getAll();
+		return categoryService.getAll();
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam Long categoryId){
-		service.delete(categoryId);
+		categoryService.delete(categoryId);
 		return "redirect:/categories/list";
 	}
 	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long categoryId,Model model){
-		model.addAttribute("category",service.getById(categoryId));
+		model.addAttribute("category",categoryService.getById(categoryId));
 		return "/category/categoryEdit";
 	}
 	
@@ -54,7 +53,7 @@ public class CategoryController {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
 	public Category update(@RequestBody Category category){
-		service.update(category);
+		categoryService.update(category);
 		return category;
 		/*	
 		// 接收資料
@@ -88,19 +87,19 @@ public class CategoryController {
 	}
 
 
-	private Map<String, String> verifyData(String data[]) {
-		Map<String,String> errorMsg=new HashMap<String,String>();
-		if(data[0] == null || data[0].trim().length()==0){
-			errorMsg.put("kindError", "請輸入種類欄位");
-		}
-		try {
-			Double.parseDouble(data[1]);
-		} catch (NumberFormatException e) {
-			errorMsg.put("levelError", "請輸入正確的權重(不可空白或非數字)");
-		}
-
-		return errorMsg;
-	}
+//	private Map<String, String> verifyData(String data[]) {
+//		Map<String,String> errorMsg=new HashMap<String,String>();
+//		if(data[0] == null || data[0].trim().length()==0){
+//			errorMsg.put("kindError", "請輸入種類欄位");
+//		}
+//		try {
+//			Double.parseDouble(data[1]);
+//		} catch (NumberFormatException e) {
+//			errorMsg.put("levelError", "請輸入正確的權重(不可空白或非數字)");
+//		}
+//
+//		return errorMsg;
+//	}
 	
 	@RequestMapping("/add")
 	public String addPage(){
@@ -110,7 +109,7 @@ public class CategoryController {
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
 	public Category insert(@RequestBody Category category){
-		service.insert(category);
+		categoryService.insert(category);
 		return category;
 		/*	
 		// 接收資料
@@ -141,4 +140,13 @@ public class CategoryController {
 		successMsg.put("level", temp.getCategoryImg());
 	*/	
 	}
+	
+	@RequestMapping("/show")
+	public void show(HttpServletResponse resp, @RequestParam Long categoryId) {
+		String prodImg = categoryService.getById(categoryId).getCategoryImg();
+		if(prodImg!=null) {
+			FileProcessing.showImg(resp, prodImg);
+		}
+	}
+	
 }
