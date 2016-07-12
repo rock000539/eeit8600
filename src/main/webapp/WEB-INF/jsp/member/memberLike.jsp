@@ -11,9 +11,11 @@
 	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" media="all">
 	<script type="text/javascript" src="/js/jquery.min.js"></script> 
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script src="https://use.typekit.net/riz5mva.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 <style>
 	body{
-		font-family: Microsoft JhengHei, sans-serif;
+		font-family: source-han-sans-traditional, Microsoft JhengHei, sans-serif;
 		padding-top: 70px;
 	}
 	.portfolio-item{

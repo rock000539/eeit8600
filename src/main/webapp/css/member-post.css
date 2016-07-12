@@ -1,6 +1,6 @@
 body {
   font-size: 100%;
-  font-family: Microsoft JhengHei, "Droid Serif", serif;
+  font-family: source-han-sans-traditional, Microsoft JhengHei, serif;;
   color: #7f8c97;
   background-color: #e9f0f5;
 }
@@ -10,6 +10,7 @@ a, a:hover {
 img {
   max-width: 100%;
 }
+
 /* -------------------------------- */
 .cd-container {
   /* this class is used to give a max-width to the element it is applied to, 
@@ -264,6 +265,36 @@ img {
    background-color: #FD9E9C;
 }
 
+
+/* ---------- btn to Top ---------- */
+.btntoTop {
+    width: 44px;
+    height: 44px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #34495e;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease;
+}
+.btntoTop:before {
+    content: "\f106";
+    display: inline-block;
+    vertical-align: middle;
+    font: 20px 'FontAwesome';
+    color: #b8bcc0;
+}
+.btntoTop.active {
+    opacity: 1;
+}
+.btntoTop.active:hover{
+    opacity:0.6;
+}
 
 
 /* ---------- animate ---------- */

@@ -10,19 +10,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- CSS -->
-	
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/css/fms-main.css" />
-	<link rel="stylesheet" href="/css/fms-customize.css" />	
 	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.dropotron.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/fms-main.js"></script>
 	<script src="/js/jquery-ui.min.js"></script>
+	<script src="https://use.typekit.net/riz5mva.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 <style>
+body{
+	font-family: source-han-sans-traditional
+}
 #mainSpace{
   width: 800px;
   margin-top:100px;
@@ -36,6 +34,66 @@
  width: 100px;
  height: 100px;
  }
+ 
+ /* service Box 6
+====================================*/
+.serviceBox_6{
+    background: #E8A1A7;
+    color:#fff;
+    padding:65px 85px;
+    margin: 0 -15px;
+    overflow: hidden;
+}
+.row div:nth-child(3n+2) .serviceBox_6{
+    background: #E6C2AB;
+    color:#fff;
+    padding:65px 85px;
+    margin: 0 -15px;
+    overflow: hidden;
+}
+.row div:nth-child(3n+3) .serviceBox_6{
+    background: #6EC686;
+    color:#fff;
+    padding:65px 85px;
+    margin: 0 -15px;
+    overflow: hidden;
+}
+.serviceBox_6 .service-content{
+    padding:0;
+}
+.serviceBox_6 .service-content h3{
+    color:#fff;
+}
+.serviceBox_6 .service-content p{
+    font-size:14px;
+    line-height:29px;
+    margin-bottom:30px;
+}
+.serviceBox_6 .service-content a{
+    background: hsla(0, 0%, 0%, 0);
+    border: 2px solid hsl(0, 0%, 97%);
+    border-radius:0;
+    color:#fff;
+    padding:9px 17px;
+    font-size:14px;
+    text-transform:uppercase;
+    transition:all 0.2s ease 0s;
+}
+.serviceBox_6 .service-content a:hover{
+    background-color: hsl(0, 0%, 97%);
+    color: hsl(0, 0%, 20%);
+}
+.serviceBox_6 .service-content .line{
+    border: 1px solid;
+    display: block;
+    width: 20%;
+    margin: 20px 0;
+}
+.serviceBox_6 .service-content a i{
+    margin-left:6px;
+}
+
+
 </style>
 
 <script>
@@ -44,6 +102,8 @@ $(function(){
     $('.deleteDate').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
+    	console.log(dateIdStr);
+    	console.log(target);
 	//----dialog--------------------------
 	   $( "#dialog-confirm" ).dialog({
         resizable: false,
@@ -73,20 +133,37 @@ $(function(){
 
     });//end $('#delete').click
 	
+    /*----------------------------------------------------*/
+    /*	Same Height Div's
+     /*----------------------------------------------------*/
+    if(jQuery.isFunction(jQuery.fn.matchHeight)){
+        $('.same-height').matchHeight();
+    }
 })
 </script>	
 
 </head>
 <body>
-
-	<!-- Wrapper -->
-		<div id="wrapper">
-<!--加入header&nav -->
-<c:import url="../fms_header_nav.jsp" />
-				
-			<!-- Main -->
-			<div id="main">
 <!-- ////////////////////////////////////////////////////////////////////-->
+
+<div class="row">
+<c:forEach items="${beans}" var="items">
+     <div class="col-sm-4">
+         <div class="serviceBox_6 same-height">
+             <div class="service-content">
+             	 <img src="/products/show?prodId=${items.product.prodId}"/>
+                 <h3>${items.product.prodName}</h3>
+                 <span class="line"></span>
+                 <p>製造日期 ${items.mfd}</p>
+                 <p>到期日 ${items.exp}</p>
+                 <a class="btn btn-default" href="/expdate/edit?dateId=${items.expDate.dateId}">&nbsp;&nbsp;Edit<i class="fa fa-thumbs-up"></i></a>
+                 <a class="btn btn-default" name="${items.expDate.dateId}" class="deleteDate" >Delete<i class="fa fa-thumbs-up"></i></a>
+             </div>
+         </div>
+     </div>
+</c:forEach>
+</div>
+
 
 <div id="mainSpace">
 <table class="table table-hover">
@@ -116,11 +193,6 @@ $(function(){
 </div>
  
 <!-- ////////////////////////////////////////////////////////////////////-->
-
-<!--加入intro&footer -->
-<c:import url="../fms_intro_footer.jsp" />
-			 </div>
-		</div>
 			
 </body>
 </html>

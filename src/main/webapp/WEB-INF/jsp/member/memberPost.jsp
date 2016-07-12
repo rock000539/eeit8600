@@ -6,12 +6,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>會員文章</title>
-	
+
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/member-post.css" type="text/css" media="all">
 	<script type="text/javascript" src="/js/jquery.min.js"></script> 
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script src="https://use.typekit.net/riz5mva.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 <style>
 	#timelineDiv{
 		width: 800px;
@@ -40,6 +42,7 @@
 </section>
 </div> <!-- timeline Div -->
 
+
 <script>
 $(function(){
 	var timelineBlocks = $('.cd-timeline-block'),
@@ -66,6 +69,28 @@ $(function(){
 			console.log("show"+$(this));
 		});
 	}
+	
+	
+
+   /*============ BUTTON UP ===========*/
+    
+   var btnUp = $('<div/>', {'class':'btntoTop'});
+   btnUp.appendTo('body');
+   $(document)
+       .on('click', '.btntoTop', function() {
+           $('html, body').animate({
+               scrollTop: 0
+           }, 700);
+       });
+
+   $(window)
+       .on('scroll', function() {
+           if ($(this).scrollTop() > 200)
+               $('.btntoTop').addClass('active');
+           else
+               $('.btntoTop').removeClass('active');
+      });
+
 }); //onload
 </script>
 </body>

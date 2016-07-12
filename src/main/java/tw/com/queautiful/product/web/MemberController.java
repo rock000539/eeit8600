@@ -1,9 +1,11 @@
 package tw.com.queautiful.product.web;
 
-import java.util.LinkedHashSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,9 +32,13 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
+import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ArticleService;
+import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
+import tw.com.queautiful.product.service.ProductService;
 
 @Controller
 @RequestMapping("/members")
@@ -44,6 +51,46 @@ public class MemberController {
 	private EmailSender mailSender;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ExpDateService expDateService;
+	@Autowired
+	private ProductService productService;
+	
+    @RequestMapping("/product-exp")
+    public String listPage(Model model, HttpServletRequest request)
+    {
+//      String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Map> result = new ArrayList<Map>();
+//        long memberId= 0;
+//        if(request.getSession().getAttribute("memberId")!= null){
+//        memberId = (long) request.getSession().getAttribute("memberId");
+//        }
+    	Long memberId = 1L;//test
+    	List<ExpDate> expDates = expDateService.getAll();
+        for (int i = 0; i < expDates.size(); i++){
+            ExpDate expDate = expDates.get(i);
+            if (expDate.getMemberId() == memberId){
+                Map<String, Object> beansMap = new HashMap<String, Object>();
+                long j = expDate.getProId();
+                Product product = productService.getById(j);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+                String mfd = dateFormat.format(expDate.getMfd());
+                String exp = dateFormat.format(expDate.getExp());
+
+                beansMap.put("expDate", expDate);
+                beansMap.put("product", product);
+                beansMap.put("mfd", mfd);
+                beansMap.put("exp", exp);
+
+                result.add(beansMap);
+
+                log.debug(result.toString());
+            }
+        }
+        model.addAttribute("beans", result);
+        return "/expDate/expDateList";
+    }
 	
 	//member文章收藏頁面
 	@RequestMapping("/like")
