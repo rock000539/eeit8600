@@ -176,7 +176,9 @@ public class ProductController {
 	
 	@RequestMapping("/view_fms")
 	public String viewFmsPage(Model model) {
-		model.addAttribute("product", prodService.getById(1L));
+		Product product = prodService.getById(1L);
+		log.debug("{}", product);
+		model.addAttribute("product", product);
 		return "/product/productViewFms";
 	}
 	
