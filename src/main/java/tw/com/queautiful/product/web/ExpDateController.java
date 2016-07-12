@@ -84,25 +84,6 @@ public class ExpDateController
             
         memberId = (long) request.getSession().getAttribute("memberId");
         
-        }else{
-        //        if(memberId==null){
-        //            System.out.println("in cookie");
-        //            List<Member> members = memberService.getAll();
-        //            Cookie[] cookies = request.getCookies();
-        //            System.out.println(cookies);//----------------------------
-        //            for (Cookie cookie : cookies) {
-        //                System.out.println("cookie.getName()=="+cookie.getValue());
-        //                for(int i=0;i<members.size();i++){
-        //                   Member member = members.get(i);
-        //                if (cookie.getValue().equals(member.getEmail())) {
-        //                    System.out.println("222cookie.getName()=="+cookie.getName());//-------------------
-        //                    memberId=member.getMemberId();
-        //                    System.out.println(member.getMemberId());//---------------------------------
-        //                    break;
-        //                }
-        //                }
-        //            }
-        //        }
         }
         
         System.out.println(expDates.size() + " " + expDates);
