@@ -18,7 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.sortSkipAndLimit;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
