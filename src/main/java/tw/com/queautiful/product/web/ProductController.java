@@ -149,7 +149,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/select_fms")
-	public String selectFmsPage() {
+	public String selectFmsPage(Model model) {
+		model.addAttribute("categories", categoryService.getAll());
 		return "/product/productSelectFms";
 	}
 	
