@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import tw.com.queautiful.commons.util.ArticleType;
 
 @Entity
 @Table(name = "ARTICLE")
@@ -27,7 +31,8 @@ public class Article {
 	private Long memberId;
 	
 	@Column(name = "ARTICLETYPE" ,length=10)
-	private String articleType;
+	@Enumerated(EnumType.STRING)
+	private ArticleType articleType;
 	
 	@Column(name = "ARTICLETITLE" ,length=50)
 	private String articleTitle;
@@ -79,11 +84,11 @@ public class Article {
 		this.memberId = memberId;
 	}
 
-	public String getArticleType() {
+	public ArticleType getArticleType() {
 		return articleType;
 	}
 
-	public void setArticleType(String articleType) {
+	public void setArticleType(ArticleType articleType) {
 		this.articleType = articleType;
 	}
 
