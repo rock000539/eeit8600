@@ -3,18 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ 	<title>Review</title>
+ 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Review</title>
     <meta name="description" content="">
 
+    
     <!-- CSS FILES -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/review/style.css" rel="stylesheet" >
-    <link href="/css/review/style.css" rel="stylesheet" type="text/css"  media="screen" data-name="skins">
-
-
+	<link href="/css/review/reviewjQueryRain-customize.css" rel="stylesheet">
+	
+	<script src="/js/jquery.min.js"></script>
 </head> 
 <body>
 <!--start wrapper-->
@@ -25,7 +27,8 @@
 
         <section id="page_head" class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12">
-			<div class="widget widget_search"
+		<!-- start site search -->
+<!-- 			<div class="widget widget_search"
 				style="width: 200px; height: 40px; float: right">
 				<div class="site-search-area">
 					<form method="get" id="site-searchform" action="#">
@@ -36,9 +39,9 @@
 						</div>
 					</form>
 				</div>
-				<!-- end site search -->
+				
 			</div>
-
+		<!-- end site search -->
 
 		<div class="page_title">
 			<h2>Blog Post</h2>
@@ -60,24 +63,40 @@
                         <div class="blog_single">
                             <article class="post">
                                 <figure class="post_img">
-                                    <a href="#">
-                                        <img src="/images/review/blog_1.png" alt="blog post">
-                                    </a>
+                                    <img class="reviewImg" src="/reviews/show?reviewId=${review.reviewId}" alt="reviewImg">
                                 </figure>
                                 <div class="post_date">
-                                    <span class="day">28</span>
-                                    <span class="month">Nov</span>
+                                    <span class="day">${day}</span>
+                                    <span class="month">${month}</span>
                                 </div>
                                 <div class="post_content">
                                     <div class="post_meta">
-                                        <h2>
-                                            <a href="#">perferendis doloribus asperiores ut labore</a>
-                                        </h2>
+                                        <h2>${review.reviewTitle}</h2>
                                         <div class="metaInfo">
-                                            <span><i class="fa fa-calendar"></i> <a href="#">Nov 28, 2015</a> </span>
-                                            <span><i class="fa fa-user"></i> By <a href="#">Louis</a> </span>
+                                            <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
+                                            <span><a href="#"><i class="fa fa-user"></i> By Louis</a> </span> <!--抓會員暱稱 -->                          
+                                            <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> <!--做html的boookmark -->
                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span>
-                                            <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
+                                        <!--心得評分 end-->
+											<span class="review-uc-diamond">
+												<span class="urcosme-score-display">
+													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>
+													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond2"></span>
+													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond3"></span>
+													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
+													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>						
+													<script type="text/javascript">
+														$(function(){
+															for(var i=0;i<"${review.reviewRating}";i++){
+																$("#tb${review.reviewId}diamond"+(i+1)).css('color','#FF5151');
+															}
+														});
+													</script>
+												</span>&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
+											</span>
+											<!--心得評分  end -->
+                                        
+                                        
                                         </div>
                                     </div>
                                     <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
