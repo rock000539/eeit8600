@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,6 +31,10 @@
   }
  .ui-button{
  height: 50px;
+ }
+ #mainSpace img{
+ width: 100px;
+ height: 100px;
  }
 </style>
 
@@ -92,7 +97,7 @@ $(function(){
 	<td colspan="2"></td></tr>
 <c:forEach items="${beans}" var="items">
  <tr>
- 	<td><img src="${items.product.prodImg}"/></td>
+ 	<td><img src="/products/show?prodId=${items.product.prodId}"/></td>
  	<td>${items.product.prodName}</td>
 	<td>${items.mfd}</td> 
 	<td>${items.exp}</td> 	
