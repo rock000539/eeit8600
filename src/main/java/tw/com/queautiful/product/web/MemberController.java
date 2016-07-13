@@ -2,6 +2,7 @@ package tw.com.queautiful.product.web;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ArticleService;
+import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
@@ -55,6 +57,8 @@ public class MemberController {
 	private ExpDateService expDateService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private BrandService brandService;
 	
     @RequestMapping("/product-exp")
     public String listPage(Model model, HttpServletRequest request)
@@ -77,14 +81,24 @@ public class MemberController {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
                 String mfd = dateFormat.format(expDate.getMfd());
                 String exp = dateFormat.format(expDate.getExp());
+                
+                String brandName = product.getBrand().getBrandName();
+                
+                long todaySec= new Date().getTime();
+                long expSec = expDate.getExp().getTime();
+                long lastTime = expSec - todaySec;
+                long lastsDay = lastTime / (24*60*60*1000);
 
                 beansMap.put("expDate", expDate);
                 beansMap.put("product", product);
                 beansMap.put("mfd", mfd);
                 beansMap.put("exp", exp);
+                beansMap.put("brandName", brandName);
+                beansMap.put("lastsDay", lastsDay);
 
                 result.add(beansMap);
-
+                log.debug("todaySec: {}, expSec: {}", todaySec, expSec);
+                log.debug("brandName: {}, lastDay: {}", brandName, lastsDay);
                 log.debug(result.toString());
             }
         }
