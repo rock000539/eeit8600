@@ -5,24 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>用成份找產品</title>
 
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/jquery-ui.min.css" rel="stylesheet" >
-	<link rel="stylesheet" href="/css/fms-main.css" />
-	<link rel="stylesheet" href="/css/fms-customize.css" />		
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
+    <link href="/css/jquery-ui.min.css" rel="stylesheet" >
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/js/fms/swipe.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fms/fms-main.js"></script>    
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 
 <style type="text/css">
-#searchbox {
-   
+.modal {
+height: 900px;
+margin-top:100px; }
+.modal-header{
+font-size: 50px;}
+
+#searchbox { 
     padding: 20px;
-    margin: 100px auto;
-    background: #fff;
+    margin: auto auto;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
 }
@@ -33,6 +45,12 @@ font-size: 14px;}
 width: 100px;
 height: 100px;
 }
+#inputForm{
+margin: auto auto;
+font-size: 14px;
+}
+#searchBtn{
+margin-left:20px; }
 </style>
 <script type="text/javascript">
 $(function(){//#1
@@ -91,20 +109,23 @@ $(".searchProducts").click(function(e){//#1-2
 </script>
 </head>
 <body>
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+			<!-- **每頁不同的內容從這裡開始** -->
+<div class="grey_bg row">
 <div id="searchbox">
 
 <form action="/ingredients/SearchIngredient" class="form-inline">
-<table class="table">
-<tr>輸入成分之中英文 / 完整 / 部份名稱皆可</tr>
+<table id="inputForm">
+<tr><td colspan="2"><h3>輸入成分之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
 <tr>
 <td><input type="text" name="ingredName" id="IngredientName" class="form-control"></td> 
-<td><input type="submit" id="search" value="查成份"></td>
+<td><input type="submit" class="btn btn-default btn-lg button"id="searchBtn" value="查成份"></td>
 </tr>
 </table>
 </form>
 
 <table class="table">
-<tr><td>成份名稱</td><td>中文名稱</td><td>概略特性</td><td>粉刺</td><td>刺激</td><td>安心度</td></tr>
+<tr><th>成份名稱</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
 <c:forEach var="items" items="${result}">
 <tr>
 <td>${items.ingredName}</td>
@@ -113,12 +134,12 @@ $(".searchProducts").click(function(e){//#1-2
 <td>${items.ingredIrritant}</td>
 <td>${items.ingredAcne}</td>
 <td>${items.ingredSafety}</td>
-<td ><input type="button" class="btn searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}"></td>
+<td ><button" class="btn-info btn-sm btn-block searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}">查看使用產品資訊</button></td>
 </tr>
 </c:forEach>
 </table>
 </div>
-
+</div>
 <!-- 使用model1 ----------------------------------------------------------------->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
@@ -142,7 +163,7 @@ $(".searchProducts").click(function(e){//#1-2
          </div>
          </form>
          <div class="modal-footer">
-            <button type="button" class="btn"   id="cancelInsert"   data-dismiss="modal" >
+            <button type="button" class="btn btn-default"   id="cancelInsert"   data-dismiss="modal" >
          	   關閉視窗
             </button>
 <!--             <button type="button" class="btn btn-primary" id="insertNewIngredient" > -->
@@ -153,6 +174,10 @@ $(".searchProducts").click(function(e){//#1-2
 </div><!-- /.modal -->
 
 <!-- 結束model1 ----------------------------------------------------------------->
+				</div>        
+            <!-- **每頁不同的內容結束** -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+			
 
 </body>
 </html>

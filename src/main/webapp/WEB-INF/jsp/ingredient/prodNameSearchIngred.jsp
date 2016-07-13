@@ -5,20 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>用產品找成份</title>
   
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/css/fms-main.css" />
-	<link rel="stylesheet" href="/css/fms-customize.css" />		
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
 	<!-- Scripts -->
-    <script src="/js/jquery.min.js"></script>
 
-	
-	<script src="/js/jquery.dropotron.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/fms-main.js"></script>  
+	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/js/fms/swipe.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+
 
 <script>
 $(function(){
@@ -38,7 +41,7 @@ $(function(){
 	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
 	+data.products[i].prodName+"</td><td><p><small>"+data.brands[i].brandName+"</small></p></td><td>"
 	+data.categorys[i].categoryName+"</td>"
-	+"<td><input type='submit' class='checkIngredient btn'"+ 
+	+"<td><input type='submit' class='checkIngredient btn-info btn-sm btn-block'"+ 
 	"data-toggle='modal'  data-target='#myModal' name='"
 	+data.products[i].prodId+"' value=查看成份>"
 	+"</td></tr>")
@@ -102,6 +105,9 @@ font-size: 50px;}
   margin-left: auto;
   margin-right: auto;
 }
+#searchIngredient{
+margin-left:20px;
+ }
 #productArea{
 width: 800px;
 margin-top: 50px;
@@ -112,29 +118,34 @@ margin-top: 50px;
 width:100px;
 height: 100px;
 }
+#searchbox { 
+    padding: 20px;
+    margin: auto auto;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+#inputForm{
+margin: auto auto;
+font-size: 14px;
+}
+button{color:white;
+}
 </style>
 </head>
 <body>
-
-<!-- Wrapper -->
-<div id="wrapper">
-<!--加入header&nav -->
-<c:import url="../fms_header_nav.jsp" />
-				
-<!-- Main -->
-<div id="main">
-<!-- top ////////////////////////////////////////////////////-->			
-<form action="" class="form-inline">
-<table>
-<tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr>
-<tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
-<td><input type="button" id="searchIngredient" value="Search" class="btn" style="margin-bottom: 10px;"></td></tr>
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+	<div class="grey_bg row">	
+<!-- top ////////////////////////////////////////////////////-->	
+<div id="searchbox">	
+<form action="" class="form-inline" id="inputForm">
+<table id="inputForm">
+<tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr><tr><td colspan="2"><br></td></tr> 
+<tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td>
+<td  colspan="2"><button" id="searchIngredient" value="查產品" class="btn btn-default btn-lg button" style="margin-bottom: 10px;">查產品</button></td></tr>
 </table>
 </form>
-
+</div>
 <!-- Button trigger modal -->
-
-
 
 <!-- <button class="btn btn-primary btn-lg" data-toggle="modal" 
    data-target="#myModal">
@@ -161,7 +172,7 @@ height: 100px;
            </table>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">  關閉視窗</button>
 <!--             <button type="button" class="btn btn-primary"> -->
 <!--            Submit </button> -->
          </div>
@@ -174,12 +185,8 @@ height: 100px;
 <table id="productList" class="table  table-hover"></table>
 </div>
 <!-- top ////////////////////////////////////////////////////-->	
+</div> 
 	            <!-- **每頁不同的內容結束** -->
-
-<!--加入intro&footer -->
-<c:import url="../fms_intro_footer.jsp" />
-	</div>
-	</div>
-			
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 </body>
 </html>

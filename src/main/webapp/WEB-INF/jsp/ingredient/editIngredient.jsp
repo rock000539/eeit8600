@@ -36,7 +36,7 @@ font-size: 15px;
 margin-left:255px}
 
 #editArea{
-margin: auto auto;
+margin: 50px auto;
  width: 550px; 
 /*  border: solid 1px black;  */
 font-size: 20px; 
