@@ -1,4 +1,4 @@
-package tw.com.queautiful.product.specification;
+package tw.com.queautiful.commons.util;
 
 import static com.google.common.collect.Iterables.toArray;
 
@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ReflectionUtils;
 
-public class ProductSpecs {
+public class Spec {
 
 	public static <T> Specification<T> byAuto(final EntityManager entityManager, final T example) {
 

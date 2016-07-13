@@ -17,9 +17,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.queautiful.App;
+import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Product;
-import tw.com.queautiful.product.specification.ProductSpecification;
-import tw.com.queautiful.product.specification.ProductSpecs;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(App.class)
@@ -42,7 +42,7 @@ public class ProductServiceTest {
 		filter.setProdDesc("說明2");
 
 		//Specification<Product> spec = new ProductSpecification(filter);
-		Specification<Product> spec = ProductSpecs.byAuto(em, filter);
+		Specification<Product> spec = Spec.byAuto(em, filter);
 		List<Product> list = service.getAll(spec);
 
 		for (Product product : list) {
