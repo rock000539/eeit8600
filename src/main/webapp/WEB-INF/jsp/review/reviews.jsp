@@ -45,7 +45,7 @@
 						</a>
 						<!--會員暱稱 -->
 						<div class="user-name">
-							<a href="/members/list">要抓會員暱稱</a> <!-- ???*同38行*放no1會員有發過的心得list連結-->
+							<a href="/members/list">${review.member.nickname}</a> <!-- ???*同38行*放no1會員有發過的心得list連結-->
 						</div>
 						<!--心得評分 end-->
 						<div class="review-uc-diamond">
