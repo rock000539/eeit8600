@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--start wrapper-->
 <section class="wrapper container">
 <!--Start Header-->
@@ -56,12 +56,12 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
 
-                <li><a href="#">Date</a></li>
+                <li><a href="/expdate/search">Date</a></li>
 
                 <li><a href="#">Ingredient</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Via Product</a></li>
-                        <li><a href="#">Via Ingredient</a></li>
+                        <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
+                        <li><a href="/ingredients/SearchIngredient">Via Ingredient</a></li>
                     </ul>
                 </li>
 
