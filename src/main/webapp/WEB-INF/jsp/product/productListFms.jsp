@@ -31,6 +31,10 @@
 		    border-bottom: 3px solid #f2f2f2;
 		}
 		
+		.blog_medium .post_content > p {
+			margin-bottom: 10px;
+		}
+		
 	</style>
 
 </head>
@@ -38,7 +42,7 @@
 	
 	<div class="col-lg-2"></div>
 	
-	<div class="col-lg-2">
+	<div class="col-lg-2 col-md-6 col-sm-8 col-xs-12">
 		<div class="widget_title" style="margin-top:50px;">
 			<h4><span>Date</span></h4>
 		</div>
@@ -164,7 +168,7 @@
 		</div>
 	</div>
 	
-	<div class="col-lg-6 blog_medium row wow fadeInDown" style="margin-top:50px;">
+	<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 blog_medium row wow fadeInDown" style="margin-top:50px;">
 		
 		<c:forEach items="${products}" var="product">
 			<article class="post">
@@ -193,10 +197,10 @@
 							<span><i class="fa fa-comments"></i> ${product.reviews.size()} </span>
 						</div>
 					</div>
-					<c:if test="${fn:substring(prodDesc.prodDesc, 0, 2) == '內文' }">
-						<p>Lorem ipsum dolor sit amet, consectetur adip ... </p>
+					<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
+						<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
 					</c:if>
-					<c:if test="${fn:substring(prodDesc.prodDesc, 0, 2) != '內文' }">
+					<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
 						<p>${fn:substring(review.review, 0, 25)} ... </p>
 					</c:if>
 					<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>

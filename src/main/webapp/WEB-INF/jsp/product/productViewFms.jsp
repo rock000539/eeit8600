@@ -34,13 +34,17 @@
 			margin-bottom: 30px;
 		}
 		
-		.fa-link {
-			margin-top: 12px;
+		.blogMeta > span {
+			font-size: 14px;
 		}
 		
-		.blogPic .blog-hover .icon {
-			margin: -5px 0px 0px -5px;
-		}
+/* 		.fa-link { */
+/* 			margin-top: 12px; */
+/* 		} */
+		
+/* 		.blogPic .blog-hover .icon { */
+/* 			margin: -5px 0px 0px -5px; */
+/* 		} */
 		
 		.is-hidden {
 			visibility: hidden;
@@ -48,14 +52,11 @@
 		
 		.bounce-in {
 			visibility: visible;
-			-webkit-animation: cd-bounce-1 0.6s;
-			-moz-animation: cd-bounce-1 0.6s;
-			animation: cd-bounce-1 0.6s;
+			-webkit-animation: cd-bounce-2 0.6s;
+			-moz-animation: cd-bounce-2 0.6s;
+			animation: cd-bounce-2 0.6s;
 		}
 		
-		.img-thumbnail {
-			text-align: center;
-		}
 		
 		/* ---------- animate ---------- */
 		@-webkit-keyframes cd-bounce-1 {
@@ -232,12 +233,12 @@
 			
 				<div class="row sub_content">
 					
-					<div class="col-lg-2 col-md-2 col-sm-2"></div>
+					<div class="col-lg-3 col-md-3 col-sm-3"></div>
 				
-					<div class="col-lg-4 col-md-4 col-sm-4" style="margin-top:0px;">
+					<div class="col-lg-3 col-md-3 col-sm-3">
 						
-						<div class="images-style-inner" style="width: 360px; height: 275px; border: 1px solid #ddd; border-radius: 10px;">
-							<img class="img-thumbnail img-responsive" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:250px; height:auto;" />
+						<div class="images-style-inner" style="text-align:center;">
+							<img class="img-thumbnail" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:250px; height:auto;" />
 						</div>
 						
 						<div class="" style="margin-top:20px; text-align:center;">
@@ -306,14 +307,11 @@
 					
 					<c:forEach items="${product.reviews}" var="review">
 					
-						<div class="col-lg-3 rec_blog">
+						<div class="col-lg-3 col-md-4 col-xs-12 rec_blog">
 							<div class="blogPic">
-								<img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:263px; height:133px; border: 1px solid #f2f2f2;">
+								<img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:263px; height:auto; border: 1px solid #f2f2f2;">
 								<div class="blog-hover">
 									<a href="#">
-										<span class="icon">
-											<i class="fa fa-link"></i>
-										</span>
 									</a>
 								</div>
 							</div>
@@ -341,14 +339,14 @@
 									</c:if>
 								</div>
 								<div class="blogMeta">
-									<a href="#">
+									<span>
 										<i class="fa fa-user"></i>
-										Here Author Name
-									</a>
-									<a href="#">
+										${review.member.nickname}&nbsp;&nbsp;&nbsp;
+									</span>
+									<span>
 										<i class="fa fa-comment"></i>
 										${review.rewCollect}
-									</a>
+									</span>
 								</div>
 							</div>
 						</div>

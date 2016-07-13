@@ -32,6 +32,10 @@ public class ProductService {
 	public List<Product> getAll(Specification<Product> spec) {
 		return dao.findAll(spec);
 	}
+	
+	public Page<Product> getAll(Specification<Product> spec, Pageable pageable) {
+		return dao.findAll(spec, pageable);
+	}
 
 	public void insert(Product product) {
 		dao.save(product);

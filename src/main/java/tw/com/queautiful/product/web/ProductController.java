@@ -3,6 +3,8 @@ package tw.com.queautiful.product.web;
 import java.net.URI;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
+import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
@@ -39,13 +42,16 @@ public class ProductController {
 
 	@Autowired
 	private ProductService prodService;
-	
+
 	@Autowired
 	private BrandService brandService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
 	
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	@RequestMapping("/list")
 	public String listPage() {
 		return "/product/productList";
@@ -84,23 +90,24 @@ public class ProductController {
 	public String addPage() {
 		return "/product/productAdd";
 	}
-	
+
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public Product insert(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
-		
-		if(prodImgFile!=null) {
+	public Product insert(@RequestPart(required = false) Product product,
+			@RequestPart(required = false) MultipartFile prodImgFile) {
+
+		if (prodImgFile != null) {
 			String prodName = product.getProdName();
 			String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
 			product.setProdImg(prodImg);
 		}
-		
+
 		// FK設定
 		product.setBrand(brandService.getById(product.getBrandId()));
 		product.setCategory(categoryService.getById(product.getCategoryId()));
-		
+
 		log.debug("{}", product);
-		
+
 		prodService.insert(product);
 		return product;
 	}
@@ -113,20 +120,21 @@ public class ProductController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Product update(@RequestPart(required=false) Product product, @RequestPart(required=false) MultipartFile prodImgFile) {
-		
-		if(prodImgFile != null ) {
+	public Product update(@RequestPart(required = false) Product product,
+			@RequestPart(required = false) MultipartFile prodImgFile) {
+
+		if (prodImgFile != null) {
 			String prodName = product.getProdName();
 			String prodImg = FileProcessing.saveImg(prodName, "product", prodImgFile);
 			product.setProdImg(prodImg);
 		}
-		
+
 		// FK設定
 		product.setBrand(brandService.getById(product.getBrandId()));
 		product.setCategory(categoryService.getById(product.getCategoryId()));
-		
+
 		log.debug("{}", product);
-		
+
 		prodService.update(product);
 		return product;
 	}
@@ -136,65 +144,90 @@ public class ProductController {
 	public void delete(@RequestBody Product product) {
 		prodService.delete(product.getProdId());
 	}
-	
+
 	@RequestMapping("/show")
 	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
 		String prodImg = prodService.getById(prodId).getProdImg();
-		if(prodImg!=null) {
+		if (prodImg != null) {
 			FileProcessing.showImg(resp, prodImg);
 		}
 	}
-	
+
 	@RequestMapping("/searchbybrand")
 	@ResponseBody
 	public List<Product> searchByBrand(@RequestParam Long brandId) {
 		Brand brand = brandService.getById(brandId);
 		return brand.getProducts();
 	}
-	
+
 	@RequestMapping("/select_fms")
 	public String selectFmsPage(Model model) {
 		model.addAttribute("categories", categoryService.getAll());
 		return "/product/productSelectFms";
 	}
-	
+
 	@RequestMapping("/list_fms")
-	public String listFmsPage(
-			@RequestParam(required=false) Long brandId,
-			@RequestParam(required=false) Long categoryId,
-			@RequestParam(required=false, defaultValue="1") Integer page,
-			@RequestParam(required=false, defaultValue="5") Integer rows,
-			Model model) {
-		
+	public String listFmsPage(@RequestParam(required = false) Long brandId,
+			@RequestParam(required = false) Long categoryId, Model model) {
+
 		log.debug("brandId = {}", brandId);
 		log.debug("categoryId = {}", categoryId);
-		log.debug("page = {}", page);
-		log.debug("rows = {}", rows);
-		
-//		if(brandId != null) {
-//			model.addAttribute("products", brandService.getById(brandId).getProducts());
-//		} else if(categoryId != null) {
-//			model.addAttribute("products", categoryService.getById(categoryId).getProducts());
-//		}
-		
-		Pageable pageable = new PageRequest(page, rows);
+
+		// if(brandId != null) {
+		// model.addAttribute("products",
+		// brandService.getById(brandId).getProducts());
+		// } else if(categoryId != null) {
+		// model.addAttribute("products",
+		// categoryService.getById(categoryId).getProducts());
+		// }
+
+		Pageable pageable = new PageRequest(0, 5);
 		Page<Product> pages = prodService.getAll(pageable);
+
 		model.addAttribute("products", pages.getContent());
-		
+		model.addAttribute("totalPage", pages.getTotalPages());
+
 		return "/product/productListFms";
 	}
-	
+
+	@RequestMapping("/list_data")
+	@ResponseBody
+	public List<Product> listFmsData(@RequestParam(required = false) Long brandId,
+			@RequestParam(required = false) Long categoryId, @RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer rows, Model model) {
+
+		Product product = null;
+		Pageable pageable = new PageRequest(page-1, rows);
+		
+		Page<Product> pages = null;
+		
+		if (brandId != null) {
+			product.setBrand(brandService.getById(brandId));
+			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
+		} else if (categoryId != null) {
+			product.setCategory(categoryService.getById(categoryId));
+			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
+		} else {
+			pages = prodService.getAll(pageable);
+		}
+		
+
+		return pages.getContent();
+	}
+
 	@RequestMapping("/view_fms")
-	public String viewFmsPage(Model model) {
+	public String viewFmsPage(@RequestParam(required = false) Long prodId, Model model) {
+		log.debug("prodId = {}", prodId);
 		Product product = prodService.getById(1L);
 		log.debug("{}", product);
 		model.addAttribute("product", product);
 		return "/product/productViewFms";
 	}
-	
+
 	@RequestMapping("/rank_fms")
 	public String rankFmsPage(Model model) {
-		//model.addAttribute("products", prodService.findTop10ByOrderByScoreDesc());
+		// model.addAttribute("products",
+		// prodService.findTop10ByOrderByScoreDesc());
 		return "/product/productRankFms";
 	}
 
