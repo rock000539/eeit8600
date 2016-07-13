@@ -82,7 +82,7 @@ public class ArticleController {
 	@ResponseBody
 	public Article update(@RequestBody Article article){
 		log.debug("{}",article);
-		article.setArticleTime(new Date(System.currentTimeMillis()));
+//		article.setArticleTime(new Date(System.currentTimeMillis()));
 		article.setMember(memberService.getById(article.getMemberId()));
 		articleService.update(article);	
 		return article;
@@ -91,7 +91,7 @@ public class ArticleController {
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public void delete(@RequestParam Article article){
+	public void delete(@RequestBody Article article){
 		articleService.delete(article.getArticleId());
 	}
 	

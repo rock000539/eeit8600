@@ -178,7 +178,7 @@
 				{
 					label: 'Logo',
 		            name: '',
-		            width: 100,
+		            width: 110,
 		            fixed: true,
 		            formatter: function (cellvalue, options, rowObject) {
 		            	var str = '/brands/show?brandId='+ rowObject.brandId;
@@ -207,9 +207,9 @@
 	          
 			],
 			width: 'auto', // 寬度
-			height: 250, // 高度
+			height: 400, // 高度
 			shrinkToFit: false,
-			rowNum: 3, // 每頁顯示列數
+			rowNum: 10, // 每頁顯示列數
 			rownumbers: true, // 第n列
 			rownumWidth: 35, // 第n列寬度
 			caption: 'Brand Grid View', // 最上方的標題和收合Table

@@ -16,9 +16,10 @@
 	<!-- jqGrid js、css -->
     <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
     <script src="/js/trirand/jquery.jqGrid.min.js"></script>
+    <script src="/js/trirand/grid.inlinedit.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-	
+
 	<!-- 一定要放在jqGrid的js後面  -->
 	<script src="/js/metisMenu.min.js"></script>
 	
@@ -97,7 +98,7 @@
 // 					console.log(result);
 // 				}
 // 			});
-		
+		var lastSel;
 		$('#jqGrid').jqGrid({
 			url:'/articles/select_jqgrid',
 			datatype:'json',
@@ -129,7 +130,7 @@
 				        		window.location.href='/articles/edit?articleId='+$('#jqGrid').jqGrid('getGridParam', 'selrow');
 				        	}
 				        },
-				        
+				     				        
 				        //設定delbutton點擊後彈出視窗的格式
 						delOptions:{
 							width: 'auto',
@@ -163,15 +164,24 @@
 					width: 80,
 					align: 'center',
 					resizable: false,
-					//editable:true
 				},
-				{
+// 				{
+// 					label: 'ArticleType',
+// 					name: 'articleType',
+// 					width: 90,
+// 					align: 'center',
+// 					resizable: false,
+// 				},
+				{   
 					label: 'ArticleType',
 					name: 'articleType',
-					width: 90,
+					edittype:'select', 
+					editoptions:{value:{news:'news',solicit:'solicit',question:'question',chat:'chat'}},
+					width:120,
 					align: 'center',
 					resizable: false,
-				},
+					editable:true,
+				},  
 				{
 					label: 'ArticleTitle',
 					name: 'articleTitle',
@@ -204,6 +214,7 @@
 					width: 80,
 					align: 'center',
 					resizable: false,
+// 					editable:true,
 				},
 				{
 					label: '檢舉次數',
@@ -211,9 +222,26 @@
 					width: 80,
 					align: 'center',
 					resizable: false,
-				}
-	          
+					editable:true,
+				},
+					          
 			],
+// 			onSelectRow: function(id,x,y,z){
+// // 				console.log("id="+id);
+// // 				console.log("x="+x);
+// // 				console.log("y="+y);
+// 			     if(id && id!==lastSel){ 
+// 			    	 $('#jqGrid').jqGrid('restoreRow',lastSel);
+// 				     var editparameters = {
+// 				      "keys" : true,
+// 				      "url" : "/articles/update",
+// // 				      "aftersavefunc" : reloadGrid,
+// 				     };
+// 				     $('#jqGrid').jqGrid('editRow',id,editparameters);
+// 				     lastSel=id;
+// 			     }  
+			     
+// 			   },
 			width: 'auto', // 寬度
 			height: 300, // 高度
 			shrinkToFit: false,
