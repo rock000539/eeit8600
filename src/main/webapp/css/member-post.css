@@ -1,8 +1,10 @@
 body {
-  font-size: 100%;
-  font-family: source-han-sans-traditional, Microsoft JhengHei, serif;;
-  color: #7f8c97;
-  background-color: #e9f0f5;
+	font-size: 100%;
+	font-family: source-han-sans-traditional, Microsoft JhengHei, serif;;
+	color: #7f8c97;
+	background: #C9FFBF; 
+	background: -webkit-linear-gradient(to left, #C9FFBF , #FFAFBD);
+	background: linear-gradient(to top, #C9FFBF , #FFAFBD);
 }
 a, a:hover {
   text-decoration: none;
@@ -49,7 +51,7 @@ img {
   left: 18px;	/*for小螢幕 微調*/
   height: 100%;
   width: 4px;
-  background: #d7e4ed;
+  background: rgba(255, 255, 255, 0.8);
 }
 @media only screen and (min-width: 1170px) {
   #cd-timeline {
@@ -65,12 +67,15 @@ img {
 /* --------- TimeLine Img --------- */
 .cd-timeline-img {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 3px #ffffff;
+}
+#cd-timeline:nth-child(3n+2) .cd-timeline-img{
+	box-shadow: 0 0 0 3px #FF3562;
 }
 .cd-timeline-img img {
   display: block;
@@ -84,10 +89,11 @@ img {
 }
 @media only screen and (min-width: 1170px) {
   .cd-timeline-img {
-    width: 60px;
-    height: 60px;
+    width: 20px;
+    height: 20px;
+    top: 18px;
     left: 50%;
-    margin-left: -28px;
+    margin-left: -8px;
     Force Hardware Acceleration in WebKit
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
@@ -122,9 +128,9 @@ img {
   position: relative;
   margin-left: 60px;
   border-radius: 0.25em;
-  box-shadow: 0 2px 0 #d7e4ed;
+/*   box-shadow: 0 2px 0 #d7e4ed; */
   opacity: 0.9;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
   float: left;
   padding: 1.6em;
 }
@@ -253,7 +259,7 @@ img {
    margin:2px;
    border: 1px solid #FD9E9C;
    color: #FD9E9C;
-   background-color: #fff;
+   background-color: rgba(255, 255, 255, 0.5);
 
 }
 .cd-info:hover {
