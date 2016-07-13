@@ -15,36 +15,40 @@
 	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Scripts -->
 	<script src="/js/jquery-ui.min.js"></script>
-	<script src="https://use.typekit.net/riz5mva.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 
 <style>
 body {
-	font-family: source-han-sans-traditional, Microsoft JhengHei, sans-serif;
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
 	padding-top: 70px;
 }
 .portfolio-item {
  	padding: 15px; 
 }
+.portfolio-item:hover .portfolio-content{
+	border-bottom-color:#727CB6; 
+}
+
 .portfolio-all {
 	background-color: #ffffff;
+	margin-bottom: 10px;
 }
+
 .portfolio-title{
-	height: 70px;
-	background-color: #98DaD6;  /*blue*/
+	height: 60px;
+	background-color: #98DaD6;  /*blue */
 	border-bottom: 1px solid #4FBAAA;
-	color: white;
+	color: #ffffff;
 	text-align: center;
 	padding: 10px;
 }
-#exprow div:nth-child(3n+1) .portfolio-title{ 
-	background-color: #FF9985;  /*pink F28E98*/
-	border-bottom: 1px solid #D97F88; 
+#exprow div:nth-child(3n+2) .portfolio-title{
+	background-color: #FFDFC8;	/*beige*/
+	border-bottom: 1px solid #E5C8B3;
 } 
-#exprow div:nth-child(3n+2) .portfolio-title{ 
-	background-color: #FFDFC8;  /*beige*/
-	border-bottom: 1px solid #E5C8B3; 
-} 
+#exprow div:nth-child(3n+3) .portfolio-title{
+	background-color: #FF9985;	/*pink*/
+	border-bottom: 1px solid #D97F88;
+}
 .portfolio-title h3 {
 	font-size: 15px;
  	line-height: 15px; 
@@ -55,17 +59,35 @@ body {
 	font-size: 22px;
 	margin: 10px;
 }
+
 .portfolio-content {
 	border: 1px solid #E7E6E6;
-	padding: 30px;
+	padding: 5px 10px 30px 10px;
 	text-align: center;
 }
-
-
-
+.portfolio-content h3 {
+	font-size: 15px;
+ 	line-height: 15px; 
+}
+.portfolio-img {
+	margin: 0 auto;
+	height: 130px;
+	width: 130px;
+	overflow:hidden;
+}
+.portfolio-content img{
+	height: 130px;
+	width: 130px;
+}
+.portfolio-content p {
+	line-height: 1.1;
+	margin: 5px;
+	font-size: 15px;
+}
+.portfolio-btn {
+	margin-top: 20px;
+}
 </style>
-
-
 </head>
 <body>
 <!--加入header&nav -->
@@ -80,8 +102,8 @@ body {
 <div class="col-lg-10">
     <!-- Page Header -->
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">文章收藏 <small>討論區</small></h1>
+        <div class="col-lg-12 deviderHeading text-center">
+            <h4 class="page-header">產品到期日</h4>
         </div>
     </div>
     <!-- /.row -->
@@ -95,13 +117,16 @@ body {
 		        <h3>${items.product.prodName}</h3>
 		    </div>
 		    <div class="portfolio-content">
-		        <a href="#">
+		        <div class="portfolio-img"><a href="#">
 		            <img src="/products/show?prodId=${items.product.prodId}"/>
-		        </a>
-		        <h3><a href="#">Project Name</a></h3>
+		        </a></div>
+		        <p><i class="fa fa-bell-o"></i>&nbsp; 還有&nbsp;${items.lastsDay}&nbsp;天到期</p>
 		        <p>製造日期 ${items.mfd}</p>
 		        <p>到期日 ${items.exp}</p>
-		        <p>還有&nbsp;${items.lastsDay}&nbsp;天到期</p>
+		        <div class="portfolio-btn">
+			    <button class="btn btn-default">修改</button> &nbsp;
+			    <button class="btn btn-default">刪除</button>
+			    </div>
 	        </div>
         </div>
     </div><!-- portfolio -->
@@ -112,29 +137,7 @@ body {
 
 
 
-<!-- ////////////////////////////////////////////////////////////////////-->
-<div id="mainSpace">
-<table class="table table-hover">
-<tr><td>產品圖片</td>
-	<td>產品名稱</td>
-	<td>製造日</td>
-	<td>到期日</td>
-	<td colspan="2"></td></tr>
-<c:forEach items="${beans}" var="items">
- <tr>
- 	<td><img src="/products/show?prodId=${items.product.prodId}"/></td>
- 	<td>${items.product.prodName}</td>
-	<td>${items.mfd}</td> 
-	<td>${items.exp}</td> 	
-	
-	<td><input type="button" name="edit" value="edit" id="editDate" onclick='location="/expdate/edit?dateId=${items.expDate.dateId}"'></td>
-	<td><input type="button" name="${items.expDate.dateId}" value="deleteDate" class="deleteDate" ></td>
-	
-</tr>
-</c:forEach>
 
-</table>
-</div>
 <!-- 跳出刪除確認視窗 -->
 <div id="dialog-confirm" title="確定刪除這筆資料?" style="display: none">
 <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;" ></span>資料刪除後將不可回復<!-- 可在此輸入文字加在跳出視窗說明--></p>
