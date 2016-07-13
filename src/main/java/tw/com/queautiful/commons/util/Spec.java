@@ -36,8 +36,8 @@ public class Spec {
 				for (Attribute<T, ?> attr : entityType.getDeclaredAttributes()) {
 					Object attrValue = getValue(example, attr);
 					
-					System.out.println("attr = " + attr.getJavaType());
-					System.out.println("attrValue = " + attrValue);
+//					System.out.println("attr = " + attr.getJavaType());
+//					System.out.println("attrValue = " + attrValue);
 					
 					if (attrValue != null) {
 						if (attr.getJavaType() == String.class) {

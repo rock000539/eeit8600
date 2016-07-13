@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.entity.ExpDate;
-import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.ExpDateSearchService;
@@ -47,6 +46,7 @@ public class ExpDateController
     @RequestMapping("/search")
     public String search(Model model)
     {
+
         List<Brand> brands = new ArrayList<Brand>();
         brands = brandService.getAll();
         model.addAttribute("Brands", brands);
@@ -83,7 +83,7 @@ public class ExpDateController
     public String listPage(Model model, HttpServletRequest request)
     {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    	 String username = SecurityContextHolder.getContext().getAuthentication().getName();
         
 
         List<Map> result = new ArrayList<Map>();

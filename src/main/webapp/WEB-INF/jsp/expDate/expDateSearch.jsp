@@ -9,12 +9,20 @@
 	
 	<!-- CSS -->
 
-	<link rel="stylesheet" href="/css/fms-main.css" />
-	<link rel="stylesheet" href="/css/fms-customize.css" />		
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/fms/swipe.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
+
 <style>
 
 /*//////////////////////////////////////////////////////////////////////////// */
@@ -42,8 +50,8 @@
 				$('#mfd').empty().prepend(data.mfdDate);
 				$('#exp').empty().prepend(data.expDate);
 				$('#proList').empty();
-				$(".dividerHeading h4").empty();
-				$(".dividerHeading h4").append("<span>"+brandName+"</span><br>");
+				$(".dividerHeading").empty();
+				$(".dividerHeading").append("<h4><span>"+brandName+"</span></h4><br>");
 				$(".dividerHeading").append("<h5><p>請在下方選擇產品加入最愛<p></h5>");
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
@@ -65,14 +73,13 @@ $('#proList').append(
 				var memberId=$("#loginTokenId").attr("value");
 				
 				if(memberId!=0&&memberId!=undefined){ //#1
-					alert("in ajax");
 				$.ajax({url : '/expdate/post', //#2
 						type : 'POST',
 						data : {"proIdStr" : prodId,
 								"mfdStr" : data.mfdDate,
 								"expStr" : data.expDate},
-				success : function(date) {
-				alert(date);
+				success : function(data) {
+				alert(data);
 				$('#proList').empty();
 				}
 				});//end #2
@@ -120,14 +127,20 @@ margin-left:180px; }
 </style>
 </head>
 <body>
-
+<!--加入header&nav -->
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+			
 <!-- ////////////////////////////////////////////////////////////////////-->
 <%@page import="org.springframework.security.core.context.SecurityContextHolder" %>
-<sec:authorize access="hasRole('ROLE_USER')">
+<%-- <sec:authorize access="hasRole('ROLE_USER')">  --%>
+         <c:set var="nickname" scope="session" value='<%=request.getSession().getAttribute("MemberNickname")%>'/>
+         <c:if test="${not empty nickname}"> 
 <div style="display:none" id="loginTokenName" ><%=SecurityContextHolder.getContext().getAuthentication().getName() %></div>
 <div style="display:none" id="loginTokenId" value="<%=request.getSession().getAttribute("memberId")%>"></div>
+		</c:if>
 <!-- 檢查會員登入與否用的token -->
-</sec:authorize>
+<%-- </sec:authorize>  --%>
+<div class="grey_bg row">
 	<div id="mainSpace">
 
 			<table class="table">
@@ -146,7 +159,7 @@ margin-left:180px; }
 							</c:forEach>
 							</select></td>
 					<td><input type="text" name="batchCode" id="batchCode" value="${reloadBatchCode}"/></td>
-					<td colspan="2"><input type="button" id="searchDate" value="查詢" />
+					<td colspan="2"><input type="button" id="searchDate" class="btn" value="查詢" />
 					</td>
 					
 					</tr>
@@ -164,7 +177,7 @@ margin-left:180px; }
 			<!-- 分隔線用 -->
 			<br>
 			<div class="dividerHeading">
-			<h4></h4>
+			
 			</div>
 			<!-- 分隔線用 -->
 			<div ><br>
@@ -172,7 +185,11 @@ margin-left:180px; }
 			</div>
 
 	</div>
+	</div>
 	<!-- ////////////////////////////////////////////////////////////////////-->
 
+<!--加入footer -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+			
 </body>
 </html>

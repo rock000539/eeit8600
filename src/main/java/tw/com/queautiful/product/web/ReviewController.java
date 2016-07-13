@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 
+import org.aspectj.lang.reflect.MemberSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Brand;
+import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.MemberService;
@@ -169,7 +171,8 @@ public class ReviewController {
 			@RequestPart(value = "reviewImgFile", required = false) MultipartFile reviewImgFile) {
 		// FK設定
 		review.setProduct(prodService.getById(review.getProdId()));
-
+		review.setMember(memberService.getById(review.getMemberId()));
+		
 		// 判斷是否有傳入圖片
 		if (reviewImgFile != null) {
 			// 取得品牌名稱當作檔名
@@ -202,6 +205,7 @@ public class ReviewController {
 
 		// FK設定
 		review.setProduct(prodService.getById(review.getProdId()));
+		review.setMember(memberService.getById(review.getMemberId()));
 
 		// 取得品牌名稱當作檔名
 		String reviewTitle = review.getReviewTitle();
