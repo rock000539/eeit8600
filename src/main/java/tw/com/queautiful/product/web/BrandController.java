@@ -30,6 +30,8 @@ import tw.com.queautiful.product.service.BrandService;
 @RequestMapping("/brands")
 public class BrandController {
 
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private BrandService brandService;
 
@@ -53,8 +55,8 @@ public class BrandController {
 			@RequestParam(required=false) Integer rows){
 		
 		Pageable pageble = new PageRequest(page-1, rows);
-		Page<Brand> brandPages = brandService.getAll(pageble);
-		return brandPages;		
+		Page<Brand> brandPage = brandService.getAll(pageble);
+		return brandPage;		
 	}
 
 	@RequestMapping("/add")
@@ -114,6 +116,7 @@ public class BrandController {
 	}
 
 	@RequestMapping("/delete")
+	@ResponseBody
 	public void delete(@RequestBody Brand brand) {
 		brandService.delete(brand.getBrandId());
 	}

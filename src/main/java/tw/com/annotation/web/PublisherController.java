@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.annotation.entity.Book;
 import tw.com.annotation.entity.Publisher;
 import tw.com.annotation.service.PublisherService;
 
