@@ -53,6 +53,10 @@
 			animation: cd-bounce-1 0.6s;
 		}
 		
+		.img-thumbnail {
+			text-align: center;
+		}
+		
 		/* ---------- animate ---------- */
 		@-webkit-keyframes cd-bounce-1 {
 		
@@ -232,8 +236,8 @@
 				
 					<div class="col-lg-4 col-md-4 col-sm-4" style="margin-top:0px;">
 						
-						<div class="images-style-inner">
-							<img class="img-thumbnail img-responsive" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:360px; height:275px;" />
+						<div class="images-style-inner" style="width: 360px; height: 275px; border: 1px solid #ddd; border-radius: 10px;">
+							<img class="img-thumbnail img-responsive" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:250px; height:auto;" />
 						</div>
 						
 						<div class="" style="margin-top:20px; text-align:center;">
@@ -316,7 +320,7 @@
 							<div class="blogDetail" style="width:263px; height:211px;">
 								<div class="blogTitle">
 									<a href="#">
-										<h4>${review.reviewTitle}</h4>
+										<h4>${fn:substring(review.reviewTitle, 0, 21)}</h4>
 									</a>
 									<span>
 										<i class="fa fa-calendar"></i>
