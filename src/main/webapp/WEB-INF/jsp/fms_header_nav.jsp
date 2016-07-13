@@ -7,21 +7,29 @@
 <header id="header">
     <div class="col-sm-12 top-nav">
         <ul>
-        <!-- 登入前 -->
-            <!-- <li>
-                <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
+        <c:set var="nickname" scope="session" value='<%=request.getSession().getAttribute("MemberNickname")%>'/>
+         <c:if test="${empty nickname}">
+		<!--  登入前 -->
+            <li>
+                <a href="/login"><i class="fa fa-user" aria-hidden="true"></i>
                 <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
                 </a>
-            </li> -->
-        <!-- 登入後 -->
+            </li>
+            
+        </c:if>
+         
+        <!-- 登入後 -->            
+        	 <c:if test="${not empty nickname}"> 
             <li>
-                <a href="#"><span>username</span></a>
+                <a href="#"><span>${nickname}</span></a>
             </li>
             <li>
                 <a class="" href="#">
-                <div class="userdiv img-circle"><img id="userimg" src="/images/fms/userh.png"/></div>
+                <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
                 </a>
             </li>
+         </c:if>
+       
         </ul>
     </div>
 
