@@ -34,6 +34,10 @@ public class ArticleService {
 	public Page<Article> getAll(Specification<Article> spec, Pageable pageable) {
 		return articleDao.findAll(spec, pageable);
 	}
+	
+	public Page<Article> getAll(Pageable pageable){
+		return articleDao.findAll(pageable);
+	}
 
 	public void insert(Article article) {
 		articleDao.save(article);

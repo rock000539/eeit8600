@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
 <title>Article Edit</title>
 <style>
 
@@ -22,7 +22,7 @@
 		</TR>
 		<TR>
 			<TD>會員ID:</TD>
-			<TD><input type="text" name="memberId" value="${article.memberId}" readonly='readonly'/></TD>
+			<TD><input type="text" name="memberId" value="${article.member.memberId}" readonly='readonly'/></TD>
 			<TD></TD>
 		</TR>
 		<TR>
@@ -30,7 +30,7 @@
 			<TD>
 			<select name="articleType" style="min-width:100px; max-width:120px;">
 			<option value="news">情報</option>
-			<option value="solicit ">徵文</option>
+			<option value="solicit">徵文</option>
 			<option value="question">問題</option>
 			<option value="chat">閒聊</option>			
 			</select>
@@ -119,7 +119,7 @@ $(function(){
 		
 		if($('#editForm').validate().form()){
 			$.ajax({
-				url:'/articles/insert',
+				url:'/articles/update',
 				type:'post',
 				contentType:'application/json;charset=UTF-8',
 				data:JSON.stringify($('#editForm').serializeObject()),

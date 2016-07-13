@@ -53,7 +53,6 @@
 </head>
 <body>
 	
-					<a href='https://www.google.com.tw'></a>
 	<!-- 內文全部用wrapper包起來 -->
 	<div id="wrapper">
 	

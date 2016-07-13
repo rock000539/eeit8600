@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,9 +28,6 @@ public class Article {
 	@Column(name = "ARTICLEID")
 	private Long articleId;
 	
-	@Column(name = "MEMBERID")	
-	private Long memberId;
-	
 	@Column(name = "ARTICLETYPE" ,length=10)
 	@Enumerated(EnumType.STRING)
 	private ArticleType articleType;
@@ -43,45 +41,39 @@ public class Article {
 	@Column(name = "ARTICLETIME")
 	private java.sql.Date articleTime;
 	
-	@Column(name = "ARTICLECOLLECT")
+	@Column(name = "ARTICLECOLLECT") //文章收藏數
 	private Integer	articleCollect;
 	
 	@Column(name = "ARTICLESHOW")
 	private Boolean articleShow;
 	
-	@Column(name = "ARTICLEREPORT")
+	@Column(name = "ARTICLEREPORT") //文章檢舉次數
 	private Integer articleReport;
 	
-	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏
+	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏者
 	private Set<Member> members;
 	
 	@ManyToOne
 	@JoinColumn(name="memberID_author")	//文章撰寫作者
 	private Member member;
+	
+	@Transient
+	private Long memberId;
 
 	@Override
 	public String toString() {
-		return "Article [articleId=" + articleId + ", memberId=" + memberId + 
-				", articleType=" + articleType + ", articleTitle=" + articleTitle + 
-				", article=" + article + ", articleTime=" + articleTime + 
-				", articleCollect=" + articleCollect + ", articleShow=" + articleShow + 
-				", articleReport=" + articleReport + "]";
+		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
+				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
+				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", members=" + members
+				+ ", member=" + member + ", memberId=" + memberId + "]";
 	}
 
 	public Long getArticleId() {
 		return articleId;
 	}
-
+	
 	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
-	}
-
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
 	}
 
 	public ArticleType getArticleType() {
@@ -155,8 +147,14 @@ public class Article {
 	public void setMembers(Set<Member> members) {
 		this.members = members;
 	}
-	
-	
+
+	public Long getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
+	}
 	
 	
 }

@@ -5,7 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/fms/style.css">
+<link rel="stylesheet" href="/css/fms/fms-customize.css">
+
 <title>Qutie MemberZone</title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" media="all">

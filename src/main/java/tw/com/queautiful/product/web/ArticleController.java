@@ -1,8 +1,14 @@
 package tw.com.queautiful.product.web;
 
 import java.sql.Date;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +23,8 @@ import tw.com.queautiful.product.service.MemberService;
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ArticleService articleService;
@@ -29,6 +37,21 @@ public class ArticleController {
 		return "/article/articleList";
 	}
 	
+	@RequestMapping("/select")
+	@ResponseBody
+	public List<Article> select(){
+		return articleService.getAll();
+	}
+	
+	@RequestMapping("/select_jqgrid")
+	@ResponseBody
+	public Page<Article> select(@RequestParam(required=false) Integer page,
+			@RequestParam(required=false) Integer rows){
+		Pageable pageable= new PageRequest(page-1,rows);
+		Page<Article> articlePage = articleService.getAll(pageable);
+		return articlePage;
+	}
+	
 	@RequestMapping("/add")
 	public String addPage(){
 		return "/article/articleAdd";
@@ -38,9 +61,13 @@ public class ArticleController {
 	@ResponseBody
 	public Article insert(@RequestBody Article article){
 		article.setArticleTime(new Date(System.currentTimeMillis()));
+		
 		//insert FK : memberID 
-		Long memberId = 1L; //test
-		article.setMember(memberService.getById(memberId));
+//		Long memberId = 1L; //test
+//		article.setMember(memberService.getById(memberId));
+
+		log.debug("{}",article);
+		article.setMember(memberService.getById(article.getMemberId()));
 		articleService.insert(article);	
 		return article;
 	}
@@ -54,16 +81,18 @@ public class ArticleController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Article update(@RequestBody Article article){
+		log.debug("{}",article);
 		article.setArticleTime(new Date(System.currentTimeMillis()));
-		articleService.insert(article);	
+		article.setMember(memberService.getById(article.getMemberId()));
+		articleService.update(article);	
 		return article;
 	}
 	
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam Long articleId){
-		articleService.delete(articleId);
-		return "redirect:/articles/list";
+	@ResponseBody
+	public void delete(@RequestParam Article article){
+		articleService.delete(article.getArticleId());
 	}
 	
 	@RequestMapping("/article-page")

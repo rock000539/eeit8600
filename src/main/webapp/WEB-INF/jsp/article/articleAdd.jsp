@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/src/js/jquery.validate.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
 <title>Article Add</title>
 <style>
 
@@ -22,7 +22,7 @@
 <!-- 		</TR> -->
 		<TR>
 			<TD>會員ID:</TD>
-			<TD><input type="text" name="memberId" value="${param.memberId}"/></TD>
+			<TD><input type="text" name="memberId" value="${param.member.memberId}"/></TD>
 			<TD></TD>
 		</TR>
 		<TR>
@@ -30,7 +30,7 @@
 			<TD>
 			<select name="articleType" style="min-width:100px; max-width:120px;">
 			<option value="news">情報</option>
-			<option value="solicit ">徵文</option>
+			<option value="solicit">徵文</option>
 			<option value="question">問題</option>
 			<option value="chat">閒聊</option>			
 			</select>
@@ -76,7 +76,7 @@
 		</TR>
 	
 	</TABLE>
-<input type="button" name="save" id="save" value="save"/>
+<input type="button" name="save" id="save" value="save" />
 <input type="button" name="cancel" value="cancel" onclick="location='/articles/list'"/>
 </FORM>
 
