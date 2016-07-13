@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="post_content">
                                     <div class="post_meta">
-                                        <h2>${review.reviewTitle}</h2>
+                                    <h2>${review.reviewTitle}</h2>
                                         <div class="metaInfo">
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
                                             <span><a href="#"><i class="fa fa-user"></i> By Louis</a> </span> <!--抓會員暱稱 -->                          

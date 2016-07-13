@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.web;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -157,11 +161,15 @@ public class ProductController {
 	@RequestMapping("/list_fms")
 	public String listFmsPage(
 			@RequestParam(required=false) Long brandId,
-			@RequestParam(required=false) Long categoryId, 
+			@RequestParam(required=false) Long categoryId,
+			@RequestParam(required=false, defaultValue="1") Integer page,
+			@RequestParam(required=false, defaultValue="5") Integer rows,
 			Model model) {
 		
-//		log.debug("brandId = {}", brandId);
-//		log.debug("categoryId = {}", categoryId);
+		log.debug("brandId = {}", brandId);
+		log.debug("categoryId = {}", categoryId);
+		log.debug("page = {}", page);
+		log.debug("rows = {}", rows);
 		
 //		if(brandId != null) {
 //			model.addAttribute("products", brandService.getById(brandId).getProducts());
@@ -169,7 +177,9 @@ public class ProductController {
 //			model.addAttribute("products", categoryService.getById(categoryId).getProducts());
 //		}
 		
-		model.addAttribute("products", prodService.getById(1L));
+		Pageable pageable = new PageRequest(page, rows);
+		Page<Product> pages = prodService.getAll(pageable);
+		model.addAttribute("products", pages.getContent());
 		
 		return "/product/productListFms";
 	}

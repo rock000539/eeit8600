@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -164,160 +166,45 @@
 	
 	<div class="col-lg-6 blog_medium row wow fadeInDown" style="margin-top:50px;">
 		
-		<article class="post">
-			<figure class="post_img effect-bubba" style="margin-left:50px;">
-				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
-				
-				<div class="option">
-				    <a href="portfolio_single.html" class="fa fa-link"></a>
-				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
-				</div>
-				
-				<figcaption>
-				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
-		        </figcaption>
-			</figure>
-			<div class="post_content">
-				<div class="post_meta">
-					<h2>
-						<a href="#">產品名稱1</a>
-					</h2>
-					<div class="metaInfo">
-						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
-						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
-						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+		<c:forEach items="${products}" var="product">
+			<article class="post">
+			
+				<figure class="post_img effect-bubba" style="margin-left:50px;">
+					<img src="http://localhost:8080/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
+					
+					<div class="option" style="margin-top:30px;">
+					    <a href="#" class="fa fa-link"></a>
+					    <a href="http://localhost:8080/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
 					</div>
-				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
-				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
-            </div>
+					
+<!-- 					<figcaption> -->
+<!-- 					    <h6 style="margin-top:20px;">查看圖片或商品</h6> -->
+<!-- 			        </figcaption> -->
+				</figure>
 				
-		</article>
-		
-		<article class="post">
-			<figure class="post_img effect-bubba" style="margin-left:50px;">
-				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
-				
-				<div class="option">
-				    <a href="portfolio_single.html" class="fa fa-link"></a>
-				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
-				</div>
-				
-				<figcaption>
-				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
-		        </figcaption>
-			</figure>
-			<div class="post_content">
-				<div class="post_meta">
-					<h2>
-						<a href="#">產品名稱1</a>
-					</h2>
-					<div class="metaInfo">
-						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
-						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
-						<span><i class="fa fa-comments"></i> 12 Reviews </span>
+				<div class="post_content">
+					<div class="post_meta">
+						<h2>
+							<a href="#">${product.prodName}</a>
+						</h2>
+						<div class="metaInfo">
+							<span><i class="fa fa-calendar"></i> ${product.launchDate} </span>
+							<span><i class="fa fa-tag"></i> ${product.brand.brandName} </span>
+							<span><i class="fa fa-comments"></i> ${product.reviews.size()} </span>
+						</div>
 					</div>
-				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
-				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
-            </div>
-				
-		</article>
-		
-		<article class="post">
-			<figure class="post_img effect-bubba" style="margin-left:50px;">
-				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
-				
-				<div class="option">
-				    <a href="portfolio_single.html" class="fa fa-link"></a>
-				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
-				</div>
-				
-				<figcaption>
-				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
-		        </figcaption>
-			</figure>
-			<div class="post_content">
-				<div class="post_meta">
-					<h2>
-						<a href="#">產品名稱1</a>
-					</h2>
-					<div class="metaInfo">
-						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
-						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
-						<span><i class="fa fa-comments"></i> 12 Reviews </span>
-					</div>
-				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
-				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
-            </div>
-				
-		</article>
-		
-		<article class="post">
-			<figure class="post_img effect-bubba" style="margin-left:50px;">
-				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
-				
-				<div class="option">
-				    <a href="portfolio_single.html" class="fa fa-link"></a>
-				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
-				</div>
-				
-				<figcaption>
-				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
-		        </figcaption>
-			</figure>
-			<div class="post_content">
-				<div class="post_meta">
-					<h2>
-						<a href="#">產品名稱1</a>
-					</h2>
-					<div class="metaInfo">
-						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
-						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
-						<span><i class="fa fa-comments"></i> 12 Reviews </span>
-					</div>
-				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
-				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
-            </div>
-				
-		</article>
-		
-		<article class="post">
-			<figure class="post_img effect-bubba" style="margin-left:50px;">
-				<img src="/images/portfolio/portfolio_2.png" alt="blog post">
-				
-				<div class="option">
-				    <a href="portfolio_single.html" class="fa fa-link"></a>
-				    <a href="/images/portfolio/portfolio_2.png" class="fa fa-search mfp-image"></a>
-				</div>
-				
-				<figcaption>
-				    <h5 style="margin-top:20px;">查看圖片或商品</h5>
-		        </figcaption>
-			</figure>
-			<div class="post_content">
-				<div class="post_meta">
-					<h2>
-						<a href="#">產品名稱1</a>
-					</h2>
-					<div class="metaInfo">
-						<span><i class="fa fa-calendar"></i> Nov 20, 2015 </span>
-						<span><i class="fa fa-tag"></i> 品牌名稱 </span>
-						<span><i class="fa fa-comments"></i> 12 Reviews </span>
-					</div>
-				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip ...</p>
-				<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-				<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
-            </div>
-				
-		</article>
+					<c:if test="${fn:substring(prodDesc.prodDesc, 0, 2) == '內文' }">
+						<p>Lorem ipsum dolor sit amet, consectetur adip ... </p>
+					</c:if>
+					<c:if test="${fn:substring(prodDesc.prodDesc, 0, 2) != '內文' }">
+						<p>${fn:substring(review.review, 0, 25)} ... </p>
+					</c:if>
+					<a class="btn btn-small btn-default" href="#" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
+					<a class="btn btn-small btn-default" href="#" style="margin-top:10px;"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+	            </div>
+					
+			</article>
+		</c:forEach>
 		
 		<div class="col-sm-12 text-center">
 	        <ul class="pagination">
@@ -351,7 +238,8 @@
 	
 		$(function() {
 			
-			console.log("${products}");
+			console.log("${products.size()}");
+			console.log("${products[0].reviews.size()}");
 		
 		});
 		

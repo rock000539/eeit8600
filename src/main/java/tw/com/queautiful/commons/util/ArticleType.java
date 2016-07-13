@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum ArticleType {
 
-	@JsonProperty(value="news")
-	NEWS,
+	@JsonProperty(value="news") //轉JSON時用到
+	NEWS, //存進DB/呼叫時 用到
 	
 	@JsonProperty(value="solicit")
 	SOLICIT,

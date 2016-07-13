@@ -7,8 +7,24 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>存取權限不足</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
+    
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/js/fms/swipe.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+
 <style>
+#titleHead{
+text-align : center;}
 .error {
 	padding: 15px;
 	margin-bottom: 20px;
@@ -30,13 +46,19 @@
 }
 
 #login-box {
-	width: 350px;
+	width: 400px;
+	height:200px;
 	padding: 20px;
 	margin: 100px auto;
 	background: #fff;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border: 1px solid #000;
+}
+#login-box div{text-align : center;
+}
+#logoutBtn{float: right;
+background-color:#f49A80;
 }
 </style>
 <script src="/src/js/jquery-2.2.4.js"></script>
@@ -49,21 +71,21 @@ $(function(){
 </script>
 </head>
 <body>
-	<h1>權限不足</h1>
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+	<div id="titleHead"><h1>權限不足</h1></div>
 	<div id="login-box">
-		<h2>請先登出目前帳號，再重新登入</h2>
+		<div><h2>請先登出目前帳號，再重新登入</h2><br></div>
 
 		<form th:action="@{/loginBms}" method="post">
-			<table>		
-				<tr>
-					<td colspan='2'><input name="button" type="button" value="回前頁"  id="prePage"/></td>
-					<td colspan='2'><input type="button" value="log out"
+				<input name="button" type="button" value="回前頁" class="btn btn-block " id="prePage"/>
+				<input type="button" class="btn btn-warning  btn-block " value="log out" id="logoutBtn"
 						onclick="location='/logout'" /></td>
-				</tr>
-			</table>
+				
+			
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
 	</div>
+	<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 </body>
 </html>
