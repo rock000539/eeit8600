@@ -100,13 +100,16 @@ public class Member {
 	@OrderBy("ARTICLETIME DESC")
 	private Set<Article> articlesWorteByAuthor;
 	
+	//心得
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	private List<Review> reviews;
+	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
 	
 	@Transient
 	private MultipartFile memberImgFile;
-	
-	
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", email=" + email + ", articlesSavedByMember=" + articlesSavedByMember
@@ -305,6 +308,19 @@ public class Member {
 	public void setArticlesWorteByAuthor(Set<Article> articlesWorteByAuthor) {
 		this.articlesWorteByAuthor = articlesWorteByAuthor;
 	}
-
 	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public void addReviews(Review review){
+		this.reviews.add(review);
+		if(review.getMember()!=this){
+			review.setMember(this);
+		}
+	}
 }

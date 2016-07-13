@@ -5,97 +5,158 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>收藏產品清單</title>
+<title>My Cosmetic Expired List</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
 	<!-- CSS -->
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
 	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery-ui.min.js"></script>
 	<script src="https://use.typekit.net/riz5mva.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 <style>
-body{
-	font-family: source-han-sans-traditional
+body {
+	font-family: source-han-sans-traditional, Microsoft JhengHei, sans-serif;
+	padding-top: 70px;
 }
-#mainSpace{
-  width: 800px;
-  margin-top:100px;
-  margin-left: auto;
-  margin-right: auto;
-  }
- .ui-button{
- height: 50px;
- }
- #mainSpace img{
- width: 100px;
- height: 100px;
- }
- 
- /* service Box 6
-====================================*/
-.serviceBox_6{
-    background: #E8A1A7;
-    color:#fff;
-    padding:65px 85px;
-    margin: 0 -15px;
-    overflow: hidden;
+.portfolio-item {
+ 	padding: 15px; 
 }
-.row div:nth-child(3n+2) .serviceBox_6{
-    background: #E6C2AB;
-    color:#fff;
-    padding:65px 85px;
-    margin: 0 -15px;
-    overflow: hidden;
+.portfolio-all {
+	background-color: #ffffff;
 }
-.row div:nth-child(3n+3) .serviceBox_6{
-    background: #6EC686;
-    color:#fff;
-    padding:65px 85px;
-    margin: 0 -15px;
-    overflow: hidden;
+.portfolio-title{
+	height: 70px;
+	background-color: #98DaD6;  /*blue*/
+	border-bottom: 1px solid #4FBAAA;
+	color: white;
+	text-align: center;
+	padding: 10px;
 }
-.serviceBox_6 .service-content{
-    padding:0;
+#exprow div:nth-child(3n+1) .portfolio-title{ 
+	background-color: #FF9985;  /*pink F28E98*/
+	border-bottom: 1px solid #D97F88; 
+} 
+#exprow div:nth-child(3n+2) .portfolio-title{ 
+	background-color: #FFDFC8;  /*beige*/
+	border-bottom: 1px solid #E5C8B3; 
+} 
+.portfolio-title h3 {
+	font-size: 15px;
+ 	line-height: 15px; 
+	color: #ffffff;
+	margin: 5px;
 }
-.serviceBox_6 .service-content h3{
-    color:#fff;
+.portfolio-title small {
+	font-size: 22px;
+	margin: 10px;
 }
-.serviceBox_6 .service-content p{
-    font-size:14px;
-    line-height:29px;
-    margin-bottom:30px;
+.portfolio-content {
+	border: 1px solid #E7E6E6;
+	padding: 30px;
+	text-align: center;
 }
-.serviceBox_6 .service-content a{
-    background: hsla(0, 0%, 0%, 0);
-    border: 2px solid hsl(0, 0%, 97%);
-    border-radius:0;
-    color:#fff;
-    padding:9px 17px;
-    font-size:14px;
-    text-transform:uppercase;
-    transition:all 0.2s ease 0s;
-}
-.serviceBox_6 .service-content a:hover{
-    background-color: hsl(0, 0%, 97%);
-    color: hsl(0, 0%, 20%);
-}
-.serviceBox_6 .service-content .line{
-    border: 1px solid;
-    display: block;
-    width: 20%;
-    margin: 20px 0;
-}
-.serviceBox_6 .service-content a i{
-    margin-left:6px;
-}
+
 
 
 </style>
 
+
+</head>
+<body>
+<!--加入header&nav -->
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+			
+			<!-- **每頁不同的內容從這裡開始** -->
+				<div class="grey_bg row">
+
+<!-- Page Content -->
+<div class="container-fluid">
+<div class="col-lg-2"></div>
+<div class="col-lg-10">
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">文章收藏 <small>討論區</small></h1>
+        </div>
+    </div>
+    <!-- /.row -->
+<!-- ExpDate Row -->
+<div id="exprow" class="row">
+	<c:forEach items="${beans}" var="items">
+    <div class="col-md-4 portfolio-item">
+    	<div class="portfolio-all">
+	    	<div class="portfolio-title">
+	    		<small>${items.brandName}</small>
+		        <h3>${items.product.prodName}</h3>
+		    </div>
+		    <div class="portfolio-content">
+		        <a href="#">
+		            <img src="/products/show?prodId=${items.product.prodId}"/>
+		        </a>
+		        <h3><a href="#">Project Name</a></h3>
+		        <p>製造日期 ${items.mfd}</p>
+		        <p>到期日 ${items.exp}</p>
+		        <p>還有&nbsp;${items.lastsDay}&nbsp;天到期</p>
+	        </div>
+        </div>
+    </div><!-- portfolio -->
+    </c:forEach>
+</div> <!-- /.row -->
+</div> <!-- col -->
+</div> <!-- container -->
+
+
+
+<!-- ////////////////////////////////////////////////////////////////////-->
+<div id="mainSpace">
+<table class="table table-hover">
+<tr><td>產品圖片</td>
+	<td>產品名稱</td>
+	<td>製造日</td>
+	<td>到期日</td>
+	<td colspan="2"></td></tr>
+<c:forEach items="${beans}" var="items">
+ <tr>
+ 	<td><img src="/products/show?prodId=${items.product.prodId}"/></td>
+ 	<td>${items.product.prodName}</td>
+	<td>${items.mfd}</td> 
+	<td>${items.exp}</td> 	
+	
+	<td><input type="button" name="edit" value="edit" id="editDate" onclick='location="/expdate/edit?dateId=${items.expDate.dateId}"'></td>
+	<td><input type="button" name="${items.expDate.dateId}" value="deleteDate" class="deleteDate" ></td>
+	
+</tr>
+</c:forEach>
+
+</table>
+</div>
+<!-- 跳出刪除確認視窗 -->
+<div id="dialog-confirm" title="確定刪除這筆資料?" style="display: none">
+<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;" ></span>資料刪除後將不可回復<!-- 可在此輸入文字加在跳出視窗說明--></p>
+</div>
+<!-- ////////////////////////////////////////////////////////////////////-->
+
+
+</div>        
+            <!-- **每頁不同的內容結束** -->
+
+<!--加入footer -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/swipe.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 <script>
 $(function(){
  
@@ -140,59 +201,6 @@ $(function(){
         $('.same-height').matchHeight();
     }
 })
-</script>	
-
-</head>
-<body>
-<!-- ////////////////////////////////////////////////////////////////////-->
-
-<div class="row">
-<c:forEach items="${beans}" var="items">
-     <div class="col-sm-4">
-         <div class="serviceBox_6 same-height">
-             <div class="service-content">
-             	 <img src="/products/show?prodId=${items.product.prodId}"/>
-                 <h3>${items.product.prodName}</h3>
-                 <span class="line"></span>
-                 <p>製造日期 ${items.mfd}</p>
-                 <p>到期日 ${items.exp}</p>
-                 <a class="btn btn-default" href="/expdate/edit?dateId=${items.expDate.dateId}">&nbsp;&nbsp;Edit<i class="fa fa-thumbs-up"></i></a>
-                 <a class="btn btn-default" name="${items.expDate.dateId}" class="deleteDate" >Delete<i class="fa fa-thumbs-up"></i></a>
-             </div>
-         </div>
-     </div>
-</c:forEach>
-</div>
-
-
-<div id="mainSpace">
-<table class="table table-hover">
-<tr><td>產品圖片</td>
-	<td>產品名稱</td>
-	<td>製造日</td>
-	<td>到期日</td>
-	<td colspan="2"></td></tr>
-<c:forEach items="${beans}" var="items">
- <tr>
- 	<td><img src="/products/show?prodId=${items.product.prodId}"/></td>
- 	<td>${items.product.prodName}</td>
-	<td>${items.mfd}</td> 
-	<td>${items.exp}</td> 	
-	
-	<td><input type="button" name="edit" value="edit" id="editDate" onclick='location="/expdate/edit?dateId=${items.expDate.dateId}"'></td>
-	<td><input type="button" name="${items.expDate.dateId}" value="deleteDate" class="deleteDate" ></td>
-	
-</tr>
-</c:forEach>
-
-</table>
-</div>
-<!-- 跳出刪除確認視窗 -->
-<div id="dialog-confirm" title="確定刪除這筆資料?" style="display: none">
-<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;" ></span>資料刪除後將不可回復<!-- 可在此輸入文字加在跳出視窗說明--></p>
-</div>
- 
-<!-- ////////////////////////////////////////////////////////////////////-->
-			
+</script>		
 </body>
 </html>

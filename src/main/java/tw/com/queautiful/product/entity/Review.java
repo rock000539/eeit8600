@@ -25,13 +25,18 @@ public class Review {
 	@Column(name="REVIEWID")
 	private Long reviewId;
 	
-	@Column(name="MEMBERID")
+	@ManyToOne
+	@JoinColumn(name="MEMBERID")
+	@JsonIgnore
+	private Member member;
+
+	@Transient
 	private Long memberId;
 	
 	@ManyToOne
 	@JoinColumn(name="PRODID")//對應PRODUCT table的欄位PRODID
 	@JsonIgnore  //停止再返查回去product
-	private Product product;
+	private Product product;  //???
 
 	@Transient
 	private Long prodId;
@@ -77,15 +82,30 @@ public class Review {
 	public void setReviewId(Long reviewId) {
 		this.reviewId = reviewId;
 	}
-
-	public Long getMemberId() {
-		return memberId;
+	
+	public Member getMember() {
+		return member;
 	}
-
+	
+	public void setMember(Member member) {
+		this.member = member;
+		if(!member.getReviews().contains(this)){
+			member.getReviews().add(this);
+		}
+	}
+	
+	public Long getMemberId() {
+		if(this.memberId==null && member!=null){
+			return this.getMember().getMemberId();
+		}else{
+			return memberId;
+		}
+	}
+	
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
-
+	
 	public Product getProduct() {
 		return product;
 	}
