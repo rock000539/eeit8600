@@ -103,7 +103,7 @@ public class MemberController {
             }
         }
         model.addAttribute("beans", result);
-        return "/expDate/expDateList";
+        return "/expDate/test1";
     }
 	
 	//member文章收藏頁面
