@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
 	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery-ui.min.js"></script>
 
 <style>
@@ -42,8 +43,8 @@ body {
 	padding: 10px;
 }
 #exprow div:nth-child(3n+2) .portfolio-title{
-	background-color: #FFDFC8;	/*beige*/
-	border-bottom: 1px solid #E5C8B3;
+	background-color: #DDD5C9;	/*beige*/
+	border-bottom: 1px solid #C6BFB4;
 } 
 #exprow div:nth-child(3n+3) .portfolio-title{
 	background-color: #FF9985;	/*pink*/
@@ -87,6 +88,7 @@ body {
 .portfolio-btn {
 	margin-top: 20px;
 }
+
 </style>
 </head>
 <body>
@@ -124,11 +126,12 @@ body {
 		        <p>製造日期 ${items.mfd}</p>
 		        <p>到期日 ${items.exp}</p>
 		        <div class="portfolio-btn">
-			    <button class="btn btn-default">修改</button> &nbsp;
-			    <button class="btn btn-default">刪除</button>
-			    </div>
-	        </div>
-        </div>
+				    <button class="btn btn-default">修改</button> &nbsp;
+				    <button class="btn btn-default deleteDate">刪除</button>
+
+				</div>
+	        </div> <!-- portfolio-content -->
+        </div> <!-- portfolio-all -->
     </div><!-- portfolio -->
     </c:forEach>
 </div> <!-- /.row -->
@@ -136,13 +139,13 @@ body {
 </div> <!-- container -->
 
 
-
-
 <!-- 跳出刪除確認視窗 -->
 <div id="dialog-confirm" title="確定刪除這筆資料?" style="display: none">
 <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;" ></span>資料刪除後將不可回復<!-- 可在此輸入文字加在跳出視窗說明--></p>
 </div>
 <!-- ////////////////////////////////////////////////////////////////////-->
+
+
 
 
 </div>        
@@ -162,7 +165,6 @@ body {
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
 <script>
 $(function(){
- 
     $('.deleteDate').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
