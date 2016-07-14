@@ -58,7 +58,7 @@
 
                 <li><a href="/expdate/search">Date</a></li>
 
-                <li><a href="#">Ingredient</a>
+                <li><a href="/ingredients/main">Ingredient</a>
                     <ul class="dropdown-menu">
                         <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
                         <li><a href="/ingredients/SearchIngredient">Via Ingredient</a></li>
