@@ -91,6 +91,7 @@ public class Member {
 	//文章收藏
 	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JsonIgnore
+	@OrderBy("ARTICLETIME DESC")
 	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
 	private Set<Article> articlesSavedByMember;
 	

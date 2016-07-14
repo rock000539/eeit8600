@@ -36,6 +36,7 @@ import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.ExpDateService;
@@ -60,6 +61,7 @@ public class MemberController {
 	@Autowired
 	private BrandService brandService;
 	
+	//保存期限頁面
     @RequestMapping("/product-exp")
     public String listPage(Model model, HttpServletRequest request)
     {
@@ -103,24 +105,24 @@ public class MemberController {
             }
         }
         model.addAttribute("beans", result);
-        return "/expDate/test1";
+        return "/expDate/expDateList";
     }
 	
 	//member文章收藏頁面
-	@RequestMapping("/like")
-	public String memberLikedPage(Model model){
+	@RequestMapping("/like/article")
+	public String memberLikeArticlePage(Model model){
 		Member member = service.getById(1L); //test
 		Set<Article> articles = service.getById(1L).getArticlesSavedByMember();
 		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
-		return "/member/memberLike";
+		return "/member/memberLike-article";
 	}
 	
 	//取消文章收藏
-	@RequestMapping("/like/delete")
+	@RequestMapping("/like/article/delete")
 	@ResponseBody
-	public Member memberLikedDelete(@RequestParam Long articleId, Model model){
+	public Boolean memberLikedDelete(@RequestParam Long articleId, Model model){
 		Long memberId = 1L;//test
 		Member member = service.getById(memberId); //test
 		Set<Article> articles = member.getArticlesSavedByMember();
@@ -132,10 +134,14 @@ public class MemberController {
 			service.update(member);
 		}
 		log.debug("after delete: {} ,target: {}", articles.contains(article), article.getArticleId().toString());
-		return service.getById(memberId);
+		if(articles.contains(article)){
+			return false;
+		}
+		return true;
 	}
 	
-	@RequestMapping("/like/insert")
+	//新增文章收藏
+	@RequestMapping("/like/article/insert")
 	@ResponseBody
 	public Boolean memberLikedInsert(@RequestParam Long articleId){
 		Long memberId = 1L;//test
@@ -148,15 +154,34 @@ public class MemberController {
 		return true;
 	}
 	
-	//member文章頁面
-	@RequestMapping("/post")
-	public String memberPostPage(Model model){
+	//member文章收藏頁面
+	@RequestMapping("/like/review")
+	public String memberLikedReviewPage(Model model){
+		
+		return "/member/memberLike-review";
+	}
+	
+	
+	//member-post文章頁面
+	@RequestMapping("/post/article")
+	public String memberPostedArticlePage(Model model){
 		Member member = service.getById(1L); //test
 		Set<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
 		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
-		return "/member/memberPost";
+		return "/member/memberPost-article";
+	}
+	
+	//review-post頁面
+	@RequestMapping("/post/review")
+	public String memberPostedReviewPage(Model model){
+		Member member = service.getById(1L); //test
+		List<Review> reviews = service.getById(1L).getReviews();
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("member", member);
+		log.debug("memberId: {}, reviews: {}", member.getMemberId().toString(), reviews);
+		return "/member/memberPost-review";
 	}
 	
 	// 提供jqGrid抓取資料使用
