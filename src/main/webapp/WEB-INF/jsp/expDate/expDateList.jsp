@@ -15,7 +15,6 @@
 	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery-ui.min.js"></script>
 
 <style>
 body {
@@ -127,7 +126,7 @@ body {
 		        <p>到期日 ${items.exp}</p>
 		        <div class="portfolio-btn">
 				    <button class="btn btn-default">修改</button> &nbsp;
-				    <button class="btn btn-default deleteDate">刪除</button>
+				    <button class="btn btn-default deleteDate" name="${items.expDate.dateId}">刪除</button>
 
 				</div>
 	        </div> <!-- portfolio-content -->
@@ -163,6 +162,7 @@ body {
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
 <script>
 $(function(){
     $('.deleteDate').click(function(e){
@@ -181,10 +181,10 @@ $(function(){
           	$.ajax({
       		url:'/expdate/delete',
       		type : 'GET',
-      		data : {dateIdStr:dateIdStr},
+      		data : {"dateIdStr":dateIdStr},
       		success : function(date){
       		
-      		$(target).parent().parent().remove();
+      		$(target).parent().parent().parent().parent().remove();
       		}
       		})
       // 刪除功能-------------------------------- 		
