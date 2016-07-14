@@ -175,7 +175,12 @@
 </style>
 </head>
 <body>
-
+<!--加入header&nav -->
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+			
+<!-- **每頁不同的內容從這裡開始** -->
+	<div class="grey_bg row">
+				
 <!-- Page Content -->
 <div class="container-fluid">
 <div class="col-lg-2"></div>
@@ -246,17 +251,34 @@
         <!-- Pagination /.row -->
 </div>	<!-- /.col-md --> 
 </div> <!-- /.container -->
+
+
+</div>        
+ <!-- **每頁不同的內容結束** -->
+
+<!--加入footer -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+
+	<script type="text/javascript" src="/js/fms/swipe.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+	
 <script>
 $(function(){
-	$('.btnDislike').click(function(event){
+	$('.btnDislike').click(function(){
+		var btn1 = $(this);
 		var articleId = $(this).next().val();
 		$.ajax({
-			url:"/members/like/delete",
+			url:"/members/like/article/delete",
 			data:{"articleId": articleId},
 			type:'get',
 			success:function(result){
-				console.log(result);
-				location.reload();
+				if(result){
+					btn1.parent().parent().parent().parent().remove();
+				}
 			}
 		});
 	});

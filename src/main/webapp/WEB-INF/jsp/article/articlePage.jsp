@@ -131,7 +131,7 @@ $(function(){
 		var articleId = $(this).val();
 		console.log(articleId);
 		$.ajax({
-			url:"/members/like/insert",
+			url:"/members/like/article/insert",
 			data:{"articleId": articleId},
 			type:'get',
 			success:function(result){
