@@ -6,12 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -51,22 +54,29 @@ public class Article {
 	private Integer articleReport;
 	
 	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏者
+	@JsonIgnore
 	private Set<Member> members;
 	
 	@ManyToOne
 	@JoinColumn(name="memberID_author")	//文章撰寫作者
+	@JsonIgnore
 	private Member member;
 	
 	@Transient
 	private Long memberId;
+	
+	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY)
+	@OrderBy("ARTICLECMTIME DESC")
+	private Set<ArticleCM> acms;
+	
 
-	@Override
-	public String toString() {
-		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
-				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
-				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", members=" + members
-				+ ", member=" + member + ", memberId=" + memberId + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
+//				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
+//				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", members=" + members
+//				+ ", member=" + member + ", memberId=" + memberId + "]";
+//	}
 
 	public Long getArticleId() {
 		return articleId;
@@ -149,11 +159,19 @@ public class Article {
 	}
 
 	public Long getMemberId() {
-		return memberId;
+		return this.member.getMemberId();
 	}
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
+	}
+
+	public Set<ArticleCM> getAcms() {
+		return acms;
+	}
+
+	public void setAcms(Set<ArticleCM> acms) {
+		this.acms = acms;
 	}
 	
 	

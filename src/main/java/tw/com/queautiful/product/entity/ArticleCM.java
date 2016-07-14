@@ -5,7 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ARTICLECM")
@@ -16,28 +21,34 @@ public class ArticleCM {
 	@Column(name="ARTICLECMID")
 	private Long acmId;
 	
-	@Column(name="ARTICLEID")
-	private Long articleId;
-	
 	@Column(name="ARTICLECMMSG",length=200)
 	private String acmMsg;
-	
-	@Column(name="MEMBERID")
-	private Long memberId;
+
+	@Column(name="ARTICLECMTIME")
+	private java.sql.Date acmTime;
 	
 	@Column(name="ARTICLECMSHOW")
 	private Boolean acmShow;
 	
-	@Column(name="ARTICLECMREPORT")
+	@Column(name="ARTICLECMREPORT") //被檢舉次數
 	private Integer acmReport;
 	
-	@Override
-	public String toString() {
-		return "ArticleCM [acmId=" + acmId + ", articleId=" + articleId
-				+ ", acmMsg=" + acmMsg + ", memberId=" + memberId + ", acmShow="
-				+ acmShow + ", acmReport=" + acmReport + "]";
-	}
+	@ManyToOne
+	@JoinColumn(name="ARTICLEID") //留言對應文章
+	@JsonIgnore
+	private Article article;
 	
+	@Transient
+	private Long articleId;
+	
+	@ManyToOne
+	@JoinColumn(name="MEMBERID") //留言撰寫作者
+	@JsonIgnore
+	private Member member;
+	
+	@Transient
+	private Long memberId;
+
 	public Long getAcmId() {
 		return acmId;
 	}
@@ -45,15 +56,7 @@ public class ArticleCM {
 	public void setAcmId(Long acmId) {
 		this.acmId = acmId;
 	}
-	
-	public Long getArticleId() {
-		return articleId;
-	}
-	
-	public void setArticleId(Long articleId) {
-		this.articleId = articleId;
-	}
-	
+
 	public String getAcmMsg() {
 		return acmMsg;
 	}
@@ -62,12 +65,12 @@ public class ArticleCM {
 		this.acmMsg = acmMsg;
 	}
 	
-	public Long getMemberId() {
-		return memberId;
+	public java.sql.Date getAcmTime() {
+		return acmTime;
 	}
-	
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
+
+	public void setAcmTime(java.sql.Date acmTime) {
+		this.acmTime = acmTime;
 	}
 	
 	public Boolean getAcmShow() {
@@ -85,4 +88,43 @@ public class ArticleCM {
 	public void setAcmReport(Integer acmReport) {
 		this.acmReport = acmReport;
 	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+		if(!article.getAcms().contains(this)){
+			article.getAcms().add(this);
+		}
+	}
+
+	public Long getArticleId() {
+		return this.article.getArticleId();
+	}
+
+	public void setArticleId(Long articleId) {
+		this.articleId = articleId;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+		if(!member.getAcmsWroteByAuthor().contains(this)){
+			member.getAcmsWroteByAuthor().add(this);
+		}
+	}
+
+	public Long getMemberId() {
+		return this.member.getMemberId();
+	}
+
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
+	}
+	
 }

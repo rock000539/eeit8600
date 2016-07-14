@@ -90,19 +90,23 @@ public class Member {
 	
 	//文章收藏
 	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JsonIgnore
 	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
 	private Set<Article> articlesSavedByMember;
 	
 	//文章撰寫作者
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
-	@JsonIgnore
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 	@OrderBy("ARTICLETIME DESC")
 	private Set<Article> articlesWorteByAuthor;
 	
 	//心得
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
-	private List<Review> reviews;
+	@OrderBy("REVIEWID ASC")
+	private Set<Review> reviews;
+	
+	//文章留言
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OrderBy("ARTICLECMTIME DESC")
+	private Set<ArticleCM> acmsWroteByAuthor;
 	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
@@ -309,11 +313,11 @@ public class Member {
 		this.articlesWorteByAuthor = articlesWorteByAuthor;
 	}
 	
-	public List<Review> getReviews() {
+	public Set<Review> getReviews() {
 		return reviews;
 	}
 	
-	public void setReviews(List<Review> reviews) {
+	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
 
@@ -323,4 +327,13 @@ public class Member {
 			review.setMember(this);
 		}
 	}
+
+	public Set<ArticleCM> getAcmsWroteByAuthor() {
+		return acmsWroteByAuthor;
+	}
+
+	public void setAcmsWroteByAuthor(Set<ArticleCM> acmsWroteByAuthor) {
+		this.acmsWroteByAuthor = acmsWroteByAuthor;
+	}
+	
 }
