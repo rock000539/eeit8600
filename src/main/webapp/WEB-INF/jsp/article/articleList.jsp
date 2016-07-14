@@ -16,7 +16,7 @@
 	<!-- jqGrid js、css -->
     <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
     <script src="/js/trirand/jquery.jqGrid.min.js"></script>
-    <script src="/js/trirand/grid.inlinedit.js"></script>
+<!--     <script src="/js/trirand/grid.inlinedit.js"></script> -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
 
@@ -160,7 +160,7 @@
 				},
 				{
 					label: 'MemberID',
-					name: 'member.memberId',
+					name: 'memberId',
 					width: 80,
 					align: 'center',
 					resizable: false,
@@ -197,8 +197,13 @@
 				{
 					label: 'ArticleTime',
 					name: 'articleTime',
-					width: 100,
+					width: 180,
 					align: 'center',
+// 					formatter:function(cellvalue, options, rowObject){
+// 					//console.log(rowObject.articleTime);
+// 						var myDate = new Date(rowObject.articleTime);
+// 						return myDate.toLocaleString();
+// 					},
 					resizable: false,
 				},
 				{

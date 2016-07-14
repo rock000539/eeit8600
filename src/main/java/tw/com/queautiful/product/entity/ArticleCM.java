@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -25,7 +26,8 @@ public class ArticleCM {
 	private String acmMsg;
 
 	@Column(name="ARTICLECMTIME")
-	private java.sql.Date acmTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	private java.sql.Timestamp acmTime;
 	
 	@Column(name="ARTICLECMSHOW")
 	private Boolean acmShow;
@@ -65,11 +67,11 @@ public class ArticleCM {
 		this.acmMsg = acmMsg;
 	}
 	
-	public java.sql.Date getAcmTime() {
+	public java.sql.Timestamp getAcmTime() {
 		return acmTime;
 	}
 
-	public void setAcmTime(java.sql.Date acmTime) {
+	public void setAcmTime(java.sql.Timestamp acmTime) {
 		this.acmTime = acmTime;
 	}
 	

@@ -18,6 +18,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tw.com.queautiful.commons.util.ArticleType;
@@ -42,7 +43,8 @@ public class Article {
 	private String article;
 	
 	@Column(name = "ARTICLETIME")
-	private java.sql.Date articleTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	private java.sql.Timestamp articleTime;
 	
 	@Column(name = "ARTICLECOLLECT") //文章收藏數
 	private Integer	articleCollect;
@@ -70,13 +72,12 @@ public class Article {
 	private Set<ArticleCM> acms;
 	
 
-//	@Override
-//	public String toString() {
-//		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
-//				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
-//				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", members=" + members
-//				+ ", member=" + member + ", memberId=" + memberId + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
+				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
+				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", memberId=" + memberId + "]";
+	}
 
 	public Long getArticleId() {
 		return articleId;
@@ -110,11 +111,11 @@ public class Article {
 		this.article = article;
 	}
 
-	public java.sql.Date getArticleTime() {
+	public java.sql.Timestamp getArticleTime() {
 		return articleTime;
 	}
 
-	public void setArticleTime(java.sql.Date articleTime) {
+	public void setArticleTime(java.sql.Timestamp articleTime) {
 		this.articleTime = articleTime;
 	}
 
@@ -159,7 +160,11 @@ public class Article {
 	}
 
 	public Long getMemberId() {
-		return this.member.getMemberId();
+		if(this.memberId==null && this.member!=null){  //select
+		return this.getMember().getMemberId();
+		}else{ //update&insert
+			return this.memberId;
+		}
 	}
 
 	public void setMemberId(Long memberId) {

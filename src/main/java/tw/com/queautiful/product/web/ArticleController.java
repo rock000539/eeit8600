@@ -3,6 +3,7 @@ package tw.com.queautiful.product.web;
 import java.sql.Date;
 import java.util.List;
 
+import org.apache.hadoop.mapred.gethistory_jsp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class ArticleController {
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Article> select(){
+		List<Article> articles = articleService.getAll();
+		for(Article a:articles){
+			log.debug("{}",a.getArticleTime());
+		}
+		
 		return articleService.getAll();
 	}
 	
@@ -60,12 +66,12 @@ public class ArticleController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public Article insert(@RequestBody Article article){
-		article.setArticleTime(new Date(System.currentTimeMillis()));
+		article.setArticleTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		
 		//insert FK : memberID 
 //		Long memberId = 1L; //test
 //		article.setMember(memberService.getById(memberId));
-
+		log.debug("{}",article.getArticleTime());
 		log.debug("{}",article);
 		article.setMember(memberService.getById(article.getMemberId()));
 		articleService.insert(article);	
@@ -81,8 +87,10 @@ public class ArticleController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Article update(@RequestBody Article article){
-		log.debug("{}",article);
+//		log.debug("{}",article);
 //		article.setArticleTime(new Date(System.currentTimeMillis()));
+		log.debug("{}",article.getMemberId());
+		log.debug("{}",article);
 		article.setMember(memberService.getById(article.getMemberId()));
 		articleService.update(article);	
 		return article;
