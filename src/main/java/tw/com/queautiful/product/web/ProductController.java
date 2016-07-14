@@ -1,11 +1,11 @@
 package tw.com.queautiful.product.web;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +45,7 @@ public class ProductController {
 
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -173,16 +170,22 @@ public class ProductController {
 		log.debug("brandId = {}", brandId);
 		log.debug("categoryId = {}", categoryId);
 
-		// if(brandId != null) {
-		// model.addAttribute("products",
-		// brandService.getById(brandId).getProducts());
-		// } else if(categoryId != null) {
-		// model.addAttribute("products",
-		// categoryService.getById(categoryId).getProducts());
-		// }
-
+		// 篩選條件
+		Product product = new Product();
+		
+		if (brandId != null) {
+			product.setBrand(brandService.getById(brandId));
+			model.addAttribute("brandId", brandId);
+		} else if (categoryId != null) {
+			product.setCategory(categoryService.getById(categoryId));
+			model.addAttribute("categoryId", categoryId);
+		}
+		
+		// 初始頁碼、每頁幾筆資料
 		Pageable pageable = new PageRequest(0, 5);
-		Page<Product> pages = prodService.getAll(pageable);
+		
+		// 查詢資料
+		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
 
 		model.addAttribute("products", pages.getContent());
 		model.addAttribute("totalPage", pages.getTotalPages());
@@ -196,11 +199,16 @@ public class ProductController {
 			@RequestParam(required = false) Long categoryId, @RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer rows, Model model) {
 
-		Product product = null;
-		Pageable pageable = new PageRequest(page-1, rows);
+		log.debug("brandId = {}", brandId);
+		log.debug("categoryId = {}", categoryId);
+		log.debug("page = {}", page);
+		log.debug("rows = {}", rows);
 		
+		Product product = new Product();
+		Pageable pageable = new PageRequest(page - 1, rows);
+
 		Page<Product> pages = null;
-		
+
 		if (brandId != null) {
 			product.setBrand(brandService.getById(brandId));
 			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
@@ -211,14 +219,15 @@ public class ProductController {
 			pages = prodService.getAll(pageable);
 		}
 		
-
+		log.debug("pages.getContent = {}", pages.getContent());
+		
 		return pages.getContent();
 	}
 
 	@RequestMapping("/view_fms")
 	public String viewFmsPage(@RequestParam(required = false) Long prodId, Model model) {
 		log.debug("prodId = {}", prodId);
-		Product product = prodService.getById(1L);
+		Product product = prodService.getById(prodId);
 		log.debug("{}", product);
 		model.addAttribute("product", product);
 		return "/product/productViewFms";

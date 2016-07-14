@@ -104,15 +104,15 @@
         <div class="portfolio-centered">
             <div id="categoryContainer" class="recentitems portfolio">
 
-				<c:forEach items="${categories}" var="item">
-	                <div class="portfolio-item ${item.categoryTitle}">
+				<c:forEach items="${categories}" var="category">
+	                <div class="portfolio-item ${category.categoryTitle}">
 	                    <div class="box">
-	                        <img src="http://localhost:8080/categories/show?categoryId=${item.categoryId}">
+	                        <img src="http://localhost:8080/categories/show?categoryId=${category.categoryId}">
 	                        <div class="option inner">
 	                            <div>
-	                                <h5>${item.categoryName}</h5>
-	                                <a href="http://localhost:8080/categories/show?categoryId=${item.categoryId}" class="fa fa-search mfp-image"></a>
-	                                <a href="portfolio_single.html" class="fa fa-link"></a>
+	                                <h5>${category.categoryName}</h5>
+	                                <a href="http://localhost:8080/categories/show?categoryId=${category.categoryId}" class="fa fa-search mfp-image"></a>
+	                                <a class="fa fa-link" data-categoryId="${category.categoryId}" onClick="category_click($(this))" ></a>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -197,20 +197,29 @@
 			// Search Button Click
 			$('#search').on('click', function() {
 				console.log('search');
+				console.log($('#sbrand').val());
+				console.log($('#sprod').val());
 				if($('#sprod').val() == '') {
 					$.redirect('/products/list_fms', { 'brandId': $('#sbrand').val() });
 				} else if($('#sprod').val() != '') {
-					$.redirect('', { 'prodId': $('#sprod').val() });
+					$.redirect('/products/view_fms', { 'prodId': $('#sprod').val() });
 				}
 			});
 			
 			// Contact Button Click
 			$('#contact').on('click', function() {
-				console.log('contact');				
+				console.log('contact');			
 			});
+			
 			
 		});
 		
+		// Category Button Click
+		function category_click(a) {
+			console.log($(a).attr('data-categoryId'));
+			$.redirect('/products/list_fms', { 'categoryId': $(a).attr('data-categoryId') });
+		}
+
 	</script>
 	
 	<!-- Categories Items Animate -->
