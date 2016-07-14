@@ -33,11 +33,14 @@ $(function(){
 		'data':{"prodName":prodName},
 		'type' : 'GET',
 		'success': function (data){
-			
 			$('#productList').empty();
+			if(data.products.length==0){
+				$("#productList").append(
+"<div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無產品資料</div>")
+			};
+			
 		for(var i=0;i<data.products.length;i++){
-			$("#productList").append(
-					
+			$("#productList").append(					
 	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
 	+data.products[i].prodName+"</td><td><p><small>"+data.brands[i].brandName+"</small></p></td><td>"
 	+data.categorys[i].categoryName+"</td>"
@@ -60,7 +63,8 @@ $(function(){
 					$('#myModalLabel').empty();
 					$('#myModalLabel').append(data.productName);
 					if(data.ingredients.length==0){
-						$('#showArea').append("<h4>抱歉目前沒有此產品成份資料<h4>");
+						$('#showArea').append(
+		"<tr><td colspan='6'><div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無成份資料</div></td></tr>");
 					}else{
 					for(var i=0;i<data.ingredients.length;i++){							
  						$('#showArea').append(
@@ -92,18 +96,19 @@ $(function(){
 
 </script>
 <style>
-h3{   text-align: center;
-}
+
 .modal {
 height: 900px;
 margin-top:100px; }
 .modal-header{
 font-size: 50px;}
-.form-inline{
- width: 400px;
- margin-top:100px;
-  margin-left: auto;
-  margin-right: auto;
+#inputForm{
+ width: 450px;
+ margin: auto auto;
+font-size: 14px;
+}
+#inputTable{
+ width: 450px;
 }
 #searchIngredient{
 margin-left:20px;
@@ -118,16 +123,16 @@ margin-top: 50px;
 width:100px;
 height: 100px;
 }
+#productList span{
+margin: auto auto;
+}
 #searchbox { 
     padding: 20px;
     margin: auto auto;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
 }
-#inputForm{
-margin: auto auto;
-font-size: 14px;
-}
+
 button{color:white;
 }
 </style>
@@ -137,9 +142,9 @@ button{color:white;
 	<div class="grey_bg row">	
 <!-- top ////////////////////////////////////////////////////-->	
 <div id="searchbox">	
-<form action="" class="form-inline" id="inputForm">
-<table id="inputForm">
-<tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr><tr><td colspan="2"><br></td></tr> 
+<form action="" id="inputForm">
+<table id="inputTable">
+<tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h2></td></tr><tr><td colspan="2"><br></td></tr> 
 <tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td>
 <td  colspan="2"><button" id="searchIngredient" value="查產品" class="btn btn-default btn-lg button" style="margin-bottom: 10px;">查產品</button></td></tr>
 </table>

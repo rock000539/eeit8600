@@ -31,7 +31,6 @@ height: 900px;
 margin-top:100px; }
 .modal-header{
 font-size: 50px;}
-
 #searchbox { 
     padding: 20px;
     margin: auto auto;
@@ -46,12 +45,18 @@ width: 100px;
 height: 100px;
 }
 #inputForm{
+width:450px;
 margin: auto auto;
 font-size: 14px;
 }
 #searchBtn{
 margin-left:20px; }
+#IngredientName.width-remove{
+    width : auto;
+}
+
 </style>
+
 <script type="text/javascript">
 $(function(){//#1
 //功能1 成份查找產品--------------------------------
@@ -59,6 +64,7 @@ $(function(){//#1
 $(".searchProducts").click(function(e){//#1-2
 		var IngredientId=e.target.getAttribute("ingredId");
 		var ingredName=e.target.name;
+
 		$.ajax({
 			url:"/ingredients/IngredientFindProducts",
 			data: {"IngredientId":IngredientId},
@@ -66,6 +72,10 @@ $(".searchProducts").click(function(e){//#1-2
 			success:function(data){
 				$("#myModalLabel").text("使用"+ingredName+"相關產品清單");
  				$("#productTable tr[name*='productRow']").remove();
+ 				if(data.length==0){$('#productTable').append(
+ 	"<tr name='productRow'><td colspan='5'><div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無產品資料</div></td></tr>"					
+ 				);
+ 					}
  				for(var i=0;i<data.length;i++){
  					$('#productTable').append(
  		 			"<tr name='productRow'><td><a href='#'><img src='/products/show?prodId="+data[i].prodId+"'/>"
@@ -78,7 +88,7 @@ $(".searchProducts").click(function(e){//#1-2
  				$('#myModal').modal("toggle");
 				} 
 			});//end of $.ajax
-		
+
 		}//end of $(".searchProducts").click(function(e)#1-2
 		);
 
@@ -114,9 +124,9 @@ $(".searchProducts").click(function(e){//#1-2
 <div class="grey_bg row">
 <div id="searchbox">
 
-<form action="/ingredients/SearchIngredient" class="form-inline">
+<form action="/ingredients/SearchIngredient" >
 <table id="inputForm">
-<tr><td colspan="2"><h3>輸入成分之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
+<tr><td colspan="2"><h3>輸入成份之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
 <tr>
 <td><input type="text" name="ingredName" id="IngredientName" class="form-control"></td> 
 <td><input type="submit" class="btn btn-default btn-lg button"id="searchBtn" value="查成份"></td>
