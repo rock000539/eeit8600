@@ -133,5 +133,10 @@ public class IngredientController {
 		List<Map<String, Object>> resultList=prodIngreListService.IngredientFindProducts(IngredientId);	
 		return resultList;
 	}
-
+	
+	//前台首頁
+	@RequestMapping("/main")
+	public String IngredientMain(){
+		return "/ingredient/ingredientmain";
+	}
 }

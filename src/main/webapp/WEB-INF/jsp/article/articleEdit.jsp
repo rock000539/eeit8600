@@ -50,11 +50,11 @@
 			<TD></TD>
 		</TR>
 		<TR>
-<!-- 			<TD>發布時間:</TD> -->
-<!-- 			<TD> -->
-<%-- 			<input type="text" name="articleTime" value="${param.articleTime}"/> --%>
-<!-- 			</TD> -->
-			<TD><input type="hidden" id="articleTime"/></TD>
+			<TD>發布時間:</TD>
+			<TD>
+			<input type="text" name="articleTime" value="${article.articleTime}" readonly="readonly"/>
+			</TD>
+			<TD></TD>
 		</TR>
 		<TR>
 			<TD>收藏數:</TD>
@@ -111,10 +111,9 @@ $(function(){
 		},//end of messages
 		
 	});
-	
-	
-	$('#save').click(function(){
 		
+	$('#save').click(function(){
+
 		console.log(JSON.stringify($('#editForm').serializeObject()));
 		
 		if($('#editForm').validate().form()){

@@ -6,15 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tw.com.queautiful.commons.util.ArticleType;
@@ -39,7 +43,8 @@ public class Article {
 	private String article;
 	
 	@Column(name = "ARTICLETIME")
-	private java.sql.Date articleTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	private java.sql.Timestamp articleTime;
 	
 	@Column(name = "ARTICLECOLLECT") //文章收藏數
 	private Integer	articleCollect;
@@ -51,21 +56,27 @@ public class Article {
 	private Integer articleReport;
 	
 	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏者
+	@JsonIgnore
 	private Set<Member> members;
 	
 	@ManyToOne
 	@JoinColumn(name="memberID_author")	//文章撰寫作者
+	@JsonIgnore
 	private Member member;
 	
 	@Transient
 	private Long memberId;
+	
+	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY)
+	@OrderBy("ARTICLECMTIME DESC")
+	private Set<ArticleCM> acms;
+	
 
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
 				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
-				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", members=" + members
-				+ ", member=" + member + ", memberId=" + memberId + "]";
+				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", memberId=" + memberId + "]";
 	}
 
 	public Long getArticleId() {
@@ -100,11 +111,11 @@ public class Article {
 		this.article = article;
 	}
 
-	public java.sql.Date getArticleTime() {
+	public java.sql.Timestamp getArticleTime() {
 		return articleTime;
 	}
 
-	public void setArticleTime(java.sql.Date articleTime) {
+	public void setArticleTime(java.sql.Timestamp articleTime) {
 		this.articleTime = articleTime;
 	}
 
@@ -149,11 +160,23 @@ public class Article {
 	}
 
 	public Long getMemberId() {
-		return memberId;
+		if(this.memberId==null && this.member!=null){  //select
+		return this.getMember().getMemberId();
+		}else{ //update&insert
+			return this.memberId;
+		}
 	}
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
+	}
+
+	public Set<ArticleCM> getAcms() {
+		return acms;
+	}
+
+	public void setAcms(Set<ArticleCM> acms) {
+		this.acms = acms;
 	}
 	
 	
