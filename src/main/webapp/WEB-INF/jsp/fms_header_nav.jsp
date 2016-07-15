@@ -69,7 +69,7 @@
 
                 <li><a href="#"><span class="data-hover" data-hover="blog">Product</span></a></li>
 
-                <li><a href="#">Review</a></li>
+                <li><a href="/reviews/reviews">Review</a></li>
                 <li><a href="#">Article</a></li>
                 <li><a href="#">Ranking</a></li>
             </ul>

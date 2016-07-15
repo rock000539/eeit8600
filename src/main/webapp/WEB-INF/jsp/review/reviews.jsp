@@ -1,22 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- **taglib沒有的話記得要加入** -->
 
 <!-- **加入4個css，請按照此順序** -->
 <link href="/css/review/bootstrap-reviews.css" rel="stylesheet" >
-<link href="/css/review/bootstrap-theme.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/fms/style.css">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
 <link href="/css/review/reviews-customize.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/fms/fms-customize.css">
 <script src="/js/jquery.min.js"></script>
-
 
 <title>Reviews</title>
 </head>
 <body>
+<!--加入header&nav -->
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+			
+			<!-- **每頁不同的內容從這裡開始** -->
+				<div class="grey_bg row">
+				
+				
 <!-- <div class="container text-center" style="text-align: center"> -->
 <div class="container">
 <!-- <div class="row row-body"> -->
@@ -89,8 +98,22 @@
 <!-- row end --> 
 </div>
 
+
+</div>        
+            <!-- **每頁不同的內容結束** -->
+
+<!--加入footer -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+
+
 <!-- **加入2個js，請按照此順序** -->
 <script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/swipe.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 <script type="text/javascript">
 		
 		
