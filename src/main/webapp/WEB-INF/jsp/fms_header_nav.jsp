@@ -28,6 +28,9 @@
                 <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
                 </a>
             </li>
+              <li>
+                <a href="/logout"><span>logout</span></a>
+            </li>
          </c:if>
        
         </ul>
