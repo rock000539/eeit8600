@@ -104,16 +104,13 @@ public class ReviewController {
 		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 		
 		//會員年齡
-//		String y = service.getAll().get(0).getMember().getBirthDay().toString();
+//		String y = service.getAll().get ).getMember().getBirthDay().toString();
 //		log.debug("birthday={}",y);
-//		List<Integer> ages=new ArrayList<Integer>();
 		for(int i=0; i<list.size(); i++){
 			Integer age = memberService.getMemberAge(list.get(i).getMember().getBirthDay());
 			log.debug("x={}",age);
 			list.get(i).getMember().setAge(age);
 		}
-		//model.addAttribute("age", ages);
-		
 		return "/review/reviews";
 	}
 
