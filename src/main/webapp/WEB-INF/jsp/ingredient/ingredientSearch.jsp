@@ -136,20 +136,22 @@ $(".searchProducts").click(function(e){//#1-2
 </form>
 
 <table class="table">
+<c:if test="${not empty result}">
 <tr><th>成份名稱</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
 
-<%-- <c:forEach var="items" items="${result}"> --%>
-<!-- <tr> -->
-<%-- <td>${items.ingredName}</td> --%>
-<%-- <td>${items.ingredChName}</td> --%>
-<%-- <td>${items.ingredChar}</td> --%>
-<%-- <td>${items.ingredIrritant}</td> --%>
-<%-- <td>${items.ingredAcne}</td> --%>
-<%-- <td>${items.ingredSafety}</td> --%>
-<%-- <td ><button class="btn-info btn-sm btn-block searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}">查看使用產品資訊</button></td> --%>
-<!-- </tr> -->
-<%-- </c:forEach> --%>
-<c:set var="items" value="${result}" scope="request"/>
+<c:forEach var="items" items="${result}">
+<tr>
+<td>${items.ingredName}</td>
+<td>${items.ingredChName}</td>
+<td>${items.ingredChar}</td>
+<td>${items.ingredIrritant}</td>
+<td>${items.ingredAcne}</td>
+<td>${items.ingredSafety}</td>
+<td ><button class="btn-info btn-sm btn-block searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}">查看使用產品資訊</button></td>
+</tr>
+</c:forEach>
+</c:if>
+<c:set var="items" value="${resultStr}" scope="request"/>
 <c:if test="${items}" >
 <tr><td><div class="alert alert-danger alert-dismissable">請輸入文字進行搜尋</div></td></tr>
 </c:if>

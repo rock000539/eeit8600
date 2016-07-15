@@ -117,6 +117,7 @@ public class IngredientController {
 	@RequestMapping(value="/SearchIngredient",method=RequestMethod.POST) //開始成份找成份
 	public String search(String ingredName,Model model){
 		if(ingredName!=""&&ingredName!=null){
+			
 		List<Ingredient> result=new ArrayList<Ingredient>();
 				result=service.findByIngredName(ingredName);
 		List resultCn=service.findByIngredChName(ingredName);
@@ -127,7 +128,7 @@ public class IngredientController {
 		return "/ingredient/ingredientSearch";
 		}else{
 			
-			model.addAttribute("result", true);
+			model.addAttribute("resultStr", true);
 			return "/ingredient/ingredientSearch";
 		}
 	}

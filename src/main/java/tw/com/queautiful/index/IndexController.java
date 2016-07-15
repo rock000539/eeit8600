@@ -11,4 +11,9 @@ public class IndexController {
 		return "/fms";
 	}
 	
+	@RequestMapping("/test")
+	public String testPage() {
+		return "/test";
+	}
+	
 }
