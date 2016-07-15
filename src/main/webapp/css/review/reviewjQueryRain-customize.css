@@ -29,6 +29,23 @@
 	color:#BEBEBE; 沒有得分(灰色)
 }
 
+/*橫*/
+#userimg {
+    position: relative;
+    left: 20%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+/*直 */
+#userimg.portrait {
+    width: 100%;
+    height: auto;
+}
+
 
 
 /* 	width:270px; */

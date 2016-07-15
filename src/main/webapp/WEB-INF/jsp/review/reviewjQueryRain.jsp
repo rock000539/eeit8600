@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,20 +13,27 @@
     
     <!-- CSS FILES -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
     <link href="/css/review/style.css" rel="stylesheet" >
 	<link href="/css/review/reviewjQueryRain-customize.css" rel="stylesheet">
 	
 	<script src="/js/jquery.min.js"></script>
 </head> 
 <body>
+<!--加入header&nav -->
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+			
+			<!-- **每頁不同的內容從這裡開始** -->
+				<div class="grey_bg row">
+
+
 <!--start wrapper-->
 <section class="wrapper container">
     <!--Start Header-->
 
     <!--End Header-->
 
-        <section id="page_head" class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12">
 		<!-- start site search -->
 <!-- 			<div class="widget widget_search"
 				style="width: 200px; height: 40px; float: right">
@@ -43,21 +49,6 @@
 				
 			</div>
 		<!-- end site search -->
-
-		<div class="page_title">
-			<h2>Blog Post</h2>
-			<span class="sub_heading">Our Blog Sub Title</span>
-		</div>
-		<nav id="breadcrumbs">
-		<ul>
-			<li>You are here:</li>
-			<li><a href="index.html">Home</a></li>
-			<li>Blog</li>
-		</ul>
-		</nav>
-	</div>
-	</section>
-        
         <section class="content blog">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -75,8 +66,8 @@
                                     <h2>${review.reviewTitle}</h2>
                                         <div class="metaInfo">
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
-                                            <span><a href="#"><i class="fa fa-user"></i> By Louis</a> </span> <!--抓會員暱稱 -->                          
-                                            <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> <!--做html的boookmark -->
+                                            <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
+                                            <span><i class="fa fa-comments"></i> <a href="#Comments">12 Comments</a></span> <!--做動態抓留言數 -->
                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span>
                                         <!--心得評分 end-->
 											<span class="review-uc-diamond">
@@ -100,17 +91,19 @@
                                         
                                         </div>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    
+                                    <p>${review.review}</p>
                                     
                                     <blockquote class="default">
+                                       
+                                         <img class="reviewImg" src="/reviews/show?reviewId=${review.reviewId}" alt="reviewImg">
                                         Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque eget tempor tellus. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.
                                     </blockquote>
                                     
-                                    <p>Morbi augue velit, tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium hendrerit fermentum. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.</p>
+                                    <p>${review.review}</p>
                                     
-                                    <p>Donec in ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Cras suscipit, quam vitae adipiscing faucibus, risus nibh laoreet odio, a porttitor metus eros ut enim. Morbi augue velit, tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu duiport titor metus eros ut enim. </p>
                                 </div>
-                                <ul class="shares">
+                                <ul class="shares" id="shares">
                                     <li class="shareslabel"><h3>Share This Story</h3></li>
                                     <li><a class="twitter" href="#" data-placement="bottom" data-toggle="tooltip" title="Twitter"></a></li>
                                     <li><a class="facebook" href="#" data-placement="bottom" data-toggle="tooltip" title="Facebook"></a></li>
@@ -122,7 +115,8 @@
                             </article>
                             <div class="about_author">
                                 <div class="author_desc">
-                                    <img src="/images/review/author.png" alt="about author">
+<!--                                     <img src="/images/review/author.png" alt="about author"> -->
+                                    <img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
                                     <ul class="author_social">
                                         <li><a class="fb" href="#." data-placement="top" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>
                                         <li><a class="twtr" href="#." data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
@@ -142,7 +136,7 @@
                         <!--News Comments-->
                         <div class="news_comments">
                             <div class="dividerHeading">
-                                <h4><span>Comments (6)</span></h4>
+                                <h4 id="Comments"><span>Comments (6)</span></h4>
                             </div>
                             <div id="comment">
                                 <ul id="comment-list">
@@ -363,43 +357,47 @@
     <!--start footer-->
 
     <!--end footer-->
-
-    <section class="footer_bottom row">
-        <div class="col-sm-6">
-            <p class="copyright">&copy; Copyright 2015 Fortune | Powered by  <a href="http://www.jqueryrain.com/">jQuery Rain</a></p>
-        </div>
-
-        <div class="col-sm-6 ">
-            <div class="footer_social">
-                <ul class="footbot_social">
-                    <li><a class="fb" href="#." data-placement="top" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                    <li><a class="twtr" href="#." data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="dribbble" href="#." data-placement="top" data-toggle="tooltip" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a class="skype" href="#." data-placement="top" data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
-                    <li><a class="rss" href="#." data-placement="top" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
 </section>
 <!--end wrapper-->
+</div>        
+            <!-- **每頁不同的內容結束** -->
 
-<script type="text/javascript" src="/js/review/jquery-1.10.2.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+<!--加入footer -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+
+
+	<!--內縮的script是必加的 -->
+	<script type="text/javascript" src="/js/review/jquery-1.10.2.min.js"></script>
+  		  <script src="/js/bootstrap.min.js"></script>
     <script src="/js/review/jquery.easing.1.3.js"></script>
     <script src="/js/review/retina-1.1.0.min.js"></script>
     <script type="text/javascript" src="/js/review/jquery.cookie.js"></script> <!-- jQuery cookie -->
     <script type="text/javascript" src="/js/review/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/js/review/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/js/review/jquery.smartmenus.bootstrap.min.js"></script>
+          <script type="text/javascript" src="/js/review/jquery.smartmenus.min.js"></script>
+   		  <script type="text/javascript" src="/js/review/jquery.smartmenus.bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/review/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/js/review/jquery.magnific-popup.min.js"></script>
+   		  <script type="text/javascript" src="/js/review/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="/js/review/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/js/review/swipe.js"></script>
-    <script type="text/javascript" src="/js/review/jquery-scrolltofixed-min.js"></script>
-
+  		  <script type="text/javascript" src="/js/review/swipe.js"></script>
+    	  <script type="text/javascript" src="/js/review/jquery-scrolltofixed-min.js"></script>
+		  <script type="text/javascript" src="/js/fms/fms-main.js"></script>
     <script src="/js/review/main.js"></script>
+<script type="text/javascript">
+$(function () {  //=$(document.)ready
+	/*  ============ USER IMG =========== 	*/ 
+		var w = $('#userimg').width();
+		var h = $('#userimg').height();
+		if (h > w) {
+			$('#userimg').addClass('portrait');
+		} else {
+			$('#userimg').removeClass('portrait');
+		}
+		console.log('w=' + $('#userimg').width());
+		console.log('h=' + $('#userimg').height());
+});
 
+
+</script>
 
 
 

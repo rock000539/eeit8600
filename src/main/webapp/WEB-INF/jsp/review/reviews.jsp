@@ -33,7 +33,7 @@
 	  <div class="col-sm-6 col-md-3 body" name="body">
 	    <div class="thumbnail" >
 					<!-- Img start -->
-			<a href="/reviews/list" > <!-- ???連結要換成去一篇的心得頁面 -->
+			<a href="/reviews/reviewjQueryRain" > <!-- ???連結要換成去一篇的心得頁面 (動態)-->
 	    	<div class="reviewImg">
 	      		<img class="reviewImg-Img" src="/products/show?prodId=${review.prodId}">
 	      	</div></a>
@@ -80,10 +80,10 @@
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				
 				<!--心得內容Start -->
-				<a class="review-link" href="/reviews/list" > ${review.review}</a>
+				<a class="review-link" href="/reviews/reviewjQueryRain" > ${review.review}</a>
 				<!-- ???連結要換成去一篇的心得頁面 -->
 				 <!--心得內容end -->
-				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/list" > ${review.reviewTitle}</a>
+				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/reviewjQueryRain" > ${review.reviewTitle}</a>
 					<!-- ???連結要換成去一篇的心得頁面 -->
 <%-- 		      		<div  name="review-bottom-title" class="review-bottom-title" id="review-bottom-title">${review.reviewTitle}</div> --%>
 <!-- 		        </a> -->
