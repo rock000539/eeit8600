@@ -66,7 +66,7 @@
 						</div>
 						<!--心得評分  end -->
 						<!-- ???到時候抓會員的肌膚和年齡 -->
-						<div class="user-skin">${review.member.skinType}性肌膚、${age[review.reviewId-1]}歲</div>
+						<div class="user-skin">${review.member.skinType}性肌膚、${review.member.age}歲</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				

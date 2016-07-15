@@ -97,20 +97,22 @@ public class ReviewController {
 
 	@RequestMapping("/reviews")
 	public String reviews(Model model) throws ParseException {
-		model.addAttribute("reviews", service.getAll());
-		log.debug("{}",service.getAll());
+		
+		List<Review> list = service.getAll();
+		model.addAttribute("reviews", list);
+		log.debug("{}", list);
 		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 		
 		//會員年齡
 //		String y = service.getAll().get(0).getMember().getBirthDay().toString();
 //		log.debug("birthday={}",y);
-		List<Integer> ages=new ArrayList<Integer>();
-		for(int i=0;i<service.getAll().size();i++){
-			Integer age = memberService.getMemberAge(service.getAll().get(i).getMember().getBirthDay());
+//		List<Integer> ages=new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++){
+			Integer age = memberService.getMemberAge(list.get(i).getMember().getBirthDay());
 			log.debug("x={}",age);
-			ages.add(age);
+			list.get(i).getMember().setAge(age);
 		}
-		model.addAttribute("age", ages);
+		//model.addAttribute("age", ages);
 		
 		return "/review/reviews";
 	}

@@ -113,6 +113,9 @@ public class Member {
 	@Transient
 	private MultipartFile memberImgFile;
 
+	@Transient
+	private Integer age;
+	
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", email=" + email + ", articlesSavedByMember=" + articlesSavedByMember
@@ -325,4 +328,13 @@ public class Member {
 	public void setAcmsWroteByAuthor(Set<ArticleCM> acmsWroteByAuthor) {
 		this.acmsWroteByAuthor = acmsWroteByAuthor;
 	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
 }

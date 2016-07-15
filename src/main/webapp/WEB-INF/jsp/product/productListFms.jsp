@@ -20,6 +20,9 @@
 	<!-- CheckBox Plugin -->
 	<link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
 	
+	<!-- Pagination Plugin -->
+	<script src="/js/jquery.bootpag.min.js"></script>	
+	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
 	
@@ -226,7 +229,7 @@
 	            			<li class="active"><a>${index}</a></li>
 	            		</c:when>
 	            		<c:otherwise>
-				            <li><a onClick="page_click($(this))">${index}</a></li>
+				            <li><a>${index}</a></li>
 	            		</c:otherwise>
 	            	</c:choose>
 	            </c:forEach>
@@ -259,6 +262,11 @@
 			console.log("products.size() = ${products.size()}");
 			console.log("totalPage = ${totalPage}");
 			
+			var a_list = $('#page_btn li a');
+			for(var i=0; i<(a_list).length; i++) {
+				$(a_list[i]).on('click', function() { page_click(this); });
+			}
+			
 		});
 		
 		function info_click(a) {
@@ -269,8 +277,17 @@
 		function page_click(a) {
 			
 			console.log('page_index = '+$(a).text());
-			console.log('brandId = ${brandId}');
-			console.log('categoryId = ${categoryId}');
+// 			console.log('brandId = ${brandId}');
+// 			console.log('categoryId = ${categoryId}');
+			
+			if($(a).text() == '«') {
+				
+			} else {
+				
+			} 
+			
+			$('#page_btn li[class="active"]').removeClass('active').children().on('click', function() { page_click($(this)); });
+			$(a).off('click').parent().attr('class', 'active');
 			
 			$.ajax({
 				url: '/products/list_data',
