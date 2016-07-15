@@ -171,10 +171,10 @@ public class ProdIngreListController {
 
 	}
 
-	@RequestMapping("/get") // 前後台產品找成分ajax用
+	@RequestMapping(value="/get",method=RequestMethod.POST) // 前後台產品找成分ajax用
 	@ResponseBody
 	public Map<String, Object> search(@RequestParam String prodName) {
-
+		
 		List<Product> products = productService.findByProdNameEndsWith(prodName);
 
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
@@ -197,7 +197,7 @@ public class ProdIngreListController {
 		resultMap.put("products", products);
 		resultMap.put("categorys", categorys);
 		resultMap.put("brands", brands);
-
+		System.out.println(resultMap);
 		return resultMap;
 	}
 

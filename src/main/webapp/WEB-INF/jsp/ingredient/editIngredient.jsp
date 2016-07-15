@@ -326,7 +326,7 @@ $(function(){
 <!------------------------------ **每頁不同的內容從這裡開始**------------------- -->
                                 
                                 
-<teble id="mainTable"><tr><td ><span proid="${productId}">${productName}</span></td></tr>      
+<table id="mainTable"><tr><td ><span proid="${productId}">${productName}</span></td></tr>      
 <tr><td>                       
 <form action="" id="insertArea">
 <input class="ui-widget ui-autocomplete-input" autocomplete="on" id="IngredientName" >
@@ -336,6 +336,7 @@ $(function(){
 <span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
 
 <input type="button" id="insertIngredient" value="新增">
+<input type="submit">
 </form>
 </td></tr>
 
@@ -363,7 +364,7 @@ ${items.ingredName}
 <input type="button" class="btn btn-default" id="editIngredient" value="確認修改">
 </div> 
 </td></tr>
-
+</table>
 <!-- 使用model1 ----------------------------------------------------------------->
 
 

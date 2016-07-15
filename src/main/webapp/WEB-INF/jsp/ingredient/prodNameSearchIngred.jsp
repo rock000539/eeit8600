@@ -27,11 +27,11 @@
 $(function(){
 	$('#searchIngredient').click(function (){
 		var prodName=$("#prodName").val();
-	if(prodName!=""){
+	if(prodName!=""){alert("test");
 		$.ajax({
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
-		'type' : 'GET',
+		'type' : 'POST',
 		'success': function (data){
 			$('#productList').empty();
 			if(data.products.length==0){
@@ -146,9 +146,9 @@ button{color:white;
 <div id="searchbox">	
 <form action="" id="inputForm">
 <table id="inputTable">
-<tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h2></td></tr><tr><td colspan="2"><br></td></tr> 
+<tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr> 
 <tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td>
-<td  colspan="2"><button" id="searchIngredient" value="查產品" class="btn btn-default btn-lg button" style="margin-bottom: 10px;">查產品</button></td></tr>
+<td  colspan="2"><button id="searchIngredient" value="查產品" class="btn btn-default btn-lg button" style="margin-bottom: 10px;">查產品</button></td></tr>
 </table>
 </form>
 </div>
