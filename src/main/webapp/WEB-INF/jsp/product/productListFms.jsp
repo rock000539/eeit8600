@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
 	
 	<!-- Pagination Plugin -->
-	<script src="/js/jquery.bootpag.min.js"></script>	
+	<script src="/js/jquery.bootpag.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
@@ -44,7 +44,7 @@
 		a:hover {
   			cursor:pointer;
  		}
-		
+ 		
 	</style>
 
 </head>
@@ -216,26 +216,11 @@
 					<a class="btn btn-small btn-default" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
 					<a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 	            </div>
-					
+			
 			</article>
 		</c:forEach>
 		
-		<div id="page_btn" class="col-sm-12 text-center">
-	        <ul class="pagination">
-	            <li><a href="#">&laquo;</a></li>
-	            <c:forEach var="index" begin="1" end="${totalPage}">
-	            	<c:choose>
-	            		<c:when test="${index == 1}">
-	            			<li class="active"><a>${index}</a></li>
-	            		</c:when>
-	            		<c:otherwise>
-				            <li><a>${index}</a></li>
-	            		</c:otherwise>
-	            	</c:choose>
-	            </c:forEach>
-				<li><a href="#">&raquo;</a></li>
-			</ul>
-    	</div>
+		<div id="page_btn" class="col-sm-12 text-center"></div>
 		
 	</div>
 	
@@ -262,118 +247,106 @@
 			console.log("products.size() = ${products.size()}");
 			console.log("totalPage = ${totalPage}");
 			
-			var a_list = $('#page_btn li a');
-			for(var i=0; i<(a_list).length; i++) {
-				$(a_list[i]).on('click', function() { page_click(this); });
-			}
+			$('#page_btn').bootpag({
+			   total: "${totalPage}",
+			   page: 1,
+			   maxVisible: 3,
+			   href: "#pro-page-{{number}}",
+			   leaps: false,
+			   next: 'next',
+			   prev: 'prev',
+			}).on('page', function(event, num){
+				$.ajax({
+					url: '/products/list_data',
+					type: 'POST',
+					dataType: 'json',
+					contextType: 'application/json; charset=utf-8;',
+					data: { 'brandId': '${brandId}', 'categoryId': '${categoryId}', 'page': num, 'rows': 5 },
+					success: function(response){
+						
+						// 刪除產品列表的元素
+						$('#post_list > article').remove();
+						
+						// 新增產品列表的元素
+						for(var i=0; i<response.length; i++) {
+							
+							var figure = $('<figure></figure>', 
+							{
+								'class': 'post_img effect-bubba',
+								css: {
+									'margin-left': '50px',
+							    },
+							});
+							
+							$('<img>', {
+								src: "http://localhost:8080/products/show?prodId=" + response[i].prodId,
+								css: {
+									'border': '1px solid #f2f2f2',
+							    },
+							}).appendTo(figure);
+									
+							$('<div></div>', {
+								"class": "option",
+								css: {
+									'margin-top': '30px',
+							    },
+							    html: '<a href="http://localhost:8080/products/show?prodId="' + response[i].prodId + ' class="fa fa-search mfp-image"></a><a href="#" class="fa fa-link"></a>',
+							}).appendTo(figure);
+							
+							var article = $('<article></article>', {
+								'class': 'post',
+							}).append(figure);
+							
+							var content = $('<div></div>', {
+								'class': 'post_content',
+							});
+							
+							var meta = $('<div></div>', {
+								'class': 'post_meta',
+							});
+							
+							$('<h2></h2>', {
+								text: response[i].prodName,
+							}).appendTo(meta);
+							
+							$('<div></div>', {
+								'class': 'metaInfo',
+								html: ' <span><i class="fa fa-calendar"></i>' + response[i].launchDate + ' </span><span><i class="fa fa-tag"></i> ' + response[i].brandName + '${product.brand.brandName} </span><span><i class="fa fa-comments"></i>' + $(response[i].reviews).size() + ' </span> '
+							}).appendTo(meta);
+							
+							meta.appendTo(content);
+							
+							var desc = '';
+							if(response[i].prodDesc.substring(0, 4) == '產品說明') {
+								desc = '<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>';
+							} else {
+								desc = '<p>' + response[i].prodDesc.substring(0, 25) + ' ... </p>'
+							}
+							
+							content.html(content.html() + desc + '<a class="btn btn-small btn-default" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a> <a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="' + response[i].prodId + '" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>');
+							
+							content.appendTo(article);
+							
+							article.insertBefore($('#page_btn'));
+							
+						}
+						
+						// 重跑列表載入動畫
+						new WOW().init();
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log(jqXHR);
+						console.log(textStatus);
+						console.log(errorThrown);
+					},
+				});
+			});
 			
 		});
 		
 		function info_click(a) {
 			console.log($(a).attr('data-prodId'));
 			$.redirect('/products/view_fms', { 'prodId': $(a).attr('data-prodId') });
-		}
-		
-		function page_click(a) {
-			
-			console.log('page_index = '+$(a).text());
-// 			console.log('brandId = ${brandId}');
-// 			console.log('categoryId = ${categoryId}');
-			
-			if($(a).text() == '«') {
-				
-			} else {
-				
-			} 
-			
-			$('#page_btn li[class="active"]').removeClass('active').children().on('click', function() { page_click($(this)); });
-			$(a).off('click').parent().attr('class', 'active');
-			
-			$.ajax({
-				url: '/products/list_data',
-				type: 'POST',
-				dataType: 'json',
-				contextType: 'application/json; charset=utf-8;',
-				data: { 'brandId': '${brandId}', 'categoryId': '${categoryId}', 'page': $(a).text() , 'rows': 5 },
-				success: function(response){
-					
-					// 刪除產品列表的元素
-					$('#post_list > article').remove();
-					
-					// 新增產品列表的元素
-					for(var i=0; i<response.length; i++) {
-						
-						var figure = $('<figure></figure>', 
-						{
-							'class': 'post_img effect-bubba',
-							css: {
-								'margin-left': '50px',
-						    },
-						});
-						
-						$('<img>', {
-							src: "http://localhost:8080/products/show?prodId=" + response[i].prodId,
-							css: {
-								'border': '1px solid #f2f2f2',
-						    },
-						}).appendTo(figure);
-								
-						$('<div></div>', {
-							"class": "option",
-							css: {
-								'margin-top': '30px',
-						    },
-						    html: '<a href="http://localhost:8080/products/show?prodId="' + response[i].prodId + ' class="fa fa-search mfp-image"></a><a href="#" class="fa fa-link"></a>',
-						}).appendTo(figure);
-						
-						var article = $('<article></article>', {
-							'class': 'post',
-						}).append(figure);
-						
-						var content = $('<div></div>', {
-							'class': 'post_content',
-						});
-						
-						var meta = $('<div></div>', {
-							'class': 'post_meta',
-						});
-						
-						$('<h2></h2>', {
-							text: response[i].prodName,
-						}).appendTo(meta);
-						
-						$('<div></div>', {
-							'class': 'metaInfo',
-							html: ' <span><i class="fa fa-calendar"></i>' + response[i].launchDate + ' </span><span><i class="fa fa-tag"></i> ' + response[i].brandName + '${product.brand.brandName} </span><span><i class="fa fa-comments"></i>' + $(response[i].reviews).size() + ' </span> '
-						}).appendTo(meta);
-						
-						meta.appendTo(content);
-						
-						var desc = '';
-						if(response[i].prodDesc.substring(0, 4) == '產品說明') {
-							desc = '<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>';
-						} else {
-							desc = '<p>' + response[i].prodDesc.substring(0, 25) + ' ... </p>'
-						}
-						
-						content.html(content.html() + desc + '<a class="btn btn-small btn-default" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a> <a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="' + response[i].prodId + '" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>');
-						
-						content.appendTo(article);
-						
-						article.insertBefore($('#page_btn'));
-						
-					}
-					
-					// 重跑列表載入動畫
-					new WOW().init();
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					console.log(jqXHR);
-					console.log(textStatus);
-					console.log(errorThrown);
-				},
-			});
-			
 		}
 		
 	</script>
