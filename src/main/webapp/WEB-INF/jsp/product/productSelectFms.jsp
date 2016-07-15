@@ -5,56 +5,31 @@
 <html>
 <head>
 	
+	<!-- 基本檔案 -->
 	<script src="/js/jquery.min.js"></script>
-	
 	<link href="/css/bootstrap.min.css" rel="stylesheet">	
 	<script src="/js/bootstrap.min.js"></script>
 	
-	<!-- Select2 Plugin --> <!-- https://goo.gl/iMeVYA -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-	
-	<!-- Electrify-Template -->
-    <link rel="stylesheet" href="/css/pselect/style.css">
-    <link rel="stylesheet" href="/css/pselect/wide.css">
+	<!-- Select2 Plugin -->
+	<link href="/css/product/select2.min.css" rel="stylesheet" />
+	<script src="/js/product/select2.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
 	
+	<!-- ThisPage Template -->
+	<link href="/css/product/product-select.css" rel="stylesheet" />
+	
+	<!-- Electrify-Template -->
+<!--     <link rel="stylesheet" href="/css/pselect/style.css"> -->
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductSelectPage</title>
-	
-	<style type="text/css">
-	
-		body {
-			font-size: 100%;
-			font-family: Microsoft JhengHei, "Droid Serif", serif;
-		}
-		
-		.serviceBox_4 .service-icon {
-			margin-left: 12px;
-		}
-		
-		.glyphicon-search {
-			margin-top: 30px;
-		}
-		
-		.box {
-			padding: 10px;
-			text-align: center;
-		}
-		
-		.box > img {
-			width: 200px;
-			height: 200px;
-		}
-		
-	</style>
 	
 </head>
 <body>
 
-	<section class="content service" style="padding-bottom: 10px;">
+	<section class="content service">
 		<div class="container">
 			<div class="row sub_content">
 			    <div class="col-lg-3"></div>
@@ -67,11 +42,11 @@
 			                <h2>選擇品牌名稱，搜尋產品！</h2>
 			            </div>
 			            <div class="row">
-							<select id="sbrand" class="js-example-basic-single" style="width: 80%;"></select>
+							<select id="sbrand" class="js-example-basic-single" style="width: 80%"></select>
 						</div>
 						<br/>
 						<div class="row">
-							<select id="sprod" class="js-example-basic-single" style="width: 80%;"></select>
+							<select id="sprod" class="js-example-basic-single" style="width: 80%"></select>
 						</div>
 						<br/>
 			            <div class="read">
@@ -107,7 +82,7 @@
 				<c:forEach items="${categories}" var="category">
 	                <div class="portfolio-item ${category.categoryTitle}">
 	                    <div class="box">
-	                        <img src="http://localhost:8080/categories/show?categoryId=${category.categoryId}">
+	                        <img src="http://localhost:8080/categories/show?categoryId=${category.categoryId}" style="width:200px; height:200px;">
 	                        <div class="option inner">
 	                            <div>
 	                                <h5>${category.categoryName}</h5>
@@ -124,13 +99,16 @@
         
     </section>
 	
-	<script src="/js/product/pselect/jquery-hoverdirection.min.js"></script>
-	<script src="/js/product/pselect/jquery.isotope.min.js"></script>
-
+	<!-- Product相關頁面共用檔案 -->
 	<script src="/js/product/jquery-scrolltofixed-min.js"></script>
 	<script src="/js/product/jquery.magnific-popup.min.js"></script>
     <script src="/js/product/jflickrfeed.js"></script>
     <script src="/js/product/swipe.js"></script>
+    <script src="/js/product/wow.min.js"></script>
+
+	<!-- 此頁面特定檔案 -->
+	<script src="/js/product/pselect/jquery-hoverdirection.min.js"></script>
+	<script src="/js/product/pselect/jquery.isotope.min.js"></script>
 	<script src="/js/product/pselect/main.js"></script>
 	
 	<script>
@@ -308,13 +286,10 @@
             
     	});
         
+    	// WOW Animation
+        new WOW().init();
+        
     </script>
 	
-	<script src="/js/product/wow.min.js"></script>
-    <script>
-        // WOW Animation
-        new WOW().init();
-    </script>
-    
 </body>
 </html>

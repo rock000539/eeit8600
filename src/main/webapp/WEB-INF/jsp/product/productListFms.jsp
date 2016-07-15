@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
 	
 	<!-- Pagination Plugin -->
-	<script src="/js/jquery.bootpag.min.js"></script>
+	<script src="/js/product/jquery.bootpag.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	

@@ -1,0 +1,756 @@
+
+/* =================================================================== */
+/* Import Section
+====================================================================== */
+@import url("../font-awesome.css");
+@import url("../magnified.css");
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 600;
+}
+
+body, h1, h2, h3, h4, h5, h6, .button, input[type="button"], input[type="submit"], input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    font-size: 100%;
+	font-family: Microsoft JhengHei, "Droid Serif", serif;
+/*     font-size: 13px; */
+    line-height: 20px;
+    color: #555;
+}
+
+h1 {
+    font-size: 28px;
+    line-height: 50px;
+}
+
+h2 {
+    font-size: 22px;
+    line-height: 30px;
+}
+h3 {
+    font-size: 16px;
+    line-height: 30px;
+}
+h4 {
+    font-size: 14px;
+    line-height: 30px;
+}
+h5 {
+    font-size: 12px;
+    line-height: 24px;
+}
+h6 {
+    font-size: 10px;
+    line-height: 20px;
+}
+
+body {
+	font-size: 100%;
+	font-family: Microsoft JhengHei, "Droid Serif", serif;
+}
+
+.content{
+    padding:30px 0 60px;
+    position: relative;
+}
+
+.super_sub_content{
+    padding: 60px 0;
+}
+
+a:focus, a:hover {
+    text-decoration: none;
+}
+
+.serviceBox_4 .service-icon {
+	margin-left: 12px;
+}
+
+.box > img {
+	width: 200px;
+	height: 200px;
+}
+
+.content .service {
+	padding-bottom: 10px;
+}
+
+/* ==================================================
+   TITLE
+================================================== */
+.dividerHeading,
+.widget_title{
+    margin-bottom: 25px;
+}
+.dividerHeading h4,
+.widget_title h4{
+    font-size: 21px;
+    font-weight: normal;
+    padding: 0 0 10px;
+    position: relative;
+    text-transform: capitalize;
+}
+
+.dividerHeading h4::before,
+.widget_title h4::before{
+    background: #727CB6;
+    border-radius: 0 5px 5px 0;
+    bottom: -1.5px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 50px;
+}
+
+.dividerHeading.text-center{
+    margin-bottom: 45px;
+}
+
+.dividerHeading.text-center h4{
+    font-size: 25px;
+}
+.dividerHeading.text-center h4::before{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    bottom: -40px;
+}
+.dividerHeading.text-center > span{
+    font-size: 18px;
+    color: #868889;
+    display: block;
+    margin: 15px 0 30px;
+}
+
+.widget_title h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.footer .widget_title h4
+{
+    border-color: #B5B5B5;
+}
+.footer .widget_title h4 span:before,
+.footer .widget_title h4 span:after{
+    color:#dfdfdf!important;
+}
+.footer .widget_title h4 span{
+    color:#fff;
+    padding:0;
+    background:#323A45;
+}
+
+/* ==================================================
+   serviceBox_4
+================================================== */
+.serviceBox_4 {
+    padding:25px 0;
+    margin-top: 50px;
+    border: 1px solid #c5c5c5;
+    position: relative;
+    text-align: center;
+}
+.serviceBox_4 .service-icon {
+    background: #727CB6;
+    border-radius: 100%;
+    color: #fff;
+    height: 88px;
+    line-height: 100px;
+    padding: 0;
+    position: absolute;
+    width: 88px;
+    top:-47px;
+    left:39%;
+}
+.serviceBox_4 .service-icon:before {
+    border: 3px solid #727CB6;
+    border-radius: 100%;
+    content: "";
+    height: 92px;
+    left: -2px;
+    position: absolute;
+    top: -2px;
+    transform: scale(1.1);
+    width: 92px;
+}
+.serviceBox_4 .service-icon i {
+    font-size: 40px;
+    margin: 0 7px 0 0;
+}
+.serviceBox_4 .service-content {
+    padding: 30px 0 12px;
+}
+.serviceBox_4 .service-content > h3{
+    color: #373a41;
+    font: bold 16px/1.2em 'Open Sans',Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+}
+.serviceBox_4 .service-content > p{
+    color: #8d9095;
+    font: 14px/23px 'Open Sans',Helvetica, Arial, sans-serif;
+    padding: 0 40px;
+}
+.serviceBox_4 .read i.fa-angle-right{
+    margin: 0 0 0 5px;
+}
+
+.serviceBox_4 .read a,
+.serviceBox_5 .read a{
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, #444A6D 0%, #444A6D 50%, #727CB6 50%) repeat scroll 100% 0 / 200% 100%;
+    color: #fff;
+}
+
+.serviceBox_4 .read a:hover,
+.serviceBox_5 .read a:hover
+{
+    background-position: 0 0;
+    color: #fff;
+}
+
+.btn-default{
+    background:#727CB6;
+    color:#fff;
+    border:none;
+    border-radius:2px;
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -ms-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out;
+}
+.btn-default:hover{
+    background:#444A6D;
+    color:#fff;
+}
+
+/* ========================================================== */
+/*  6. PORTFOLIO/PROJECTS                                     */
+/* ========================================================== */
+
+.isotope-item {
+    z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Isotope CSS3 transitions */
+.isotope,
+.isotope .isotope-item {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -ms-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.isotope {
+    -webkit-transition-property: height, width;
+       -moz-transition-property: height, width;
+        -ms-transition-property: height, width;
+         -o-transition-property: height, width;
+            transition-property: height, width;
+}
+
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+       -moz-transition-property: -moz-transform, opacity;
+        -ms-transition-property: -ms-transform, opacity;
+         -o-transition-property: top, left, opacity;
+            transition-property: transform, opacity;
+}
+
+/* Disabling Isotope CSS3 transitions */
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+    -webkit-transition-duration: 0s;
+    -moz-transition-duration: 0s;
+    -ms-transition-duration: 0s;
+    -o-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+/* Disable CSS transitions for containers with infinite scrolling */
+.isotope.infinite-scrolling {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+#portfolio{
+    width:100%;
+    padding-bottom:120px;
+    position:relative;
+    z-index:9;
+}
+#filter {
+    margin: 0 auto 25px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+#filter li {
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0 1px 10px;
+}
+#filter li a{
+    color:#505354;
+    padding:10px 20px;
+    font-size:14px;
+    position: relative;
+    line-height: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    -moz-transition: all .50s ease-in-out;
+    -webkit-transition: all .50s ease-in-out;
+    transition: all .50s ease-in-out;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    border-radius:3px;
+    outline:none;
+    text-decoration: none;
+}
+
+#filter li.selected a, #filter li a:hover{
+    color:#727CB6;
+}
+#filter li.selected a:after, #filter li a:hover:after {
+    background: #727CB6;
+    width: 100%;
+}
+#filter  li a:after,
+#filter  li a:before {
+    transition: all .5s;
+}
+#filter li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width:0%;
+    content: '.';
+    color: transparent;
+    height: 2px;
+}
+
+#filter li a:hover:after {
+    width: 100%;
+}
+
+#list{ margin-bottom:30px;padding: 0; }
+
+.list_item{
+    margin-bottom:3%;
+    overflow: hidden;
+}
+
+.recent-item .touching img{width: 100%;}
+
+.option h5{
+    margin:0 0 5%;
+    color: #fff;
+    font-size: 21px;
+}
+.option span{
+    display: block;
+    margin-top: 4%;
+    font-size: 18px;
+}
+
+.option a.fa {
+    background-color: transparent;
+    border-width: 2px;
+    color: #ffffff;
+    font-size: 18px;
+    height: 46px;
+    line-height: 43px;
+    width: 46px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.option a.fa:hover{
+    background-color: #fff;
+    color:rgba(114, 124, 181, 0.85);
+    transition:all 0.3s ease-in-out 0s;
+}
+.option a.fa-search{
+    margin-right: 1%;
+}
+.option a.fa-link{
+    margin-left: 1%;
+}
+
+/*---------- Large-images CSS ----------*/
+.large-images .option h5{
+    font-size:25px;
+}
+.large-images .option span{
+    font-size:20px;
+}
+
+/*---------- Small-images CSS ----------*/
+.small-images .option a.fa,
+.owl-carousel .option a.fa{
+    font-size: 16px;
+    height: 35px;
+    line-height: 32px;
+    width: 35px;
+}
+
+.small-images .option h5,
+.owl-carousel .option h5{
+    font-size: 18px;
+}
+.small-images .option span,
+.owl-carousel .option span{
+    font-size: 15px;
+}
+.small-images .inner > div {
+    height: 50%;
+}
+
+/* ==================================================
+   portfolio
+================================================== */
+
+.portfolio-centered .box{
+    margin: 0;
+}
+
+.portfolio-item img{
+    max-width: 100%;
+    height: auto;
+}
+
+.option a.fa,
+.small-images .option a.fa ,
+.owl-carousel .option a.fa{
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    line-height: 35px;
+}
+
+.option h5,
+.large-images .option h5,
+.small-images .option h5{
+    font-size: 155%;
+}
+
+.option span,
+.small-images .option span,
+.large-images .option span{
+    font-size: 115%;
+}
+
+.option h5{
+    margin:0 0 5%;
+    color: #fff;
+    font-size: 21px;
+}
+.option span{
+    display: block;
+    margin-top: 4%;
+    font-size: 18px;
+}
+
+.option a.fa {
+    background-color: transparent;
+    border-width: 2px;
+    color: #ffffff;
+    font-size: 18px;
+    height: 46px;
+    line-height: 43px;
+    width: 46px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.option a.fa:hover{
+    background-color: #fff;
+    color:rgba(114, 124, 181, 0.85);
+    transition:all 0.3s ease-in-out 0s;
+}
+.option a.fa-search{
+    margin-right: 1%;
+}
+.option a.fa-link{
+    margin-left: 1%;
+}
+
+/* ----------------------------------------------------
+  MASONRY PORTFOLIO STYLES
+------------------------------------------------------- */
+
+.inner > div {
+    position:absolute;
+    width: 90%;
+    height: 45%;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin:auto;
+}
+
+/* Hover Effect on Portfolio Image
+====================================*/
+
+.box {
+    background: #ddd;
+    cursor: pointer;
+    margin: 0 10px;
+    overflow: hidden;
+    position: relative;
+    
+    padding: 10px;
+	text-align: center;
+}
+.portfolio-centered .box{
+    margin: 0;
+}
+.inner {
+    background:rgba(114, 124, 181, 0.85);
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -webkit-animation-duration: 0.15s;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: forwards;
+
+    -moz-transform: translate3d(-100%, 0, 0);
+    -moz-animation-duration: 0.15s;
+    -moz-animation-timing-function: ease-out;
+    -moz-animation-fill-mode: forwards;
+
+    transform: translate3d(-100%, 0, 0);
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+/* Top */
+.box.hover-enter-top .inner {
+    -webkit-animation-name: slide_in_top;
+    -moz-animation-name: slide_in_top;
+    animation-name: slide_in_top;
+}
+.box.hover-leave-top .inner {
+    -webkit-animation-name: slide_out_top;
+    -moz-animation-name: slide_out_top;
+    animation-name: slide_out_top;
+}
+
+/* Right */
+.box.hover-enter-right .inner {
+    -webkit-animation-name: slide_in_right;
+    -moz-animation-name: slide_in_right;
+    animation-name: slide_in_right;
+}
+.box.hover-leave-right .inner {
+    -webkit-animation-name: slide_out_right;
+    -moz-animation-name: slide_out_right;
+    animation-name: slide_out_right;
+}
+
+/* Bottom */
+.box.hover-enter-bottom .inner {
+    -webkit-animation-name: slide_in_bottom;
+    -moz-animation-name: slide_in_bottom;
+    animation-name: slide_in_bottom;
+}
+.box.hover-leave-bottom .inner {
+    -webkit-animation-name: slide_out_bottom;
+    -moz-animation-name: slide_out_bottom;
+    animation-name: slide_out_bottom;
+}
+
+/* Left */
+.box.hover-enter-left .inner {
+    -webkit-animation-name: slide_in_left;
+    -moz-animation-name: slide_in_left;
+    animation-name: slide_in_left;
+}
+.box.hover-leave-left .inner {
+    -webkit-animation-name: slide_out_left;
+    -moz-animation-name: slide_out_left;
+    animation-name: slide_out_left;
+}
+
+/* Top */
+@-webkit-keyframes slide_in_top {
+    0%   { -webkit-transform: translate3d(0, -100%, 0); }
+    100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+@-webkit-keyframes slide_out_top {
+    0%   { -webkit-transform: translate3d(0, 0, 0); }
+    100% { -webkit-transform: translate3d(0, -100%, 0); }
+}
+@-moz-keyframes slide_in_top {
+    0%   { -moz-transform: translate3d(0, -100%, 0); }
+    100% { -moz-transform: translate3d(0, 0, 0); }
+}
+@-moz-keyframes slide_out_top {
+    0%   { -moz-transform: translate3d(0, 0, 0); }
+    100% { -moz-transform: translate3d(0, -100%, 0); }
+}
+@keyframes slide_in_top {
+    0%   { transform: translate3d(0, -100%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes slide_out_top {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, -100%, 0); }
+}
+
+/* Right */
+@-webkit-keyframes slide_in_right {
+    0%   { -webkit-transform: translate3d(100%, 0, 0); }
+    100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+@-webkit-keyframes slide_out_right {
+    0%   { -webkit-transform: translate3d(0, 0, 0); }
+    100% { -webkit-transform: translate3d(100%, 0, 0); }
+}
+@-moz-keyframes slide_in_right {
+    0%   { -moz-transform: translate3d(100%, 0, 0); }
+    100% { -moz-transform: translate3d(0, 0, 0); }
+}
+@-moz-keyframes slide_out_right {
+    0%   { -moz-transform: translate3d(0, 0, 0); }
+    100% { -moz-transform: translate3d(100%, 0, 0); }
+}
+@keyframes slide_in_right {
+    0%   { transform: translate3d(100%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes slide_out_right {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(100%, 0, 0); }
+}
+
+/* Bottom */
+@-webkit-keyframes slide_in_bottom {
+    0%   { -webkit-transform: translate3d(0, 100%, 0); }
+    100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+@-webkit-keyframes slide_out_bottom {
+    0%   { -webkit-transform: translate3d(0, 0, 0); }
+    100% { -webkit-transform: translate3d(0, 100%, 0); }
+}
+@-moz-keyframes slide_in_bottom {
+    0%   { -moz-transform: translate3d(0, 100%, 0); }
+    100% { -moz-transform: translate3d(0, 0, 0); }
+}
+@-moz-keyframes slide_out_bottom {
+    0%   { -moz-transform: translate3d(0, 0, 0); }
+    100% { -moz-transform: translate3d(0, 100%, 0); }
+}
+@keyframes slide_in_bottom {
+    0%   { transform: translate3d(0, 100%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes slide_out_bottom {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, 100%, 0); }
+}
+
+/* Left */
+@-webkit-keyframes slide_in_left {
+    0%   { -webkit-transform: translate3d(-100%, 0, 0); }
+    100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+@-webkit-keyframes slide_out_left {
+    0%   { -webkit-transform: translate3d(0, 0, 0); }
+    100% { -webkit-transform: translate3d(-100%, 0, 0); }
+}
+@-moz-keyframes slide_in_left {
+    0%   { -moz-transform: translate3d(-100%, 0, 0); }
+    100% { -moz-transform: translate3d(0, 0, 0); }
+}
+@-moz-keyframes slide_out_left {
+    0%   { -moz-transform: translate3d(0, 0, 0); }
+    100% { -moz-transform: translate3d(-100%, 0, 0); }
+}
+@keyframes slide_in_left {
+    0%   { transform: translate3d(-100%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes slide_out_left {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* ===================================================== */
+/* 33. Button Up										 */
+/* ===================================================== */
+.btntoTop {
+    width: 44px;
+    height: 44px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #727CB6;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 40px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 999;
+    -webkit-transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease;
+}
+.btntoTop:before {
+    content: "\f106";
+    display: inline-block;
+    vertical-align: middle;
+    font: 20px 'FontAwesome';
+    color: #fff;
+}
+.btntoTop.active {
+    opacity: 1;
+}
+.btntoTop.active:hover{
+    background-color: #464D71;
+}
+
+/* ==================================================
+   Media Query
+================================================== */
+@media only screen and (max-width:768px) {
+	.super_sub_content {
+	    padding: 40px 0;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+	.serviceBox_4 .service-icon { 
+		left: 66px; 
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.serviceBox_4 {
+		margin-bottom: 80px;
+	}
+}
+
