@@ -28,6 +28,9 @@
                 <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
                 </a>
             </li>
+              <li>
+                <a href="/logout"><span>logout</span></a>
+            </li>
          </c:if>
        
         </ul>
@@ -61,7 +64,7 @@
                 <li><a href="/ingredients/main">Ingredient</a>
                     <ul class="dropdown-menu">
                         <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
-                        <li><a href="/ingredients/SearchIngredient">Via Ingredient</a></li>
+                        <li><a href="/ingredients/search">Via Ingredient</a></li>
                     </ul>
                 </li>
 
@@ -69,7 +72,7 @@
 
                 <li><a href="#"><span class="data-hover" data-hover="blog">Product</span></a></li>
 
-                <li><a href="#">Review</a></li>
+                <li><a href="/reviews/reviews">Review</a></li>
                 <li><a href="#">Article</a></li>
                 <li><a href="#">Ranking</a></li>
             </ul>

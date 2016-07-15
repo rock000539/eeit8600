@@ -27,12 +27,13 @@
 $(function(){
 	$('#searchIngredient').click(function (){
 		var prodName=$("#prodName").val();
-	if(prodName!=""){alert("test");
+	if(prodName!=""){
 		$.ajax({
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
-		'type' : 'POST',
+		"type" : "post",
 		'success': function (data){
+			
 			$('#productList').empty();
 			if(data.products.length==0){
 				$("#productList").append(
@@ -88,7 +89,8 @@ $(function(){
 
 	});	
 	}else{
-		alert("請輸入部分或全部產品名");
+		$('#productList').empty();
+		$("#productList").append("<div class='alert alert-danger alert-dismissable'>請輸入文字進行搜尋</div>");
 	}
 	})//end search click
 		
@@ -103,12 +105,12 @@ margin-top:100px; }
 .modal-header{
 font-size: 50px;}
 #inputForm{
- width: 450px;
- margin: auto auto;
-font-size: 14px;
+
 }
 #inputTable{
  width: 450px;
+ margin: auto auto;
+font-size: 14px;
 }
 #searchIngredient{
 margin-left:20px;
@@ -144,13 +146,14 @@ button{color:white;
 <!-- top ////////////////////////////////////////////////////-->	
 <h2>產品找成份</h2>
 <div id="searchbox">	
-<form action="" id="inputForm">
+
 <table id="inputTable">
 <tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr> 
-<tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td>
+<tr><td><form  id="inputForm"><input type="text" name="prodName" id="prodName" class="form-control" ></form></td>
+
 <td  colspan="2"><button id="searchIngredient" value="查產品" class="btn btn-default btn-lg button" style="margin-bottom: 10px;">查產品</button></td></tr>
 </table>
-</form>
+
 </div>
 <!-- Button trigger modal -->
 
