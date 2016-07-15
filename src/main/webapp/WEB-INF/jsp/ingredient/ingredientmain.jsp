@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-		
+<style type="text/css">
+.grey_bg{
+min-height: 450px;}</style>		
 </head>
 
 <body>
@@ -23,9 +25,39 @@
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
-				<div class="grey_bg row">
-					成份主要功能選擇頁面
-				</div>        
+				<div class="grey_bg row ">
+				<div class="container">
+				<div class=" row ">
+					<div class="item mobile isotope-item" style="width: 376px; height: 186px;display:inline-block;position:relative;float:left;transform: translate3d(130px, 30px, 0px);">
+                            <figure class="touching effect-bubba">
+                                <img src="/img/cosmeticProducts.jpg"  alt="" class="img-responsive" >
+
+                                <div class="option">
+                                    <a href="/prodIngreList/prodNameSearchIngred" class="fa fa-link" ></a>
+                                </div>
+                                <figcaption class="item-description">
+                                    <h5>查看產品成份</h5>
+                                   
+                                </figcaption>
+                            </figure>
+                        </div>
+                                                                    
+                        <div class="item mobile isotope-item" style="width: 376px; height: 186px; display:inline-block;position:relative;transform: translate3d(280px, 30px, 0px);">
+                            <figure class="touching effect-bubba">
+                                <img src="/img/1-1502031R346120.jpg" alt="" class="img-responsive">
+
+                                <div class="option">
+                                    <a href="/ingredients/SearchIngredient" class="fa fa-link"></a>
+                                </div>
+                                <figcaption class="item-description">
+                                    <h5>利用成份查詢產品</h5>
+                                    
+                                </figcaption>
+                            </figure>
+                        </div>
+					
+				</div></div></div>     
+				
             <!-- **每頁不同的內容結束** -->
 
 <!--加入footer -->

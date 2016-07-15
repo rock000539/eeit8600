@@ -132,7 +132,8 @@ margin: auto auto;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
 }
-
+.grey_bg{
+min-height: 450px;}
 button{color:white;
 }
 </style>
@@ -141,6 +142,7 @@ button{color:white;
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 	<div class="grey_bg row">	
 <!-- top ////////////////////////////////////////////////////-->	
+<h2>產品找成份</h2>
 <div id="searchbox">	
 <form action="" id="inputForm">
 <table id="inputTable">

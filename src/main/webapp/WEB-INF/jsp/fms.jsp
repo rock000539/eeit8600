@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -26,72 +27,9 @@
 </head>
 <body>
 <!--start wrapper-->
-<section class="wrapper container">
+<!-- <section class="wrapper container"> -->
 <!--Start Header-->
-<header id="header">
-    <div class="col-sm-12 top-nav">
-        <ul>
-        <!-- 登入前 -->
-            <!-- <li>
-                <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
-                <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
-                </a>
-            </li> -->
-        <!-- 登入後 -->
-            <li>
-                <a href="#"><span>username</span></a>
-            </li>
-            <li>
-                <a class="" href="#">
-                <div class="userdiv img-circle"><img id="userimg" src="/images/fms/userh.png"/></div>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="col-sm-12">
-        <div id="logo">
-            <h1><a href="index.html"><img src="/images/fms/logo_qutie.jpg"/></a></h1>
-        </div>
-    </div>
-
-    <!-- Navigation
-    ================================================== -->
-
-    <div class="navbar navbar-default navbar-static-top col-sm-12" role="navigation">
-        <span class="nav-caption">Navigation Menu...</span>
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-
-                <li><a href="#">Date</a></li>
-
-                <li><a href="#">Ingredient</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Via Product</a></li>
-                        <li><a href="#">Via Ingredient</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="#">Order</a></li>
-
-                <li><a href="#"><span class="data-hover" data-hover="blog">Product</span></a></li>
-
-                <li><a href="#">Review</a></li>
-                <li><a href="#">Article</a></li>
-                <li><a href="#">Ranking</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 <!--End Header-->
 
 <div class="grey_bg row">
@@ -884,88 +822,10 @@
     </section> -->
 
 <!--start footer-->
-<footer class="footer row">
-    <div class="col-sm-6 col-md-3 col-lg-3">
-        <div class="widget_title">
-            <h4><span>About Us</span></h4>
-        </div>
-        <div class="widget_content">
-            <p>Donec earum rerum hic tenetur ans sapiente delectus, ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores.</p>
-            <ul class="contact-details-alt">
-                <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: Taipei, Taiwan</p></li>
-                <li><i class="fa fa-user"></i> <p><strong>Phone</strong>:(+886) 8888-8888</p></li>
-                <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: <a href="#">qutie@gmail.com</a></p></li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-3 col-lg-3">
-        <div class="widget_title">
-            <h4><span>Recent Posts</span></h4>
-        </div>
-        <div class="widget_content">
-            <ul class="links">
-                <li> <a href="#">Aenean commodo ligula eget dolor<span>November 07, 2015</span></a></li>
-                <li> <a href="#">Temporibus autem quibusdam <span>November 05, 2015</span></a></li>
-                <li> <a href="#">Debitis aut rerum saepe <span>November 03, 2015</span></a></li>
-                <li> <a href="#">Et voluptates repudiandae <span>November 02, 2015</span></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-3 col-lg-3">
-        <div class="widget_title">
-            <h4><span>Twitter</span></h4>
-
-        </div>
-        <div class="widget_content">
-            <ul class="tweet_list">
-                <li class="tweet_content item">
-                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                    <span class="time">29 September 2015</span>
-                </li>
-                <li class="tweet_content item">
-                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                    <span class="time">29 September 2015</span>
-                </li>
-                <li class="tweet_content item">
-                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                    <span class="time">29 September 2015</span>
-                </li>
-            </ul>
-        </div>
-        <div class="widget_content">
-            <div class="tweet_go"></div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-3 col-lg-3">
-        <div class="widget_title">
-            <h4><span>Flickr Gallery</span></h4>
-        </div>
-        <div class="widget_content">
-            <div class="flickr">
-                <ul id="flickrFeed" class="flickr-feed"></ul>
-            </div>
-        </div>
-    </div>
-</footer>
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 <!--end footer-->
 
-<section class="footer_bottom row">
-    <div class="col-sm-6">
-        <p class="copyright">&copy; Copyright 2016 Qutie | Powered by  <a href="http://www.jqueryrain.com/">Qutie.com</a></p>
-    </div>
 
-    <div class="col-sm-6 ">
-        <div class="footer_social">
-            <ul class="footbot_social">
-                <li><a class="fb" href="#." data-placement="top" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a class="twtr" href="#." data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                <li><a class="dribbble" href="#." data-placement="top" data-toggle="tooltip" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-                <li><a class="skype" href="#." data-placement="top" data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
-                <li><a class="rss" href="#." data-placement="top" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</section>
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
