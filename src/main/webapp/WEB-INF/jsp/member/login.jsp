@@ -36,7 +36,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 }
 
 #login-box {
-    width: 350px;
+    width: 380px;
     padding: 20px;
     margin: 100px auto;
     background: #fff;
