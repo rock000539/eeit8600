@@ -61,6 +61,15 @@ public class MemberController {
 	@Autowired
 	private BrandService brandService;
 	
+	@RequestMapping("/personal")
+	public String memberPersonalPage(Model model){
+		Long memberId = 1L; //test
+		Member member = service.getById(memberId);
+		model.addAttribute("member", member);
+		log.debug(member.toString());
+		return "/member/memberPersonal";
+	}
+
 	//保存期限頁面
     @RequestMapping("/product-exp")
     public String listPage(Model model, HttpServletRequest request)
@@ -221,7 +230,7 @@ public class MemberController {
 	//return forgotPassword page
 	@RequestMapping("/forgotpsw")
 	public String forgotPswPage(){
-		return "/member/member_forgotPsw"; 
+		return "/member/memberPsw-forgot";
 	}
 	
 	//send reset-psw email
@@ -236,14 +245,14 @@ public class MemberController {
 	
 	//return reset-password Page
 	@RequestMapping("/resetpassword")
-	public String changePswPage(@RequestParam String token, Model model){
+	public String changePswPage(@RequestParam String token, Model model){ 
 		Member member = service.getByResetPswToken(token);
 		log.debug("email token: {}", token);
 		String validToken = service.validateResetPswToken(token);
 		log.debug("validToken: {}", validToken);
 		if(validToken==null){
 			model.addAttribute("email", member.getEmail());
-			return "/member/resetPassword";
+			return "/member/memberPsw-reset";
 		}
 		//xxxxxxxxxx   回傳validToken訊息
 		return "/fms";
