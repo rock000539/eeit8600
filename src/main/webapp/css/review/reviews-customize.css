@@ -126,6 +126,8 @@
     -moz-border-radius: 50%;
 }
 
+
+
 .memeberImg{
 	max-width: 52px;
 	max-height: 52px;
@@ -140,6 +142,33 @@
     vertical-align: middle;
     opacity: 1;
 }
+
+/*userimg*/
+.userdiv {
+	border: 1px solid #ccc;
+  	width: 52px;
+    height: 52px;
+	margin-top: 9px;
+	margin-left: 9px;
+	overflow: hidden;
+    position: relative;
+    }        
+        /*橫*/
+        .userdiv img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 100%;
+            width: auto;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+        /*直*/
+        .userdiv img.portrait {
+        	width: 100%;
+        	height: auto;
+        }
 
 .user-name{
 	font-family:"Microsoft JhengHei";

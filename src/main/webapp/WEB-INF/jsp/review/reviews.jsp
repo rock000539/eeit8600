@@ -10,8 +10,8 @@
 
 <!-- **加入4個css，請按照此順序** -->
 <link href="/css/review/bootstrap-reviews.css" rel="stylesheet" >
-<link rel="stylesheet" href="/css/fms/style.css">
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
+<link rel="stylesheet" href="/css/fms/style.css">
 <link href="/css/review/reviews-customize.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/fms/fms-customize.css">
 <script src="/js/jquery.min.js"></script>
@@ -47,8 +47,8 @@
 					<div class="user-info">
 						<a class="user-info-link" href="/members/list"><!-- ???放no1會員有發過的心得list連結-->
 							<!--會員照片 -->
-							<div class="card-header-circle">
-								<img class="memeberImg" src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
+							<div class="img-circle userdiv">
+								<img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
 							</div>
 						</a>
 						<!--會員暱稱 -->
@@ -129,7 +129,16 @@
 		 		$(this).css('border-color','#BEBEBE');
 		 	});//hover end
 		 	
-		 	
+ 		 	  /*  ============ USER IMG =========== 	*/ 
+ 		 		var w = $('#userimg').width();
+ 		 		var h = $('#userimg').height();
+ 		 		if (h > w) {
+ 		 			$('#userimg').addClass('portrait');
+ 		 		} else {
+ 		 			$('#userimg').removeClass('portrait');
+ 		 		}
+ 		 		console.log('w=' + $('#userimg').width());
+ 		 		console.log('h=' + $('#userimg').height());
 		  });
 
 </script>
