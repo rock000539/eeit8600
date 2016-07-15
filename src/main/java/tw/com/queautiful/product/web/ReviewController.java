@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -100,25 +101,16 @@ public class ReviewController {
 		log.debug("{}",service.getAll());
 		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 		
-		//計算年齡
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		
-		java.util.Date birthday = df.parse("1999-07-15");
-		Calendar nowCal = Calendar.getInstance();
-		Calendar birthdayCal = Calendar.getInstance();
-		log.debug("No1_birthdayCal={}",birthdayCal);
-		birthdayCal.setTime(birthday);
-		log.debug("No2_birthdayCal={}",birthdayCal);
-		int age = nowCal.get(Calendar.YEAR) - birthdayCal.get(Calendar.YEAR) ;
-		log.debug("age={}",age);
-		//判斷年紀只有這裡要注意，就是今年的生日過了沒，沒過就少算一歲。
-		birthdayCal.set(Calendar.YEAR,nowCal.get(Calendar.YEAR));
-		log.debug("nowCal.getTime().getTime()={}", nowCal.getTime().getTime());
-		log.debug("birthdayCal.getTime().getTime()={}",birthdayCal.getTime().getTime());
-		if(nowCal.getTime().getTime()<birthdayCal.getTime().getTime()){
-		  age--;
+		//會員年齡
+//		String y = service.getAll().get(0).getMember().getBirthDay().toString();
+//		log.debug("birthday={}",y);
+		List<Integer> ages=new ArrayList<Integer>();
+		for(int i=0;i<service.getAll().size();i++){
+			Integer age = memberService.getMemberAge(service.getAll().get(i).getMember().getBirthDay());
+			log.debug("x={}",age);
+			ages.add(age);
 		}
-		System.out.println(age+" years old");
+		model.addAttribute("age", ages);
 		
 		return "/review/reviews";
 	}

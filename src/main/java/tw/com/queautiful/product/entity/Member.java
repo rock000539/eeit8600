@@ -52,9 +52,6 @@ public class Member {
 	@Column(name="BIRTHDAY")
 	private java.sql.Date birthDay;
 	
-	@Column(name="age")
-	private Integer age;
-	
 	@Column(name="SKINTYPE", length=30)
 	private String skinType;
 	
@@ -201,14 +198,6 @@ public class Member {
 
 	public void setBirthDay(java.sql.Date birthDay) {
 		this.birthDay = birthDay;
-	}
-	
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
 	}
 
 	public String getSkinType() {
