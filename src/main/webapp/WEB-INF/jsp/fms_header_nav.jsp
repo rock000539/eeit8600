@@ -35,7 +35,7 @@
 
     <div class="col-sm-12">
         <div id="logo">
-            <h1><a href="index.html"><img src="/images/fms/logo_qutie.jpg"/></a></h1>
+            <h1><a href="/fms"><img src="/images/fms/logo_qutie.jpg"/></a></h1>
         </div>
     </div>
 
