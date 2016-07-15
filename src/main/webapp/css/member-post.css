@@ -163,6 +163,11 @@ img {
   font-size: 13px;
   color: #969696;
 }
+.cd-timeline-content div.cd-img{
+	width: 250px;
+	height: 250px;
+	margin: auto;
+}
 .cd-timeline-content .cd-info, .cd-timeline-content .cd-date {
   display: inline-block;
 }
@@ -194,7 +199,7 @@ img {
 @media only screen and (min-width: 1170px) {
   .cd-timeline-content {
     margin-left: 0;
-    padding: 1.6em;
+    padding: 2.5em;
     width: 45%;
   }
   .cd-timeline-content::before {

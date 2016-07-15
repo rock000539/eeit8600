@@ -95,9 +95,31 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/reviews")
-	public String reviews(Model model) {
+	public String reviews(Model model) throws ParseException {
 		model.addAttribute("reviews", service.getAll());
+		log.debug("{}",service.getAll());
 		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
+		
+		//計算年齡
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		
+		java.util.Date birthday = df.parse("1999-07-15");
+		Calendar nowCal = Calendar.getInstance();
+		Calendar birthdayCal = Calendar.getInstance();
+		log.debug("No1_birthdayCal={}",birthdayCal);
+		birthdayCal.setTime(birthday);
+		log.debug("No2_birthdayCal={}",birthdayCal);
+		int age = nowCal.get(Calendar.YEAR) - birthdayCal.get(Calendar.YEAR) ;
+		log.debug("age={}",age);
+		//判斷年紀只有這裡要注意，就是今年的生日過了沒，沒過就少算一歲。
+		birthdayCal.set(Calendar.YEAR,nowCal.get(Calendar.YEAR));
+		log.debug("nowCal.getTime().getTime()={}", nowCal.getTime().getTime());
+		log.debug("birthdayCal.getTime().getTime()={}",birthdayCal.getTime().getTime());
+		if(nowCal.getTime().getTime()<birthdayCal.getTime().getTime()){
+		  age--;
+		}
+		System.out.println(age+" years old");
+		
 		return "/review/reviews";
 	}
 
@@ -113,10 +135,10 @@ public class ReviewController {
 		log.debug("{}", review);
 		model.addAttribute("review", review);
 
-		
+		// 得到英文月份
 		Date temp = review.getReviewTime();
 		log.debug("{}", temp);
-		// 準備輸出的格式，如：Sat,Jun,18,16
+		// 準備輸出的格式，如：Jun,18,16
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM,d,yy", Locale.US);
 		// 利用 DateFormat 來parse 日期的字串
 		DateFormat df = DateFormat.getDateInstance();

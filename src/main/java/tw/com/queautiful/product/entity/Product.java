@@ -37,6 +37,9 @@ public class Product {
 
 	@Transient
 	private Long brandId;
+	
+	@Transient
+	private String brandName;
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
@@ -48,7 +51,7 @@ public class Product {
 
 	//雙向(對應Review Entity的@ManyToOne 設的變數名)
 	//difference-between-fetchtype-lazy-and-eager
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	@OrderBy("REVIEWTIME DESC")
 	private List<Review> reviews;
 
@@ -113,9 +116,17 @@ public class Product {
 			return this.brandId;
 		}
 	}
-
+	
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
+	}
+	
+	public String getBrandName() {
+		return this.getBrand().getBrandName();
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	public Category getCategory() {
@@ -230,11 +241,16 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [prodId=" + prodId + ", prodName=" + prodName + ", brand=" + brand + ", brandId=" + brandId
-				+ ", category=" + category + ", categoryId=" + categoryId + ", reviews=" + reviews + ", weight="
-				+ weight + ", score=" + score + ", price=" + price + ", capacity=" + capacity + ", launchDate="
-				+ launchDate + ", prodDesc=" + prodDesc + ", mainIgdt=" + mainIgdt + ", concentration=" + concentration
-				+ ", prodImg=" + prodImg + "]";
+		return "Product [prodName=" + prodName + "]";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Product [prodId=" + prodId + ", prodName=" + prodName + ", brand=" + brand + ", brandId=" + brandId
+//				+ ", category=" + category + ", categoryId=" + categoryId + ", reviews=" + reviews + ", weight="
+//				+ weight + ", score=" + score + ", price=" + price + ", capacity=" + capacity + ", launchDate="
+//				+ launchDate + ", prodDesc=" + prodDesc + ", mainIgdt=" + mainIgdt + ", concentration=" + concentration
+//				+ ", prodImg=" + prodImg + "]";
+//	}
 
 }

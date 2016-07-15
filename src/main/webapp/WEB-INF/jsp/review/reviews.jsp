@@ -26,7 +26,6 @@
 					<!-- Img start -->
 			<a href="/reviews/list" > <!-- ???連結要換成去一篇的心得頁面 -->
 	    	<div class="reviewImg">
-<%-- 	      		<img class="reviewImg-Img" src="/reviews/show?reviewId=${review.reviewId}"> --%>
 	      		<img class="reviewImg-Img" src="/products/show?prodId=${review.prodId}">
 	      	</div></a>
 	      			<!-- Img end -->
@@ -40,7 +39,7 @@
 						<a class="user-info-link" href="/members/list"><!-- ???放no1會員有發過的心得list連結-->
 							<!--會員照片 -->
 							<div class="card-header-circle">
-								<img class="memeberImg" src="/reviews/show?reviewId=${review.reviewId}" alt="memeberImg"> 
+								<img class="memeberImg" src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
 							</div>
 						</a>
 						<!--會員暱稱 -->
@@ -67,7 +66,7 @@
 						</div>
 						<!--心得評分  end -->
 						<!-- ???到時候抓會員的肌膚和年齡 -->
-						<div class="user-skin">混合性肌膚、25歲</div>
+						<div class="user-skin">${review.member.skinType}性肌膚、25歲</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				
@@ -109,12 +108,6 @@
 		 	
 		 	
 		  });
-
-		  //瀑布流 no ok
-// 		  $('.row').masonry({
-// 			    itemSelector: '.item',  //選擇要做佈局的項目方塊
-// 			    columnWidth: 30,        //網格對齊的寬度 
-// 			})
 
 </script>
 

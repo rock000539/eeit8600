@@ -36,7 +36,7 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name="PRODID")//對應PRODUCT table的欄位PRODID
 	@JsonIgnore  //停止再返查回去product
-	private Product product;  //???
+	private Product product;  
 
 	@Transient
 	private Long prodId;

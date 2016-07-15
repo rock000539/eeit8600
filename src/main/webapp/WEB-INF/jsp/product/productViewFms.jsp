@@ -233,9 +233,9 @@
 			
 				<div class="row sub_content">
 					
-					<div class="col-lg-3 col-md-3 col-sm-3"></div>
+					<div class="col-lg-2 col-md-2 col-sm-2"></div>
 				
-					<div class="col-lg-3 col-md-3 col-sm-3">
+					<div class="col-lg-4 col-md-4 col-sm-4">
 						
 						<div class="images-style-inner" style="text-align:center;">
 							<img class="img-thumbnail" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:250px; height:auto;" />
@@ -369,7 +369,7 @@
 	
 	<script>
 	
-		//console.log('${product}');
+		console.log('${product}');
 		console.log('${product.category.categoryName}');
 		console.log('${product.brand.brandName}');
 		console.log('${product.reviews.size()}');
