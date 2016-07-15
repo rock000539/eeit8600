@@ -46,31 +46,38 @@ public class Article {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private java.sql.Timestamp articleTime;
 	
-	@Column(name = "ARTICLECOLLECT") //文章收藏數
+	//文章觀看次數
+	@Column(name="ARTICLEVIEW") 
+	private Integer articleView;
+	
+	//文章收藏數
+	@Column(name = "ARTICLECOLLECT") 
 	private Integer	articleCollect;
 	
 	@Column(name = "ARTICLESHOW")
 	private Boolean articleShow;
 	
-	@Column(name = "ARTICLEREPORT") //文章檢舉次數
+	//文章檢舉次數
+	@Column(name = "ARTICLEREPORT") 
 	private Integer articleReport;
 	
-	@ManyToMany(mappedBy = "articlesSavedByMember") //文章收藏者
+	//文章收藏者
+	@ManyToMany(mappedBy = "articlesSavedByMember") 
 	@JsonIgnore
 	private Set<Member> members;
 	
+	//文章撰寫作者
 	@ManyToOne
-	@JoinColumn(name="memberID_author")	//文章撰寫作者
+	@JoinColumn(name="memberID_author")	
 	@JsonIgnore
 	private Member member;
 	
 	@Transient
 	private Long memberId;
 	
-	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 	@OrderBy("ARTICLECMTIME DESC")
 	private Set<ArticleCM> acms;
-	
 
 	@Override
 	public String toString() {
@@ -80,6 +87,7 @@ public class Article {
 	}
 
 	public Long getArticleId() {
+		
 		return articleId;
 	}
 	
@@ -117,6 +125,14 @@ public class Article {
 
 	public void setArticleTime(java.sql.Timestamp articleTime) {
 		this.articleTime = articleTime;
+	}
+
+	public Integer getArticleView() {
+		return articleView;
+	}
+
+	public void setArticleView(Integer articleView) {
+		this.articleView = articleView;
 	}
 
 	public Integer getArticleCollect() {
@@ -178,6 +194,6 @@ public class Article {
 	public void setAcms(Set<ArticleCM> acms) {
 		this.acms = acms;
 	}
-	
+
 	
 }

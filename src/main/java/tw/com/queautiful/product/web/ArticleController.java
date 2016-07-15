@@ -1,6 +1,11 @@
 package tw.com.queautiful.product.web;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.MemberService;
@@ -27,8 +34,12 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	
 	@Autowired
 	private MemberService memberService;
+	
+	@PersistenceContext
+	private EntityManager em;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -38,13 +49,21 @@ public class ArticleController {
 	
 	@RequestMapping("/select")
 	@ResponseBody
-	public List<Article> select(){
+	public List<Article> select(){	
 		List<Article> articles = articleService.getAll();
 		for(Article a:articles){
 			log.debug("{}",a.getArticleTime());
 		}
-		
-		return articleService.getAll();
+		return articles;
+	}
+	
+	@RequestMapping("/selectbyarticletype")
+	@ResponseBody
+	public List<Article> selectByArticleType(@RequestParam ArticleType articleType){
+		Article article = new Article();
+		article.setArticleType(articleType);
+		List<Article> articles = articleService.getAll(Spec.byAuto(em, article));		
+		return articles;
 	}
 	
 	@RequestMapping("/select_jqgrid")
@@ -105,6 +124,19 @@ public class ArticleController {
 	public String articlePage(@RequestParam Long articleId, Model model){
 		model.addAttribute("article", articleService.getById(articleId));
 		return "/article/articlePage";
+	}
+
+	@RequestMapping("/listfms")
+	public String articleListFms(Model model){
+		model.addAttribute("articles", articleService.getAll());
+		ArticleType[] types = ArticleType.values();
+		List<String> articleTypes = new ArrayList<String>();
+		for(ArticleType type:types){
+			log.debug("{}",type.name());
+			articleTypes.add(type.name());
+		}
+		model.addAttribute("articleTypes", articleTypes);
+		return "/article/articleListFms";
 	}
 	
 }
