@@ -253,11 +253,6 @@
 			                    <span class="btn-tip">&nbsp;心得</span>
 			                </a>
 			
-			                <a href="#fakelink" class="btn btn-sm btn-social-pinterest" style="border-radius:5px;">
-			                    <i class="glyphicon glyphicon-fire"></i>
-			                    <span class="btn-tip">&nbsp;升火</span>
-			                </a>
-	
 			                <a href="#fakelink" class="btn btn-sm btn-social-stumbleupon" style="border-radius:5px;">
 			                    <i class="glyphicon glyphicon-floppy-open"></i>
 			                    <span class="btn-tip">&nbsp;收藏</span>
