@@ -47,7 +47,7 @@ min-height: 450px;}</style>
                                 <img src="/img/1-1502031R346120.jpg" alt="" class="img-responsive">
 
                                 <div class="option">
-                                    <a href="/ingredients/SearchIngredient" class="fa fa-link"></a>
+                                    <a href="/ingredients/search" class="fa fa-link"></a>
                                 </div>
                                 <figcaption class="item-description">
                                     <h5>利用成份查詢產品</h5>

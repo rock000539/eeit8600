@@ -100,7 +100,7 @@ $('#proList').append(
 </script>
 <style>
 #mainSpace{
- width: 600px;
+ width: 450px;
  margin-top:100px;
   margin-left: auto;
   margin-right: auto;
@@ -123,7 +123,8 @@ margin: auto auto;
 }
 .dividerHeading h5{
 margin-left:180px; }
-
+.grey_bg{
+min-height: 450px;}
 </style>
 </head>
 <body>
@@ -141,13 +142,10 @@ margin-left:180px; }
 <!-- 檢查會員登入與否用的token -->
 <%-- </sec:authorize>  --%>
 <div class="grey_bg row">
-	<div id="mainSpace">
-
-			<table class="table">
-			<tr><td colspan="4"><h1>產品品號查詢</h1></td></tr>
-				<form  id='ExpDateForm'>
-					<tr>
-					<td><select id="brandId">
+	<div id="mainSpace">	
+		<h1>Date Query</h1>
+					<div style="display: inline-block;">	
+					<select id="brandId" class="form-control">
 							<c:set var="reloadBrandId" scope="session" value="${reloadBrandId}"/>
 							<c:forEach items='${Brands}' var="items">
 							<c:if test="${reloadBrandId!=items.brandId}">
@@ -157,14 +155,13 @@ margin-left:180px; }
 							<option value='${items.brandId}' selected="selected">${items.brandName}</option>
 							</c:if>
 							</c:forEach>
-							</select></td>
-					<td><input type="text" name="batchCode" id="batchCode" value="${reloadBatchCode}"/></td>
-					<td colspan="2"><input type="button" id="searchDate" class="btn" value="查詢" />
-					</td>
+					</select>
+					</div>
+					<div style="display: inline-block;"><input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}"/></div>
+					<div style="display: inline-block;float:right;"><button id="searchDate" class="btn btn-default btn-lg btn-block"   value="查詢" />查詢</button></div>
 					
-					</tr>
-				</form>
-			</table>
+			
+		
 			<table id="dateResult">
 				<tr>
 					<td colspan="2" class="dateArea"><h5>製造日</h5></td>

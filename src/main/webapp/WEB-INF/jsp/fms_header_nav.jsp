@@ -61,7 +61,7 @@
                 <li><a href="/ingredients/main">Ingredient</a>
                     <ul class="dropdown-menu">
                         <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
-                        <li><a href="/ingredients/SearchIngredient">Via Ingredient</a></li>
+                        <li><a href="/ingredients/search">Via Ingredient</a></li>
                     </ul>
                 </li>
 
