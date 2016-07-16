@@ -5,11 +5,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	
+
+	<!-- 基本檔案 -->	
 	<script src="/js/jquery.min.js"></script>
-	
 	<link href="/css/bootstrap.min.css" rel="stylesheet">	
 	<script src="/js/bootstrap.min.js"></script>
+	
+	<!-- jQuery Redirect Plugin -->
+	<script src="/js/jquery.redirect.js"></script>
 	
     <link rel="stylesheet" href="/css/pview/wide.css">
     <link rel="stylesheet" href="/css/pview/style.css">
@@ -37,14 +40,6 @@
 		.blogMeta > span {
 			font-size: 14px;
 		}
-		
-/* 		.fa-link { */
-/* 			margin-top: 12px; */
-/* 		} */
-		
-/* 		.blogPic .blog-hover .icon { */
-/* 			margin: -5px 0px 0px -5px; */
-/* 		} */
 		
 		.is-hidden {
 			visibility: hidden;

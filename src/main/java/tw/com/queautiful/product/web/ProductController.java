@@ -159,7 +159,7 @@ public class ProductController {
 	@RequestMapping("/search")
 	public String selectFmsPage(Model model) {
 		model.addAttribute("categories", categoryService.getAll());
-		return "/product/productSelectFms";
+		return "/product/productSelect";
 	}
 
 	@RequestMapping("/inventory")
@@ -230,6 +230,12 @@ public class ProductController {
 		log.debug("{}", product);
 		model.addAttribute("product", product);
 		return "/product/productViewFms";
+	}
+	
+	@RequestMapping("/view2")
+	public String viewPage(@RequestParam(required = false, defaultValue = "1") Long prodId, Model model) {
+		model.addAttribute("product", prodService.getById(prodId));
+		return "/product/productView";
 	}
 
 	@RequestMapping("/rank")

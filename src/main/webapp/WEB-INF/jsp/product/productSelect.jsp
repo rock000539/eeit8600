@@ -14,18 +14,15 @@
 	<link rel="stylesheet" href="/css/fms/style.css">
 	<link rel="stylesheet" href="/css/fms/fms-customize.css">
 	
+	<!-- ThisPage Template --> <!-- Electrify Template -->
+	<link href="/css/product/product-select.css" rel="stylesheet" />
+
 	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
 	<script src="/js/product/select2.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
-	
-	<!-- ThisPage Template -->
-	<link href="/css/product/product-select.css" rel="stylesheet" />
-	
-	<!-- Electrify Template -->
-<!--     <link rel="stylesheet" href="/css/pselect/style.css"> -->
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductSelectPage</title>
@@ -133,9 +130,9 @@
     <script src="/js/product/wow.min.js"></script>
 
 	<!-- 此頁面特定檔案 -->
-	<script src="/js/product/pselect/jquery-hoverdirection.min.js"></script>
-	<script src="/js/product/pselect/jquery.isotope.min.js"></script>
-	<script src="/js/product/pselect/main.js"></script>
+	<script src="/js/product/select/jquery-hoverdirection.min.js"></script>
+	<script src="/js/product/select/jquery.isotope.min.js"></script>
+	<script src="/js/product/select/main.js"></script>
 	
 	<script>
 	
