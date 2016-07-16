@@ -74,6 +74,15 @@ a:focus, a:hover {
 	padding-bottom: 10px;
 }
 
+.dividerHeading.text-center h4:before {
+	left: 0%;
+}
+
+#categoryContainer {
+    margin:0 auto;
+    width: 89%;
+}
+
 /* ==================================================
    TITLE
 ================================================== */
@@ -425,10 +434,6 @@ a:focus, a:hover {
 /* ==================================================
    portfolio
 ================================================== */
-
-.portfolio-centered .box{
-    margin: 0;
-}
 
 .portfolio-item img{
     max-width: 100%;
