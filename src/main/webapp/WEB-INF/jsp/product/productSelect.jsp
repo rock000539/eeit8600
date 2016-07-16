@@ -10,6 +10,13 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">	
 	<script src="/js/bootstrap.min.js"></script>
 	
+	<!-- Header & Footer -->
+	<link rel="stylesheet" href="/css/fms/style.css">
+	<link rel="stylesheet" href="/css/fms/fms-customize.css">
+	
+	<!-- ThisPage Template --> <!-- Electrify Template -->
+	<link href="/css/product/product-select.css" rel="stylesheet" />
+
 	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
 	<script src="/js/product/select2.min.js"></script>
@@ -17,88 +24,104 @@
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
 	
-	<!-- ThisPage Template -->
-	<link href="/css/product/product-select.css" rel="stylesheet" />
-	
-	<!-- Electrify-Template -->
-<!--     <link rel="stylesheet" href="/css/pselect/style.css"> -->
-	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductSelectPage</title>
+	
+	<style>
+		#categoryContainer {
+		    margin:0 auto;
+		    width: 89%;
+		}
+	</style>
 	
 </head>
 <body>
 
-	<section class="content service">
-		<div class="container">
-			<div class="row sub_content">
-			    <div class="col-lg-3"></div>
-			    <div class="col-lg-6">
-			        <div class="serviceBox_4">
-			            <div class="service-icon">
-			                <i class="glyphicon glyphicon-search" style="margin-top: 22px; margin-left: 8px;"></i>
-			            </div>
-			            <div class="service-content">
-			                <h2>選擇品牌名稱，搜尋產品！</h2>
-			            </div>
-			            <div class="row">
-							<select id="sbrand" class="js-example-basic-single" style="width: 80%"></select>
-						</div>
-						<br/>
-						<div class="row">
-							<select id="sprod" class="js-example-basic-single" style="width: 80%"></select>
-						</div>
-						<br/>
-			            <div class="read">
-			                <a id="search" class="btn btn-default"><i class="fa fa-search"></i>&nbsp;搜尋商品</a>
-			                <a id="contact" class="btn btn-default"><i class="glyphicon glyphicon-question-sign"></i>&nbsp;找不到商品嗎？</a>
-			            </div>
-			        </div>
-			    </div>
-			    <div class="col-lg-3"></div>
+	<!--加入header&nav -->
+	<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+
+	<!-- **每頁不同的內容從這裡開始** -->
+	<div class="grey_bg row">
+		<section class="content service">
+			<div class="container">
+				<div class="row sub_content">
+				    <div class="col-sm-3"></div>
+				    <div class="col-sm-6">
+				        <div class="serviceBox_4">
+				            <div class="service-icon">
+				                <i class="glyphicon glyphicon-search" style="margin-top: 22px; margin-left: 8px;"></i>
+				            </div>
+				            <div class="service-content">
+				                <h2>選擇品牌名稱，搜尋產品！</h2>
+				            </div>
+				            <div class="row">
+								<select id="sbrand" class="js-example-basic-single" style="width: 80%"></select>
+							</div>
+							<br/>
+							<div class="row">
+								<select id="sprod" class="js-example-basic-single" style="width: 80%"></select>
+							</div>
+							<br/>
+				            <div class="read">
+				                <a id="search" class="btn btn-default"><i class="fa fa-search"></i>&nbsp;搜尋商品</a>
+				                <a id="contact" class="btn btn-default"><i class="glyphicon glyphicon-question-sign"></i>&nbsp;找不到商品嗎？</a>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="col-sm-3"></div>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+		
+		<section class="super_sub_content" style="padding-top: 0px;">
+		
+	        <div class="dividerHeading text-center col-sm-12">
+	            <h4><span>RECENT CATEGORIES ITEMS</span></h4>
+	        </div>
 	
-	<section class="super_sub_content" style="padding-top: 0px;">
+	        <nav class="clearfix col-sm-12">
+	            <ul id="filter">
+	                <li data-filter="*" class="selected"><a href="#">All Categories</a></li>
+	                <li data-filter=".MAKEUP"><a href="#">MakeUp</a></li>
+	                <li data-filter=".SKINCARE"><a href="#">Skin Care</a></li>
+	                <li data-filter=".BATHBODY"><a href="#">Bath & Body</a></li>
+	                <li data-filter=".HAIR"><a href="#">Hair</a></li>
+	            </ul>
+	        </nav>
 	
-        <div class="dividerHeading text-center">
-            <h4><span>RECENT CATEGORIES ITEMS</span></h4>
-        </div>
-
-        <nav class="clearfix">
-            <ul id="filter">
-                <li data-filter="*" class="selected"><a href="#">All Categories</a></li>
-                <li data-filter=".MAKEUP"><a href="#">MakeUp</a></li>
-                <li data-filter=".SKINCARE"><a href="#">Skin Care</a></li>
-                <li data-filter=".BATHBODY"><a href="#">Bath & Body</a></li>
-                <li data-filter=".HAIR"><a href="#">Hair</a></li>
-            </ul>
-        </nav>
-
-        <div class="portfolio-centered">
-            <div id="categoryContainer" class="recentitems portfolio">
-
-				<c:forEach items="${categories}" var="category">
-	                <div class="portfolio-item ${category.categoryTitle}">
-	                    <div class="box">
-	                        <img src="http://localhost:8080/categories/show?categoryId=${category.categoryId}" style="width:200px; height:200px;">
-	                        <div class="option inner">
-	                            <div>
-	                                <h5>${category.categoryName}</h5>
-	                                <a href="http://localhost:8080/categories/show?categoryId=${category.categoryId}" class="fa fa-search mfp-image"></a>
-	                                <a class="fa fa-link" data-categoryId="${category.categoryId}" onClick="category_click($(this))" ></a>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-				</c:forEach>
-
-            </div>
-        </div>
-        
-    </section>
+	        <div class="portfolio-centered">
+	            <div id="categoryContainer" class="recentitems portfolio">
 	
+					<c:forEach items="${categories}" var="category">
+		                <div class="portfolio-item ${category.categoryTitle}">
+		                    <div class="box">
+		                        <img src="http://localhost:8080/categories/show?categoryId=${category.categoryId}" style="width:200px; height:200px;">
+		                        <div class="option inner">
+		                            <div>
+		                                <h5>${category.categoryName}</h5>
+		                                <a href="http://localhost:8080/categories/show?categoryId=${category.categoryId}" class="fa fa-search mfp-image"></a>
+		                                <a class="fa fa-link" data-categoryId="${category.categoryId}" onClick="category_click($(this))" ></a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+					</c:forEach>
+	
+	            </div>
+	        </div>
+	        
+	    </section>
+	</div>        
+    <!-- **每頁不同的內容結束** -->
+
+	<!--加入footer -->
+	<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
+	
+	<!-- Header & Footer -->
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+
 	<!-- Product相關頁面共用檔案 -->
 	<script src="/js/product/jquery-scrolltofixed-min.js"></script>
 	<script src="/js/product/jquery.magnific-popup.min.js"></script>
@@ -107,9 +130,9 @@
     <script src="/js/product/wow.min.js"></script>
 
 	<!-- 此頁面特定檔案 -->
-	<script src="/js/product/pselect/jquery-hoverdirection.min.js"></script>
-	<script src="/js/product/pselect/jquery.isotope.min.js"></script>
-	<script src="/js/product/pselect/main.js"></script>
+	<script src="/js/product/select/jquery-hoverdirection.min.js"></script>
+	<script src="/js/product/select/jquery.isotope.min.js"></script>
+	<script src="/js/product/select/main.js"></script>
 	
 	<script>
 	

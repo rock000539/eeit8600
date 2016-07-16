@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="/css/animate.css"/>
 	
 	<!-- CheckBox Plugin -->
-	<link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
+	<link rel="stylesheet" href="/css/product/awesome-bootstrap-checkbox.css">
 	
 	<!-- Pagination Plugin -->
 	<script src="/js/product/jquery.bootpag.min.js"></script>

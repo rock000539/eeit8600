@@ -156,13 +156,13 @@ public class ProductController {
 		return brand.getProducts();
 	}
 
-	@RequestMapping("/select_fms")
+	@RequestMapping("/search")
 	public String selectFmsPage(Model model) {
 		model.addAttribute("categories", categoryService.getAll());
-		return "/product/productSelectFms";
+		return "/product/productSelect";
 	}
 
-	@RequestMapping("/list_fms")
+	@RequestMapping("/inventory")
 	public String listFmsPage(@RequestParam(required = false) Long brandId,
 			@RequestParam(required = false) Long categoryId, Model model) {
 
@@ -223,7 +223,7 @@ public class ProductController {
 		return pages.getContent();
 	}
 
-	@RequestMapping("/view_fms")
+	@RequestMapping("/view")
 	public String viewFmsPage(@RequestParam(required = false) Long prodId, Model model) {
 		log.debug("prodId = {}", prodId);
 		Product product = prodService.getById(prodId);
@@ -231,8 +231,14 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "/product/productViewFms";
 	}
+	
+	@RequestMapping("/view2")
+	public String viewPage(@RequestParam(required = false, defaultValue = "1") Long prodId, Model model) {
+		model.addAttribute("product", prodService.getById(prodId));
+		return "/product/productView";
+	}
 
-	@RequestMapping("/rank_fms")
+	@RequestMapping("/rank")
 	public String rankFmsPage(Model model) {
 		// model.addAttribute("products",
 		// prodService.findTop10ByOrderByScoreDesc());
