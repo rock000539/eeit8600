@@ -1,0 +1,24 @@
+.navbar-header img{   /* header: Logo Qutie style*/
+	height: 40px;
+	width: 80px;
+	display: inline-block;
+	float: left;
+	margin-top: 3px;
+}
+#grid {
+	background-color: #fff;
+}
+#grid.ui-th-column, #grid th{
+	text-align: center;
+}
+#grid.center .ui-jqgrid {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+
+
+
+
