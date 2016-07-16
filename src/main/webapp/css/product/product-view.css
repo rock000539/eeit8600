@@ -1,7 +1,282 @@
 
-.our-team .names {
-	font-size: 14px;	
+.team-pic {
+	width: 295px;
+	height: 245.06px;
+	background: white;
+	border: 3px solid #727CB6;
+	border-radius: 20px 20px 0px 0px;
 }
+
+.our-team .names {
+	font-size: 14px;
+}
+
+.team-social-media{
+	margin-top: 160px;
+/* 	border-radius: 0px 0px 20px 20px; */
+}
+
+.our-team span.profile {
+/* 	border-radius: 0px 0px 20px 20px; */
+}
+
+.dividerHeading h4 span {
+    background: #efefef;
+}
+
+.dividerHeading h4 span:after, .widget_title h4 span:after, .widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span:before, .dividerHeading h4 span:after, .widget_title h4 span:after, .widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.is-hidden {
+	visibility: hidden;
+}
+
+.bounce-in {
+	visibility: visible;
+	-webkit-animation: cd-bounce-1 0.6s;
+	-moz-animation: cd-bounce-1 0.6s;
+	animation: cd-bounce-1 0.6s;
+}
+
+
+/* ---------- animate ---------- */
+@-webkit-keyframes cd-bounce-1 {
+
+	0% { 
+		opacity: 0;
+	  	-webkit-transform: scale(0.5);
+	}
+
+	60% {
+	  	opacity: 1;
+	  	-webkit-transform: scale(1.2);
+	}
+
+	100% {
+	 	-webkit-transform: scale(1);
+	}
+	
+}
+
+@keyframes cd-bounce-1 {
+
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.5);
+		-moz-transform: scale(0.5);
+		-ms-transform: scale(0.5);
+		-o-transform: scale(0.5);
+		transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-webkit-transform: scale(1.2);
+		-moz-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		-o-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		transform: scale(1);
+	}
+ 		
+}
+
+@-webkit-keyframes cd-bounce-3 {
+
+	0% { 
+		opacity: 0;
+		-webkit-transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+	  	-webkit-transform: scale(1.1);
+	}
+
+	100% {
+	  	-webkit-transform: scale(1);
+	}
+	
+}
+
+@-webkit-keyframes cd-bounce-2 {
+
+	0% {
+	  	opacity: 0;
+		-webkit-transform: translateX(-100px);
+	}
+
+	60% {
+		opacity: 1;
+	  	-webkit-transform: translateX(20px);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+	}
+	
+}
+
+@keyframes cd-bounce-2 {
+
+	0% {
+		opacity: 0;
+	  	-webkit-transform: translateX(-100px);
+	  	-moz-transform: translateX(-100px);
+	  	-ms-transform: translateX(-100px);
+	  	-o-transform: translateX(-100px);
+	  	transform: translateX(-100px);
+	}
+
+	60% {
+		opacity: 1;
+		-webkit-transform: translateX(20px);
+		-moz-transform: translateX(20px);
+		-ms-transform: translateX(20px);
+		-o-transform: translateX(20px);
+		transform: translateX(20px);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+		-moz-transform: translateX(0);
+		-ms-transform: translateX(0);
+		-o-transform: translateX(0);
+		transform: translateX(0);
+	}
+
+}
+
+@-webkit-keyframes cd-bounce-2-inverse {
+
+	0% {
+		opacity: 0;
+	  	-webkit-transform: translateX(100px);
+	}
+
+	60% {
+		opacity: 1;
+	  	-webkit-transform: translateX(-20px);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+	}
+	
+}
+
+@keyframes cd-bounce-2-inverse {
+
+	0% {
+		opacity: 0;
+		-webkit-transform: translateX(100px);
+		-moz-transform: translateX(100px);
+		-ms-transform: translateX(100px);
+		-o-transform: translateX(100px);
+		transform: translateX(100px);
+	}
+
+	60% {
+	  	opacity: 1;
+	  	-webkit-transform: translateX(-20px);
+	  	-moz-transform: translateX(-20px);
+	  	-ms-transform: translateX(-20px);
+	 	-o-transform: translateX(-20px);
+	  	transform: translateX(-20px);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+		-moz-transform: translateX(0);
+		-ms-transform: translateX(0);
+		-o-transform: translateX(0);
+		transform: translateX(0);
+	}
+
+}
+
+/* ==================================================
+   24. TITLE
+================================================== */
+/* .dividerHeading, */
+/* .widget_title */
+/* { */
+/*     text-align: center; */
+/*     position: relative; */
+/*     margin-bottom:25px; */
+/* } */
+/* .dividerHeading h4, */
+/* .widget_title h4 */
+/* { */
+/*     font-size:18px; */
+/*     position:relative; */
+/*     line-height:0; */
+/*     border-bottom: 1px solid #E74C3C; */
+/* } */
+/* .dividerHeading h4 span{ */
+/*     background:white; */
+/*     position:relative; */
+/*     line-height: 7px; */
+/*     top: 4px; */
+/*     display: inline-block; */
+
+/* } */
+/* .dividerHeading h4 span:before, */
+/* .dividerHeading h4 span:after, */
+/* .widget_title h4 span:after, */
+/* .widget_title h4 span:before */
+/* { */
+/*     color:#E74C3C; */
+/*     font-size:10px; */
+/*     content: "\f10c"; */
+/*     font-family:fontawesome; */
+/*     display: inline-block; */
+
+/* } */
+/* .dividerHeading h4 span:before, */
+/* .widget_title h4 span:before */
+/* { */
+/*     margin-right:10px ; */
+/* } */
+/* .dividerHeading h4 span:after, */
+/* .widget_title h4 span:after */
+/* { */
+/*     margin-left:10px ; */
+/* } */
+/* .widget_title { */
+/*     position: relative; */
+/* } */
+/* .widget_title h4 { */
+/*     font-size: 14px; */
+/*     text-transform: uppercase; */
+/* } */
+/* .footer .widget_title h4 */
+/* { */
+/*     border-color:#dfdfdf; */
+/* } */
+/* .footer .widget_title h4 span:before, */
+/* .footer .widget_title h4 span:after */
+/* { */
+/*     color:#dfdfdf!important; */
+/* } */
+/* .footer .widget_title h4 span */
+/* { */
+/*     color:#fff; */
+/*     padding:0; */
+/*     background:#323A45; */
+/* } */
 
 /* ===================================================== */
 /* 33. Button Up										 */

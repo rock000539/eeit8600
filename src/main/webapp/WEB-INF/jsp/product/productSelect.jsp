@@ -197,13 +197,10 @@
 			
 			// Search Button Click
 			$('#search').on('click', function() {
-				console.log('search');
-				console.log($('#sbrand').val());
-				console.log($('#sprod').val());
 				if($('#sprod').val() == '') {
-					$.redirect('/products/list_fms', { 'brandId': $('#sbrand').val() });
+					$.redirect('/products/inventory', { 'brandId': $('#sbrand').val() });
 				} else if($('#sprod').val() != '') {
-					$.redirect('/products/view_fms', { 'prodId': $('#sprod').val() });
+					$.redirect('/products/view', { 'prodId': $('#sprod').val() });
 				}
 			});
 			
@@ -218,7 +215,7 @@
 		// Category Button Click
 		function category_click(a) {
 			console.log($(a).attr('data-categoryId'));
-			$.redirect('/products/list_fms', { 'categoryId': $(a).attr('data-categoryId') });
+			$.redirect('/products/inventory', { 'categoryId': $(a).attr('data-categoryId') });
 		}
 
 	</script>

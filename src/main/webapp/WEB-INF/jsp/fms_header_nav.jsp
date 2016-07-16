@@ -75,6 +75,7 @@
                 <li><a href="/reviews/reviews">Review</a></li>
                 <li><a href="#">Article</a></li>
                 <li><a href="#">Ranking</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         </div>
     </div>
