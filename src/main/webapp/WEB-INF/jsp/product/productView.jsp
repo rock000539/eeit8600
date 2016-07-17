@@ -56,71 +56,99 @@
 
 	<!-- **每頁不同的內容從這裡開始** -->
 	<div class="grey_bg row">
-		
-		<div class="col-sm-1"></div>
-		
-		<div class="col-sm-10">
-		
-			<section class="team row sub_content">
-			
-		        <div class="col-lg-12 col-md-12 col-sm-12">
-		            <div class="dividerHeading">
-		                <h4><span>Recent Reviews</span></h4>
-		            </div>
-		        </div>
-				
-				<c:forEach items="${product.reviews}" var="review">
-				
-			        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
-			            <div class="our-team" style="height:455px;">
-			                <div class="team-pic image">
-			                    <img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
-	<!-- 		                    <div class="team-overlay"></div> -->
-			                    <div class="serviceBox_4">
-				                    <div class="service-icon">
-				                        <a href="#">
-				                            <span></span>
-				                        </a>
-				                    </div>
-				                </div>
-			                </div>
-			                
-			                <div class="team-profile">
-			                    <h4 class="names">
-			                    	${fn:substring(review.reviewTitle, 0, 21)}<br/>
-			                    	<i class="fa fa-calendar"></i>&nbsp;&nbsp;${review.reviewTime}&nbsp;&nbsp;
-			                    	<c:forEach begin="1" end="${review.reviewRating}">
-										<i class="fa fa-diamond"></i>
-									</c:forEach> <br/>
-			                    </h4>
-			                    <span class="profile">
-			                    	<c:if test="${fn:substring(review.review, 0, 2) == '內文' }">
-										<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
-									</c:if>
-									<c:if test="${fn:substring(review.review, 0, 2) != '內文' }">
-										<p>${fn:substring(review.review, 0, 50)} ...</p>
-									</c:if>
-									<span>
-										<i class="fa fa-user"></i>&nbsp;&nbsp;${review.member.nickname}&nbsp;&nbsp;&nbsp;${review.member.skinType}&nbsp;性肌膚
-				                    	<span style="float:right;"><i class="fa fa-comment"></i>&nbsp;&nbsp;${review.rewCollect}&nbsp;&nbsp;</span>
-									</span>
-			                    </span>
-			                </div>
-			
-			                <div class="team-social-media" style="text-align: center;">
-			                	<a id="search" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-search"></i>&nbsp;&nbsp;收藏心得</a>
-			                	<a id="save" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-save"></i>&nbsp;&nbsp;觀看心得</a>
-			                </div>
+	
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<section class="team row sub_content">
+					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
+			            <div class="dividerHeading">
+			                <h4><span>Product Introduction</span></h4>
 			            </div>
 			        </div>
-		        
-		        </c:forEach>
-		        
-		    </section>
-		    
+		        </section>
+			</div>
+	        <div class="col-sm-1"></div>
 		</div>
+	
+		<div class="row">
+			
+			<div class="col-sm-1"></div>
+			
+			<div class="col-sm-10"></div>
+			
+			<div class="col-sm-1"></div>
+			
+		</div>
+	
+		<div class="row">
 		
-		<div class="col-sm-1"></div>
+			<div class="col-sm-1"></div>
+		
+			<div class="col-sm-10">
+			
+				<section class="team row sub_content">
+				
+			        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom:30px;">
+			            <div class="dividerHeading">
+			                <h4><span>Recent Reviews</span></h4>
+			            </div>
+			        </div>
+					
+					<c:forEach items="${product.reviews}" var="review">
+					
+				        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
+				            <div class="our-team" style="height:455px;">
+				                <div class="team-pic image">
+				                    <img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
+		<!-- 		                    <div class="team-overlay"></div> -->
+				                    <div class="serviceBox_4">
+					                    <div class="service-icon">
+					                        <a href="#">
+					                            <span></span>
+					                        </a>
+					                    </div>
+					                </div>
+				                </div>
+				                
+				                <div class="team-profile">
+				                    <h4 class="names">
+				                    	${fn:substring(review.reviewTitle, 0, 21)}<br/>
+				                    	<i class="fa fa-calendar"></i>&nbsp;&nbsp;${review.reviewTime}&nbsp;&nbsp;
+				                    	<c:forEach begin="1" end="${review.reviewRating}">
+											<i class="fa fa-diamond"></i>
+										</c:forEach> <br/>
+				                    </h4>
+				                    <span class="profile">
+				                    	<c:if test="${fn:substring(review.review, 0, 2) == '內文' }">
+											<p>Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
+										</c:if>
+										<c:if test="${fn:substring(review.review, 0, 2) != '內文' }">
+											<p>${fn:substring(review.review, 0, 50)} ...</p>
+										</c:if>
+										<span>
+											<i class="fa fa-user"></i>&nbsp;&nbsp;${review.member.nickname}&nbsp;&nbsp;&nbsp;${review.member.skinType}&nbsp;性肌膚
+					                    	<span style="float:right;"><i class="fa fa-comment"></i>&nbsp;&nbsp;${review.rewCollect}&nbsp;&nbsp;</span>
+										</span>
+				                    </span>
+				                </div>
+				
+				                <div class="team-social-media" style="text-align: center;">
+				                	<a id="search" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-search"></i>&nbsp;&nbsp;收藏心得</a>
+				                	<a id="save" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-save"></i>&nbsp;&nbsp;觀看心得</a>
+				                </div>
+				            </div>
+				        </div>
+			        
+			        </c:forEach>
+			        
+			    </section>
+			    
+			</div>
+			
+			<div class="col-sm-1"></div>
+			
+		</div>
 		
 	</div>        
     <!-- **每頁不同的內容結束** -->
