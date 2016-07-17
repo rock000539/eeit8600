@@ -25,7 +25,7 @@
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
-					                <div class="rs_box  wow bounceInRight" data-wow-offset="200">
+				<div class="rs_box  wow bounceInRight" data-wow-offset="500">
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
@@ -71,7 +71,7 @@
 <!--                     </a> -->
                 </div>
                 
-                <div class="container" style="margin-top: 35px">
+                <div class="container" style="margin-top: 250px">
 <!--                 <div class="page-header page-heading"> -->
 <!-- 				    <h1 class="pull-left">Forums</h1> -->
 <!-- 				    <ol class="breadcrumb pull-right where-am-i"> -->
@@ -81,6 +81,9 @@
 <!-- 				    <div class="clearfix"></div> -->
 <!-- 				</div> -->
 <!-- 				<p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p> -->
+				  <a href="/articles/add"><button class="btn btn-default btn-lg" type="button">
+				  	<i class="fa fa-plus"></i>&nbspNew Topic
+				  </button></a>
 				  <table class="table forum table-striped">
 				    <thead>
 				      <tr>
@@ -104,7 +107,7 @@
 <!-- 				        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 1 years ago</small></td> -->
 <!-- 				      </tr> -->
 				    <c:forEach var="article" items="${articles}">
-				      <tr data-type="${article.articleType}">
+				      <tr  data-type="${article.articleType}">
 				      	<c:choose>
 						    <c:when test="${article.articleType=='NEWS'}">
 						       <td class="text-center"><i class="fa fa-bullhorn fa-2x text-primary NEWS"></i></td>
@@ -213,17 +216,22 @@
 	<script>
 	$(function(){
 		$(".serviceBox_3").on('click',function(){
-			var aTypes=['NEWS','SOLICIT','QUESTION','CHAT'];
-			console.log(aTypes);
-// 			var aTypes2=$("${articleTypes}");
-// 			console.log(aTypes2);
 			var aType = $(this).find('h3').text();
-// 			console.log($(this).find('h3').text());
-			for(var i=0; i<aTypes.length;i++){
-				console.log(aTypes[i]);
-				$('td>i.'+aTypes[i]).parent().parent().hide();			
-			}
-			$('td>i.'+aType).parent().parent().show();
+			$('tbody>tr[data-type!='+aType+']').hide();
+			$('tbody>tr[data-type='+aType+']').show();
+			
+			
+// 			var aTypes=['NEWS','SOLICIT','QUESTION','CHAT'];
+// 			console.log(aTypes);
+// // 			var aTypes2=$("${articleTypes}");
+// // 			console.log(aTypes2);
+// 			var aType = $(this).find('h3').text();
+// // 			console.log($(this).find('h3').text());
+// 			for(var i=0; i<aTypes.length;i++){
+// 				console.log(aTypes[i]);
+// 				$('td>i.'+aTypes[i]).parent().parent().hide();			
+// 			}
+// 			$('td>i.'+aType).parent().parent().show();
 						
 // 			$.ajax({
 // 				url:'/articles/selectbyarticletype',
