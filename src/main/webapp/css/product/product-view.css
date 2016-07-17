@@ -24,14 +24,6 @@
     background: #efefef;
 }
 
-.dividerHeading h4 span:after, .widget_title h4 span:after, .widget_title h4 span:before {
-    color: #727CB6;
-}
-
-.dividerHeading h4 span:before, .dividerHeading h4 span:after, .widget_title h4 span:after, .widget_title h4 span:before {
-    color: #727CB6;
-}
-
 .is-hidden {
 	visibility: hidden;
 }
@@ -208,75 +200,103 @@
 }
 
 /* ==================================================
-   24. TITLE
+   26. TITLE
 ================================================== */
-/* .dividerHeading, */
-/* .widget_title */
-/* { */
-/*     text-align: center; */
-/*     position: relative; */
-/*     margin-bottom:25px; */
-/* } */
-/* .dividerHeading h4, */
-/* .widget_title h4 */
-/* { */
-/*     font-size:18px; */
-/*     position:relative; */
-/*     line-height:0; */
-/*     border-bottom: 1px solid #E74C3C; */
-/* } */
-/* .dividerHeading h4 span{ */
-/*     background:white; */
-/*     position:relative; */
-/*     line-height: 7px; */
-/*     top: 4px; */
-/*     display: inline-block; */
+.dividerHeading,
+.widget_title
+{
+    text-align: center;
+    position: relative;
+    margin-bottom:25px;
+}
+.dividerHeading h4,
+.widget_title h4
+{
+    font-size:18px;
+    position:relative;
+    line-height:0;
+    border-bottom: 1px solid #727CB6;
+}
+.dividerHeading h4 span{
+    background:white;
+    position:relative;
+    line-height: 7px;
+    top: 4px;
+    display: inline-block;
 
-/* } */
-/* .dividerHeading h4 span:before, */
-/* .dividerHeading h4 span:after, */
-/* .widget_title h4 span:after, */
-/* .widget_title h4 span:before */
-/* { */
-/*     color:#E74C3C; */
-/*     font-size:10px; */
-/*     content: "\f10c"; */
-/*     font-family:fontawesome; */
-/*     display: inline-block; */
+}
+.dividerHeading h4 span:before,
+.dividerHeading h4 span:after,
+.widget_title h4 span:after,
+.widget_title h4 span:before
+{
+    color:#E74C3C;
+    font-size:10px;
+    content: "\f10c";
+    font-family:fontawesome;
+    display: inline-block;
 
-/* } */
-/* .dividerHeading h4 span:before, */
-/* .widget_title h4 span:before */
-/* { */
-/*     margin-right:10px ; */
-/* } */
-/* .dividerHeading h4 span:after, */
-/* .widget_title h4 span:after */
-/* { */
-/*     margin-left:10px ; */
-/* } */
-/* .widget_title { */
-/*     position: relative; */
-/* } */
-/* .widget_title h4 { */
-/*     font-size: 14px; */
-/*     text-transform: uppercase; */
-/* } */
-/* .footer .widget_title h4 */
-/* { */
-/*     border-color:#dfdfdf; */
-/* } */
-/* .footer .widget_title h4 span:before, */
-/* .footer .widget_title h4 span:after */
-/* { */
-/*     color:#dfdfdf!important; */
-/* } */
-/* .footer .widget_title h4 span */
-/* { */
-/*     color:#fff; */
-/*     padding:0; */
-/*     background:#323A45; */
-/* } */
+}
+.dividerHeading h4 span:before,
+.widget_title h4 span:before
+{
+    margin-right:10px ;
+}
+.dividerHeading h4 span:after,
+.widget_title h4 span:after
+{
+    margin-left:10px ;
+}
+.widget_title {
+    position: relative;
+}
+.widget_title h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.footer .widget_title h4
+{
+    border-color:#dfdfdf;
+}
+.footer .widget_title h4 span:before,
+.footer .widget_title h4 span:after
+{
+    color:#dfdfdf!important;
+}
+.footer .widget_title h4 span
+{
+    color:#fff;
+    padding:0;
+    background:#323A45;
+}
+
+/* 修改樣式 */
+
+.dividerHeading h4 span:after, .widget_title h4 span:after, .widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span:before, .dividerHeading h4 span:after, .widget_title h4 span:after, .widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span {
+    background: #efefef;
+}
+		
+.dividerHeading h4,
+.widget_title h4{
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.dividerHeading h4::before, .widget_title h4::before {
+    border: 0px;
+    content: none;
+}
 
 /* ===================================================== */
 /* 33. Button Up										 */

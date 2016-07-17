@@ -28,10 +28,13 @@
 	<title>ProductSelectPage</title>
 	
 	<style>
+		
 		#categoryContainer {
-		    margin:0 auto;
 		    width: 89%;
+		    margin:0 auto;
+		    margin-left: 7.5%;
 		}
+		
 	</style>
 	
 </head>

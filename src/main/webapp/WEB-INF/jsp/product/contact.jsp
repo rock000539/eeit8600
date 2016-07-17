@@ -16,6 +16,9 @@
 	
 	<!-- ThisPage Template -->
 	<link href="/css/product/contact.css" rel="stylesheet" />
+	
+	<!-- GoogleMap -->
+	<script type="text/javascript" src="/js/product/jquery.gmap.js"></script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ContactPage</title>
@@ -32,15 +35,19 @@
 		<section class="content contact">
 		
 	        <div class="row">
-	            <div class="col-sm-12">
+	        	<div class="col-sm-1"></div>
+	            <div class="col-sm-10">
 	                <div class="maps">
 	                    <div id="page_maps"></div>
 	                </div>
 	            </div>
+	            <div class="col-sm-1"></div>
 	        </div>
 	
 	        <div class="row sub_content">
-	            <div class="col-lg-8 col-md-8 col-sm-8">
+	        	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+	        	
+	            <div class="col-lg-7 col-md-7 col-sm-7">
 	                <div class="dividerHeading">
 	                    <h4><span>Get in Touch</span></h4>
 	                </div>
@@ -90,7 +97,7 @@
 	                </form>
 	            </div>
 	
-	            <div class="col-lg-4 col-md-4 col-sm-4">
+	            <div class="col-lg-3 col-md-3 col-sm-3">
 	                <div class="sidebar">
 	                    <div class="widget_info">
 	                        <div class="dividerHeading">
@@ -126,12 +133,16 @@
 	                    </div>
 	                </div>
 	            </div>
+	            
+	            <div class="col-lg-1 col-md-1 col-sm-1"></div>
 	        </div>
 	    </section>
 
 		<!--start footer-->
-	    <footer class="footer row">
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	    <footer class="footer row" style="width:1170px; margin-left:0.01%;">
+	    	
+	    
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>About Us</span></h4>
 	            </div>
@@ -144,7 +155,7 @@
 	                </ul>
 	            </div>
 	        </div>
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>Recent Posts</span></h4>
 	            </div>
@@ -157,7 +168,7 @@
 	                </ul>
 	            </div>
 	        </div>
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>Twitter</span></h4>
 	
@@ -182,7 +193,7 @@
 	                <div class="tweet_go"></div>
 	            </div>
 	        </div>
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>Flickr Gallery</span></h4>
 	            </div>
@@ -192,6 +203,8 @@
 	                </div>
 	            </div>
 	        </div>
+
+
 	    </footer>
 	    <!--end footer-->
 	    
@@ -205,9 +218,6 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
-
-	<!-- GoogleMap -->
-	<script type="text/javascript" src="/js/product/jquery.gmap.js"></script>
 
 </body>
 </html>
