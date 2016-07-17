@@ -21,7 +21,7 @@ body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
 	padding-top: 70px;
 }
-.portfolio-item {
+.portfolio-item { 
  	padding: 15px; 
 }
 .portfolio-item:hover .portfolio-content{

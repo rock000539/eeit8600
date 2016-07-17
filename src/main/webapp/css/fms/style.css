@@ -4131,150 +4131,83 @@ h5.circular-title{
 /* ==================================================
    26. TITLE
 ================================================== */
-.dividerHeading,
-.widget_title
-{
-    text-align: center;
-    position: relative;
-    margin-bottom:25px;
-}
+
 .dividerHeading h4,
-.widget_title h4
-{
-    font-size:18px;
-    position:relative;
-    line-height:0;
-    border-bottom: 1px solid #727CB6;
-}
-.dividerHeading h4 span{
-    background:white;
-    position:relative;
-    line-height: 7px;
-    top: 4px;
-    display: inline-block;
-
-}
-.dividerHeading h4 span:before,
-.dividerHeading h4 span:after,
-.widget_title h4 span:after,
-.widget_title h4 span:before
-{
-    color:#E74C3C;
-    font-size:10px;
-    content: "\f10c";
-    font-family:fontawesome;
-    display: inline-block;
-
-}
-.dividerHeading h4 span:before,
-.widget_title h4 span:before
-{
-    margin-right:10px ;
-}
-.dividerHeading h4 span:after,
-.widget_title h4 span:after
-{
-    margin-left:10px ;
-}
-.widget_title {
+.widget_title h4{
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 25px;
+    padding: 0 0 10px;
     position: relative;
 }
+
+.dividerHeading h4::before,
+.widget_title h4::before{
+    background: #fff !important;
+    border: 1px solid #727CB6;
+    content: "";
+    height: 8px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: -4px;
+    left: 102px;
+    width: 8px;
+    z-index: 1;
+}
+
+.dividerHeading.text-center h4:after{
+    left:45%;
+}
+
+.dividerHeading.text-center h4:before{
+    left:50%;
+}
+
+
+.footer .widget_title h4::before{
+    background: #292F38 !important;
+}
+.sidebar .widget_title h4::before{
+    background: #fff !important;
+}
+.project_details,
+.dividerHeading h4::after,
+.widget_title h4::after {
+    bottom: -1px;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 120px;
+}
+
+.dividerHeading h4::after,
+.dividerHeading h4::before,
+.widget_title h4::after,
+.widget_title h4::before{
+    background-color: #727CB6;
+}
+
+.widget_title{
+    padding: 0 10px;
+}
+.footer .widget_title span{
+    color: #fff;
+}
+
 .widget_title h4 {
     font-size: 14px;
     text-transform: uppercase;
 }
-.footer .widget_title h4
-{
-    border-color:#dfdfdf;
-}
+
 .footer .widget_title h4 span:before,
-.footer .widget_title h4 span:after
-{
+.footer .widget_title h4 span:after{
     color:#dfdfdf!important;
 }
-.footer .widget_title h4 span
-{
-    color:#fff;
+.footer .widget_title h4 span{
     padding:0;
-    background:#323A45;
 }
-
-/* .dividerHeading h4, */
-/* .widget_title h4{ */
-/*     font-size: 21px; */
-/*     font-weight: normal; */
-/*     margin-bottom: 25px; */
-/*     padding: 0 0 10px; */
-/*     position: relative; */
-/* } */
-
-/* .dividerHeading h4::before, */
-/* .widget_title h4::before{ */
-/*     background: #fff !important; */
-/*     border: 1px solid #727CB6; */
-/*     content: ""; */
-/*     height: 8px; */
-/*     margin: 0 auto; */
-/*     position: absolute; */
-/*     bottom: -4px; */
-/*     left: 102px; */
-/*     width: 8px; */
-/*     z-index: 1; */
-/* } */
-
-/* .dividerHeading.text-center h4:after{ */
-/*     left:45%; */
-/* } */
-
-/* .dividerHeading.text-center h4:before{ */
-/*     left:50%; */
-/* } */
-
-
-/* .footer .widget_title h4::before{ */
-/*     background: #292F38 !important; */
-/* } */
-/* .sidebar .widget_title h4::before{ */
-/*     background: #fff !important; */
-/* } */
-/* .project_details, */
-/* .dividerHeading h4::after, */
-/* .widget_title h4::after { */
-/*     bottom: -1px; */
-/*     content: ""; */
-/*     display: inline-block; */
-/*     height: 1px; */
-/*     left: 0; */
-/*     position: absolute; */
-/*     width: 120px; */
-/* } */
-
-/* .dividerHeading h4::after, */
-/* .dividerHeading h4::before, */
-/* .widget_title h4::after, */
-/* .widget_title h4::before{ */
-/*     background-color: #727CB6; */
-/* } */
-
-/* .widget_title{ */
-/*     padding: 0 10px; */
-/* } */
-/* .footer .widget_title span{ */
-/*     color: #fff; */
-/* } */
-
-/* .widget_title h4 { */
-/*     font-size: 14px; */
-/*     text-transform: uppercase; */
-/* } */
-
-/* .footer .widget_title h4 span:before, */
-/* .footer .widget_title h4 span:after{ */
-/*     color:#dfdfdf!important; */
-/* } */
-/* .footer .widget_title h4 span{ */
-/*     padding:0; */
-/* } */
 
 /* ===================================================== */
 /* 27. DROPCAPS											 */

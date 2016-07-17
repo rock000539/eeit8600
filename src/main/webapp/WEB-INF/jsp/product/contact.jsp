@@ -16,6 +16,9 @@
 	
 	<!-- ThisPage Template -->
 	<link href="/css/product/contact.css" rel="stylesheet" />
+	
+	<!-- GoogleMap -->
+	<script type="text/javascript" src="/js/product/jquery.gmap.js"></script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ContactPage</title>
@@ -32,15 +35,19 @@
 		<section class="content contact">
 		
 	        <div class="row">
-	            <div class="col-sm-12">
+	        	<div class="col-sm-1"></div>
+	            <div class="col-sm-10">
 	                <div class="maps">
 	                    <div id="page_maps"></div>
 	                </div>
 	            </div>
+	            <div class="col-sm-1"></div>
 	        </div>
 	
 	        <div class="row sub_content">
-	            <div class="col-lg-8 col-md-8 col-sm-8">
+	        	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+	        	
+	            <div class="col-lg-7 col-md-7 col-sm-7">
 	                <div class="dividerHeading">
 	                    <h4><span>Get in Touch</span></h4>
 	                </div>
@@ -90,7 +97,7 @@
 	                </form>
 	            </div>
 	
-	            <div class="col-lg-4 col-md-4 col-sm-4">
+	            <div class="col-lg-3 col-md-3 col-sm-3">
 	                <div class="sidebar">
 	                    <div class="widget_info">
 	                        <div class="dividerHeading">
@@ -98,10 +105,10 @@
 	                            </div>
 	                        <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 	                        <ul class="widget_info_contact">
-	                            <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: #2021 Lorem Ipsum</p></li>
-	                            <li><i class="fa fa-user"></i> <p><strong>Phone</strong>:(+91) 9000-12345</p></li>
-	                            <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: <a href="#">mail@example.com</a></p></li>
-	                            <li><i class="fa fa-globe"></i> <p><strong>Web</strong>: <a href="#" data-placement="bottom" data-toggle="tooltip" title="www.example.com">www.example.com</a></p></li>
+	                            <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: &nbsp;台北市復興南路一段390號</p></li>
+	                            <li><i class="fa fa-user"></i> <p><strong>Phone</strong>: &nbsp;(02) 2782-3590</p></li>
+	                            <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: &nbsp;eeit86@gmail.com</p></li>
+	                            <li><i class="fa fa-globe"></i> <p><strong>Web</strong>: <a href="#" data-placement="bottom" data-toggle="tooltip" title="www.example.com"> &nbsp;www.quite.com</a></p></li>
 	                        </ul>
 	
 	                    </div>
@@ -114,9 +121,6 @@
 	                            <li><a class="fb" href="#." data-placement="bottom" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>
 	                            <li><a class="twtr" href="#." data-placement="bottom" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
 	                            <li><a class="gmail" href="#." data-placement="bottom" data-toggle="tooltip" title="Google"><i class="fa fa-google-plus"></i></a></li>
-	                            <li><a class="dribbble" href="#." data-placement="bottom" data-toggle="tooltip" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-	                            <li><a class="skype" href="#." data-placement="bottom" data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
-	                            <li><a class="pinterest" href="#." data-placement="bottom" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
 	                            <li><a class="instagram" href="#." data-placement="bottom" data-toggle="tooltip" title="Instagram"><i class="fa fa-instagram"></i></a></li>
 	                            <li><a class="youtube" href="#." data-placement="bottom" data-toggle="tooltip" title="Youtube"><i class="fa fa-youtube"></i></a></li>
 	                            <li><a class="linkedin" href="#." data-placement="bottom" data-toggle="tooltip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
@@ -126,12 +130,16 @@
 	                    </div>
 	                </div>
 	            </div>
+	            
+	            <div class="col-lg-1 col-md-1 col-sm-1"></div>
 	        </div>
 	    </section>
 
 		<!--start footer-->
-	    <footer class="footer row">
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	    <footer class="footer row" style="width:1170px; margin-left:0.01%;">
+	    	
+	    
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>About Us</span></h4>
 	            </div>
@@ -144,7 +152,7 @@
 	                </ul>
 	            </div>
 	        </div>
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>Recent Posts</span></h4>
 	            </div>
@@ -157,7 +165,7 @@
 	                </ul>
 	            </div>
 	        </div>
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>Twitter</span></h4>
 	
@@ -182,7 +190,7 @@
 	                <div class="tweet_go"></div>
 	            </div>
 	        </div>
-	        <div class="col-sm-6 col-md-3 col-lg-3">
+	        <div class="col-lg-3 col-md-3 col-sm-6">
 	            <div class="widget_title">
 	                <h4><span>Flickr Gallery</span></h4>
 	            </div>
@@ -192,6 +200,8 @@
 	                </div>
 	            </div>
 	        </div>
+
+
 	    </footer>
 	    <!--end footer-->
 	    
@@ -205,9 +215,6 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
-
-	<!-- GoogleMap -->
-	<script type="text/javascript" src="/js/product/jquery.gmap.js"></script>
 
 </body>
 </html>

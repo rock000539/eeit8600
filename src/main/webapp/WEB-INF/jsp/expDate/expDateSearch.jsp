@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<!-- CSS -->
-
+	<meta name="viewport" content="width=device-width, initial-scale=1" />	
+	<!-- CSS --
 	<!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -22,21 +20,14 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-
-<style>
-
-/*//////////////////////////////////////////////////////////////////////////// */
-
-
-</style>
 <script>
 	$(function() {
 		var mfdDate;
 		var expDate;
-			
+		$("#dateResult").hide();		
 		
 		$("#searchDate").click(function() {
-		
+			$('#proList').hide();
 		var brandId = $('#brandId').val();
 		var batchCode = $('#batchCode').val();
 		var brandName=$(":selected").text();
@@ -51,23 +42,33 @@
 				$('#exp').empty().prepend(data.expDate);
 				$('#proList').empty();
 				$(".dividerHeading").empty();
+// 				var brandName=$(":selected").text();	
+				var prodNameCheck = data.productList[0].prodName;
+				if (prodNameCheck != undefined) {
+											
+				$("#dateResult").show();	
+				$('#proList').show();
 				$(".dividerHeading").append("<h4><span>"+brandName+"</span></h4><br>");
 				$(".dividerHeading").append("<h5><p>請在下方選擇產品加入最愛<p></h5>");
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
 				var prodId = data.productList[i].prodId
-	
-				if (prodName != undefined) {
-										
-$('#proList').append(	
-'<tr><td ><a href="#"><img src="/products/show?prodId=' + prodId+ '"/></a></td><td><a href="#">'+ prodName+ '</a></td>'
-+ '</td><td><input type="button" class="saveDate btn" name='
-+data.productList[i].prodId+' value="加入最愛"/></td></tr>'
-
-)
-												}
-											}
 				
+				$("#proList").append(	//---------------------------------
+				"<div class='col-md-4 portfolio-item'><div class='portfolio-all'>"
+				+"<div class='portfolio-title'>"
+				+"<a href='#'><h3>"+prodName+"</h3></a></div>"
+				+"<div class='portfolio-content'>"
+				+"<div class='portfolio-img'>"
+				+"<a href='#'><img src='/products/show?prodId="+prodId+"'/></a>"
+				+"</div>"
+				+"<div class='portfolio-btn'>"
+ 				+"<button class='saveDate btn btn-default' name='"
+ 				+data.productList[i].prodId+"'>加入最愛</button> &nbsp;"
+				+"</div></div></div></div>"		
+					)//-----------------------------------------------------
+					}//end of for Loop
+												}else{}//end of if
 				$('.saveDate').click(function(e) {
 				var prodId = e.target.name;
 				var memberId=$("#loginTokenId").attr("value");
@@ -107,16 +108,10 @@ $('#proList').append(
 }
 
 #proList{
-  margin-top: 25px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 100px;
-font-size: 24px;
+ margin-top: 25px;
+ font-size: 24px;
 }
-#proList img{
-width: 120px;
-height: 120px;
-}
+
 #dateResult{
 width:300px;
 margin: auto auto;
@@ -125,8 +120,75 @@ margin: auto auto;
 margin-left:180px; }
 .grey_bg{
 min-height: 450px;}
+
+.portfolio-content {
+	border: 1px solid #E7E6E6;
+	padding: 5px 10px 30px 10px;
+	text-align: center;
+}
+.portfolio-content h3 {
+	font-size: 15px;
+ 	line-height: 15px; 
+}
+.portfolio-img {
+	margin: 0 auto;
+	height: 130px;
+	width: 130px;
+	overflow:hidden;
+}
+.portfolio-content img{
+	height: 130px;
+	width: 130px;
+}
+.portfolio-content p {
+	line-height: 1.1;
+	margin: 5px;
+	font-size: 15px;
+}
+.portfolio-btn {
+	margin-top: 20px;
+}
+body {
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
+	padding-top: 70px;
+}
+.portfolio-item {
+ 	padding: 15px; 
+}
+.portfolio-item:hover .portfolio-content{
+	border-bottom-color:#727CB6; 
+}
+
+.portfolio-all {
+	background-color: #ffffff;
+	margin-bottom: 10px;
+}
+
+.portfolio-title{
+	height: 60px;
+	background-color: #98DaD6;  /*blue */
+	border-bottom: 1px solid #4FBAAA;
+	color: #ffffff;
+	text-align: center;
+	padding: 10px;
+}
+#proList div:nth-child(3n+2) .portfolio-title{
+	background-color: #DDD5C9;	/*beige*/
+	border-bottom: 1px solid #C6BFB4;
+} 
+#proList div:nth-child(3n+3) .portfolio-title{
+	background-color: #FF9985;	/*pink*/
+	border-bottom: 1px solid #D97F88;
+}
+.portfolio-title h3 {
+	font-size: 15px;
+ 	line-height: 15px; 
+	color: #ffffff;
+	margin: 5px;
+}
 </style>
 </head>
+
 <body>
 <!--加入header&nav -->
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
@@ -140,7 +202,6 @@ min-height: 450px;}
 <div style="display:none" id="loginTokenId" value="<%=request.getSession().getAttribute("memberId")%>"></div>
 		</c:if>
 <!-- 檢查會員登入與否用的token -->
-<%-- </sec:authorize>  --%>
 <div class="grey_bg row">
 	<div id="mainSpace">	
 		<h1>Date Query</h1>
@@ -158,11 +219,12 @@ min-height: 450px;}
 					</select>
 					</div>
 					<div style="display: inline-block;"><input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}"/></div>
-					<div style="display: inline-block;float:right;"><button id="searchDate" class="btn btn-default btn-lg btn-block"   value="查詢" />查詢</button></div>
+					<div style="display: inline-block;float:right;">
+					<button id="searchDate" class="btn btn-default btn-lg btn-block" >查詢</button></div>
 					
 			
 		
-			<table id="dateResult">
+			<table id="dateResult" >
 				<tr>
 					<td colspan="2" class="dateArea"><h5>製造日</h5></td>
 					<td colspan="2" class="dateResult"><p id="mfd"></p></td>
@@ -177,12 +239,12 @@ min-height: 450px;}
 			
 			</div>
 			<!-- 分隔線用 -->
-			<div ><br>
-				<table id="proList" class="table" ></table>
-			</div>
+
 
 	</div>
 	</div>
+			<div id="proList" class="row">
+			</div>
 	<!-- ////////////////////////////////////////////////////////////////////-->
 
 <!--加入footer -->
