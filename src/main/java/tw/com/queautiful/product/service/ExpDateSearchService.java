@@ -92,7 +92,7 @@ public class ExpDateSearchService {
 
 		String yearStr = batchCode.substring(2);
 
-		int year = Integer.valueOf(yearStr) + 2000;
+		int year = Integer.valueOf(yearStr) + 2010;
 
 		String monthStr = batchCode.substring(1, 2);
 
