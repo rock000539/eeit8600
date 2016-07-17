@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -57,7 +58,6 @@
 <!--                             <a class="read" href="#">Read more</a> -->
                         </div>
                     </div>
-<!--                     <a href="https://www.google.com.tw/"> -->
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
@@ -68,8 +68,7 @@
 <!--                             <a class="read" href="#">Read more</a> -->
                         </div>
                     </div>
-<!--                     </a> -->
-                </div>
+                </div> <!-- end of rs_box -->
                 
                 <div class="container" style="margin-top: 250px">
 <!--                 <div class="page-header page-heading"> -->
@@ -81,7 +80,8 @@
 <!-- 				    <div class="clearfix"></div> -->
 <!-- 				</div> -->
 <!-- 				<p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p> -->
-				  <a href="/articles/add"><button class="btn btn-default btn-lg" type="button">
+				  <button class="btn btn-default btn-lg" type="button" style="width:150px" id="allpost">All Post</button>
+				  <a href="/articles/add"><button class="btn btn-default btn-lg" type="button" style="width:150px">
 				  	<i class="fa fa-plus"></i>&nbspNew Topic
 				  </button></a>
 				  <table class="table forum table-striped">
@@ -110,25 +110,32 @@
 				      <tr  data-type="${article.articleType}">
 				      	<c:choose>
 						    <c:when test="${article.articleType=='NEWS'}">
-						       <td class="text-center"><i class="fa fa-bullhorn fa-2x text-primary NEWS"></i></td>
+						       <td class="text-center"><i class="fa fa-bullhorn fa-2x text-primary"></i></td>
 						    </c:when>
 						    <c:when test="${article.articleType=='SOLICIT'}">
-						       <td class="text-center"><i class="fa fa-file-text fa-2x text-success SOLICIT"></i></td>
+						       <td class="text-center"><i class="fa fa-file-text fa-2x text-success"></i></td>
 						    </c:when>
 						    <c:when test="${article.articleType=='QUESTION'}">
-						       <td class="text-center"><i class="fa fa-question-circle fa-2x text-danger QUESTION"></i></td>
+						       <td class="text-center"><i class="fa fa-question-circle fa-2x text-danger"></i></td>
 						    </c:when>
 						    <c:when test="${article.articleType=='CHAT'}">
-						        <td class="text-center"><i class="fa fa-rocket fa-2x text-warning CHAT"></i></td>
+						        <td class="text-center"><i class="fa fa-rocket fa-2x text-warning"></i></td>
 						    </c:when>
 						</c:choose>
 				        
 				        <td>
-				          <h4><a href="https://www.google.com.tw/" class="articleTitle">${article.articleTitle}</a><br><small>by <a href="#">${article.member.nickname}</a> >> ${article.articleTime}</small></h4>
+				          <h4><a href="https://www.google.com.tw/" class="articleTitle">［${article.articleType}］${article.articleTitle}</a><br>
+				          <small>by <a href="#">${article.member.nickname}</a> 
+				          <i class="fa fa-angle-double-right"></i> 
+				          ${fn:substring(article.articleTime,0,19)}</small>
+				          </h4>
 				        </td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.acms.size()}</a></td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
-				        <td class="hidden-xs hidden-sm">by <a href="#">${article.member.nickname}</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
+				        <td class="hidden-xs hidden-sm">
+				        	by <a href="#">${article.member.nickname}</a><br>
+				        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
+				        </td>
 				      </tr>
 				    </c:forEach>
 <!-- 				      <tr> -->
@@ -194,7 +201,9 @@
 <!-- 				      </tr> -->
 <!-- 				    </tbody> -->
 <!-- 				  </table> -->
-				</div>
+				</div>   <!-- end of ArticleList -->
+				
+				<div id="page_btn" class="col-sm-12 text-center"></div>
 				</div>   <!-- end of grey_bg  -->
             <!-- **每頁不同的內容結束** -->
 
@@ -205,46 +214,38 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 
+	<!-- Pagination Plugin -->
+	<script src="/js/product/jquery.bootpag.min.js"></script>
+
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+	
 
 
 	<script>
 	$(function(){
+		$('#allpost').on('click',function(){
+			$('tbody>tr').show();
+		});
 		$(".serviceBox_3").on('click',function(){
 			var aType = $(this).find('h3').text();
 			$('tbody>tr[data-type!='+aType+']').hide();
 			$('tbody>tr[data-type='+aType+']').show();
-			
-			
-// 			var aTypes=['NEWS','SOLICIT','QUESTION','CHAT'];
-// 			console.log(aTypes);
-// // 			var aTypes2=$("${articleTypes}");
-// // 			console.log(aTypes2);
-// 			var aType = $(this).find('h3').text();
-// // 			console.log($(this).find('h3').text());
-// 			for(var i=0; i<aTypes.length;i++){
-// 				console.log(aTypes[i]);
-// 				$('td>i.'+aTypes[i]).parent().parent().hide();			
-// 			}
-// 			$('td>i.'+aType).parent().parent().show();
-						
-// 			$.ajax({
-// 				url:'/articles/selectbyarticletype',
-// 				type: 'get',
-// 				contentType:'json',
-// 				data: {articleType:$(this).find('h3').text()},
-// 				success:function(result){
-// 					console.log(result);
-// 				}			
-// 			});
-			
 		});
-// 		$('#test').hide();
+		
+		$("#page_btn").bootpag({
+		    total:8,
+ 		    page:1,
+		    maxVisible: 5,	    
+		}).on("page", function(event, num){
+		   console.log(event);
+		   console.log(num);		    	 
+		});
+		
 // 		$('.articleTitle').click(function(){
 // 			console.log($(this).text());		
 // 		});

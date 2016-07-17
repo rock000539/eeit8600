@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.OrderBy;
 import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
@@ -128,14 +129,7 @@ public class ArticleController {
 
 	@RequestMapping("/listfms")
 	public String articleListFms(Model model){
-		model.addAttribute("articles", articleService.getAll());
-		ArticleType[] types = ArticleType.values();
-		List<String> articleTypes = new ArrayList<String>();
-		for(ArticleType type:types){
-			log.debug("{}",type.name());
-			articleTypes.add(type.name());
-		}
-		model.addAttribute("articleTypes", articleTypes);
+		model.addAttribute("articles", articleService.findByOrderByArticleTimeDesc());
 		return "/article/articleListFms";
 	}
 	

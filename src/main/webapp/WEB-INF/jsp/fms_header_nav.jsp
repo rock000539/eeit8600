@@ -8,6 +8,7 @@
     <div class="col-sm-12 top-nav">
         <ul>
         <c:set var="nickname" scope="session" value='<%=request.getSession().getAttribute("MemberNickname")%>'/>
+        <c:set var="memberId" scope="session" value='<%=request.getSession().getAttribute("memberId") %>' />
          <c:if test="${empty nickname}">
 		<!--  登入前 -->
             <li>
@@ -17,9 +18,11 @@
             </li>
             
         </c:if>
-         
         <!-- 登入後 -->            
         	 <c:if test="${not empty nickname}"> 
+            <li>
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
+            </li>
             <li>
                 <a href="#"><span>${nickname}</span></a>
             </li>
@@ -28,9 +31,6 @@
                 <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
                 </a>
             </li>
-              <li>
-                <a href="/logout"><span>logout</span></a>
-            </li>
          </c:if>
        
         </ul>
@@ -38,7 +38,7 @@
 
     <div class="col-sm-12">
         <div id="logo">
-            <h1><a href="/fms"><img src="/images/fms/logo_qutie.jpg"/></a></h1>
+            <h1><a href="/fms"><img src="/images/logo_qutie-02.png"/></a></h1>
         </div>
     </div>
 
@@ -73,7 +73,7 @@
                 <li><a href="/products/search"><span class="data-hover" data-hover="blog">Product</span></a></li>
 
                 <li><a href="/reviews/reviews">Review</a></li>
-                <li><a href="#">Article</a></li>
+                <li><a href="/articles/listfms">Forum</a></li>
                 <li><a href="#">Ranking</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
