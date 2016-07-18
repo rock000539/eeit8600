@@ -9,8 +9,8 @@
 <!-- **taglib沒有的話記得要加入** -->
 
 <!-- **加入4個css，請按照此順序** -->
-<link href="/css/review/bootstrap-reviews.css" rel="stylesheet" >
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> <!--**new**-->
+<link href="/css/review/bootstrap-reviews.css" rel="stylesheet" >
 <link rel="stylesheet" href="/css/fms/style.css">
 <link href="/css/review/reviews-customize.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/fms/fms-customize.css">

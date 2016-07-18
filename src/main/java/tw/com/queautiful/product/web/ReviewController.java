@@ -147,6 +147,9 @@ public class ReviewController {
 		model.addAttribute("month",month);
 		model.addAttribute("day",day);
 		
+		//會員年齡
+		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
+		
 		return "/review/reviewjQueryRain";
 	}
 
