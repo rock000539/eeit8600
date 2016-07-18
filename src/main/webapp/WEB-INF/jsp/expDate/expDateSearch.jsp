@@ -11,13 +11,13 @@
 	<!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 <script type="text/javascript" src="/js/fms/swipe.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+<!-- <script type="text/javascript" src="/js/fms/fms-main.js"></script> -->
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
