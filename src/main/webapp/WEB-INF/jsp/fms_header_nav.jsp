@@ -1,96 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-<!-- Header -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!--start wrapper-->
+<section class="wrapper container">
+<!--Start Header-->
 <header id="header">
-	<h1>
-		<a href="#">Queautiful</a>
-	</h1>
-	<nav class="links" id="main-nav">
-		<ul>
-			<li><a href="#" class="icon fa-calendar">日期</a></li>
-			<li><a href="#" class="icon fa-flask">成分</a>
-				<ul>
-					<li><a href="https://www.google.com.tw">依成份查詢產品</a></li>
-					<li><a href="#">依產品查詢成分</a></li>
-				</ul></li>
-			<li><a href="#" class="icon fa-retweet">順序</a></li>
-			<li><a href="#" class="icon fa-heart-o">產品</a></li>
-			<li><a href="#" class="icon fa-heart">使用心得</a></li>
-			<li><a href="#" class="icon fa-pencil">討論區</a></li>
-			<li><a href="#" class="icon fa-trophy">排行</a></li>
+    <div class="col-sm-12 top-nav">
+        <ul>
+        <c:set var="nickname" scope="session" value='<%=request.getSession().getAttribute("MemberNickname")%>'/>
+        <c:set var="memberId" scope="session" value='<%=request.getSession().getAttribute("memberId") %>' />
+         <c:if test="${empty nickname}">
+		<!--  登入前 -->
+            <li>
+                <a href="/fmslogin"><i class="fa fa-user" aria-hidden="true"></i>
+                <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
+                </a>
+            </li>
+            
+        </c:if>
+        <!-- 登入後 -->            
+        	 <c:if test="${not empty nickname}"> 
+            <li>
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
+            </li>
+            <li>
+                <a href="#"><span>${nickname}</span></a>
+            </li>
+            <li>
+                <a class="" href="#">
+                <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
+                </a>
+            </li>
+         </c:if>
+       
+        </ul>
+    </div>
 
-		</ul>
-	</nav>
-	<nav class="main">
-		<ul>
-			<li class="login">
-				<!--未登入 --> <!-- 										<a class="fa-user" href="#login">Login</a> -->
-				<!--已登入 -->
-				<div>
-					<a href="https://www.google.com.tw"> <img class="user"
-						src="/img/testuser.jpg" alt="" /> <span>username</span>
-					</a>
-				</div>
-			</li>
-			<li class="search"><a class="fa-search" href="#search">Search</a>
-				<form id="search" method="get" action="#">
-					<input type="text" name="query" placeholder="Search" />
-				</form></li>
-			<li class="menu"><a class="fa-bars" href="#menu">Menu</a></li>
-		</ul>
-	</nav>
+    <div class="col-sm-12">
+        <div id="logo">
+            <h1><a href="/fms"><img src="/images/logo_qutie-02.png"/></a></h1>
+        </div>
+    </div>
+
+    <!-- Navigation
+    ================================================== -->
+
+    <div class="navbar navbar-default navbar-static-top col-sm-12" role="navigation">
+        <span class="nav-caption">Navigation Menu...</span>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/fms">Home</a></li>
+
+                <li><a href="/expdate/search">Date</a></li>
+
+                <li><a href="/ingredients/main">Ingredient</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
+                        <li><a href="/ingredients/search">Via Ingredient</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Order</a></li>
+
+                <li><a href="/products/search"><span class="data-hover" data-hover="blog">Product</span></a></li>
+
+                <li><a href="/reviews/reviews">Review</a></li>
+                <li><a href="/articles/listfms">Forum</a></li>
+                <li><a href="#">Ranking</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
 </header>
-<!--右側選單 -->
-<!-- Menu -->
-<section id="menu">
-
-	<!-- Search -->
-	<section>
-		<form class="search" method="get" action="#">
-			<input type="text" name="query" placeholder="Search" />
-		</form>
-	</section>
-
-	<!-- Links -->
-	<section>
-		<ul class="links">
-			<li><a href="/expdate/list">
-					<h3>日期</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>成分</h3>
-			</a> <a href="/prodIngreList/showIngredient"><span>依成份查詢產品</span></a> <a
-				href="/prodIngreList/prodNameSearchIngred"><span>依產品查詢成分</span></a></li>
-			<li><a href="#">
-					<h3>順序</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>產品</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>使用心得</h3>
-			</a></li>
-			<li><a href="#">
-					<h3>討論區</h3>
-			</a></li>
-		</ul>
-	</section>
-
-	<!-- Actions -->
-	<section>
-		<ul class="actions vertical">
-			<li>
-				<!--未登入 --> <!-- 									<a href="#" class="button big fit">Log In</a> -->
-				<!--已登入 -->
-				<div>
-					<a href="#"> <img class="user" src="/img/testuser.jpg" alt="" />
-						<span>user</span>
-					</a>
-				</div>
-			</li>
-		</ul>
-	</section>
-
-</section>
+<!--End Header-->

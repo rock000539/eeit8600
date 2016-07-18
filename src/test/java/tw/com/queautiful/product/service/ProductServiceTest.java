@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +18,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.queautiful.App;
+import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Product;
-import tw.com.queautiful.product.specification.ProductSpecification;
-import tw.com.queautiful.product.specification.ProductSpecs;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(App.class)
@@ -28,22 +28,25 @@ public class ProductServiceTest {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ProductService service;
+	private ProductService productService;
+	
+	@Autowired
+	private BrandService brandService;
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Test
+	@Transactional
 	public void test() {
 
 		Product filter = new Product();
-		filter.setProdName("產品1");
-		filter.setBrandId(2L);
-		filter.setProdDesc("說明2");
+		filter.setBrand(brandService.getById(1L));
+		
+		log.debug("{}", filter);
 
-		//Specification<Product> spec = new ProductSpecification(filter);
-		Specification<Product> spec = ProductSpecs.byAuto(em, filter);
-		List<Product> list = service.getAll(spec);
+		Specification<Product> spec = Spec.byAuto(em, filter);
+		List<Product> list = productService.getAll(spec);
 
 		for (Product product : list) {
 			log.debug("{}", product);

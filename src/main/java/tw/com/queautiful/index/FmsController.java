@@ -5,10 +5,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FmsController {
-	
+
 	@RequestMapping("/fms")
-	public String fmsPage(){
+	public String fmsPage() {
 		return "/fms";
 	}
+
+	@RequestMapping("/indexfms")
+	public String indexfmsPage() {
+		return "/indexfms";
+	}
+
+	@RequestMapping("/indexjr")
+	public String indexjrPage() {
+		return "/indexjr";
+	}
+
+	@RequestMapping("/contact")
+	public String contactPage() {
+		return "/product/contact";
+	}
 	
+	@RequestMapping("/fmslogin")
+	public String loginPage() {
+		return "/fms";
+	}
 }

@@ -46,10 +46,23 @@ public class ExpDateController
     @RequestMapping("/search")
     public String search(Model model)
     {
+
         List<Brand> brands = new ArrayList<Brand>();
         brands = brandService.getAll();
-        System.out.println(brands);
         model.addAttribute("Brands", brands);
+        return "/expDate/expDateSearch";
+    }
+    
+    @RequestMapping("/reloadsearch")
+    public String reloadSearch(Model model,String reloadBatchCode,String brandId)
+    {
+    	System.out.println("test "+reloadBatchCode+"  "+brandId);
+        List<Brand> brands = new ArrayList<Brand>();
+        brands = brandService.getAll();
+        model.addAttribute("Brands", brands);
+        model.addAttribute("reloadBrandId", brandId);
+        model.addAttribute("reloadBatchCode", reloadBatchCode);
+        
         return "/expDate/expDateSearch";
     }
 
@@ -70,9 +83,8 @@ public class ExpDateController
     public String listPage(Model model, HttpServletRequest request)
     {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("username is " + username);
-
+    	 String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        
 
         List<Map> result = new ArrayList<Map>();
 
@@ -84,28 +96,8 @@ public class ExpDateController
             
         memberId = (long) request.getSession().getAttribute("memberId");
         
-        }else{
-        //        if(memberId==null){
-        //            System.out.println("in cookie");
-        //            List<Member> members = memberService.getAll();
-        //            Cookie[] cookies = request.getCookies();
-        //            System.out.println(cookies);//----------------------------
-        //            for (Cookie cookie : cookies) {
-        //                System.out.println("cookie.getName()=="+cookie.getValue());
-        //                for(int i=0;i<members.size();i++){
-        //                   Member member = members.get(i);
-        //                if (cookie.getValue().equals(member.getEmail())) {
-        //                    System.out.println("222cookie.getName()=="+cookie.getName());//-------------------
-        //                    memberId=member.getMemberId();
-        //                    System.out.println(member.getMemberId());//---------------------------------
-        //                    break;
-        //                }
-        //                }
-        //            }
-        //        }
         }
         
-        System.out.println(expDates.size() + " " + expDates);
 
         for (int i = 0; i < expDates.size(); i++)
         {

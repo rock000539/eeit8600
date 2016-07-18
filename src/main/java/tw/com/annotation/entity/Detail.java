@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -23,7 +24,7 @@ public class Detail {
 	private Integer numberOfPages;
 	
 	@OneToOne(mappedBy = "detail")
-	@JsonManagedReference
+	@JsonIgnore
 	private Book book;
 
 	public Detail() {
@@ -55,7 +56,6 @@ public class Detail {
 	}
 
 	public void setBook(Book book) {
-		this.book = book;
 		if(book.getDetail()!=this) {
 			book.setDetail(this);
 		}

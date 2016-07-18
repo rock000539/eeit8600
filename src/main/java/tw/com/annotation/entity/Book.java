@@ -13,8 +13,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "BOOK")
@@ -29,19 +33,20 @@ public class Book {
 	private String name;
 
 	@OneToOne
-	@JoinColumn(name = "detailid")
-	@JsonBackReference
+	@JoinColumn(name = "DETAILID")
 	private Detail detail;
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORYID")
-	@JsonBackReference
-	private Category category;
+	private BookCategory category;
+
+	@Transient
+	private Integer categoryId;
 
 	@ManyToMany
 	@JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "BOOKID", referencedColumnName = "BOOKID"), inverseJoinColumns = @JoinColumn(name = "PUBID", referencedColumnName = "PUBID"))
 	private List<Publisher> publishers;
-
+	
 	public Book() {
 
 	}
@@ -55,7 +60,7 @@ public class Book {
 		this.detail = detail;
 	}
 
-	public Book(String name, Category category) {
+	public Book(String name, BookCategory category) {
 		this.name = name;
 		this.category = category;
 	}
@@ -63,6 +68,14 @@ public class Book {
 	public Book(String name, List<Publisher> publishers) {
 		this.name = name;
 		this.publishers = publishers;
+	}
+
+	public Integer getCategoryId() {
+		return this.category.getCategoryId();
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public Long getBookId() {
@@ -92,11 +105,11 @@ public class Book {
 		}
 	}
 
-	public Category getCategory() {
+	public BookCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(BookCategory category) {
 		this.category = category;
 		if (!category.getBooks().contains(this)) {
 			category.getBooks().add(this);
@@ -109,19 +122,18 @@ public class Book {
 
 	public void setPublishers(List<Publisher> publishers) {
 		this.publishers = publishers;
+		Logger log = LoggerFactory.getLogger(this.getClass());
+		for(Publisher publisher : publishers) {
+			if(!publisher.getBooks().contains(this)) {
+				publisher.getBooks().add(this);
+			}
+			log.info("{}", publisher);
+		}
 	}
 
 	@Override
 	public String toString() {
-		
-		String result = String.format("Book [id=%d, name='%s']%n", bookId, name);
-		if (publishers != null) {
-			for (Publisher publisher : publishers) {
-				result += String.format("Publisher[id=%d, name='%s']%n", publisher.getPubId(), publisher.getName());
-			}
-		}
-
-		return result;
+		return "Book [bookId=" + bookId + "]";
 	}
-
+	
 }

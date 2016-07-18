@@ -41,4 +41,8 @@ public class ReviewService {
 		reviewDAO.delete(reviewId);
 	}
 	
+	public List<Review> findByOrderByReviewTimeDesc() {
+		return reviewDAO.findByOrderByReviewTimeDesc();
+	}
+	
 } 

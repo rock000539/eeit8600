@@ -2,6 +2,8 @@ package tw.com.queautiful.product.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,10 @@ public class ProductService {
 	public List<Product> getAll(Specification<Product> spec) {
 		return dao.findAll(spec);
 	}
+	
+	public Page<Product> getAll(Specification<Product> spec, Pageable pageable) {
+		return dao.findAll(spec, pageable);
+	}
 
 	public void insert(Product product) {
 		dao.save(product);
@@ -43,6 +49,10 @@ public class ProductService {
 
 	public void delete(Long productId) {
 		dao.delete(productId);
+	}
+	
+	public List<Product> findTop10ByOrderByScoreDesc() {
+		return dao.findTop10ByOrderByScoreDesc();
 	}
 	
 	public List<Product> findByProdNameEndsWith(String prodName){

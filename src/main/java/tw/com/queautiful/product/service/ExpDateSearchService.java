@@ -74,7 +74,7 @@ public class ExpDateSearchService {
 		products = productServ.getAll();
 		for (int i = 0; i < products.size(); i++) {
 
-			if (products.get(i).getBrandId() == brandId) {
+			if (products.get(i).getBrand().getBrandId() == brandId) {
 
 				productList.add(products.get(i));
 			}
@@ -92,7 +92,7 @@ public class ExpDateSearchService {
 
 		String yearStr = batchCode.substring(2);
 
-		int year = Integer.valueOf(yearStr) + 2000;
+		int year = Integer.valueOf(yearStr) + 2010;
 
 		String monthStr = batchCode.substring(1, 2);
 

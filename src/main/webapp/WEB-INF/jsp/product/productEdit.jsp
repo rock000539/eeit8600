@@ -268,6 +268,8 @@
 										<div class="col-sm-1"></div>
 									</div>
 									
+									<input type="hidden" id="prodImg" name="prodImg" value="${product.prodImg}" />
+									
 									<div class="form-group">
 										<div class="col-sm-3"></div>	
 										<div class="col-sm-7">

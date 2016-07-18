@@ -1,0 +1,303 @@
+@CHARSET "UTF-8";
+
+.container {
+/*      border:1px solid red; */
+}
+/*
+.container-body{
+	border:1px solid blue	;
+	margin:0px auto;
+	padding-left: 1%;
+	
+}
+.row-body{
+	margin-left:20px;
+	border:1px solid red;
+	margin-right:10px;
+}
+*/
+.body{	
+	float:left;
+    margin:15px 11px;
+/* 	border:1px solid rgb(224, 224, 224); */
+	border-radius:5px;
+    height: 407px;
+	width:270px;
+	padding-right:0px;
+    padding-left: 0px;
+    background: #fff;
+/*     下面還看不出效果*/;
+    display: inline-block;
+    box-shadow: 0px 0px 5px #CCC;
+    overflow: hidden;
+    position: relative;
+/*     position:static;  */
+}
+
+.thumbnail {
+	padding:0px;
+	/*     下面還看不出效果 */;
+    display: block;
+    line-height: 1.42857143;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+.reviewImg{
+	width:270px;
+	height: 180px;
+/* 	border:2px solid red; */
+	display: table-cell;
+    text-align: center;
+    /*     下面還看不出效果 */;
+	overflow: hidden;
+    margin: 0px auto;
+    padding: 0px;
+    padding-top:10px;
+    vertical-align: middle;
+}
+
+.reviewImg-Img{
+	max-width: 266px;
+	max-height: 190px;
+	/*     下面還看不出效果 */;
+	position: relative;
+    left: 0px;
+    top: 0px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    opacity: 1;
+}
+
+.info{
+	width: 250px;
+    height: 240px;
+    margin: 5px 10px 15px 10px;
+    overflow: hidden;
+}
+
+.reviewTime{
+    display: inline-block;
+    font-size: 12px;
+    color: #808080;
+    width: 100px;
+    padding-left: 5px;
+    margin-left: 5px;
+    font-family:"Microsoft JhengHei";
+    /*     下面還看不出效果 */;
+    line-height: 16px;
+    text-align: left;
+}
+
+.reviewState{
+	display: inline-block;
+    font-size: 12px;
+    color: #808080;
+    text-align: right;
+    width: 150px;
+    font-family:"Microsoft JhengHei";
+     /*     下面還看不出效果 */;
+    line-height: 16px;
+}
+
+.user-info{
+	position: relative;
+    width: 250px;
+    height: 65px;
+/*     margin: 5px auto; */
+    overflow: hidden;
+    background-color: #F2F2F2;
+}
+
+.card-header-circle{
+	border: 1px solid #ccc;
+    width: 52px;
+    height: 52px;
+    margin-top: 9px;
+    margin-left: 9px;
+    overflow: hidden;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    /*     下面還看不出效果 */;
+    -moz-border-radius: 50%;
+}
+
+
+
+.memeberImg{
+	max-width: 52px;
+	max-height: 52px;
+	margin-left: 5px;
+/*     width: auto; */
+/*     height: auto; */
+    /*     下面還看不出效果 */;
+    text-align: center;
+	position: relative;
+    left: 0px;
+    top: 0px;
+    vertical-align: middle;
+    opacity: 1;
+}
+
+/*userimg*/
+.userdiv {
+	border: 1px solid #ccc;
+  	width: 52px;
+    height: 52px;
+	margin-top: 9px;
+	margin-left: 9px;
+	overflow: hidden;
+    position: relative;
+    }        
+        /*橫*/
+        .userdiv img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 100%;
+            width: auto;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+        /*直*/
+        .userdiv img.portrait {
+        	width: 100%;
+        	height: auto;
+        }
+
+.user-name{
+	font-family:"Microsoft JhengHei";
+/* 	font-weight:bolder;  */ /* 會員暱稱變粗體*/
+	position: absolute;
+    top: 0;
+    left: 70px
+}
+
+	.user-name>a:link{
+		color:#4D4D4D;
+	}
+	
+	.user-name>a:visited{
+		color:#4D4D4D;
+	}
+	
+	.user-name>a:hover{
+		text-decoration:none;
+		color:#eb8ca9;
+	}
+	
+	.user-name>a:active{
+		text-decoration:none;
+		color:#eb8ca9;
+	}
+	
+
+.review-uc-diamond {
+	position: absolute;
+    top: 26px;
+    left: 70px;
+    color: #4D4D4D;
+    font-size: 12px;
+/*     letter-spacing:1px; */ /* diamond間距加寬*/
+	}
+	
+.urcosme-score-display{
+	display: inline-block;
+	/*     下面還看不出效果 */;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+/* .inline-block-diamond{ */
+/* 	width:14px; */
+/* 	height:30px; */
+/* 	margin-right: 1px; */
+/*     display: inline-block; */
+/*     zoom: 1; */
+/* } */
+
+.diamond{
+	font-size: 14px;
+/* 	color:#FF5151;有得分(紅色) */
+	color:#BEBEBE; /*沒有得分(灰色)*/
+}
+
+.review-rating{
+	letter-spacing:3px;
+	font-family:"Microsoft JhengHei";
+}
+
+.user-skin{
+	font-family:"Microsoft JhengHei";
+	position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #808080;
+}
+
+.review-link{
+	width: 250px;
+	font-family:"Microsoft JhengHei";
+	text-align:justify;
+	font-size: 14px;
+    line-height: 22px;
+    color: #4D4D4D;
+    margin-top: 16px;
+    padding-left:5px ;
+    padding-right:5px ;
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+	/*     下面還看不出效果 */;    
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+	.review-link:hover{
+		color:#4D4D4D;
+		text-decoration:none;
+	}
+
+.review-bottom-title{
+	font-family:"Microsoft JhengHei";
+	width:270px;
+	border-radius:5px;
+	position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding:3px 8px 3px 10px;
+    background-color: rgba(45, 42, 42, 0.69);
+    font-size: 15px;
+    line-height: 22px;
+	/*     下面還看不出效果 */; 
+    overflow: hidden;
+    text-align: left;
+    color: #FFFFFF;
+    opacity: 0;
+    z-index: 10;
+}	
+	.review-bottom-title:link{
+		color:#FFFFFF;
+	}
+	
+	.review-bottom-title:visited{
+		color:#FFFFFF;
+	}
+	
+	.review-bottom-title:hover{
+		text-decoration:none;
+		color:#FFFFFF;
+	}
+	
+	.review-bottom-title:active{
+		text-decoration:none;
+		color:#FFFFFF;
+	}

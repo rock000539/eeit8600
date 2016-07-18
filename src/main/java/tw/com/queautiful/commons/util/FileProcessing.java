@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +25,15 @@ public class FileProcessing {
 			){
 		String imgPath = null;
 		
+//		System.out.println("getOriginalFilename---->"+brandImgFile.getOriginalFilename());
+//		System.out.println("getContentType---->"+brandImgFile.getContentType());
+//		
+		String fileName = multipartFile.getOriginalFilename();
+//		int lastpoint = fileName.lastIndexOf(".");
+//		String mimeType = fileName.substring(lastpoint);
+		String mimeType = fileName.substring(fileName.lastIndexOf("."));
+		System.out.println("mimeType---->"+mimeType);
+
 //		String realPath = req.getServletContext().getRealPath("/WEB-INF/img");
 //		System.out.println("realPath----->" + realPath);
 		
@@ -37,7 +45,8 @@ public class FileProcessing {
 				if(!dir.exists())
 					dir.mkdirs();
 				System.out.println();
-				imgPath = path + folderName + File.separator + imgName + ".png";
+//				imgPath = path + folderName + File.separator + imgName + ".png";
+				imgPath = path + folderName + File.separator + imgName + mimeType;
 				
 				File file = new File(imgPath);
 				FileOutputStream fos = new FileOutputStream(file);
@@ -59,17 +68,18 @@ public class FileProcessing {
 	
 	//在網頁中顯示圖片
 	//傳入參數:1.HttpServletResponse, 2.檔案路徑
-	public static void showImg(HttpServletResponse resp,String imgPath){
+	public static void showImg(HttpServletResponse resp, String imgPath){
+		
 		try (InputStream is = new FileInputStream(imgPath);
-				ServletOutputStream out = resp.getOutputStream();){			
-				byte[] b = new byte[8192];
-				int len = 0;
-				while ((len = is.read(b)) != -1) {
-				out.write(b, 0, len);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			ServletOutputStream out = resp.getOutputStream();){			
+			byte[] b = new byte[8192];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+			out.write(b, 0, len);
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	
 	}
 	

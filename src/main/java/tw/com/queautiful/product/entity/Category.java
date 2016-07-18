@@ -1,35 +1,41 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import tw.com.queautiful.commons.util.CategoryTitle;
 
 @Entity
-@Table(name="CATEGORY")
+@Table(name = "CATEGORY")
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="CATEGORYID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CATEGORYID")
 	private Long categoryId;
-	
-	@Column(name="CATEGORYNAME",length=50)
+
+	@Column(name = "CATEGORYNAME", length = 50)
 	private String categoryName;
-	
-	@Column(name="CATEGORYIMG",length=200)
+
+	@Column(name = "CATEGORYIMG", length = 200)
 	private String categoryImg;
 	
-	@ManyToOne
-	@JoinColumn(name="TITLEID")
-	@JsonBackReference
-	private CategoryTitle title;
+	@Column(name="CATEGORYTITLE", length = 20)
+	@Enumerated(EnumType.STRING)
+	private CategoryTitle categoryTitle;
+
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+	private List<Product> products;
 
 	public Long getCategoryId() {
 		return categoryId;
@@ -54,22 +60,28 @@ public class Category {
 	public void setCategoryImg(String categoryImg) {
 		this.categoryImg = categoryImg;
 	}
-
-	public CategoryTitle getTitle() {
-		return title;
+	
+	public CategoryTitle getCategoryTitle() {
+		return categoryTitle;
 	}
 
-	public void setTitle(CategoryTitle title) {
-		this.title = title;
-		if(!title.getCategories().contains(this)) {
-			title.getCategories().add(this);
+	public void setCategoryTitle(CategoryTitle categoryTitle) {
+		this.categoryTitle = categoryTitle;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public void addProducts(Product product) {
+		this.products.add(product);
+		if (product.getCategory() != this) {
+			product.setCategory(this);
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryImg=" + categoryImg
-				+ ", title=" + title + "]";
-	}
-	
 }

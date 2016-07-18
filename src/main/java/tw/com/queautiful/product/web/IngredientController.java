@@ -2,6 +2,7 @@ package tw.com.queautiful.product.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.Ingredient;
+import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.IngredientService;
+import tw.com.queautiful.product.service.ProdIngreListService;
 
 
 
@@ -29,6 +32,10 @@ public class IngredientController {
 	
 	@Autowired
 	IngredientService service;
+	@Autowired
+	ProdIngreListService prodIngreListService;
+	@Autowired
+	BrandService brandService;
 	
 	// 提供jqGrid抓取資料使用
 		@RequestMapping("/select_jqgrid")
@@ -69,6 +76,16 @@ public class IngredientController {
 		return ingredient;
 	}
 	
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
+	@ResponseBody
+	public Ingredient ajaxPost(@RequestParam String NewingredName, @RequestParam String NewingredChName, @RequestParam String NewIngredChar) {
+		Ingredient ingredient=new Ingredient();
+		ingredient.setIngredName(NewingredName);
+		
+		service.insert(ingredient);
+		return ingredient;
+	}
+	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long ingredId, Model model) {
 		model.addAttribute("ingredient", service.getById(ingredId));
@@ -97,18 +114,36 @@ public class IngredientController {
 	
 	
 
-	@RequestMapping("/SearchIngredient") //開始成份找成份
+	@RequestMapping(value="/SearchIngredient",method=RequestMethod.POST) //開始成份找成份
 	public String search(String ingredName,Model model){
-		System.out.println("in contorller");
+		if(ingredName!=""&&ingredName!=null){
+			
 		List<Ingredient> result=new ArrayList<Ingredient>();
 				result=service.findByIngredName(ingredName);
 		List resultCn=service.findByIngredChName(ingredName);
 		for(int i=0;i<resultCn.size();i++){
 			result.add((Ingredient) resultCn.get(i));
 		}
-		System.out.println(result);
 		model.addAttribute("result", result);
 		return "/ingredient/ingredientSearch";
+		}else{
+			
+			model.addAttribute("resultStr", true);
+			return "/ingredient/ingredientSearch";
+		}
 	}
-
+	
+	//前台成分找產品用
+	@RequestMapping("/IngredientFindProducts")
+	@ResponseBody
+	public List<Map<String, Object>> IngredientFindProducts(@RequestParam String IngredientId){
+		List<Map<String, Object>> resultList=prodIngreListService.IngredientFindProducts(IngredientId);	
+		return resultList;
+	}
+	
+	//前台首頁
+	@RequestMapping("/main")
+	public String IngredientMain(){
+		return "/ingredient/ingredientmain";
+	}
 }

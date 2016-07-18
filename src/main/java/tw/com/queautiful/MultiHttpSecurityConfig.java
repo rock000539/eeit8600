@@ -21,11 +21,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.RequestCache;
 
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.MemberService;
+import tw.com.queautiful.product.service.MyUserDetailsService;
 
 @EnableGlobalAuthentication
 @EnableGlobalMethodSecurity(securedEnabled = true) 
@@ -35,23 +37,31 @@ public class MultiHttpSecurityConfig {
     MemberService memberService;
     
     @Autowired
+    MyUserDetailsService myUserDetailsService;
+    
+    @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
     {  
-    	auth.inMemoryAuthentication().withUser("parker").password("p").roles("PARKER");
+    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    	//--使用userdtilservice------------------------------------
+   	 	auth.userDetailsService(myUserDetailsService);
+//   	 	.passwordEncoder(encoder);//加密功能-------------
+    	//---------------------------------------------------
+    	auth.inMemoryAuthentication().withUser("parker").password("p").roles("ADMIN");
     	
         auth.inMemoryAuthentication()
         .withUser("user").password("p").roles("USER");
         
-        List<Member> members = new ArrayList<Member>();
-        members = memberService.getAll();
-        
-        for (int i = 0; i < members.size(); i++)
-        {
-            Member member = new Member();
-            member = (Member) members.get(i);
-            auth.inMemoryAuthentication().withUser(member.getEmail()).password(member.getPassword())
-                    .roles("USER");
-        }
+//        List<Member> members = new ArrayList<Member>();
+//        members = memberService.getAll();
+//        
+//        for (int i = 0; i < members.size(); i++)
+//        {
+//            Member member = new Member();
+//            member = (Member) members.get(i);
+//            auth.inMemoryAuthentication().withUser(member.getEmail()).password(member.getPassword())
+//                    .roles("USER");
+//        }
    
     }   
     
@@ -64,10 +74,10 @@ public class MultiHttpSecurityConfig {
        
             http    .csrf()
                     .disable()
-                    .antMatcher("/Gundam/**")
+                    .antMatcher("/bms/**")
                     .authorizeRequests()
                     .anyRequest()
-                    .hasRole("PARKER")//管理員PARKER才允許訪問的位置                 
+                    .hasRole("ADMIN")//管理員ADMIN才允許訪問的位置                 
                     .and()
                     .formLogin()
                     .loginPage("/login")
@@ -75,7 +85,8 @@ public class MultiHttpSecurityConfig {
                     .permitAll()
                     .and()
                     .logout()
-                    .logoutUrl("/logout")          
+                    .logoutUrl("/logout")//登出要用的url
+                    .logoutSuccessUrl("/fms")         
                     .permitAll()
                     .and()
                     .exceptionHandling().accessDeniedPage("/loginBmsDenied")  //權限不夠 登入時會導入的頁面                    
@@ -97,7 +108,8 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
     public void configure(WebSecurity web) throws Exception {
     web
     .ignoring()
-    .antMatchers("/**/**"); // 這個過濾條件中，忽略url(不用登入即可看的路徑)
+    .antMatchers("/gundam"); // 這個過濾條件中，忽略url(不用登入即可看的路徑),
+    						//因為和下面功能衝突只能用於設定全部路徑或設定不存在的路徑
     }
     
     @Override
@@ -106,9 +118,9 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable()
                 .authorizeRequests()  //開始設定路徑&權限
                 .antMatchers(
-                "/","/expdate/search",
-                "/expdate/batchCodeController",
-                "/loginBms",
+                "/","/expdate/search","/**/show","/**/select",
+                "/expdate/batchCodeController","/reviews/reviews","/reviews/review","/reviews/reviewjQueryRain",
+                "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied",
                 "/ingredients/startSearch") 
                 .permitAll()      //設定過濾條件 ↓         
@@ -125,7 +137,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .and()
                 .logout()
                 .logoutUrl("/logout")//登出要用的url
-                .logoutSuccessUrl("/")//登出後轉導的頁面
+                .logoutSuccessUrl("/fms")//登出後轉導的頁面
                 .invalidateHttpSession(true)//登出後使session無效
                 .permitAll()
                 
@@ -146,7 +158,6 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
         {
             List<Member> members = memberService.getAll();
             String Email = SecurityContextHolder.getContext().getAuthentication().getName();
-
             for (int i = 0; i < members.size(); i++)
             {
 
@@ -155,6 +166,8 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 if (member.getEmail().equals(Email))
                 {
                     request.getSession().setAttribute("memberId", member.getMemberId());
+                
+                    request.getSession().setAttribute("MemberNickname", member.getNickname());
                     //---------------------------------------------------------------------------------
                     Cookie crunchifyCookie = new Cookie("UserName", Email);
                     response.addCookie(crunchifyCookie);

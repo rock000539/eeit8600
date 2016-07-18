@@ -1,14 +1,27 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MEMBER")
@@ -39,9 +52,6 @@ public class Member {
 	@Column(name="BIRTHDAY")
 	private java.sql.Date birthDay;
 	
-	@Column(name="age")
-	private Integer age;
-	
 	@Column(name="SKINTYPE", length=30)
 	private String skinType;
 	
@@ -69,28 +79,49 @@ public class Member {
 	@Column(name="MEMBERSUSPENDCOUNT")
 	private Integer memberSuspendCount; //會員累計停權次數
 	
+	@Column(name="RESETPSWTOKEN")
+	private String resetPswToken; //重設密碼token
 	
+	@Column(name="RESETPSWEXP")
+	private java.sql.Date resetPswExp; //重設密碼期限
+	
+	//文章收藏
+	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OrderBy("ARTICLETIME DESC")
+	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
+	private Set<Article> articlesSavedByMember;
+	
+	//文章撰寫作者
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OrderBy("ARTICLETIME DESC")
+	private Set<Article> articlesWorteByAuthor;
+	
+	//心得
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OrderBy("REVIEWID ASC")
+	private Set<Review> reviews;
+	
+	//文章留言
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OrderBy("ARTICLECMTIME DESC")
+	private Set<ArticleCM> acmsWroteByAuthor;
+
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
 	
 	@Transient
 	private MultipartFile memberImgFile;
-	
-	
 
+	@Transient
+	private Integer age;
+	
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", nickname=" + nickname
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthDay="
-				+ birthDay + ", age=" + age + ", skinType=" + skinType + ", memberImg=" + memberImg + ", phone=" + phone
-				+ ", addr=" + addr + ", memberRegiDate=" + memberRegiDate + ", memberSuspend=" + memberSuspend
-				+ ", memberSuspendStart=" + memberSuspendStart + ", memberSuspendDays=" + memberSuspendDays
-				+ ", memberSuspendCount=" + memberSuspendCount + ", memberSuspendExp=" + memberSuspendExp
-				+ ", memberImgFile=" + memberImgFile + "]";
+		return "Member [memberId=" + memberId + ", email=" + email + ", articlesSavedByMember=" + articlesSavedByMember
+				+ ", articlesWorteByAuthor=" + articlesWorteByAuthor + "]";
 	}
 
-	
-	
 	public MultipartFile getMemberImgFile() {
 		return memberImgFile;
 	}
@@ -171,14 +202,6 @@ public class Member {
 	public void setBirthDay(java.sql.Date birthDay) {
 		this.birthDay = birthDay;
 	}
-	
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
 
 	public String getSkinType() {
 		return skinType;
@@ -252,6 +275,66 @@ public class Member {
 		this.memberSuspendCount = memberSuspendCount;
 	}
 
-	
+	public String getResetPswToken() {
+		return resetPswToken;
+	}
 
+	public void setResetPswToken(String resetPswToken) {
+		this.resetPswToken = resetPswToken;
+	}
+
+	public java.sql.Date getResetPswExp() {
+		return resetPswExp;
+	}
+
+	public void setResetPswExp(java.sql.Date resetPswExp) {
+		this.resetPswExp = resetPswExp;
+	}
+
+	public Set<Article> getArticlesSavedByMember() {
+		return articlesSavedByMember;
+	}
+
+	public void setArticlesSavedByMember(Set<Article> articlesSavedByMember) {
+		this.articlesSavedByMember = articlesSavedByMember;
+	}
+
+	public Set<Article> getArticlesWorteByAuthor() {
+		return articlesWorteByAuthor;
+	}
+
+	public void setArticlesWorteByAuthor(Set<Article> articlesWorteByAuthor) {
+		this.articlesWorteByAuthor = articlesWorteByAuthor;
+	}
+	
+	public Set<Review> getReviews() {
+		return reviews;
+	}
+	
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public void addReviews(Review review){
+		this.reviews.add(review);
+		if(review.getMember()!=this){
+			review.setMember(this);
+		}
+	}
+	public Set<ArticleCM> getAcmsWroteByAuthor() {
+		return acmsWroteByAuthor;
+	}
+
+	public void setAcmsWroteByAuthor(Set<ArticleCM> acmsWroteByAuthor) {
+		this.acmsWroteByAuthor = acmsWroteByAuthor;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
 }

@@ -5,41 +5,50 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Find by Product</title>
   
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/css/fms-main.css" />
-	<link rel="stylesheet" href="/css/fms-customize.css" />		
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/fms/style.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">
 	<!-- Scripts -->
-    <script src="/js/jquery.min.js"></script>
 
-	
-	<script src="/js/jquery.dropotron.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/fms-main.js"></script>  
+	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/js/fms/swipe.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+
 
 <script>
 $(function(){
 	$('#searchIngredient').click(function (){
 		var prodName=$("#prodName").val();
-
+	if(prodName!=""){
 		$.ajax({
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
-		'type' : 'GET',
+		"type" : "post",
 		'success': function (data){
 			
 			$('#productList').empty();
+			if(data.products.length==0){
+				$("#productList").append(
+"<div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無產品資料</div>")
+			};
+			
 		for(var i=0;i<data.products.length;i++){
-			$("#productList").append(
-					
-	'<tr><td>'+data.products[i].prodName+'</td><td>'
-	+data.categorys[i].categoryName+'</td>'
-	+'<td><input type="submit" class="checkIngredient btn btn-primary " data-toggle="modal"  data-target="#myModal"  name="'
-	+data.products[i].prodId+'" value=查看成份>'
-	+'</td></tr>')
+			$("#productList").append(					
+	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
+	+data.products[i].prodName+"</td><td><p><small>"+data.brands[i].brandName+"</small></p></td><td>"
+	+data.categorys[i].categoryName+"</td>"
+	+"<td><input type='submit' class='checkIngredient btn-info btn-sm btn-block'"+ 
+	"data-toggle='modal'  data-target='#myModal' name='"
+	+data.products[i].prodId+"' value=查看成份>"
+	+"</td></tr>")
 		}//end of for
 		//------------------------------------------------------------------------------
 		$(".checkIngredient").click(function(e){
@@ -50,11 +59,13 @@ $(function(){
 				type : 'get',
 				data : {"proIdStr":prodId},
 				success : function(data){
-					$('#showArea').empty();
+					$('#showArea td').remove();
+					$('#showArea h4').remove();
 					$('#myModalLabel').empty();
 					$('#myModalLabel').append(data.productName);
 					if(data.ingredients.length==0){
-						$('#showArea').append("<h4>抱歉目前沒有此產品成份資料<h4>");
+						$('#showArea').append(
+		"<tr><td colspan='6'><div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無成份資料</div></td></tr>");
 					}else{
 					for(var i=0;i<data.ingredients.length;i++){							
  						$('#showArea').append(
@@ -77,56 +88,76 @@ $(function(){
 		}
 
 	});	
-	
+	}else{
+		$('#productList').empty();
+		$("#productList").append("<div class='alert alert-danger alert-dismissable'>請輸入文字進行搜尋</div>");
+	}
 	})//end search click
 		
 })//end function
 
 </script>
 <style>
-h3{   text-align: center;
+body {
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
 }
 .modal {
 height: 900px;
 margin-top:100px; }
 .modal-header{
 font-size: 50px;}
-.form-inline{
- width: 400px;
- margin-top:100px;
-  margin-left: auto;
-  margin-right: auto;
+#inputForm{
+
 }
+#inputTable{
+ width: 450px;
+ margin: auto auto;
+font-size: 14px;
+}
+#searchIngredient{
+margin-left:20px;
+ }
 #productArea{
-width: 500px;
+width: 800px;
 margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-
+}
+#productList img{
+width:100px;
+height: 100px;
+}
+#productList span{
+margin: auto auto;
+}
+#searchbox { 
+    padding: 20px;
+    margin: auto auto;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+.grey_bg{
+min-height: 450px;}
+button{color:white;
 }
 </style>
 </head>
 <body>
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+	<div class="grey_bg row">	
+<!-- top ////////////////////////////////////////////////////-->	
 
-<!-- Wrapper -->
-<div id="wrapper">
-<!--加入header&nav -->
-<c:import url="../fms_header_nav.jsp" />
-				
-<!-- Main -->
-<div id="main">
-<!-- top ////////////////////////////////////////////////////-->			
-<form action="" class="form-inline">
-<table>
-<tr><td colspan="2"><h3>請輸入產品名稱或部分名稱</h2></td></tr>
-<tr><td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
-<td><input type="button" id="searchIngredient" value="Search" class="btn btn-default" style="margin-bottom: 10px;"></td></tr>
+<div id="searchbox">	
+<h2>Find by Product</h2>
+<table id="inputTable">
+<tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr> 
+<tr><td><form  id="inputForm"><input type="text" name="prodName" id="prodName" class="form-control" ></form></td>
+
+<td  colspan="2"><button id="searchIngredient" value="查產品" class="btn btn-default btn-lg button" style="margin-bottom: 10px;">查產品</button></td></tr>
 </table>
-</form>
 
+</div>
 <!-- Button trigger modal -->
-
-
 
 <!-- <button class="btn btn-primary btn-lg" data-toggle="modal" 
    data-target="#myModal">
@@ -148,12 +179,12 @@ margin-top: 50px;
             </h4>
          </div>
          <div class="modal-body" >
-           <table id="showArea" class="table table-hover">
-           <tr><td>成份</td><td>中文名稱</td><td>概略特性</td><td>粉刺</td><td>刺激</td><td>安心度</td></tr>
+           <table id="showArea" class="table">
+           <tr><th>成份</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
            </table>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">  關閉視窗</button>
 <!--             <button type="button" class="btn btn-primary"> -->
 <!--            Submit </button> -->
          </div>
@@ -166,12 +197,8 @@ margin-top: 50px;
 <table id="productList" class="table  table-hover"></table>
 </div>
 <!-- top ////////////////////////////////////////////////////-->	
+</div> 
 	            <!-- **每頁不同的內容結束** -->
-
-<!--加入intro&footer -->
-<c:import url="../fms_intro_footer.jsp" />
-	</div>
-	</div>
-			
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 </body>
 </html>
