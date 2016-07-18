@@ -31,19 +31,23 @@ min-height: 450px;}</style>
 				<div class="grey_bg row ">
 				<div class="container">
 				<div class=" row ">
-					
-					<div class="item mobile isotope-item" style="width: 376px; height: 186px;display:inline-block;position:relative;float:left;transform: translate3d(130px, 30px, 0px);">
+				
+					<div class="item mobile isotope-item" style="width: 376px; height: 270px;display:inline-block;position:relative;float:left;transform: translate3d(130px, 30px, 0px);text-align:center;">
                             <figure class="touching effect-bubba">
                                 <img src="/img/cosmeticProducts.jpg"  alt="" class="img-responsive" >
+
                                 <div class="option">
                                     <a href="/prodIngreList/prodNameSearchIngred" class="fa fa-link" ></a>
                                 </div>
                                 <figcaption class="item-description">
                                     <h5>查看產品成份</h5>
+                                   
                                 </figcaption>
                             </figure>
                         </div>
-                        <div class="item mobile isotope-item" style="width: 376px; height: 186px; display:inline-block;position:relative;transform: translate3d(280px, 30px, 0px);">
+                         
+                                                                    
+                        <div class="item mobile isotope-item" style="width: 376px; height: 270px; display:inline-block;position:relative;transform: translate3d(280px, 30px, 0px);text-align:center;">
                             <figure class="touching effect-bubba">
                                 <img src="/img/1-1502031R346120.jpg" alt="" class="img-responsive">
 

@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/css/fms/fms-customize.css">
 	
 	<!-- ThisPage Template --> <!-- Electrify Template -->
-	<link href="/css/product/product-select.css" rel="stylesheet" />
+	<link href="/css/product/product-search.css" rel="stylesheet" />
 
 	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
@@ -25,14 +25,13 @@
 	<script src="/js/jquery.redirect.js"></script>	
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ProductSelectPage</title>
+	<title>ProductSearchPage</title>
 	
 	<style>
 		
 		#categoryContainer {
- 		    width: 100%;
+ 		    width: 87%;
  		    margin:0 auto;
-			margin-left: 1.5%;
 		}
 		
 	</style>
@@ -91,7 +90,7 @@
 	                <li data-filter=".HAIR"><a href="#">Hair</a></li>
 	            </ul>
 	        </nav>
-	
+			
 	        <div class="portfolio-centered">
 	            <div id="categoryContainer" class="recentitems portfolio">
 	

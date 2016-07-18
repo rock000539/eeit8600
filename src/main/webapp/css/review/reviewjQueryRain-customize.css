@@ -11,9 +11,10 @@
 	position: inherit;
     top: 26px;
     left: 70px;
-    color: #4D4D4D;
+/*     color: #4D4D4D; */
+    color: #777777;
     font-size: 12px;
-/*     letter-spacing:1px; diamond間距加寬 */
+    letter-spacing:-0.5px; /*diamond間距加寬*/
 	}
 	
 .urcosme-score-display{
@@ -23,28 +24,28 @@
     font-size: 12px;
 }
 
-.diamond{
-	font-size: 14px;
-/* 	color:#FF5151;有得分(紅色) */
-	color:#BEBEBE; 沒有得分(灰色)
-}
+/* .diamond{ */
+/* 	font-size: 13px; */
+/* /* 	color:rgb(100, 140, 213);有得分(藍紫色) */ */
+/* 	color:#BEBEBE; 沒有得分(灰色) */
+/* } */
 
-/*橫*/
-#userimg {
-    position: relative;
-    left: 20%;
-    top: 50%;
-    height: 100%;
-    width: auto;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-}
-/*直 */
-#userimg.portrait {
-    width: 100%;
-    height: auto;
-}
+/* /*橫*/ */
+/* #userimg { */
+/*     position: relative; */
+/*     left: 20%; */
+/*     top: 50%; */
+/*     height: 100%; */
+/*     width: auto; */
+/*     -webkit-transform: translate(-50%,-50%); */
+/*     -ms-transform: translate(-50%,-50%); */
+/*     transform: translate(-50%,-50%); */
+/* } */
+/* /*直 */ */
+/* #userimg.portrait { */
+/*     width: 100%; */
+/*     height: auto; */
+/* } */
 
 
 

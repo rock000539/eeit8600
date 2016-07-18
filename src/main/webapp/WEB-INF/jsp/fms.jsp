@@ -15,49 +15,45 @@
     <!-- CSS FILES -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
+    
+	<!-- fractionslider -->
+    <link rel="stylesheet" href="/css/fms/fractionslider.css"/>
+    <link rel="stylesheet" href="/css/fms/style-fraction.css"/>
+    
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 <body>
 <!--start wrapper-->
 <!-- <section class="wrapper container"> -->
+
 <!--Start Header-->
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 <!--End Header-->
 
-<div class="grey_bg row">
-
-</div>
-<!-- <div class="slider-wrapper row"> -->
-    <!-- <div class="slider">
-        <div class="fs_loader"></div> -->
+<div class="slider-wrapper row">
+    <div class="slider">
+        <div class="fs_loader"></div>
 
 <!-- slide1 -->
-        <!-- <div class="slide">
-            <img src="images/fraction-slider/base.jpg" width="1170" height="auto" data-in="top" data-out="fade" data-delay=""/>
-            <img src="images/silde/jmnashi.jpg" width="380" height="252" data-position="60,650" data-in="right" data-out="left" data-delay="1500"/>
+        <div class="slide">
+            <img src="/images/fms/fraction-slider/base.jpg" width="1170" height="auto" data-in="top" data-out="fade" data-delay=""/>
+            <img src="/images/fms/fraction-slider/jmnashi.jpg" width="380" height="252" data-position="60,650" data-in="right" data-out="left" data-delay="1500"/>
 
             <p class="slide-1" data-position="100,170" data-in="top" data-out="bottom" data-delay="2500">premium layer slider use</p>
             <p class="slide-1 a " data-position="145,170" data-in="right" data-out="left" data-delay="2900">come in 40 colors</p>
             <p class="slide-1 " data-position="190,170" data-in="left" data-out="right" data-delay="3300">Easy to use and customize </p>
             <p class="slide-1 a" data-position="235,170" data-in="bottom" data-out="top" data-delay="3700">super clean and responsive design </p>
-        </div> -->
+        </div>
 
 <!-- slide2 -->
-        <!-- <div class="slide">
-            <img src="images/fraction-slider/base_2.jpg" width="1170" height="auto" data-in="fade" data-out="fade"/>
+        <div class="slide">
+            <img src="/images/fms/fraction-slider/base_2.jpg" width="1170" height="auto" data-in="fade" data-out="fade"/>
 
             <p class="slide-2 " data-position="30,430" data-in="top" data-out="top" data-delay="500">Awesome Features</p>
             <p class="slide-2a " data-position="70,200" data-in="top" data-out="top" data-delay="400">Cors justo odio dapibus ac facilisis in, egestas eget quam.vestibulum id</p>
 
-            <img src="images/fraction-slider/gadgets/3.png" width="223" height="260" data-position="100,450" data-in="fade" data-out="fade" data-delay="1500"/>
+            <img src="/images/fms/fraction-slider/pj.jpg" width="223" height="260" data-position="100,500" data-in="fade" data-out="fade" data-delay="1500"/>
 
             <p class="slide-2icon" data-position="110,380" data-in="right" data-out="left" data-delay="2000"><i class="fa fa-user"></i></p>
             <p class="slide-2icon-a " data-position="190,300" data-in="right" data-out="left" data-delay="3000">Easy instrucation</p>
@@ -73,16 +69,16 @@
             <p class="slide-2icon bgb " data-position="220,900" data-in="left" data-out="right" data-delay="2400"><i class="fa fa-unlock"></i>
             </p>
             <p class="slide-2icon-a " data-position="300,840" data-in="left" data-out="right" data-delay="4000">100% Server Update</p>
-        </div> -->
+        </div>
 
 <!-- slide3 -->
-        <!-- <div class="slide">
-            <img src="images/fraction-slider/base_3.jpg" data-in="fade" data-0ut="fade" width="1170" height="auto">
+        <div class="slide">
+            <img src="/images/fms/fraction-slider/base_3.jpg" data-in="fade" data-0ut="fade" width="1170" height="auto">
 
-            <img src="images/silde/jmnashi.jpg" width="541" height="355" data-position="0,550" data-in="right" data-out="left" data-delay="20">
-            <img src="images/silde/top-note-lemon.jpg" width="160" height="80" data-position="275,70" data-in="left" data-out="right" data-delay="1000">
-            <img src="images/silde/heart-note-nashi-blossom.jpg" width="160" height="80" data-position="275,230" data-in="top" data-out="bottom" data-delay="1500">
-            <img src="images/silde/base-note-white-musk.jpg" width="160" height="80" data-position="275,390" data-in="right" data-out="left" data-delay="1600">
+            <img src="/images/fms/fraction-slider/jmnashi.jpg" width="541" height="355" data-position="0,550" data-in="right" data-out="left" data-delay="20">
+            <img src="/images/fms/fraction-slider/top-note-lemon.jpg" width="160" height="80" data-position="275,70" data-in="left" data-out="right" data-delay="1000">
+            <img src="/images/fms/fraction-slider/heart-note-nashi-blossom.jpg" width="160" height="80" data-position="275,230" data-in="top" data-out="bottom" data-delay="1500">
+            <img src="/images/fms/fraction-slider/base-note-white-musk.jpg" width="160" height="80" data-position="275,390" data-in="right" data-out="left" data-delay="1600">
 
             <p class="style heading" data-position="50,180" data-in="top" data-out="top" data-delay="2000" data-ease-in="easeOutBounce">Tasting Notes</p>
 
@@ -93,18 +89,16 @@
 
             <p class=" icon" data-position="120,180" data-in="top" data-out="bottom" data-delay="1100" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
             <p class=" icon" data-position="150,180" data-in="top" data-out="bottom" data-delay="1200" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
-            <p class=" icon" data-position="180,180" data-in="top" data-out="bottom" data-delay="1300" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p> -->
-           
-            
-
-           <!--  <a href=""	class="slider-read" data-position="250,180" data-in="bottom" data-out="bottom" data-ease-in="easeOutBounce" data-delay="6000">download Now</a> -->
-     <!--    </div>
-    </div> -->
-<!-- </div> -->
+            <p class=" icon" data-position="180,180" data-in="top" data-out="bottom" data-delay="1300" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
+ 
+            <a href=""	class="slider-read" data-position="210,180" data-in="bottom" data-out="bottom" data-ease-in="easeOutBounce" data-delay="2000">Check Now</a>
+        </div>
+    </div>
+</div>
 <!--End Slider-->
 
-    <!-- <section class="info_service"> -->
-        <!-- <div class="row sub_content">
+        <!-- <section class="info_service"> -->
+        <div class="row sub_content">
             <div class="col-md-3 col-sm-6">
                 <div class="serviceBox_2 green">
                     <div class="service-icon">
@@ -112,7 +106,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Quick</h3>
-                        <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                        <p>Get What You Need Quickly</p>
                         <div class="read">
                             <a href="">Read more</a>
                         </div>
@@ -127,7 +121,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Query</h3>
-                        <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                        <p>Query Whatever You Want To Know </p>
                         <div class="read">
                             <a href="">Read more</a>
                         </div>
@@ -142,7 +136,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Quality</h3>
-                        <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                        <p>We Provide Quality Information</p>
                         <div class="read">
                             <a href="">Read more</a>
                         </div>
@@ -157,14 +151,14 @@
                     </div>
                     <div class="service-content">
                         <h3>Question</h3>
-                        <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                        <p>Share Experience & Put Question</p>
                         <div class="read">
                             <a href="">Read more</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     <!-- </section> -->
 
     <!-- <div class="grey_bg pdt-70 row"> -->
@@ -822,19 +816,84 @@
     </section> -->
 
 <!--start footer-->
+<footer class="footer row">
+    <div class="col-sm-6 col-md-3 col-lg-3">
+        <div class="widget_title">
+            <h4><span>About Us</span></h4>
+        </div>
+        <div class="widget_content">
+            <p>Donec earum rerum hic tenetur ans sapiente delectus, ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores.</p>
+            <ul class="contact-details-alt">
+                <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: Taipei, Taiwan</p></li>
+                <li><i class="fa fa-user"></i> <p><strong>Phone</strong>:(+886) 8888-8888</p></li>
+                <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: <a href="#">qutie@gmail.com</a></p></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3">
+        <div class="widget_title">
+            <h4><span>Recent Posts</span></h4>
+        </div>
+        <div class="widget_content">
+            <ul class="links">
+                <li> <a href="#">Aenean commodo ligula eget dolor<span>November 07, 2015</span></a></li>
+                <li> <a href="#">Temporibus autem quibusdam <span>November 05, 2015</span></a></li>
+                <li> <a href="#">Debitis aut rerum saepe <span>November 03, 2015</span></a></li>
+                <li> <a href="#">Et voluptates repudiandae <span>November 02, 2015</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3">
+        <div class="widget_title">
+            <h4><span>Twitter</span></h4>
+
+        </div>
+        <div class="widget_content">
+            <ul class="tweet_list">
+                <li class="tweet_content item">
+                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
+                    <span class="time">29 September 2015</span>
+                </li>
+                <li class="tweet_content item">
+                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
+                    <span class="time">29 September 2015</span>
+                </li>
+                <li class="tweet_content item">
+                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
+                    <span class="time">29 September 2015</span>
+                </li>
+            </ul>
+        </div>
+        <div class="widget_content">
+            <div class="tweet_go"></div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3">
+        <div class="widget_title">
+            <h4><span>Flickr Gallery</span></h4>
+        </div>
+        <div class="widget_content">
+            <div class="flickr">
+                <ul id="flickrFeed" class="flickr-feed"></ul>
+            </div>
+        </div>
+    </div>
+</footer>
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 <!--end footer-->
 
-
-
+<!-- SCRIPT -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="/js/fms/swipe.js"></script>
-<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
-<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.fractionslider.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
+<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+
+<script type="text/javascript" src="/js/fms/swipe.js"></script>
+<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
 
 </body>

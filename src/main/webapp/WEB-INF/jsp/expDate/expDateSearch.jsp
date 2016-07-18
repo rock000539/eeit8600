@@ -223,7 +223,7 @@ body {
 					
 			
 		
-			<table id="dateResult" >
+			<table id="dateResult"  >
 				<tr>
 					<td colspan="2" class="dateArea"><h5>製造日</h5></td>
 					<td colspan="2" class="dateResult"><p id="mfd"></p></td>
@@ -242,7 +242,11 @@ body {
 
 	</div>
 	</div>
-			<div id="proList" class="row">
+			<div class="row">
+			<div  class="col-md-1">
+			</div>
+			<div id="proList" class="col-md-10 col-sm-7">
+			</div>
 			</div>
 	<!-- ////////////////////////////////////////////////////////////////////-->
 
