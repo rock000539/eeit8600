@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>用產品找成份</title>
+<title>Find by Product</title>
   
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
@@ -146,9 +146,9 @@ button{color:white;
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 	<div class="grey_bg row">	
 <!-- top ////////////////////////////////////////////////////-->	
-<h2>產品找成份</h2>
-<div id="searchbox">	
 
+<div id="searchbox">	
+<h2>Find by Product</h2>
 <table id="inputTable">
 <tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr> 
 <tr><td><form  id="inputForm"><input type="text" name="prodName" id="prodName" class="form-control" ></form></td>

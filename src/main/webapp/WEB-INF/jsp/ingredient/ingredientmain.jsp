@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>FMS Template</title>
+    <title>Ingredient Information</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +25,7 @@ min-height: 450px;}</style>
 
 <body>
 <!--加入header&nav -->
-<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+<c:import url="/WEB-INF/jsp/fms_header_nav2.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row ">
@@ -41,9 +41,9 @@ min-height: 450px;}</style>
                                 </div>
                                 <figcaption class="item-description">
                                     <h5>查看產品成份</h5>
-                                   
                                 </figcaption>
                             </figure>
+                            <div><h1>Find by Product</h1></div>
                         </div>
                          
                                                                     
@@ -59,6 +59,7 @@ min-height: 450px;}</style>
                                     
                                 </figcaption>
                             </figure>
+                            <div><h1>Find by Ingredient</h1></div>
                         </div>
 					
 				</div></div></div>     
@@ -78,6 +79,8 @@ min-height: 450px;}</style>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+
+
 
 </body>
 </html>

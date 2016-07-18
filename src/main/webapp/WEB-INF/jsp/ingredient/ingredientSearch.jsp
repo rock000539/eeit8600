@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>用成份找產品</title>
+<title>Find by Ingredient</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
@@ -127,7 +127,7 @@ $(".searchProducts").click(function(e){//#1-2
 			<!-- **每頁不同的內容從這裡開始** -->
 <div class="grey_bg row">
 <div id="searchbox">
-<h2>成份找產品</h2>
+<h2>Find by Ingredient</h2>
 <form action="/ingredients/SearchIngredient" method="post">
 <table id="inputForm">
 <tr><td colspan="2"><h3>輸入成份之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
