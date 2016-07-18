@@ -58,7 +58,7 @@ var handleSlimScroll = function() {
             $(i).hasClass(t) ? $(i).removeClass(t) : e !== !0 ? $(i).addClass(t) : e = !1, $(window).width() < 480 && $("#page-container").removeClass("page-right-sidebar-toggled")
         })
     },
-    handleSidebarMinify = function() {
+    handleSidebarMinify = function() {	/* sidebar的縮小 */
         $("[data-click=sidebar-minify]").click(function(e) {
             e.preventDefault();
             var a = "page-sidebar-minified",
@@ -494,6 +494,8 @@ var handleSlimScroll = function() {
             }
         }
     }();
+    
+/* customize */
     
 	$(function(){
 		Bms.init();

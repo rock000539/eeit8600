@@ -60,10 +60,122 @@ div.col-lg-4, div.col-sm-6{
     text-transform: uppercase;
     font-weight: 400;
 }
-.main-section.alabaster{
-	background:#fafafa;
+
+#navigationDiv{
+	float:left;
+	position: fixed;
+}
+#navigationMenu li{
+	list-style:none;
+	height:39px;
+	width:40px;
+	padding:2px;
+}
+#navigationMenu span.nav-span{
+	width:0;
+	left:38px;
+	padding:0;
+	position:absolute;
+	overflow:hidden;
+	font-family:'Myriad Pro',Arial, Helvetica, sans-serif;
+	font-size:18px;
+	font-weight:bold;
+	letter-spacing:0.6px;
+	white-space:nowrap;
+	line-height:39px;
+	-webkit-transition: 0.25s;
+	transition: 0.25s;
+}
+#navigationMenu a{
+	height:39px;
+	width:38px;
+	display:block;
+	position:relative;
+	text-align: center;
+}
+#navigationMenu a>span.nav-icon{
+	display: inline-block;
+	padding-top: 9px;
+	font-size: 22px;
+}
+a.home{
+	background: #EA3556;
+	color: #fff;
+}
+a.about{
+	background: #61D2D6;
+	color: #fff;
+}
+a.expdate{
+	background: #ED146F;
+	color: #fff;
+}
+a.liked{
+	background: #EDE5E2;
+	color: #fff;
+}
+a.liked-product{
+	background: #EDDE45;
+	color: #fff;
+}
+a.post{
+	background: #9BF0E9;
+	color: #fff;
 }
 
+#navigationMenu a:hover span.nav-span{
+	width:auto; 
+	padding:0 20px;
+	overflow:visible; 
+}
+#navigationMenu a:hover{
+	text-decoration:none;
+	-webkit-box-shadow:0 0 5px #9ddff5;
+	box-shadow:0 0 5px #9ddff5;
+}
+
+#navigationMenu .home {	background-position:0 0;}
+#navigationMenu .home:hover {	background-position:0 -39px;}
+#navigationMenu .home span.nav-span{
+	background-color: #EA3556;
+	color: #fff;
+/* 	text-shadow:1px 1px 0 #99bf31; */
+}
+#navigationMenu .about { background-position:-38px 0;}
+#navigationMenu .about:hover { background-position:-38px -39px;}
+#navigationMenu .about span.nav-span{
+	background-color: #61D2D6;
+	color: #fff;
+/* 	text-shadow:1px 1px 0 #44a8d0; */
+}
+#navigationMenu .expdate { background-position:-152px 0;}
+#navigationMenu .expdate:hover { background-position:-152px -39px;}
+#navigationMenu .expdate span.nav-span{
+	background-color: #ED146F;
+	color: #fff;
+/* 	text-shadow:1px 1px 0 #d244a6; */
+}
+#navigationMenu .liked { background-position:-76px 0;}
+#navigationMenu .liked:hover { background-position:-76px -39px;}
+#navigationMenu .liked span.nav-span{
+	background-color: #EDE5E2;
+	color: #222;
+/* 	text-shadow:1px 1px 0 #d28344; */
+}
+#navigationMenu .liked-product { background-position:-38px 0;}
+#navigationMenu .liked-product:hover { background-position:-38px -39px;}
+#navigationMenu .liked-product span.nav-span{
+	background-color: #EDDE45;
+	color: #222;
+/* 	text-shadow:1px 1px 0 #44a8d0; */
+}
+#navigationMenu .post { background-position:-152px 0;}
+#navigationMenu .post:hover { background-position:-152px -39px;}
+#navigationMenu .post span.nav-span{
+	background-color: #9BF0E9;
+	color: #222;
+/* 	text-shadow:1px 1px 0 #d244a6; */
+}
 </style>	
 </head>
 
@@ -73,6 +185,46 @@ div.col-lg-4, div.col-sm-6{
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
+<div id="navigationDiv">
+	<ul id="navigationMenu">
+	    <li>
+		    <a class="home" href="#">
+		    	<span class="nav-icon"><i class="fa fa-home"></i></span>
+	            <span class="nav-span">Home</span>
+	        </a>
+	    </li>
+	    <li>
+	    	<a class="about" href="#">
+	    		<span class="nav-icon"><i class="fa fa-user"></i></span>
+	            <span class="nav-span">About</span>
+	        </a>
+	    </li>
+	    <li>
+	    	<a class="expdate" href="#">
+	            <span class="nav-icon"><i class="fa fa-bell-o"></i></span>
+	            <span class="nav-span">Exp Date</span>
+	        </a>
+	    </li>
+	    <li>
+		     <a class="liked" href="#">
+	            <span class="nav-icon"><i class="fa fa-thumbs-up"></i></span>
+	            <span class="nav-span">Liked</span>
+	         </a>
+	    </li>
+	    <li>
+	    	<a class="liked-product" href="#">
+	            <span class="nav-icon"><i class="fa fa-gift"></i></span>
+	            <span class="nav-span">Product</span>
+	        </a>
+	    </li>
+	    <li>
+	    	<a class="post" href="#">
+	            <span class="nav-icon"><i class="fa fa-pencil"></i></span>
+	            <span class="nav-span">Posted</span>
+	        </a>
+	    </li>
+	</ul>
+</div>
 
 <div class="row detail-div">
 	<div class="col-lg-3"></div>

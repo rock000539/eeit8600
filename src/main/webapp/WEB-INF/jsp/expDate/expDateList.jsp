@@ -19,7 +19,6 @@
 <style>
 body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
-	padding-top: 70px;
 }
 .portfolio-item {
  	padding: 15px; 

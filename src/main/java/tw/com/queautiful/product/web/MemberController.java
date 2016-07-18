@@ -67,7 +67,7 @@ public class MemberController {
 		Member member = service.getById(memberId);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
-		return "/member/memberPersonal";
+		return "/member/memberPersonal2";
 	}
 
 	//保存期限頁面
