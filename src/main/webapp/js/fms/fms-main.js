@@ -23,16 +23,16 @@ $(function() {
 	// ===================
 	// = Flickr Gallery =
 	// ===================
-	$('#flickrFeed')
-			.jflickrfeed(
-					{
-						limit : 9,
-						qstrings : {
-							// id: '124787947@N07' our id //
-							id : '124787947@N07'
-						},
-						itemTemplate : '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
-					});
+//	$('#flickrFeed')
+//			.jflickrfeed(
+//					{
+//						limit : 9,
+//						qstrings : {
+//							// id: '124787947@N07' our id //
+//							id : '124787947@N07'
+//						},
+//						itemTemplate : '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
+//					});
 	// ============================
 	// = Scroll event function =
 	// ===========================
