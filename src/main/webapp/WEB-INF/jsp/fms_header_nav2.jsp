@@ -7,7 +7,6 @@
 $(function (){
 	var title=$("title").text();
 	$("#titleArea h2").append(title);
-	
 })
 </script>
 
@@ -90,12 +89,11 @@ $(function (){
     </div>
     
     <section id="page_head" class="row" >
-        <div class="col-lg-12 col-md-12 col-sm-12" style="background-img: url('/images/pattern-1.png');">
+        <div class="col-lg-12 col-md-12 col-sm-12" >
             <div class="page_title" id="titleArea">
                 <h2></h2>
                 <span class="sub_heading">We are Web Agency Specialised in Free Themes</span>
             </div>
-
         </div>
     </section>
     

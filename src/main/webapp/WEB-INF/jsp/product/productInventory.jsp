@@ -121,94 +121,6 @@
 					</div>
 				</div>
 				
-				<div class="widget widget_categories">
-					<div class="widget_title">
-						<h4><span>Categories</span></h4>
-					</div>
-					<div id="Date" class="pre-scrollable" style="max-height:180px;">
-						<div class="checkbox">
-			                <input id="checkbox1" class="styled" type="checkbox" checked>
-			                <label for="checkbox1">
-			                    Default
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-primary">
-			                <input id="checkbox2" class="styled" type="checkbox" checked>
-			                <label for="checkbox2">
-			                    Primary
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-success">
-			                <input id="checkbox3" class="styled" type="checkbox" checked>
-			                <label for="checkbox3">
-			                    Success
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-info">
-			                <input id="checkbox4" class="styled" type="checkbox" checked>
-			                <label for="checkbox4">
-			                    Info
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-warning">
-			                <input id="checkbox5" type="checkbox" class="styled" checked>
-			                <label for="checkbox5">
-			                    Warning
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-danger">
-			                <input id="checkbox6" type="checkbox" class="styled" checked>
-			                <label for="checkbox6">
-			                    Check me out
-			                </label>
-			            </div>
-					</div>
-				</div>
-				
-				<div class="widget widget_categories">
-					<div class="widget_title">
-						<h4><span>Date</span></h4>
-					</div>
-					<div id="Date" class="pre-scrollable" style="max-height:180px;">
-						<div class="checkbox">
-			                <input id="checkbox1" class="styled" type="checkbox" checked>
-			                <label for="checkbox1">
-			                    Default
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-primary">
-			                <input id="checkbox2" class="styled" type="checkbox" checked>
-			                <label for="checkbox2">
-			                    Primary
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-success">
-			                <input id="checkbox3" class="styled" type="checkbox" checked>
-			                <label for="checkbox3">
-			                    Success
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-info">
-			                <input id="checkbox4" class="styled" type="checkbox" checked>
-			                <label for="checkbox4">
-			                    Info
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-warning">
-			                <input id="checkbox5" type="checkbox" class="styled" checked>
-			                <label for="checkbox5">
-			                    Warning
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-danger">
-			                <input id="checkbox6" type="checkbox" class="styled" checked>
-			                <label for="checkbox6">
-			                    Check me out
-			                </label>
-			            </div>
-					</div>
-				</div>
-				
 			</div>
 		
 			<div id="post_list" class="col-lg-7 col-md-5 col-sm-3 col-xs-12 blog_medium row wow fadeInDown" style="margin-top:50px;">
@@ -283,6 +195,10 @@
         // WOW Animation
         new WOW().init();
     </script>
+    
+    <script type="text/template">
+		console.log('123');
+	</script>
 	
 	<script>
 	

@@ -11,9 +11,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-     <link rel="stylesheet" href="/css/fms/styleForLogin.css"> 
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-    <link rel="stylesheet" href="/css/font-awesomeForLogin.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
+	<link rel="stylesheet" href="/css/fms/styleForLogin.css"> 
 <style>
 .error {
     padding: 15px;
@@ -72,17 +72,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             <tr>
                 <td>Password :</td>
                 <td><input type='password' name='password' /></td>
-            </tr>				<tr><td><br></td></tr>
-            					<tr>
-                    			<td colspan='2'>
-                                
-                                </td>
-                                
-                               	<td colspan='2'>
-                               	
-                                <sec:authorize access="hasRole('ROLE_USER')"> 
-                                <input type="button" value="log out"  class="btn" onclick="location='/logout'"/>
-                                </sec:authorize> 
+            </tr>				
+            <tr>
+            <td><br></td>
+            </tr>
+            <tr>
+                 <td colspan='2'>
+                 <sec:authorize access="hasRole('ROLE_USER')"> 
+                 <input type="button" value="log out"  class="btn" onclick="location='/logout'"/>
+                 </sec:authorize>
+                 </td>
+
+                 <td colspan='2'>
                                 <input name="submit" type="submit" class="btn btn-default" value="Submit" />
                                 </td>  
             </tr>
@@ -103,6 +104,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
 </body>
 </html>

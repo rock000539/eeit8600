@@ -84,7 +84,7 @@
 	                    <div class="row">
 	                        <div class="form-group">
 	                            <div class="col-md-12">
-	                                <textarea id="message" class="form-control" name="message" rows="5" cols="50" data-msg-required="Please enter your message." maxlength="5000" placeholder="Message"></textarea>
+	                                <textarea id="message" class="form-control" name="message" rows="5" cols="50" data-msg-required="Please enter your message." maxlength="5000" placeholder="Message" style="resize: none"></textarea>
 	
 	                            </div>
 	                        </div>
