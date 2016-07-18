@@ -103,12 +103,25 @@ function initialize() {
 
 	
 	var marker = new google.maps.Marker({
+		map: map,
 		position: myLatlng,
   	  	icon: icon,
-  	  	title: "Hello World!",
   	  	visible: true,
-  	  	map: map,
+		draggable: false,
+		//animation: google.maps.Animation.DROP,
 	});
+	
+	marker.setAnimation(google.maps.Animation.BOUNCE);
+	
+//	marker.addListener('click', toggleBounce);
+//	
+//	function toggleBounce() {
+//		if (marker.getAnimation() !== null) {
+//			marker.setAnimation(null);
+//		} else {
+//			marker.setAnimation(google.maps.Animation.BOUNCE);
+//		}
+//	}
   
 	var styledMapOptions = 
 	{

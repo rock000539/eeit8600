@@ -132,9 +132,9 @@
     <script src="/js/product/wow.min.js"></script>
 
 	<!-- 此頁面特定檔案 -->
-	<script src="/js/product/select/jquery-hoverdirection.min.js"></script>
-	<script src="/js/product/select/jquery.isotope.min.js"></script>
-	<script src="/js/product/select/main.js"></script>
+	<script src="/js/product/search/jquery-hoverdirection.min.js"></script>
+	<script src="/js/product/search/jquery.isotope.min.js"></script>
+	<script src="/js/product/search/main.js"></script>
 	
 	<script>
 	
