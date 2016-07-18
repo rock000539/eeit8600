@@ -62,6 +62,9 @@ $(function(){
 
 </script>
 <style >
+body {
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
+}
 #productList img{width:100px;
 height: 100px;
 }

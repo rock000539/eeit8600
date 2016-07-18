@@ -24,6 +24,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
 
 <style>
+body {
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
+}
 #mainTable{
 width: 500px;
 margin: 50px 255px;

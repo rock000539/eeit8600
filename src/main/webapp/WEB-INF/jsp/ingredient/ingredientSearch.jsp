@@ -26,6 +26,9 @@
 <script src="/js/jquery-ui.min.js"></script>
 
 <style type="text/css">
+body {
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
+}
 .modal {
 height: 900px;
 margin-top:100px; }

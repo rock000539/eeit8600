@@ -25,5 +25,9 @@ public class FmsController {
 	public String contactPage() {
 		return "/product/contact";
 	}
-
+	
+	@RequestMapping("/fmslogin")
+	public String loginPage() {
+		return "/fms";
+	}
 }

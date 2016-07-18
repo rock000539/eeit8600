@@ -12,7 +12,7 @@
          <c:if test="${empty nickname}">
 		<!--  登入前 -->
             <li>
-                <a href="/login"><i class="fa fa-user" aria-hidden="true"></i>
+                <a href="/fmslogin"><i class="fa fa-user" aria-hidden="true"></i>
                 <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
                 </a>
             </li>
@@ -57,7 +57,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="/fms">Home</a></li>
 
                 <li><a href="/expdate/search">Date</a></li>
 

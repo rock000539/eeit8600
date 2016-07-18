@@ -98,7 +98,9 @@ $(function(){
 
 </script>
 <style>
-
+body {
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
+}
 .modal {
 height: 900px;
 margin-top:100px; }

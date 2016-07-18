@@ -149,8 +149,7 @@ min-height: 450px;}
 	margin-top: 20px;
 }
 body {
-	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
-	padding-top: 70px;
+	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
 }
 .portfolio-item {
  	padding: 15px; 
