@@ -68,7 +68,7 @@
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
                                             <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
                                             <span><i class="fa fa-comments"></i> <a href="#Comments">12 Comments</a></span> <!--做動態抓留言數 -->
-                                            <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span>
+<!--                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span> --><!--??tag標籤數量?? -->
                                         <!--心得評分 end-->
 											<span class="review-uc-diamond">
 												<span class="urcosme-score-display">
@@ -76,15 +76,15 @@
 													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond2"></span>
 													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond3"></span>
 													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
-													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>						
+													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>					
 													<script type="text/javascript">
 														$(function(){
 															for(var i=0;i<"${review.reviewRating}";i++){
-																$("#tb${review.reviewId}diamond"+(i+1)).css('color','#FF5151');
+																$("#tb${review.reviewId}diamond"+(i+1)).css('color','rgb(100, 140, 213)');
 															}
 														});
 													</script>
-												</span>&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
+												</span>&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}score</span>  
 											</span>
 											<!--心得評分  end -->
                                         
@@ -92,15 +92,15 @@
                                         </div>
                                     </div>
                                     
-                                    <p>${review.review}</p>
+                                         <img class="reviewImg" src="/reviews/show?reviewId=${review.reviewId}" alt="reviewImg">
                                     
                                     <blockquote class="default">
                                        
-                                         <img class="reviewImg" src="/reviews/show?reviewId=${review.reviewId}" alt="reviewImg">
+                                    <p>${review.review}</p>
                                         Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque eget tempor tellus. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.
+                                    <p>${review.review}</p>
                                     </blockquote>
                                     
-                                    <p>${review.review}</p>
                                     
                                 </div>
                                 <ul class="shares" id="shares">
@@ -116,20 +116,25 @@
                             <div class="about_author">
                                 <div class="author_desc">
 <!--                                     <img src="/images/review/author.png" alt="about author"> -->
-                                    <img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
+<%--                                     <img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg">  --%>
+                                    <img src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
                                     <ul class="author_social">
                                         <li><a class="fb" href="#." data-placement="top" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>
                                         <li><a class="twtr" href="#." data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
                                         <li><a class="skype" href="#." data-placement="top" data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
                                     </ul>
                                 </div>
+                                <!--心得發布者資訊start -->
                                 <div class="author_bio">
-                                    <h3 class="author_name"><a href="#">Tom Jobs</a></h3>
-                                    <h5>CEO at <a href="#">jQuery Rain</a></h5>
-                                    <p class="author_det">
-                                        Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis saperet docendi nec, eos ea alii molestiae aliquand.
-                                    </p>
+                                    <h3 class="author_name"><a href="#">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
+                                  	<ul>
+                                  		<li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性別:&nbsp;${review.member.gender}</li>
+                                  		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;膚質:&nbsp;${review.member.skinType}性肌膚</li>
+                                  		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:&nbsp;${review.member.age}歲</li>
+                                  		<p></p><!--不可以刪,為了版型好看-->
+                                  	</ul>
                                 </div>
+                                <!--心得發布者資訊end -->
                             </div>
                         </div>
 
@@ -357,9 +362,8 @@
     <!--start footer-->
 
     <!--end footer-->
-</section>
+<!-- </section> -->
 <!--end wrapper-->
-</div>        
             <!-- **每頁不同的內容結束** -->
 
 <!--加入footer -->
@@ -385,15 +389,15 @@
 <script type="text/javascript">
 $(function () {  //=$(document.)ready
 	/*  ============ USER IMG =========== 	*/ 
-		var w = $('#userimg').width();
-		var h = $('#userimg').height();
-		if (h > w) {
-			$('#userimg').addClass('portrait');
-		} else {
-			$('#userimg').removeClass('portrait');
-		}
-		console.log('w=' + $('#userimg').width());
-		console.log('h=' + $('#userimg').height());
+// 		var w = $('#userimg').width();
+// 		var h = $('#userimg').height();
+// 		if (h > w) {
+// 			$('#userimg').addClass('portrait');
+// 		} else {
+// 			$('#userimg').removeClass('portrait');
+// 		}
+// 		console.log('w=' + $('#userimg').width());
+// 		console.log('h=' + $('#userimg').height());
 });
 
 
