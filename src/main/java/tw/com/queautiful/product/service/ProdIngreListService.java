@@ -134,7 +134,7 @@ public class ProdIngreListService {
 	public List<Map<String, Object>> IngredientFindProducts(String IngredientId){
 		List<Map<String, Object>> result=new ArrayList<Map<String, Object>>();
 		String findProductsByIngredientId=
-"  select t.prodname,b.brandcname,t.mainigdt,t.prodid from brand b  join (select p.prodid,p.prodname,p.mainigdt,p.brandid  from [proingrelist] pl join product p  on pl.prodid=p.prodid  where pl.ingredid="
+"  select t.prodname,b.brandcname,t.mainigdt,t.prodid,t.concentration from brand b  join (select p.prodid,p.prodname,p.mainigdt,p.brandid,p.concentration  from [proingrelist] pl join product p  on pl.prodid=p.prodid  where pl.ingredid="
 		+IngredientId+
 ") t   on b.brandid=t.brandid";
 		List<Object[]> resultList = manager.createNativeQuery(findProductsByIngredientId).getResultList();
@@ -146,6 +146,7 @@ public class ProdIngreListService {
 			resultMap.put("brandcname",datas[1]);
 			resultMap.put("mainigdt",datas[2]);
 			resultMap.put("prodId",datas[3]);
+			resultMap.put("concentration",datas[4]);
 			result.add(resultMap);
 		}
 

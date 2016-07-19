@@ -128,9 +128,9 @@
                                 <div class="author_bio">
                                     <h3 class="author_name"><a href="#">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
                                   	<ul>
-                                  		<li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性別:&nbsp;${review.member.gender}</li>
-                                  		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;膚質:&nbsp;${review.member.skinType}性肌膚</li>
-                                  		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:&nbsp;${review.member.age}歲</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性別:&nbsp;${review.member.gender}</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;膚質:&nbsp;${review.member.skinType}性肌膚</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:&nbsp;${review.member.age}歲</li>
                                   		<p></p><!--不可以刪,為了版型好看-->
                                   	</ul>
                                 </div>
@@ -248,7 +248,7 @@
                             
                             <div class="widget widget_categories">
                                 <div class="widget_title">
-                                    <h4><span>Categories</span></h4>
+                                    <h4><span>Product Details</span></h4>
                                     </div>
                                 <ul class="arrows_list list_style">
                                     <li><a href="#"> Grapic Design (10)</a></li>

@@ -26,8 +26,8 @@
 	$(function() {
 		var mfdDate;
 		var expDate;
-		$("#dateResult").hide();		
-		
+		$("#dateResult").hide();	
+		$("#checkBox").hide();
 		$("#searchDate").click(function() {
 			$('#proList').hide();
 		var brandId = $('#brandId').val();
@@ -46,18 +46,18 @@
 				$(".dividerHeading").empty();
 // 				var brandName=$(":selected").text();	
 				var prodNameCheck = data.productList[0].prodName;
+				
 				if (prodNameCheck != undefined) {
-											
 				$("#dateResult").show();	
 				$('#proList').show();
-				$(".dividerHeading").append("<h4><span>"+brandName+"</span></h4><br>");
-				$(".dividerHeading").append("<h5><p>請在下方選擇產品加入最愛<p></h5>");
+				$("#checkBox").show();
+				$(".dividerHeading").append("<h4><span>"+brandName+"</span></h4><h3> Product Choice </h3><br>");
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
-				var prodId = data.productList[i].prodId
-				
+				var prodId = data.productList[i].prodId;
+				var categoryId=data.productList[i].categoryId;
 				$("#proList").append(	//---------------------------------
-				"<div class='col-md-4 portfolio-item'><div class='portfolio-all'>"
+				"<div class='col-md-4 portfolio-item' name="+categoryId+"><div class='portfolio-all'>"
 				+"<div class='portfolio-title'>"
 				+"<a href='#'><h3>"+prodName+"</h3></a></div>"
 				+"<div class='portfolio-content'>"
@@ -74,13 +74,13 @@
 				$('.saveDate').click(function(e) {
 				var prodId = e.target.name;
 				var memberId=$("#loginTokenId").attr("value");
-				
+				var batchCode = $('#batchCode').val();
 				if(memberId!=0&&memberId!=undefined){ //#1
 				$.ajax({url : '/expdate/post', //#2
 						type : 'POST',
 						data : {"proIdStr" : prodId,
 								"mfdStr" : data.mfdDate,
-								"expStr" : data.expDate},
+								"expStr" : data.expDate,"batchCode":batchCode},
 				success : function(data) {
 				alert(data);
 				$('#proList').empty();
@@ -99,6 +99,20 @@
 
 				});//--end $('#search').click(function() 
 
+						
+			$(".checkbox").click(
+					function(e){
+						var checkState=e.target.checked;
+						var checkBox=e.target.value;
+					if(checkState==false){
+					$('.portfolio-item[name='+checkBox+']').hide();
+					}else{
+						$('.portfolio-item[name='+checkBox+']').show();
+					}
+					}
+					);
+			
+						
 	})//---end onload
 </script>
 <style>
@@ -118,7 +132,7 @@
 width:300px;
 margin: auto auto;
 }
-.dividerHeading h5{
+.dividerHeading h3{
 margin-left:180px; }
 .grey_bg{
 min-height: 450px;}
@@ -187,6 +201,7 @@ body {
 	color: #ffffff;
 	margin: 5px;
 }
+.div-inline{ display:inline} 
 </style>
 </head>
 
@@ -240,7 +255,12 @@ body {
 			
 			</div>
 			<!-- 分隔線用 -->
-
+			<div id="checkBox">
+			
+			<c:forEach items='${categorys}' var="items">
+			<div class="col-md-3"><input type="checkbox" class="checkbox div-inline" value="${items.categoryId}" checked>&nbsp;${items.categoryName}&nbsp;</div>
+			</c:forEach>
+			</div>
 
 	</div>
 	</div>

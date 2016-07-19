@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.Brand;
+import tw.com.queautiful.product.entity.Category;
 import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
+import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.ExpDateSearchService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.ProductService;
@@ -38,7 +40,8 @@ public class ExpDateController
     private ProductService productService;
     @Autowired
     private BrandService brandService;
-
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private ExpDateSearchService expDateSearchService;
@@ -48,20 +51,25 @@ public class ExpDateController
     {
 
         List<Brand> brands = new ArrayList<Brand>();
+        List<Category> categorys = new ArrayList<Category>();
         brands = brandService.getAll();
+        categorys= categoryService.getAll();
         model.addAttribute("Brands", brands);
+        model.addAttribute("categorys", categorys);
         return "/expDate/expDateSearch";
     }
     
     @RequestMapping("/reloadsearch")
     public String reloadSearch(Model model,String reloadBatchCode,String brandId)
     {
-    	System.out.println("test "+reloadBatchCode+"  "+brandId);
+    	List<Category> categorys = new ArrayList<Category>();
         List<Brand> brands = new ArrayList<Brand>();
         brands = brandService.getAll();
+        categorys= categoryService.getAll();
         model.addAttribute("Brands", brands);
         model.addAttribute("reloadBrandId", brandId);
         model.addAttribute("reloadBatchCode", reloadBatchCode);
+        model.addAttribute("categorys", categorys);
         
         return "/expDate/expDateSearch";
     }
@@ -142,7 +150,7 @@ public class ExpDateController
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ResponseBody
     public String post(Model model, HttpServletRequest request, @RequestParam String proIdStr,
-            @RequestParam String mfdStr, @RequestParam String expStr)
+            @RequestParam String mfdStr, @RequestParam String expStr,@RequestParam String batchCode)
     {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -164,6 +172,7 @@ public class ExpDateController
             expDate.setProId(proId);
             expDate.setExp(exp);
             expDate.setMfd(Mfd);
+            expDate.setBatchCode(batchCode);
             expDate.setMemberId(memberId);
             expDateService.insert(expDate);
             //*---------------------------------
