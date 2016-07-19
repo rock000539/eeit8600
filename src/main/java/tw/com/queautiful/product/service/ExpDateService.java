@@ -38,6 +38,7 @@ public class ExpDateService {
 		DateDao.delete(dateId);
 	}
 	
+	//check expDate will be expired after one month
 	public List<ExpDate> expDateAfterOneMonth(){
 		Calendar exp = Calendar.getInstance();
 		exp.add(Calendar.MONTH, +1);

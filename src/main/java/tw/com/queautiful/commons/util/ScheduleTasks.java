@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import tw.com.queautiful.product.entity.ExpDate;
+import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
@@ -28,9 +29,9 @@ public class ScheduleTasks {
 	@Autowired
 	private EmailSender emailSender;
 	
-	@Scheduled(cron="0 56 15 * * ?")
+	@Scheduled(cron="0 0 9 * * ?")   // 9 AM everyDay
 	public void expDateReminder(){
-		List<ExpDate> expDate = expDateService.expDateAfterOneMonth();
+		List<ExpDate> expDate = expDateService.expDateAfterOneMonth(); //check Exp expired after 1 month
 		if(!expDate.isEmpty()){
 			for(ExpDate exp: expDate){
 				String email = memberService.getById(exp.getMemberId()).getEmail();
@@ -39,7 +40,22 @@ public class ScheduleTasks {
 				emailSender.sendExpDateRemind(email, prodName, date);
 			}
 		}else {
-			log.debug("today no prod-exp-reminder mail be sent");
+			log.debug("Schedule - ExpDateReminder checked: no result");
+		}
+	}
+	
+	@Scheduled(cron="0 0 10 * * ?")	  // 10 AM everyDay
+	public void deleteRestPswToken(){
+		java.sql.Date today = new java.sql.Date(new java.util.Date().getTime());
+		List<Member> memberPswTokenExpired = memberService.getByResetPswExp(today);
+		if(!memberPswTokenExpired.isEmpty()){
+			for(Member member: memberPswTokenExpired){
+				member.setResetPswToken(null);
+				member.setResetPswExp(null);
+				memberService.update(member);
+			}
+		} else{
+			log.debug("Schedule - ResetPswTokenExp checked: no result");
 		}
 	}
 	
