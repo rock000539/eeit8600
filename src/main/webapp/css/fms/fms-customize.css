@@ -44,9 +44,13 @@
 	height:50px;
 }
 
-.navbar-default .navbar-nav > li:not(:first-of-type) a{
+.navbar-default .navbar-nav > li:not(:first-of-type) > a{
 /* border:3px solid red; */
 	padding-top:32px;
+}
+
+.navbar-nav > li > ul.dropdown-menu{
+    top: 55px !important;
 }
 
 #logo img{

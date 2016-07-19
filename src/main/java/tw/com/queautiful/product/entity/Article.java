@@ -39,8 +39,8 @@ public class Article {
 	@Column(name = "ARTICLETITLE" ,length=50)
 	private String articleTitle;
 	
-	@Column(name = "ARTICLE" ,length=1000)
-	private String article;
+	@Column(name = "ARTICLECONTENT" ,length=1000)
+	private String articleContent;
 	
 	@Column(name = "ARTICLETIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
@@ -82,7 +82,7 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
-				+ ", article=" + article + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
+				+ ", articleContent=" + articleContent + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
 				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", memberId=" + memberId + "]";
 	}
 
@@ -111,12 +111,12 @@ public class Article {
 		this.articleTitle = articleTitle;
 	}
 
-	public String getArticle() {
-		return article;
+	public String getArticleContent() {
+		return articleContent;
 	}
 
-	public void setArticle(String article) {
-		this.article = article;
+	public void setArticleContent(String articleContent) {
+		this.articleContent = articleContent;
 	}
 
 	public java.sql.Timestamp getArticleTime() {
