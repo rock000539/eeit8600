@@ -41,6 +41,8 @@
 		    padding-bottom: 25px;
 		    margin-bottom: 30px;
 		    border-bottom: 3px solid #f2f2f2;
+/* 		    background: black; */
+    		padding: 12px;
 		}
 		
 		.blog_medium .post_content > p {
@@ -57,7 +59,14 @@
 		    font-size: 18px;
 		    text-transform: uppercase;
 		}
- 		
+		
+		img
+		{
+			-moz-box-shadow: 0 0 5px #fff;
+			-webkit-box-shadow: 0 0 5px #fff;
+			box-shadow: 0px 0px 5px #fff;
+		}
+		
 	</style>
 
 </head>
@@ -71,9 +80,7 @@
 		
 		<div class="row sub_content">
 		
-			<div class="col-lg-2">
-				
-			</div>
+			<div class="col-lg-2"></div>
 		
 			<div class="col-lg-2 col-md-6 col-sm-8 col-xs-12" style="">
 				
@@ -122,23 +129,22 @@
 				</div>
 				
 			</div>
+			
 		
 			<div id="post_list" class="col-lg-7 col-md-5 col-sm-3 col-xs-12 blog_medium row wow fadeInDown" style="margin-top:50px;">
 				
 				<c:forEach items="${products}" var="product">
 					<article class="post">
-					
+						
 						<figure class="post_img effect-bubba" style="margin-left:50px;">
-							<img src="http://localhost:8080/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
+							<img src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
-							    <a href="http://localhost:8080/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
+							    <a href="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
 							    <a href="#" class="fa fa-link"></a>
 							</div>
 							
-		<!-- 					<figcaption> -->
-		<!-- 					    <h6 style="margin-top:20px;">查看圖片或商品</h6> -->
-		<!-- 			        </figcaption> -->
+							<figcaption class="item-description"></figcaption>
 						</figure>
 						
 						<div class="post_content">
@@ -158,8 +164,10 @@
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
 							</c:if>
-							<a class="btn btn-small btn-default" style="margin-left:110px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-							<a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+							<span style="float:right;">
+								<a class="btn btn-small btn-default" style="margin-left:110px; margin-top:10px;"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+							</span>
 			            </div>
 					
 					</article>
@@ -188,7 +196,7 @@
     <script src="/js/product/jflickrfeed.js"></script>
     <script src="/js/product/jquery.magnific-popup.min.js"></script>
     <script src="/js/product/swipe.js"></script>
-<!--     <script src="/js/product/main.js"></script> -->
+    <script src="/js/product/main.js"></script>
 	
 	<script src="/js/product/wow.min.js"></script>
     <script>
@@ -196,8 +204,34 @@
         new WOW().init();
     </script>
     
-    <script type="text/template">
-		console.log('123');
+    <script id="article" type="text/template">
+		<article class="post">
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="<%= request.getContextPath() %>/products/show?prodId=_prodId" style="border:1px solid #f2f2f2;">
+				<div class="option" style="margin-top:30px;">
+				    <a href="<%= request.getContextPath() %>/products/show?prodId=_prodId" class="fa fa-search mfp-image"></a>
+				    <a href="#" class="fa fa-link"></a>
+				</div>
+				<figcaption class="item-description"></figcaption>
+			</figure>
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						_prodName
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> _launchDate </span>
+						<span><i class="fa fa-tag"></i> _brandName </span>
+						<span><i class="fa fa-comments"></i> _size </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
+				<span style="float:right;">
+					<a class="btn btn-small btn-default" style="margin-left:110px; margin-top:10px;"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+					<a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="_prodId" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+				</span>
+            </div>
+		</article>
 	</script>
 	
 	<script>
@@ -232,66 +266,17 @@
 						// 新增產品列表的元素
 						for(var i=0; i<response.length; i++) {
 							
-							var figure = $('<figure></figure>', 
-							{
-								'class': 'post_img effect-bubba',
-								css: {
-									'margin-left': '50px',
-							    },
-							});
-							
-							$('<img>', {
-								src: "http://localhost:8080/products/show?prodId=" + response[i].prodId,
-								css: {
-									'border': '1px solid #f2f2f2',
-							    },
-							}).appendTo(figure);
-									
-							$('<div></div>', {
-								"class": "option",
-								css: {
-									'margin-top': '30px',
-							    },
-							    html: '<a href="http://localhost:8080/products/show?prodId="' + response[i].prodId + ' class="fa fa-search mfp-image"></a><a href="#" class="fa fa-link"></a>',
-							}).appendTo(figure);
-							
-							var article = $('<article></article>', {
-								'class': 'post',
-							}).append(figure);
-							
-							var content = $('<div></div>', {
-								'class': 'post_content',
-							});
-							
-							var meta = $('<div></div>', {
-								'class': 'post_meta',
-							});
-							
-							$('<h2></h2>', {
-								text: response[i].prodName,
-							}).appendTo(meta);
-							
-							$('<div></div>', {
-								'class': 'metaInfo',
-								html: ' <span><i class="fa fa-calendar"></i>' + response[i].launchDate + ' </span><span><i class="fa fa-tag"></i> ' + response[i].brandName + '${product.brand.brandName} </span><span><i class="fa fa-comments"></i>' + $(response[i].reviews).size() + ' </span> '
-							}).appendTo(meta);
-							
-							meta.appendTo(content);
-							
-							var desc = '';
-							if(response[i].prodDesc.substring(0, 4) == '產品說明') {
-								desc = '<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>';
-							} else {
-								desc = '<p>' + response[i].prodDesc.substring(0, 25) + ' ... </p>'
-							}
-							
-							content.html(content.html() + desc + '<a class="btn btn-small btn-default" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a> <a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="' + response[i].prodId + '" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>');
-							
-							content.appendTo(article);
-							
-							article.appendTo($('#post_list'));
-							
-							//article.insertBefore($('#page_btn'));
+							$('#post_list').append(
+									$('#article').html()
+										.replace('_prodId', response[i].prodId)
+										.replace('_prodId', response[i].prodId)
+										.replace('_prodName', response[i].prodName)
+										.replace('_launchDate', response[i].launchDate)
+										.replace('_brandName', response[i].brandName)
+										.replace('_size', response[i].reviews.length)
+										//.replace('_prodDesc', response[i].prodDesc)
+										.replace('_prodId', response[i].prodId)
+							)
 							
 						}
 						

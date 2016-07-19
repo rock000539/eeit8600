@@ -5,13 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
 <script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script>
 $(function(){
 	$("#reportBtn").click(function (){
-		
-		
-		
+		$('#myModal').modal("toggle");
+				
 	});
 	
 	
@@ -27,8 +29,8 @@ $(function(){
 </script>
 </head>
 <body>
-
-<input type="button" id="reportBtn">
+<div></div>
+<input type="button" id="reportBtn" value="report">
 
 
 <!-- 使用model1 ----------------------------------------------------------------->
@@ -49,8 +51,10 @@ $(function(){
          <div class="modal-body" id="modal-body">
 <!--在这里添加一些文本-->				
 			<input type="text" name="reportTitle">
-			<input type="text" name="reportDetile">
-			<input type="button" name="cancel" >
+			<br>
+			<textarea cols="50" rows="5" name="reportDetile"></textarea>
+			<br>
+			<input type="button" name="cancel" value="cancel" >
 			<input type="submit" name="submit" >
          </div>
          </form>

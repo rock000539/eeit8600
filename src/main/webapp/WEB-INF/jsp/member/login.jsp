@@ -67,7 +67,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             <table>
             <tr>
                 <td>User :</td>
-                <td><input type='text' name='username' value=''></td>
+                <td><input type='text' name='username' value=''><br></td>
             </tr>
             <tr>
                 <td>Password :</td>

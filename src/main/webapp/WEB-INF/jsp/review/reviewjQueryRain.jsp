@@ -69,7 +69,7 @@
                                             <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
                                             <span><i class="fa fa-comments"></i> <a href="#Comments">12 Comments</a></span> <!--做動態抓留言數 -->
 <!--                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span> --><!--??tag標籤數量?? -->
-                                        <!--心得評分 end-->
+                                        <!--心得評分 start-->
 											<span class="review-uc-diamond">
 												<span class="urcosme-score-display">
 													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>
@@ -244,53 +244,55 @@
                     <!--Sidebar Widget-->
                     <div class="col-xs-12 col-md-4 col-lg-4 col-sm-4" >
                         <div class="sidebar" >
-
                             
-                            <div class="widget widget_categories">
                                 <div class="widget_title">
-                                    <h4><span>Product Details</span></h4>
-                                    </div>
-                                <ul class="arrows_list list_style">
-                                    <li><a href="#"> Grapic Design (10)</a></li>
-                                    <li><a href="#"> Web Design & Development (25)</a></li>
-                                    <li><a href="#"> Photography (29)</a></li>
-                                    <li><a href="#"> Custom Illustrations (19)</a></li>
-                                    <li><a href="#"> Wordpress Themes(38)</a></li>
-                                    <li><a href="#"> Videography (33)</a></li>
-                                </ul>
-                            </div>
+                                    <h4><span>Product</span></h4>
+                                </div>
                             
-                            <div class="widget widget_about">
-                                <div class="widget_title">
-                                    <h4><span>Basic Text Widget</span></h4>
-                                    </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
-
                             <div class="velocity-tab sidebar-tab">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#Popular" data-toggle="tab">Popular</a></li>
-                                    <li class=""><a href="#Recent" data-toggle="tab">Recent</a></li>
-                                    <li class="last-tab"><a href="#Comment" data-toggle="tab"><i class="fa fa-comments-o"></i></a></li>
+                                    <li class="active"><a href="#Popular" data-toggle="tab">DETAILS</a></li>
+                                    <li class=""><a href="#Recent" data-toggle="tab">DESCRIPTIONS</a></li>
+                                   <li class="last-tab"><a href="#Comment" data-toggle="tab"><i class="fa fa-tint"></i>&nbsp;成份</a></li> 
                                 </ul>
 
                                 <div class="tab-content clearfix">
                                     <div class="tab-pane fade active in" id="Popular">
                                         <ul class="recent_tab_list">
                                             <li>
-                                                <span><a href="#"><img src="/images/review/recent_1.png" alt="" /></a></span>
-                                                <a href="#">Publishing packag esanse web page editos</a>
-                                                <i>October 09, 2015</i>
-                                            </li>
-                                            <li>
-                                                <span><a href="#"><img src="/images/review/recent_2.png" alt="" /></a></span>
-                                                <a href="#">Sublishing packag esanse web page editos</a>
-                                                <i>October 08, 2015</i>
-                                            </li>
-                                            <li class="last-tab">
-                                                <span><a href="#"><img src="/images/review/recent_3.png" alt="" /></a></span>
-                                                <a href="#">Mublishing packag esanse web page editos</a>
-                                                <i>October 07, 2015</i>
+                                                <span><a href="#"><img class="product-image" src="/products/show?prodId=${review.prodId}" alt="product-image" /></a></span>
+<!--                                                 <a href="#">Publishing packag esanse web page editos</a> -->
+                                                <p><span>Brand :</span>${review.product.brand.brandName}</p>
+                                                <p><span>Name :</span>${review.product.prodName}</p>
+                                                <p><span>Category :</span>${review.product.category.categoryName}</p>
+                                                <p><span style="margin-left:100px">Score :</span>
+                                                
+                                                
+                                                  <!--心得評分 start-->
+<!-- 											<span class="review-uc-diamond"> -->
+												<span class="urcosme-score-display">
+													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>
+													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond2"></span>
+													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond3"></span>
+													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
+													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>					
+													<script type="text/javascript">
+														$(function(){
+															for(var i=0;i<"${review.reviewRating}";i++){
+																$("#tb${review.reviewId}diamond"+(i+1)).css('color','rgb(100, 140, 213)');
+															}
+														});
+													</script>
+												</span>&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}score</span>  
+<!-- 											</span> -->
+											<!--心得評分  end -->
+											
+											
+											
+                                                </p>
+                                       
+                                              
+<!--                                                 <i>October 09, 2015</i> -->
                                             </li>
                                         </ul>
                                     </div>
@@ -301,17 +303,9 @@
                                                 <a href="#">Various versions has evolved over the years</a>
                                                 <i>October 18, 2015</i>
                                             </li>
-                                            <li>
-                                                <span><a href="#"><img src="/images/review/recent_5.png" alt="" /></a></span>
-                                                <a href="#">Rarious versions has evolve over the years</a>
-                                                <i>October 17, 2015</i>
-                                            </li>
-                                            <li class="last-tab">
-                                                <span><a href="#"><img src="/images/review/recent_6.png" alt="" /></a></span>
-                                                <a href="#">Marious versions has evolven over the years</a>
-                                                <i>October 16, 2015</i>
-                                            </li>
+											<li><span>Ingredient :</span> <a href="#">${product.mainIgdt}</a></li>
                                         </ul>
+                                 
                                     </div>
                                     <div class="tab-pane fade">
                                         <ul class="comments">
@@ -331,7 +325,7 @@
                                     </div>
                                 </div>
                             </div>
-
+							
                             <div class="widget widget_tags">
                                 <div class="widget_title">
                                     <h4><span>Tags Widget</span></h4>
