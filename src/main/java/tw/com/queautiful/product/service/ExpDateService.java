@@ -43,7 +43,6 @@ public class ExpDateService {
 		exp.add(Calendar.MONTH, +1);
 		java.sql.Date expAfterOneMonth = new java.sql.Date(exp.getTimeInMillis());
 		log.debug("expAfterOneMonth: {}", expAfterOneMonth);
-		Calendar exp2 = Calendar.getInstance();
 		return DateDao.findByExpIs(expAfterOneMonth);
 	}
 }
