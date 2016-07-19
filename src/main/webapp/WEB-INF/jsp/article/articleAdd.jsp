@@ -29,7 +29,7 @@
 <div class="row sub_content">
 	<div class="col-lg-2 col-md-2 col-sm-2"></div>
 	<div class="col-lg-8 col-md-8 col-sm-8">
-	<FORM id="addForm">
+	<FORM id="addForm" action="/articles/insert" method="post">
 	<input type="hidden" name="memberId" value="${memberId}"/>
 		<TABLE>
 			<TR>
@@ -52,7 +52,14 @@
 			<TR>
 				<TD>內文:</TD>
 				<TD>
-				<textarea class="summernote" name="article"></textarea>
+<!-- 				<textarea class="summernote" name="articleContent"></textarea> -->
+				</TD>
+				<TD></TD>
+			</TR>
+			<TR>
+				<TD>內文:</TD>
+				<TD>
+				<textarea class="ckeditor" id="content" name="articleContent" cols="80" rows="12"></textarea>
 				</TD>
 				<TD></TD>
 			</TR>
@@ -64,6 +71,8 @@
 <!-- 				<TD><input type="hidden" id="articleTime"/></TD> -->
 			</TR>
 		</TABLE>
+		<input type="submit" value="submit">
+	<button class="btn btn-default btn-lg" type="button" name="check" id="check">check</button>
 	<button class="btn btn-default btn-lg" type="button" name="save" id="save">Save</button>
 	<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'">Cancel</button>
 	</FORM>
@@ -76,7 +85,7 @@
 	<span id="memberId"></span><br/>
 	<span id="articleType"></span><br/>
 	<span id="articleTitle"></span><br/>
-	<span id="article"></span><br/>
+	<span id="articleContent"></span><br/>
 	<span id="articleTime"></span><br/>
 
 	</div>
@@ -102,6 +111,8 @@
 	
 	<script type="text/javascript" src="/js/article/summernote.js"></script>
 	
+	<script src="/ckeditor/ckeditor.js"></script>
+	
 	<script>
 	$(function(){
 		
@@ -121,34 +132,69 @@
 // 		});
 		
 		$('.summernote').summernote({height: 200});
-
-		$('#save').click(function(){
-			
-			console.log(JSON.stringify($('#addForm').serializeObject()));
-			
-	 		if($('#addForm').validate().form()){
-				$.ajax({
+		
+		$('#check').click(function(){		
+			var value = CKEDITOR.instances['content'].getData();
+			console.log(value);
+		});
+		
+		$('#save').on('click',function(){
+			var value = CKEDITOR.instances['content'].getData();
+			console.log(value);
+			console.log($(':selected').val());
+			console.log($(':text[name=articleTitle]').val());
+			var datas={'articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':value};
+			console.log(JSON.stringify(datas));
+			$.ajax({
 					url:'/articles/insert',
 					type:'post',
 					contentType:'application/json;charset=UTF-8',
-					data:JSON.stringify($('#addForm').serializeObject()),
+					data:{'article':JSON.stringify(datas)},
 					dataType:'json',
 					success:function(data){
-// 						console.log(data);
-// 						console.log(data.articleTime);
-						var t = data.articleTime;
-						$('#addForm')[0].reset();			
-						$('#result>h2').text('Insert Success');
-// 						$('#articleId').text('ArticleId:'+data.articleId);
-// 						$('#memberId').text('memberId:'+data.memberId);
-						$('#articleType').text('articleType:'+data.articleType);
-						$('#articleTitle').text('articleTitle:'+data.articleTitle);
-						$('#article').text('article:'+data.article);
-						$('#articleTime').text('articleTime:'+data.articleTime);
+// // 						console.log(data);
+// // 						console.log(data.articleTime);
+// 						var t = data.articleTime;
+// 						$('#addForm')[0].reset();			
+// 						$('#result>h2').text('Insert Success');
+// // 						$('#articleId').text('ArticleId:'+data.articleId);
+// // 						$('#memberId').text('memberId:'+data.memberId);
+// 						$('#articleType').text('articleType:'+data.articleType);
+// 						$('#articleTitle').text('articleTitle:'+data.articleTitle);
+// 						$('#articleContent').text('articleContent:'+data.articleContent);
+// 						$('#articleTime').text('articleTime:'+data.articleTime);
 	 				}
-				})		
-			}		
+				});		
+			
 		});
+
+		
+// 		$('#save').click(function(){			
+// 			console.log(JSON.stringify($('#addForm').serializeObject()));			
+// 	 		if($('#addForm').validate().form()){
+// 				$.ajax({
+// 					url:'/articles/insert',
+// 					type:'post',
+// 					contentType:'application/json;charset=UTF-8',
+// 					data:JSON.stringify($('#addForm').serializeObject()),
+// 					dataType:'json',
+// 					success:function(data){
+// // 						console.log(data);
+// // 						console.log(data.articleTime);
+// 						var t = data.articleTime;
+// 						$('#addForm')[0].reset();
+// 						$('textarea[name=articleContent]').empty();
+// 						$('#result>h2').text('Insert Success');
+// // 						$('#articleId').text('ArticleId:'+data.articleId);
+// // 						$('#memberId').text('memberId:'+data.memberId);
+// 						$('#articleType').text('articleType:'+data.articleType);
+// 						$('#articleTitle').text('articleTitle:'+data.articleTitle);
+// 						$('#articleContent').text('articleContent:'+data.articleContent);
+// 						$('#articleTime').text('articleTime:'+data.articleTime);
+// 	 				}
+// 				})		
+// 			}		
+// 		});
 
 		$.fn.serializeObject = function()
 		{

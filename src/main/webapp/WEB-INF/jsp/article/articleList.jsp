@@ -189,9 +189,9 @@
 					//align: 'center'							
 				},
 				{
-					label: 'Article',
-					name: 'article',
-					width: 100,
+					label: 'ArticleContent',
+					name: 'articleContent',
+					width: 120,
 					//align: 'center'	
 				},
 				{
