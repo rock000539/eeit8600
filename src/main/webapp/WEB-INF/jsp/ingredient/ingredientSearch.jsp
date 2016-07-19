@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
     <link href="/css/jquery-ui.min.css" rel="stylesheet" >
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
+
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
