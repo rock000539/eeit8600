@@ -29,10 +29,22 @@
 	font-weight:bolder;  /*變粗體*/
 }
 
+.product-image{
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: auto;
+    height: auto;
+    max-width: 85px;
+    max-height: 85px;
+    vertical-align: middle;
+    opacity: 1;
+}
+
 
 /* .diamond{ */
 /* 	font-size: 13px; */
-/* /* 	color:rgb(100, 140, 213);有得分(藍紫色) */ */
+/* /* 	color:rgb(100, 140, 213);有得分(藍紫色) */ 
 /* 	color:#BEBEBE; 沒有得分(灰色) */
 /* } */
 
