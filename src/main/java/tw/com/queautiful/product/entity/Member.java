@@ -106,7 +106,10 @@ public class Member {
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
 	@OrderBy("ARTICLECMTIME DESC")
 	private Set<ArticleCM> acmsWroteByAuthor;
-
+	
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	private Set<Review_Report> review_Reports;
+	
 	@Transient
 	private java.sql.Date memberSuspendExp; //會員停權到期日
 	
@@ -115,6 +118,8 @@ public class Member {
 
 	@Transient
 	private Integer age;
+	
+
 	
 	@Override
 	public String toString() {
@@ -336,5 +341,16 @@ public class Member {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+
+	public Set<Review_Report> getReview_Reports() {
+		return review_Reports;
+	}
+
+	public void setReview_Reports(Set<Review_Report> review_Reports) {
+		this.review_Reports = review_Reports;
+	}
+
+
+
 	
 }

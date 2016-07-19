@@ -16,6 +16,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
+
 <script src="/js/sb-admin-2.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
@@ -106,12 +107,13 @@ $(function(){
 		if(Insterpossible)	{
 		//功能1-A	針對資料庫有的資料新增-------------------------------------------
 		var data=$("#IngredientName").val();
+		
 		$.ajax({
 			"url":'/prodIngreList/checkIngredientName',
 			"type":"POST",
-			"data":{"IngredientName":data},
+			"data":{"IngredientName":IngredientName},
 			success:function(result){// #4
-
+				
 				if(result.ingredName !=undefined){
 					console.log("result not undefined");
 					
@@ -310,16 +312,16 @@ $(function(){
 </script>
 </head>
 <body>
-<!-- 內文全部用wrapper包起來 -->
+<!-- <!-- 內文全部用wrapper包起來 --> -->
 <div id="wrapper">
 
-<!-- 加入上方及側邊Nav-Bar -->	
+<!-- 加入上方及側邊Nav-Bar	 -->
 <c:import url="../bms_header.jsp" />
 <c:import url="../bms_navbar-side.jsp" />
 <!-- ?? url有沒有更好的寫法 ?? -->
 
 
-<!-- Page Content --> 
+<!-- Page Content  -->
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -444,13 +446,13 @@ ${items.ingredName}
 </div><!-- /.modal -->
 <!-- 結束model2 ----------------------------------------------------------------->
 
-                <!-- **每頁不同的內容 end** -->
+<!--                 **每頁不同的內容 end** -->
             </div>
-            <!-- /.col-lg-12 -->
+<!--             /.col-lg-12 -->
         </div>
-        <!-- /.row -->
+<!--         /.row -->
     </div>
-    <!-- /.container-fluid -->
+<!--     /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
 
