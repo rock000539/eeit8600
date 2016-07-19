@@ -26,7 +26,7 @@
 
 .user-detail{
 	font-family:"Microsoft JhengHei";
-	font-weight:bolder;  /*變粗體*/
+/* 	font-weight:bolder;  變粗體 */
 }
 
 .product-image{
@@ -40,6 +40,12 @@
     vertical-align: middle;
     opacity: 1;
 }
+
+.product-score{
+	margin-left:100px;
+}
+
+
 
 
 /* .diamond{ */

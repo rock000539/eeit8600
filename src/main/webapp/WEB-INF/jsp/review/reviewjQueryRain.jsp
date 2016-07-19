@@ -72,19 +72,19 @@
                                         <!--心得評分 start-->
 											<span class="review-uc-diamond">
 												<span class="urcosme-score-display">
-													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>
-													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond2"></span>
-													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond3"></span>
-													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
-													<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>					
+													<span class=" fa fa-diamond diamond" id="diamond1"></span>
+													<span class=" fa fa-diamond diamond" id="diamond2"></span>
+													<span class=" fa fa-diamond diamond" id="diamond3"></span>
+													<span class=" fa fa-diamond diamond" id="diamond4"></span>
+													<span class=" fa fa-diamond diamond" id="diamond5"></span>					
 													<script type="text/javascript">
 														$(function(){
 															for(var i=0;i<"${review.reviewRating}";i++){
-																$("#tb${review.reviewId}diamond"+(i+1)).css('color','rgb(100, 140, 213)');
+																$("#diamond"+(i+1)).css('color','rgb(100, 140, 213)');
 															}
 														});
 													</script>
-												</span>&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}score</span>  
+												</span>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}score</span>  
 											</span>
 											<!--心得評分  end -->
                                         
@@ -126,7 +126,7 @@
                                 </div>
                                 <!--心得發布者資訊start -->
                                 <div class="author_bio">
-                                    <h3 class="author_name"><a href="#">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
+                                    <h3 class="author_name"><a href="/members/post/review?memberId=${review.member.memberId}">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
                                   	<ul>
                                   		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性別:&nbsp;${review.member.gender}</li>
                                   		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;膚質:&nbsp;${review.member.skinType}性肌膚</li>
@@ -243,7 +243,7 @@
 
                     <!--Sidebar Widget-->
                     <div class="col-xs-12 col-md-4 col-lg-4 col-sm-4" >
-                        <div class="sidebar" >
+                        <div class="sidebar">
                             
                                 <div class="widget_title">
                                     <h4><span>Product</span></h4>
@@ -253,7 +253,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#Popular" data-toggle="tab">DETAILS</a></li>
                                     <li class=""><a href="#Recent" data-toggle="tab">DESCRIPTIONS</a></li>
-                                   <li class="last-tab"><a href="#Comment" data-toggle="tab"><i class="fa fa-tint"></i>&nbsp;成份</a></li> 
+                                    <li class="last-tab"><a href="#Comment" data-toggle="tab"><i class="fa fa-tint"></i>&nbsp;成份</a></li> 
                                 </ul>
 
                                 <div class="tab-content clearfix">
@@ -262,40 +262,16 @@
                                             <li>
                                                 <span><a href="#"><img class="product-image" src="/products/show?prodId=${review.prodId}" alt="product-image" /></a></span>
 <!--                                                 <a href="#">Publishing packag esanse web page editos</a> -->
-                                                <p><span>Brand :</span>${review.product.brand.brandName}</p>
-                                                <p><span>Name :</span>${review.product.prodName}</p>
+                                                <p><span>Brand :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.brand.brandName}</p>
+                                                <p><span>Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.prodName}</p>
                                                 <p><span>Category :</span>${review.product.category.categoryName}</p>
-                                                <p><span style="margin-left:100px">Score :</span>
-                                                
-                                                
-                                                  <!--心得評分 start-->
-<!-- 											<span class="review-uc-diamond"> -->
-												<span class="urcosme-score-display">
-													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>
-													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond2"></span>
-													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond3"></span>
-													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond4"></span>
-													<span class="review-uc-diamond fa fa-diamond diamond" id="tb${review.reviewId}diamond5"></span>					
-													<script type="text/javascript">
-														$(function(){
-															for(var i=0;i<"${review.reviewRating}";i++){
-																$("#tb${review.reviewId}diamond"+(i+1)).css('color','rgb(100, 140, 213)');
-															}
-														});
-													</script>
-												</span>&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}score</span>  
-<!-- 											</span> -->
-											<!--心得評分  end -->
-											
-											
-											
-                                                </p>
-                                       
-                                              
+                                                <p><span class="product-score">Score :</span></p>
+                                             
 <!--                                                 <i>October 09, 2015</i> -->
                                             </li>
                                         </ul>
                                     </div>
+                                    
                                     <div class="tab-pane fade" id="Recent">
                                         <ul class="recent_tab_list">
                                             <li>
@@ -305,7 +281,6 @@
                                             </li>
 											<li><span>Ingredient :</span> <a href="#">${product.mainIgdt}</a></li>
                                         </ul>
-                                 
                                     </div>
                                     <div class="tab-pane fade">
                                         <ul class="comments">
