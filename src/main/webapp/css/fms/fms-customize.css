@@ -1,18 +1,20 @@
-.wrapper{
-            margin-top: 0px; 
-        }
+.wrapper {
+	margin-top: 0px;
+}
 
-        #header{
-            padding: 25px 0;
-        }
-        #logo{
-            margin-bottom:0;
-        }
-        .navbar-default .navbar-nav > li > a {
-            padding: 10px 12px;
-            letter-spacing: 2px;
-        }
-        /*.login, .login>span{
+#header {
+	padding: 20px 0 0;
+}
+
+#logo {
+	margin-bottom: 0;
+}
+
+.navbar-default .navbar-nav>li>a {
+	padding: 10px 12px;
+	letter-spacing: 2px;
+}
+/*.login, .login>span{
             float:right;
             width:40px;
             text-align:center;
@@ -21,47 +23,78 @@
         .login:hover,  .login>span:hover{
             color:hsl(219, 57%, 61%);
         }*/
+.top-nav ul {
+	line-height: 40px;
+}
 
-        .top-nav ul{
-            line-height:40px;
-        }
+.top-nav ul li {
+	float: right;
+	margin-left: 10px;
+}
 
-        .top-nav ul li{
-            float:right;
-            margin-left: 10px;
-        }
-        .top-nav ul li a{
-            color:hsl(0, 0%, 48%);
-        }
-        .top-nav ul li a:hover{
-            color:hsl(219, 57%, 61%);
+.top-nav ul li a {
+	color: hsl(0, 0%, 48%);
+}
 
-        }
+.top-nav ul li a:hover {
+	color: hsl(219, 57%, 61%);
+}
 
-        /*userimg*/
-        .userdiv {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            overflow: hidden;
-        }        
-        /*橫*/
-        .userdiv img {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            height: 100%;
-            width: auto;
-            -webkit-transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
-        }
-        /*直*/
-        .userdiv img.portrait {
-            width: 100%;
-            height: auto;
-        }
+.navbar-default .navbar-nav > li > a >img{
+	height:50px;
+}
 
-        .pk_bg{
-            background: pink;
-        }
+.navbar-default .navbar-nav > li:not(:first-of-type) a{
+/* border:3px solid red; */
+	padding-top:32px;
+}
+
+#logo img{
+ 	display:none;
+}
+
+@media only screen and (max-width:768px) { 
+	.navbar-default .navbar-nav > li:first-child{
+		display:none;
+	}
+    #logo{
+    	height:60px;
+    	width:200px;
+    }
+    #logo img{
+    	display:inline;
+    	float:left;
+    	height:50px;
+    }    
+    #header {
+		padding: 20px 0 10px;
+	}
+} 
+
+/*userimg*/
+.userdiv {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+}
+/*橫*/
+.userdiv img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100%;
+	width: auto;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+/*直*/
+.userdiv img.portrait {
+	width: 100%;
+	height: auto;
+}
+
+.pk_bg {
+	background: pink;
+}

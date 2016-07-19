@@ -18,7 +18,7 @@
             </li>
             
         </c:if>
-		<!--  登入後     -->
+        <!-- 登入後 -->            
         	 <c:if test="${not empty nickname}"> 
             <li>
                 <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
@@ -31,11 +31,12 @@
                 <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
                 </a>
             </li>
-         </c:if>      
+         </c:if>
+       
         </ul>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-12">
         <div id="logo">
             <h1><a href="/fms"><img src="/images/logo_qutie-02.png"/></a></h1>
         </div>
@@ -45,7 +46,7 @@
     ================================================== -->
 
     <div class="navbar navbar-default navbar-static-top col-sm-12" role="navigation">
-<!--         <span class="nav-caption">Navigation Menu...</span> -->
+        <span class="nav-caption"></span>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -56,8 +57,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-            	<li class="active"><a href="/fms"><img src="/images/logo_qutie-02.png"/></a><li>
-                <li><a href="/fms">Home</a></li>
+                <li class="active"><a href="/fms">Home</a></li>
 
                 <li><a href="/expdate/search">Date</a></li>
 

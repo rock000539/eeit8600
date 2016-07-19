@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/fms/fractionslider.css"/>
     <link rel="stylesheet" href="/css/fms/style-fraction.css"/>
     
-    <link rel="stylesheet" href="/css/fms/fms-customize.css">
+    <link rel="stylesheet" href="/css/fms/fms-customize_index.css">
 
 </head>
 <body>
@@ -28,7 +28,7 @@
 <!-- <section class="wrapper container"> -->
 
 <!--Start Header-->
-<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
+<c:import url="/WEB-INF/jsp/fms_header_nav_index.jsp" />
 <!--End Header-->
 
 <div class="slider-wrapper row">
