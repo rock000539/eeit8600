@@ -233,7 +233,7 @@
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						
 						<div class="images-style-inner" style="text-align:center;">
-							<img class="img-thumbnail" src="http://localhost:8080/products/show?prodId=${product.prodId}" style="width:250px; height:auto;" />
+							<img class="img-thumbnail" src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" style="width:250px; height:auto;" />
 						</div>
 						
 						<div class="" style="margin-top:20px; text-align:center;">
@@ -299,7 +299,7 @@
 					
 						<div class="col-lg-3 col-md-4 col-xs-12 rec_blog">
 							<div class="blogPic">
-								<img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:263px; height:auto; border: 1px solid #f2f2f2;">
+								<img src="<%= request.getContextPath() %>/products/show?prodId=${review.prodId}" style="width:263px; height:auto; border: 1px solid #f2f2f2;">
 								<div class="blog-hover">
 									<a href="#">
 									</a>
