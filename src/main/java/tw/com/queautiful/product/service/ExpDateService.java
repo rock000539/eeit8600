@@ -1,7 +1,10 @@
 package tw.com.queautiful.product.service;
 
+import java.util.Calendar;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import tw.com.queautiful.product.entity.ExpDate;
 
 @Service
 public class ExpDateService {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private ExpDateDao DateDao;
 	
@@ -32,5 +36,14 @@ public class ExpDateService {
 	
 	public void delete(Long dateId) {
 		DateDao.delete(dateId);
+	}
+	
+	public List<ExpDate> expDateAfterOneMonth(){
+		Calendar exp = Calendar.getInstance();
+		exp.add(Calendar.MONTH, +1);
+		java.sql.Date expAfterOneMonth = new java.sql.Date(exp.getTimeInMillis());
+		log.debug("expAfterOneMonth: {}", expAfterOneMonth);
+		Calendar exp2 = Calendar.getInstance();
+		return DateDao.findByExpIs(expAfterOneMonth);
 	}
 }
