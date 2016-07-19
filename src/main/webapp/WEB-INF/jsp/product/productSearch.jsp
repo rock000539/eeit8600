@@ -30,8 +30,8 @@
 	<style>
 		
 		#categoryContainer {
- 		    width: 87%;
- 		    margin:0 auto;
+ 		    width: 79vw;
+ 		    margin: 0 auto;
 		}
 		
 	</style>
