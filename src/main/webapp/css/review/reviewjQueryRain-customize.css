@@ -24,13 +24,19 @@
     font-size: 12px;
 }
 
+.user-detail{
+	font-family:"Microsoft JhengHei";
+	font-weight:bolder;  /*變粗體*/
+}
+
+
 /* .diamond{ */
 /* 	font-size: 13px; */
 /* /* 	color:rgb(100, 140, 213);有得分(藍紫色) */ */
 /* 	color:#BEBEBE; 沒有得分(灰色) */
 /* } */
 
-/* /*橫*/ */
+/* /*橫*/ 
 /* #userimg { */
 /*     position: relative; */
 /*     left: 20%; */
@@ -41,11 +47,21 @@
 /*     -ms-transform: translate(-50%,-50%); */
 /*     transform: translate(-50%,-50%); */
 /* } */
-/* /*直 */ */
+/* /*直 */ 
 /* #userimg.portrait { */
 /*     width: 100%; */
 /*     height: auto; */
 /* } */
+
+
+
+
+
+
+
+
+
+
 
 
 

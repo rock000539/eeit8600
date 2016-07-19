@@ -40,36 +40,50 @@ public class Review {
 
 	@Transient
 	private Long prodId;
-
+	
+	//心得標題
 	@Column(name="REVIEWTITLE",length=200)
 	private String reviewTitle;
 	
+	//心得內容
 	@Column(name="REVIEW",length=2000)
 	private String review;
 	
+	//心得評分
 	@Column(name="REVIEWRATING")
 	private Integer reviewRating;
 	
+	//心得圖片
 	@Column(name="REVIEWIMG",length=200)
 	private String reviewImg;
 	
+	//心得發布時間
 	@Column(name="REVIEWTIME")
 	private Date reviewTime;
 	
+	//心得收藏數
 	@Column(name="REWCOLLECT")
 	private Integer rewCollect;
 	
+	//心得顯示或隱藏
 	@Column(name="REVIEWSHOW")
 	private Boolean reviewShow;
+		
+	//心得檢舉次數
+	@Column(name = "REVIEWREPORT") 
+	private Integer reviewReport;
+	
 	
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", memberId=" + memberId
+		return "Review [reviewId=" + reviewId + ", member=" + member
+				+ ", memberId=" + memberId + ", product=" + product
 				+ ", prodId=" + prodId + ", reviewTitle=" + reviewTitle
 				+ ", review=" + review + ", reviewRating=" + reviewRating
 				+ ", reviewImg=" + reviewImg + ", reviewTime=" + reviewTime
-				+ ", RewCollect=" + rewCollect + ", reviewShow=" + reviewShow
-				+ ", reviewImgFile=" + reviewImgFile + "]";
+				+ ", rewCollect=" + rewCollect + ", reviewShow=" + reviewShow
+				+ ", reviewReport=" + reviewReport + ", reviewImgFile="
+				+ reviewImgFile + "]";
 	}
 
 	@Transient
@@ -191,5 +205,13 @@ public class Review {
 
 	public void setReviewImgFile(MultipartFile reviewImgFile) {
 		this.reviewImgFile = reviewImgFile;
+	}
+	
+	public Integer getReviewReport() {
+		return reviewReport;
+	}
+	
+	public void setReviewReport(Integer reviewReport) {
+		this.reviewReport = reviewReport;
 	}
 }
