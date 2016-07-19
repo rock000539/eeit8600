@@ -150,7 +150,7 @@ public class ExpDateController
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ResponseBody
     public String post(Model model, HttpServletRequest request, @RequestParam String proIdStr,
-            @RequestParam String mfdStr, @RequestParam String expStr)
+            @RequestParam String mfdStr, @RequestParam String expStr,@RequestParam String batchCode)
     {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -172,6 +172,7 @@ public class ExpDateController
             expDate.setProId(proId);
             expDate.setExp(exp);
             expDate.setMfd(Mfd);
+            expDate.setBatchCode(batchCode);
             expDate.setMemberId(memberId);
             expDateService.insert(expDate);
             //*---------------------------------

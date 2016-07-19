@@ -74,13 +74,13 @@
 				$('.saveDate').click(function(e) {
 				var prodId = e.target.name;
 				var memberId=$("#loginTokenId").attr("value");
-				
+				var batchCode = $('#batchCode').val();
 				if(memberId!=0&&memberId!=undefined){ //#1
 				$.ajax({url : '/expdate/post', //#2
 						type : 'POST',
 						data : {"proIdStr" : prodId,
 								"mfdStr" : data.mfdDate,
-								"expStr" : data.expDate},
+								"expStr" : data.expDate,"batchCode":batchCode},
 				success : function(data) {
 				alert(data);
 				$('#proList').empty();

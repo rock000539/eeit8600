@@ -21,13 +21,10 @@ public class IndexController {
 		return "/fms";
 	}
 	
-	@RequestMapping("/test")
+	@RequestMapping("/report")
 	public String testPage(Model model) {
 
-        List<Brand> brands = new ArrayList<Brand>();
-        brands = brandService.getAll();
-        model.addAttribute("Brands", brands);
-		return "/test1";
+		return "/report/reportTest";
 	}
 	
 }

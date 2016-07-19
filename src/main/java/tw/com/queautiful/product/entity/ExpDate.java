@@ -22,7 +22,7 @@ public class ExpDate {
 	private Long proId;
 	
 	@Column(name = "BATCHCODE")
-	private Integer batchCode;
+	private String batchCode;
 	
 	@Column(name = "MFD")
 	private java.sql.Date mfd;
@@ -54,11 +54,11 @@ public class ExpDate {
 		this.proId = proId;
 	}
 
-	public Integer getBatchCode() {
+	public String getBatchCode() {
 		return batchCode;
 	}
 
-	public void setBatchCode(Integer batchCode) {
+	public void setBatchCode(String batchCode) {
 		this.batchCode = batchCode;
 	}
 
