@@ -142,8 +142,7 @@ public class ProductController {
 	}
 
 	@RequestMapping("/show")
-	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
-		String prodImg = prodService.getById(prodId).getProdImg();
+	public void show(HttpServletResponse resp, @RequestParam String prodImg) {
 		if (prodImg != null) {
 			FileProcessing.showImg(resp, prodImg);
 		}

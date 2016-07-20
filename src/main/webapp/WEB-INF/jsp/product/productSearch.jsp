@@ -19,7 +19,7 @@
 
 	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
-	<script src="/js/product/select2.min.js"></script>
+	<script src="/js/product/search/select2.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
@@ -44,6 +44,7 @@
 
 	<!-- **每頁不同的內容從這裡開始** -->
 	<div class="grey_bg row">
+	
 		<section class="content service">
 			<div class="container">
 				<div class="row sub_content">
@@ -111,8 +112,8 @@
 	
 	            </div>
 	        </div>
-	        
 	    </section>
+	    
 	</div>        
     <!-- **每頁不同的內容結束** -->
 
@@ -210,7 +211,6 @@
 			$('#contact').on('click', function() {
 				console.log('contact');			
 			});
-			
 			
 		});
 		

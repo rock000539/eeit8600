@@ -91,7 +91,7 @@
 			<div class="col-sm-2"></div>
 			
 			<div class="col-sm-3" style="text-align: center;">
-				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" />
+				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" />
 			</div>
 			
 			<div class="col-sm-5 sidebar">
@@ -116,7 +116,6 @@
 	                <div class="panel-heading">
 	                    <h4 class="panel-title">
 	                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-	
 	                            How do I give feedback on items?
 	                        </a>
 	                    </h4>
@@ -152,7 +151,7 @@
 				        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
 				            <div class="our-team" style="height:455px;">
 				                <div class="team-pic image">
-				                    <img src="<%= request.getContextPath() %>/products/show?prodId=${review.prodId}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
+				                    <img src="<%= request.getContextPath() %>/products/show?prodImg=${review.reviewImg}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
 		<!-- 		                    <div class="team-overlay"></div> -->
 				                    <div class="serviceBox_4">
 					                    <div class="service-icon">

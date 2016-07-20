@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="/css/product/awesome-bootstrap-checkbox.css">
 	
 	<!-- Pagination Plugin -->
-	<script src="/js/product/jquery.bootpag.min.js"></script>
+	<script src="/js/product/inventory/jquery.bootpag.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
@@ -60,7 +60,7 @@
 		    text-transform: uppercase;
 		}
 		
-		img
+		.img-prod
 		{
 			-moz-box-shadow: 0 0 5px #fff;
 			-webkit-box-shadow: 0 0 5px #fff;
@@ -124,10 +124,10 @@
 					<article class="post">
 						
 						<figure class="post_img effect-bubba" style="margin-left:50px;">
-							<img src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
+							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
-							    <a href="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
+							    <a href="/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
 							    <a href="#" class="fa fa-link"></a>
 							</div>
 							
@@ -168,7 +168,7 @@
 					<article class="post">
 						
 						<figure class="post_img effect-bubba" style="margin-left:50px;">
-							<img src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
+							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
 							    <a href="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
@@ -220,10 +220,11 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
-	
-    <script src="/js/product/jquery-scrolltofixed-min.js"></script>
+
+	<!-- Product相關頁面共用檔案 -->
+	<script src="/js/product/jquery-scrolltofixed-min.js"></script>
+	<script src="/js/product/jquery.magnific-popup.min.js"></script>
     <script src="/js/product/jflickrfeed.js"></script>
-    <script src="/js/product/jquery.magnific-popup.min.js"></script>
     <script src="/js/product/swipe.js"></script>
 	
 	<script src="/js/product/wow.min.js"></script>
@@ -239,7 +240,7 @@
 			<figure class="post_img effect-bubba" style="margin-left:50px;">
 				<img src="<%= request.getContextPath() %>/products/show?prodId=_prodId" style="border:1px solid #f2f2f2;">
 				
-				<div class="option" style="margin-top:30px;">
+				<div class="img-prod" class="option" style="margin-top:30px;">
 				    <a href="<%= request.getContextPath() %>/products/show?prodId=_prodId" class="fa fa-search mfp-image"></a>
 				    <a href="#" class="fa fa-link"></a>
 				</div>
@@ -270,7 +271,7 @@
 	</script>
 	
 	<script id="article_grid" type="text/template">
-	
+		
 		
 
 	</script>

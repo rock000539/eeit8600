@@ -18,7 +18,7 @@
 	<link href="/css/product/contact.css" rel="stylesheet" />
 	
 	<!-- GoogleMap -->
-	<script type="text/javascript" src="/js/product/jquery.gmap.js"></script>
+	<script type="text/javascript" src="/js/product/contact/jquery.gmap.js"></script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ContactPage</title>
