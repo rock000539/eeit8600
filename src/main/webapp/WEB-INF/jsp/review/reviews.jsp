@@ -22,6 +22,7 @@
 <title>Reviews</title>
 </head>
 <body>
+<%=request.getContextPath()%>
 <!--加入header&nav -->
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
@@ -38,7 +39,7 @@
 					<!-- Img start -->
 			<a href="/reviews/reviewjQueryRain" > <!-- ???連結要換成去一篇的心得頁面 (動態)-->
 	    	<div class="reviewImg">
-	      		<img class="reviewImg-Img" src="/products/show?prodId=${review.prodId}">
+	      		<img class="reviewImg-Img" src="/products/show?prodImg=${review.product.prodImg}">
 	      	</div></a>
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>

@@ -2,6 +2,11 @@
 @import url("../font-awesome.css");
 @import url("../magnified.css");
 
+body {
+    font-size: 100%;
+	font-family: Microsoft JhengHei, "Droid Serif", serif;
+}
+
 /* ===================================================== */
 /* 33. Button Up										 */
 /* ===================================================== */

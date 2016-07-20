@@ -55,14 +55,15 @@
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
 				var prodId = data.productList[i].prodId;
+				var prodImg=data.productList[i].prodImg;
 				var categoryId=data.productList[i].categoryId;
 				$("#proList").append(	//---------------------------------
 				"<div class='col-md-4 portfolio-item' name="+categoryId+"><div class='portfolio-all'>"
 				+"<div class='portfolio-title'>"
-				+"<a href='#'><h3>"+prodName+"</h3></a></div>"
+				+"<a href='/products/view?prodId="+prodId+"'><h3>"+prodName+"</h3></a></div>"
 				+"<div class='portfolio-content'>"
 				+"<div class='portfolio-img'>"
-				+"<a href='#'><img src='/products/show?prodId="+prodId+"'/></a>"
+				+"<a href='/products/view?prodId="+prodId+"'><img src='/products/show?prodImg="+prodImg+"'/></a>"
 				+"</div>"
 				+"<div class='portfolio-btn'>"
  				+"<button class='saveDate btn btn-default' name='"

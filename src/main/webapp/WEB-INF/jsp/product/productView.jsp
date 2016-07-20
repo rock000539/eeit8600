@@ -42,10 +42,6 @@
 			height: 65px;
 		}
 		
-/* 		.our-team span.profile { */
-/* 			visibility: hidden; */
-/* 		} */
-
 		.img-prod
 		{
 			border: 3px solid #727CB6;
@@ -56,9 +52,8 @@
 			box-shadow: 0px 0px 5px #fff;
 		}
 		
-		.sidebar .widget ul.list_style li {
-			margin-top: 2px;
-			border-bottom: 1px solid #727CB6;
+		.view_tab span {
+			font-size: 13px;
 		}
 
 	</style>
@@ -73,8 +68,8 @@
 	<div class="grey_bg row">
 	
 		<div class="row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
 				<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
 			            <div class="dividerHeading">
@@ -83,52 +78,51 @@
 			        </div>
 		        </section>
 			</div>
-	        <div class="col-sm-2"></div>
+	        <div class="col-sm-3"></div>
 		</div>
 		
 		<div class="row">
 		
-			<div class="col-sm-2"></div>
+			<div class="col-sm-3"></div>
 			
 			<div class="col-sm-3" style="text-align: center;">
 				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" />
 			</div>
 			
-			<div class="col-sm-5 sidebar">
-				
-<%-- 				<li><span>Name :</span>${product.prodName}</li> --%>
-<%-- 				<li><span>Date :</span>${product.launchDate}</li> --%>
-<%-- 				<li><span>Brand :</span>${product.brand.brandName}</li> --%>
-<%-- 				<li><span>Category :</span>${product.category.categoryName}</li> --%>
-<%-- 				<li><span>Ingredient :</span> <a href="#">${product.mainIgdt}</a></li> --%>
-				
-				<div class="panel panel-default">
-	                <div class="panel-heading">
-	                    <h4 class="panel-title">
-	                        <a>
-	                            <span>Name :</span>${product.prodName}
-	                        </a>
-	                    </h4>
-	                </div>
-	            </div>
-				 
-	            <div class="panel panel-default">
-	                <div class="panel-heading">
-	                    <h4 class="panel-title">
-	                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-	                            How do I give feedback on items?
-	                        </a>
-	                    </h4>
-	                </div>
-	                <div id="collapseSix" class="panel-collapse collapse">
-	                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
-	                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
-	                </div>
-	            </div>
-                    
+			<div class="col-sm-3">
+			
+				<div class="view_tab">
+			    	<label for="tab-one"><span>Name : ${product.prodName}</span></label>
+			    </div>
+		    	<div class="view_tab">
+		      		<label for="tab-two"><span>Date : ${product.launchDate}</span></label>
+		    	</div>
+		    	<div class="view_tab">
+			    	<label for="tab-one"><span>Brand : ${product.brand.brandName}</span></label>
+			    </div>
+		    	<div class="view_tab">
+			    	<label for="tab-one"><span>Category : ${product.category.categoryName}</span></label>
+			    </div>
+			    <div class="view_tab">
+			    	<label for="tab-one"><span>Ingredient : ${product.mainIgdt}</span></label>
+			    </div>
+			    <div class="view_tab">
+			      	<input id="tab-three" type="checkbox" name="tabs">
+			      	<label for="tab-three"><span>Description</span></label>
+			    	<div class="view_tab-content" style="overflow:auto;">
+			    		<c:choose>
+			    			<c:when test="${product.prodDesc.length() > 10}">
+			    				<p>${product.prodDesc}</p>
+			    			</c:when>
+			    			<c:otherwise>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>			    			
+			    			</c:otherwise>
+			    		</c:choose>
+			    	</div>
+			    </div>
 			</div>
 				
-			<div class="col-sm-2"></div>
+			<div class="col-sm-3"></div>
 			
 		</div>
 			

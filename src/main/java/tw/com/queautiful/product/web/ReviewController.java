@@ -4,16 +4,14 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 
-import org.aspectj.lang.reflect.MemberSignature;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
-import tw.com.queautiful.product.entity.Brand;
-import tw.com.queautiful.product.entity.Member;
-import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
@@ -102,7 +97,9 @@ public class ReviewController {
 		model.addAttribute("reviews", list);
 		log.debug("{}", list);
 //		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
-		 
+//		 model.addAttribute("reviews", service.findByOrderByReviewReportDesc());
+		
+		
 		//會員年齡
 //		String y = service.getAll().get ).getMember().getBirthDay().toString();
 //		log.debug("birthday={}",y);
@@ -111,7 +108,6 @@ public class ReviewController {
 			log.debug("x={}",age);
 			list.get(i).getMember().setAge(age);
 		}
-		
 		return "/review/reviews";
 	}
 
@@ -221,7 +217,7 @@ public class ReviewController {
 		return "/review/reviewAdd";
 	}
 
-	@RequestMapping("/insert")
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public Review insert(@RequestPart("review") Review review,
 			@RequestPart("reviewImgFile") MultipartFile reviewImgFile) {
@@ -253,7 +249,14 @@ public class ReviewController {
 		return service.getAll();
 	}
 
-	@RequestMapping("/show")
+	@RequestMapping("show")
+	public void show(HttpServletResponse resp,@RequestParam String reviewImg){
+		if(reviewImg !=null){
+			FileProcessing.showImg(resp, reviewImg);
+		}
+	}
+	
+	@RequestMapping("/show_old")
 	public void show(HttpServletResponse resp, @RequestParam Long reviewId) {
 		Review review = service.getById(reviewId);
 
