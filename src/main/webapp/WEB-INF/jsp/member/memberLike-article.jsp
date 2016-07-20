@@ -203,7 +203,7 @@
 	            </div>
 	            <div class="content1">
 		            <h5>${item.articleTime}</h5>
-		            <p>${item.article}</p>
+		            <p>${item.articleContent}</p>
 	            </div>
 	            
 	            <div class="mask hvr-trim">
