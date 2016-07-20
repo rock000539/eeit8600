@@ -133,4 +133,10 @@ public class ArticleController {
 		return "/article/articleListFms";
 	}
 	
+	@RequestMapping("/view")
+	public String articleView(@RequestParam Long articleId, Model model){
+		model.addAttribute("article",articleService.getById(articleId));	
+		return "/article/articleView";
+	}
+	
 }
