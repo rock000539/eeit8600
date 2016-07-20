@@ -95,6 +95,10 @@ public class MemberService {
 	public Member getByResetPswToken(String resetPswToken) {
 		return memberDao.findByResetPswToken(resetPswToken);
 	}
+	
+	public List<Member> getByResetPswExp(java.sql.Date resetPswExp){
+		return memberDao.findByResetPswExp(resetPswExp);
+	}
 
 	public void updatePassword(Member member, String newPassword) {
 		member.setPassword(newPassword);
