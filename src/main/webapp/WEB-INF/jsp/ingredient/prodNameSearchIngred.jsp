@@ -43,8 +43,8 @@ $(function(){
 			
 		for(var i=0;i<data.products.length;i++){
 			$("#productList").append(					
-	"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
-	+data.products[i].prodName+"</td><td><p><small>"+data.brands[i].brandName+"</small></p></td><td>"
+	"<tr><td><a href='/products/view?prodId="+data.products[i].prodId+"'><img src='/products/show?prodImg="+data.products[i].prodImg+"'/></a></td><td>"
+	+"<a href='/products/view?prodId="+data.products[i].prodId+"'>"+data.products[i].prodName+"</a></td><td><p><small>"+data.brands[i].brandName+"</small></p></td><td>"
 	+data.categorys[i].categoryName+"</td>"
 	+"<td><input type='submit' class='checkIngredient btn-info btn-sm btn-block'"+ 
 	"data-toggle='modal'  data-target='#myModal' name='"

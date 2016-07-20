@@ -36,7 +36,7 @@ $(function(){
 			$('#productList').empty();
 		for(var i=0;i<data.products.length;i++){
 			$("#productList").append(					
-					"<tr><td><img src='/products/show?prodId="+data.products[i].prodId+"'/></td><td>"
+					"<tr><td><img src='/products/show?prodImg="+data.products[i].prodImg+"'/></td><td>"
 					+data.products[i].prodName+"</td><td>"
 					+data.categorys[i].categoryName+"</td>"
 					+"<td><input type='submit' class='checkIngredient btn btn-primary'"+ 
