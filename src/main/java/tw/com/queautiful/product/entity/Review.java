@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,6 +45,12 @@ public class Review {
 	@Transient
 	private Long prodId;
 	
+	//心得留言
+	@OneToMany(mappedBy="review",fetch=FetchType.LAZY)
+	@OrderBy("REVIEWCMID ASC")
+	private Set<ReviewCM> reviewCMs;
+	
+
 	//心得標題
 	@Column(name="REVIEWTITLE",length=200)
 	private String reviewTitle;
@@ -75,7 +82,6 @@ public class Review {
 	//心得檢舉次數
 	@Column(name = "REVIEWREPORT") 
 	private Integer reviewReport;
-	
 	
 	@OneToMany(mappedBy="review",fetch=FetchType.LAZY)
 	private Set<Review_Report> Review_Reports;
@@ -109,8 +115,8 @@ public class Review {
 	
 	public void setMember(Member member) {
 		this.member = member;
-		if(!member.getReviews().contains(this)){
-			member.getReviews().add(this);
+		if(!member.getReviewsWorteByAuthor().contains(this)){
+			member.getReviewsWorteByAuthor().add(this);
 		}
 	}
 	
@@ -149,6 +155,22 @@ public class Review {
 		this.prodId = prodId;
 	}
 
+	public Set<ReviewCM> getReviewCMs() {
+		return reviewCMs;
+	}
+	
+	public void setReviewCMs(Set<ReviewCM> reviewCMs) {
+		this.reviewCMs = reviewCMs;
+	}
+	
+	public void addReviewCMs(ReviewCM reviewCMs){
+		this.reviewCMs.add(reviewCMs);
+		if(reviewCMs.getReview()!=this){
+			reviewCMs.setReview(this);
+		}
+	}
+
+	
 	public String getReviewTitle() {
 		return reviewTitle;
 	}

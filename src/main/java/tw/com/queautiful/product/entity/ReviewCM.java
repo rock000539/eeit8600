@@ -4,9 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="REVIEWCM")
@@ -17,18 +22,36 @@ public class ReviewCM {
 	@Column(name="REVIEWCMID")
 	private Long rcmId;
 	
-	@Column(name="REVIEWID")
+	@ManyToOne
+	@JoinColumn(name="REVIEWID")
+	@JsonIgnore
+	private Review review;
+
+	@Transient
 	private Long reviewId;
 	
+	@ManyToOne
+	@JoinColumn(name="MEMBERID")
+	@JsonIgnore
+	private Member member;
+
+	@Transient
+	private Long memberId;
+	
+	//心得留言內容
 	@Column(name="REVIEWCMMSG",length=200)
 	private String rcmMsg;
 	
-	@Column(name="MEMBERID")
-	private Long memberId;
+	//心得留言時間
+	@Column(name="REVIEWCMTIME")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Taipei")
+	private java.sql.Timestamp reviewCMTime;
 	
+	//心得留言顯示或隱藏
 	@Column(name="REVIEWCMSHOW")
 	private Boolean rcmShow;
 	
+	//心得留言檢舉次數
 	@Column(name="REVIEWCMREPORT")
 	private Integer rcmReport;
 
@@ -40,14 +63,6 @@ public class ReviewCM {
 		this.rcmId = rcmId;
 	}
 
-	public Long getReviewId() {
-		return reviewId;
-	}
-
-	public void setReviewId(Long reviewId) {
-		this.reviewId = reviewId;
-	}
-
 	public String getRcmMsg() {
 		return rcmMsg;
 	}
@@ -56,14 +71,14 @@ public class ReviewCM {
 		this.rcmMsg = rcmMsg;
 	}
 
-	public Long getMemberId() {
-		return memberId;
+	public java.sql.Timestamp getReviewCMTime() {
+		return reviewCMTime;
 	}
 
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
+	public void setReviewCMTime(java.sql.Timestamp reviewCMTime) {
+		this.reviewCMTime = reviewCMTime;
 	}
-
+	
 	public Boolean getRcmShow() {
 		return rcmShow;
 	}
@@ -80,12 +95,49 @@ public class ReviewCM {
 		this.rcmReport = rcmReport;
 	}
 
-	@Override
-	public String toString() {
-		return "ReviewCM [rcmId=" + rcmId + ", reviewId=" + reviewId
-				+ ", rcmMsg=" + rcmMsg + ", memberId=" + memberId
-				+ ", rcmShow=" + rcmShow + ", rcmReport=" + rcmReport + "]";
+	public Review getReview() {
+		return review;
 	}
 
+	public void setReview(Review review) {
+		this.review = review;
+		if(!review.getReviewCMs().contains(this)){
+			review.getReviewCMs().add(this);
+		}
+	}
+
+	public Long getReviewId() {
+		if(this.reviewId==null && review!=null){
+			return this.getReview().getReviewId();
+		}else{
+			return reviewId;
+		}
+	}
+
+	public void setReviewId(Long reviewId) {
+		this.reviewId = reviewId;
+	}
+	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+		if(!member.getRcmsWroteByAuthor().contains(this)){
+			member.getRcmsWroteByAuthor().add(this);
+		}
+	}
+	
+	public Long getMemberId() {
+		if(this.memberId==null && member!=null){
+			return this.getMember().getMemberId();
+		}
+		return memberId;
+	}
+
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
+	}
 }
 
