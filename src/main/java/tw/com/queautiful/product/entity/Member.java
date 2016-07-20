@@ -107,7 +107,7 @@ public class Member {
 	@OrderBy("ARTICLECMTIME DESC")
 	private Set<ArticleCM> acmsWroteByAuthor;
 	
-	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Review_Report> review_Reports;
 	
 	@Transient
