@@ -1,4 +1,12 @@
 
+@import url("../font-awesome.css");
+@import url("../magnified.css");
+
+body {
+    font-size: 100%;
+	font-family: Microsoft JhengHei, "Droid Serif", serif;
+}
+
 .team-pic {
 	width: 295px;
 	height: 245.06px;
@@ -35,6 +43,72 @@
 	animation: cd-bounce-1 0.6s;
 }
 
+/* ---------- Pure CSS Accordion ---------- */
+/* Acordeon styles */
+.view_tab {
+	position: relative;
+	margin-bottom: 1px;
+	width: 100%;
+	color: #fff;
+	overflow: hidden;
+}
+input {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+label {
+	position: relative;
+	display: block;
+	padding: 0 0 0 1em;
+	background: #727CB6;
+	font-weight: bold;
+	line-height: 3;
+	cursor: pointer;
+	
+	margin-bottom: 7px;
+}
+.view_tab-content {
+	max-height: 0;
+	overflow: hidden;
+	background: #727CB6;
+	-webkit-transition: max-height .35s;
+	-o-transition: max-height .35s;
+	transition: max-height .35s;
+}
+.view_tab-content p {
+	margin: 1em;
+}
+/* :checked */
+input:checked ~ .view_tab-content {
+	max-height: 10em;
+}
+/* Icon */
+label::after {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: block;
+	width: 3em;
+	height: 3em;
+	line-height: 3;
+	text-align: center;
+	-webkit-transition: all .35s;
+	-o-transition: all .35s;
+	transition: all .35s;
+}
+input[type=checkbox] + label::after {
+	content: "\2795";
+}
+input[type=radio] + label::after {
+	content: "\25BC";
+}
+input[type=checkbox]:checked + label::after {
+	transform: rotate(315deg);
+}
+input[type=radio]:checked + label::after {
+	transform: rotateX(180deg);
+}
 
 /* ---------- animate ---------- */
 @-webkit-keyframes cd-bounce-1 {

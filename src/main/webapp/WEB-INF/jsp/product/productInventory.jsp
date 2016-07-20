@@ -103,6 +103,8 @@
 </head>
 <body>
 
+	<!-- http://codepen.io/amortka/pen/KqfoB -->
+
 	<!--加入header&nav -->
 	<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 	
@@ -238,10 +240,10 @@
 		<article class="post">
 						
 			<figure class="post_img effect-bubba" style="margin-left:50px;">
-				<img src="<%= request.getContextPath() %>/products/show?prodId=_prodId" style="border:1px solid #f2f2f2;">
+				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=_prodImg" style="border:1px solid #f2f2f2;">
 				
-				<div class="img-prod" class="option" style="margin-top:30px;">
-				    <a href="<%= request.getContextPath() %>/products/show?prodId=_prodId" class="fa fa-search mfp-image"></a>
+				<div class="option" style="margin-top:30px;">
+				    <a href="<%= request.getContextPath() %>/products/show?prodImg=_prodImg" class="fa fa-search mfp-image"></a>
 				    <a href="#" class="fa fa-link"></a>
 				</div>
 				
@@ -316,9 +318,11 @@
 							
 							var list = i%2 == 0 ? l_list : r_list;
 							
+							console.log(response[i].prodImg)
+							
 							$($('#article_list').html()
-								.replace('_prodId', response[i].prodId)
-								.replace('_prodId', response[i].prodId)
+								.replace('_prodImg', response[i].prodImg)
+								.replace('_prodImg', response[i].prodImg)
 								.replace('_prodName', response[i].prodName)
 								.replace('_launchDate', response[i].launchDate)
 								.replace('_brandName', response[i].brandName)

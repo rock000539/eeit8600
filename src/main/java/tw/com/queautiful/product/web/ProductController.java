@@ -228,11 +228,9 @@ public class ProductController {
 		return "/product/productView";
 	}
 
-	@RequestMapping("/rank")
+	@RequestMapping("/login")
 	public String rankFmsPage(Model model) {
-		// model.addAttribute("products",
-		// prodService.findTop10ByOrderByScoreDesc());
-		return "/product/productRankFms";
+		return "/product/login";
 	}
 
 }
