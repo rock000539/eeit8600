@@ -21,6 +21,7 @@
 	<script src="/js/jquery.min.js"></script>
 </head> 
 <body>
+
 <!--加入header&nav -->
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
@@ -55,7 +56,7 @@
                         <div class="blog_single">
                             <article class="post">
                                 <figure class="post_img">
-                                    <img class="reviewImg" src="/reviews/show?reviewId=${review.reviewId}" alt="reviewImg">
+                                    <img class="reviewImg" src="/reviews/show?reviewImg=${review.reviewImg}" alt="reviewImg">
                                 </figure>
                                 <div class="post_date">
                                     <span class="day">${day}</span>
@@ -92,7 +93,7 @@
                                         </div>
                                     </div>
                                     
-                                         <img class="reviewImg" src="/reviews/show?reviewId=${review.reviewId}" alt="reviewImg">
+                                         <img class="reviewImg" src="/reviews/show?reviewImg=${review.reviewImg}" alt="reviewImg">
                                     
                                     <blockquote class="default">
                                        
@@ -260,7 +261,7 @@
                                     <div class="tab-pane fade active in" id="Popular">
                                         <ul class="recent_tab_list">
                                             <li>
-                                                <span><a href="#"><img class="product-image" src="/products/show?prodId=${review.prodId}" alt="product-image" /></a></span>
+                                                <span><a href="#"><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></a></span>
 <!--                                                 <a href="#">Publishing packag esanse web page editos</a> -->
                                                 <p><span>Brand :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.brand.brandName}</p>
                                                 <p><span>Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.prodName}</p>
@@ -356,6 +357,8 @@
 		  <script type="text/javascript" src="/js/fms/fms-main.js"></script>
     <script src="/js/review/main.js"></script>
 <script type="text/javascript">
+console.log("")
+console.log("123")
 $(function () {  //=$(document.)ready
 	/*  ============ USER IMG =========== 	*/ 
 // 		var w = $('#userimg').width();
@@ -371,8 +374,6 @@ $(function () {  //=$(document.)ready
 
 
 </script>
-
-
 
 </body>
 </html>

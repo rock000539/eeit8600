@@ -102,7 +102,9 @@ public class ReviewController {
 		model.addAttribute("reviews", list);
 		log.debug("{}", list);
 //		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
-		 
+//		 model.addAttribute("reviews", service.findByOrderByReviewReportDesc());
+		
+		
 		//會員年齡
 //		String y = service.getAll().get ).getMember().getBirthDay().toString();
 //		log.debug("birthday={}",y);
@@ -253,7 +255,14 @@ public class ReviewController {
 		return service.getAll();
 	}
 
-	@RequestMapping("/show")
+	@RequestMapping("show")
+	public void show(HttpServletResponse resp,@RequestParam String reviewImg){
+		if(reviewImg !=null){
+			FileProcessing.showImg(resp, reviewImg);
+		}
+	}
+	
+	@RequestMapping("/show_old")
 	public void show(HttpServletResponse resp, @RequestParam Long reviewId) {
 		Review review = service.getById(reviewId);
 

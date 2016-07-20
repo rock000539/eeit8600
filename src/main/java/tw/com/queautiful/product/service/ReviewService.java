@@ -45,4 +45,8 @@ public class ReviewService {
 		return reviewDAO.findByOrderByReviewTimeDesc();
 	}
 	
+	public List<Review> findByOrderByReviewReportDesc(){
+		return reviewDAO.findByOrderByReviewRatingDesc();
+	}
+	
 } 
