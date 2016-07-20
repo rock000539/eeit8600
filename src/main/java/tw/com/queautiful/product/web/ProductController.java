@@ -48,11 +48,6 @@ public class ProductController {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@RequestMapping("/list")
-	public String listPage() {
-		return "/product/productList";
-	}
-
 	// 提供一般抓取資料使用
 	@RequestMapping("/select")
 	@ResponseBody
@@ -80,6 +75,11 @@ public class ProductController {
 		log.debug("----------------------------------------------------------"); // 測試
 
 		return prodPage;
+	}
+	
+	@RequestMapping("/list")
+	public String listPage() {
+		return "/product/productList";
 	}
 
 	@RequestMapping("/add")
@@ -181,7 +181,7 @@ public class ProductController {
 		}
 		
 		// 初始頁碼、每頁幾筆資料
-		Pageable pageable = new PageRequest(0, 5);
+		Pageable pageable = new PageRequest(0, 10);
 		
 		// 查詢資料
 		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
@@ -225,15 +225,6 @@ public class ProductController {
 
 	@RequestMapping("/view")
 	public String viewFmsPage(@RequestParam(required = false) Long prodId, Model model) {
-		log.debug("prodId = {}", prodId);
-		Product product = prodService.getById(prodId);
-		log.debug("{}", product);
-		model.addAttribute("product", product);
-		return "/product/productViewFms";
-	}
-	
-	@RequestMapping("/view2")
-	public String viewPage(@RequestParam(required = false, defaultValue = "1") Long prodId, Model model) {
 		model.addAttribute("product", prodService.getById(prodId));
 		return "/product/productView";
 	}

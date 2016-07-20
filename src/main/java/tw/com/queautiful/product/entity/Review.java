@@ -1,14 +1,17 @@
 package tw.com.queautiful.product.entity;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -73,6 +76,9 @@ public class Review {
 	@Column(name = "REVIEWREPORT") 
 	private Integer reviewReport;
 	
+	
+	@OneToMany(mappedBy="review",fetch=FetchType.LAZY)
+	private Set<Review_Report> Review_Reports;
 	
 	@Override
 	public String toString() {
@@ -214,4 +220,13 @@ public class Review {
 	public void setReviewReport(Integer reviewReport) {
 		this.reviewReport = reviewReport;
 	}
+
+	public Set<Review_Report> getReview_Reports() {
+		return Review_Reports;
+	}
+
+	public void setReview_Reports(Set<Review_Report> review_Reports) {
+		Review_Reports = review_Reports;
+	}
+	
 }

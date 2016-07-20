@@ -45,7 +45,22 @@
 /* 		.our-team span.profile { */
 /* 			visibility: hidden; */
 /* 		} */
+
+		.img-prod
+		{
+			border: 3px solid #727CB6;
+			border-radius: 20px;
 		
+			-moz-box-shadow: 0 0 5px #fff;
+			-webkit-box-shadow: 0 0 5px #fff;
+			box-shadow: 0px 0px 5px #fff;
+		}
+		
+		.sidebar .widget ul.list_style li {
+			margin-top: 2px;
+			border-bottom: 1px solid #727CB6;
+		}
+
 	</style>
 	
 </head>
@@ -58,8 +73,8 @@
 	<div class="grey_bg row">
 	
 		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
 				<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
 			            <div class="dividerHeading">
@@ -68,19 +83,56 @@
 			        </div>
 		        </section>
 			</div>
-	        <div class="col-sm-1"></div>
+	        <div class="col-sm-2"></div>
 		</div>
-	
+		
 		<div class="row">
+		
+			<div class="col-sm-2"></div>
 			
-			<div class="col-sm-1"></div>
+			<div class="col-sm-3" style="text-align: center;">
+				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" />
+			</div>
 			
-			<div class="col-sm-10"></div>
-			
-			<div class="col-sm-1"></div>
+			<div class="col-sm-5 sidebar">
+				
+<%-- 				<li><span>Name :</span>${product.prodName}</li> --%>
+<%-- 				<li><span>Date :</span>${product.launchDate}</li> --%>
+<%-- 				<li><span>Brand :</span>${product.brand.brandName}</li> --%>
+<%-- 				<li><span>Category :</span>${product.category.categoryName}</li> --%>
+<%-- 				<li><span>Ingredient :</span> <a href="#">${product.mainIgdt}</a></li> --%>
+				
+				<div class="panel panel-default">
+	                <div class="panel-heading">
+	                    <h4 class="panel-title">
+	                        <a>
+	                            <span>Name :</span>${product.prodName}
+	                        </a>
+	                    </h4>
+	                </div>
+	            </div>
+				 
+	            <div class="panel panel-default">
+	                <div class="panel-heading">
+	                    <h4 class="panel-title">
+	                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+	
+	                            How do I give feedback on items?
+	                        </a>
+	                    </h4>
+	                </div>
+	                <div id="collapseSix" class="panel-collapse collapse">
+	                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
+	                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
+	                </div>
+	            </div>
+                    
+			</div>
+				
+			<div class="col-sm-2"></div>
 			
 		</div>
-	
+			
 		<div class="row">
 		
 			<div class="col-sm-1"></div>
@@ -100,7 +152,7 @@
 				        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
 				            <div class="our-team" style="height:455px;">
 				                <div class="team-pic image">
-				                    <img src="http://localhost:8080/products/show?prodId=${review.prodId}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
+				                    <img src="<%= request.getContextPath() %>/products/show?prodId=${review.prodId}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
 		<!-- 		                    <div class="team-overlay"></div> -->
 				                    <div class="serviceBox_4">
 					                    <div class="service-icon">
@@ -134,8 +186,8 @@
 				                </div>
 				
 				                <div class="team-social-media" style="text-align: center;">
-				                	<a id="search" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-search"></i>&nbsp;&nbsp;收藏心得</a>
-				                	<a id="save" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-save"></i>&nbsp;&nbsp;觀看心得</a>
+				                	<a id="search" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏心得</a>
+				                	<a id="save" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-eye"></i>&nbsp;&nbsp;觀看心得</a>
 				                </div>
 				            </div>
 				        </div>

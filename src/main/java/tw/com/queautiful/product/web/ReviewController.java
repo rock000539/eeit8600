@@ -122,8 +122,8 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/reviewjQueryRain")
-	public String reviewjQueryRain(Model model) throws ParseException {
-		Review review = service.getById(1L);
+	public String reviewjQueryRain(Model model,Long reviewId) throws ParseException {
+		Review review = service.getById(reviewId);
 		log.debug("{}", review);
 		model.addAttribute("review", review);
 
@@ -151,6 +151,12 @@ public class ReviewController {
 		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
 		
 		return "/review/reviewjQueryRain";
+	}
+	
+	@RequestMapping("/search")
+	public String searchPage(Model model) {
+//		model.addAttribute("reviews", service.getAll());
+		return "/fms_search";
 	}
 
 	// @RequestMapping("/delete")

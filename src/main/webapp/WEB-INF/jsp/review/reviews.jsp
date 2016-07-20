@@ -16,6 +16,9 @@
 <link rel="stylesheet" href="/css/fms/fms-customize.css">
 <script src="/js/jquery.min.js"></script>
 
+<!-- jQuery Redirect Plugin -->
+<script src="/js/jquery.redirect.js"></script>	
+
 <title>Reviews</title>
 </head>
 <body>
@@ -83,7 +86,7 @@
 				<a class="review-link" href="/reviews/reviewjQueryRain" > ${review.review}</a>
 				<!-- ???連結要換成去一篇的心得頁面 -->
 				 <!--心得內容end -->
-				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/reviewjQueryRain" > ${review.reviewTitle}</a>
+				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/reviewjQueryRain?reviewId=${review.reviewId}" > ${review.reviewTitle}</a>
 					<!-- ???連結要換成去一篇的心得頁面 -->
 <%-- 		      		<div  name="review-bottom-title" class="review-bottom-title" id="review-bottom-title">${review.reviewTitle}</div> --%>
 <!-- 		        </a> -->
@@ -139,6 +142,12 @@
  		 		}
  		 		console.log('w=' + $('#userimg').width());
  		 		console.log('h=' + $('#userimg').height());
+
+ 				function category_click(a) {
+ 					console.log($(a).attr('data-categoryId'));
+ 					$.redirect('/products/inventory', { 'categoryId': $(a).attr('data-categoryId') });
+ 				}
+		  
 		  });
 
 </script>

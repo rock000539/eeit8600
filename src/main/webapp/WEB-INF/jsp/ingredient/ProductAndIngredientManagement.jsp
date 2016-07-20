@@ -30,7 +30,7 @@ $(function(){
 		$.ajax({
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
-		'type' : 'GET',
+		'type' : 'POST',
 		'success': function (data){
 			
 			$('#productList').empty();

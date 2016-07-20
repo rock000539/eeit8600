@@ -41,6 +41,8 @@
 		    padding-bottom: 25px;
 		    margin-bottom: 30px;
 		    border-bottom: 3px solid #f2f2f2;
+/* 		    background: black; */
+    		padding: 12px;
 		}
 		
 		.blog_medium .post_content > p {
@@ -57,7 +59,45 @@
 		    font-size: 18px;
 		    text-transform: uppercase;
 		}
- 		
+		
+		img
+		{
+			-moz-box-shadow: 0 0 5px #fff;
+			-webkit-box-shadow: 0 0 5px #fff;
+			box-shadow: 0px 0px 5px #fff;
+		}
+		
+		.buttons {
+			text-align: right;
+			margin: 20px auto 0;
+			padding-right: 3%;
+		}
+
+		button {
+			height: 36px;
+			width: 40px;
+			margin-left: 4px;
+			font-size: 24px;
+			color: #727CB6;
+			text-align: center;
+			line-height: 1.4;
+			border-radius: 4px;
+			border: none;
+			outline: none;
+			background-color: white;
+			box-shadow: 0px 1px 2px #bbb;
+		}
+
+		button:hover {
+		    cursor: pointer;
+		    box-shadow: 0px 0px 3px #666;
+		}
+
+		button.on {
+		    color: white;
+		    background-color: #ccc;
+		}
+		
 	</style>
 
 </head>
@@ -68,77 +108,30 @@
 	
 	<!-- **每頁不同的內容從這裡開始** -->
 	<div class="grey_bg row">
+	
+		<div class="row">
+			<div class="buttons">
+				<button class="list-view on"><i class="fa fa-bars"></i></button>
+			  	<button class="grid-view"><i class="fa fa-th"></i></button>
+			</div>
+		</div>
 		
 		<div class="row sub_content">
 		
-			<div class="col-lg-2">
+			<div id="lpost_list" class="col-lg-6 col-md-4 col-sm-2 col-xs-12 blog_medium wow fadeInDown" style="margin-top:50px; border:3px solid black;">
 				
-			</div>
-		
-			<div class="col-lg-2 col-md-6 col-sm-8 col-xs-12" style="">
-				
-				<div class="widget widget_categories">
-					<div class="widget_title">
-						<h4><span>Brands</span></h4>
-					</div>
-					<div id="Date" class="pre-scrollable" style="max-height:180px;">
-						<div class="checkbox">
-			                <input id="checkbox1" class="styled" type="checkbox" checked>
-			                <label for="checkbox1">
-			                    Default
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-primary">
-			                <input id="checkbox2" class="styled" type="checkbox" checked>
-			                <label for="checkbox2">
-			                    Primary
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-success">
-			                <input id="checkbox3" class="styled" type="checkbox" checked>
-			                <label for="checkbox3">
-			                    Success
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-info">
-			                <input id="checkbox4" class="styled" type="checkbox" checked>
-			                <label for="checkbox4">
-			                    Info
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-warning">
-			                <input id="checkbox5" type="checkbox" class="styled" checked>
-			                <label for="checkbox5">
-			                    Warning
-			                </label>
-			            </div>
-			            <div class="checkbox checkbox-danger">
-			                <input id="checkbox6" type="checkbox" class="styled" checked>
-			                <label for="checkbox6">
-			                    Check me out
-			                </label>
-			            </div>
-					</div>
-				</div>
-				
-			</div>
-		
-			<div id="post_list" class="col-lg-7 col-md-5 col-sm-3 col-xs-12 blog_medium row wow fadeInDown" style="margin-top:50px;">
-				
-				<c:forEach items="${products}" var="product">
+				<c:forEach items="${products}" var="product" begin="0" step="2">
 					<article class="post">
-					
+						
 						<figure class="post_img effect-bubba" style="margin-left:50px;">
-							<img src="http://localhost:8080/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
+							<img src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
-							    <a href="http://localhost:8080/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
+							    <a href="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
 							    <a href="#" class="fa fa-link"></a>
 							</div>
 							
-		<!-- 					<figcaption> -->
-		<!-- 					    <h6 style="margin-top:20px;">查看圖片或商品</h6> -->
-		<!-- 			        </figcaption> -->
+							<figcaption class="item-description"></figcaption>
 						</figure>
 						
 						<div class="post_content">
@@ -158,8 +151,10 @@
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
 							</c:if>
-							<a class="btn btn-small btn-default" style="margin-left:110px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a>
-							<a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+							<span style="float:right;">
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+							</span>
 			            </div>
 					
 					</article>
@@ -167,7 +162,49 @@
 				
 			</div>
 		
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+			<div id="rpost_list" class="col-lg-6 col-md-4 col-sm-2 col-xs-12 blog_medium wow fadeInDown" style="margin-top:50px; border:3px solid black;">
+				
+				<c:forEach items="${products}" var="product" begin="1" step="2">
+					<article class="post">
+						
+						<figure class="post_img effect-bubba" style="margin-left:50px;">
+							<img src="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" style="border:1px solid #f2f2f2;">
+							
+							<div class="option" style="margin-top:30px;">
+							    <a href="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
+							    <a href="#" class="fa fa-link"></a>
+							</div>
+							
+							<figcaption class="item-description"></figcaption>
+						</figure>
+						
+						<div class="post_content">
+							<div class="post_meta">
+								<h2>
+									${product.prodName}
+								</h2>
+								<div class="metaInfo">
+									<span><i class="fa fa-calendar"></i> ${product.launchDate} </span>
+									<span><i class="fa fa-tag"></i> ${product.brand.brandName} </span>
+									<span><i class="fa fa-comments"></i> ${product.reviews.size()} </span>
+								</div>
+							</div>
+							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
+								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
+							</c:if>
+							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
+								<p>${fn:substring(review.review, 0, 25)} ... </p>
+							</c:if>
+							<span style="float:right;">
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+							</span>
+			            </div>
+					
+					</article>
+				</c:forEach>
+				
+			</div>
 		
 		</div>
 		
@@ -188,7 +225,6 @@
     <script src="/js/product/jflickrfeed.js"></script>
     <script src="/js/product/jquery.magnific-popup.min.js"></script>
     <script src="/js/product/swipe.js"></script>
-<!--     <script src="/js/product/main.js"></script> -->
 	
 	<script src="/js/product/wow.min.js"></script>
     <script>
@@ -196,8 +232,47 @@
         new WOW().init();
     </script>
     
-    <script type="text/template">
-		console.log('123');
+    <script id="article_list" type="text/template">
+		
+		<article class="post">
+						
+			<figure class="post_img effect-bubba" style="margin-left:50px;">
+				<img src="<%= request.getContextPath() %>/products/show?prodId=_prodId" style="border:1px solid #f2f2f2;">
+				
+				<div class="option" style="margin-top:30px;">
+				    <a href="<%= request.getContextPath() %>/products/show?prodId=_prodId" class="fa fa-search mfp-image"></a>
+				    <a href="#" class="fa fa-link"></a>
+				</div>
+				
+				<figcaption class="item-description"></figcaption>
+			</figure>
+			
+			<div class="post_content">
+				<div class="post_meta">
+					<h2>
+						_prodName
+					</h2>
+					<div class="metaInfo">
+						<span><i class="fa fa-calendar"></i> _launchDate </span>
+						<span><i class="fa fa-tag"></i> _brandName </span>
+						<span><i class="fa fa-comments"></i> _size </span>
+					</div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>				
+				<span style="float:right;">
+					<a class="btn btn-small btn-default" data-prodId="_prodId"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
+				</span>
+            </div>
+		
+		</article>
+
+	</script>
+	
+	<script id="article_grid" type="text/template">
+	
+		
+
 	</script>
 	
 	<script>
@@ -218,80 +293,39 @@
 			   next: 'next',
 			   prev: 'prev',
 			}).on('page', function(event, num){
+				
 				$.ajax({
 					url: '/products/list_data',
 					type: 'POST',
 					dataType: 'json',
 					contextType: 'application/json; charset=utf-8;',
-					data: { 'brandId': '${brandId}', 'categoryId': '${categoryId}', 'page': num, 'rows': 5 },
+					data: { 'brandId': '${brandId}', 'categoryId': '${categoryId}', 'page': num, 'rows': 10 },
 					success: function(response){
 						
 						// 刪除產品列表的元素
-						var post_list = $('#post_list > article').remove();
+						$('#lpost_list > article').remove();
+						$('#rpost_list > article').remove();
+
+						// 宣告左右列的商品列表
+						var l_list = $('#lpost_list');
+						var r_list = $('#rpost_list');
 						
 						// 新增產品列表的元素
 						for(var i=0; i<response.length; i++) {
 							
-							var figure = $('<figure></figure>', 
-							{
-								'class': 'post_img effect-bubba',
-								css: {
-									'margin-left': '50px',
-							    },
-							});
+							var list = i%2 == 0 ? l_list : r_list;
 							
-							$('<img>', {
-								src: "http://localhost:8080/products/show?prodId=" + response[i].prodId,
-								css: {
-									'border': '1px solid #f2f2f2',
-							    },
-							}).appendTo(figure);
-									
-							$('<div></div>', {
-								"class": "option",
-								css: {
-									'margin-top': '30px',
-							    },
-							    html: '<a href="http://localhost:8080/products/show?prodId="' + response[i].prodId + ' class="fa fa-search mfp-image"></a><a href="#" class="fa fa-link"></a>',
-							}).appendTo(figure);
-							
-							var article = $('<article></article>', {
-								'class': 'post',
-							}).append(figure);
-							
-							var content = $('<div></div>', {
-								'class': 'post_content',
-							});
-							
-							var meta = $('<div></div>', {
-								'class': 'post_meta',
-							});
-							
-							$('<h2></h2>', {
-								text: response[i].prodName,
-							}).appendTo(meta);
-							
-							$('<div></div>', {
-								'class': 'metaInfo',
-								html: ' <span><i class="fa fa-calendar"></i>' + response[i].launchDate + ' </span><span><i class="fa fa-tag"></i> ' + response[i].brandName + '${product.brand.brandName} </span><span><i class="fa fa-comments"></i>' + $(response[i].reviews).size() + ' </span> '
-							}).appendTo(meta);
-							
-							meta.appendTo(content);
-							
-							var desc = '';
-							if(response[i].prodDesc.substring(0, 4) == '產品說明') {
-								desc = '<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>';
-							} else {
-								desc = '<p>' + response[i].prodDesc.substring(0, 25) + ' ... </p>'
-							}
-							
-							content.html(content.html() + desc + '<a class="btn btn-small btn-default" style="margin-left:130px; margin-top:10px;"> <i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;升火 </a> <a class="btn btn-small btn-default" style="margin-top:10px;" data-prodId="' + response[i].prodId + '" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>');
-							
-							content.appendTo(article);
-							
-							article.appendTo($('#post_list'));
-							
-							//article.insertBefore($('#page_btn'));
+							$($('#article_list').html()
+								.replace('_prodId', response[i].prodId)
+								.replace('_prodId', response[i].prodId)
+								.replace('_prodName', response[i].prodName)
+								.replace('_launchDate', response[i].launchDate)
+								.replace('_brandName', response[i].brandName)
+								.replace('_size', response[i].reviews.length)
+								//.replace('_prodDesc', response[i].prodDesc)
+								.replace('_prodId', response[i].prodId)
+								.replace('_prodId', response[i].prodId))
+								.appendTo(list);
 							
 						}
 						
@@ -305,14 +339,28 @@
 						console.log(errorThrown);
 					},
 				});
+				
 			});
 			
 		});
 		
 		function info_click(a) {
 			console.log($(a).attr('data-prodId'));
-			$.redirect('/products/view2', { 'prodId': $(a).attr('data-prodId') });
+			$.redirect('/products/view', { 'prodId': $(a).attr('data-prodId') });
 		}
+		
+		listButton = $('button.list-view');
+		gridButton = $('button.grid-view');
+
+		listButton.on('click',function(){
+			gridButton.removeClass('on');
+		  	listButton.addClass('on');
+		});
+
+		gridButton.on('click',function(){
+			listButton.removeClass('on');
+		  	gridButton.addClass('on');
+		});
 		
 	</script>
 

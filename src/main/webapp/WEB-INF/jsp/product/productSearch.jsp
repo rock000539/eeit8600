@@ -30,8 +30,8 @@
 	<style>
 		
 		#categoryContainer {
- 		    width: 87%;
- 		    margin:0 auto;
+ 		    width: 79vw;
+ 		    margin: 0 auto;
 		}
 		
 	</style>
@@ -97,11 +97,11 @@
 					<c:forEach items="${categories}" var="category">
 		                <div class="portfolio-item ${category.categoryTitle}">
 		                    <div class="box">
-		                        <img src="http://localhost:8080/categories/show?categoryId=${category.categoryId}" style="width:200px; height:200px;">
+		                        <img src="<%= request.getContextPath() %>/categories/show?categoryId=${category.categoryId}" style="width:200px; height:200px;">
 		                        <div class="option inner">
 		                            <div>
 		                                <h5>${category.categoryName}</h5>
-		                                <a href="http://localhost:8080/categories/show?categoryId=${category.categoryId}" class="fa fa-search mfp-image"></a>
+		                                <a href="<%= request.getContextPath() %>/categories/show?categoryId=${category.categoryId}" class="fa fa-search mfp-image"></a>
 		                                <a class="fa fa-link" data-categoryId="${category.categoryId}" onClick="category_click($(this))" ></a>
 		                            </div>
 		                        </div>
