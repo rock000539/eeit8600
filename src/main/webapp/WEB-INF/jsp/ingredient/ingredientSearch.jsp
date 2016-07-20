@@ -82,8 +82,8 @@ $(".searchProducts").click(function(e){//#1-2
  					}
  				for(var i=0;i<data.length;i++){
  					$('#productTable').append(
- 		 			"<tr name='productRow'><td><a href='#'><img src='/products/show?prodId="+data[i].prodId+"'/>"
- 					+"</a></td><td><a href='#'>"+data[i].prodname
+ 		 			"<tr name='productRow'><td><a href='/products/view?prodId="+data[i].prodId+"'><img src='/products/show?prodImg="+data[i].prodimg+"'/>"
+ 					+"</a></td><td><a href='/products/view?prodId="+data[i].prodId+"'>"+data[i].prodname
  					+"</td></a><td>"+data[i].brandcname
  					+"</td><td>"+data[i].mainigdt+"</td><td>"+data[i].concentration+"</td></tr>"
  					);//end of for 

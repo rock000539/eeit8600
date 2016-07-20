@@ -25,7 +25,7 @@ min-height: 450px;}</style>
 
 <body>
 <!--加入header&nav -->
-<c:import url="/WEB-INF/jsp/fms_header_nav2.jsp" />
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row ">
