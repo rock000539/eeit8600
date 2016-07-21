@@ -1,17 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--  BASE CSS STYLE  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bms/style.min.css" rel="stylesheet">
+	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	<script src="/js/bms/pace.min.js"></script>
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
+
 <title>Article Edit</title>
 <style>
 
 </style>
 </head>
 <body>
+	<!-- page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+	
+	<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
+	
+		<!-- page content -->
+		<div id="content" class="content">
+			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">Page Options</a></li>
+				<li class="active">Blank Page</li>
+			</ol>
+			
+			<!-- page-header 每頁標題 副標 -->
+			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
+			
+			<!-- 內文 -->
+			<div class="row">
+			    <div class="col-md-12 ui-sortable">
+	            <!-- **每頁不同的內容從這裡開始** -->
+
 <h1>Article EditPage</h1>
 <FORM id="editForm">
 	<TABLE>
@@ -45,7 +78,7 @@
 		<TR>
 			<TD>內文:</TD>
 			<TD>
-			<textarea name="article">${article.article}</textarea>
+			<textarea name="article">${article.articleContent}</textarea>
 			</TD>
 			<TD></TD>
 		</TR>
@@ -93,7 +126,25 @@
 <span id="articleReport"></span><br/>
 </div>
 
+	            <!-- **每頁不同的內容 end** -->     
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
+		</div>
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+	</div>
+	<!-- /end page container -->
+	
+	<!--  BASE JS  -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/bms.js"></script>
+
 </body>
+<script src="/js/jquery.validate.min.js"></script>
 <script>
 $(function(){
 	$('#'+$('#articleShowStatus').val()).prop('checked',true);
