@@ -21,7 +21,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.enumeration.ArticleType;
 
 @Entity
 @Table(name = "ARTICLE")
