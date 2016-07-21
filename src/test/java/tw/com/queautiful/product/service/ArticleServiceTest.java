@@ -21,7 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.queautiful.App;
-import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.enumeration.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
 
@@ -46,7 +46,7 @@ public class ArticleServiceTest {
 		// Spec 篩選條件
 		Article article = new Article();
 		article.setMember(memberService.getById(1L));
-		// article.setArticleType(ArticleType.NEWS);
+		article.setArticleType(ArticleType.NEWS);
 		Specification<Article> spec = Spec.byAuto(em, article);
 		
 		String[] array = { "articleTime", "articleCollect" };

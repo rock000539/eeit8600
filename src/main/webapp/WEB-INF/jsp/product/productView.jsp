@@ -98,10 +98,10 @@
 		      		<label for="tab-two"><span>Date : ${product.launchDate}</span></label>
 		    	</div>
 		    	<div class="view_tab">
-			    	<label for="tab-one"><span>Brand : ${product.brand.brandName}</span></label>
+			    	<label for="tab-one"><span>Brand : ${product.brandName}</span></label>
 			    </div>
 		    	<div class="view_tab">
-			    	<label for="tab-one"><span>Category : ${product.category.categoryName}</span></label>
+			    	<label for="tab-one"><span>Category : ${product.categoryName}</span></label>
 			    </div>
 			    <div class="view_tab">
 			    	<label for="tab-one"><span>Ingredient : ${product.mainIgdt}</span></label>

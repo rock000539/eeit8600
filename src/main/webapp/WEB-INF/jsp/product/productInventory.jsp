@@ -143,8 +143,8 @@
 								</h2>
 								<div class="metaInfo">
 									<span><i class="fa fa-calendar"></i> ${product.launchDate} </span>
-									<span><i class="fa fa-tag"></i> ${product.brand.brandName} </span>
-									<span><i class="fa fa-comments"></i> ${product.reviews.size()} </span>
+									<span><i class="fa fa-tag"></i> ${product.brandName} </span>
+									<span><i class="fa fa-comments"></i> ${product.rSize} </span>
 								</div>
 							</div>
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
@@ -187,8 +187,8 @@
 								</h2>
 								<div class="metaInfo">
 									<span><i class="fa fa-calendar"></i> ${product.launchDate} </span>
-									<span><i class="fa fa-tag"></i> ${product.brand.brandName} </span>
-									<span><i class="fa fa-comments"></i> ${product.reviews.size()} </span>
+									<span><i class="fa fa-tag"></i> ${product.brandName} </span>
+									<span><i class="fa fa-comments"></i> ${product.rSize} </span>
 								</div>
 							</div>
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
@@ -326,7 +326,7 @@
 								.replace('_prodName', response[i].prodName)
 								.replace('_launchDate', response[i].launchDate)
 								.replace('_brandName', response[i].brandName)
-								.replace('_size', response[i].reviews.length)
+								.replace('_size', response[i].rSize)
 								//.replace('_prodDesc', response[i].prodDesc)
 								.replace('_prodId', response[i].prodId)
 								.replace('_prodId', response[i].prodId))

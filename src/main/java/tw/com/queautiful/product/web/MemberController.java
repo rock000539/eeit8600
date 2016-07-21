@@ -17,11 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.com.queautiful.commons.enumeration.ArticleType;
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Article;
@@ -38,7 +37,6 @@ import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.ArticleService;
-import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
@@ -49,7 +47,7 @@ public class MemberController {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private MemberService service;
+	private MemberService memberService;
 	@Autowired
 	private EmailSender mailSender;
 	@Autowired
@@ -58,16 +56,15 @@ public class MemberController {
 	private ExpDateService expDateService;
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private BrandService brandService;
 	
-	@RequestMapping("/personal")
-	public String memberPersonalPage(Model model){
-		Long memberId = 1L; //test
-		Member member = service.getById(memberId);
+	
+	@RequestMapping("/profile")
+	public String memberPersonalPage(HttpServletRequest request, Model model){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
 		model.addAttribute("member", member);
 		log.debug(member.toString());
-		return "/member/memberPersonal2";
+		return "/member/memberPersonal";
 	}
 
 	//保存期限頁面
@@ -76,11 +73,10 @@ public class MemberController {
     {
 //      String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<Map> result = new ArrayList<Map>();
-//        long memberId= 0;
-//        if(request.getSession().getAttribute("memberId")!= null){
-//        memberId = (long) request.getSession().getAttribute("memberId");
-//        }
-    	Long memberId = 1L;//test
+        long memberId= 0;
+        if(request.getSession().getAttribute("memberId")!= null){
+        	memberId = (long) request.getSession().getAttribute("memberId");
+        }
     	List<ExpDate> expDates = expDateService.getAll();
         for (int i = 0; i < expDates.size(); i++){
             ExpDate expDate = expDates.get(i);
@@ -119,12 +115,12 @@ public class MemberController {
 	
 	//member文章收藏頁面
 	@RequestMapping("/like/article")
-	public String memberLikeArticlePage(Model model){
-		Member member = service.getById(1L); //test
-		Set<Article> articles = service.getById(1L).getArticlesSavedByMember();
+	public String memberLikeArticlePage(HttpServletRequest request, Model model){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		Set<Article> articles = member.getArticlesSavedByMember();
 		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
-		log.debug(member.toString());
 		return "/member/memberLike-article";
 	}
 	
@@ -133,14 +129,14 @@ public class MemberController {
 	@ResponseBody
 	public Boolean memberLikedDelete(@RequestParam Long articleId, Model model){
 		Long memberId = 1L;//test
-		Member member = service.getById(memberId); //test
+		Member member = memberService.getById(memberId); //test
 		Set<Article> articles = member.getArticlesSavedByMember();
 		Article article = articleService.getById(articleId);
 		log.debug("before delete: {}", articles.contains(article));
 		if(articles.contains(article)){
 			articles.remove(article);
 			member.setArticlesSavedByMember(articles);
-			service.update(member);
+			memberService.update(member);
 		}
 		log.debug("after delete: {} ,target: {}", articles.contains(article), article.getArticleId().toString());
 		if(articles.contains(article)){
@@ -154,12 +150,12 @@ public class MemberController {
 	@ResponseBody
 	public Boolean memberLikedInsert(@RequestParam Long articleId){
 		Long memberId = 1L;//test
-		Member member = service.getById(memberId);
+		Member member = memberService.getById(memberId);
 		Set<Article> articles = member.getArticlesSavedByMember();
 		Article article = articleService.getById(articleId);
 		articles.add(article);
 		member.setArticlesSavedByMember(articles);
-		service.update(member);
+		memberService.update(member);
 		return true;
 	}
 	
@@ -173,20 +169,59 @@ public class MemberController {
 	
 	//member-post文章頁面
 	@RequestMapping("/post/article")
-	public String memberPostedArticlePage(Model model){
-		Member member = service.getById(1L); //test
-		Set<Article> articles = service.getById(1L).getArticlesWorteByAuthor();
-		model.addAttribute("articles", articles);
+	public String memberPostedArticlePage(HttpServletRequest request, Model model){
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		Page<Article> pages = memberService.getArticlesPaging(memberId, null, 0, null, null);
+			log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+			log.debug("page size = {}", pages.getSize()); //size of the slice
+			log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+			log.debug("totalPages() = {}", pages.getTotalPages()); 
+			log.debug("totalElements = {}", pages.getTotalElements()); 
+		model.addAttribute("articles", pages.getContent());
+		model.addAttribute("pageNum", pages.getNumber());
 		model.addAttribute("member", member);
-		log.debug(member.toString());
+		model.addAttribute("totalPages", pages.getTotalPages());
 		return "/member/memberPost-article";
+	}
+	
+	//分頁, 分類, 排序
+	@RequestMapping(value="/post/article/{pageNum}")
+	@ResponseBody
+	public  List<Map> memberLikeArticlePageSort(
+			@PathVariable(value="pageNum") Integer pageNum,
+			@RequestParam(required=false) ArticleType articleType,
+			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction,
+			HttpServletRequest request, Model model){
+		log.debug("page: {}",pageNum);
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		
+		Page<Article> pages = 
+				memberService.getArticlesPaging(memberId, articleType, pageNum, sortProperty, direction);
+		
+		//pass to front-end
+		List<Map> result = new ArrayList<Map>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("articles", pages.getContent());
+		map.put("pageNum", pages.getNumber());
+		map.put("totalPages", pages.getTotalPages());
+		map.put("member", memberService.getById(memberId));
+		result.add(map);
+		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", pages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", pages.getTotalPages()); 
+		log.debug("totalElements = {}", pages.getTotalElements()); 
+		
+		return result;
 	}
 	
 	//review-post頁面
 	@RequestMapping("/post/review")
 	public String memberPostedReviewPage(Model model){
-		Member member = service.getById(1L); //test
-		Set<Review> reviews = service.getById(1L).getReviewsWorteByAuthor();
+		Member member = memberService.getById(1L); //test
+		Set<Review> reviews = memberService.getById(1L).getReviewsWorteByAuthor();
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("member", member);
 		log.debug("memberId: {}, reviews: {}", member.getMemberId().toString(), reviews);
@@ -203,22 +238,22 @@ public class MemberController {
 		log.debug("rows = {}", rows);
 		
 		Pageable pageable = new PageRequest(page - 1, rows);
-		Page<Member> memberPage = service.getAll(pageable);
-		log.debug(memberPage.toString());
-		log.debug("getSize = {}", memberPage.getSize()); // 列數(資料筆數)
-		log.debug("getNumber = {}", memberPage.getNumber()); // 頁數-1
-		log.debug("getTotalPages() = {}", memberPage.getTotalPages()); // 總共幾頁
-		log.debug("getTotalElements = {}", memberPage.getTotalElements()); // 全部有幾筆資料
-		log.debug("getNumberOfElements = {}", memberPage.getNumberOfElements()); // 列數(資料筆數)
+		Page<Member> pages = memberService.getAll(pageable);
+		log.debug(pages.toString());
+		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", pages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", pages.getTotalPages()); 
+		log.debug("totalElements = {}", pages.getTotalElements()); 
 		log.debug("----------------------------------------------------------"); // 測試
-		return memberPage;
+		return pages;
 	}
 	
 	//check whether the account has been taken
 	@RequestMapping("/check_email")
 	@ResponseBody
 	public Boolean accountCheck(String email){
-		return service.accountCheck(email);
+		return memberService.accountCheck(email);
 	}
 
 	//return signUp page
@@ -237,7 +272,7 @@ public class MemberController {
 	@RequestMapping("/requestforpsw")
 	@ResponseBody
 	public String requestForResetPsw(@RequestParam String email, HttpServletRequest req){
-		String resetPswUrl = service.createPswResetUrl(email, req);
+		String resetPswUrl = memberService.createPswResetUrl(email, req);
 		log.debug("URL: {}", resetPswUrl);
 		mailSender.sendResetPsw(email, resetPswUrl);
 		return "Please check your email and follow the instructions.";
@@ -246,9 +281,9 @@ public class MemberController {
 	//return reset-password Page
 	@RequestMapping("/resetpassword")
 	public String changePswPage(@RequestParam String token, Model model){ 
-		Member member = service.getByResetPswToken(token);
+		Member member = memberService.getByResetPswToken(token);
 		log.debug("email token: {}", token);
-		String validToken = service.validateResetPswToken(token);
+		String validToken = memberService.validateResetPswToken(token);
 		log.debug("validToken: {}", validToken);
 		if(validToken==null){
 			model.addAttribute("email", member.getEmail());
@@ -262,9 +297,9 @@ public class MemberController {
 	@RequestMapping(value="/updatepassword", method=RequestMethod.POST)
 	@ResponseBody
 	public String resetPassword(@RequestParam String email, @RequestParam String password){
-		Member member = service.getByEmail(email);
+		Member member = memberService.getByEmail(email);
 		if(member != null){
-			service.updatePassword(member, password);
+			memberService.updatePassword(member, password);
 			return "success";
 		}
 		return "failure";
@@ -273,19 +308,19 @@ public class MemberController {
 	@RequestMapping("/check_emailexist")
 	@ResponseBody
 	public Boolean emailCheck(String email){
-		return !service.accountCheck(email);
+		return !memberService.accountCheck(email);
 	}
 	
 	//設定停權天數
 	@RequestMapping("/suspend")
 	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){
 		log.debug("inside controller");//test
-		service.memberSuspend(memberId, memberSuspendDays);
+		memberService.memberSuspend(memberId, memberSuspendDays);
 	}
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
-		model.addAttribute("members", service.getAll());
+		model.addAttribute("members", memberService.getAll());
 		return "/member/memberList";
 	}
 	
@@ -298,7 +333,7 @@ public class MemberController {
 	@ResponseBody
 	public Member insert(@RequestPart(name="member") Member member, 
 			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile){
-		service.insert(member);
+		memberService.insert(member);
 		if(memberImgFile!=null){
 			String mId = "member"+member.getMemberId().toString();
 			String memberImg = FileProcessing.saveImg(mId, "member", memberImgFile);
@@ -306,13 +341,13 @@ public class MemberController {
 		}
 		log.debug("memberImg: {}", member.getMemberImg());//test
 		member.setMemberRegiDate(new java.sql.Date(new java.util.Date().getTime()));
-		service.update(member);
-		return service.getById(member.getMemberId());
+		memberService.update(member);
+		return memberService.getById(member.getMemberId());
 	}
 	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long memberId, Model model){
-		model.addAttribute("member", service.getById(memberId));
+		model.addAttribute("member", memberService.getById(memberId));
 		return "/member/memberEdit";
 	}
 	
@@ -327,20 +362,20 @@ public class MemberController {
 			member.setMemberImg(memberImg);
 		}
 		log.debug(member.getMemberImg());//test
-		service.update(member);
-		return service.getById(member.getMemberId());
+		memberService.update(member);
+		return memberService.getById(member.getMemberId());
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public void delete(@RequestBody Member member){
 		log.debug(member.toString());
-		service.delete(member.getMemberId());
+		memberService.delete(member.getMemberId());
 	}
 	
 	@RequestMapping("/show")
 	public void show(HttpServletResponse resp, @RequestParam Long memberId) {
-		Member member = service.getById(memberId);
+		Member member = memberService.getById(memberId);
 		String memberImg = member.getMemberImg();
 		FileProcessing.showImg(resp, memberImg);
 	}
@@ -349,7 +384,7 @@ public class MemberController {
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Member> select() {
-		return service.getAll();
+		return memberService.getAll();
 	}
 
 }

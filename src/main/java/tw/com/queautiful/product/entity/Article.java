@@ -21,7 +21,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.enumeration.ArticleType;
 
 @Entity
 @Table(name = "ARTICLE")
@@ -74,6 +74,9 @@ public class Article {
 	
 	@Transient
 	private Long memberId;
+	
+	@Transient
+	private String nickname;
 	
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 	@OrderBy("ARTICLECMTIME DESC")
@@ -185,6 +188,18 @@ public class Article {
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getNickname() {
+		if(this.nickname==null && this.member!=null){
+			return this.getMember().getNickname();
+		}else{
+			return nickname;
+		}
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Set<ArticleCM> getAcms() {

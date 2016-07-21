@@ -1,4 +1,4 @@
-package tw.com.queautiful.commons.util;
+package tw.com.queautiful.commons.enumeration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -17,104 +17,30 @@
 	<script src="https://use.typekit.net/riz5mva.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 <style>
-	#timelineDiv{
-		width: 800px;
-		margin: 0 auto;
-		margin-top: 50px;
-	}
-	#header{
-		width: 100%;
-	}
-	.wrapper{
-		background-color: transparent;
-	}
-	.container{
-		width: 100%;
-	}
-	@media (min-width: 768px){
-		.container {
-			width: 100%;			
-		}
-	}
+#timelineDiv{
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
 </style>
 </head>
 <body>
-<!--start wrapper-->
-<section class="wrapper container">
-<!--Start Header-->
-<header id="header">
-    <div class="col-sm-12 top-nav">
-        <ul>
-        <c:set var="nickname" scope="session" value='<%=request.getSession().getAttribute("MemberNickname")%>'/>
-         <c:if test="${empty nickname}">
-		<!--  登入前 -->
-            <li>
-                <a href="/login"><i class="fa fa-user" aria-hidden="true"></i>
-                <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
-                </a>
-            </li>
-            
-        </c:if>
-         
-        <!-- 登入後 -->            
-        	 <c:if test="${not empty nickname}"> 
-            <li>
-                <a href="#"><span>${nickname}</span></a>
-            </li>
-            <li>
-                <a class="" href="#">
-                <div class="userdiv img-circle"><img id="userimg" src="/members/show?memberId=<%=request.getSession().getAttribute("memberId")%>"/></div>
-                </a>
-            </li>
-         </c:if>
-       
-        </ul>
-    </div>
+<!--加入header&nav -->
+<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 
-    <div class="col-sm-12">
-        <div id="logo">
-            <h1><a href="index.html"><img src="/images/fms/logo_qutie.jpg"/></a></h1>
-        </div>
-    </div>
+			<!-- **每頁不同的內容從這裡開始** -->
+				<div class="grey_bg row">
 
-    <!-- Navigation
-    ================================================== -->
-
-    <div class="navbar navbar-default navbar-static-top col-sm-12" role="navigation">
-        <span class="nav-caption">Navigation Menu...</span>
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-
-                <li><a href="/expdate/search">Date</a></li>
-
-                <li><a href="#">Ingredient</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
-                        <li><a href="/ingredients/SearchIngredient">Via Ingredient</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="#">Order</a></li>
-
-                <li><a href="#"><span class="data-hover" data-hover="blog">Product</span></a></li>
-
-                <li><a href="#">Review</a></li>
-                <li><a href="#">Article</a></li>
-                <li><a href="#">Ranking</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
-<!--End Header-->
+<!-- <div id="selectCondition"> -->
+<!-- 	<form> -->
+<!-- 		<div class="checkbox"> -->
+<!-- 			<label> -->
+<!-- 				<input type="checkbox" name="" value=""> -->
+<!-- 			</label> -->
+<!-- 		</div> -->
+<!-- 	</form> -->
+<!-- </div> -->
 
 <div id="timelineDiv">
 <section id="cd-timeline">
@@ -125,19 +51,38 @@
 		<div class="cd-timeline-content">
 			<h2>${item.articleTitle}</h2>
 			<small>${item.articleType}</small>
-			<p>${item.article}</p>
+			<p>${item.articleContent}</p>
 			<a href="/articles/article-page?articleId=${item.articleId}" class="cd-info">觀看文章</a>
             <a href="/articles/edit?articleId=${item.articleId}" class="cd-info">編輯文章</a>
 			<span class="cd-date">${item.articleTime}</span>
 		</div> <!-- cd-timeline-content -->
 	</div> <!-- cd-timeline-block -->
 	</c:forEach>
+	<input type="hidden" id="pageNum" value="${pageNum}">
+	<input type="hidden" id="totalPages" value="${totalPages}">
 </section>
 </div> <!-- timeline Div -->
+
+				</div>        
+            <!-- **每頁不同的內容結束** -->
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
+<script id="blockTemplate" type="text/template">
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img"></div>
+
+		<div class="cd-timeline-content">
+			<h2>_articleTitle</h2>
+			<small>_articleType</small>
+			<p>_articleContent</p>
+			<a href="/articles/article-page?articleId=_articleId" class="cd-info">觀看文章</a>
+            <a href="/articles/edit?articleId=_articleId" class="cd-info">編輯文章</a>
+			<span class="cd-date">_articleTime</span>
+		</div>
+	</div>
+</script>
 <script>
 $(function(){
 	var timelineBlocks = $('.cd-timeline-block'),
@@ -161,9 +106,44 @@ $(function(){
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
-			console.log("show"+$(this));
 		});
 	}
+	
+	$(window).scroll(function(){
+	    if($(window).scrollTop() + $(window).height() >= $(document).height()){	
+	    	var totalPages = $('#totalPages').val();
+	    	var loadedPageNum = $('#pageNum').val();
+	    	var pageNum = parseInt(loadedPageNum)+1;
+	    	console.log("loadedPageNum: "+loadedPageNum);
+	    	if(loadedPageNum < totalPages){
+	    	$.ajax({
+	    		url: '/members/post/article/'+pageNum,
+				type: 'POST',
+				dataType: 'json',
+				contextType: 'application/json; charset=utf-8;',
+				success: function(response){
+					var result = response[0];
+					console.log(result);
+					var articles = result.articles;
+					var member = result.member;
+					var pageNum = result.pageNum;
+					
+					$('#pageNum').val(pageNum);
+					
+					for(var i=0; i<articles.length; i++){
+						$($('#blockTemplate').html()
+							.replace('_articleTitle', articles[i].articleTitle)
+							.replace('_articleType', articles[i].articleType)
+							.replace('_articleContent', articles[i].articleContent)
+							.replace('_articleId', articles[i].articleId)
+							.replace('_articleId', articles[i].articleId)
+							.replace('_articleTime', articles[i].articleTime))
+							.appendTo($('#cd-timeline'));
+					}
+				} /* success */
+	    	});} /* ajax */
+	    }
+	}); /* onScroll */
 	
 	
 
@@ -188,5 +168,6 @@ $(function(){
 
 }); //onload
 </script>
+
 </body>
 </html>

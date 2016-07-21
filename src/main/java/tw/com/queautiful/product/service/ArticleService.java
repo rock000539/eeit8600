@@ -42,6 +42,10 @@ public class ArticleService {
 	public List<Article> findByOrderByArticleTimeDesc(){
 		return articleDao.findByOrderByArticleTimeDesc();
 	}
+	
+	public Page<Article> findByOrderByArticleTimeDesc(Pageable pageable){
+		return articleDao.findByOrderByArticleTimeDesc(pageable);
+	}
 
 	public void insert(Article article) {
 		articleDao.save(article);
