@@ -238,7 +238,7 @@ public class MemberController {
 	@RequestMapping("/post/review")
 	public String memberPostedReviewPage(Model model){
 		Member member = memberService.getById(1L); //test
-		Set<Review> reviews = memberService.getById(1L).getReviews();
+		Set<Review> reviews = memberService.getById(1L).getReviewsWorteByAuthor();
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("member", member);
 		log.debug("memberId: {}, reviews: {}", member.getMemberId().toString(), reviews);

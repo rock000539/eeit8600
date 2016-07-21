@@ -80,7 +80,7 @@
 <!-- 				    <div class="clearfix"></div> -->
 <!-- 				</div> -->
 <!-- 				<p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p> -->
-				  <button class="btn btn-default btn-lg" type="button" style="width:150px" id="allpost">All Post</button>
+				  <button class="btn btn-default btn-lg" type="button" style="width:150px;margin-right:10px;" id="allpost">All Post</button>
 				  <a href="/articles/add"><button class="btn btn-default btn-lg" type="button" style="width:150px">
 				  	<i class="fa fa-plus"></i>&nbspNew Topic
 				  </button></a>
@@ -124,7 +124,7 @@
 						</c:choose>
 				        
 				        <td>
-				          <h4><a href="https://www.google.com.tw/" class="articleTitle">［${article.articleType}］${article.articleTitle}</a><br>
+				          <h4><a data-articleId="${article.articleId}" class="articleTitle" onclick="info_click($(this))">［${article.articleType}］${article.articleTitle}</a><br>
 				          <small>by <a href="#">${article.member.nickname}</a> 
 				          <i class="fa fa-angle-double-right"></i> 
 				          ${fn:substring(article.articleTime,0,19)}</small>
@@ -214,9 +214,6 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 
-	<!-- Pagination Plugin -->
-	<script src="/js/product/jquery.bootpag.min.js"></script>
-
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
@@ -224,8 +221,12 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 	
-
-
+	<!-- Pagination Plugin -->
+	<script src="/js/product/inventory/jquery.bootpag.min.js"></script>
+	
+	<!-- jQuery Redirect Plugin -->
+	<script src="/js/jquery.redirect.js"></script>	
+	
 	<script>
 	$(function(){
 		$('#allpost').on('click',function(){
@@ -246,10 +247,17 @@
 		   console.log(num);		    	 
 		});
 		
+		
 // 		$('.articleTitle').click(function(){
 // 			console.log($(this).text());		
 // 		});
 	});
+	
+
+	function info_click(a) {
+		console.log($(a).attr('data-articleId'));
+			$.redirect('/articles/view', { 'articleId': $(a).attr('data-articleId') });
+	}
 	</script>
 </body>
 </html>

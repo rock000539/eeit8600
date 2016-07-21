@@ -97,3 +97,7 @@
 .forum.table th.cell-stat-2x {
     width: 14em;
 }
+
+.articleTitle{
+	cursor:pointer;
+}
