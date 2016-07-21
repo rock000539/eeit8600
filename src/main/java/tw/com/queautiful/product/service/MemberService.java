@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.service;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,7 +20,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.com.queautiful.commons.enumeration.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
@@ -72,7 +70,7 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
-	//articlesLikedByMember pagination and sorted
+	//articlesSavedByMember pagination and sorted
 	public Page<Article> getArticlesPaging(Long memberId, ArticleType articleType, Integer page,
 			String sortProperty, String direction){
 		Article article = new Article();
@@ -93,7 +91,7 @@ public class MemberService {
 			sortProperty = "articleTime";
 		
 		//PageRequest(int page, int size, Sort.Direction direction, String... properties)
-		Pageable pageable = new PageRequest(page, 9, new Sort(sortDirection, sortProperty));
+		Pageable pageable = new PageRequest(page, 3, new Sort(sortDirection, sortProperty));
 		return articleService.getAll(spec, pageable);
 	}
 

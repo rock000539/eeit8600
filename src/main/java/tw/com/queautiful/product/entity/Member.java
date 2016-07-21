@@ -93,7 +93,6 @@ public class Member {
 
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	@JsonIgnore
 	@OrderBy("ARTICLETIME DESC")
 	private Set<Article> articlesWorteByAuthor;
 	

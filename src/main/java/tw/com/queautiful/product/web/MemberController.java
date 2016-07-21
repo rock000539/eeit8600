@@ -8,21 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.neo4j.cypher.internal.compiler.v2_2.ast.False;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +37,6 @@ import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.ArticleService;
-import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
@@ -63,8 +56,6 @@ public class MemberController {
 	private ExpDateService expDateService;
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private BrandService brandService;
 	
 	
 	@RequestMapping("/profile")
@@ -182,42 +173,40 @@ public class MemberController {
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		Page<Article> pages = memberService.getArticlesPaging(memberId, null, 0, null, null);
-		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
-		log.debug("page size = {}", pages.getSize()); //size of the slice
-		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
-		log.debug("totalPages() = {}", pages.getTotalPages()); 
-		log.debug("totalElements = {}", pages.getTotalElements()); 
+			log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+			log.debug("page size = {}", pages.getSize()); //size of the slice
+			log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+			log.debug("totalPages() = {}", pages.getTotalPages()); 
+			log.debug("totalElements = {}", pages.getTotalElements()); 
 		model.addAttribute("articles", pages.getContent());
+		model.addAttribute("pageNum", pages.getNumber());
 		model.addAttribute("member", member);
-		log.debug(member.toString());
 		return "/member/memberPost-article";
 	}
 	
 	//分頁, 分類, 排序
-	@RequestMapping("/post/article/{page}")
+	@RequestMapping(value="/post/article/{pageNum}")
 	@ResponseBody
 	public  List<Map> memberLikeArticlePageSort(
-			@PathVariable(value="page") Integer page,
+			@PathVariable(value="pageNum") Integer pageNum,
 			@RequestParam(required=false) ArticleType articleType,
 			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			HttpServletRequest request, Model model){
-		
+		log.debug("page: {}",pageNum);
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		
-		ArticleType articleType2 = ArticleType.NEWS; //test
-		
 		Page<Article> pages = 
-				memberService.getArticlesPaging(memberId, articleType2, page, sortProperty, direction);
+				memberService.getArticlesPaging(memberId, articleType, pageNum, sortProperty, direction);
 		
 		//pass to front-end
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("articles", pages.getContent());
-		map.put("member", memberService.getById(memberId));
+		map.put("pageNum", pages.getNumber());
 		map.put("totalPages", pages.getTotalPages());
+		map.put("member", memberService.getById(memberId));
 		result.add(map);
-		
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", pages.getSize()); //size of the slice
 		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
