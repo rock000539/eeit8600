@@ -142,11 +142,11 @@
 		<div class="col-sm-7">
 			<label class="radio-inline">
 		    <input type="radio" checked
-		    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
+		    	name="gender" value="Female" ${member.gender=='Female'? 'checked':''}> 女性
 			</label>
 	    	<label class="radio-inline">
 		    <input type="radio"
-		    	name="gender" value="M" ${member.gender=='M'? 'checked':''}> 男性
+		    	name="gender" value="Male" ${member.gender=='Male'? 'checked':''}> 男性
 		    </label>
 		</div>
 	</div>
