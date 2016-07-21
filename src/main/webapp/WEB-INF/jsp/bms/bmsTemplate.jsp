@@ -26,14 +26,16 @@
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/bms/style.min.css" rel="stylesheet">
 	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	<!--  BASE JS  -->
 	<script src="/js/bms/pace.min.js"></script>
 </head>
 <body>
 	<!-- page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 	
-	<c:import url="/WEB-INF/jsp/bms_header.jsp" />
-	<c:import url="/WEB-INF/jsp/bms_navbar-side.jsp" />	
+	<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
 	
 		<!-- page content -->
 		<div id="content" class="content">

@@ -29,8 +29,8 @@
 	<!-- page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 	
-	<c:import url="/WEB-INF/jsp/bms_v3/bms_header.jsp" />
-	<c:import url="/WEB-INF/jsp/bms_v3/bms_navbar-side.jsp" />	
+	<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
 	
 		<!-- page content -->
 		<div id="content" class="content">
