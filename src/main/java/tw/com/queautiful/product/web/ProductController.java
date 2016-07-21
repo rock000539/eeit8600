@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,10 +27,16 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Brand;
+import tw.com.queautiful.product.entity.Category;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.ProductService;
+import tw.com.queautiful.product.vo.brand.BrandSearch;
+import tw.com.queautiful.product.vo.category.CategorySearch;
+import tw.com.queautiful.product.vo.product.ProductInventory;
+import tw.com.queautiful.product.vo.product.ProductSearch;
+import tw.com.queautiful.product.vo.product.ProductView;
 
 @Controller
 @RequestMapping("/products")
@@ -76,7 +84,7 @@ public class ProductController {
 
 		return prodPage;
 	}
-	
+
 	@RequestMapping("/list")
 	public String listPage() {
 		return "/product/productList";
@@ -148,44 +156,87 @@ public class ProductController {
 		}
 	}
 
-	@RequestMapping("/searchbybrand")
-	@ResponseBody
-	public List<Product> searchByBrand(@RequestParam Long brandId) {
-		Brand brand = brandService.getById(brandId);
-		return brand.getProducts();
-	}
-
 	@RequestMapping("/search")
-	public String selectFmsPage(Model model) {
-		model.addAttribute("categories", categoryService.getAll());
+	public String searchPage(Model model) {
+
+		// 類別
+		List<Category> c_list = categoryService.getAll();
+		List<CategorySearch> categories = new ArrayList<>();
+		CategorySearch category = null;
+		for (Category tmp : c_list) {
+			category = new CategorySearch();
+			BeanUtils.copyProperties(tmp, category);
+			categories.add(category);
+		}
+
+		// 品牌
+		List<Brand> b_list = brandService.getAll();
+		List<BrandSearch> brands = new ArrayList<>();
+		BrandSearch brand = null;
+		for (Brand tmp : b_list) {
+			brand = new BrandSearch();
+			BeanUtils.copyProperties(tmp, brand);
+			brands.add(brand);
+		}
+
+		model.addAttribute("categories", categories);
+		model.addAttribute("brands", brands);
 		return "/product/productSearch";
 	}
 
+	@RequestMapping("/searchbybrand")
+	@ResponseBody
+	public List<ProductSearch> searchByBrand(@RequestParam Long brandId) {
+		List<Product> p_list = brandService.getById(brandId).getProducts();
+		List<ProductSearch> products = new ArrayList<>();
+		ProductSearch product = null;
+		for(Product tmp : p_list) {
+			product = new ProductSearch();
+			BeanUtils.copyProperties(tmp, product);
+			products.add(product);
+		}
+		return products;
+	}
+
 	@RequestMapping("/inventory")
-	public String listFmsPage(@RequestParam(required = false) Long brandId,
+	public String inventoryPage(@RequestParam(required = false) Long brandId,
 			@RequestParam(required = false) Long categoryId, Model model) {
 
 		log.debug("brandId = {}", brandId);
 		log.debug("categoryId = {}", categoryId);
 
 		// 篩選條件
-		Product product = new Product();
-		
+		Product filter = new Product();
+
 		if (brandId != null) {
-			product.setBrand(brandService.getById(brandId));
+			log.debug("brand");
+			filter.setBrand(brandService.getById(brandId));
 			model.addAttribute("brandId", brandId);
 		} else if (categoryId != null) {
-			product.setCategory(categoryService.getById(categoryId));
+			log.debug("category");
+			filter.setCategory(categoryService.getById(categoryId));
 			model.addAttribute("categoryId", categoryId);
 		}
-		
+
 		// 初始頁碼、每頁幾筆資料
 		Pageable pageable = new PageRequest(0, 10);
-		
-		// 查詢資料
-		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
 
-		model.addAttribute("products", pages.getContent());
+		// 查詢資料
+		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
+		
+		// Copy需要送到前端的資料
+		List<Product> p_list = pages.getContent();
+		List<ProductInventory> products = new ArrayList<>();
+		ProductInventory product = null;
+		for(Product tmp : p_list) {
+			product = new ProductInventory();
+			BeanUtils.copyProperties(tmp, product);
+			product.setrSize(tmp.getReviews().size());
+			products.add(product);
+		}
+		model.addAttribute("products", products);
+		
+		// 總共幾頁
 		model.addAttribute("totalPage", pages.getTotalPages());
 
 		return "/product/productInventory";
@@ -193,7 +244,7 @@ public class ProductController {
 
 	@RequestMapping("/list_data")
 	@ResponseBody
-	public List<Product> listFmsData(@RequestParam(required = false) Long brandId,
+	public List<ProductInventory> listData(@RequestParam(required = false) Long brandId,
 			@RequestParam(required = false) Long categoryId, @RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer rows, Model model) {
 
@@ -202,34 +253,48 @@ public class ProductController {
 		log.debug("page = {}", page);
 		log.debug("rows = {}", rows);
 		
-		Product product = new Product();
+		// 篩選條件
+		Product filter = new Product();
+		
+		// 頁碼、每頁幾筆資料
 		Pageable pageable = new PageRequest(page - 1, rows);
 
+		// 設定條件
 		Page<Product> pages = null;
-
 		if (brandId != null) {
-			product.setBrand(brandService.getById(brandId));
-			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
+			filter.setBrand(brandService.getById(brandId));
+			pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
 		} else if (categoryId != null) {
-			product.setCategory(categoryService.getById(categoryId));
-			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
+			filter.setCategory(categoryService.getById(categoryId));
+			pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
 		} else {
 			pages = prodService.getAll(pageable);
 		}
 		
-		log.debug("pages.getContent = {}", pages.getContent());
-		
-		return pages.getContent();
+		// Copy需要送到前端的資料
+		List<Product> p_list = pages.getContent();
+		List<ProductInventory> products = new ArrayList<>();
+		ProductInventory product = null;
+		for(Product tmp : p_list) {
+			product = new ProductInventory();
+			BeanUtils.copyProperties(tmp, product);
+			product.setrSize(tmp.getReviews().size());
+			products.add(product);
+		}
+
+		return products;
 	}
 
 	@RequestMapping("/view")
-	public String viewFmsPage(@RequestParam(required = false) Long prodId, Model model) {
-		model.addAttribute("product", prodService.getById(prodId));
+	public String viewPage(@RequestParam(required = false) Long prodId, Model model) {
+		ProductView bean = new ProductView();
+		BeanUtils.copyProperties(prodService.getById(prodId), bean);
+		model.addAttribute("product", bean);
 		return "/product/productView";
 	}
 
 	@RequestMapping("/login")
-	public String rankFmsPage(Model model) {
+	public String rankPage(Model model) {
 		return "/product/login";
 	}
 

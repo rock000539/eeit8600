@@ -90,18 +90,28 @@ public class Member {
 	@OrderBy("ARTICLETIME DESC")
 	@JoinTable(name="member_article", joinColumns=@JoinColumn(name="MEMBERID", referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="ARTICLEID", referencedColumnName="ARTICLEID"))
 	private Set<Article> articlesSavedByMember;
-	
+
 	//文章撰寫作者
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	@JsonIgnore
 	@OrderBy("ARTICLETIME DESC")
 	private Set<Article> articlesWorteByAuthor;
 	
-	//心得
-	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
-	@OrderBy("REVIEWID ASC")
-	private Set<Review> reviews;
+	//心得收藏
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OrderBy("REVIEWTIME DESC")
+	@JoinTable(name="member_review",joinColumns=@JoinColumn(name="MEMBERID",referencedColumnName="MEMBERID"),inverseJoinColumns=@JoinColumn(name="REVIEWID",referencedColumnName="REVIEWID"))
+	private Set<Review> reviewsSavedByMember;
 	
+	//心得撰寫作者
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OrderBy("REVIEWTIME DESC")
+	private Set<Review> reviewsWorteByAuthor;
+	
+	//心得留言
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OrderBy("REVIEWCMTIME DESC")
+	private Set<ReviewCM> rcmsWroteByAuthor;
+
 	//文章留言
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
 	@OrderBy("ARTICLECMTIME DESC")
@@ -303,7 +313,7 @@ public class Member {
 	public void setArticlesSavedByMember(Set<Article> articlesSavedByMember) {
 		this.articlesSavedByMember = articlesSavedByMember;
 	}
-
+	
 	public Set<Article> getArticlesWorteByAuthor() {
 		return articlesWorteByAuthor;
 	}
@@ -311,21 +321,46 @@ public class Member {
 	public void setArticlesWorteByAuthor(Set<Article> articlesWorteByAuthor) {
 		this.articlesWorteByAuthor = articlesWorteByAuthor;
 	}
+
 	
-	public Set<Review> getReviews() {
-		return reviews;
-	}
-	
-	public void setReviews(Set<Review> reviews) {
-		this.reviews = reviews;
+	public Set<Review> getReviewsSavedByMember() {
+		return reviewsSavedByMember;
 	}
 
-	public void addReviews(Review review){
-		this.reviews.add(review);
-		if(review.getMember()!=this){
-			review.setMember(this);
+	public void setReviewsSavedByMember(Set<Review> reviewsSavedByMember) {
+		this.reviewsSavedByMember = reviewsSavedByMember;
+	}
+
+	public Set<Review> getReviewsWorteByAuthor() {
+		return reviewsWorteByAuthor;
+	}
+
+	public void setReviewsWorteByAuthor(Set<Review> reviewsWorteByAuthor) {
+		this.reviewsWorteByAuthor = reviewsWorteByAuthor;
+	}
+
+	public void addReviewsWorteByAuthor(Review reviewsWorteByAuthor){
+		this.reviewsWorteByAuthor.add(reviewsWorteByAuthor);
+		if(reviewsWorteByAuthor.getMember()!=this){
+			reviewsWorteByAuthor.setMember(this);
 		}
 	}
+	
+	public Set<ReviewCM> getRcmsWroteByAuthor() {
+		return rcmsWroteByAuthor;
+	}
+
+	public void setRcmsWroteByAuthor(Set<ReviewCM> rcmsWroteByAuthor) {
+		this.rcmsWroteByAuthor = rcmsWroteByAuthor;
+	}
+	
+	public void addRcmsWroteByAuthor(ReviewCM rcmsWroteByAuthor){
+		this.rcmsWroteByAuthor.add(rcmsWroteByAuthor);
+		if(rcmsWroteByAuthor.getMember()!=this){
+			rcmsWroteByAuthor.setMember(this);
+		}
+	}
+	
 	public Set<ArticleCM> getAcmsWroteByAuthor() {
 		return acmsWroteByAuthor;
 	}
@@ -349,8 +384,5 @@ public class Member {
 	public void setReview_Reports(Set<Review_Report> review_Reports) {
 		this.review_Reports = review_Reports;
 	}
-
-
-
 	
 }

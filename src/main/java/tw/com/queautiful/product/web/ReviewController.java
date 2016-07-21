@@ -4,16 +4,14 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 
-import org.aspectj.lang.reflect.MemberSignature;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
-import tw.com.queautiful.product.entity.Brand;
-import tw.com.queautiful.product.entity.Member;
-import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
@@ -113,7 +108,6 @@ public class ReviewController {
 			log.debug("x={}",age);
 			list.get(i).getMember().setAge(age);
 		}
-		
 		return "/review/reviews";
 	}
 
@@ -151,6 +145,8 @@ public class ReviewController {
 		
 		//會員年齡
 		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
+		
+		
 		
 		return "/review/reviewjQueryRain";
 	}
@@ -223,7 +219,7 @@ public class ReviewController {
 		return "/review/reviewAdd";
 	}
 
-	@RequestMapping("/insert")
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public Review insert(@RequestPart("review") Review review,
 			@RequestPart("reviewImgFile") MultipartFile reviewImgFile) {

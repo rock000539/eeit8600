@@ -8,10 +8,6 @@ public class BmsController {
 	
 	@RequestMapping("/bms")
 	public String bmsPage(){
-		return "/bms";
-	}
-	@RequestMapping("/bms3")
-	public String bms3Page(){
-		return "/bms_v3/bms_v3";
+		return "/bms/bms";
 	}
 }

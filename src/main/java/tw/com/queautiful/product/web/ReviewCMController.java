@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ReviewCM;
+import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ReviewCMService;
+import tw.com.queautiful.product.service.ReviewService;
 
 @Controller
 @RequestMapping("/reviewCMs")
@@ -21,6 +23,12 @@ public class ReviewCMController {
 
 	@Autowired
 	private ReviewCMService service;
+
+	@Autowired
+	private ReviewService reveiwService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -42,6 +50,12 @@ public class ReviewCMController {
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
 	public ReviewCM insert(@RequestBody ReviewCM reviewCM){
+		
+		//FK
+		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
+		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
+		
+		
 		service.insert(reviewCM);
 		return reviewCM;
 	}
@@ -55,6 +69,11 @@ public class ReviewCMController {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
 	public ReviewCM update(@RequestBody ReviewCM reviewCM){
+		
+		//FK
+		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
+		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
+
 		service.update(reviewCM);
 		return reviewCM;
 	}

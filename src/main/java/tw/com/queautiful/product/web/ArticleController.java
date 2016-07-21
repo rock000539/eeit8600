@@ -21,9 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.enumeration.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.MemberService;
 
@@ -128,9 +129,38 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/listfms")
-	public String articleListFms(Model model){
-		model.addAttribute("articles", articleService.findByOrderByArticleTimeDesc());
+	public String listFmsPage(Model model){
+		// 初始頁碼、每頁幾筆資料
+		Pageable pageable = new PageRequest(0, 10);
+		
+		// 查詢資料		
+		Page<Article> pages = articleService.findByOrderByArticleTimeDesc(pageable);
+		
+		log.debug("pages.getContent()-->{}",pages.getContent());
+		
+		model.addAttribute("articles", pages.getContent());
+		model.addAttribute("totalPage", pages.getTotalPages());
+		
+//		log.debug("findByOrderByArticleTimeDesc()-->{}",articleService.findByOrderByArticleTimeDesc());
+//		model.addAttribute("articles", articleService.findByOrderByArticleTimeDesc());
+		
 		return "/article/articleListFms";
+	}
+	
+	@RequestMapping("/list_data")
+	@ResponseBody
+	public List<Article> listFmsData(Integer page, Integer rows){
+		Pageable pageable = new PageRequest(page-1, rows);
+		Page<Article> pages = articleService.findByOrderByArticleTimeDesc(pageable);
+		
+		log.debug("list_data:pages.getContent()-->{}",pages.getContent());		
+		return pages.getContent();
+	}
+	
+	@RequestMapping("/view")
+	public String articleView(@RequestParam Long articleId, Model model){
+		model.addAttribute("article",articleService.getById(articleId));	
+		return "/article/articleView";
 	}
 	
 }
