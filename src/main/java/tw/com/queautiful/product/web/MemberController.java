@@ -181,6 +181,7 @@ public class MemberController {
 		model.addAttribute("articles", pages.getContent());
 		model.addAttribute("pageNum", pages.getNumber());
 		model.addAttribute("member", member);
+		model.addAttribute("totalPages", pages.getTotalPages());
 		return "/member/memberPost-article";
 	}
 	

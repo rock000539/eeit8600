@@ -59,6 +59,7 @@
 	</div> <!-- cd-timeline-block -->
 	</c:forEach>
 	<input type="hidden" id="pageNum" value="${pageNum}">
+	<input type="hidden" id="totalPages" value="${totalPages}">
 </section>
 </div> <!-- timeline Div -->
 
@@ -105,14 +106,16 @@ $(function(){
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
-			console.log("show"+$(this));
 		});
 	}
 	
 	$(window).scroll(function(){
 	    if($(window).scrollTop() + $(window).height() >= $(document).height()){	
-	    	var pageNum = parseInt($('#pageNum').val())+1;
-	    	console.log("pageNum: "+pageNum);
+	    	var totalPages = $('#totalPages').val();
+	    	var loadedPageNum = $('#pageNum').val();
+	    	var pageNum = parseInt(loadedPageNum)+1;
+	    	console.log("loadedPageNum: "+loadedPageNum);
+	    	if(loadedPageNum < totalPages){
 	    	$.ajax({
 	    		url: '/members/post/article/'+pageNum,
 				type: 'POST',
@@ -120,7 +123,7 @@ $(function(){
 				contextType: 'application/json; charset=utf-8;',
 				success: function(response){
 					var result = response[0];
-					
+					console.log(result);
 					var articles = result.articles;
 					var member = result.member;
 					var pageNum = result.pageNum;
@@ -137,10 +140,10 @@ $(function(){
 							.replace('_articleTime', articles[i].articleTime))
 							.appendTo($('#cd-timeline'));
 					}
-				}
-	    	});
+				} /* success */
+	    	});} /* ajax */
 	    }
-	});
+	}); /* onScroll */
 	
 	
 
