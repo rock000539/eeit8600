@@ -1,7 +1,5 @@
 package tw.com.queautiful.commons.util;
 
-import static com.google.common.collect.Iterables.toArray;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +34,6 @@ public class Spec {
 				for (Attribute<T, ?> attr : entityType.getDeclaredAttributes()) {
 					Object attrValue = getValue(example, attr);
 					
-//					System.out.println("attr = " + attr.getJavaType());
-//					System.out.println("attrValue = " + attrValue);
-					
 					if (attrValue != null) {
 						if (attr.getJavaType() == String.class) {
 							if (StringUtils.isNotEmpty(attrValue.toString())) {
@@ -52,11 +47,7 @@ public class Spec {
 					}
 				}
 
-				System.out.println(cb.and(toArray(predicates, Predicate.class)).toString());
-
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-				// return predicates.isEmpty() ? cb.conjunction() :
-				// cb.and(toArray(predicates, Predicate.class));
 			}
 
 			private <T> Object getValue(T example, Attribute<T, ?> attr) {
