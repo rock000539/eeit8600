@@ -58,7 +58,12 @@
 				                <h2>選擇品牌名稱，搜尋產品！</h2>
 				            </div>
 				            <div class="row">
-								<select id="sbrand" class="js-example-basic-single" style="width: 80%"></select>
+								<select id="sbrand" class="js-example-basic-single" style="width: 80%; visibility: hidden;">
+									<option value="0">請選擇品牌</option>
+									<c:forEach items="${brands}" var="brand">
+										<option value="${brand.brandId}">${brand.brandName}</option>
+									</c:forEach>
+								</select>
 							</div>
 							<br/>
 							<div class="row">
@@ -153,49 +158,40 @@
 				theme: 'classic',
 			});
 			
-			// append data to select #sbrand
-			$.ajax({
-				url: '/brands/select',
-				type: 'GET',
-				dataType: 'json',
-				success:function(response) {
-					var select = $('#sbrand').empty();
-					select.append($('<option></option>'));
-					for(i=0; i<response.length; i++){
-						select.append($('<option></option>').attr('value', response[i].brandId).text(response[i].brandName));
-					}
-				}
-			});
-			
 			$('#sbrand').on('select2:select', function (evt) {
 				
-				// select-product init
-				$('#sprod').select2({
-					placeholder: 'Select a Product',
-					allowClear: true,
-					theme: 'classic',
-				});
-				
-				// show btn
-				$('#search').show();
-				$('#contact').show();
-				
-				// append data to select #sprod
-				$.ajax({
-					url: '/products/searchbybrand',
-					type: 'POST',
-					dataType: 'json',
-					contextType: 'application/json; charset=utf-8;',
-					data: { 'brandId': $(this).val() },
-					success:function(response){
-						console.log(response);
-						var select = $('#sprod').empty();
-						select.append($('<option></option>'));
-						for(i=0; i<response.length; i++){
-							select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
+				if($(this).val() > 0) {
+					
+					// select-product init
+					$('#sprod').select2({
+						placeholder: 'Select a Product',
+						allowClear: true,
+						theme: 'classic',
+					});
+					
+					// show btn
+					$('#search').show();
+					$('#contact').show();
+					
+					// append data to select #sprod
+					$.ajax({
+						url: '/products/searchbybrand',
+						type: 'POST',
+						dataType: 'json',
+						contextType: 'application/json; charset=utf-8;',
+						data: { 'brandId': $(this).val() },
+						success:function(response){
+							console.log(response);
+							var select = $('#sprod').empty();
+							select.append($('<option>請選擇產品</option>'));
+							for(i=0; i<response.length; i++){
+								select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
+							}
 						}
-					}
-				});
+					});
+					
+				}
+				
 			});
 			
 			// Search Button Click
@@ -216,7 +212,6 @@
 		
 		// Category Button Click
 		function category_click(a) {
-			console.log($(a).attr('data-categoryId'));
 			$.redirect('/products/inventory', { 'categoryId': $(a).attr('data-categoryId') });
 		}
 

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.enumeration.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.service.ArticleService;

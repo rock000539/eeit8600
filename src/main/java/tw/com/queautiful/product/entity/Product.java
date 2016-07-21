@@ -48,10 +48,13 @@ public class Product {
 
 	@Transient
 	private Long categoryId;
+	
+	@Transient
+	private String categoryName;
 
 	//雙向(對應Review Entity的@ManyToOne 設的變數名)
 	//difference-between-fetchtype-lazy-and-eager
-	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	@OrderBy("REVIEWTIME DESC")
 	private List<Review> reviews;
 
@@ -150,6 +153,14 @@ public class Product {
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+	}
+	
+	public String getCategoryName() {
+		return this.getCategory().getCategoryName();
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public List<Review> getReviews() {
