@@ -185,42 +185,38 @@ select {
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-12 hasbutton">
-				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
+				<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
 				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
 			</div>
 		</div>
-	</div>	
-<!-- 	<TABLE> -->
-<!-- 			<TR> -->
-<!-- 				<TD><h3>Category:</h3></TD> -->
-<!-- 				<TD> -->
-<!-- 				<select name="articleType" class="form-control" style="min-width:100px; max-width:120px;"> -->
-<!-- 				<option value="news">情報</option> -->
-<!-- 				<option value="solicit">徵文</option> -->
-<!-- 				<option value="question">問題</option> -->
-<!-- 				<option value="chat">閒聊</option>			 -->
-<!-- 				</select> -->
-<!-- 				</TD> -->
-<!-- 			</TR> -->
-<!-- 			<TR> -->
-<!-- 				<TD><h3>Title:</h3></TD> -->
-<%-- 				<TD><input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${param.articleTitle}" placeholder="Title"></TD> --%>
-<!-- 			</TR> -->
-<!-- 			<TR> -->
-<!-- 				<TD colspan="2"><textarea class="ckeditor" id="content" name="articleContent" cols="80" rows="12"></textarea></TD> -->
-<!-- 			</TR> -->
-<!-- 			<TR> -->
-<!-- 				<TD colspan="2" style="padding-top:20px;text-align: center"> -->
-<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
-<!-- 				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button> -->
-<!-- 				</TD> -->
-<!-- 			</TR> -->
-<!-- 	</TABLE> -->
-	
+	</div>		
 	</FORM>
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
 	
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+<!--       Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Please Check Your Post</h4>
+        </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" name="save" id="save" class="btn btn-default" data-dismiss="modal">Confirm</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
 </div>
 	
 <!-- 	<div id='result'> -->
@@ -282,6 +278,8 @@ select {
 			console.log(value);
 		});
 		
+		
+		
 		$('#save').on('click',function(){
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
@@ -296,6 +294,7 @@ select {
 					data:JSON.stringify($('#addForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
+						location.href="/articles/listfms";
 // // 						console.log(data);
 // // 						console.log(data.articleTime);
 // 						var t = data.articleTime;
@@ -329,6 +328,13 @@ select {
 		    return o;
 		};
 	});
+	
+	function toModal(){
+		$(".modal-body").empty()
+						.append('<p>Post Type：'+$(':selected').val()+'</p>')
+						.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
+						.append('<p>Content：'+ CKEDITOR.instances['content'].getData() +'</p>');
+	}
 
 
 	</script>

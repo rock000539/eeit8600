@@ -27,7 +27,7 @@
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
 				<div class="rs_box  wow bounceInRight" data-wow-offset="500">
-                    <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
                                 <i class="fa fa-bullhorn"></i>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
                                 <i class="fa fa-file-text"></i>
@@ -48,7 +48,7 @@
 <!--                             <a class="read" href="#">Read more</a> -->
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
                                 <i class="fa fa-question-circle"></i>
@@ -58,7 +58,7 @@
 <!--                             <a class="read" href="#">Read more</a> -->
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
                                 <i class="fa fa-rocket"></i>
@@ -227,6 +227,31 @@
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
 	
+	<script id="article_list" type="text/template">
+
+			<tr  data-type="_articleType">
+
+				<td class="text-center"><i class="fa _type fa-2x _color"></i></td>
+				
+				<td>
+				    <h4><a data-articleId="_articleId" class="articleTitle" onclick="info_click($(this))">［_articleType］_articleTitle</a><br>
+				    	<small>by 
+							<a href="#">_memberNickname</a> 
+				    		<i class="fa fa-angle-double-right"></i> 
+				    		_articleTime
+						</small>
+				    </h4>
+				</td>
+				<td class="text-center hidden-xs hidden-sm"><a href="#">_acmsSize</a></td>
+				<td class="text-center hidden-xs hidden-sm"><a href="#">_articleView</a></td>
+				<td class="hidden-xs hidden-sm">
+				     by <a href="#">_memberNickname</a><br>
+					<small><i class="fa fa-clock-o"></i>_articleTime</small>
+				</td>
+				
+			</tr>
+	</script>
+	
 	<script>
 	$(function(){
 		$('#allpost').on('click',function(){
@@ -238,13 +263,62 @@
 			$('tbody>tr[data-type='+aType+']').show();
 		});
 		
-		$("#page_btn").bootpag({
-		    total:8,
+		$('#page_btn').bootpag({
+		    total:"${totalPage}",
  		    page:1,
-		    maxVisible: 5,	    
-		}).on("page", function(event, num){
-		   console.log(event);
-		   console.log(num);		    	 
+		    maxVisible: 5,
+		    href: '#pro-page-{{number}}',
+			leaps: false,
+		}).on('page', function(event, num){
+// 		   console.log(event);
+// 		   console.log(num);
+		   $.ajax({
+			   url:'/articles/list_data',
+			   type:'POST',
+			   contextType: 'application/json; charset=utf-8;',
+			   data:{'page':num,'rows':10},
+			   dataType: 'json',
+			   success:function(result){
+// 				   console.log(result);
+				   $('tbody').empty();
+				   
+				   for(var i = 0; i < 2; i++) {
+					   
+					   var str = $('#article_list').html();
+					   console.log(str);
+					   
+					   var str1 = '';
+					   if(result[i].articleType == 'news') {
+						   	str1 = str.replace('_type','fa-bullhorn').replace('_color', 'text-primary');
+					   } else if(result[i].articleType == 'solicit') {
+						   	str1 = str.replace('_type','fa-file-text').replace('_color', 'text-success');
+					   } else if(result[i].articleType == 'question') {
+							str1 = str.replace('_type','fa-question-circle').replace('_color', 'text-danger');
+					   } else if(result[i].articleType == 'chat') {
+						   	str1 = str.replace('_type','fa-rocket').replace('_color', 'text-warning');
+					   }
+					   
+					   $(str1.replace("_articleType", result[i].articleType.toUpperCase())
+					   		.replace("_articleType", result[i].articleType.toUpperCase())
+						    .replace("_articleType", result[i].articleType.toUpperCase())
+						    .replace("_articleType", result[i].articleType.toUpperCase())
+						    .replace("_articleType", result[i].articleType.toUpperCase())
+						    .replace("_articleId", result[i].articleId)
+				   			.replace("_articleType", result[i].articleType.toUpperCase())
+				   			.replace("_articleTitle", result[i].articleTitle)
+				   			.replace("_memberNickname", result[i].member.nickname)
+				   			.replace("_memberNickname", result[i].member.nickname)
+				   			.replace("_articleTime", result[i].articleTime)
+				   			.replace("_articleTime", result[i].articleTime)
+				   			.replace("_acmsSize", result[i].acms.size())
+							).appendTo($('tbody'));
+
+				   }
+// 				   console.log($('#article_list').html());
+			   }
+			   
+			   
+		   });
 		});
 		
 		
