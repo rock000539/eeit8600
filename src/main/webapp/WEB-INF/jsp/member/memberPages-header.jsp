@@ -8,6 +8,5 @@
 	<div class="detail-list-col2">
 	       <h3>${member.nickname}</h3>
 	       <p>${member.gender}, ${member.skinType} skin, from ${member.addr}</p>
-	       <a id="editProfile" class="btn btn-default" href="#"><i class="fa fa-pencil"></i> EDIT PROFILE</a>
 	</div>
 </div>

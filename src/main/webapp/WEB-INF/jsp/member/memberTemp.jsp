@@ -30,10 +30,10 @@
 	<div id="div1" class="col-lg-2"></div>
 	<div class="col-lg-6 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header" />
-		<!-- **每頁不同的內容從這裡開始** -->
-	
-	
-		<!-- **每頁不同的內容結束** -->
+		
+		
+		
+		
 	</div> <!-- col-lg -->
 	
 	<div class="col-lg-1"></div>
