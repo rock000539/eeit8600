@@ -146,6 +146,8 @@ public class ReviewController {
 		//會員年齡
 		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
 		
+		
+		
 		return "/review/reviewjQueryRain";
 	}
 	
