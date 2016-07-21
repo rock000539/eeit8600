@@ -23,7 +23,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.enumeration.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.MemberDao;
 import tw.com.queautiful.product.entity.Article;
