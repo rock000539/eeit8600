@@ -34,6 +34,7 @@ import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
+import tw.com.queautiful.product.vo.product.ProductInventory;
 import tw.com.queautiful.product.vo.product.ProductSearch;
 import tw.com.queautiful.product.vo.product.ProductView;
 
@@ -205,13 +206,15 @@ public class ProductController {
 		log.debug("categoryId = {}", categoryId);
 
 		// 篩選條件
-		Product product = new Product();
+		Product filter = new Product();
 
 		if (brandId != null) {
-			product.setBrand(brandService.getById(brandId));
+			log.debug("brand");
+			filter.setBrand(brandService.getById(brandId));
 			model.addAttribute("brandId", brandId);
 		} else if (categoryId != null) {
-			product.setCategory(categoryService.getById(categoryId));
+			log.debug("category");
+			filter.setCategory(categoryService.getById(categoryId));
 			model.addAttribute("categoryId", categoryId);
 		}
 
@@ -219,9 +222,21 @@ public class ProductController {
 		Pageable pageable = new PageRequest(0, 10);
 
 		// 查詢資料
-		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
-
-		model.addAttribute("products", pages.getContent());
+		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
+		
+		// Copy需要送到前端的資料
+		List<Product> p_list = pages.getContent();
+		List<ProductInventory> products = new ArrayList<>();
+		ProductInventory product = null;
+		for(Product tmp : p_list) {
+			product = new ProductInventory();
+			BeanUtils.copyProperties(tmp, product);
+			product.setrSize(tmp.getReviews().size());
+			products.add(product);
+		}
+		model.addAttribute("products", products);
+		
+		// 總共幾頁
 		model.addAttribute("totalPage", pages.getTotalPages());
 
 		return "/product/productInventory";
@@ -229,7 +244,7 @@ public class ProductController {
 
 	@RequestMapping("/list_data")
 	@ResponseBody
-	public List<Product> listData(@RequestParam(required = false) Long brandId,
+	public List<ProductInventory> listData(@RequestParam(required = false) Long brandId,
 			@RequestParam(required = false) Long categoryId, @RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer rows, Model model) {
 
@@ -237,25 +252,37 @@ public class ProductController {
 		log.debug("categoryId = {}", categoryId);
 		log.debug("page = {}", page);
 		log.debug("rows = {}", rows);
-
-		Product product = new Product();
+		
+		// 篩選條件
+		Product filter = new Product();
+		
+		// 頁碼、每頁幾筆資料
 		Pageable pageable = new PageRequest(page - 1, rows);
 
+		// 設定條件
 		Page<Product> pages = null;
-
 		if (brandId != null) {
-			product.setBrand(brandService.getById(brandId));
-			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
+			filter.setBrand(brandService.getById(brandId));
+			pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
 		} else if (categoryId != null) {
-			product.setCategory(categoryService.getById(categoryId));
-			pages = prodService.getAll(Spec.byAuto(entityManager, product), pageable);
+			filter.setCategory(categoryService.getById(categoryId));
+			pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
 		} else {
 			pages = prodService.getAll(pageable);
 		}
+		
+		// Copy需要送到前端的資料
+		List<Product> p_list = pages.getContent();
+		List<ProductInventory> products = new ArrayList<>();
+		ProductInventory product = null;
+		for(Product tmp : p_list) {
+			product = new ProductInventory();
+			BeanUtils.copyProperties(tmp, product);
+			product.setrSize(tmp.getReviews().size());
+			products.add(product);
+		}
 
-		log.debug("pages.getContent = {}", pages.getContent());
-
-		return pages.getContent();
+		return products;
 	}
 
 	@RequestMapping("/view")
