@@ -125,7 +125,7 @@
 		<div class="cd-timeline-content">
 			<h2>${item.articleTitle}</h2>
 			<small>${item.articleType}</small>
-			<p>${item.article}</p>
+			<p>${item.articleContent}</p>
 			<a href="/articles/article-page?articleId=${item.articleId}" class="cd-info">觀看文章</a>
             <a href="/articles/edit?articleId=${item.articleId}" class="cd-info">編輯文章</a>
 			<span class="cd-date">${item.articleTime}</span>

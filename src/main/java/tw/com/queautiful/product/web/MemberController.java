@@ -25,6 +25,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +37,6 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.queautiful.commons.util.ArticleType;
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
-import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
@@ -65,8 +65,7 @@ public class MemberController {
 	private ProductService productService;
 	@Autowired
 	private BrandService brandService;
-	@PersistenceContext
-	private EntityManager em;
+	
 	
 	@RequestMapping("/profile")
 	public String memberPersonalPage(HttpServletRequest request, Model model){
@@ -134,52 +133,6 @@ public class MemberController {
 		return "/member/memberLike-article";
 	}
 	
-	//分頁, 分類, 排序
-	@RequestMapping("/like/article/sort")
-	@ResponseBody
-	public List memberLikeAericlePageSort(
-			@RequestParam(value="page", defaultValue="1") Integer page,
-			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
-			@RequestParam(required=false) String articleType, //test
-			@RequestParam(value="direction", defaultValue="DESC") String direction,
-			HttpServletRequest request, Model model){
-		//set condition
-		Article article = new Article();
-		Long memberId = (Long) request.getSession().getAttribute("memberId");
-		
-		article.setMember(memberService.getById(memberId));
-		
-		if(articleType!=null){ 
-			article.setArticleType(ArticleType.NEWS);//test
-		}
-		
-		Direction sortDirection = Sort.Direction.DESC;
-		if("ASC".equals(direction)){
-			sortDirection = Sort.Direction.ASC;		
-		}
-		
-		Specification<Article> spec = Spec.byAuto(em, article);
-		
-		//PageRequest(int page, int size, Sort.Direction direction, String... properties)
-		Pageable pageable = new PageRequest(page-1, 9, new Sort(sortDirection, sortProperty));
-		Page<Article> pages = articleService.getAll(spec, pageable);
-		List<Article> articles = pages.getContent();
-		
-		//pass to front-end
-		List<Map> result = new ArrayList<Map>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("articles", articles);
-		map.put("member", memberService.getById(memberId));
-		map.put("totalPages", pages.getTotalPages());
-		result.add(map);
-		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
-		log.debug("page size = {}", pages.getSize()); //size of the slice
-		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
-		log.debug("totalPages() = {}", pages.getTotalPages()); 
-		log.debug("totalElements = {}", pages.getTotalElements()); 
-		return result;
-	}
-	
 	//取消文章收藏
 	@RequestMapping("/like/article/delete")
 	@ResponseBody
@@ -225,13 +178,53 @@ public class MemberController {
 	
 	//member-post文章頁面
 	@RequestMapping("/post/article")
-	public String memberPostedArticlePage(Model model){
-		Member member = memberService.getById(1L); //test
-		Set<Article> articles = memberService.getById(1L).getArticlesWorteByAuthor();
-		model.addAttribute("articles", articles);
+	public String memberPostedArticlePage(HttpServletRequest request, Model model){
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		Page<Article> pages = memberService.getArticlesPaging(memberId, null, 0, null, null);
+		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", pages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", pages.getTotalPages()); 
+		log.debug("totalElements = {}", pages.getTotalElements()); 
+		model.addAttribute("articles", pages.getContent());
 		model.addAttribute("member", member);
 		log.debug(member.toString());
 		return "/member/memberPost-article";
+	}
+	
+	//分頁, 分類, 排序
+	@RequestMapping("/post/article/{page}")
+	@ResponseBody
+	public  List<Map> memberLikeArticlePageSort(
+			@PathVariable(value="page") Integer page,
+			@RequestParam(required=false) ArticleType articleType,
+			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction,
+			HttpServletRequest request, Model model){
+		
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		
+		ArticleType articleType2 = ArticleType.NEWS; //test
+		
+		Page<Article> pages = 
+				memberService.getArticlesPaging(memberId, articleType2, page, sortProperty, direction);
+		
+		//pass to front-end
+		List<Map> result = new ArrayList<Map>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("articles", pages.getContent());
+		map.put("member", memberService.getById(memberId));
+		map.put("totalPages", pages.getTotalPages());
+		result.add(map);
+		
+		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", pages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", pages.getTotalPages()); 
+		log.debug("totalElements = {}", pages.getTotalElements()); 
+		
+		return result;
 	}
 	
 	//review-post頁面

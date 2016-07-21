@@ -7,16 +7,26 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import tw.com.queautiful.commons.util.ArticleType;
+import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.MemberDao;
+import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.Member;
 
 @Service
@@ -25,6 +35,10 @@ public class MemberService {
 
 	@Autowired
 	private MemberDao memberDao;
+	@PersistenceContext
+	private EntityManager em;
+	@Autowired
+	private ArticleService articleService;
 
 	public Member getById(Long memberId) {
 		return memberDao.findOne(memberId);
@@ -56,6 +70,31 @@ public class MemberService {
 
 	public void delete(Long memberId) {
 		memberDao.delete(memberId);
+	}
+	
+	//articlesLikedByMember pagination and sorted
+	public Page<Article> getArticlesPaging(Long memberId, ArticleType articleType, Integer page,
+			String sortProperty, String direction){
+		Article article = new Article();
+		article.setMember(getById(memberId));
+		
+		if(articleType!=null){ 
+			article.setArticleType(articleType);
+		}
+		
+		Specification<Article> spec = Spec.byAuto(em, article);
+		
+		Direction sortDirection = Sort.Direction.DESC;
+		if("ASC".equals(direction)){
+			sortDirection = Sort.Direction.ASC;		
+		}
+		
+		if(sortProperty==null)
+			sortProperty = "articleTime";
+		
+		//PageRequest(int page, int size, Sort.Direction direction, String... properties)
+		Pageable pageable = new PageRequest(page, 9, new Sort(sortDirection, sortProperty));
+		return articleService.getAll(spec, pageable);
 	}
 
 	// 產生reset-password URL
