@@ -4,27 +4,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	
-	<!-- Header, NavBar -->
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/metisMenu.min.css" rel="stylesheet">
-	<link href="/css/sb-admin-2.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="/css/bms-customize.css" rel="stylesheet" >
-	
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/sb-admin-2.js"></script>
 
-	<!-- BootStrap 基本檔案  -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>productEdit</title>
 	
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!--  BASE CSS STYLE  -->
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bms/style.min.css" rel="stylesheet">
+	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	
+	<!--  BASE JS  -->
+	<script src="/js/bms/pace.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/bms.js"></script>
+
 	<!-- 表單驗證  -->
-	<script 
-		src="/js/jquery.validate.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
 		
 	<!-- DatePicker -->
 	<link rel="stylesheet" 
@@ -34,22 +35,21 @@
     <script
     	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     	
+   	<!-- DatePicker -->
+	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+    
     <!-- Dialog -->
-    <link rel="stylesheet" 
-		href="/css/bootstrap-dialog.min.css" />
-    <script
-    	src="/js/bootstrap-dialog.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap-dialog.min.css" />
+    <script src="/js/bootstrap-dialog.min.js"></script>
     	
     <!-- FileInput -->
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
     <script src="/js/fileinput.min.js"></script>
-    	
-    <script src="/js/metisMenu.min.js"></script>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>productEdit</title>
 	
 	<style>
+	
 		.col-md-6 {
 			margin-top: 20px;
 		}
@@ -62,25 +62,40 @@
 		textarea {
 		    resize: none;
 		}
+		
 	</style>
 
 </head>
 <body>
+
+	<!-- Loading animate -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	
-	<!-- 內文全部用wrapper包起來 -->
-	<div id="wrapper">
+	<!-- page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 	
-	<!-- 加入上方及側邊Nav-Bar -->	
-	<c:import url="../bms_header.jsp" />
-	<c:import url="../bms_navbar-side.jsp" />
+		<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+		<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
 	
-	<!-- Page Content --> 
-	<div id="page-wrapper">
-	    <div class="container-fluid">
-	        <div class="row">
-	            <div class="col-lg-12">
+		<!-- page content -->
+		<div id="content" class="content">
+			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">產品資料</li>
+				<li class="active">修改產品</li>
+			</ol>
+			
+			<!-- page-header 每頁標題 副標 -->
+			<h1 class="page-header">修改產品資料 <small></small></h1>
+			
+			<!-- 內文 -->
+			<div class="row">
+			    <div class="col-md-12 ui-sortable">
+	            <!-- **每頁不同的內容從這裡開始** -->
 	                
-                	<div class="col-md-2"></div>
+	                <div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="panel panel-primary">
 							<div class="panel-heading">Product Edit Form</div>
@@ -257,7 +272,7 @@
 											        maxFileCount: 1,
 											        mainClass: "input-group-sm",
 											        initialPreview: [
-											        	"http://localhost:8080/products/show?prodId="+$('#prodId').val(),
+											        	"http://localhost:8080/products/show?prodImg="+$('#prodImg').val(),
 											        ],
 						                     		initialPreviewAsData: true,
 						                     		initialPreviewFileType: 'image',
@@ -288,19 +303,16 @@
 						</div>
 					</div>
 					<div class="col-md-2"></div>
-	                
-	                <!-- **每頁不同的內容 end** -->
-	            </div>
-	            <!-- /.col-lg-12 -->
-	        </div>
-	        <!-- /.row -->
-	    </div>
-	    <!-- /.container-fluid -->
+	                 
+                <!-- **每頁不同的內容 end** -->     
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
+		</div>
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 	</div>
-	<!-- /#page-wrapper -->
-	
-	</div>
-	<!-- /#wrapper -->
+	<!-- /end page container -->
 	
 	<script type="text/javascript">
 	

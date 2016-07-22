@@ -20,7 +20,7 @@
 	<!-- 一定要放在Header、NavBar css的後面  -->
     <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
 	
-</style>
+	<style></style>
 </head>
 <body>
 	<!-- Loading animate -->

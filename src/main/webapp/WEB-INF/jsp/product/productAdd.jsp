@@ -5,51 +5,43 @@
 <html>
 <head>
 
-	<!-- Header, NavBar -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>productAdd</title>
+
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/metisMenu.min.css" rel="stylesheet">
-	<link href="/css/sb-admin-2.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="/css/bms-customize.css" rel="stylesheet" >
 	
+	<!--  BASE CSS STYLE  -->
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bms/style.min.css" rel="stylesheet">
+	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	
+	<!--  BASE JS  -->
+	<script src="/js/bms/pace.min.js"></script>
 	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/sb-admin-2.js"></script>
-	
-	<!-- BootStrap 基本檔案  -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	
+	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/bms.js"></script>
+
 	<!-- 表單驗證  -->
-	<script 
-		src="/js/jquery.validate.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
 	
 	<!-- DatePicker -->
-	<link rel="stylesheet" 
-		href="/css/bootstrap-datetimepicker.min.css" />
-    <script
-    	src="/js/bootstrap-datetimepicker.min.js"></script>
-    <script
-    	src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/trirand/i18n/bootstrap-datetimepicker.zh-TW.js"></script>
     
     <!-- Dialog -->
-    <link rel="stylesheet" 
-		href="/css/bootstrap-dialog.min.css" />
-    <script
-    	src="/js/bootstrap-dialog.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap-dialog.min.css" />
+    <script src="/js/bootstrap-dialog.min.js"></script>
     	
     <!-- FileInput -->
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
     <script src="/js/fileinput.min.js"></script>
     
-    <script src="/js/metisMenu.min.js"></script>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>productAdd</title>
-	
 	<style>
+	
 		.col-md-6 {
 			margin-top: 20px;
 		}
@@ -62,229 +54,243 @@
 		textarea {
 		    resize: none;
 		}
+	
 	</style>
 	
 </head>
 <body>
 
-	<!-- 內文全部用wrapper包起來 -->
-	<div id="wrapper">
-	<!-- 加入上方及側邊Nav-Bar -->	
-	<c:import url="../bms_header.jsp" />
-	<c:import url="../bms_navbar-side.jsp" />
-		<!-- Page Content --> 
-		<div id="page-wrapper">
-		    <div class="container-fluid">
-		        <div class="row">
-		            <div class="col-lg-12">
-		                <!-- **每頁不同的內容從這裡開始** -->
-		                
-		                <div class="col-md-2"></div>
-						<div class="col-md-8">
-							<div class="panel panel-primary">
-								<div class="panel-heading">Product Add Form</div>
-								<div class="panel-body">
-									<form accept-charset="UTF-8"
-										action="" class="simple_form form-horizontal" id="addForm" method="post">
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="prodName">
-												prodName
-											</label>
-											<div class="col-sm-8">
-												<input class="string required form-control"
-													id="prodName" name="prodName"
-													placeholder="請輸入prodName" type="text"/>
-											</div>
-											<div class="col-sm-1"></div>
+	<!-- Loading animate -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+	
+	<!-- page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+	
+		<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+		<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
+	
+		<!-- page content -->
+		<div id="content" class="content">
+			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">產品資料</li>
+				<li class="active">新增產品</li>
+			</ol>
+			
+			<!-- page-header 每頁標題 副標 -->
+			<h1 class="page-header">新增產品資料<small></small></h1>
+			
+			<!-- 內文 -->
+			<div class="row">
+			    <div class="col-md-12 ui-sortable">
+	            <!-- **每頁不同的內容從這裡開始** -->
+	                
+	                <div class="col-md-2"></div>
+					<div class="col-md-8">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Product Add Form</div>
+							<div class="panel-body">
+								<form accept-charset="UTF-8"
+									action="" class="simple_form form-horizontal" id="addForm" method="post">
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="prodName">
+											prodName
+										</label>
+										<div class="col-sm-8">
+											<input class="string required form-control"
+												id="prodName" name="prodName"
+												placeholder="請輸入prodName" type="text"/>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="brandId">
-												<abbr title="required">*</abbr>
-												brandId
-											</label>
-											<div class="col-sm-8">
-												<select class="form-control" id="brandId" name="brandId"></select>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="brandId">
+											<abbr title="required">*</abbr>
+											brandId
+										</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="brandId" name="brandId"></select>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="categoryId">
-												<abbr title="required">*</abbr>
-												categoryId
-											</label>
-											<div class="col-sm-8">
-												<select class="form-control" id="categoryId" name="categoryId"></select>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="categoryId">
+											<abbr title="required">*</abbr>
+											categoryId
+										</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="categoryId" name="categoryId"></select>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="weight">
-												weight
-											</label>
-											<div class="col-sm-8">
-												<input class="required number form-control"
-													id="weight" name="weight"
-													placeholder="請輸入weight" type="text"/>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="weight">
+											weight
+										</label>
+										<div class="col-sm-8">
+											<input class="required number form-control"
+												id="weight" name="weight"
+												placeholder="請輸入weight" type="text"/>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="score">
-												score
-											</label>
-											<div class="col-sm-8">
-												<input class="required number form-control"
-													id="score" name="score"
-													placeholder="請輸入score" type="text"/>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="score">
+											score
+										</label>
+										<div class="col-sm-8">
+											<input class="required number form-control"
+												id="score" name="score"
+												placeholder="請輸入score" type="text"/>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="price">
-												price
-											</label>
-											<div class="col-sm-8">
-												<input class="required digits form-control"
-													id="price" name="price"
-													placeholder="請輸入price" type="text"/>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="price">
+											price
+										</label>
+										<div class="col-sm-8">
+											<input class="required digits form-control"
+												id="price" name="price"
+												placeholder="請輸入price" type="text"/>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="capacity">
-												capacity
-											</label>
-											<div class="col-sm-8">
-												<input class="required digits form-control"
-													id="capacity" name="capacity"
-													placeholder="請輸入capacity" type="text"/>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="capacity">
+											capacity
+										</label>
+										<div class="col-sm-8">
+											<input class="required digits form-control"
+												id="capacity" name="capacity"
+												placeholder="請輸入capacity" type="text"/>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="launchDate">
-												launchDate
-											</label>
-											<div class="col-sm-8">
-								                <div class="input-group date" id="datetimepicker">
-								                    <input class="form-control" 
-								                    	id="launchDate" name="launchDate"
-								                    	type="text" />
-								                    <span class="input-group-addon">
-								                        <span class="glyphicon glyphicon-calendar"></span>
-								                    </span>
-								                </div>
-									        </div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="launchDate">
+											launchDate
+										</label>
+										<div class="col-sm-8">
+							                <div class="input-group date" id="datetimepicker">
+							                    <input class="form-control" 
+							                    	id="launchDate" name="launchDate"
+							                    	type="text" />
+							                    <span class="input-group-addon">
+							                        <span class="glyphicon glyphicon-calendar"></span>
+							                    </span>
+							                </div>
+								        </div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="mainIgdt">
+											<abbr title="required">*</abbr>
+											mainIgdt
+										</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="mainIgdt" name="mainIgdt">
+												<option value="1">1. 主成分1</option>
+												<option value="2">2. 主成分2</option>
+												<option value="3">3. 主成分3</option>
+											</select>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="mainIgdt">
-												<abbr title="required">*</abbr>
-												mainIgdt
-											</label>
-											<div class="col-sm-8">
-												<select class="form-control" id="mainIgdt" name="mainIgdt">
-													<option value="1">1. 主成分1</option>
-													<option value="2">2. 主成分2</option>
-													<option value="3">3. 主成分3</option>
-												</select>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="concentration">
+											concentration
+										</label>
+										<div class="col-sm-8">
+											<input class="required number form-control"
+												id="concentration" name="concentration"
+												placeholder="請輸入concentration" type="text"/>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="concentration">
-												concentration
-											</label>
-											<div class="col-sm-8">
-												<input class="required number form-control"
-													id="concentration" name="concentration"
-													placeholder="請輸入concentration" type="text"/>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="prodDesc">
+											prodDesc
+										</label>
+										<div class="col-sm-8">
+											​<textarea class="string required form-control" 
+												id="prodDesc" name="prodDesc" 
+												rows="5" cols="50"></textarea>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="prodDesc">
-												prodDesc
-											</label>
-											<div class="col-sm-8">
-												​<textarea class="string required form-control" 
-													id="prodDesc" name="prodDesc" 
-													rows="5" cols="50"></textarea>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="prodDesc">
+											prodImgFile
+										</label>
+										<div class="col-sm-8">
+											<input id="prodImgFile" name="prodImgFile" type="file" class="file-loading">
+											<script>
+											$(document).on('ready', function() {
+											    $("#prodImgFile").fileinput({
+											        showUpload: false,
+											        maxFileCount: 1,
+											        mainClass: "input-group-sm",
+											    });
+											});
+											</script>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="prodDesc">
-												prodImgFile
-											</label>
-											<div class="col-sm-8">
-												<input id="prodImgFile" name="prodImgFile" type="file" class="file-loading">
-												<script>
-												$(document).on('ready', function() {
-												    $("#prodImgFile").fileinput({
-												        showUpload: false,
-												        maxFileCount: 1,
-												        mainClass: "input-group-sm",
-												    });
-												});
-												</script>
-											</div>
-											<div class="col-sm-1"></div>
+										<div class="col-sm-1"></div>
+									</div>
+									
+									<!--
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="prodImgFile">File</label>
+										<div class="col-sm-9">
+											<input class="file optional" id="user_horizontal_file"
+												name="user_horizontal[file]" type="file" />
 										</div>
-										
-										<!--
-										<div class="form-group">
-											<label class="col-sm-3 control-label" for="prodImgFile">File</label>
-											<div class="col-sm-9">
-												<input class="file optional" id="user_horizontal_file"
-													name="user_horizontal[file]" type="file" />
-											</div>
+									</div>
+									-->
+									
+									<div class="form-group">
+										<div class="col-sm-3"></div>	
+										<div class="col-sm-7">
+											<input class="btn btn-primary" type="button" 
+												id="save" name="save" value="Save" />
+											<input class="btn btn-primary" type="button" 
+												id="clear" name="clear" value="Reset" />
+											<input class="btn btn-primary" type="button" 
+												id="cancel" name="cancel" value="Cancel" 
+												onClick="location='/products/list'" />
 										</div>
-										-->
-										
-										<div class="form-group">
-											<div class="col-sm-3"></div>	
-											<div class="col-sm-7">
-												<input class="btn btn-primary" type="button" 
-													id="save" name="save" value="Save" />
-												<input class="btn btn-primary" type="button" 
-													id="clear" name="clear" value="Reset" />
-												<input class="btn btn-primary" type="button" 
-													id="cancel" name="cancel" value="Cancel" 
-													onClick="location='/products/list'" />
-											</div>
-											<div class="col-sm-2"></div>
-										</div>
-									</form>
-								</div>
+										<div class="col-sm-2"></div>
+									</div>
+								</form>
 							</div>
 						</div>
-						<div class="col-md-2"></div>
-		                
-		                <!-- **每頁不同的內容 end** -->
-		            </div>
-		            <!-- /.col-lg-12 -->
-		        </div>
-		        <!-- /.row -->
-		    </div>
-		    <!-- /.container-fluid -->
+					</div>
+					<div class="col-md-2"></div>
+	                 
+                <!-- **每頁不同的內容 end** -->
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
 		</div>
-		<!-- /#page-wrapper -->
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 	</div>
-	<!-- /#wrapper -->
-	
+	<!-- /end page container -->
+
 	<script type="text/javascript">
 	
 		$(function() {

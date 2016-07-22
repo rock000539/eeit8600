@@ -8,106 +8,119 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductList</title>
 	
-	<!-- Header、NavBar js -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/sb-admin-2.js"></script>
-	
-	<!-- jqGrid js、css -->
-    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
-    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/css/bootstrap.min.css"> 
-	
-	<!-- 一定要放在jqGrid的js後面  -->
-	<script src="/js/metisMenu.min.js"></script>
-	
-	<!-- Header、NavBar css -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/metisMenu.min.css" rel="stylesheet">
-	<link href="/css/sb-admin-2.css" rel="stylesheet">
+	
+	<!--  BASE CSS STYLE  -->
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/css/bms-customize.css" rel="stylesheet" >
+	<link href="/css/bms/style.min.css" rel="stylesheet">
+	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	
+	<!--  BASE JS  -->
+	<script src="/js/bms/pace.min.js"></script>
 	
 	<!-- 一定要放在Header、NavBar css的後面  -->
     <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
 	
-	<script>
-		$.jgrid.defaults.width = 780;
-	</script>
-	
 	<style>
-		.ui-th-column {
+		
+		.ui-th-column, #grid th {
 			text-align: center;
+			padding-left: 3px;
 		}
+		
+		.ui-jqgrid .ui-jqgrid-btable tbody tr.jqgrow td {
+			vertical-align: middle;
+			padding-left: 3px;
+		}
+		
 		.center .ui-jqgrid {
     		margin-left: auto;
     		margin-right: auto;
 		}
-		/*
-		.ui-jqgrid tr.jqgrow td {
-			line-height: 50px;
- 			text-align: center;
- 		}
- 		*/
+		
 	</style>
 	
 </head>
 <body>
 	
-	<!-- 內文全部用wrapper包起來 -->
-	<div id="wrapper">
+	<!-- Loading animate -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	
-	<!-- 加入上方及側邊Nav-Bar -->
-	<c:import url="../bms_header.jsp" />
-	<c:import url="../bms_navbar-side.jsp" />
+	<!-- page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 	
-	<!-- Page Content --> 
-	<div id="page-wrapper">
-	    <div class="container-fluid">
-	        <div class="row">
-	            <div class="col-lg-12">
-	                <!-- **每頁不同的內容從這裡開始** -->
+		<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+		<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
+	
+		<!-- page content -->
+		<div id="content" class="content">
+			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">產品資料</li>
+			</ol>
+			
+			<!-- page-header 每頁標題 副標 -->
+			<h1 class="page-header">產品資料列表 <small>產品新增 / 修改 / 刪除</small></h1>
+			
+			<!-- 內文 -->
+			<div class="row">
+			    <div class="col-md-12 ui-sortable">
+	            <!-- **每頁不同的內容從這裡開始** -->
 	                
 	                <div id="grid" class="jqGrid" style="margin-top:20px">
 					    <table id="jqGrid"></table>
 					    <div id="jqGridPager"></div>
 					</div>
-	                
-	                <!-- **每頁不同的內容 end** -->
-	            </div>
-	            <!-- /.col-lg-12 -->
-	        </div>
-	        <!-- /.row -->
-	    </div>
-	    <!-- /.container-fluid -->
+	                 
+                <!-- **每頁不同的內容 end** -->     
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
+		</div>
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 	</div>
-	<!-- /#page-wrapper -->
+	<!-- /end page container -->
 	
-	</div>
-	<!-- /#wrapper -->
+	<!--  BASE JS  -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/bms.js"></script>
+	
+	<!-- jqGrid js -->
+    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
+    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
+    
+    <script>
+		$.jgrid.defaults.width = 780;
+	</script>
 	
     <script type="text/javascript">
     
         $(function () {
 			
             $("#jqGrid").jqGrid({
-                url: '/products/select_jqgrid',
+                url: '/products/select',
                 mtype: "GET",
 				styleUI : 'Bootstrap',
                 datatype: "json",
-                jsonReader: {
-					root: "content",
-			      	page: "number"+1, 
-			      	total: "totalPages", 
-			      	records: "totalElements", 
-				    repeatitems: false,
-			    },
+//                 jsonReader: {
+// 					root: "content",
+// 			      	page: "number"+1, 
+// 			      	total: "totalPages", 
+// 			      	records: "totalElements", 
+// 				    repeatitems: false,
+// 			    },
                 colModel: [
 					{
 						label: '',
 					    name: '',
-					    width: 75,
+					    width: 60,
 					    align: 'center',
 					    resizable: false,
 					    formatter: 'actions',
@@ -150,7 +163,7 @@
 					{
 						label: 'Name',
 						name: 'prodName',
-						width: 80,
+						width: 170,
 						align: 'center',
 						resizable: false,
 						editable: true,
@@ -172,65 +185,65 @@
 					{ 
 						label: 'Weight', 
 						name: 'weight', 
-						width: 70,
+						width: 80,
 						align: 'center',
 						resizable: false,
 					},
 					{ 
 						label: 'Score', 
 						name: 'score', 
-						width: 70,
+						width: 80,
 						align: 'center',
 						resizable: false,
 					},
 					{ 
 						label: 'Price', 
 						name: 'price', 
-						width: 70,
+						width: 80,
 						align: 'center',
 						resizable: false,
 					},
 					{ 
 						label: 'Capacity', 
 						name: 'capacity', 
-						width: 90,
+						width: 100,
 						align: 'center',
 						resizable: false,
 					},
 					{ 
 						label: 'Date', 
 						name: 'launchDate', 
-						width: 100,
+						width: 120,
 						align: 'center',
 						resizable: false,
 					},
 					{
 						label: 'ProdDesc', 
 						name: 'prodDesc', 
-						width: 100,
+						width: 120,
 						align: 'center',
 					},
 					{ 
 						label: 'MainIgdt', 
 						name: 'mainIgdt', 
-						width: 80,
+						width: 100,
 						align: 'center',
 						resizable: false,
 					},
 					{ 
 						label: 'Concn', 
 						name: 'concentration', 
-						width: 90,
+						width: 70,
 						align: 'center',
 						resizable: false,
 					},
 					{
 						label: 'Logo',
 			            name: '',
-			            width: 100,
+			            width: 80,
 			            fixed: true,
 			            formatter: function (cellvalue, options, rowObject) {
-			            	var str = '/products/show?prodId='+ rowObject.prodId;
+			            	var str = '/products/show?prodImg='+ rowObject.prodImg;
 			                return "<img height='30' src=" + str + " />";
 			            },
 						align: 'center'
@@ -238,51 +251,25 @@
 					{ 
 						label: 'Img', 
 						name: 'prodImg', 
-						width: 150,
+						width: 400,
 						align: 'center',
 						resizable: false,
 					},
                 ],
                 width: 'auto', // 寬度
-				height: 380, // 高度
+				height: 400, // 高度
 				shrinkToFit: false,
 				rowNum: 10, // 每頁顯示列數
 				rownumbers: true, // 第n列
 				rownumWidth: 35, // 第n列寬度
 				caption: 'Products Grid View', // 最上方的標題和收合Table
-				loadonce: false, // 資料是否只載入一次
+				loadonce: true, // 資料是否只載入一次
 				viewrecords: true, // 右下角的 1-10 共n條
 				pager: '#jqGridPager',
 				sortable: false,
 				beforeRequest: function () {
                     responsive_jqgrid($(".jqGrid"));
                 },
-//                 onSelectRow: function (rowid) {
-                	
-//                     var $grid = $('#jqGrid');
-//                     var iRow = $("#" + rowid)[0].rowIndex;
-
-//                     $grid.jqGrid('editRow', iRow, {
-//                     	keys : true,
-//                     	oneditfunc: function() {
-//                     		alert('onedit');
-//                             return true;
-//                         },
-//                     	successfunc: function() {
-//                             alert('success');
-//                             return true;
-//                         },
-//                     	url: '/products/add',
-//                         extraparam: {},
-//                     	aftersavefunc : function() {
-//                     		alert('aftersavefunc');
-//                     	},
-//                     	errorfunc: null,
-//                     	afterrestorefunc: null,
-//                     	restoreAfterError: true,
-//                     	mtype: "POST",
-//                     });
-//                 },
             });
             
          	// jQuery Grid Navigator
@@ -341,6 +328,8 @@
 	        	},
 			});
          	
+			$("#jqGrid").jqGrid('filterToolbar', { searchOnEnter: true, enableClear: false });
+         	
 			// Change Caption Position (TitleBar)
 			$("#jqGrid").closest("div.ui-jqgrid-view").children("div.ui-jqgrid-titlebar").css("text-align", "center");
         });
@@ -354,6 +343,9 @@
             jqgrid.find('.ui-jqgrid-sdiv').addClass('clear-margin span12').css('width', '');
             jqgrid.find('.ui-jqgrid-pager').addClass('clear-margin span12').css('width', '');
         }
+        
+        $('td').css('padding-left', '20px');
+        console.log($('td'))
  
    </script>
 	
