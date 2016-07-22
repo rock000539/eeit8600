@@ -79,7 +79,8 @@ public class ProdIngreListController {
 	@RequestMapping(value="/put",method=RequestMethod.POST) // 後台新增資料頁面用
 	@ResponseBody
 	@Transactional
-	public List<String>  editProductIngredient(Model model, @RequestParam String[] IngredientNames ,@RequestParam String proName,@RequestParam String proId  ) {
+	public List<String>  editProductIngredient
+	(Model model, @RequestParam String[] IngredientNames ,@RequestParam String proName,@RequestParam String proId  ) {
 		String findAllProductAndIngredietRelativeWithProId="select [ingredid] from [proingrelist] where [prodid]="+proId;
 		
 		List<Object> oleResultList=manager.createNativeQuery(findAllProductAndIngredietRelativeWithProId).getResultList();
