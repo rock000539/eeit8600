@@ -1,7 +1,7 @@
 .detail-list{
 	padding:0 0 0 0;
 	font-size:14px;
-	margin-bottom:40px;
+	margin-bottom: 20px;
 }
 .detail-list-col1{
 	float:left;
@@ -20,6 +20,8 @@
 #member-header{
 	padding-bottom: 15px;
 	border-bottom: 1px solid #313131;
+	margin-top:50px;
+	margin-bottom: 40px;
 }
 #member-header>div.detail-list-col1{
 	width: 80px;
@@ -52,7 +54,7 @@
 
 #navigationDiv{
 	position: fixed;
-	margin-top: 10px;
+	margin-top: 70px;
 }
 #navigationMenu li{
 	list-style:none;
@@ -72,18 +74,4 @@
 #navigationMenu span.nav-active{
 	color: #313131;
 	
-}
-#editProfile, #editProfile:visited, 
-#editProfile:focus, #editProfile:active{
-	display: inline-block;
-	height: 24px;
-	line-height: 24px;
-	background-color: #000;
-	border-radius: 0px;
-	font-weight: bold;
-	padding: 0 10px 0 10px;
-}
-#editProfile:hover{
-	background: #fff;
-	color: #000;
 }

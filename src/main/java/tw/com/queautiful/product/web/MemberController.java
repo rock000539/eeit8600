@@ -375,12 +375,13 @@ public class MemberController {
 	@ResponseBody
 	public Member update(@RequestPart(name="member") Member member, 
 			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile){
-		
+		log.debug(member.getMemberId().toString());
 		if(memberImgFile!=null){
 			String mId = "member"+member.getMemberId();
 			String memberImg = FileProcessing.saveImg(mId, "member", memberImgFile);
 			member.setMemberImg(memberImg);
 		}
+		log.debug(member.getMemberId().toString());
 		log.debug(member.getMemberImg());//test
 		memberService.update(member);
 		return memberService.getById(member.getMemberId());
