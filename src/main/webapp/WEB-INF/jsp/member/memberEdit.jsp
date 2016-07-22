@@ -33,66 +33,66 @@
 
 <form accept-charset="UTF-8" class="form-horizontal" id="editForm">
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">ID</label>
+	    <label class="col-sm-3 control-label" for="memberId">ID</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberId" readonly="readonly"
-	    		name="lastName" value="${member.memberId}">
+	    		name="memberId" value="${member.memberId}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">EMAIL</label>
+	    <label class="col-sm-3 control-label" for="email">EMAIL</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="email"  readonly="readonly"
-	    		name="lastName" value="${member.email}">
+	    		name="email" value="${member.email}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">停權狀態</label>
+	    <label class="col-sm-3 control-label" for="memberSuspend">停權狀態</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberSuspend" 
-	    		name="lastName" value="${member.memberSuspend}">
+	    		name="memberSuspend" value="${member.memberSuspend}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">停權天數</label>
+	    <label class="col-sm-3 control-label" for="memberSuspendDays">停權天數</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberSuspendDays" 
-	    		name="lastName" value="${member.memberSuspendDays}">
+	    		name="memberSuspendDays" value="${member.memberSuspendDays}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">停權日期</label>
+	    <label class="col-sm-3 control-label" for="memberSuspendStart">停權日期</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberSuspendStart" 
-	    		name="lastName" value="${member.memberSuspendStart}">
+	    		name="memberSuspendStart" value="${member.memberSuspendStart}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">停權到期日</label>
+	    <label class="col-sm-3 control-label" for="memberSuspendExp">停權到期日</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberSuspendExp" readonly="readonly"
-	    		name="lastName" value="${member.memberSuspendExp}">
+	    		name="memberSuspendExp" value="${member.memberSuspendExp}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">累計停權次數</label>
+	    <label class="col-sm-3 control-label" for="memberSuspendCount">累計停權次數</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberSuspendCount" readonly="readonly"
-	    		name="lastName" value="${member.memberSuspendCount}">
+	    		name="memberSuspendCount" value="${member.memberSuspendCount}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">暱稱</label>
+	    <label class="col-sm-3 control-label" for="nickname">暱稱</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="nickname" readonly="readonly"
-	    		name="lastName" value="${member.nickname}">
+	    		name="nickname" value="${member.nickname}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">名字</label>
+	    <label class="col-sm-3 control-label" for="firstName">名字</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="firstName"  readonly="readonly"
-	    		name="lastName" value="${member.firstName}">
+	    		name="firstName" value="${member.firstName}">
 	    </div>
 	</div>
 	<div class="form-group">
@@ -103,51 +103,51 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">性別</label>
+	    <label class="col-sm-3 control-label" for="gender">性別</label>
 	    <div class="col-sm-7">
 	    	<label class="radio-inline">
 			    <input type="radio" readonly="readonly"
-			    	name="gender" value="F" ${member.gender=='F'? 'checked':''}> 女性
+			    	name="gender" value="Female" ${member.gender=='Female'? 'checked':''}> 女性
 			</label>
 	    	<label class="radio-inline">
 			    <input type="radio" readonly="readonly"
-			    	name="gender" value="M" ${member.gender=='M'? 'checked':''}> 男性
+			    	name="gender" value="Male" ${member.gender=='Male'? 'checked':''}> 男性
 		    </label>
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">生日</label>
+	    <label class="col-sm-3 control-label" for="birthDay">生日</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="birthDay" readonly="readonly"
-	    		name="lastName" value="${member.birthDay}">
+	    		name="birthDay" value="${member.birthDay}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">膚質</label>
+	    <label class="col-sm-3 control-label" for="skinType">膚質</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="skinType"  readonly="readonly"
-	    		name="lastName" value="${member.skinType}">
+	    		name="skinType" value="${member.skinType}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">大頭貼照</label>
+	    <label class="col-sm-3 control-label" for="memberImg">大頭貼照</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="memberImg" readonly="readonly"
-	    		name="lastName" value="${member.memberImg}">
+	    		name="memberImg" value="${member.memberImg}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">電話</label>
+	    <label class="col-sm-3 control-label" for="phone">電話</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="phone" readonly="readonly"
-	    		name="lastName" value="${member.phone}">
+	    		name="phone" value="${member.phone}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">地址</label>
+	    <label class="col-sm-3 control-label" for="addr">地址</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="addr" readonly="readonly"
-	    		name="lastName" value="${member.addr}">
+	    		name="addr" value="${member.addr}">
 	    </div>
 	</div>
 

@@ -227,7 +227,7 @@ $(function () {
 			align: 'center',
 			resizable: false,
 			formatter: function (cellvalue, options, rowObject) {
-            	if(rowObject.gender=="F"){
+            	if(rowObject.gender=="Female"){
             		return "女";
             	}else{
                 	return "男";

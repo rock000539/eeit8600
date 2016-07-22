@@ -69,7 +69,7 @@
                  <!-- /.nav-second-level -->
              </li>
              <li>
-                 <a href=".jsp"><i class="fa fa-users fa-fw"></i> 處理會員意見</a>
+                 <a href="<% request.getContextPath(); %>/webmail/webmaillist"><i class="fa fa-users fa-fw"></i> 處理會員意見</a>
                  <!-- /.nav-second-level -->
              </li>
          </ul>

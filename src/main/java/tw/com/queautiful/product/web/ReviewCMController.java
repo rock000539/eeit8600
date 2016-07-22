@@ -2,7 +2,13 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.crsh.console.jline.internal.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +27,7 @@ import tw.com.queautiful.product.service.ReviewService;
 @RequestMapping("/reviewCMs")
 public class ReviewCMController {
 
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private ReviewCMService service;
 
@@ -49,13 +56,20 @@ public class ReviewCMController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public ReviewCM insert(@RequestBody ReviewCM reviewCM){
-		
+	public ReviewCM insert(@RequestBody ReviewCM reviewCM,HttpServletRequest request){
+		log.debug("{}",reviewCM);
+		reviewCM.setReviewCMTime(new java.sql.Timestamp(System.currentTimeMillis()));
+//		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		//FK
-		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
-		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
+//		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
+//		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
 		
-		
+		log.debug("{}",reviewCM.getReviewCMTime());
+		log.debug("{}",reviewCM);
+//		log.debug("{}",reviewCM.getReviewId());
+		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
+		reviewCM.setReview(reveiwService.getById(reviewCM.getReviewId()));
+	
 		service.insert(reviewCM);
 		return reviewCM;
 	}

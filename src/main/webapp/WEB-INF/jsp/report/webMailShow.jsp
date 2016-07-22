@@ -1,103 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/metisMenu.min.css" rel="stylesheet">
-<link href="/css/sb-admin-2.css" rel="stylesheet">
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/css/bms-customize.css" rel="stylesheet" >
-<link href="/css/jquery-ui.min.css" rel="stylesheet" >
-
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/metisMenu.min.js"></script>
-<script src="/js/sb-admin-2.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
-
-<script>
-$(function(){
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+	<title>Bms</title>
 	
-	$(".details").click(function (e){
-		var btnP=$(this);
-		var webMailId=btnP.attr("name");
-		var webMail=$(".details[name*="+webMailId+"]")
-		
-		var webMailSender=webMail[0].firstChild.nodeValue;
-		var mailTitle=webMail[1].firstChild.nodeValue;
-		var mailContent=webMail[2].firstChild.nodeValue;
-		var mailContentType=webMail[3].firstChild.nodeValue;
-		var mailSendDate=webMail[4].firstChild.nodeValue;
-					
-		$("#mailDetailsTable").empty();
-		$("#mailDetailsTable").append(
-				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
-				webMailId+"></td></tr><tr><td>標題</td><td>"
-				+mailTitle+"</td><td>日期</td><td>"+mailSendDate+"</td></tr>"
-				+"<tr><td>內文</td><td><div>"+mailContent+"</div></td></tr>"
-				);
-		
-		$("#myModal").modal("toggle");
-		
-				
-	})//end $(".details").click
-	
-	
-	$("#insertNewIngredient").click(function(){
-		var webMailId=$("#webMailId").attr("value");
-		
-		$.ajax({
-			"url":"/webmail/postReport",type:"POST",
-			data:{"webMailId":webMailId},
-			success:function(result){
-				alert(result);
-				$("#myModal").modal("toggle");
-			}
-			
-			
-		});
-		
-	})
-	
-	
-})
-
-</script>
+	<!--  BASE CSS STYLE  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bms/style.min.css" rel="stylesheet">
+	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	<!--  BASE JS  -->
+	<script src="/js/bms/pace.min.js"></script>
 
 </head>
 <body>
+	<!-- Loading animate -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 
-	<table class="table">
+	<!-- page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+	
+	<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
+	
+		<!-- page content -->
+		<div id="content" class="content">
+			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li class="active"><a href="javascript:;">Home</a></li>
+			</ol>
+			
+			<!-- page-header 每頁標題/副標 -->
+			<h1 class="page-header"> 管理員信箱 <small>顧客服務、通知</small></h1>
+			
+			<!-- 內文 -->
+			<div class="row">
+			    <div class="col-md-12 ui-sortable">
+	            <!-- **每頁不同的內容從這裡開始** -->
+	                   
+	                   <div class="panel panel-inverse">
+	                       <div class="panel-heading">
+	                           <div class="panel-heading-btn">
+	                               <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+	                               <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" id="reloadMail"><i class="fa fa-repeat"></i></a>
+	                               <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+	                               <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+	                           </div>
+	                           <h4 class="panel-title"> Mail Box</h4>
+	                       </div>
+ 	<div class="panel-body">
+	 <!-- //////////////////////////////////////////////////////////// -->
+
+	<table class="table" id="mailTable">
 	<tr>
-	<th>發信人</th><th>標題</th><th>內容</th><th>狀態</th><th>信件類型</th><th>發信日期</th>
+	<th>發信人</th><th>標題</th><th>內容</th><th>狀態</th><th>信件類型</th><th>發信日期</th><th></th>
 	</tr>
 	<c:forEach var="items" items="${result}">	
 	<tr>
 	<td class="details"  name="${items.webMail.webMailId}" value="${items.webMail.webMailSender}">
-	${items.nickName}
+	<a href="#">${items.nickName}</a>
 	</td>
-	<td class="details" name="${items.webMail.webMailId}">${items.webMail.mailTitle}</td>
-	<td class="details" name="${items.webMail.webMailId}">${items.webMail.mailContent}</td>
-	<td id="mailReadType" class="details" name="${items.webMail.webMailId}">
+	<td class="details" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailTitle}</a></td>
+	<td class="details" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContent}</a></td>
+	<td class="details mailReadType" name="${items.webMail.webMailId}">
 	<c:if test="${items.webMail.mailReadType ==true}">
-	已讀
+	<a href="#">已讀</a>
 	</c:if>
 	<c:if test="${items.webMail.mailReadType ==false}">
-	未讀
+	<a href="#">未讀</a>
 	</c:if>
 	</td>
-	<td class="details" name="${items.webMail.webMailId}">${items.webMail.mailContentType}</td>
-	<td class="details" name="${items.webMail.webMailId}">${items.webMail.mailSendDate}</td>
+	<td class="details" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	<td class="details" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailSendDate}</a></td>
+	<td>
+	<input type="button" class="btn deleteBtn" webMailId="${items.webMail.webMailId}" value="Delete"></td>
 	</tr>
+	
 
 	</c:forEach>
 	</table>
@@ -114,9 +102,7 @@ $(function(){
                data-dismiss="modal" aria-hidden="true">
                   &times;
             </button>
-            <h4 class="modal-title" id="myModalLabel">
-            
-            </h4>
+            <h4 class="modal-title" id="myModalLabel"></h4>
          </div>
          <form id="NewIngredientForm">
          <div class="modal-body" id="modal-body">
@@ -136,41 +122,187 @@ $(function(){
          </div>
       </div><!-- /.modal-content -->
 </div><!-- /.modal -->
-
-<!-- 結束model1 ----------------------------------------------------------------->
-<!-- 使用model2 ----------------------------------------------------------------->
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
-   aria-labelledby="myModalLabel2" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel2">
-               ${productName}成份清單
-            </h4>
-         </div>
-         <div class="modal-body" id="modal-body2">
-<!-- 添加一些文本22222			 -->
-		<table>
+	        <!-- //////////////////////////////////////////////////////////// -->    
+	                       </div>
+	                   </div> <!-- /end .panel -->
+	                   
+	            <!-- **每頁不同的內容 end** -->     
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
+		</div>
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+	</div>
+	<!-- /end page container -->
+	
+	<!--  BASE JS  -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/bms.js"></script>
+		<script>
+$(function(){
+	//功能1 跳出modal-----
+	$(".details").click(function (e){
+		var btnP=$(this);
+		var webMailId=btnP.attr("name");
+		var webMail=$(".details[name*="+webMailId+"]")
 		
-		</table>
+		var webMailSender=webMail[0].children[0].innerHTML;
+		var mailTitle=webMail[1].children[0].innerHTML;
+		var mailContent=webMail[2].children[0].innerHTML;
+		var mailContentType=webMail[3].children[0].innerHTML;
+		var mailSendDate=webMail[5].children[0].innerHTML;
+		
+		$("#myModalLabel").empty();
+		$("#myModalLabel").append("標題 :"+mailTitle);
+		$("#mailDetailsTable").empty();
+		$("#mailDetailsTable").append(
+				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
+				webMailId+"></td><td>日期</td><td>"+mailSendDate+"</td></tr>"
+				+"<tr><td>內容</td><td colspan='4'><div>"+mailContent+"</div></td></tr>"
+				);
+		//功能1-2 修改信件為已讀---
+			$.ajax({
+			"url":"/webmail/changemailreadtype",type:"POST",
+			data:{"webMailId":webMailId},
+			success:function(result){
+					$(".mailReadType[name*="+webMailId+"]").empty();
+					$(".mailReadType[name*="+webMailId+"]").append("<a href='#'>已讀</a>");
+				}
+				});
+		
+		$("#myModal").modal("toggle");
+		
+				
+	})//end $(".details").click
+	
+	
+	//功能2 確認並送出檢舉----
+	$("#insertNewIngredient").click(function(){
+		var webMailId=$("#webMailId").attr("value");
+		
+		$.ajax({
+			"url":"/webmail/postReport",type:"POST",
+			data:{"webMailId":webMailId},
+			success:function(result){
+				alert(result);
+				$("#myModal").modal("toggle");
+			}
+		});
+		
+	})
+	
+	
+	
+	//功能3-刪除mail
+	$(".deleteBtn").click(function(e){
+		var webMailId=e.target.getAttribute("webMailId");
+		var targetBtn=$(this);
+		$.ajax({
+			"url":"/webmail/deleteMail",type:"POST",
+			data:{"webMailId":webMailId},
+			success:function(result){
+				alert(result);
+				targetBtn.parent().parent().remove();
+			}
+		});
+	})	
+	//功能4-reload 清單
+	$("#reloadMail").click(function(){
+		
+		$.ajax({
+			"url":"/webmail/reloadMail",type:"POST",
+			data:{},
+			success:function(WebMails){
+				
+				$("#mailTable td").parent().remove();
+				for(var i=0;i<WebMails.length;i++){
+					var nickName="";
+					var webMailSender=WebMails[i].webMailSender;
+					
+					$.ajax({
+						"url":"/webmail/getnickname",type:"POST",
+						data:{"webMailSender":webMailSender},
+						success:function(result){							
+							nickName=result;
+						}
+						});
+					
+					var mailReadType="";
+					if(WebMails[i].mailReadType){
+						mailReadType="已讀";
+					}else{
+						mailReadType="未讀"
+					}
+	$("#mailTable").append("<tr><td class='details'name='"+WebMails[i].webMailId
+	+"' value='WebMails.webMailSender}'><a href='#'>"+nickName+"</a></td>"
+	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailTitle+"</a></td>"
+	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailContent+"</a></td>"
+	+"<td class='details mailReadType' name='"+WebMails[i].webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
+	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailContentType+"</a></td>"
+	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailSendDate+"</a></td>"
+	+"<td><input type='button' class='btn deleteBtn' webMailId='"+WebMails[i].webMailId+"' value='Delete'></td></tr>"
+	);//end of append
+			}//end of for loop
 			
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
-               data-dismiss="modal">重新修改
-            </button>
-           <a href="/prodIngreList/list" >
-           <button type="button" class="btn btn-primary">
-               	確認
-            </button></a>
-         </div>
-      </div><!-- /.modal-content -->
-</div><!-- /.modal -->
-<!-- 結束model2 ----------------------------------------------------------------->
+			//重新綁上事件-------------------------------------
+		$(".deleteBtn").click(function(e){
+		var webMailId=e.target.getAttribute("webMailId");
+		var targetBtn=$(this);
+		$.ajax({
+			"url":"/webmail/deleteMail",type:"POST",
+			data:{"webMailId":webMailId},
+			success:function(result){
+				alert(result);
+				targetBtn.parent().parent().remove();
+			}
+			});
+			})	
+			
+			$(".details").click(function (e){
+			var btnP=$(this);
+			var webMailId=btnP.attr("name");
+			var webMail=$(".details[name*="+webMailId+"]")
+		
+			var webMailSender=webMail[0].children[0].innerHTML;
+			var mailTitle=webMail[1].children[0].innerHTML;
+			var mailContent=webMail[2].children[0].innerHTML;
+			var mailContentType=webMail[3].children[0].innerHTML;
+			var mailSendDate=webMail[5].children[0].innerHTML;
+					
+			$("#mailDetailsTable").empty();
+			$("#mailDetailsTable").append(
+				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
+				webMailId+"></td></tr><tr><td>標題</td><td>"
+				+mailTitle+"</td><td>日期</td><td>"+mailSendDate+"</td></tr>"
+				+"<tr><td>內文</td><td><div>"+mailContent+"</div></td></tr>"
+				);
+			//功能1-2 修改信件為已讀---
+				$.ajax({
+				"url":"/webmail/changemailreadtype",type:"POST",
+				data:{"webMailId":webMailId},
+				success:function(result){
+					$(".mailReadType[name*="+webMailId+"]").empty();
+					$(".mailReadType[name*="+webMailId+"]").append("<a href='#'>已讀</a>");
+				}
+				});
+		
+		
+			$("#myModal").modal("toggle");
+		
+				
+			})//end $(".details").click
+			
+			//------------------------------------------
+			}//end of success function
+		});
+		
+	})
+	
+})
+</script>
 </body>
 </html>

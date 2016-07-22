@@ -159,19 +159,19 @@ public class MemberService {
 		return memberDao.findByEmailIs(email);
 	}
 
-	// 要改成傳Member，且前端可以傳特定日期
-	public void memberSuspend(Long id, Integer memberSuspendDays) {
-		log.debug("inside service{}, {}", id, memberSuspendDays); // test
-		Member member = memberDao.findOne(id);
-		Long milliToday = new java.util.Date().getTime();
-		java.sql.Date today = new java.sql.Date(milliToday);
-		Long milliSuspend = memberSuspendDays * 24 * 60 * 60 * 1000L;
-		new java.sql.Date(milliToday + milliSuspend);
+	// member停權, 天數:30天
+	public void memberSuspend(Long memberId) {
+		Integer memberSuspendDays = 30;
+		Member member = memberDao.findOne(memberId);
+		Calendar suspending = Calendar.getInstance();
+		suspending.add(Calendar.DATE, memberSuspendDays);
+		java.sql.Date memberSuspendExp = new java.sql.Date(suspending.getTimeInMillis());
 		member.setMemberSuspend(true);
-		member.setMemberSuspendStart(today);
+		member.setMemberSuspendStart(new java.sql.Date(new java.util.Date().getTime()));
 		member.setMemberSuspendDays(memberSuspendDays);
 		member.setMemberSuspendCount(member.getMemberSuspendCount() + 1);
-		member.setMemberSuspendExp(new java.sql.Date(milliToday + milliSuspend));
+		member.setMemberSuspendExp(memberSuspendExp);
+		log.debug("memberSuspendExp: {}", memberSuspendExp);
 		memberDao.save(member);
 	}
 		// 計算年齡

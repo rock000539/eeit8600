@@ -270,12 +270,17 @@ select {
 			},//end of messages			
 		});
 		
+<<<<<<< HEAD
 		$('#confirm').on('click',function(){
+=======
+		$('#save').on('click',function(){
+			
+			console.log(JSON.stringify($('#addForm').serializeObject()));
+>>>>>>> branch 'master' of https://github.com/rock000539/eeit8600.git
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
 // 			console.log(JSON.stringify(datas));
 			$('#content').val(CKEDITOR.instances['content'].getData());
-			console.log(JSON.stringify($('#addForm').serializeObject()));
 			$.ajax({
 					url:'/articles/insert',
 					type:'post',
@@ -285,8 +290,8 @@ select {
 					dataType:'json',
 					success:function(data){
 						location.href="/articles/listfms";
-// // 						console.log(data);
-// // 						console.log(data.articleTime);
+// 						console.log(data);
+// 						console.log(data.articleTime);
 // 						var t = data.articleTime;
 // 						$('#addForm')[0].reset();			
 // 						$('#result>h2').text('Insert Success');

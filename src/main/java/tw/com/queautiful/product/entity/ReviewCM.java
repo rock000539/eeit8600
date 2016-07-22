@@ -37,7 +37,7 @@ public class ReviewCM {
 
 	@Transient
 	private Long memberId;
-	
+
 	//心得留言內容
 	@Column(name="REVIEWCMMSG",length=200)
 	private String rcmMsg;
@@ -139,5 +139,17 @@ public class ReviewCM {
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
+
+	@Override
+	public String toString() {
+		return "ReviewCM [rcmId=" + rcmId + ", review=" + review
+				+ ", reviewId=" + reviewId + ", member=" + member
+				+ ", memberId=" + memberId + ", rcmMsg=" + rcmMsg
+				+ ", reviewCMTime=" + reviewCMTime + ", rcmShow=" + rcmShow
+				+ ", rcmReport=" + rcmReport + "]";
+	}
+	
+	
 }
+
 

@@ -48,7 +48,7 @@ public class Review {
 	
 	//心得留言
 	@OneToMany(mappedBy="review",fetch=FetchType.LAZY)
-	@OrderBy("REVIEWCMID ASC")
+	@OrderBy("REVIEWCMTIME DESC")
 	private Set<ReviewCM> reviewCMs;
 	
 	@Transient
