@@ -97,15 +97,6 @@
 				      </tr>
 				    </thead>
 				    <tbody>
-<!-- 				    <tr id="test"> -->
-<!-- 				        <td class="text-center"><i class="fa fa-exclamation fa-2x text-danger"></i></td> -->
-<!-- 				        <td> -->
-<!-- 				          <h4><a href="#">Important changes</a><br><small>Category description</small></h4> -->
-<!-- 				        </td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">6532</a></td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">152123</a></td> -->
-<!-- 				        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 1 years ago</small></td> -->
-<!-- 				      </tr> -->
 				    <c:forEach var="article" items="${articles}">
 				      <tr  data-type="${article.articleType}">
 				      	<c:choose>
@@ -143,69 +134,8 @@
 				        </td>
 				      </tr>
 				    </c:forEach>
-<!-- 				      <tr> -->
-<!-- 				        <td class="text-center"><i class="fa fa-exclamation fa-2x text-danger"></i></td> -->
-<!-- 				        <td> -->
-<!-- 				          <h4><a href="#">Important changes</a><br><small>Category description</small></h4> -->
-<!-- 				        </td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">6532</a></td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">152123</a></td> -->
-<!-- 				        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 1 years ago</small></td> -->
-<!-- 				      </tr> -->
 				    </tbody>
 				  </table>
-<!-- 				  <table class="table forum table-striped"> -->
-<!-- 				    <thead> -->
-<!-- 				      <tr> -->
-<!-- 				        <th class="cell-stat"></th> -->
-<!-- 				        <th> -->
-<!-- 				          <h3>Suggestions</h3> -->
-<!-- 				        </th> -->
-<!-- 				        <th class="cell-stat text-center hidden-xs hidden-sm">Topics</th> -->
-<!-- 				        <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th> -->
-<!-- 				        <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th> -->
-<!-- 				      </tr> -->
-<!-- 				    </thead> -->
-<!-- 				    <tbody> -->
-<!-- 				      <tr> -->
-<!-- 				        <td class="text-center"><i class="fa fa-heart fa-2x text-primary"></i></td> -->
-<!-- 				        <td> -->
-<!-- 				          <h4><a href="#">More more more</a><br><small>Category description</small></h4> -->
-<!-- 				        </td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">6532</a></td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">152123</a></td> -->
-<!-- 				        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td> -->
-<!-- 				      </tr> -->
-<!-- 				      <tr> -->
-<!-- 				        <td class="text-center"><i class="fa fa-magic fa-2x text-primary"></i></td> -->
-<!-- 				        <td> -->
-<!-- 				          <h4><a href="#">Haha</a><br><small>Category description</small></h4> -->
-<!-- 				        </td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">6532</a></td> -->
-<!-- 				        <td class="text-center hidden-xs hidden-sm"><a href="#">152123</a></td> -->
-<!-- 				        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 1 years ago</small></td> -->
-<!-- 				      </tr> -->
-<!-- 				    </tbody> -->
-<!-- 				  </table> -->
-<!-- 				  <table class="table forum table-striped"> -->
-<!-- 				    <thead> -->
-<!-- 				      <tr> -->
-<!-- 				        <th class="cell-stat"></th> -->
-<!-- 				        <th> -->
-<!-- 				          <h3>Open discussion</h3> -->
-<!-- 				        </th> -->
-<!-- 				        <th class="cell-stat text-center hidden-xs hidden-sm">Topics</th> -->
-<!-- 				        <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th> -->
-<!-- 				        <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th> -->
-<!-- 				      </tr> -->
-<!-- 				    </thead> -->
-<!-- 				    <tbody> -->
-<!-- 				      <tr> -->
-<!-- 				        <td></td> -->
-<!-- 				        <td colspan="4" class="center">No topics have been added yet.</td> -->
-<!-- 				      </tr> -->
-<!-- 				    </tbody> -->
-<!-- 				  </table> -->
 				</div>   <!-- end of ArticleList -->
 				
 				<div id="page_btn" class="col-sm-12 text-center"></div>
@@ -260,31 +190,20 @@
 	<script>
 	$(function(){
 		$('#allpost').on('click',function(){
-			$('tbody>tr').show();
+// 			$('tbody>tr').show();
+			$.redirect('/articles/listfms');
 		});
 		
-		$(".serviceBox_3").on('click',function(){
-			var aType = $(this).find('h3').text();
-			$('tbody>tr[data-type!='+aType+']').hide();
-			$('tbody>tr[data-type='+aType+']').show();
-		});
-
 // 		$(".serviceBox_3").on('click',function(){
-// 			console.log('hi');
-// 			console.log($(this).find('h3').text());
-// 			$.ajax({
-// 				url:'/articles/selectbyarticletype',
-// 				type:'POST',
-// 				contextType:'application/json; charset=utf-8;',
-// 				data:{'articleType':$(this).find('h3').text()},
-// 				dataType:'json',
-// 				success:function(result){
-// 					console.log(result);
-					
-// 				}
-				
-// 			});
+// 			var aType = $(this).find('h3').text();
+// 			$('tbody>tr[data-type!='+aType+']').hide();
+// 			$('tbody>tr[data-type='+aType+']').show();
 // 		});
+
+		$(".serviceBox_3").on('click',function(){
+// 			console.log($(this).find('h3').text());
+			$.redirect('/articles/listfms?articleType='+$(this).find('h3').text());
+		});
 		
 		$('#page_btn').bootpag({
 		    total:"${totalPage}",
@@ -302,42 +221,7 @@
 			   data:{'page':num,'rows':10},
 			   dataType: 'json',
 			   success:function(result){
-// 				   console.log(result);
-				   $('tbody').empty();
-				   
-				   for(var i = 0; i < result.length; i++) {
-					   
-					   var str = $('#article_list').html();
-// 					   console.log(str);
-					   
-					   var str1 = '';
-					   if(result[i].articleType == 'news') {
-						   	str1 = str.replace('_type','fa-bullhorn').replace('_color', 'text-primary');
-					   } else if(result[i].articleType == 'solicit') {
-						   	str1 = str.replace('_type','fa-file-text').replace('_color', 'text-success');
-					   } else if(result[i].articleType == 'question') {
-							str1 = str.replace('_type','fa-question-circle').replace('_color', 'text-danger');
-					   } else if(result[i].articleType == 'chat') {
-						   	str1 = str.replace('_type','fa-rocket').replace('_color', 'text-warning');
-					   }
-					   
-					   var str2 = '';
-					   if(result[i].articleView==null) {
-						   str2 = str1.replace("_articleView", 0);
-					   } else {
-						   str2 = str1.replace("_articleView", result[i].articleView);
-					   }
-					   $(str2.replace("_articleType", result[i].articleType.toUpperCase())
-						    .replace("_articleId", result[i].articleId)
-				   			.replace("_articleType", result[i].articleType.toUpperCase())
-				   			.replace("_articleTitle", result[i].articleTitle)
-				   			.replace("_memberNickname", result[i].nickname)
-				   			.replace("_articleTime", result[i].articleTime)
-				   			.replace("_acmsSize", result[i].acms.length)
-				   			.replace("_memberNickname", result[i].nickname)
-				   			.replace("_articleTime", result[i].articleTime)
-							).appendTo($('tbody'));
-				   }
+				   appendArticle(result);
 			   }
 		   });
 		});
@@ -353,6 +237,46 @@
 // 		console.log($(a).attr('data-articleId'));
 		$.redirect('/articles/view', { 'articleId': $(a).attr('data-articleId') });
 	}
+	
+	function appendArticle(result){
+		console.log(result);
+		$('tbody').empty();
+		   
+		   for(var i = 0; i < result.length; i++) {
+			   
+			   var str = $('#article_list').html();
+//				   console.log(str);
+			   
+			   var str1 = '';
+			   if(result[i].articleType == 'news') {
+				   	str1 = str.replace('_type','fa-bullhorn').replace('_color', 'text-primary');
+			   } else if(result[i].articleType == 'solicit') {
+				   	str1 = str.replace('_type','fa-file-text').replace('_color', 'text-success');
+			   } else if(result[i].articleType == 'question') {
+					str1 = str.replace('_type','fa-question-circle').replace('_color', 'text-danger');
+			   } else if(result[i].articleType == 'chat') {
+				   	str1 = str.replace('_type','fa-rocket').replace('_color', 'text-warning');
+			   }
+			   
+			   var str2 = '';
+			   if(result[i].articleView==null) {
+				   str2 = str1.replace("_articleView", 0);
+			   } else {
+				   str2 = str1.replace("_articleView", result[i].articleView);
+			   }
+			   $(str2.replace("_articleType", result[i].articleType.toUpperCase())
+				    .replace("_articleId", result[i].articleId)
+		   			.replace("_articleType", result[i].articleType.toUpperCase())
+		   			.replace("_articleTitle", result[i].articleTitle)
+		   			.replace("_memberNickname", result[i].nickname)
+		   			.replace("_articleTime", result[i].articleTime)
+		   			.replace("_acmsSize", result[i].acms.length)
+		   			.replace("_memberNickname", result[i].nickname)
+		   			.replace("_articleTime", result[i].articleTime)
+					).appendTo($('tbody'));
+		   }
+	}
+	
 	</script>
 </body>
 </html>

@@ -178,7 +178,7 @@ select {
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-12">
-				<textarea class="ckeditor" id="content" name="articleContent" cols="80" rows="12"></textarea>
+				<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
 			</div>
 		</div>
 	</div>	
@@ -217,15 +217,6 @@ select {
       
     </div>
 </div>
-	
-<!-- 	<div id='result'> -->
-<!-- 	<h2></h2> -->
-<!-- 	<span id="memberId"></span><br/> -->
-<!-- 	<span id="articleType"></span><br/> -->
-<!-- 	<span id="articleTitle"></span><br/> -->
-<!-- 	<span id="articleContent"></span><br/> -->
-<!-- 	<span id="articleTime"></span><br/> -->
-<!-- 	</div> -->
 				</div>        
             <!-- **每頁不同的內容結束** -->
 
@@ -270,17 +261,13 @@ select {
 			},//end of messages			
 		});
 		
-<<<<<<< HEAD
+
 		$('#confirm').on('click',function(){
-=======
-		$('#save').on('click',function(){
-			
-			console.log(JSON.stringify($('#addForm').serializeObject()));
->>>>>>> branch 'master' of https://github.com/rock000539/eeit8600.git
+
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
 // 			console.log(JSON.stringify(datas));
-			$('#content').val(CKEDITOR.instances['content'].getData());
+			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
 			$.ajax({
 					url:'/articles/insert',
 					type:'post',
@@ -290,17 +277,6 @@ select {
 					dataType:'json',
 					success:function(data){
 						location.href="/articles/listfms";
-// 						console.log(data);
-// 						console.log(data.articleTime);
-// 						var t = data.articleTime;
-// 						$('#addForm')[0].reset();			
-// 						$('#result>h2').text('Insert Success');
-// // 						$('#articleId').text('ArticleId:'+data.articleId);
-// // 						$('#memberId').text('memberId:'+data.memberId);
-// 						$('#articleType').text('articleType:'+data.articleType); 
-// 						$('#articleTitle').text('articleTitle:'+data.articleTitle);
-// 						$('#articleContent').text('articleContent:'+data.articleContent);
-// 						$('#articleTime').text('articleTime:'+data.articleTime);
 	 				}
 				});		
 			
@@ -325,12 +301,12 @@ select {
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['content'].getData()!=""){
+		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Post Type：'+$(':selected').val()+'</p>')
 							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
-							.append('<p>Content：'+ CKEDITOR.instances['content'].getData() +'</p>');
+							.append('<p>Content：'+ CKEDITOR.instances['articleContent'].getData() +'</p>');
 			$('#confirm').show();
 		}else{
 			$(".modal-title").text('Please Modify Your Post');
