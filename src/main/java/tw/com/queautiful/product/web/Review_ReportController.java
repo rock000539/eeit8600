@@ -20,6 +20,7 @@ import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Review_Report;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ReviewService;
+import tw.com.queautiful.product.service.Review_reportService;
 
 @Controller
 @RequestMapping("/review_report")
@@ -29,10 +30,9 @@ public class Review_ReportController {
 	
 	@Autowired
 	private ReviewService reviewService;
-	
-	@PersistenceContext
-	private EntityManager manager;
-	
+	@Autowired
+	private Review_reportService review_reportService;
+		
 	@RequestMapping(value="/post",method = RequestMethod.POST)   
 	@ResponseBody
 	public String articlereport(
@@ -61,11 +61,7 @@ public class Review_ReportController {
 	@RequestMapping(value="/findByAthorId",method = RequestMethod.POST)   
 	@ResponseBody
 	@Transactional
-	public List<Object[]> findBymenberId(@RequestParam long review_athor){
-	String findByAthorId=
-	"Select rv.[reviewid],rv.memberid,rv.[report_content],rv.[report_date],rv.[review_author],rv.[report_title] from [review_report] rv where [review_author]="+review_athor;
-	List<Object[]> resultList =manager.createNativeQuery(findByAthorId).getResultList();		
-				
-		return resultList;		
+	public List<Object[]> findBymenberId(@RequestParam long review_athor){	
+		return review_reportService.findBymenberId(review_athor);	
 	}
 }
