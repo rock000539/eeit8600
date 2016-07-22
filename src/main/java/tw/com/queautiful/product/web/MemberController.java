@@ -71,6 +71,21 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "/member/memberProfile";
 	}
+	
+	@RequestMapping("/profile/edit")
+	public String memberPersonalEditPage(HttpServletRequest request, Model model){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		try {
+			member.setAge(memberService.getMemberAge(member.getBirthDay()));
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
+		model.addAttribute("member", member);
+		return "/member/memberProfile-edit";
+	}
+	
+	
 
 	//保存期限頁面
     @RequestMapping("/product-exp")
@@ -320,7 +335,7 @@ public class MemberController {
 	@RequestMapping("/suspend")
 	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){
 		log.debug("inside controller");//test
-		memberService.memberSuspend(memberId, memberSuspendDays);
+		memberService.memberSuspend(memberId);
 	}
 	
 	@RequestMapping("/list")
