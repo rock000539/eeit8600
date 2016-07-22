@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -14,6 +15,7 @@ public interface ArticleDao extends JpaRepository<Article, Long>, JpaSpecificati
 
 	List<Article> findByOrderByArticleTimeDesc();
 	Page<Article> findByOrderByArticleTimeDesc(Pageable pageable);
+	Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable);
 	
 	List<Article> findByMember(Member member);
 }

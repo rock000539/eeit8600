@@ -124,16 +124,21 @@
 						</c:choose>
 				        
 				        <td>
-				          <h4><a data-articleId="${article.articleId}" class="articleTitle" onclick="info_click($(this))">［${article.articleType}］${article.articleTitle}</a><br>
-				          <small>by <a href="#">${article.member.nickname}</a> 
+				          <h4><a data-articleId="${article.articleId}" class="articleTitle" onclick="info_click($(this))">【${article.articleType}】${article.articleTitle}</a><br>
+				          <small>by <a href="#">${article.nickname}</a> 
 				          <i class="fa fa-angle-double-right"></i> 
 				          ${fn:substring(article.articleTime,0,19)}</small>
 				          </h4>
 				        </td>
-				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.acms.size()}</a></td>
-				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
+				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.acmsSize}</a></td>
+				        <c:if test="${empty article.articleView}">
+				        	<td class="text-center hidden-xs hidden-sm"><a href="#">0</a></td>
+				        </c:if>
+				        <c:if test="${not empty article.articleView}">
+				        	<td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
+				        </c:if>
 				        <td class="hidden-xs hidden-sm">
-				        	by <a href="#">${article.member.nickname}</a><br>
+				        	by <a href="#">${article.nickname}</a><br>
 				        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
 				        </td>
 				      </tr>
@@ -225,16 +230,16 @@
 	<script src="/js/product/inventory/jquery.bootpag.min.js"></script>
 	
 	<!-- jQuery Redirect Plugin -->
-	<script src="/js/jquery.redirect.js"></script>	
-	
+	<script src="/js/jquery.redirect.js"></script>
+		
+	<!-- template -->
 	<script id="article_list" type="text/template">
-
 			<tr  data-type="_articleType">
 
 				<td class="text-center"><i class="fa _type fa-2x _color"></i></td>
 				
 				<td>
-				    <h4><a data-articleId="_articleId" class="articleTitle" onclick="info_click($(this))">［_articleType］_articleTitle</a><br>
+				    <h4><a data-articleId="_articleId" class="articleTitle" onclick="info_click($(this))">【_articleType】_articleTitle</a><br>
 				    	<small>by 
 							<a href="#">_memberNickname</a> 
 				    		<i class="fa fa-angle-double-right"></i> 
@@ -257,11 +262,29 @@
 		$('#allpost').on('click',function(){
 			$('tbody>tr').show();
 		});
+		
 		$(".serviceBox_3").on('click',function(){
 			var aType = $(this).find('h3').text();
 			$('tbody>tr[data-type!='+aType+']').hide();
 			$('tbody>tr[data-type='+aType+']').show();
 		});
+
+// 		$(".serviceBox_3").on('click',function(){
+// 			console.log('hi');
+// 			console.log($(this).find('h3').text());
+// 			$.ajax({
+// 				url:'/articles/selectbyarticletype',
+// 				type:'POST',
+// 				contextType:'application/json; charset=utf-8;',
+// 				data:{'articleType':$(this).find('h3').text()},
+// 				dataType:'json',
+// 				success:function(result){
+// 					console.log(result);
+					
+// 				}
+				
+// 			});
+// 		});
 		
 		$('#page_btn').bootpag({
 		    total:"${totalPage}",
@@ -285,7 +308,7 @@
 				   for(var i = 0; i < result.length; i++) {
 					   
 					   var str = $('#article_list').html();
-					   console.log(str);
+// 					   console.log(str);
 					   
 					   var str1 = '';
 					   if(result[i].articleType == 'news') {
@@ -298,21 +321,24 @@
 						   	str1 = str.replace('_type','fa-rocket').replace('_color', 'text-warning');
 					   }
 					   
-					   $(str1.replace("_articleType", result[i].articleType.toUpperCase())
+					   var str2 = '';
+					   if(result[i].articleView==null) {
+						   str2 = str1.replace("_articleView", 0);
+					   } else {
+						   str2 = str1.replace("_articleView", result[i].articleView);
+					   }
+					   $(str2.replace("_articleType", result[i].articleType.toUpperCase())
 						    .replace("_articleId", result[i].articleId)
 				   			.replace("_articleType", result[i].articleType.toUpperCase())
 				   			.replace("_articleTitle", result[i].articleTitle)
 				   			.replace("_memberNickname", result[i].nickname)
-				   			.replace("_memberNickname", result[i].nickname)
-				   			.replace("_articleTime", result[i].articleTime)
 				   			.replace("_articleTime", result[i].articleTime)
 				   			.replace("_acmsSize", result[i].acms.length)
+				   			.replace("_memberNickname", result[i].nickname)
+				   			.replace("_articleTime", result[i].articleTime)
 							).appendTo($('tbody'));
-
 				   }
-// 				   console.log($('#article_list').html());
 			   }
-			   
 		   });
 		});
 		
@@ -324,8 +350,8 @@
 	
 
 	function info_click(a) {
-		console.log($(a).attr('data-articleId'));
-			$.redirect('/articles/view', { 'articleId': $(a).attr('data-articleId') });
+// 		console.log($(a).attr('data-articleId'));
+		$.redirect('/articles/view', { 'articleId': $(a).attr('data-articleId') });
 	}
 	</script>
 </body>

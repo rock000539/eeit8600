@@ -36,10 +36,10 @@ public class Article {
 	@Enumerated(EnumType.STRING)
 	private ArticleType articleType;
 	
-	@Column(name = "ARTICLETITLE" ,length=50)
+	@Column(name = "ARTICLETITLE" ,columnDefinition="nvarchar(20)")
 	private String articleTitle;
 	
-	@Column(name = "ARTICLECONTENT" ,length=1000)
+	@Column(name = "ARTICLECONTENT" ,columnDefinition="nvarchar(30)")
 	private String articleContent;
 	
 	@Column(name = "ARTICLETIME")
@@ -85,7 +85,8 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
-				+ ", articleContent=" + articleContent + ", articleTime=" + articleTime + ", articleCollect=" + articleCollect
+				+ ", articleContent=" + articleContent + ", articleTime=" + articleTime + ", articleView=" + articleView
+				+ ", articleCollect=" + articleCollect
 				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", memberId=" + memberId + "]";
 	}
 

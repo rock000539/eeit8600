@@ -205,14 +205,13 @@ select {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Please Check Your Post</h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <p></p>
         </div>
         <div class="modal-footer">
-          <button type="button" name="save" id="save" class="btn btn-default" data-dismiss="modal">Confirm</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        	<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">Confirm</button>
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -255,32 +254,23 @@ select {
 	$(function(){
 		
 		//驗證
-// 		$('#addForm').validate({
-// 			onfocusout: function (element) {
-// 		        $(element).valid();
-// 		    },
-// 			rules:{
-// 				articleType:{required:true},
-// 				articleTitle:{required:true},
+		$('#addForm').validate({
+			onfocusout: function (element) {
+		        $(element).valid();
+		    },
+			rules:{
+				articleType:{required:true},
+				articleTitle:{required:true},
 // 				articleContent:{required:true},
-// 			},//end of rules
-// 			messages:{
+			},//end of rules
+			messages:{
 // 				articleType:'必填',
 // 				articleTitle:'必填',
 // 				articleContent:'必填'
-// 			},//end of messages			
-// 		});
-		
-// 		$('.summernote').summernote({height: 200});
-		
-		$('#check').click(function(){		
-			var value = CKEDITOR.instances['content'].getData();
-			console.log(value);
+			},//end of messages			
 		});
 		
-		
-		
-		$('#save').on('click',function(){
+		$('#confirm').on('click',function(){
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
 // 			console.log(JSON.stringify(datas));
@@ -302,7 +292,7 @@ select {
 // 						$('#result>h2').text('Insert Success');
 // // 						$('#articleId').text('ArticleId:'+data.articleId);
 // // 						$('#memberId').text('memberId:'+data.memberId);
-// 						$('#articleType').text('articleType:'+data.articleType);
+// 						$('#articleType').text('articleType:'+data.articleType); 
 // 						$('#articleTitle').text('articleTitle:'+data.articleTitle);
 // 						$('#articleContent').text('articleContent:'+data.articleContent);
 // 						$('#articleTime').text('articleTime:'+data.articleTime);
@@ -330,10 +320,20 @@ select {
 	});
 	
 	function toModal(){
-		$(".modal-body").empty()
-						.append('<p>Post Type：'+$(':selected').val()+'</p>')
-						.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
-						.append('<p>Content：'+ CKEDITOR.instances['content'].getData() +'</p>');
+		if($('#addForm').validate().form() && CKEDITOR.instances['content'].getData()!=""){
+			$(".modal-title").text('Please Check Your Post');
+			$(".modal-body").empty()
+							.append('<p>Post Type：'+$(':selected').val()+'</p>')
+							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
+							.append('<p>Content：'+ CKEDITOR.instances['content'].getData() +'</p>');
+			$('#confirm').show();
+		}else{
+			$(".modal-title").text('Please Modify Your Post');
+			$(".modal-body").empty()
+							.append('<p>Please Enter the Required Fields</p>');
+			$('#confirm').hide();
+			
+		}
 	}
 
 
