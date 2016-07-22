@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 @Service
 public class Article_reportService {
@@ -13,14 +14,23 @@ public class Article_reportService {
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public void insertReport(long articleid,long memberid,String report_content,
+	public String insertReport (long articleid,long memberid,String report_content,
 		String report_date,long article_athorId,String report_title){
+		
+		String result="新增檢舉事件成功";
 		String insertReport=
 " insert into [article_report](articleid, memberid, [report_content] , report_date , [article_athor_id] , report_title) values"
 +"("+articleid+","+memberid+",'"+report_content+"','"+report_date+"',"+article_athorId+",'"+report_title+"')";
 		
-		manager.createNativeQuery(insertReport).executeUpdate();
-		
+		try {
+			manager.createNativeQuery(insertReport).executeUpdate();
+		} catch (Exception e) {
+			result="檢舉已經受理，請勿重複檢舉";
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return result;
+		}
+		return result;
+	
 	}
 	
 	public List<Object[]> findByMemberId(long article_athorId){

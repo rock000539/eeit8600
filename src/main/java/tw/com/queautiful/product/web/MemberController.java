@@ -71,6 +71,21 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "/member/memberProfile";
 	}
+	
+	@RequestMapping("/profile/edit")
+	public String memberPersonalEditPage(HttpServletRequest request, Model model){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		try {
+			member.setAge(memberService.getMemberAge(member.getBirthDay()));
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
+		model.addAttribute("member", member);
+		return "/member/memberProfile-edit";
+	}
+	
+	
 
 	//保存期限頁面
     @RequestMapping("/product-exp")
@@ -320,7 +335,7 @@ public class MemberController {
 	@RequestMapping("/suspend")
 	public void memberSuspending(@RequestParam Long memberId, @RequestParam Integer memberSuspendDays){
 		log.debug("inside controller");//test
-		memberService.memberSuspend(memberId, memberSuspendDays);
+		memberService.memberSuspend(memberId);
 	}
 	
 	@RequestMapping("/list")
@@ -336,7 +351,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	public Member insert(@RequestPart(name="member") Member member, 
+	public Member insert(HttpServletRequest request, @RequestPart(name="member") Member member, 
 			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile){
 		memberService.insert(member);
 		if(memberImgFile!=null){
@@ -360,12 +375,13 @@ public class MemberController {
 	@ResponseBody
 	public Member update(@RequestPart(name="member") Member member, 
 			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile){
-		
+		log.debug(member.getMemberId().toString());
 		if(memberImgFile!=null){
 			String mId = "member"+member.getMemberId();
 			String memberImg = FileProcessing.saveImg(mId, "member", memberImgFile);
 			member.setMemberImg(memberImg);
 		}
+		log.debug(member.getMemberId().toString());
 		log.debug(member.getMemberImg());//test
 		memberService.update(member);
 		return memberService.getById(member.getMemberId());

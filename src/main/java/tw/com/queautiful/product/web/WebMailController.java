@@ -71,7 +71,7 @@ public class WebMailController {
 	public String webMailList(Model model){
 		List<Map<String, Object>> result=new ArrayList<Map<String, Object>>();
 		
-		List<WebMail> webMails = webMailService.fingAll();
+		List<WebMail> webMails = webMailService.findAll();
 		for(int i=0;i<webMails.size();i++){
 			Map<String, Object> resultMap=new HashMap<String, Object>();
 			String nickName=memberService.getById(webMails.get(i).getWebMailSender()).getNickname();
@@ -87,7 +87,35 @@ public class WebMailController {
 	@RequestMapping(value="/postReport",method = RequestMethod.POST)
 	@ResponseBody
 	public String postReport(long webMailId){
-		reportService.postReport(webMailService.findOneById(webMailId));
-		return "Success";	
+		String result = reportService.postReport(webMailService.findOneById(webMailId));
+		return result;	
+	}
+	
+	@RequestMapping(value="/changemailreadtype",method = RequestMethod.POST)
+	@Transactional
+	@ResponseBody
+	public String changeMailReadType(long webMailId){
+		WebMail webMail=webMailService.findOneById(webMailId);
+		webMail.setMailReadType(true);
+		webMailService.insertAndUpdate(webMail);
+		return "";
+	}
+	@RequestMapping(value="/deleteMail",method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteMail(long webMailId){
+		webMailService.delete(webMailId);
+		return "Mail already deleted";
+	}
+	@RequestMapping(value="/reloadMail",method = RequestMethod.POST)
+	@ResponseBody
+	public List<WebMail> reloadMail(){
+		List<WebMail> WebMails=webMailService.findAll();
+		return WebMails;
+	}
+	
+	@RequestMapping(value="/getnickname",method = RequestMethod.POST)
+	@ResponseBody
+	public String getnickname(long webMailSender){
+		return memberService.getById(webMailSender).getNickname();
 	}
 }

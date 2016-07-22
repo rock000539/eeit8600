@@ -58,7 +58,7 @@
 					</li>
 					
 					<li>
-						<a href="javascript:;">
+						<a href="/webmail/webmaillist">
 							<i class="fa fa-table"></i> <span>會員意見管理</span>
 						</a>
 					</li>

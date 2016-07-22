@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,16 +31,18 @@ public class Article_reportController {
 	@RequestMapping(value="/post",method = RequestMethod.POST)   
 	@ResponseBody
 	@Transactional
-	public String articlereport(
+	public String articlereport (
 	@RequestParam long articleid,@RequestParam long memberid,@RequestParam String reportContent,
 	 @RequestParam String report_title){
 		long article_athorId=articleService.getById(articleid).getMemberId();
 		java.util.Date now = new java.util.Date();
 		String report_date= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);				
-		String result="檢舉已送出";
-		article_reportService.insertReport(articleid,memberid, reportContent, report_date, article_athorId, report_title);		
+		
+		String result=article_reportService.insertReport(articleid,memberid, reportContent, report_date, article_athorId, report_title);		
 		return result;
 	}	
+	
+	
 	@RequestMapping(value="/findByAthorId",method = RequestMethod.POST)   
 	@ResponseBody
 	@Transactional

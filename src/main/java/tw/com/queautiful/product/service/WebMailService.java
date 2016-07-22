@@ -13,7 +13,7 @@ public class WebMailService {
 	@Autowired
 	private WebMailDao webMailDao;
 	
-	public List<WebMail> fingAll(){
+	public List<WebMail> findAll(){
 		return webMailDao.findAll();
 	}
 	

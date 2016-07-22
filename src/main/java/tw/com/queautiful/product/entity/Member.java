@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.entity;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,7 +20,6 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MEMBER")

@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Member Profile</title>
+    <title>Member XXX</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,7 @@
 <div class="row detail-div">
 	<div id="div1" class="col-lg-2"></div>
 	<div class="col-lg-6 col-sm-6 wow fadeInLeft delay-05s memberDiv">
-		<c:import url="/WEB-INF/jsp/member/memberPages-header" />
+		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 		
 		
 		
