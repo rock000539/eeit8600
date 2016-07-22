@@ -20,7 +20,7 @@ public class WebMail {
 	private String mailContent;
 	private boolean mailReadType; 
 	private String mailContentType;
-	private Date mailSendDate;
+	private java.sql.Date mailSendDate;
 	
 	private Long articleid;
 	private Long reviewId;
