@@ -37,7 +37,7 @@ public class ReviewCM {
 
 	@Transient
 	private Long memberId;
-	
+
 	//心得留言內容
 	@Column(name="REVIEWCMMSG",length=200)
 	private String rcmMsg;

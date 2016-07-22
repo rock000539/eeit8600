@@ -150,7 +150,7 @@
                                     <li class="comment">
                                         <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div>
                                         <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">John Smith$</a></span></h4>
+                                            <h4 class="comment-author"><a href="#">John Smith</a></span></h4>
                                             <div class="comment-meta"><a href="#" class="comment-date link-style1">February 22, 2015</a></div>
                                             <div class="comment-body">
                                                 <p>Ne omnis saperet docendi nec, eos ea alii molestiae aliquand. Latine fuisset mele, mandamus atrioque eu mea, wi forensib argumentum vim an. Te viderer conceptam sed, mea et delenit fabellas probat.</p>
@@ -159,23 +159,12 @@
                                     </li>
                                     
                                     <li class="comment">
-                                        <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div>
+                                        <div class="avatar"><img alt="" src="/members/show?memberId=${reviewCMs[0].memberId}" class="avatar"></div>
                                         <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">John Smith</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 07, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
+                                            <h4 class="comment-author"><a href="#">John Smith${review}</a></span></h4>
+                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 07, 2015  ${reviewCMs[0].reviewCMTime}</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
                                             <div class="comment-body">
                                                 <p>Eu mea harum soleat albucius. At duo nihil saperet inimicus. Ne quo dicit offendit eloquenam. Ut intellegam inn theophras tus mea. Vide ceteros mediocritatem est in, utamur gubergren contentiones.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    
-                                    <li class="comment">
-                                        <div class="avatar"><img alt="" src="/images/review/avatar_3.png" class="avatar"></div>
-                                        <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">Thomas Smith</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 02, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
-                                            <div class="comment-body">
-                                                <p>Quodsi eirmod salutandi usu ei, ei mazim facete mel. Deleniti interesset at sed, sea ei malis expetenda. Ei efficiat integebat mel, vis alii insoles te. Vis ex bonorum contentiones. An cum possit reformidans. Est at eripuit theophrastus. Scripta imper diet ad nec, everti contentiones id eam, an eum causae officiis.</p>
                                             </div>
                                         </div>
                                     </li>
@@ -327,7 +316,6 @@ $(function () {  //=$(document.)ready
 // 		}
 // 		console.log('w=' + $('#userimg').width());
 // 		console.log('h=' + $('#userimg').height());
-
 		$('#postComment').click(function(){
 			var value=CKEDITOR.instances['content'].getData();
 			console.log(value);
@@ -344,11 +332,11 @@ $(function () {  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(data){
-					console.log("data="+data);
+					console.log(data);
 // 					console.log("value="+value);
 				
 					
-// 					location.href="#Comments";
+					location.href="#Comments";
 					
 				},error:function(x,y,z){
 					console.log("x="+x);

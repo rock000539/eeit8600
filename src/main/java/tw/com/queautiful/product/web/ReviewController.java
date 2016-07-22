@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewCMService;
@@ -148,7 +149,18 @@ public class ReviewController {
 		//會員年齡
 		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
 		
-		model.addAttribute("reviewCMs",reveiwCMService.getAll());
+		//心得留言
+		
+		List<ReviewCM> reviewCMs = reveiwCMService.getAll();
+		log.debug("x={}",review.getReviewCMs());
+//		for(int i=0; i<reviewCMs.size(); i++){
+			
+//			Integer age = memberService.getMemberAge(reviewCMs.get(i).getMember().getBirthDay());
+//			reviewCMs.get(i).getMember().setAge(age);
+//		}
+		
+		model.addAttribute("reviewCMs",reviewCMs);
+		
 		
 		return "/review/reviewjQueryRain";
 	}
