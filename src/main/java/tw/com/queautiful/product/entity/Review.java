@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -50,7 +51,13 @@ public class Review {
 	@OrderBy("REVIEWCMID ASC")
 	private Set<ReviewCM> reviewCMs;
 	
-
+	@Transient
+	private Long rcmId;
+	
+	@ManyToMany(mappedBy="reviewsSavedByMember")
+	@JsonIgnore
+	private Set<Member> memberSave;
+	
 	//心得標題
 	@Column(name="REVIEWTITLE",length=200)
 	private String reviewTitle;
