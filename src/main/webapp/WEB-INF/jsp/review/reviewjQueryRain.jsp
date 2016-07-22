@@ -146,50 +146,18 @@
                             </div>
                             <div id="comment">
                                 <ul id="comment-list">
+                                
                                     <li class="comment">
                                         <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div>
                                         <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">John Smith</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 22, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
+                                            <h4 class="comment-author"><a href="#">John Smith$</a></span></h4>
+                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 22, 2015</a></div>
                                             <div class="comment-body">
                                                 <p>Ne omnis saperet docendi nec, eos ea alii molestiae aliquand. Latine fuisset mele, mandamus atrioque eu mea, wi forensib argumentum vim an. Te viderer conceptam sed, mea et delenit fabellas probat.</p>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="comment">
-                                        <div class="avatar"><img alt="" src="/images/review/avatar_2.png" class="avatar"></div>
-                                        <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">Eva Smith</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 13, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
-                                            <div class="comment-body">
-                                                <p>Vidit nulla errem ea mea. Dolore apeirian insolens mea ut, indoctum consequuntur hasi. No aeque dictas dissenti as tusu, sumo quodsi fuisset mea in. Ea nobis populo interesset cum, ne sit quis elit officiis, min im tempor iracundia sit anet. Facer falli aliquam nec te. In eirmod utamur offendit vis, posidonium instructior sed te.</p>
-                                            </div>
-                                        </div>
-                                        <ul class="children">
-                                            <li class="comment">
-                                                <div class="avatar"><img alt="" src="/images/review/avatar_3.png" class="avatar"></div>
-                                                <div class="comment-container">
-                                                    <h4 class="comment-author"><a href="#">Thomas Smith</a></span></h4>
-                                                    <div class="comment-meta"><a href="#" class="comment-date link-style1">February 14, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
-                                                    <div class="comment-body">
-                                                        <p>Labores pertinax theophrastus vim an. Error ditas in sea, per no omnis iisque nonumes. Est an dicam option, ad quis iriure saperet nec, ignota causae inciderint ex vix. Iisque qualisque imp duo eu, pro reque consequ untur. No vero laudem legere pri, error denique vis ne, duo iusto bonorum.</p>
-                                                    </div>
-                                                </div>
-                                                <ul class="children">
-                                                    <li class="comment">
-                                                        <div class="avatar"><img alt="" src="/images/review/avatar_2.png" class="avatar"></div>
-                                                        <div class="comment-container">
-                                                            <h4 class="comment-author"><a href="#">Eva Smith</a></span></h4>
-                                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 14, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
-                                                            <div class="comment-body">
-                                                                <p>Dico animal vis cu, sed no aliquam appellantur, et exerci eleifend eos. Vixese eros tiloi novum adtam, mazim inimicus maiestatis ad vim. Ex his unum fuisset reformidans, has iriure ornatus atomorum ut, ad tation feugiat impedit per.</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    
                                     <li class="comment">
                                         <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div>
                                         <div class="comment-container">
@@ -200,6 +168,7 @@
                                             </div>
                                         </div>
                                     </li>
+                                    
                                     <li class="comment">
                                         <div class="avatar"><img alt="" src="/images/review/avatar_3.png" class="avatar"></div>
                                         <div class="comment-container">
@@ -216,32 +185,21 @@
                             <div class="dividerHeading">
                                 <h4><span>Leave a comment</span></h4>
                                 </div>
-
-                            <div class="comment_form">
-                               <div class="row">
-                                   <div class="col-sm-4">
-                                       <input class="col-lg-4 col-md-4 form-control" name="name" type="text" id="name" size="30"  onfocus="if(this.value == 'Name') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Name'; }" value="Name" placeholder="Name" >
-                                   </div>
-                                   <div class="col-sm-4">
-                                       <input class="col-lg-4 col-md-4 form-control" name="email" type="text" id="email" size="30" onfocus="if(this.value == 'E-mail') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'E-mail'; }" value="E-mail" placeholder="E-mail">
-                                   </div>
-                                   <div class="col-sm-4">
-                                       <input class="col-lg-4 col-md-4 form-control" name="url" type="text" id="url" size="30" onfocus="if(this.value == 'Url') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Url'; }" value="Url" placeholder="Url">
-                                   </div>
-                               </div>
-                            </div>
+						<form id="addForm" action="/reviewCMs/insert" method="post">
+                            <input type="hidden" name="memberId" value="${memberId}"/>
+                            <input type="hidden" name="reviewId" value="${review.reviewId}"/>
                             <div class="comment-box row">
                                 <div class="col-sm-12">
-                                    <p>
-                                        <textarea name="comments" class="form-control" rows="6" cols="40" id="comments" onfocus="if(this.value == 'Message') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Message'; }" placeholder="Message">Message</textarea>
+                                    <p>	
+                                    	<textarea class="ckeditor" id="content" name="rcmMsg" rows="10" cols="40"></textarea>
                                     </p>
                                 </div>
                             </div>
-
-                            <a class="btn btn-lg btn-default" href="#">Post Comment</a>
+							<button class="btn btn-lg btn-default" type="button"  id="postComment"onclick="">Post Comment</button>
+                         </form>
                         </div>
                     </div>
-
+					
                     <!--Sidebar Widget-->
                     <div class="col-xs-12 col-md-4 col-lg-4 col-sm-4" >
                         <div class="sidebar">
@@ -291,7 +249,7 @@
                                             </li>
                                             <li class="comments_list clearfix">
                                                 <a class="post-thumbnail" href="#"><img width="60" height="60" src="/images/review/recent_1.png" alt="#"></a>
-                                                <p><strong><a href="#">Makaroni</a> <i>says: </i> </strong> Tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada.</p>
+                                         <       <p><strong><a href="#">Makaroni</a> <i>says: </i> </strong> Tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada.</p>
                                             </li>
                                             <li class="comments_list clearfix">
                                                 <a class="post-thumbnail" href="#"><img width="60" height="60" src="/images/review/recent_2.png" alt="#"></a>
@@ -356,9 +314,8 @@
     	  <script type="text/javascript" src="/js/review/jquery-scrolltofixed-min.js"></script>
 		  <script type="text/javascript" src="/js/fms/fms-main.js"></script>
     <script src="/js/review/main.js"></script>
+    	  <script src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-console.log("")
-console.log("123")
 $(function () {  //=$(document.)ready
 	/*  ============ USER IMG =========== 	*/ 
 // 		var w = $('#userimg').width();
@@ -370,7 +327,64 @@ $(function () {  //=$(document.)ready
 // 		}
 // 		console.log('w=' + $('#userimg').width());
 // 		console.log('h=' + $('#userimg').height());
-});
+
+		$('#postComment').click(function(){
+			var value=CKEDITOR.instances['content'].getData();
+			console.log(value);
+		});//check ckeditor data end
+
+		$('#postComment').on('click',function(){
+			$('#content').val(CKEDITOR.instances['content'].getData());
+// 			console.log($('#addForm'));
+			console.log(JSON.stringify($('#addForm').serializeObject()));
+			$.ajax({
+				url:'/reviewCMs/insert',
+				type:'post',
+				contentType:'application/json;charset=UTF-8',
+				data:JSON.stringify($('#addForm').serializeObject()),
+				dataType:'json',
+				success:function(data){
+					console.log("data="+data);
+// 					console.log("value="+value);
+				
+					
+// 					location.href="#Comments";
+					
+				},error:function(x,y,z){
+					console.log("x="+x);
+					console.log("y="+y);
+					console.log("z="+z);
+				}
+			})
+		})//#postComment click end
+
+		
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		}; //serializeObject end
+		
+		
+		
+});//$(function () end
+
+
+
+
+
+
 
 
 </script>

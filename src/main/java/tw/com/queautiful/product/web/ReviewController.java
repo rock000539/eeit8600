@@ -4,13 +4,11 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +31,7 @@ import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
+import tw.com.queautiful.product.service.ReviewCMService;
 import tw.com.queautiful.product.service.ReviewService;
 
 @Controller
@@ -49,6 +48,9 @@ public class ReviewController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ReviewCMService reveiwCMService;
 
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -146,7 +148,7 @@ public class ReviewController {
 		//會員年齡
 		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
 		
-		
+		model.addAttribute("reviewCMs",reveiwCMService.getAll());
 		
 		return "/review/reviewjQueryRain";
 	}
