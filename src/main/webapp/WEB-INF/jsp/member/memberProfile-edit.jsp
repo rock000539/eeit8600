@@ -162,6 +162,7 @@
 	</div>
     <div class="form-group">
     	<div class="col-sm-offset-4">
+    	<input type="hidden" name="memberId" value="${member.memberId}">
         <button type="button" class="btn btn-default" id="insertBtn" name="insert">Confirm</button>
         </div>
     </div>

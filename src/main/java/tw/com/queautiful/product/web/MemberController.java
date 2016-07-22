@@ -351,7 +351,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	public Member insert(@RequestPart(name="member") Member member, 
+	public Member insert(HttpServletRequest request, @RequestPart(name="member") Member member, 
 			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile){
 		memberService.insert(member);
 		if(memberImgFile!=null){
