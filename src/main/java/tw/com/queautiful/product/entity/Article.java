@@ -64,7 +64,7 @@ public class Article {
 	//文章收藏者
 	@ManyToMany(mappedBy = "articlesSavedByMember") 
 	@JsonIgnore
-	private Set<Member> members;
+	private Set<Member> memberSave;
 	
 	//文章撰寫作者
 	@ManyToOne
@@ -170,12 +170,12 @@ public class Article {
 		this.member = member;
 	}
 
-	public Set<Member> getMembers() {
-		return members;
+	public Set<Member> getMemberSave() {
+		return memberSave;
 	}
 
-	public void setMembers(Set<Member> members) {
-		this.members = members;
+	public void setMemberSave(Set<Member> memberSave) {
+		this.memberSave = memberSave;
 	}
 
 	public Long getMemberId() {
