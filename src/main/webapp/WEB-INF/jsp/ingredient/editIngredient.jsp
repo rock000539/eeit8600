@@ -59,6 +59,8 @@ background-color: #DDDDDD;
 .error{
 color:red;
 }
+#proTitle{
+margin-left:255px;}
 #submitArea{
 margin: 30px 350px;}
 </style>
@@ -245,10 +247,8 @@ $(function(){
 		
 		for(var i=0;i<Ingredients.length;i++){
 			IngredientNames[i]=Ingredients[i].getAttribute('name');
-			alert(IngredientNames[i]);
 		}
-					
-	$.ajax({
+		$.ajax({
 		'url':'/prodIngreList/put',
 		'data':{"IngredientNames":IngredientNames,"proName":proName,"proId":proId},
 		'type' : 'POST',
@@ -342,7 +342,7 @@ $(function(){
 	            <!-- **每頁不同的內容從這裡開始** -->
                                 
                                 
-<table id="mainTable"><tr><td ><p proid="${productId}">${productName}</p></td></tr>      
+<table id="mainTable"><tr><td ><span id="proTitle" proid="${productId}">${productName}</span></td></tr>      
 <tr><td>                       
 <form action="" id="insertArea">
 <input class="ui-widget ui-autocomplete-input" autocomplete="on" id="IngredientName" >

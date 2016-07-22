@@ -114,7 +114,6 @@ public class ProdIngreListService {
 		}//end of for loop
 		}else{//case2 ----有成份，但還沒關聯性資料
 			
-			System.out.println("start insert");
 			
 //			EntityTransaction et = manager.getTransaction();//要考慮交易的位置
 			manager.createNativeQuery(insertNewProductAndIngerdientRelative).executeUpdate();
