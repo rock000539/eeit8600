@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hazelcast.hibernate.local.Timestamp;
-
 import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.MemberService;

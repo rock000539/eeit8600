@@ -273,13 +273,10 @@ select {
 		
 // 		$('.summernote').summernote({height: 200});
 		
-// 		$('#check').click(function(){		
-// 			var value = CKEDITOR.instances['content'].getData();
-// 			console.log(value);
-// 		});
-		
-		var value = CKEDITOR.instances['content'].getData();
-		
+		$('#check').click(function(){		
+			var value = CKEDITOR.instances['content'].getData();
+			console.log(value);
+		});
 		
 		$('#save').on('click',function(){
 			
@@ -287,7 +284,7 @@ select {
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
 // 			console.log(JSON.stringify(datas));
-			$('#content').val(value);
+			$('#content').val(CKEDITOR.instances['content'].getData());
 			$.ajax({
 					url:'/articles/insert',
 					type:'post',
@@ -296,9 +293,9 @@ select {
 					data:JSON.stringify($('#addForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
-// 						location.href="/articles/listfms";
-						console.log(data);
-						console.log(data.articleTime);
+						location.href="/articles/listfms";
+// 						console.log(data);
+// 						console.log(data.articleTime);
 // 						var t = data.articleTime;
 // 						$('#addForm')[0].reset();			
 // 						$('#result>h2').text('Insert Success');
