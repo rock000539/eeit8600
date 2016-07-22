@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -17,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="REVIEW_REPORT")
 public class Review_Report implements Serializable{
 	@Id
-	private long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -29,7 +32,7 @@ public class Review_Report implements Serializable{
 	@JsonIgnore
 	private Member member;
 	
-	private Long reportMemberId;
+	private Long review_author;
 	
 	private String reportTitle;
 	
@@ -53,13 +56,7 @@ public class Review_Report implements Serializable{
 		this.member = member;
 	}
 
-	public Long getReportMemberId() {
-		return reportMemberId;
-	}
 
-	public void setReportMemberId(Long reportMemberId) {
-		this.reportMemberId = reportMemberId;
-	}
 
 	public String getReportTitle() {
 		return reportTitle;
@@ -85,5 +82,30 @@ public class Review_Report implements Serializable{
 		this.reportDate = reportDate;
 	}
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getReview_author() {
+		return review_author;
+	}
+
+	public void setReview_author(Long review_author) {
+		this.review_author = review_author;
+	}
+
+	@Override
+	public String toString() {
+		return "Review_Report [id=" + id + ", review=" + review + ", member=" + member + ", review_author="
+				+ review_author + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", reportDate="
+				+ reportDate + "]";
+	}
+
+	
 
 }

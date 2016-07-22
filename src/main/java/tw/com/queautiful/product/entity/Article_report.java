@@ -19,7 +19,7 @@ public class Article_report implements Serializable{
 	@Column(name ="MEMBERID")
 	private Long memberId;
 	
-	private Long reportMemberId;
+	private Long article_athorId;
 	
 	private String reportTitle;
 	
@@ -43,13 +43,7 @@ public class Article_report implements Serializable{
 		this.memberId = memberId;
 	}
 
-	public Long getReportMemberId() {
-		return reportMemberId;
-	}
 
-	public void setReportMemberId(Long reportMemberId) {
-		this.reportMemberId = reportMemberId;
-	}
 
 	public String getReportTitle() {
 		return reportTitle;
@@ -75,13 +69,21 @@ public class Article_report implements Serializable{
 		this.reportDate = reportDate;
 	}
 
+	public Long getArticleId_athorId() {
+		return article_athorId;
+	}
+
+	public void setArticleId_athorId(Long articleId_athorId) {
+		this.article_athorId = articleId_athorId;
+	}
+
 	@Override
 	public String toString() {
-		return "Article_report [articleId=" + articleId + ", memberId=" + memberId + ", reportMemberId="
-				+ reportMemberId + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", reportDate="
-				+ reportDate + "]";
+		return "Article_report [articleId=" + articleId + ", memberId=" + memberId + ", articleId_athorId="
+				+ article_athorId + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
+				+ ", reportDate=" + reportDate + "]";
 	}
-	
-	
+
+
 	
 }

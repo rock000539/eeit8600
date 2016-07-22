@@ -282,7 +282,7 @@
 // 				   console.log(result);
 				   $('tbody').empty();
 				   
-				   for(var i = 0; i < 2; i++) {
+				   for(var i = 0; i < result.length; i++) {
 					   
 					   var str = $('#article_list').html();
 					   console.log(str);
@@ -299,24 +299,19 @@
 					   }
 					   
 					   $(str1.replace("_articleType", result[i].articleType.toUpperCase())
-					   		.replace("_articleType", result[i].articleType.toUpperCase())
-						    .replace("_articleType", result[i].articleType.toUpperCase())
-						    .replace("_articleType", result[i].articleType.toUpperCase())
-						    .replace("_articleType", result[i].articleType.toUpperCase())
 						    .replace("_articleId", result[i].articleId)
 				   			.replace("_articleType", result[i].articleType.toUpperCase())
 				   			.replace("_articleTitle", result[i].articleTitle)
-				   			.replace("_memberNickname", result[i].member.nickname)
-				   			.replace("_memberNickname", result[i].member.nickname)
+				   			.replace("_memberNickname", result[i].nickname)
+				   			.replace("_memberNickname", result[i].nickname)
 				   			.replace("_articleTime", result[i].articleTime)
 				   			.replace("_articleTime", result[i].articleTime)
-				   			.replace("_acmsSize", result[i].acms.size())
+				   			.replace("_acmsSize", result[i].acms.length)
 							).appendTo($('tbody'));
 
 				   }
 // 				   console.log($('#article_list').html());
 			   }
-			   
 			   
 		   });
 		});

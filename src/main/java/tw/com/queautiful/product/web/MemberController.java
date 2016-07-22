@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.web;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,9 +63,13 @@ public class MemberController {
 	public String memberPersonalPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
+		try {
+			member.setAge(memberService.getMemberAge(member.getBirthDay()));
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
 		model.addAttribute("member", member);
-		log.debug(member.toString());
-		return "/member/memberPersonal";
+		return "/member/memberProfile";
 	}
 
 	//保存期限頁面

@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-	<title>Bms3</title>
+	<title>Bms</title>
 	
 	<!--  BASE CSS STYLE  -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -25,8 +25,8 @@
 	<!-- page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 	
-	<c:import url="/WEB-INF/jsp/bms_v3/bms_header.jsp" />
-	<c:import url="/WEB-INF/jsp/bms_v3/bms_navbar-side.jsp" />	
+	<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
 	
 		<!-- page content -->
 		<div id="content" class="content">

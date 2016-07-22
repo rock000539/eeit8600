@@ -88,14 +88,14 @@
 			box-shadow: 0px 1px 2px #bbb;
 		}
 
-		button:hover {
-		    cursor: pointer;
-		    box-shadow: 0px 0px 3px #666;
-		}
-
 		button.on {
 		    color: white;
 		    background-color: #ccc;
+		}
+		
+		.list-view:hover, grid-view:hover {
+			cursor: pointer;
+		    box-shadow: 0px 0px 3px #666;
 		}
 		
 	</style>
@@ -129,7 +129,7 @@
 							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
-							    <a href="/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
+							    <a href="/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
 							    <a href="#" class="fa fa-link"></a>
 							</div>
 							
@@ -173,7 +173,7 @@
 							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
-							    <a href="<%= request.getContextPath() %>/products/show?prodId=${product.prodId}" class="fa fa-search mfp-image"></a>
+							    <a href="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
 							    <a href="#" class="fa fa-link"></a>
 							</div>
 							
@@ -228,6 +228,7 @@
 	<script src="/js/product/jquery.magnific-popup.min.js"></script>
     <script src="/js/product/jflickrfeed.js"></script>
     <script src="/js/product/swipe.js"></script>
+    <script src="/js/product/main.js"></script>
 	
 	<script src="/js/product/wow.min.js"></script>
     <script>
