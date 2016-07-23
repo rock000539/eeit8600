@@ -180,7 +180,7 @@
                             <div class="comment-box row">
                                 <div class="col-sm-12">
                                     <p>	
-                                    	<textarea class="ckeditor" id="content" name="rcmMsg" rows="10" cols="40"></textarea>
+                                    	<textarea class="ckeditor" id="rcmMsg" name="rcmMsg" rows="10" cols="40"></textarea>
                                     </p>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
                                                 <a href="#">Various versions has evolved over the years</a>
                                                 <i>October 18, 2015</i>
                                             </li>
-											<li><span>Ingredient :</span> <a href="#">${product.mainIgdt}</a></li>
+											<li><span>Ingredient :</span> <a href="#">${reivew.product.mainIgdt}</a></li>
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade">
@@ -316,13 +316,16 @@ $(function () {  //=$(document.)ready
 // 		}
 // 		console.log('w=' + $('#userimg').width());
 // 		console.log('h=' + $('#userimg').height());
+
+
+
 		$('#postComment').click(function(){
-			var value=CKEDITOR.instances['content'].getData();
+			var value=CKEDITOR.instances['rcmMsg'].getData();
 			console.log(value);
 		});//check ckeditor data end
 
 		$('#postComment').on('click',function(){
-			$('#content').val(CKEDITOR.instances['content'].getData());
+			$('#rcmMsg').val(CKEDITOR.instances['rcmMsg'].getData());
 // 			console.log($('#addForm'));
 			console.log(JSON.stringify($('#addForm').serializeObject()));
 			$.ajax({

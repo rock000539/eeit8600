@@ -159,7 +159,7 @@ public class ReviewController {
 //			reviewCMs.get(i).getMember().setAge(age);
 //		}
 		
-		model.addAttribute("reviewCMs",reviewCMs);
+//		model.addAttribute("reviewCMs",reviewCMs);
 		
 		
 		return "/review/reviewjQueryRain";
