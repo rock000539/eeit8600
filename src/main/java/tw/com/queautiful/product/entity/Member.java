@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 
 
 
@@ -111,7 +113,7 @@ public class Member {
 	//心得留言
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
 	@OrderBy("REVIEWCMTIME DESC")
-	private Set<ReviewCM> rcmsWroteByAuthor;
+	private List<ReviewCM> rcmsWroteByAuthor;
 
 	//文章留言
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
@@ -347,11 +349,11 @@ public class Member {
 		}
 	}
 	
-	public Set<ReviewCM> getRcmsWroteByAuthor() {
+	public List<ReviewCM> getRcmsWroteByAuthor() {
 		return rcmsWroteByAuthor;
 	}
 
-	public void setRcmsWroteByAuthor(Set<ReviewCM> rcmsWroteByAuthor) {
+	public void setRcmsWroteByAuthor(List<ReviewCM> rcmsWroteByAuthor) {
 		this.rcmsWroteByAuthor = rcmsWroteByAuthor;
 	}
 	

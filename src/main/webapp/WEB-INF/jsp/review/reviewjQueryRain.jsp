@@ -159,12 +159,12 @@
                                     </li>
                                     
                                     <li class="comment">
-                                        <div class="avatar"><img alt="" src="/members/show?memberId=${reviewCMs[0].memberId}" class="avatar"></div>
+                                        <div class="avatar"><img alt="" src="/members/show?memberId=${review.reviewCMs[0].memberId}" class="avatar"></div>
                                         <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">John Smith${review}</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 07, 2015  ${reviewCMs[0].reviewCMTime}</a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
+                                            <h4 class="comment-author"><a href="#">${review.reviewCMs[0].nickname}</a></span></h4>
+                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">${review.reviewCMs[0].reviewCMTime} </a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
                                             <div class="comment-body">
-                                                <p>Eu mea harum soleat albucius. At duo nihil saperet inimicus. Ne quo dicit offendit eloquenam. Ut intellegam inn theophras tus mea. Vide ceteros mediocritatem est in, utamur gubergren contentiones.</p>
+                                                <p>${review.reviewCMs[0].rcmMsg}</p>
                                             </div>
                                         </div>
                                     </li>

@@ -1,6 +1,7 @@
 package tw.com.queautiful.product.entity;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -49,7 +50,7 @@ public class Review {
 	//心得留言
 	@OneToMany(mappedBy="review",fetch=FetchType.LAZY)
 	@OrderBy("REVIEWCMTIME DESC")
-	private Set<ReviewCM> reviewCMs;
+	private List<ReviewCM> reviewCMs;
 	
 	@Transient
 	private Long rcmId;
@@ -162,11 +163,11 @@ public class Review {
 		this.prodId = prodId;
 	}
 
-	public Set<ReviewCM> getReviewCMs() {
+	public List<ReviewCM> getReviewCMs() {
 		return reviewCMs;
 	}
 	
-	public void setReviewCMs(Set<ReviewCM> reviewCMs) {
+	public void setReviewCMs(List<ReviewCM> reviewCMs) {
 		this.reviewCMs = reviewCMs;
 	}
 	

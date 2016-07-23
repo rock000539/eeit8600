@@ -37,6 +37,9 @@ public class ReviewCM {
 
 	@Transient
 	private Long memberId;
+	
+	@Transient
+	private String nickname;
 
 	//心得留言內容
 	@Column(name="REVIEWCMMSG",length=200)
@@ -132,14 +135,25 @@ public class ReviewCM {
 	public Long getMemberId() {
 		if(this.memberId==null && member!=null){
 			return this.getMember().getMemberId();
+		}else{
+			return memberId;
 		}
-		return memberId;
 	}
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 
+
+	public String getNickname() {
+		return this.getMember().getNickname();
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "ReviewCM [rcmId=" + rcmId + ", review=" + review

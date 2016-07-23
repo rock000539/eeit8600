@@ -22,7 +22,6 @@
 <title>Reviews</title>
 </head>
 <body>
-<%=request.getContextPath()%>
 <!--加入header&nav -->
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
