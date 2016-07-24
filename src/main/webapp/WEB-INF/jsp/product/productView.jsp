@@ -34,12 +34,14 @@
 		.serviceBox_4 { 
 		   position: absolute; 
 		   top: 73%; 
-		   width: 100%; 
+		   width: 100%;
 		}
 		
 		.serviceBox_4 .service-icon a > span {
 			width: 65px;
 			height: 65px;
+			border-radius: 35px;
+			background: white;
 		}
 		
 		.img-prod
@@ -68,8 +70,8 @@
 	<div class="grey_bg row">
 	
 		<div class="row">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-6">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
 				<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
 			            <div class="dividerHeading">
@@ -78,51 +80,66 @@
 			        </div>
 		        </section>
 			</div>
-	        <div class="col-sm-3"></div>
+	        <div class="col-sm-2"></div>
 		</div>
 		
 		<div class="row">
 		
-			<div class="col-sm-3"></div>
+			<div class="col-sm-2"></div>
 			
 			<div class="col-sm-3" style="text-align: center;">
 				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" />
 			</div>
 			
-			<div class="col-sm-3">
+			<div class="col-sm-5">
 			
-				<div class="view_tab">
-			    	<label for="tab-one"><span>Name : ${product.prodName}</span></label>
-			    </div>
-		    	<div class="view_tab">
-		      		<label for="tab-two"><span>Date : ${product.launchDate}</span></label>
-		    	</div>
-		    	<div class="view_tab">
-			    	<label for="tab-one"><span>Brand : ${product.brandName}</span></label>
-			    </div>
-		    	<div class="view_tab">
-			    	<label for="tab-one"><span>Category : ${product.categoryName}</span></label>
-			    </div>
-			    <div class="view_tab">
-			    	<label for="tab-one"><span>Ingredient : ${product.mainIgdt}</span></label>
-			    </div>
-			    <div class="view_tab">
-			      	<input id="tab-three" type="checkbox" name="tabs">
-			      	<label for="tab-three"><span>Description</span></label>
-			    	<div class="view_tab-content" style="overflow:auto;">
-			    		<c:choose>
-			    			<c:when test="${product.prodDesc.length() > 10}">
-			    				<p>${product.prodDesc}</p>
-			    			</c:when>
-			    			<c:otherwise>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>			    			
-			    			</c:otherwise>
-			    		</c:choose>
+				<div class="col-sm-6">
+					<div class="view_tab" style="margin-top: 15px;">
+			    		<label for="tab-one"><span>Name : ${product.prodName}</span></label>
+				    </div>
+			    	<div class="view_tab">
+			      		<label for="tab-two"><span>Date : ${product.launchDate}</span></label>
 			    	</div>
-			    </div>
+			    	<div class="view_tab">
+				    	<label for="tab-one"><span>Brand : ${product.brandName}</span></label>
+				    </div>
+			    	<div class="view_tab">
+				    	<label for="tab-one"><span>Category : ${product.categoryName}</span></label>
+				    </div>
+				    <div class="view_tab">
+				    	<label for="tab-one"><span>Ingredient : ${product.mainIgdt}</span></label>
+				    </div>
+				</div>
+				
+				<div class="col-sm-6">
+					<div class="view_tab" style="margin-top: 15px;">
+				    	<label for="tab-one">
+				    		<span>Qutie分數 : 
+				    			<c:forEach begin="1" end="${product.score}">
+									<i class="fa fa-diamond"></i>
+								</c:forEach>
+				    		</span>
+				    	</label>
+				    </div>
+					<div class="view_tab">
+				      	<input id="tab-three" type="checkbox" name="tabs">
+				      	<label for="tab-three"><span>Description</span></label>
+				    	<div class="view_tab-content" style="overflow:auto;">
+				    		<c:choose>
+				    			<c:when test="${product.prodDesc.length() > 10}">
+				    				<p>${product.prodDesc}</p>
+				    			</c:when>
+				    			<c:otherwise>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>			    			
+				    			</c:otherwise>
+				    		</c:choose>
+				    	</div>
+				    </div>
+				</div>
+			
 			</div>
 				
-			<div class="col-sm-3"></div>
+			<div class="col-sm-2"></div>
 			
 		</div>
 			
@@ -150,7 +167,9 @@
 				                    <div class="serviceBox_4">
 					                    <div class="service-icon">
 					                        <a href="#">
-					                            <span></span>
+					                            <span>
+					                            	<img src="<%= request.getContextPath() %>/members/show?memberId=${review.member.memberId}" style="transform:rotate(-60deg); margin-top:-2px;">
+					                            </span>
 					                        </a>
 					                    </div>
 					                </div>

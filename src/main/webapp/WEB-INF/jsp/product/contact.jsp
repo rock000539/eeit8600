@@ -22,7 +22,33 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ContactPage</title>
+<script>
+$(function(){
+	
+$("#sendMail").click(function(){//#1
 
+var webMailSender=$("#webMailSender").val();
+var senderEMail=$("#senderEMail").val();
+var mailSubject=$("#mailSubject").val();
+var mailMessage=$("#mailMessage").val();
+var memberId=$("#sendMail").attr("memberId");
+$.ajax({//#2
+url:"/webmail/sendMail",
+type:"POST",
+data : {"webMailSender" : webMailSender,
+		"senderEMail" : senderEMail,
+		"mailSubject" : mailSubject,
+		"mailMessage" : mailMessage,
+		"memberId" : memberId},
+success : function(data){
+	alert(data);
+}	
+})//end of #2
+})//end of #1
+
+	
+})
+</script>
 </head>
 <body>
 
@@ -67,31 +93,31 @@
 	                    <div class="row">
 	                        <div class="form-group">
 	                            <div class="col-lg-6 ">
-	                                <input type="text" id="name" name="name" class="form-control" maxlength="100" data-msg-required="Please enter your name." value="" placeholder="Your Name" >
+	                                <input type="text" id="webMailSender" name="name" class="form-control" maxlength="100" data-msg-required="Please enter your name." value="" placeholder="Your Name" >
 	                            </div>
 	                            <div class="col-lg-6 ">
-	                                <input type="email" id="email" name="email" class="form-control" maxlength="100" data-msg-email="Please enter a valid email address." data-msg-required="Please enter your email address." value="" placeholder="Your E-mail" >
+	                                <input type="email" id="senderEMail" name="email" class="form-control" maxlength="100" data-msg-email="Please enter a valid email address." data-msg-required="Please enter your email address." value="" placeholder="Your E-mail" >
 	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="row">
 	                        <div class="form-group">
 	                            <div class="col-md-12">
-	                                <input type="text" id="subject" name="subject" class="form-control" maxlength="100" data-msg-required="Please enter the subject." value="" placeholder="Subject">
+	                                <input type="text" id="mailSubject" name="subject" class="form-control" maxlength="100" data-msg-required="Please enter the subject." value="" placeholder="Subject">
 	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="row">
 	                        <div class="form-group">
 	                            <div class="col-md-12">
-	                                <textarea id="message" class="form-control" name="message" rows="5" cols="50" data-msg-required="Please enter your message." maxlength="5000" placeholder="Message" style="resize: none"></textarea>
+	                                <textarea id="mailMessage" class="form-control" name="message" rows="5" cols="50" data-msg-required="Please enter your message." maxlength="5000" placeholder="Message" style="resize: none"></textarea>
 	
 	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="row">
 	                        <div class="col-md-12">
-	                            <input type="submit" data-loading-text="Loading..." class="btn btn-default btn-lg" value="Send Message" style="float:right;">
+	                            <button data-loading-text="Loading..." id="sendMail" class="btn btn-default btn-lg" value="Send Message" style="float:right;" memberId="${memberId}">Send Message</button>
 	                        </div>
 	                    </div>
 	                </form>
