@@ -20,13 +20,19 @@
 	<!--  BASE JS  -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery-ui.min.js"></script>
+	
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/bms/jquery.slimscroll.min.js"></script>
 	<script src="/js/bms/bms.js"></script>
+	
+
+	
 <script src="/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+
+
 
 <style>
 body {
@@ -90,7 +96,7 @@ $(function(){
 	$("#insertIngredient").click(function(){
 		var IngredientName=$("#IngredientName").val();
 	
-		var Ingredients=document.getElementsByClassName("info");
+		var Ingredients=document.getElementsByClassName("IngredientInfo");
 		
 		var Insterpossible=false;
 		
@@ -125,7 +131,7 @@ $(function(){
 					console.log("result not undefined");
 					
 					$('#IngredientArea')
-					.append("<fieldset><li class='list-inline'><span class='info' ingredId='New"+(Ingredients.length+1)
+					.append("<fieldset><li class='list-inline'><span class='IngredientInfo' ingredId='New"+(Ingredients.length+1)
 					+"' name='"+data+"'> "
 					+data
 					+"</span><span class='close' aria-label='Close' ingredId='New"
@@ -134,7 +140,7 @@ $(function(){
 					//-------功能1-2: 按下close 刪除即將加入的成份-------------------------------	
 					$(".close").click(function(e){
 						var closeBtn=e.target.getAttribute('ingredId');	
-						var spans=$(".info");
+						var spans=$(".IngredientInfo");
 						
 						for(var i=0;i<spans.length;i++){
 							var spanIngredId=spans[i].getAttribute('ingredId');
@@ -175,12 +181,12 @@ $(function(){
 
 		//新增li用------------------------------
 		
-		var Ingredients=document.getElementsByClassName("info");
+		var Ingredients=document.getElementsByClassName("IngredientInfo");
 		var IngredientName=$("#IngredientName").val();
 		
 		if(checkValidate){	
 		$('#IngredientArea')
-		.append("<fieldset><li class='list-inline'><span class='info' ingredId='New"+(Ingredients.length+1)
+		.append("<fieldset><li class='list-inline'><span class='IngredientInfo' ingredId='New"+(Ingredients.length+1)
 		+"' name='"+IngredientName+"'> "
 		+IngredientName
 		+"</span><span class='close' aria-label='Close' ingredId='New"
@@ -189,7 +195,7 @@ $(function(){
 		//-------功能1-2: 按下close 刪除即將加入的成份-------------------------------	
 		$(".close").click(function(e){
 			var closeBtn=e.target.getAttribute('ingredId');	
-			var spans=$(".info");
+			var spans=$(".IngredientInfo");
 			
 			for(var i=0;i<spans.length;i++){
 				var spanIngredId=spans[i].getAttribute('ingredId');
@@ -222,7 +228,7 @@ $(function(){
 	
 	$(".close").click(function(e){
 	var closeBtn=e.target.getAttribute('ingredId');	
-	var spans=$(".info");
+	var spans=$(".IngredientInfo");
 	
 	for(var i=0;i<spans.length;i++){
 		var spanIngredId=spans[i].getAttribute('ingredId');
@@ -242,7 +248,7 @@ $(function(){
 		var proName=$("#mainTable span").html();
 		var proId=$("#mainTable span").attr("proid");
 		
-		var Ingredients=document.getElementsByClassName('info');
+		var Ingredients=document.getElementsByClassName('IngredientInfo');
 		var IngredientNames=[];
 		
 		for(var i=0;i<Ingredients.length;i++){
@@ -254,7 +260,7 @@ $(function(){
 		'type' : 'POST',
 		traditional: true,
 		success : function(data){//data是尚未加入成份的名稱
-			var Ingredients=document.getElementsByClassName("info");			
+			var Ingredients=document.getElementsByClassName("IngredientInfo");			
 			if(data[0]!=undefined){	
 				$("#modal-body2").append("有未存在於資料庫的成份資料");
 			}else{
@@ -363,7 +369,7 @@ $(function(){
 <c:forEach var="items" items="${ingredients}">
 <fieldset >
 <li class="list-inline">
-<span class="info" ingredId="${items.ingredId}" name="${items.ingredName}">
+<span class="IngredientInfo" ingredId="${items.ingredId}" name="${items.ingredName}">
 ${items.ingredName}
 </span>
 <span class="close" aria-label="Close" ingredId="${items.ingredId}" >&times;</span>
@@ -422,6 +428,18 @@ ${items.ingredName}
 </div><!-- /.modal -->
 
 <!-- 結束model1 ----------------------------------------------------------------->
+
+
+	            <!-- **每頁不同的內容 end** -->     
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
+		</div>
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+	</div>
+	<!-- /end page container -->
+
 <!-- 使用model2 ----------------------------------------------------------------->
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
@@ -456,16 +474,6 @@ ${items.ingredName}
       </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 <!-- 結束model2 ----------------------------------------------------------------->
-
-	            <!-- **每頁不同的內容 end** -->     
-			    </div><!-- /end .col-md-12 -->
-			</div> <!-- /end .row -->
-		</div>
-		<!-- /end #content -->
-		<!-- scroll to top btn -->
-		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-	</div>
-	<!-- /end page container -->
 
 </body>
 </html>

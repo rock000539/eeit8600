@@ -22,21 +22,48 @@ public class WebMail {
 	private String mailContentType;
 	private java.sql.Date mailSendDate;
 	
+	private String anonymousName;
+	private String anonymousEMail;
+	
 	private Long articleid;
 	private Long reviewId;
 	private Long acmId;
 	private Long rcmId;
 	
-	
-	
-
 	@Override
 	public String toString() {
 		return "WebMail [webMailId=" + webMailId + ", webMailSender=" + webMailSender + ", mailAddressee="
 				+ mailAddressee + ", mailTitle=" + mailTitle + ", mailContent=" + mailContent + ", mailReadType="
 				+ mailReadType + ", mailContentType=" + mailContentType + ", mailSendDate=" + mailSendDate
-				+ ", articleid=" + articleid + ", reviewId=" + reviewId + ", acmId=" + acmId + ", rcmId=" + rcmId + "]";
+				+ ", anonymousName=" + anonymousName + ", anonymousEMail=" + anonymousEMail + ", articleid=" + articleid
+				+ ", reviewId=" + reviewId + ", acmId=" + acmId + ", rcmId=" + rcmId + "]";
 	}
+
+
+
+	public String getAnonymousName() {
+		return anonymousName;
+	}
+
+
+
+	public void setAnonymousName(String anonymousName) {
+		this.anonymousName = anonymousName;
+	}
+
+
+
+	public String getAnonymousEMail() {
+		return anonymousEMail;
+	}
+
+
+
+	public void setAnonymousEMail(String anonymousEMail) {
+		this.anonymousEMail = anonymousEMail;
+	}
+
+
 
 	public Long getWebMailSender() {
 		return webMailSender;
