@@ -21,7 +21,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import tw.com.queautiful.commons.enumeration.ArticleType;
+import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.MemberDao;
 import tw.com.queautiful.product.entity.Article;

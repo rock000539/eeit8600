@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import tw.com.queautiful.commons.enumeration.ArticleType;
+import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Article;

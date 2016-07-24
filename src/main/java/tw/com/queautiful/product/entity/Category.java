@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import tw.com.queautiful.commons.enumeration.CategoryTitle;
+import tw.com.queautiful.commons.enums.CategoryTitle;
 
 @Entity
 @Table(name = "CATEGORY")

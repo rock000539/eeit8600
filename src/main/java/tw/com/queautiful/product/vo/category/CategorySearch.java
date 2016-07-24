@@ -1,6 +1,6 @@
 package tw.com.queautiful.product.vo.category;
 
-import tw.com.queautiful.commons.enumeration.CategoryTitle;
+import tw.com.queautiful.commons.enums.CategoryTitle;
 
 public class CategorySearch {
 	

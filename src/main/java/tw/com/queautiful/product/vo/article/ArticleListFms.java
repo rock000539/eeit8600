@@ -1,6 +1,6 @@
 package tw.com.queautiful.product.vo.article;
 
-import tw.com.queautiful.commons.enumeration.ArticleType;
+import tw.com.queautiful.commons.enums.ArticleType;
 
 public class ArticleListFms {
 
