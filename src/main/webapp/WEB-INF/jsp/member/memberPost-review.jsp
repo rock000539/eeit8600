@@ -50,7 +50,7 @@
 		
 		<div class="cd-timeline-content">
 			<h2>${item.reviewTitle}</h2>
-			<div class="cd-img"><img src="/products/show?prodId=${item.reviewId}"/></div>
+			<div class="cd-img"><img src="/products/show?prodImg=${item.product.prodImg}"/></div>
 			<p>Rating: ${item.reviewRating}</p>
 			<p>${item.review}</p>
 			<p>收藏數: ${item.rewCollect}</p>

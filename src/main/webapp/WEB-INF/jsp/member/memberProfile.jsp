@@ -20,9 +20,17 @@
     <link rel="stylesheet" href="/css/member/member-customize.css">
 
 <style>
+.memberDiv{
+	margin-bottom: 100px;
+	padding-left: 100px;
+	padding-right: 80px;
+}
 .delay-05s { 
 	animation-delay: 0.5s; 
 	-webkit-animation-delay: 0.5s; 
+}
+#member-header{
+	margin-bottom: 30px;
 }
 #editProfile, #editProfile:active, 
 #editProfile:focus, #editProfile:visited{
@@ -49,8 +57,7 @@
 				<div class="grey_bg row">
 
 <div class="row detail-div">
-	<div id="div1" class="col-lg-2"></div>
-	<div class="col-lg-6 col-sm-6 wow fadeInLeft delay-05s memberDiv">
+	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		<div id="member-header" class="detail-list">
 			<div id="memberphoto" class="detail-list-col1">
 			   	<img src="/members/show?memberId=${member.memberId}"/>
@@ -133,7 +140,6 @@
 			</div>
 		</div>
 	</div> <!-- col-lg -->
-	<div class="col-lg-1"></div>
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 
 </div> <!-- row -->

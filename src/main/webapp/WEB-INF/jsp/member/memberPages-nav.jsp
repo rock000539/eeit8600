@@ -30,7 +30,7 @@
 	         </a>
 	    </li>
 	    <li>
-	    	<a class="posted" href="<% request.getContextPath(); %>/members/post/article">
+	    	<a class="posted" href="<% request.getContextPath(); %>/members/post">
 	            <span class="nav-span">Posted</span>
 	        </a>
 	    </li>
