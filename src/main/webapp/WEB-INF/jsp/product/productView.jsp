@@ -179,8 +179,8 @@
 				                </div>
 				
 				                <div class="team-social-media" style="text-align: center;">
-				                	<a id="search" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏心得</a>
-				                	<a id="save" class="btn btn-primary" style="margin-top:-2.5%;"><i class="fa fa-eye"></i>&nbsp;&nbsp;觀看心得</a>
+				                	<a class="btn btn-primary" style="margin-top:-2.5%;" data-reviewId="${review.reviewId}" onClick="save_click($(this))"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏心得</a>
+				                	<a class="btn btn-primary" style="margin-top:-2.5%;" data-reviewId="${review.reviewId}" onClick="watch_click($(this))"><i class="fa fa-eye"></i>&nbsp;&nbsp;觀看心得</a>
 				                </div>
 				            </div>
 				        </div>
@@ -205,6 +205,19 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+	
+	<script>
+	
+		function save_click (a) {
+			console.log($(a).attr('data-reviewId'));
+		}
+		
+		function watch_click (a) {
+			console.log($(a).attr('data-reviewId'));
+			$.redirect('/reviews/reviewjQueryRain', { 'reviewId': $(a).attr('data-reviewId') });
+		}
+	
+	</script>
 	
 	<script>
 	

@@ -335,7 +335,7 @@
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
 							</c:if>
 							<span style="float:right;">
-								<a class="btn btn-small btn-default" data-prodId="${product.prodId}"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 							</span>
 			            </div>
@@ -379,7 +379,7 @@
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
 							</c:if>
 							<span style="float:right;">
-								<a class="btn btn-small btn-default" data-prodId="${product.prodId}"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 							</span>
 			            </div>
@@ -452,7 +452,7 @@
 				</div>
 				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>				
 				<span style="float:right;">
-					<a class="btn btn-small btn-default" data-prodId="_prodId"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="save_click($(this))"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
 					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 				</span>
             </div>
@@ -476,7 +476,7 @@
 					<div class="card__share">
 			            <div class="card__social">  
 			                <a class="share-icon info" data-prodId="_prodId" onClick="info_click($(this))"><span class="fa fa-info"></span></a>
-			                <a class="share-icon bookmark" data-prodId="_prodId" onClick=""><span class="fa fa-bookmark"></span></a>
+			                <a class="share-icon bookmark" data-prodId="_prodId" onClick="save_click($(this))"><span class="fa fa-bookmark"></span></a>
 			            </div>
 			            <a id="share" class="share-toggle share-icon" href="#"></a>
 			        </div>
@@ -490,17 +490,8 @@
 	</script>
 	
 	<script>
-	
-		$(function($) {
-	
-			$('.card__share > a').on('click', function(e){ 
-				e.preventDefault() // prevent default action - hash doesn't appear in url
-		   		$(this).parent().find( 'div' ).toggleClass( 'card__social--active' );
-				$(this).toggleClass('share-expanded');
-		    });
-		  
-		});
-	
+		
+		// 初始化資料
 		$(function() {
 			
 			console.log("mode = ${mode}");
@@ -527,6 +518,7 @@
 			
 		});
 		
+		// 根據情況取得不同資料
 		function appendData() {
 			
 			console.log('mode = ' + $('#mode').val());
@@ -616,6 +608,7 @@
 							
 						}
 						
+						bindShareEvent();
 					}
 					
 					// 重跑列表載入動畫
@@ -631,9 +624,24 @@
 			
 		}
 		
+		// 查看商品
 		function info_click(a) {
 			console.log($(a).attr('data-prodId'));
 			$.redirect('/products/view', { 'prodId': $(a).attr('data-prodId') });
+		}
+		
+		// 收藏商品
+		function save_click (a) {
+			console.log($(a).attr('data-prodId'));
+		}
+		
+		// Grid/List System
+		function bindShareEvent() {
+			$('.card__share > a').on('click', function(e){ 
+				e.preventDefault() // prevent default action - hash doesn't appear in url
+		   		$(this).parent().find( 'div' ).toggleClass( 'card__social--active' );
+				$(this).toggleClass('share-expanded');
+		    });
 		}
 		
 		listButton = $('button.list-view');
