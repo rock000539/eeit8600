@@ -21,7 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.queautiful.App;
-import tw.com.queautiful.commons.enumeration.ArticleType;
+import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
 

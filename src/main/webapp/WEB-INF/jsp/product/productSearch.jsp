@@ -205,7 +205,7 @@
 			
 			// Contact Button Click
 			$('#contact').on('click', function() {
-				console.log('contact');			
+				document.location.href='/contact';		
 			});
 			
 		});

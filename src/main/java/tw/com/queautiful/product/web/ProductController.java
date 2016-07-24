@@ -1,7 +1,9 @@
 package tw.com.queautiful.product.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -197,10 +199,14 @@ public class ProductController {
 		}
 		return products;
 	}
-
+	
+	
 	@RequestMapping("/inventory")
-	public String inventoryPage(@RequestParam(required = false) Long brandId,
-			@RequestParam(required = false) Long categoryId, Model model) {
+	public String inventoryPage(
+			@RequestParam(required = false, defaultValue = "list") String mode,
+			@RequestParam(required = false) Long brandId,
+			@RequestParam(required = false) Long categoryId, 
+			Model model) {
 
 		log.debug("brandId = {}", brandId);
 		log.debug("categoryId = {}", categoryId);
@@ -209,11 +215,9 @@ public class ProductController {
 		Product filter = new Product();
 
 		if (brandId != null) {
-			log.debug("brand");
 			filter.setBrand(brandService.getById(brandId));
 			model.addAttribute("brandId", brandId);
 		} else if (categoryId != null) {
-			log.debug("category");
 			filter.setCategory(categoryService.getById(categoryId));
 			model.addAttribute("categoryId", categoryId);
 		}
@@ -236,28 +240,32 @@ public class ProductController {
 		}
 		model.addAttribute("products", products);
 		
-		// 總共幾頁
+		// list模式下總共幾頁
+		model.addAttribute("mode", "list");
 		model.addAttribute("totalPage", pages.getTotalPages());
 
 		return "/product/productInventory";
 	}
 
-	@RequestMapping("/list_data")
+	@RequestMapping("/inventory_data")
 	@ResponseBody
-	public List<ProductInventory> listData(@RequestParam(required = false) Long brandId,
-			@RequestParam(required = false) Long categoryId, @RequestParam(required = false) Integer page,
-			@RequestParam(required = false) Integer rows, Model model) {
+	public Map<String, Object> listData(
+			@RequestParam(required = false) String mode,
+			@RequestParam(required = false) Long brandId,
+			@RequestParam(required = false) Long categoryId, 
+			@RequestParam(required = false) Integer page, 
+			@RequestParam(required = false) Integer rows) {
 
 		log.debug("brandId = {}", brandId);
 		log.debug("categoryId = {}", categoryId);
 		log.debug("page = {}", page);
 		log.debug("rows = {}", rows);
 		
-		// 篩選條件
-		Product filter = new Product();
-		
 		// 頁碼、每頁幾筆資料
 		Pageable pageable = new PageRequest(page - 1, rows);
+
+		// 篩選條件
+		Product filter = new Product();
 
 		// 設定條件
 		Page<Product> pages = null;
@@ -281,8 +289,17 @@ public class ProductController {
 			product.setrSize(tmp.getReviews().size());
 			products.add(product);
 		}
-
-		return products;
+		
+		Map<String, Object> data = new HashMap<>();
+		//data.put("mode", mode);
+		//data.put("brandId", brandId);
+		//data.put("categoryId", categoryId);
+		//data.put("page", page);
+		//data.put("rows", rows);
+		data.put("totalPage", pages.getTotalPages());
+		data.put("products", products);
+		
+		return data;
 	}
 
 	@RequestMapping("/view")
