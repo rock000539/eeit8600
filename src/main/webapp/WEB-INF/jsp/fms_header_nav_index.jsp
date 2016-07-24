@@ -84,7 +84,6 @@
 
                 <li><a href="/reviews/reviews">Review</a></li>
                 <li><a href="/articles/listfms">Forum</a></li>
-                <li><a href="#">Ranking</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </div>

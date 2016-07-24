@@ -61,7 +61,7 @@
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <div class="serviceBox_3">
                             <div class="service-icon">
-                                <i class="fa fa-rocket"></i>
+                                <i class="fa fa-wechat"></i>
                             </div>
                             <h3>CHAT</h3>
                             <p>閒聊區</p>
@@ -110,15 +110,16 @@
 						       <td class="text-center"><i class="fa fa-question-circle fa-2x text-danger"></i></td>
 						    </c:when>
 						    <c:when test="${article.articleType=='CHAT'}">
-						        <td class="text-center"><i class="fa fa-rocket fa-2x text-warning"></i></td>
+						        <td class="text-center"><i class="fa fa-wechat fa-2x text-warning"></i></td>
 						    </c:when>
 						</c:choose>
 				        
 				        <td>
 				          <h4><a data-articleId="${article.articleId}" class="articleTitle" onclick="info_click($(this))">【${article.articleType}】${article.articleTitle}</a><br>
-				          <small>by <a href="#">${article.nickname}</a> 
-				          <i class="fa fa-angle-double-right"></i> 
-				          ${fn:substring(article.articleTime,0,19)}</small>
+				          <small>
+				          <i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a> &nbsp&nbsp
+				          <i class="fa fa-clock-o"></i>&nbsp${fn:substring(article.articleTime,0,19)}
+				          </small>
 				          </h4>
 				        </td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.acmsSize}</a></td>
@@ -129,7 +130,7 @@
 				        	<td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
 				        </c:if>
 				        <td class="hidden-xs hidden-sm">
-				        	by <a href="#">${article.nickname}</a><br>
+				        	<i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a><br>
 				        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
 				        </td>
 				      </tr>
@@ -170,17 +171,16 @@
 				
 				<td>
 				    <h4><a data-articleId="_articleId" class="articleTitle" onclick="info_click($(this))">【_articleType】_articleTitle</a><br>
-				    	<small>by 
-							<a href="#">_memberNickname</a> 
-				    		<i class="fa fa-angle-double-right"></i> 
-				    		_articleTime
+				    	<small>
+							<i class="fa fa-user"></i><a href="#">&nbsp_memberNickname</a>&nbsp&nbsp
+				    		<i class="fa fa-clock-o"></i>&nbsp_articleTime
 						</small>
 				    </h4>
 				</td>
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_acmsSize</a></td>
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_articleView</a></td>
 				<td class="hidden-xs hidden-sm">
-				     by <a href="#">_memberNickname</a><br>
+				    <i class="fa fa-user"></i><a href="#">&nbsp_memberNickname</a><br>
 					<small><i class="fa fa-clock-o"></i>_articleTime</small>
 				</td>
 				
@@ -255,7 +255,7 @@
 			   } else if(result[i].articleType == 'question') {
 					str1 = str.replace('_type','fa-question-circle').replace('_color', 'text-danger');
 			   } else if(result[i].articleType == 'chat') {
-				   	str1 = str.replace('_type','fa-rocket').replace('_color', 'text-warning');
+				   	str1 = str.replace('_type','fa-wechat').replace('_color', 'text-warning');
 			   }
 			   
 			   var str2 = '';
