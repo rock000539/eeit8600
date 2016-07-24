@@ -140,6 +140,14 @@ public class Review {
 		this.memberId = memberId;
 	}
 	
+	public Set<Member> getMemberSave() {
+		return memberSave;
+	}
+
+	public void setMemberSave(Set<Member> memberSave) {
+		this.memberSave = memberSave;
+	}
+
 	public Product getProduct() {
 		return product;
 	}
