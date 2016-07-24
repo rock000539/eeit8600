@@ -284,15 +284,20 @@ $(function(){
 					var reviewsPageNum = result.reviewsPageNum;
 					var products = result.products;
 					var member = result.member;
+					var dates = result.dates;
 					
 					$('#reviewsPageNum').val(reviewsPageNum);
 					
 					for(var i=0; i<reviews.length; i++){
 						console.log("prodId: "+reviews[i].prodId);
+						var month = dates[i].substring(0,3);
+						var day = dates[i].substring(4,5);
+						var year = dates[i].substring(7);
+						console.log(year+" "+day+" "+month);
 						$($('#reviewTemplate').html()
-							.replace('_year', reviews[i].reviewTime)
-							.replace('_day', reviews[i].reviewTime)
-							.replace('_month', reviews[i].reviewTime)
+							.replace('_year', year)
+							.replace('_day', day)
+							.replace('_month', month)
 							.replace('_reviewTime', reviews[i].reviewTime)
 							.replace('_rewCollect', reviews[i].rewCollect)
 							.replace('_rewCollect', reviews[i].rewCollect)
