@@ -78,7 +78,7 @@
 		<TR>
 			<TD>內文:</TD>
 			<TD>
-			<textarea name="article">${article.articleContent}</textarea>
+			<textarea name="articleContent">${article.articleContent}</textarea>
 			</TD>
 			<TD></TD>
 		</TR>
@@ -119,7 +119,7 @@
 <span id="memberId"></span><br/>
 <span id="articleType"></span><br/>
 <span id="articleTitle"></span><br/>
-<span id="article"></span><br/>
+<span id="articleContent"></span><br/>
 <span id="articleTime"></span><br/>
 <span id="articleCollect"></span><br/>
 <span id="articleShow"></span><br/>
@@ -184,7 +184,7 @@ $(function(){
 					$('#memberId').text('memberId:'+data.memberId);
 					$('#articleType').text('articleType:'+data.articleType);
 					$('#articleTitle').text('articleTitle:'+data.articleTitle);
-					$('#article').text('article:'+data.article);
+					$('#articleContent').text('article:'+data.articleContent);
 					$('#articleTime').text(t);
 					$('#articleCollect').text('articleCollect:'+data.articleCollect);
 					$('#articleShow').text('articleShow:'+data.articleShow);

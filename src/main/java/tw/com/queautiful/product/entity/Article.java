@@ -39,7 +39,7 @@ public class Article {
 	@Column(name = "ARTICLETITLE" ,columnDefinition="nvarchar(20)")
 	private String articleTitle;
 	
-	@Column(name = "ARTICLECONTENT" ,columnDefinition="nvarchar(30)")
+	@Column(name = "ARTICLECONTENT" ,columnDefinition="nvarchar(2000)")
 	private String articleContent;
 	
 	@Column(name = "ARTICLETIME")
