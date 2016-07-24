@@ -121,7 +121,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/","/expdate/search","/**/show","/**/select",
                 "/expdate/batchCodeController","/reviews/reviews","/reviews/review","/reviews/reviewjQueryRain",
                 "/loginBms","/logout","/**/select_jqgrid",
-                "/loginBmsDenied",
+                "/loginBmsDenied","/webmail/sendMail","/contact",
                 "/ingredients/startSearch") 
                 .permitAll()      //設定過濾條件 ↓         
                 //沒有設ROLE(一般人)，permitAll():表示以上路徑都可訪問                            

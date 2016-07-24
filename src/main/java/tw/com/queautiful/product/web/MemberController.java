@@ -3,9 +3,11 @@ package tw.com.queautiful.product.web;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,10 +40,13 @@ import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
+import tw.com.queautiful.product.service.ReviewService;
+import tw.com.queautiful.product.vo.product.ProductView;
 
 @Controller
 @RequestMapping("/members")
@@ -57,6 +63,8 @@ public class MemberController {
 	private ExpDateService expDateService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	
 	@RequestMapping("/profile")
@@ -187,7 +195,7 @@ public class MemberController {
 	}
 	
 	
-	//member-post文章頁面
+	//member-post article文章頁面
 	@RequestMapping("/post/article")
 	public String memberPostedArticlePage(HttpServletRequest request, Model model){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
@@ -200,15 +208,15 @@ public class MemberController {
 			log.debug("totalElements = {}", pages.getTotalElements()); 
 		model.addAttribute("articles", pages.getContent());
 		model.addAttribute("pageNum", pages.getNumber());
-		model.addAttribute("member", member);
 		model.addAttribute("totalPages", pages.getTotalPages());
+		model.addAttribute("member", member);
 		return "/member/memberPost-article";
 	}
 	
-	//分頁, 分類, 排序
+	//article 分頁, 分類, 排序
 	@RequestMapping(value="/post/article/{pageNum}")
 	@ResponseBody
-	public  List<Map> memberLikeArticlePageSort(
+	public  List<Map> memberPostArticlePageSort(
 			@PathVariable(value="pageNum") Integer pageNum,
 			@RequestParam(required=false) ArticleType articleType,
 			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
@@ -237,15 +245,73 @@ public class MemberController {
 		return result;
 	}
 	
+	//review 分頁(3/page), 分類(none), 排序(reviewTime,reviewRating,rewCollect)
+	@RequestMapping(value="/post/review/{pageNum}")
+	@ResponseBody
+	public  List<Map> memberPostReviewPageSort(
+			@PathVariable(value="pageNum") Integer pageNum,
+			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction,
+			HttpServletRequest request, Model model){
+		log.debug("page: {}",pageNum);
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		
+		Page<Review> pages = 
+				memberService.getReviewsPaging("", memberId, pageNum, sortProperty, direction);
+		
+		List<Review> reviews = pages.getContent();
+		
+		List<ProductView> products = new ArrayList();
+		for(Review review:reviews){
+			Long prodId = review.getProduct().getProdId();
+			ProductView product = new ProductView();
+			BeanUtils.copyProperties(productService.getById(prodId), product);
+			products.add(product);
+		}
+		
+		//pass to front-end
+		List<Map> result = new ArrayList<Map>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviews", reviews);
+		map.put("reviewsPageNum", pages.getNumber());
+		map.put("products", products);
+		map.put("member", memberService.getById(memberId));
+		result.add(map);
+		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", pages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", pages.getTotalPages()); 
+		log.debug("totalElements = {}", pages.getTotalElements()); 
+		
+		return result;
+	}
+	
 	//review-post頁面
-	@RequestMapping("/post/review")
-	public String memberPostedReviewPage(Model model){
-		Member member = memberService.getById(1L); //test
-		Set<Review> reviews = memberService.getById(1L).getReviewsWorteByAuthor();
-		model.addAttribute("reviews", reviews);
-		model.addAttribute("member", member);
-		log.debug("memberId: {}, reviews: {}", member.getMemberId().toString(), reviews);
-		return "/member/memberPost-review";
+	@RequestMapping("/post")
+	public String memberPostedReviewPage(Model model, HttpServletRequest request){
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		Page<Review> pages = 
+				memberService.getReviewsPaging("", memberId, 0, null, null);
+		
+		List<Review> reviews = pages.getContent();
+		List<String> dates = new ArrayList();
+		for(Review review: reviews){
+			java.sql.Date reviewTime = review.getReviewTime();
+			SimpleDateFormat sDateFormat = new SimpleDateFormat("MMM,d,yyyy", Locale.US);
+			Calendar date = Calendar.getInstance();
+			date.setTime(reviewTime);
+			String datef = sDateFormat.format(date.getTime());
+			log.debug(datef);
+			dates.add(datef);
+		}
+		log.debug(dates.toString());
+		model.addAttribute("dates", dates);
+		model.addAttribute("reviews", pages.getContent());
+		model.addAttribute("reviewsPageNum", pages.getNumber());
+		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
+		model.addAttribute("member", memberService.getById(memberId));
+		
+		return "/member/memberPost";
 	}
 	
 	// 提供jqGrid抓取資料使用

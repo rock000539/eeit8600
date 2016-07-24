@@ -74,8 +74,14 @@ public class WebMailController {
 		List<WebMail> webMails = webMailService.findAll();
 		for(int i=0;i<webMails.size();i++){
 			Map<String, Object> resultMap=new HashMap<String, Object>();
-			String nickName=memberService.getById(webMails.get(i).getWebMailSender()).getNickname();
+			Long memeberId=webMails.get(i).getWebMailSender();
+			if(memeberId!=null&&memeberId!=0){
+			String nickName=memberService.getById(memeberId).getNickname();
 			resultMap.put("nickName", nickName);
+			}else{
+				String nickName=webMails.get(i).getAnonymousName();
+				resultMap.put("nickName", nickName);
+			}
 			resultMap.put("webMail",webMails.get(i));
 			result.add(resultMap);
 		}
@@ -117,5 +123,32 @@ public class WebMailController {
 	@ResponseBody
 	public String getnickname(long webMailSender){
 		return memberService.getById(webMailSender).getNickname();
+	}
+	
+	@RequestMapping(value="/sendMail",method = RequestMethod.POST)
+	@ResponseBody
+	public String sendMail(String webMailSender,String senderEMail,String mailSubject,String mailMessage,Long memberId){
+		WebMail webMail=new WebMail();
+		webMail.setMailTitle(mailSubject);
+		webMail.setMailContent(mailMessage);
+		webMail.setMailReadType(false);
+		webMail.setMailContentType("Contact");
+		long now=new java.util.Date().getTime();
+		java.sql.Date date=new java.sql.Date(now);
+		webMail.setMailSendDate(date);
+		if(memberId==null){
+			if(senderEMail!=null&&webMailSender!=null){
+				webMail.setAnonymousEMail(senderEMail);
+				webMail.setAnonymousName(webMailSender);
+				webMailService.insertAndUpdate(webMail);
+			}else{
+				return "請填寫姓名和電子信箱";
+			}
+		}else{
+			webMail.setWebMailSender(memberId);	
+			webMailService.insertAndUpdate(webMail);
+			
+		}
+		return "Thank for your Contact!!";
 	}
 }

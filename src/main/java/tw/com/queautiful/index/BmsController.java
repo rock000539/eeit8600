@@ -28,8 +28,14 @@ public class BmsController {
 		List<WebMail> webMails = webMailService.findAll();
 		for(int i=0;i<webMails.size();i++){
 			Map<String, Object> resultMap=new HashMap<String, Object>();
-			String nickName=memberService.getById(webMails.get(i).getWebMailSender()).getNickname();
+			Long memeberId=webMails.get(i).getWebMailSender();
+			if(memeberId!=null&&memeberId!=0){
+			String nickName=memberService.getById(memeberId).getNickname();
 			resultMap.put("nickName", nickName);
+			}else{
+				String nickName=webMails.get(i).getAnonymousName();
+				resultMap.put("nickName", nickName);
+			}
 			resultMap.put("webMail",webMails.get(i));
 			result.add(resultMap);
 		}
