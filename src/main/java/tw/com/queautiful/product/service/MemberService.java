@@ -26,6 +26,7 @@ import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.MemberDao;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.Member;
+import tw.com.queautiful.product.entity.Review;
 
 @Service
 public class MemberService {
@@ -37,6 +38,8 @@ public class MemberService {
 	private EntityManager em;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ReviewService reviewService;
 
 	public Member getById(Long memberId) {
 		return memberDao.findOne(memberId);
@@ -70,8 +73,29 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
+	//reviews Saved/Wroted ByMember PAGEDnSORTED
+		public Page<Review> getReviewsPaging(String findby, Long memberId, Integer pageNum,
+				String sortProperty, String direction){
+			Review review = new Review();
+			review.setMember(getById(memberId));
+			
+			Specification<Review> spec = Spec.byAuto(em, review);
+			
+			Direction sortDirection = Sort.Direction.DESC;
+			if("ASC".equals(direction)){
+				sortDirection = Sort.Direction.ASC;		
+			}
+			
+			if(sortProperty==null)
+				sortProperty = "reviewTime";
+			
+			//PageRequest(int page, int size, Sort.Direction direction, String... properties)
+			Pageable pageable = new PageRequest(pageNum, 3, new Sort(sortDirection, sortProperty));
+			return reviewService.getAll(spec, pageable);
+		}
+	
 	//articlesSavedByMember pagination and sorted
-	public Page<Article> getArticlesPaging(Long memberId, ArticleType articleType, Integer page,
+	public Page<Article> getArticlesPaging(Long memberId, ArticleType articleType, Integer pageNum,
 			String sortProperty, String direction){
 		Article article = new Article();
 		article.setMember(getById(memberId));
@@ -91,7 +115,7 @@ public class MemberService {
 			sortProperty = "articleTime";
 		
 		//PageRequest(int page, int size, Sort.Direction direction, String... properties)
-		Pageable pageable = new PageRequest(page, 3, new Sort(sortDirection, sortProperty));
+		Pageable pageable = new PageRequest(pageNum, 3, new Sort(sortDirection, sortProperty));
 		return articleService.getAll(spec, pageable);
 	}
 
