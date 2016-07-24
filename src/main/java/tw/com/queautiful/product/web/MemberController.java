@@ -260,7 +260,7 @@ public class MemberController {
 				memberService.getReviewsPaging("", memberId, pageNum, sortProperty, direction);
 		
 		List<Review> reviews = pages.getContent();
-		
+		List<String> dates = formatDate(reviews);
 		List<ProductView> products = new ArrayList();
 		for(Review review:reviews){
 			Long prodId = review.getProduct().getProdId();
@@ -273,8 +273,9 @@ public class MemberController {
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviews", reviews);
-		map.put("reviewsPageNum", pages.getNumber());
+		map.put("dates", dates);
 		map.put("products", products);
+		map.put("reviewsPageNum", pages.getNumber());
 		map.put("member", memberService.getById(memberId));
 		result.add(map);
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
@@ -294,6 +295,19 @@ public class MemberController {
 				memberService.getReviewsPaging("", memberId, 0, null, null);
 		
 		List<Review> reviews = pages.getContent();
+		List<String> dates = formatDate(reviews);
+		log.debug(dates.toString());
+		
+		model.addAttribute("dates", dates);
+		model.addAttribute("reviews", pages.getContent());
+		model.addAttribute("reviewsPageNum", pages.getNumber());
+		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
+		model.addAttribute("member", memberService.getById(memberId));
+		
+		return "/member/memberPost";
+	}
+	
+	private List<String> formatDate(List<Review> reviews){
 		List<String> dates = new ArrayList();
 		for(Review review: reviews){
 			java.sql.Date reviewTime = review.getReviewTime();
@@ -304,14 +318,7 @@ public class MemberController {
 			log.debug(datef);
 			dates.add(datef);
 		}
-		log.debug(dates.toString());
-		model.addAttribute("dates", dates);
-		model.addAttribute("reviews", pages.getContent());
-		model.addAttribute("reviewsPageNum", pages.getNumber());
-		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
-		model.addAttribute("member", memberService.getById(memberId));
-		
-		return "/member/memberPost";
+		return dates;
 	}
 	
 	// 提供jqGrid抓取資料使用
