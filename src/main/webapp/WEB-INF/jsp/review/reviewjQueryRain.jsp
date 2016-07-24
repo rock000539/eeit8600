@@ -304,6 +304,23 @@
 		  <script type="text/javascript" src="/js/fms/fms-main.js"></script>
     <script src="/js/review/main.js"></script>
     	  <script src="/ckeditor/ckeditor.js"></script>
+    	  
+    	  
+<script id="reviewCM_mode" type="text/template">
+
+	<li class="comment">
+    	<div class="avatar"><img alt="" src="/members/show?memberId=_memberId" class="avatar"></div>
+        <div class="comment-container">
+	        <h4 class="comment-author"><a href="#">_memberNickname</a></span></h4>
+            <div class="comment-meta"><a href="#" class="comment-date link-style1">_reviewCMTime </a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
+            <div class="comment-body">
+    	        <p>_reviewCMMsg</p>
+            </div>
+        </div>
+    </li>
+
+</script>    	  
+    	  
 <script type="text/javascript">
 $(function () {  //=$(document.)ready
 	/*  ============ USER IMG =========== 	*/ 
@@ -334,13 +351,10 @@ $(function () {  //=$(document.)ready
 				contentType:'application/json;charset=UTF-8',
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
-				success:function(data){
-					console.log(data);
-// 					console.log("value="+value);
-				
-					
+				success:function(result){
+					console.log("result="+result);
+// 					appendReviewCM(result);
 					location.href="#Comments";
-					
 				},error:function(x,y,z){
 					console.log("x="+x);
 					console.log("y="+y);
@@ -349,6 +363,16 @@ $(function () {  //=$(document.)ready
 			})
 		})//#postComment click end
 
+		function appendReviewCM(result){
+			console.log(result);
+			$('#comment-list').empty;
+			
+			
+// 			for(var)
+			
+		}
+		
+		
 		
 		$.fn.serializeObject = function()
 		{

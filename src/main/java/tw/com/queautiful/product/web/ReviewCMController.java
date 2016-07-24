@@ -59,18 +59,19 @@ public class ReviewCMController {
 	public ReviewCM insert(@RequestBody ReviewCM reviewCM,HttpServletRequest request){
 		log.debug("{}",reviewCM);
 		reviewCM.setReviewCMTime(new java.sql.Timestamp(System.currentTimeMillis()));
-//		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		//FK
 //		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
 //		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
 		
 		log.debug("{}",reviewCM.getReviewCMTime());
 		log.debug("{}",reviewCM);
-//		log.debug("{}",reviewCM.getReviewId());
+		
+//		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 		reviewCM.setReview(reveiwService.getById(reviewCM.getReviewId()));
 	
 		service.insert(reviewCM);
+//		List<ReviewCM> reveiwCMs = service.getById(rcmId);
 		return reviewCM;
 	}
 	
