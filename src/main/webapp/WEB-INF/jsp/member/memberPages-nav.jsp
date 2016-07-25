@@ -10,12 +10,12 @@
 	        </a>
 	    </li>
 	    <li>
-	    	<a class="profile" href="<% request.getContextPath(); %>/members/profile">
+	    	<a class="profile" href="/members/profile">
 	            <span class="nav-span nav-active">Profile</span>
 	        </a>
 	    </li>
 	    <li>
-	    	<a class="expdate" href="<% request.getContextPath(); %>/members/product-exp">
+	    	<a class="expdate" href="/members/product-exp">
 	            <span class="nav-span">ExpDate</span>
 	        </a>
 	    </li>
@@ -25,12 +25,12 @@
 	        </a>
 	    </li>
 	    <li>
-		     <a class="liked" href="<% request.getContextPath(); %>/members/like/article">
+		     <a class="liked" href="/members/like/article">
 	            <span class="nav-span">Liked</span>
 	         </a>
 	    </li>
 	    <li>
-	    	<a class="posted" href="<% request.getContextPath(); %>/members/post/${memberId}">
+	    	<a class="posted" href="/members/post/${memberId}">
 	            <span class="nav-span">Posted</span>
 	        </a>
 	    </li>

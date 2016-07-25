@@ -66,6 +66,28 @@ public class MemberController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	@RequestMapping("/overview/{memberId}")
+	public String memberOverviewPage(@PathVariable Long memberId, HttpServletRequest request, Model model){
+		Member member = memberService.getById(memberId);
+		
+		java.sql.Date regiDate = member.getMemberRegiDate();
+		SimpleDateFormat sDateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+		Calendar date = Calendar.getInstance(); 
+		date.setTime(regiDate);
+		String memberRegiDate = sDateFormat.format(date.getTime());
+		
+		
+		model.addAttribute("member", member);
+		model.addAttribute("memberRegiDate", memberRegiDate);
+		model.addAttribute("expDates", expDateService.getByMemberId(memberId).size());
+		model.addAttribute("postedReviews", member.getReviewsWorteByAuthor().size());
+		model.addAttribute("postedArticles", member.getArticlesWorteByAuthor().size());
+		
+		model.addAttribute("member", member);
+		model.addAttribute("likedReviews", member.getReviewsSavedByMember().size());
+		model.addAttribute("likedArticles", member.getArticlesSavedByMember().size());
+		return "/member/memberOverview";
+	}
 	
 	@RequestMapping("/profile")
 	public String memberPersonalPage(HttpServletRequest request, Model model){
@@ -232,8 +254,7 @@ public class MemberController {
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("articles", pages.getContent());
-		map.put("pageNum", pages.getNumber());
-		map.put("totalPages", pages.getTotalPages());
+		map.put("articlesPageNum", pages.getNumber());
 		map.put("member", memberService.getById(memberId));
 		result.add(map);
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
@@ -288,16 +309,14 @@ public class MemberController {
 	}
 	
 	//review-post頁面
-	@RequestMapping("/post")
-	public String memberPostedReviewPage(Model model, HttpServletRequest request){
-		Long memberId = (Long) request.getSession().getAttribute("memberId");
+	@RequestMapping("/post/{memberId}")
+	public String memberPostedReviewPage(@PathVariable Long memberId, Model model, HttpServletRequest request){
 		Member member = memberService.getById(memberId);
 		
 		Page<Review> pages = 
 				memberService.getReviewsPaging("", memberId, 0, null, null);
 		List<Review> reviews = pages.getContent();
 		List<String> dates = formatDate(reviews);
-		log.debug(dates.toString());
 		
 		model.addAttribute("dates", dates);
 		model.addAttribute("reviews", pages.getContent());
@@ -311,6 +330,11 @@ public class MemberController {
 		model.addAttribute("articlesPageNum", articlePages.getNumber());
 		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
 		model.addAttribute("member", member);
+		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", articlePages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", articlePages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", articlePages.getTotalPages()); 
+		log.debug("totalElements = {}", articlePages.getTotalElements()); 
 		
 		return "/member/memberPost";
 	}
@@ -324,7 +348,6 @@ public class MemberController {
 			Calendar date = Calendar.getInstance();
 			date.setTime(reviewTime);
 			String datef = sDateFormat.format(date.getTime());
-			log.debug(datef);
 			dates.add(datef);
 		}
 		return dates;
