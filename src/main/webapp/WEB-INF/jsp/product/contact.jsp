@@ -22,33 +22,38 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ContactPage</title>
-<script>
-$(function(){
 	
-$("#sendMail").click(function(){//#1
-
-var webMailSender=$("#webMailSender").val();
-var senderEMail=$("#senderEMail").val();
-var mailSubject=$("#mailSubject").val();
-var mailMessage=$("#mailMessage").val();
-var memberId=$("#sendMail").attr("memberId");
-$.ajax({//#2
-url:"/webmail/sendMail",
-type:"POST",
-data : {"webMailSender" : webMailSender,
-		"senderEMail" : senderEMail,
-		"mailSubject" : mailSubject,
-		"mailMessage" : mailMessage,
-		"memberId" : memberId},
-success : function(data){
-	alert(data);
-}	
-})//end of #2
-})//end of #1
-
+	<script>
 	
-})
-</script>
+		$(function(){
+		
+			$("#sendMail").click(function(){
+	
+				var webMailSender=$("#webMailSender").val();
+				var senderEMail=$("#senderEMail").val();
+				var mailSubject=$("#mailSubject").val();
+				var mailMessage=$("#mailMessage").val();
+				var memberId=$("#sendMail").attr("memberId");
+				
+				$.ajax({
+					url:"/webmail/sendMail",
+					type:"POST",
+					data : {"webMailSender" : webMailSender,
+							"senderEMail" : senderEMail,
+							"mailSubject" : mailSubject,
+							"mailMessage" : mailMessage,
+							"memberId" : memberId},
+					success : function(data){
+						alert(data);
+					}	
+				});
+				
+			});
+	
+		});
+		
+	</script>
+	
 </head>
 <body>
 
