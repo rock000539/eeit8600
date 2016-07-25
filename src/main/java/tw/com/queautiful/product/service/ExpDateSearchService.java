@@ -45,6 +45,10 @@ public class ExpDateSearchService {
 				result.put("expDate", expStr);
 				result.put("productList", productList);
 			} else if (brandId == 3) {
+				Biore(batchCode);
+				result.put("mfdDate", mfdStr);
+				result.put("expDate", expStr);
+				result.put("productList", productList);
 			} else if (brandId == 4) {
 				Lancome(batchCode);
 				result.put("mfdDate", mfdStr);
@@ -58,16 +62,16 @@ public class ExpDateSearchService {
 			}
 			else {
 				System.out.println("Exception2");
-				result.put("mfdDate", "抱歉請檢察序號是否輸入正確");
-				result.put("expDate", "抱歉請檢察序號是否輸入正確");
+				result.put("mfdDate", "Your input is wrong.");
+				result.put("expDate", "Your input is wrong.");
 				result.put("productList", productList);
 			}
 
 		} catch (Exception e) {
 			System.out.println("Exception 1");
-			result.put("mfdDate", "抱歉請檢察序號是否輸入正確");
-			result.put("expDate", "抱歉請檢察序號是否輸入正確");
-			result.put("productList", "抱歉請檢察序號是否輸入正確");
+			result.put("mfdDate", "Your input is wrong.");
+			result.put("expDate", "Your input is wrong.");
+			result.put("productList", "Your input is wrong.");
 			return result;
 		}
 

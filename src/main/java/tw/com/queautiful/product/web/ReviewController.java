@@ -17,8 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +34,7 @@ import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewCMService;
 import tw.com.queautiful.product.service.ReviewService;
+import tw.com.queautiful.product.service.Review_TagListService;
 
 @Controller
 @RequestMapping("/reviews")
@@ -52,6 +53,9 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewCMService reveiwCMService;
+	
+	@Autowired
+	private Review_TagListService review_TagListService;
 
 	// 提供jqGrid抓取資料使用
 	@RequestMapping("/select_jqgrid")
@@ -282,5 +286,13 @@ public class ReviewController {
 		// 在網頁中顯示圖片-->直接使用FileProcessing檔的showImg方法
 		// 傳入參數:1.HttpServletResponse, 2.檔案路徑
 		FileProcessing.showImg(resp, reviewImg);
+	}
+	
+	@RequestMapping(value="/deleteTag", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional
+	public String deleteTag(Long reviewid,Long reviewtagid){
+		String result=review_TagListService.deleteReview_TagList(reviewid, reviewtagid);
+		return result;
 	}
 }

@@ -161,7 +161,7 @@
                                     <li class="comment">
                                         <div class="avatar"><img alt="" src="/members/show?memberId=${review.reviewCMs[0].memberId}" class="avatar"></div>
                                         <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">${review.reviewCMs[0].nickname}</a></span></h4>
+                                            <h4 class="comment-author"><a href="#">${review.reviewCMs[0].member.nickname}</a></span></h4>
                                             <div class="comment-meta"><a href="#" class="comment-date link-style1">${review.reviewCMs[0].reviewCMTime} </a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
                                             <div class="comment-body">
                                                 <p>${review.reviewCMs[0].rcmMsg}</p>
@@ -176,7 +176,7 @@
                                 </div>
 						<form id="addForm" action="/reviewCMs/insert" method="post">
                             <input type="hidden" name="memberId" value="${memberId}"/>
-                            <input type="hidden" name="reviewId" value="${review.reviewId}"/>
+                            <input id="reviewId" type="hidden" name="reviewId" value="${review.reviewId}"/>
                             <div class="comment-box row">
                                 <div class="col-sm-12">
                                     <p>	
@@ -338,13 +338,13 @@ $(function () {  //=$(document.)ready
 
 		$('#postComment').click(function(){
 			var value=CKEDITOR.instances['rcmMsg'].getData();
-			console.log(value);
+// 			console.log(value);
 		});//check ckeditor data end
 
 		$('#postComment').on('click',function(){
 			$('#rcmMsg').val(CKEDITOR.instances['rcmMsg'].getData());
 // 			console.log($('#addForm'));
-			console.log(JSON.stringify($('#addForm').serializeObject()));
+// 			console.log(JSON.stringify($('#addForm').serializeObject()));
 			$.ajax({
 				url:'/reviewCMs/insert',
 				type:'post',
@@ -352,8 +352,8 @@ $(function () {  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(result){
-					console.log("result="+result);
-// 					appendReviewCM(result);
+					console.log("result1="+result);
+					appendReviewCM(result);
 					location.href="#Comments";
 				},error:function(x,y,z){
 					console.log("x="+x);
@@ -364,11 +364,17 @@ $(function () {  //=$(document.)ready
 		})//#postComment click end
 
 		function appendReviewCM(result){
-			console.log(result);
+			console.log("result2="+result);
 			$('#comment-list').empty;
 			
+			console.log($('#reviewCM_mode').html());
 			
-// 			for(var)
+			for(var i=0;i<result.length;i++){
+				var str =$('#reviewCM_mode').html();
+				console.log("str="+str);
+				
+// 				$(str).replace("_memberId",result[i].)
+			}
 			
 		}
 		

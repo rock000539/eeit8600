@@ -627,7 +627,8 @@
 		// 查看商品
 		function info_click(a) {
 			console.log($(a).attr('data-prodId'));
-			$.redirect('/products/view', { 'prodId': $(a).attr('data-prodId') });
+			//$.redirect('/products/view', { 'prodId': $(a).attr('data-prodId') });
+			document.location.href='/products/view?prodId=' + $(a).attr('data-prodId');
 		}
 		
 		// 收藏商品
@@ -647,7 +648,7 @@
 		listButton = $('button.list-view');
 		gridButton = $('button.grid-view');
 
-		listButton.on('click',function(){
+		listButton.on('click',function() {
 			
 			if(listButton.attr('class') == 'list-view') {
 				
