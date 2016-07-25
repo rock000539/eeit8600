@@ -56,23 +56,24 @@ public class ReviewCMController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public ReviewCM insert(@RequestBody ReviewCM reviewCM,HttpServletRequest request){
-		log.debug("{}",reviewCM);
-		reviewCM.setReviewCMTime(new java.sql.Timestamp(System.currentTimeMillis()));
+	public List<ReviewCM> insert(@RequestBody ReviewCM reviewCM,HttpServletRequest request){
 		//FK
 //		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
 //		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
 		
-		log.debug("{}",reviewCM.getReviewCMTime());
-		log.debug("{}",reviewCM);
-		
+		reviewCM.setReviewCMTime(new java.sql.Timestamp(System.currentTimeMillis()));
 //		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 		reviewCM.setReview(reveiwService.getById(reviewCM.getReviewId()));
-	
+		log.debug("{}",reviewCM);
 		service.insert(reviewCM);
-//		List<ReviewCM> reveiwCMs = service.getById(rcmId);
-		return reviewCM;
+		
+		//一篇心得內的所有留言
+		log.debug("ReviewId={}",reviewCM.getReviewId());		
+		List<ReviewCM> reviewCMs = reveiwService.getById(reviewCM.getReviewId()).getReviewCMs();
+		log.debug("ReviewCMs={}",reviewCMs);
+		
+		return reviewCMs;	
 	}
 	
 	@RequestMapping("/edit")
