@@ -217,6 +217,8 @@ select {
       
     </div>
 </div>
+<!-- end of Modal -->
+
 				</div>        
             <!-- **每頁不同的內容結束** -->
 
