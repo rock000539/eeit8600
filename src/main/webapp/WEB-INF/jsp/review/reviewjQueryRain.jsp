@@ -352,9 +352,26 @@ $(function(){  //=$(document.)ready
 		}; //serializeObject end
 			
 		console.log("reviewId="+$('#reviewId').val());
+// 			$.ajax({
+// 				url:"/reviewCMs/select/"+$('#reviewId').val(),
+// 				type:'POST',
+// // 				contentType:'application/json;charset=UTF-8',
+// // 				data:JSON.stringify($('#addForm').serializeObject()),
+// 				data:{'reviewId':$('#reviewId').val()},
+// 				dataType:'json',
+// 				success:function(result){
+// 					console.log("result1="+result);
+// 					appendReviewCM(result);
+// 				},error:function(x,y,z){
+// 					console.log("x="+x);
+// 					console.log("y="+y);
+// 					console.log("z="+z);
+// 				}
+// 			})//onload ajax
+			
 			$.ajax({
-				url:'/reviewCMs/selects',
-				type:'post',
+				url:"/reviewCMs/selects",
+				type:'POST',
 // 				contentType:'application/json;charset=UTF-8',
 // 				data:JSON.stringify($('#addForm').serializeObject()),
 				data:{'reviewId':$('#reviewId').val()},

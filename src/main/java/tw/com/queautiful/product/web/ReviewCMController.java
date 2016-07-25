@@ -2,22 +2,18 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.crsh.console.jline.internal.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ReviewCMService;
@@ -78,7 +74,18 @@ public class ReviewCMController {
 	
 	@RequestMapping(value="/selects",method=RequestMethod.POST)
 	@ResponseBody
-	public List<ReviewCM> selects(@RequestParam Long reviewId){
+	public List<ReviewCM> selects(@RequestParam("reviewId") Long reviewId){
+		log.debug("ReviewId={}",reviewId);		
+		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
+		log.debug("ReviewCMs={}",reviewCMs);
+		
+		return reviewCMs;	
+//		return null;	
+	}
+	
+	@RequestMapping(value="/select/{id}",method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReviewCM> selects2(@PathVariable("id") Long reviewId){
 		log.debug("ReviewId={}",reviewId);		
 		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
 		log.debug("ReviewCMs={}",reviewCMs);
