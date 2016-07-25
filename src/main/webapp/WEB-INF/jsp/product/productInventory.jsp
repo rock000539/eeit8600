@@ -35,244 +35,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductInventory</title>
 
-	<style>
-		
-		.blog_medium .post {
-		    padding-bottom: 25px;
-		    margin-bottom: 30px;
-		    border-bottom: 3px solid #f2f2f2;
-/* 		    background: black; */
-    		padding: 12px;
-		}
-		
-		.blog_medium .post_content > p {
-			margin-bottom: 10px;
-		}
-		
-		a:hover {
-  			cursor:pointer;
- 		}
- 		
- 		.widget_title h4 {
- 			margin-top: 20px;
- 			margin-bottom: 5px;
-		    font-size: 18px;
-		    text-transform: uppercase;
-		}
-		
-		.img-prod
-		{
-			-moz-box-shadow: 0 0 5px #fff;
-			-webkit-box-shadow: 0 0 5px #fff;
-			box-shadow: 0px 0px 5px #fff;
-		}
-		
-		.buttons {
-			text-align: right;
-			margin: 20px auto 0;
-			padding-right: 3%;
-		}
-
-		button {
-			height: 36px;
-			width: 40px;
-			margin-left: 4px;
-			font-size: 24px;
-			color: #727CB6;
-			text-align: center;
-			line-height: 1.4;
-			border-radius: 4px;
-			border: none;
-			outline: none;
-			background-color: white;
-			box-shadow: 0px 1px 2px #bbb;
-		}
-
-		button.on {
-		    color: white;
-		    background-color: #ccc;
-		}
-		
-		.list-view:hover, grid-view:hover {
-			cursor: pointer;
-		    box-shadow: 0px 0px 3px #666;
-		}
-		
-		/* Grid */
-		#proList {
-			margin-top: 20px;
-			font-size: 24px;
-		}
-
-		.portfolio-content {
-			border: 1px solid #E7E6E6;
-			padding: 20px 10px 20px 10px;
-			text-align: center;
-		}
-		
-		.portfolio-content h3 {
-			font-size: 15px;
-		 	line-height: 15px;
-		}
-		
-		.portfolio-img {
-			margin: 0 auto;
-			height: 130px;
-			width: 130px;
-			overflow:hidden;
-		}
-		
-		.portfolio-content img{
-			height: 130px;
-			width: 130px;
-		}
-		
-		.portfolio-content p {
-			line-height: 1.1;
-			margin: 5px;
-			font-size: 15px;
-		}
-		
-		.portfolio-btn {
-			margin-top: 20px;
-		}
-		
-		.portfolio-item {
-		 	padding: 15px; 
-		}
-		
-		.portfolio-item:hover .portfolio-content{
-			border-bottom-color:#727CB6; 
-		}
-		
-		.portfolio-all {
-			background-color: #ffffff;
-			margin-bottom: 10px;
-		}
-		
-		.portfolio-title {
-			height: 60px;
-			background-color: #98DaD6;  /*blue */
-			border-bottom: 1px solid #4FBAAA;
-			color: #ffffff;
-			text-align: center;
-			padding: 15px 10px 10px 10px;
-		}
-		
-		#proList div:nth-child(4n+2) .portfolio-title {
-			background-color: #DDD5C9;	/*beige*/
-			border-bottom: 1px solid #C6BFB4;
-		} 
-		
-		#proList div:nth-child(4n+3) .portfolio-title {
-			background-color: #FF95CA;	/*beige*/
-			border-bottom: 1px solid #C6BFB4;
-		} 
-		
-		#proList div:nth-child(4n+4) .portfolio-title {
-			background-color: #FF9985;	/*pink*/
-			border-bottom: 1px solid #D97F88;
-		}
-		
-		.portfolio-title h3 {
-			font-size: 15px;
-		 	line-height: 15px; 
-			color: #ffffff;
-			margin: 5px;
-		}
-		
-		.div-inline { 
-			display:inline
-		}
-		
-		/* Share Toggle */
-		.card__share {
-			float: right;
-			position: relative;
-			margin-top: -32px;
-		}
-	
-		.card__social {
-			position: absolute;
-			top: 0;
-			right: 0;
-			visibility: hidden;
-			width: 135px;
-			transform: translateZ(0);
-		  	transform: translateX(0px);
-		  	transition: transform 0.35s ease;
-		}
-		
-		.card__social--active {
-			visibility: visible;
-			transform: translateZ(0);
-	 		transform: translateX(-6px);
-	  		transition: transform 0.35s ease;
-		}
-		
-		.share-toggle {
-			z-index: 2;
-		}
-		
-		.share-toggle:before {
-			content: "\f1e0";
-			font-family: 'FontAwesome';
-			color: #3498db;
-		}
-		
-		.share-toggle.share-expanded:before {
-			content: "\f00d";
-		}
-		
-		.share-icon {
-			display: inline-block;
-			width: 30px;
-			height: 30px;
-			line-height: 30px;
-			text-align: center;
-			border-radius: 50%;
-			background-color: #fff;
-			transition: all 0.3s ease;
-			outline: 0;
-		
-			box-shadow: 
-			  		0 2px 4px rgba(0,0,0, 0.12),
-			    	0 2px 4px rgba(0,0,0, 0.24);
-		}
-		
-		.share-icon:hover,
-		.share-icon:focus {
-			box-shadow: 
-		  		0 3px 6px rgba(0,0,0, 0.12),
-		    	0 3px 6px rgba(0,0,0, 0.24);
-	
-		    -webkit-transform: scale(1.2);
-		    -moz-transform: scale(1.2);
-		    -ms-transform: scale(1.2);
-		    -o-transform: scale(1.2);
-		    transform: scale(1.2);
-		}
-		
-		.info {
-			background-color: #0080FF;
-		}
-		
-		.bookmark {
-			background-color: #FF8040;
-		}
-		
-		.info,
-		.bookmark {
-			padding-top:2px;
-			color: #fff;
-		}
-	
-		.info:hover,
-		.bookmark:hover {
-			color: #eee;
-		}
-		
-	</style>
+	<style></style>
 
 </head>
 <body>
@@ -494,12 +257,6 @@
 		// 初始化資料
 		$(function() {
 			
-			console.log("mode = ${mode}");
-			console.log("brandId = ${brandId}");
-			console.log("categoryId = ${categoryId}");
-			console.log("products.size() = ${products.size()}");
-			console.log("totalPage = ${totalPage}");
-			
 			$('#list').show();
 			$('#grid').hide();
 			
@@ -541,8 +298,6 @@
 					'rows': $('#rows').val(),
 				},
 				success: function(response) {
-					
-					console.log(response);
 					
 					$('#totalPage').val(response.totalPage);
 					$('#page_btn').bootpag({
@@ -626,9 +381,7 @@
 		
 		// 查看商品
 		function info_click(a) {
-			console.log($(a).attr('data-prodId'));
-			//$.redirect('/products/view', { 'prodId': $(a).attr('data-prodId') });
-			document.location.href='/products/view?prodId=' + $(a).attr('data-prodId');
+			document.location.href='/products/view/' + $(a).attr('data-prodId');
 		}
 		
 		// 收藏商品

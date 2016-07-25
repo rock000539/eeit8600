@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,8 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.commons.util.Spec;
-import tw.com.queautiful.product.entity.Brand;
-import tw.com.queautiful.product.entity.Category;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
@@ -38,7 +35,6 @@ import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
 import tw.com.queautiful.product.vo.product.ProductInventory;
 import tw.com.queautiful.product.vo.product.ProductSearch;
-import tw.com.queautiful.product.vo.product.ProductView;
 
 @Controller
 @RequestMapping("/products")
@@ -70,9 +66,6 @@ public class ProductController {
 	@ResponseBody
 	public Page<Product> select(@RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer rows) {
-
-		log.debug("page = {}", page);
-		log.debug("rows = {}", rows);
 
 		Pageable pageable = new PageRequest(page - 1, rows);
 		Page<Product> prodPage = prodService.getAll(pageable);
@@ -112,8 +105,6 @@ public class ProductController {
 		product.setBrand(brandService.getById(product.getBrandId()));
 		product.setCategory(categoryService.getById(product.getCategoryId()));
 
-		log.debug("{}", product);
-
 		prodService.insert(product);
 		return product;
 	}
@@ -139,8 +130,6 @@ public class ProductController {
 		product.setBrand(brandService.getById(product.getBrandId()));
 		product.setCategory(categoryService.getById(product.getCategoryId()));
 
-		log.debug("{}", product);
-
 		prodService.update(product);
 		return product;
 	}
@@ -162,44 +151,21 @@ public class ProductController {
 	public String searchPage(Model model) {
 
 		// 類別
-		List<Category> c_list = categoryService.getAll();
-		List<CategorySearch> categories = new ArrayList<>();
-		CategorySearch category = null;
-		for (Category tmp : c_list) {
-			category = new CategorySearch();
-			BeanUtils.copyProperties(tmp, category);
-			categories.add(category);
-		}
+		List<CategorySearch> categories = categoryService.getAllByVoSearch();
+		model.addAttribute("categories", categories);
 
 		// 品牌
-		List<Brand> b_list = brandService.getAll();
-		List<BrandSearch> brands = new ArrayList<>();
-		BrandSearch brand = null;
-		for (Brand tmp : b_list) {
-			brand = new BrandSearch();
-			BeanUtils.copyProperties(tmp, brand);
-			brands.add(brand);
-		}
-
-		model.addAttribute("categories", categories);
+		List<BrandSearch> brands = brandService.getAllByVoSearch();
 		model.addAttribute("brands", brands);
+
 		return "/product/productSearch";
 	}
 
-	@RequestMapping("/searchbybrand")
+	@RequestMapping("/search/{brandId}")
 	@ResponseBody
-	public List<ProductSearch> searchByBrand(@RequestParam Long brandId) {
-		List<Product> p_list = brandService.getById(brandId).getProducts();
-		List<ProductSearch> products = new ArrayList<>();
-		ProductSearch product = null;
-		for(Product tmp : p_list) {
-			product = new ProductSearch();
-			BeanUtils.copyProperties(tmp, product);
-			products.add(product);
-		}
-		return products;
+	public List<ProductSearch> searchByBrand(@PathVariable Long brandId) {
+		return prodService.getAllByVoSearch(brandService.getById(brandId).getProducts());
 	}
-	
 	
 	@RequestMapping("/inventory")
 	public String inventoryPage(
@@ -207,9 +173,6 @@ public class ProductController {
 			@RequestParam(required = false) Long brandId,
 			@RequestParam(required = false) Long categoryId, 
 			Model model) {
-
-		log.debug("brandId = {}", brandId);
-		log.debug("categoryId = {}", categoryId);
 
 		// 篩選條件
 		Product filter = new Product();
@@ -229,15 +192,7 @@ public class ProductController {
 		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
 		
 		// Copy需要送到前端的資料
-		List<Product> p_list = pages.getContent();
-		List<ProductInventory> products = new ArrayList<>();
-		ProductInventory product = null;
-		for(Product tmp : p_list) {
-			product = new ProductInventory();
-			BeanUtils.copyProperties(tmp, product);
-			product.setrSize(tmp.getReviews().size());
-			products.add(product);
-		}
+		List<ProductInventory> products = prodService.getAllByVoInventory(pages.getContent());
 		model.addAttribute("products", products);
 		
 		// list模式下總共幾頁
@@ -280,15 +235,7 @@ public class ProductController {
 		}
 		
 		// Copy需要送到前端的資料
-		List<Product> p_list = pages.getContent();
-		List<ProductInventory> products = new ArrayList<>();
-		ProductInventory product = null;
-		for(Product tmp : p_list) {
-			product = new ProductInventory();
-			BeanUtils.copyProperties(tmp, product);
-			product.setrSize(tmp.getReviews().size());
-			products.add(product);
-		}
+		List<ProductInventory> products = prodService.getAllByVoInventory(pages.getContent());
 		
 		Map<String, Object> data = new HashMap<>();
 		//data.put("mode", mode);
@@ -302,11 +249,9 @@ public class ProductController {
 		return data;
 	}
 
-	@RequestMapping("/view")
-	public String viewPage(@RequestParam(required = false) Long prodId, Model model) {
-		ProductView bean = new ProductView();
-		BeanUtils.copyProperties(prodService.getById(prodId), bean);
-		model.addAttribute("product", bean);
+	@RequestMapping("/view/{prodId}")
+	public String viewPage(@PathVariable Long prodId, Model model) {
+		model.addAttribute("product", prodService.getByIdByVoView(prodId));
 		return "/product/productView";
 	}
 
