@@ -132,6 +132,20 @@ $(function(){
 	})
 	
 	
+	$("#deleteTag").click(function(){
+		var reviewid=1;
+		var reviewtagid=1;
+		
+		$.ajax({
+			"url":"/reviews/deleteTag",
+			type:"POST",
+			data:{"reviewid":reviewid,"reviewtagid":reviewtagid},
+			success:function(result){
+				alert(result);		
+			}
+		})
+	})
+		
 	
 	
 })//end of onload
@@ -148,6 +162,8 @@ $(function(){
 <input type="button" id="reviewreport" value="reviewreport">
 <br><br><br><br>
 <input type="button" id="SelectReview" value="SelectReview">
+<hr><hr>
+<input type="button" id="deleteTag" value="deleteTag">
 <!-- 使用model1 ----------------------------------------------------------------->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
