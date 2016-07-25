@@ -27,8 +27,7 @@
 				<div class="grey_bg row">
 
 <div class="row detail-div">
-	<div id="div1" class="col-lg-2"></div>
-	<div class="col-lg-6 col-sm-6 wow fadeInLeft delay-05s memberDiv">
+	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 		
 		
@@ -36,14 +35,11 @@
 		
 	</div> <!-- col-lg -->
 	
-	<div class="col-lg-1"></div>
-	
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 	
 </div> <!-- row -->
 					
 				</div>        
-            
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />

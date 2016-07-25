@@ -5,7 +5,7 @@
 <div id="navigationDiv">
 	<ul id="navigationMenu">
 	    <li>
-		    <a class="overview" href="#">
+		    <a class="overview" href="/members/overview/${memberId}">
 	            <span class="nav-span">Overview</span>
 	        </a>
 	    </li>
@@ -30,7 +30,7 @@
 	         </a>
 	    </li>
 	    <li>
-	    	<a class="posted" href="<% request.getContextPath(); %>/members/post">
+	    	<a class="posted" href="<% request.getContextPath(); %>/members/post/${memberId}">
 	            <span class="nav-span">Posted</span>
 	        </a>
 	    </li>

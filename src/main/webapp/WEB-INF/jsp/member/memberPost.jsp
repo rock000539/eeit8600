@@ -23,6 +23,7 @@
 <style>
 h2, h4{
 	margin: 0;
+	font-weight: normal;
 }
 #member-header{
 	border-bottom: 0px;
@@ -51,10 +52,11 @@ h2, h4{
  	border: 0px;
  	padding-left: 0px;
 }
-.reviews{
+.reviews, .articles{
 	padding: 33px 0 40px 0;
 	border-top: 1px solid #E0E0E0;
 }
+
 .prod{
 	color:#000;
 	font-weight: 400;
@@ -62,7 +64,7 @@ h2, h4{
 	display:inline-block;
 	padding-bottom: 5px;
 }
-.reviewTime{
+.reviewTime, .articleTime{
 	position:relative;
 	display: block;
 	float: left;
@@ -76,9 +78,10 @@ h2, h4{
 	width: 90px;
 	top:2px;
 	border-top: 2px solid #727CB6;
-	
+	font-family: "Neutra Face","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .reviewTime>span{
+	display: block;
 	font-size: 18px;
 	font-family: FranklinGothic,Helvetica,sans-serif;
 }
@@ -108,23 +111,25 @@ h2, h4{
 	padding-left: 30px;
 	vertical-align: top;
 }
-.reviewContent h2, .reviewContent p, .reviewContent h4{
+.reviewContent h2, .reviewContent p, .reviewContent h4
+.articleContent h2, .articleContent p, .articleContent h4{
 	font-family: Microsoft YaHei;
 }
-.reviewContent h2.reviewTitle{
+.reviewContent h2.reviewTitle, .articleTitle{
 	color: #000;
 	font-size: 28px;
 	font-weight: normal;
 	letter-spacing: 0.05em;
+	padding-bottom: 5px;
 }
-.reviewContent h2.reviewTitle>span{
+.reviewContent h2.reviewTitle>span, .articleEdit{
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 10px;
 	padding: 0 10px 0 4px;
 	background: #727CB6;
 }
-.reviewContent h2>span>a{
+.reviewContent h2>span>a, .articleEdit>a{
 	color: #fff;
 	line-height: 20px;
 }
@@ -168,7 +173,16 @@ h2, h4{
 	font-family: "Proxima Nova",sans-serif;
 	font-size: 14px;
 	padding: 13px 16px;
+	text-transform: uppercase;
 }
+.articleType{
+	color: #df3331;
+	font-family: "Irvin Text",Georgia,"Times New Roman",Times,serif;
+    font-size: 12px;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+
 </style>
 </head>
 <body>
@@ -184,8 +198,8 @@ h2, h4{
 <div id="tabnav">
 	<div id="maintab">
 		<ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#review">Review</a></li>
-            <li class=""><a data-toggle="tab" href="#article">Article</a></li>
+            <li id="tab-r" class=" active"><a data-toggle="tab" href="#review">Review</a></li>
+            <li id="tab-a" class=""><a data-toggle="tab" href="#article">Article</a></li>
         </ul>
 	</div> <!-- maintab -->
 </div> <!-- tabnav -->
@@ -213,9 +227,7 @@ h2, h4{
 						</div>
 					</div>
 					<div class="rating">
-					<c:forEach begin="1" end="${item.reviewRating}">
-						<i class="fa fa-diamond"></i>
-					</c:forEach>
+					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
 	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>
@@ -234,8 +246,31 @@ h2, h4{
 			<input type="hidden" id="reviewsTotalPages" value="${reviewsTotalPages}">
 	    </div>
 	    
+	    <!-- articles -->
+	    
 	    <div id="article" class="tab-pane fade">
-        	
+        	<div class="subject">
+				<p>POSTED ARTICLES</p>
+			</div>
+			<div class="subtab">
+			</div> <!-- subtab -->
+			<c:forEach var="item" items="${articles}" varStatus="vs">
+			<div class="articles col-lg-12">
+				<div class="articleTime">
+					<h4>${item.articleTime}</h4>
+					<h4 class="articleType">${item.articleType}</h4>
+					
+				</div>
+				<div class="articleContent">
+					<h2 class="articleTitle">${item.articleTitle} <span class="articleEdit"><a href="/articles/edit?articleId=${item.articleId}"><i class="fa fa-pencil"></i>edit</a></span></h2>
+					<p class="prereview">${item.articleContent}</p>
+					<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
+		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
+				</div>
+			</div>
+			</c:forEach>
+			<input type="hidden" id="articlesPageNum" value="${articlesPageNum}">
+			<input type="hidden" id="articlesTotalPages" value="${articlesTotalPages}">
     	</div>
 	</div>
 </div> <!-- tabContent -->
@@ -249,13 +284,7 @@ h2, h4{
 </div> <!-- row -->
 					
 				</div>        
-  <div class="rating">
-					<c:forEach begin="1" end="${item.reviewRating}">
-						<i class="fa fa-diamond"></i>
-					</c:forEach>
-					</div>
-	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
-	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>          
+
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
@@ -284,10 +313,26 @@ h2, h4{
 	</div>
 </div>
 </script>
+<script id="articleTemplate" type="text/template">
+<div class="articles col-lg-12">
+	<div class="articleTime">
+		<h4>_articleTime</h4>
+		<h4 class="articleType">_articleType</h4>
+		
+	</div>
+	<div class="articleContent">
+		<h2 class="articleTitle">_articleTitle <span class="articleEdit"><a href="/articles/edit?articleId=articleId"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		<p class="prereview">_articleContent</p>
+		<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
+       	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
+	</div>
+</div>
+</script>		
 <script>
 $(function(){
 	$(window).scroll(function(){
-	    if($(window).scrollTop() + $(window).height() >= $(document).height()){	
+	if($(window).scrollTop() + $(window).height() >= $(document).height()){	
+		if($('#tab-r').hasClass('active')){
 	    	var totalPages = $('#reviewsTotalPages').val();
 	    	var loadedPageNum = $('#reviewsPageNum').val();
 	    	var pageNum = parseInt(loadedPageNum)+1;
@@ -323,7 +368,7 @@ $(function(){
 						for(var j=0; j<reviewRating; j++){
 							rating += dimand;
 						}
-						$($('#reviewTemplate').html()
+						$($('#articlesPageNum').html()
 							.replace('_year', year)
 							.replace('_day', day)
 							.replace('_month', month)
@@ -343,9 +388,58 @@ $(function(){
 					}
 				} /* success */
 	    	});} /* ajax */
-	    }
+	    }  /* if #tab-r active*/
+	    
+	    
+		if($('#tab-a').hasClass('active')){
+			var totalPages = $('#articlesTotalPages').val();
+	    	var loadedPageNum = $('#articlesPageNum').val();
+	    	var pageNum = parseInt(loadedPageNum)+1;
+	    	console.log("totalPages: "+totalPages);
+//  	    	console.log("loadedPageNum: "+loadedPageNum);
+//  	    	console.log("pageNum: "+pageNum);
+ 	    	
+ 	    	if(loadedPageNum < totalPages){
+ 		    	$.ajax({
+ 		    		url: '/members/post/article/'+pageNum,
+ 					type: 'POST',
+ 					dataType: 'json',
+ 					contextType: 'application/json; charset=utf-8;',
+ 					success: function(response){
+ 						var result = response[0];
+ 						console.log("result: "+result);
+ 						var articles = result.articles;
+ 						var articlesPageNum = result.articlesPageNum;
+ 						var member = result.member;
+ 						console.log("articles: "+articles);
+ 						console.log("articlesPageNum: "+articlesPageNum);
+ 						console.log("member: "+member);
+ 						
+ 						$('#articlesPageNum').val(articlesPageNum);
+ 						
+ 						for(var i=0; i<articles.length; i++){
+ 							$($('#articleTemplate').html()
+ 								.replace('_articleTime', articles[i].articleTime)
+ 								.replace('_articleType', articles[i].articleType)
+ 								.replace('_articleTitle', articles[i].articleTitle)
+ 								.replace('_articleId', articles[i].articleId)
+ 								.replace('_articleContent', articles[i].articleContent)
+								.replace('_articleId', articles[i].articleId))
+								.appendTo($('#article'));
+  						}
+ 					} /* success */
+ 		    	});} /* ajax */
+ 	    	
+		}
+	}  /* scroll-bottom*/
 	}); /* onScroll */
 	
+	
+	
+		
+	    	
+	    	
+	    	
 	
 	  /*============ BUTTON UP ===========*/
     
