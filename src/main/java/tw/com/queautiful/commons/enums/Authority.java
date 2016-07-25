@@ -1,4 +1,4 @@
-package tw.com.queautiful.product.entity;
+package tw.com.queautiful.commons.enums;
 
 public enum Authority {
 	ROLE_USER,ROLE_SUSPENDED,

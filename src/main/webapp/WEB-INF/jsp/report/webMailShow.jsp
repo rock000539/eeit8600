@@ -84,6 +84,7 @@
 	<a href="#">${items.webMail.mailSendDate}</a></td>
 	<td>
 	<input type="button" class="btn deleteBtn" webMailId="${items.webMail.webMailId}" value="Delete"></td>
+	<td><input type="button" class="btn replyMail" webMailId="${items.webMail.webMailId}"  value="reply"></td>
 	</tr>
 	
 
@@ -122,6 +123,41 @@
          </div>
       </div><!-- /.modal-content -->
 </div><!-- /.modal -->
+<!-- 使用model2 ----------------------------------------------------------------->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel2" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">
+              
+            </h4>
+         </div>
+         <div class="modal-body" id="modal-body2">
+<!-- 添加一些文本22222			 -->
+		
+		<div><input type="text" id="replyTitle"></div>
+		<div><input type="text" id="replyMessages"></div>
+			
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">重新修改
+            </button>
+           
+           <button type="button" class="btn btn-primary" id="replyMailCommit">
+               	確認
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+<!-- 結束model2 ----------------------------------------------------------------->
+
 	        <!-- //////////////////////////////////////////////////////////// -->    
 	                       </div>
 	                   </div> <!-- /end .panel -->
@@ -142,13 +178,17 @@
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/bms/jquery.slimscroll.min.js"></script>
 	<script src="/js/bms/bms.js"></script>
-		<script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+	
+<script>
 $(function(){
 	//功能1 跳出modal-----
 	$(".details").click(function (e){
 		var btnP=$(this);
 		var webMailId=btnP.attr("name");
-		var webMail=$(".details[name*="+webMailId+"]")
+		var webMail=$(".details[name*="+webMailId+"]");
 		
 		var webMailSender=webMail[0].children[0].innerHTML;
 		var mailTitle=webMail[1].children[0].innerHTML;
@@ -222,10 +262,11 @@ $(function(){
 				for(var i=0;i<WebMails.length;i++){
 					var nickName="";
 					var webMailSender=WebMails[i].webMailSender;
-					
+					var webMailId=WebMails[i].webMailId;
+					alert(webMailId);
 					$.ajax({
 						"url":"/webmail/getnickname",type:"POST",
-						data:{"webMailSender":webMailSender},
+						data:{"webMailSender":webMailSender,"webMailId":webMailId},
 						success:function(result){							
 							nickName=result;
 						}
@@ -244,7 +285,8 @@ $(function(){
 	+"<td class='details mailReadType' name='"+WebMails[i].webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
 	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailContentType+"</a></td>"
 	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailSendDate+"</a></td>"
-	+"<td><input type='button' class='btn deleteBtn' webMailId='"+WebMails[i].webMailId+"' value='Delete'></td></tr>"
+	+"<td><input type='button' class='btn deleteBtn' webMailId='"+WebMails[i].webMailId+"' value='Delete'></td>"
+	+"<td><input type='button' class='btn replyMail' webMailId='"+WebMails[i].webMailId+"'  value='reply'></td></tr>"
 	);//end of append
 			}//end of for loop
 			
@@ -301,7 +343,30 @@ $(function(){
 		});
 		
 	})
-	
+	//---回信--------------------------------------
+	$(".replyMail").click(function(){
+		$("#myModal2").modal("toggle");
+		var btnP=$(this);
+		var webMailId=btnP.attr("webMailId");		
+		$("#replyMailCommit").attr("value",webMailId);
+		})
+	$("#replyMailCommit").click(function(){
+		var replyTitle=$("#replyTitle").val();
+		var replyMessages=$("#replyMessages").val();
+		var webMailId=$("#replyMailCommit").attr("value");
+		$.ajax({
+			"url":"/webmail/replyMail",type:"POST",
+			data:{"webMailId":webMailId,
+				"replyTitle":replyTitle,
+				"replyMessages":replyMessages},
+			success:function(result){
+				alert(result);
+				$("#myModal2").modal("toggle");
+			}
+
+			})
+		
+		})
 })
 </script>
 </body>
