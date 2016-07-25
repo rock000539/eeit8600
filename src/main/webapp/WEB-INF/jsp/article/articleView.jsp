@@ -34,6 +34,34 @@ border:1px solid black;
   	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
 }
 
+.breadcrumb-line{position:relative;margin:0 0 35px;border-radius:4px;background-color:#e1e5eb;}
+.breadcrumb{
+/*  	background:rgba(0,0,0,0); */
+/* 	border-radius:0; */
+	height:40px;
+	line-height:40px;
+	margin:0;
+	overflow:hidden;
+	padding:0 20px 0 0;
+	text-overflow:ellipsis;
+	white-space:nowrap
+}
+.breadcrumb-buttons{background:#d7dee3;border-radius:0 4px 4px 0;display:inline-block;list-style:none;margin:0;padding-left:15px;position:absolute;right:0;top:0}
+.breadcrumb .icon,.breadcrumb-buttons .icon{font-size:18px;vertical-align:text-bottom}
+.breadcrumb-buttons li a{line-height:40px;position:relative;margin-right:14px;text-decoration:none}
+.breadcrumb li{display:inline}
+.breadcrumb li a{-webkit-transition:none 0s ease 0s;transition:none 0s ease 0s;text-align:center;text-decoration:none;}
+.breadcrumb li:first-child a{
+	background:#c8d2d8;
+	padding: 11px 15px;
+	display:inline-block;
+	border-radius:4px 0 0 4px;
+	color: #888;
+}
+.breadcrumb .icon{font-size:18px}
+.breadcrumb>li+li:before{font-family:"FontAwesome";content:"\f054";vertical-align:middle;color: #ccc;}
+.breadcrumb li:last-child a{font-weight:700;color:#888}
+
 /* ==================================================
    authordiv
 ================================================== */
@@ -65,6 +93,7 @@ border:1px solid black;
 	border:#e8ecf3 solid 1px;
  	background-color:#fff;
  	margin-bottom:10px;
+ 	border-radius:4px;
 }
 .post:hover{
 /* 	background-color:white; */
@@ -77,8 +106,8 @@ border:1px solid black;
 /* 	border-right:#e8ecf3 solid 1px; */
 	
 }
-.postprofile h3, .postbody h3{
-	margin:10px 0 0;
+.postprofile h3{
+	margin:5px 0 0;
 }
 
 
@@ -110,9 +139,102 @@ border:1px solid black;
     width: 80px;
     height: 4px;
     margin-bottom: -4px;
+    margin-top:15px;
     content: "";
     background-color: #ee836e;
 }
+
+/*reply area*/
+/*dividerHeading*/
+.dividerHeading,
+.widget_title
+{
+    text-align: center;
+    position: relative;
+    margin-bottom:25px;
+}
+.dividerHeading h4,
+.widget_title h4
+{
+    font-size:18px;
+    position:relative;
+    line-height:0;
+    border-bottom: 1px solid #727CB6;
+}
+.dividerHeading h4 span{
+    background:white;
+    position:relative;
+    line-height: 7px;
+    top: 4px;
+    display: inline-block;
+
+}
+.dividerHeading h4 span:before,
+.dividerHeading h4 span:after,
+.widget_title h4 span:after,
+.widget_title h4 span:before
+{
+    color:#E74C3C;
+    font-size:10px;
+    content: "\f10c";
+    font-family:fontawesome;
+    display: inline-block;
+
+}
+.dividerHeading h4 span:before,
+.widget_title h4 span:before
+{
+    margin-right:10px ;
+}
+.dividerHeading h4 span:after,
+.widget_title h4 span:after
+{
+    margin-left:10px ;
+}
+
+/* 修改樣式 */
+
+.dividerHeading h4 span:after, 
+.widget_title h4 span:after, 
+.widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span:before, 
+.dividerHeading h4 span:after, 
+.widget_title h4 span:after, 
+.widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span {
+    background: #faeadf; /*new post bgcolor*/
+}
+		
+.dividerHeading h4,
+.widget_title h4{
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.dividerHeading h4::before, .widget_title h4::before { 
+	border: 0px;
+    content: none;
+}
+
+#addForm button{
+	margin:0 5px;
+}
+
+.hasbutton{
+	text-align:center; 
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
 
 
 </style>
@@ -127,6 +249,12 @@ border:1px solid black;
 <div class="row sub_content">
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
 	<div class="col-lg-10 col-md-10 col-sm-10 article">
+	<div class="breadcrumb-line clearfix">
+		<ul class="breadcrumb">
+				   <li><a href="/articles/listfms" data-original-title="" title=""><span class="icon fa fa-home"></span></a></li>
+		   		   <li><a href="/articles/listfms?articleType=${article.articleType}" data-navbar-reference="index" itemprop="url" data-original-title="" title=""><span itemprop="title">${article.articleType}</span></a></li>
+		</ul>
+	</div>
 		<!-- start article -->
 		<div class="col-lg-12 post">
 			<div class="postprofile col-lg-3">
@@ -184,7 +312,7 @@ border:1px solid black;
 				<ul>
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
-					<li><a href="#" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
+<!-- 					<li><a href="#" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li> -->
 					<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 				</ul>
 				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(acm.acmTime,0,19)}</small>
@@ -197,9 +325,64 @@ border:1px solid black;
 		</c:forEach>
 		<!-- end of articleCM -->
 		
+		<!-- REPLY -->
+		<section class="team row sub_content">
+					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
+			            <div class="dividerHeading">
+			                <h4><span>Reply</span></h4>
+			            </div>
+			        </div>
+		</section>
+		<FORM id="addForm" action="/articles/insert" method="post">
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-12">
+					<input type="hidden" name="memberId" value="${memberId}"/>
+					<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="RE:【${article.articleType}】${article.articleTitle}">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-12">
+					<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
+				</div>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-12 hasbutton">
+	<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
+					<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspReply</button>
+				</div>
+			</div>
+		</div>		
+		</FORM>
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>	
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+<!--       Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+        	<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">Confirm</button>
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+<!-- end of Modal -->
 					
 				</div>        
             <!-- **每頁不同的內容結束** -->
@@ -217,6 +400,8 @@ border:1px solid black;
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+	
+	<script src="/ckeditor/ckeditor.js"></script>
 	
 	<script>
 	$(function(){
@@ -239,6 +424,22 @@ border:1px solid black;
 		
 	});
 	
+	function toModal(){
+		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
+			$(".modal-title").text('Please Check Your Post');
+			$(".modal-body").empty()
+							.append('<p>Post Type：'+$(':selected').val()+'</p>')
+							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
+							.append('<p>Content：'+ CKEDITOR.instances['articleContent'].getData() +'</p>');
+			$('#confirm').show();
+		}else{
+			$(".modal-title").text('Please Modify Your Post');
+			$(".modal-body").empty()
+							.append('<p>Please Enter the Required Fields</p>');
+			$('#confirm').hide();
+			
+		}
+	}
 	
 	</script>
 <!-- https://themeforest.net/item/flatboots-phpbb-31-and-30-/8536771 -->
