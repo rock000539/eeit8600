@@ -145,13 +145,13 @@ public class ReviewCM {
 	}
 
 
-//	public String getNickname() {
-//		return this.getMember().getNickname();
-//	}
-//
-//	public void setNickname(String nickname) {
-//		this.nickname = nickname;
-//	}
+	public String getNickname() {
+		return this.getMember().getNickname();
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	
 	@Override

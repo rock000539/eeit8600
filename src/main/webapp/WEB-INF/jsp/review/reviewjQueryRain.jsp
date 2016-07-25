@@ -147,27 +147,27 @@
                             <div id="comment">
                                 <ul id="comment-list">
                                 
-                                    <li class="comment">
-                                        <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div>
-                                        <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">John Smith</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">February 22, 2015</a></div>
-                                            <div class="comment-body">
-                                                <p>Ne omnis saperet docendi nec, eos ea alii molestiae aliquand. Latine fuisset mele, mandamus atrioque eu mea, wi forensib argumentum vim an. Te viderer conceptam sed, mea et delenit fabellas probat.</p>
-                                            </div>
-                                        </div>
-                                    </li>
+<!--                                     <li class="comment"> -->
+<!--                                         <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div> -->
+<!--                                         <div class="comment-container"> -->
+<!--                                             <h4 class="comment-author"><a href="#">John Smith</a></span></h4> -->
+<!--                                             <div class="comment-meta"><a href="#" class="comment-date link-style1">February 22, 2015</a></div> -->
+<!--                                             <div class="comment-body"> -->
+<!--                                                 <p>Ne omnis saperet docendi nec, eos ea alii molestiae aliquand. Latine fuisset mele, mandamus atrioque eu mea, wi forensib argumentum vim an. Te viderer conceptam sed, mea et delenit fabellas probat.</p> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </li> -->
                                     
-                                    <li class="comment">
-                                        <div class="avatar"><img alt="" src="/members/show?memberId=${review.reviewCMs[0].memberId}" class="avatar"></div>
-                                        <div class="comment-container">
-                                            <h4 class="comment-author"><a href="#">${review.reviewCMs[0].member.nickname}</a></span></h4>
-                                            <div class="comment-meta"><a href="#" class="comment-date link-style1">${review.reviewCMs[0].reviewCMTime} </a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
-                                            <div class="comment-body">
-                                                <p>${review.reviewCMs[0].rcmMsg}</p>
-                                            </div>
-                                        </div>
-                                    </li>
+<!--                                     <li class="comment"> -->
+<%--                                         <div class="avatar"><img alt="" src="/members/show?memberId=${review.reviewCMs[0].memberId}" class="avatar"></div> --%>
+<!--                                         <div class="comment-container"> -->
+<%--                                             <h4 class="comment-author"><a href="#">${review.reviewCMs[0].member.nickname}</a></span></h4> --%>
+<%--                                             <div class="comment-meta"><a href="#" class="comment-date link-style1">${review.reviewCMs[0].reviewCMTime} </a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div> --%>
+<!--                                             <div class="comment-body"> -->
+<%--                                                 <p>${review.reviewCMs[0].rcmMsg}</p> --%>
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </li> -->
                                 </ul>
                             </div>
                             <!-- /#comments -->
@@ -312,7 +312,7 @@
     	<div class="avatar"><img alt="" src="/members/show?memberId=_memberId" class="avatar"></div>
         <div class="comment-container">
 	        <h4 class="comment-author"><a href="#">_memberNickname</a></span></h4>
-            <div class="comment-meta"><a href="#" class="comment-date link-style1">_reviewCMTime </a><a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a></div>
+            <div class="comment-meta"><a href="#" class="comment-date link-style1">_reviewCMTime </a></div>
             <div class="comment-body">
     	        <p>_reviewCMMsg</p>
             </div>
@@ -352,7 +352,7 @@ $(function () {  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(result){
-// 					console.log("result1="+result);
+					console.log("result1="+result);
 					appendReviewCM(result);
 					location.href="#Comments";
 				},error:function(x,y,z){
@@ -367,20 +367,25 @@ $(function () {  //=$(document.)ready
 			console.log("result2="+result);
 			$('#comment-list').empty;
 			
-			console.log("result[0]={}",result[0]);
-			console.log("result[1]={}",result[1]);
-			for(var i=0;i<result.length;i++){
+			console.log("result[0]=",result[0]);
+			console.log("result[0].memberId=",result[0].memberId);
+			console.log("result[0].nickname=",result[0].nickname);
+			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
+			console.log("result[0].rcmMsg=",result[0].rcmMsg);
+			
+			
+			for(var i=0 ; i < result.length; i++){
 				var str =$('#reviewCM_mode').html();
 				console.log("str="+str);
 				
 				$(str.replace("_memberId",result[i].memberId)
-					  .replace("_memberNickname",result[i].nickName)
+					  .replace("_memberNickname",result[i].nickname)
 					  .replace("_reviewCMTime",result[i].reviewCMTime)
-					  .replace("reviewCMMsg",result[i].rcmMsg))
-					  .apendTo($('#comment-list'));
+					  .replace("_reviewCMMsg",result[i].rcmMsg))
+					  .appendTo($('#comment-list'));
 			}
 			
-		}
+		}//appendReviewCM end
 		
 		
 		
