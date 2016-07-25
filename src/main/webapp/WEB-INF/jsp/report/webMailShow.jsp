@@ -56,7 +56,7 @@
 	                       </div>
  	<div class="panel-body">
 	 <!-- //////////////////////////////////////////////////////////// -->
-
+<div id="tempNickName" value="" style="display:none;"></div>
 	<table class="table" id="mailTable">
 	<tr>
 	<th>發信人</th><th>標題</th><th>內容</th><th>狀態</th><th>信件類型</th><th>發信日期</th><th></th>
@@ -135,14 +135,14 @@
                   &times;
             </button>
             <h4 class="modal-title" id="myModalLabel2">
-              
+              <div><input type="text" name="replyTitle" id="replyTitle" placeholder="Subject"></div><br>
             </h4>
          </div>
          <div class="modal-body" id="modal-body2">
 <!-- 添加一些文本22222			 -->
 		
-		<div><input type="text" id="replyTitle"></div>
-		<div><input type="text" id="replyMessages"></div>
+		
+		<div><textarea rows="4" cols="50" name="replyMessages" id="replyMessages" placeholder="Message"></textarea></div>
 			
          </div>
          <div class="modal-footer">
@@ -256,37 +256,27 @@ $(function(){
 		$.ajax({
 			"url":"/webmail/reloadMail",type:"POST",
 			data:{},
-			success:function(WebMails){
-				
+			success:function(result){				
 				$("#mailTable td").parent().remove();
-				for(var i=0;i<WebMails.length;i++){
-					var nickName="";
-					var webMailSender=WebMails[i].webMailSender;
-					var webMailId=WebMails[i].webMailId;
-					alert(webMailId);
-					$.ajax({
-						"url":"/webmail/getnickname",type:"POST",
-						data:{"webMailSender":webMailSender,"webMailId":webMailId},
-						success:function(result){							
-							nickName=result;
-						}
-						});
-					
+				for(var i=0;i<result.length;i++){
+					var nickName=result[i].nickName;
+					var webMailSender=result[i].WebMails.webMailSender;
+					var webMailId=result[i].WebMails.webMailId;					
 					var mailReadType="";
-					if(WebMails[i].mailReadType){
+					if(result[i].WebMails.mailReadType){
 						mailReadType="已讀";
 					}else{
 						mailReadType="未讀"
 					}
-	$("#mailTable").append("<tr><td class='details'name='"+WebMails[i].webMailId
-	+"' value='WebMails.webMailSender}'><a href='#'>"+nickName+"</a></td>"
-	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailTitle+"</a></td>"
-	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailContent+"</a></td>"
-	+"<td class='details mailReadType' name='"+WebMails[i].webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
-	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailContentType+"</a></td>"
-	+"<td class='details' name='"+WebMails[i].webMailId+"'><a href='#'>"+WebMails[i].mailSendDate+"</a></td>"
-	+"<td><input type='button' class='btn deleteBtn' webMailId='"+WebMails[i].webMailId+"' value='Delete'></td>"
-	+"<td><input type='button' class='btn replyMail' webMailId='"+WebMails[i].webMailId+"'  value='reply'></td></tr>"
+	$("#mailTable").append("<tr><td class='details'name='"+webMailId
+	+"' value='"+webMailSender+"'><a href='#'>"+nickName+"</a></td>"
+	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailTitle+"</a></td>"
+	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContent+"</a></td>"
+	+"<td class='details mailReadType' name='"+webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
+	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContentType+"</a></td>"
+	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailSendDate+"</a></td>"
+	+"<td><input type='button' class='btn deleteBtn' webMailId='"+webMailId+"' value='Delete'></td>"
+	+"<td><input type='button' class='btn replyMail' webMailId='"+webMailId+"'  value='reply'></td></tr>"
 	);//end of append
 			}//end of for loop
 			
@@ -337,7 +327,16 @@ $(function(){
 		
 				
 			})//end $(".details").click
-			
+			//重新綁事件------------------------
+			$(".replyMail").click(function(){
+				$("#replyTitle").val("");
+				$("#replyMessages").val("");
+				$("#myModal2").modal("toggle");
+				var btnP=$(this);
+				var webMailId=btnP.attr("webMailId");		
+				$("#replyMailCommit").attr("value",webMailId);
+				})
+			//---------------------------------
 			//------------------------------------------
 			}//end of success function
 		});
@@ -345,6 +344,8 @@ $(function(){
 	})
 	//---回信--------------------------------------
 	$(".replyMail").click(function(){
+		$("#replyTitle").val("");
+		$("#replyMessages").val("");
 		$("#myModal2").modal("toggle");
 		var btnP=$(this);
 		var webMailId=btnP.attr("webMailId");		
@@ -363,10 +364,10 @@ $(function(){
 				alert(result);
 				$("#myModal2").modal("toggle");
 			}
-
 			})
-		
 		})
+		
+		
 })
 </script>
 </body>
