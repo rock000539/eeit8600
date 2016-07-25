@@ -76,6 +76,17 @@ public class ReviewCMController {
 		return reviewCMs;	
 	}
 	
+	@RequestMapping(value="/selects",method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReviewCM> selects(@RequestParam Long reviewId){
+		log.debug("ReviewId={}",reviewId);		
+		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
+		log.debug("ReviewCMs={}",reviewCMs);
+		
+		return reviewCMs;	
+//		return null;	
+	}
+	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long rcmId,Model model){
 		model.addAttribute("reviewCM", service.getById(rcmId));

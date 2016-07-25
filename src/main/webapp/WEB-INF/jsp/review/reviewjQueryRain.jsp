@@ -322,7 +322,7 @@
 </script>    	  
     	  
 <script type="text/javascript">
-$(function () {  //=$(document.)ready
+$(function(){  //=$(document.)ready
 	/*  ============ USER IMG =========== 	*/ 
 // 		var w = $('#userimg').width();
 // 		var h = $('#userimg').height();
@@ -334,6 +334,40 @@ $(function () {  //=$(document.)ready
 // 		console.log('w=' + $('#userimg').width());
 // 		console.log('h=' + $('#userimg').height());
 
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		}; //serializeObject end
+			
+		console.log("reviewId="+$('#reviewId').val());
+			$.ajax({
+				url:'/reviewCMs/selects',
+				type:'post',
+// 				contentType:'application/json;charset=UTF-8',
+// 				data:JSON.stringify($('#addForm').serializeObject()),
+				data:{'reviewId':$('#reviewId').val()},
+				dataType:'json',
+				success:function(result){
+					console.log("result1="+result);
+					appendReviewCM(result);
+				},error:function(x,y,z){
+					console.log("x="+x);
+					console.log("y="+y);
+					console.log("z="+z);
+				}
+			})//onload ajax
 
 
 		$('#postComment').click(function(){
@@ -352,9 +386,9 @@ $(function () {  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(result){
-					console.log("result1="+result);
+// 					console.log("result1="+result);
 					appendReviewCM(result);
-					location.href="#Comments";
+// 					location.href="#addForm";
 				},error:function(x,y,z){
 					console.log("x="+x);
 					console.log("y="+y);
@@ -365,7 +399,7 @@ $(function () {  //=$(document.)ready
 
 		function appendReviewCM(result){
 			console.log("result2="+result);
-			$('#comment-list').empty;
+			$('#comment-list').empty();
 			
 			console.log("result[0]=",result[0]);
 			console.log("result[0].memberId=",result[0].memberId);
@@ -389,22 +423,7 @@ $(function () {  //=$(document.)ready
 		
 		
 		
-		$.fn.serializeObject = function()
-		{
-		    var o = {};
-		    var a = this.serializeArray();
-		    $.each(a, function() {
-		        if (o[this.name] !== undefined) {
-		            if (!o[this.name].push) {
-		                o[this.name] = [o[this.name]];
-		            }
-		            o[this.name].push(this.value || '');
-		        } else {
-		            o[this.name] = this.value || '';
-		        }
-		    });
-		    return o;
-		}; //serializeObject end
+
 		
 		
 		

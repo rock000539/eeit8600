@@ -42,7 +42,7 @@ public class ReviewCM {
 	private String nickname;
 
 	//心得留言內容
-	@Column(name="REVIEWCMMSG",length=200)
+	@Column(name="REVIEWCMMSG",length=20000)
 	private String rcmMsg;
 	
 	//心得留言時間
