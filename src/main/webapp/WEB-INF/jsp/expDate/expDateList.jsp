@@ -118,7 +118,7 @@ body {
 		    </div>
 		    <div class="portfolio-content">
 		        <div class="portfolio-img"><a href="#">
-		            <img src="/products/show?prodId=${items.product.prodId}"/>
+		            <img src="/products/show?prodImg=${items.product.prodImg}"/>
 		        </a></div>
 		        <p><i class="fa fa-bell-o"></i>&nbsp; 還有&nbsp;${items.lastsDay}&nbsp;天到期</p>
 		        <p>製造日期 ${items.mfd}</p>

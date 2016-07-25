@@ -121,8 +121,13 @@ public class WebMailController {
 	
 	@RequestMapping(value="/getnickname",method = RequestMethod.POST)
 	@ResponseBody
-	public String getnickname(long webMailSender){
+	public String getnickname(Long webMailSender,Long webMailId){
+		if(webMailSender!=null&&webMailSender!=0){
 		return memberService.getById(webMailSender).getNickname();
+		}else{
+			return webMailService.findOneById(webMailId).getAnonymousName();
+		}
+		
 	}
 	
 	@RequestMapping(value="/sendMail",method = RequestMethod.POST)
@@ -150,5 +155,32 @@ public class WebMailController {
 			
 		}
 		return "Thank for your Contact!!";
+	}
+	
+	@RequestMapping(value="/replyMail",method = RequestMethod.POST)
+	@ResponseBody
+	@Transactional
+	public String callBackMail(Long webMailId,String replyTitle,String replyMessages){
+		System.out.println("webMailId "+webMailId+"replyTitle "+replyTitle+"replyMessages "+replyMessages);
+		
+		Long mailSender=webMailService.findOneById(webMailId).getWebMailSender();
+		
+		WebMail webMail=new WebMail();
+		
+		if(mailSender!=null&&mailSender!=0){
+		webMail.setMailAddressee(mailSender);
+		}else{
+			return "匿名用戶，請使用Email聯繫";
+		}
+		long now=new java.util.Date().getTime();
+		java.sql.Date date=new java.sql.Date(now);
+		webMail.setMailSendDate(date);
+		webMail.setMailContent(replyMessages);
+		webMail.setMailTitle(replyTitle);
+		webMail.setMailReadType(false);
+		webMail.setMailContentType("Reply");
+		webMail.setWebMailSender(0L);
+		webMailService.insertAndUpdate(webMail);
+		return "已成功回信";
 	}
 }
