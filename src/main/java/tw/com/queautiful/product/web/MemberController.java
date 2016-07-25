@@ -196,7 +196,7 @@ public class MemberController {
 	
 	
 	//member-post article文章頁面
-	@RequestMapping("/post/article")
+//	@RequestMapping("/post/article")
 	public String memberPostedArticlePage(HttpServletRequest request, Model model){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
@@ -213,7 +213,7 @@ public class MemberController {
 		return "/member/memberPost-article";
 	}
 	
-	//article 分頁, 分類, 排序
+	//article 分頁, 分類(news,solicit,question,chat), 排序(articleTime)
 	@RequestMapping(value="/post/article/{pageNum}")
 	@ResponseBody
 	public  List<Map> memberPostArticlePageSort(
@@ -291,9 +291,10 @@ public class MemberController {
 	@RequestMapping("/post")
 	public String memberPostedReviewPage(Model model, HttpServletRequest request){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		
 		Page<Review> pages = 
 				memberService.getReviewsPaging("", memberId, 0, null, null);
-		
 		List<Review> reviews = pages.getContent();
 		List<String> dates = formatDate(reviews);
 		log.debug(dates.toString());
@@ -302,11 +303,19 @@ public class MemberController {
 		model.addAttribute("reviews", pages.getContent());
 		model.addAttribute("reviewsPageNum", pages.getNumber());
 		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
-		model.addAttribute("member", memberService.getById(memberId));
+		
+		Page<Article> articlePages =
+				memberService.getArticlesPaging(memberId, null, 0, null, null);
+		
+		model.addAttribute("articles", articlePages.getContent());
+		model.addAttribute("articlesPageNum", articlePages.getNumber());
+		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
+		model.addAttribute("member", member);
 		
 		return "/member/memberPost";
 	}
 	
+	//format date
 	private List<String> formatDate(List<Review> reviews){
 		List<String> dates = new ArrayList();
 		for(Review review: reviews){

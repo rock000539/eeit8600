@@ -36,7 +36,7 @@ h2, h4{
 	border: 0px;
 	background: #fff;
 }
-.nav-tabs li, .nav-tabs li:hover{
+.nav-tabs li, .nav-tabs li:hover, .nav-tabs li.active{
 	margin: 0 5px 0 0;
 }
 .nav-tabs li.active, .nav-tabs li.active a, .nav-tabs li.active a:hover,
@@ -44,15 +44,16 @@ h2, h4{
 .nav-tabs li a:hover{
     background: #000;
     color: #fff;
-    font-weight: 600;
 	border: 0px;
 }
+
 .tab-content{
- 	border: 0px; 
+ 	border: 0px;
+ 	padding-left: 0px;
 }
 .reviews{
 	padding: 33px 0 40px 0;
-	border-bottom: 1px solid #E0E0E0;
+	border-top: 1px solid #E0E0E0;
 }
 .prod{
 	color:#000;
@@ -89,16 +90,18 @@ h2, h4{
 .reviewImg img{
 	width: 100%;
 }
-
+.rating{
+	margin-top: 100px;
+	font-size: 12px;
+}
 .info{
 	position:relative;
 	display: block;
-	float: left;
+	float: right;
 	clear: both;
 	margin-left: 5px;
-	margin-top: 50px;
+	margin-top: 10px;
 	font-size: 12px;
-	color: #000;
 }
 .reviewContent{
 	display: table-cell;
@@ -145,6 +148,9 @@ h2, h4{
 .singlepage:hover{
 	text-decoration: underline;
 }
+.blog_single{
+	display: inline-block;
+}
 .blog_single .post_date{
 	float: right;
 	padding-top: 5px;
@@ -155,6 +161,13 @@ h2, h4{
 }
 .blog_single .month{
 	padding: 2px 8px 4px;
+}
+.subject{
+	text-align: center;
+	letter-spacing: 1px;
+	font-family: "Proxima Nova",sans-serif;
+	font-size: 14px;
+	padding: 13px 16px;
 }
 </style>
 </head>
@@ -175,14 +188,17 @@ h2, h4{
             <li class=""><a data-toggle="tab" href="#article">Article</a></li>
         </ul>
 	</div> <!-- maintab -->
-	<div id="subtab">
-		
-	</div> <!-- subtab -->
 </div> <!-- tabnav -->
 
 <div id="container">
 	<div class="tab-content clearfix">
 	    <div id="review" class="tab-pane fade active in">
+	    	<div class="subject">
+				<p>POSTED REVIEWS</p>
+			</div>
+			<div class="subtab">
+				
+			</div> <!-- subtab -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
 	        	<div class="reviewTime">
@@ -191,12 +207,15 @@ h2, h4{
 	        		<c:set var="time"  value="${fn:split(reviewTime,',')}"/>
 	        		<span>${time[2]}</span>
 	        		<div class="blog_single">
-		        		<article class="post">
-			        		<div class="post_date">
-								<span class="day">${time[1]}</span>
-								<span class="month">${time[0]}</span>
-							</div>
-						</article>
+		        		<div class="post_date">
+							<span class="day">${time[1]}</span>
+							<span class="month">${time[0]}</span>
+						</div>
+					</div>
+					<div class="rating">
+					<c:forEach begin="1" end="${item.reviewRating}">
+						<i class="fa fa-diamond"></i>
+					</c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
 	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>
@@ -230,7 +249,13 @@ h2, h4{
 </div> <!-- row -->
 					
 				</div>        
-            
+  <div class="rating">
+					<c:forEach begin="1" end="${item.reviewRating}">
+						<i class="fa fa-diamond"></i>
+					</c:forEach>
+					</div>
+	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
+	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>          
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
@@ -239,14 +264,12 @@ h2, h4{
 	<div class="reviewTime">
 		<span>_year</span>
 	    <div class="blog_single">
-	    <article class="post">
 	    	<div class="post_date">
 			<span class="day">_day</span>
 			<span class="month">_month</span>
 			</div>
-		</article>
 		</div>
-		<div class="reviewBtn"></div>
+		<div class="rating">_rating</div>
 		<div class="info"><i class="fa fa-heart"></i> _rewCollect
 			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rewCollect</div>
 	</div>
@@ -294,10 +317,17 @@ $(function(){
 						var day = dates[i].substring(4,5);
 						var year = dates[i].substring(7);
 						console.log(year+" "+day+" "+month);
+						var reviewRating = reviews[i].reviewRating;
+						var dimand = '<i class="fa fa-diamond"></i>';
+						var rating = "";
+						for(var j=0; j<reviewRating; j++){
+							rating += dimand;
+						}
 						$($('#reviewTemplate').html()
 							.replace('_year', year)
 							.replace('_day', day)
 							.replace('_month', month)
+							.replace('_rating', rating)
 							.replace('_reviewTime', reviews[i].reviewTime)
 							.replace('_rewCollect', reviews[i].rewCollect)
 							.replace('_rewCollect', reviews[i].rewCollect)
@@ -309,6 +339,7 @@ $(function(){
 							.replace('_review', reviews[i].review)
 							.replace('_reviewId', reviews[i].reviewId))
 							.appendTo($('#review'));
+						
 					}
 				} /* success */
 	    	});} /* ajax */
