@@ -56,7 +56,7 @@ public class ReviewCMController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public List<ReviewCM> insert(@RequestBody ReviewCM reviewCM,HttpServletRequest request){
+	public List<ReviewCM> insert(@RequestBody ReviewCM reviewCM){
 		//FK
 //		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
 //		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));

@@ -233,7 +233,8 @@
 		
 		function watch_click (a) {
 			console.log($(a).attr('data-reviewId'));
-			$.redirect('/reviews/reviewjQueryRain', { 'reviewId': $(a).attr('data-reviewId') });
+			//$.redirect('/reviews/reviewjQueryRain', { 'reviewId': $(a).attr('data-reviewId') });
+			document.location.href='/reviews/reviewjQueryRain?reviewId=' + $(a).attr('data-reviewId');
 		}
 	
 	</script>

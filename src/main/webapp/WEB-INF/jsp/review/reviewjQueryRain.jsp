@@ -367,7 +367,9 @@ $(function () {  //=$(document.)ready
 			console.log("result2="+result);
 			$('#comment-list').empty;
 			
-			for(var i=0;i<result.lenth;i++){
+			console.log($('#reviewCM_mode').html());
+			
+			for(var i=0;i<result.length;i++){
 				var str =$('#reviewCM_mode').html();
 				console.log("str="+str);
 				
