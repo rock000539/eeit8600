@@ -114,9 +114,33 @@ public class WebMailController {
 	}
 	@RequestMapping(value="/reloadMail",method = RequestMethod.POST)
 	@ResponseBody
-	public List<WebMail> reloadMail(){
+	public List<Map<String, Object>> reloadMail(){
+		
+		List<Map<String, Object>> result=new ArrayList<Map<String, Object>>();
 		List<WebMail> WebMails=webMailService.findAll();
-		return WebMails;
+		System.out.println(WebMails.size());
+		for(int i=0;i<WebMails.size();i++){
+			Map<String, Object> resultMap=new HashMap<String, Object>();
+			WebMail webMail=WebMails.get(i);
+			Long snederId=webMail.getWebMailSender();
+			if(snederId!=null&&snederId!=0){
+				resultMap.put("nickName", memberService.getById(webMail.getWebMailSender()).getNickname());
+				resultMap.put("WebMails", webMail);
+				result.add(resultMap);
+				
+			}else if(snederId==0){
+				resultMap.put("nickName", "ADMIN");
+				resultMap.put("WebMails", webMail);
+				result.add(resultMap);
+			}
+			else{
+				resultMap.put("nickName", webMail.getAnonymousName());
+				resultMap.put("WebMails", webMail);
+				result.add(resultMap);
+			
+			}
+		}
+		return result;
 	}
 	
 	@RequestMapping(value="/getnickname",method = RequestMethod.POST)
