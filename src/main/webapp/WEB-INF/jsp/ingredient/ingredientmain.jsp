@@ -20,7 +20,13 @@ body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
 }
 .grey_bg{
-min-height: 450px;}</style>		
+background-image: url("/images/IngredientBackground.jpg");
+-moz-background-size:cover;
+-webkit-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+min-height: 500px;}
+</style>		
 </head>
 
 <body>

@@ -158,9 +158,6 @@ margin: auto auto;
 }
 .dividerHeading h3{
 margin-left:180px; }
-.grey_bg{
-min-height: 500px;}
-
 .portfolio-content {
 	border: 1px solid #E7E6E6;
 	padding: 5px 10px 30px 10px;
@@ -226,9 +223,16 @@ body {
 	margin: 5px;
 }
 #information p{
-font-size: 24px;
+font-size: 20px;
 line-height: 55px;
 }
+.grey_bg{
+background-image: url("/images/expdateSearchBackground.jpg");
+-moz-background-size:cover;
+-webkit-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+min-height: 500px;}
 .div-inline{ display:inline} 
 </style>
 </head>
@@ -307,12 +311,12 @@ line-height: 55px;
 	
 	
 	</div>
-			<div class="row">
+ 			<div class="row"> 
 			<div  class="col-md-1">
 			</div>
 			<div id="proList" class="col-md-10 col-sm-7">
 			</div>
-			</div>
+ 			</div> 
 	<!-- ////////////////////////////////////////////////////////////////////-->
 
 <!--加入footer -->
