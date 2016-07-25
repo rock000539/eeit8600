@@ -38,6 +38,10 @@ public class ExpDateService {
 		DateDao.delete(dateId);
 	}
 	
+	public List<ExpDate> getByMemberId(Long memberId){
+		return DateDao.findByMemberIdIs(memberId);
+	}
+	
 	//check expDate will be expired after one month
 	public List<ExpDate> expDateAfterOneMonth(){
 		Calendar exp = Calendar.getInstance();
