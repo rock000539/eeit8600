@@ -114,8 +114,6 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "/member/memberProfile-edit";
 	}
-	
-	
 
 	//保存期限頁面
     @RequestMapping("/product-exp")
@@ -145,6 +143,8 @@ public class MemberController {
                 long expSec = expDate.getExp().getTime();
                 long lastTime = expSec - todaySec;
                 long lastsDay = lastTime / (24*60*60*1000);
+                
+                Member member = memberService.getById(memberId);
 
                 beansMap.put("expDate", expDate);
                 beansMap.put("product", product);
@@ -152,6 +152,7 @@ public class MemberController {
                 beansMap.put("exp", exp);
                 beansMap.put("brandName", brandName);
                 beansMap.put("lastsDay", lastsDay);
+                beansMap.put("member", member);
 
                 result.add(beansMap);
                 log.debug("todaySec: {}, expSec: {}", todaySec, expSec);
@@ -161,6 +162,15 @@ public class MemberController {
         }
         model.addAttribute("beans", result);
         return "/expDate/expDateList";
+    }
+    
+    
+    @RequestMapping("/like")
+    public String memberLikePage(HttpServletRequest request, Model model){
+    	Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		model.addAttribute("member", member);
+    	return "/member/memberLike";
     }
 	
 	//member文章收藏頁面

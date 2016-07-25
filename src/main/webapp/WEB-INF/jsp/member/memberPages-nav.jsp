@@ -25,7 +25,7 @@
 	        </a>
 	    </li>
 	    <li>
-		     <a class="liked" href="/members/like/article">
+		     <a class="liked" href="/members/like">
 	            <span class="nav-span">Liked</span>
 	         </a>
 	    </li>

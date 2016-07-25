@@ -272,7 +272,7 @@ h2, h4{
 			<input type="hidden" id="articlesPageNum" value="${articlesPageNum}">
 			<input type="hidden" id="articlesTotalPages" value="${articlesTotalPages}">
     	</div>
-	</div>
+	</div> <!-- tab-content -->
 </div> <!-- tabContent -->
 
 

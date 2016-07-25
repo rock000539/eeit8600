@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
 	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+	<!-- customize -->
+    <link rel="stylesheet" href="/css/member/member-customize.css">
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 
@@ -95,18 +97,14 @@ body {
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
-
+<c:set var="member"  value="${beans[0].member}"/>
+<div class="row detail-div">
+	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
+		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
+		
+		
 <!-- Page Content -->
-<div class="container-fluid">
-<div class="col-lg-2"></div>
-<div class="col-lg-10">
-    <!-- Page Header -->
-    <div class="row">
-        <div class="col-lg-12 deviderHeading text-center">
-            <h4 class="page-header">產品到期日</h4>
-        </div>
-    </div>
-    <!-- /.row -->
+<div class="col-lg-12">
 <!-- ExpDate Row -->
 <div id="exprow" class="row">
 	<c:forEach items="${beans}" var="items">
@@ -134,7 +132,6 @@ body {
     </c:forEach>
 </div> <!-- /.row -->
 </div> <!-- col -->
-</div> <!-- container -->
 
 
 <!-- 跳出刪除確認視窗 -->
@@ -144,9 +141,13 @@ body {
 <!-- ////////////////////////////////////////////////////////////////////-->
 
 
+	</div> <!-- col-lg -->
+	
+	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
+	
+</div> <!-- row -->
 
-
-</div>        
+</div> <!-- grey_bg -->       
             <!-- **每頁不同的內容結束** -->
 
 <!--加入footer -->
