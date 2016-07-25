@@ -132,7 +132,7 @@ $(".searchProducts").click(function(e){//#1-2
 <table id="inputForm">
 <tr><td colspan="2"><h3>輸入成份之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
 <tr>
-<td><input type="text" name="ingredName" id="IngredientName" class="form-control"></td> 
+<td><input type="text" name="ingredName" id="IngredientName" class="form-control" style="border-radius:20px;"></td> 
 <td><input type="submit" class="btn btn-default btn-lg button"id="searchBtn" value="查成份"></td>
 </tr>
 </table>

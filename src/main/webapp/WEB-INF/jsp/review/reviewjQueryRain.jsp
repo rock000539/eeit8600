@@ -352,7 +352,7 @@ $(function () {  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(result){
-					console.log("result1="+result);
+// 					console.log("result1="+result);
 					appendReviewCM(result);
 					location.href="#Comments";
 				},error:function(x,y,z){
@@ -367,13 +367,17 @@ $(function () {  //=$(document.)ready
 			console.log("result2="+result);
 			$('#comment-list').empty;
 			
-			console.log($('#reviewCM_mode').html());
-			
+			console.log("result[0]={}",result[0]);
+			console.log("result[1]={}",result[1]);
 			for(var i=0;i<result.length;i++){
 				var str =$('#reviewCM_mode').html();
 				console.log("str="+str);
 				
-// 				$(str).replace("_memberId",result[i].)
+				$(str.replace("_memberId",result[i].memberId)
+					  .replace("_memberNickname",result[i].nickName)
+					  .replace("_reviewCMTime",result[i].reviewCMTime)
+					  .replace("reviewCMMsg",result[i].rcmMsg))
+					  .apendTo($('#comment-list'));
 			}
 			
 		}

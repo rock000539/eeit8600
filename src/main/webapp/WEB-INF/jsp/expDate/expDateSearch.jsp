@@ -158,9 +158,6 @@ margin: auto auto;
 }
 .dividerHeading h3{
 margin-left:180px; }
-.grey_bg{
-min-height: 500px;}
-
 .portfolio-content {
 	border: 1px solid #E7E6E6;
 	padding: 5px 10px 30px 10px;
@@ -226,10 +223,21 @@ body {
 	margin: 5px;
 }
 #information p{
-font-size: 24px;
+font-size: 20px;
 line-height: 55px;
 }
+.grey_bg{
+background-image: url("/images/expdateSearchBackground.jpg");
+-moz-background-size:cover;
+-webkit-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+min-height: 610px;}
 .div-inline{ display:inline} 
+#information div{
+width: 380px;
+margin: auto auto;}
+
 </style>
 </head>
 
@@ -248,7 +256,7 @@ line-height: 55px;
 <!-- 檢查會員登入與否用的token -->
 <div class="grey_bg row">
 	<div class="col-md-6" id="information">
-	<h1>Welcome to Qutie 2016!</h1>
+	<div><h1>Welcome to Qutie 2016!</h1></div>
 	<br>
 	<div><p>Qutie helps you calculate your cosmetics' production date or expiration date from the batch code found on the product package.</p></div>
 	<div><p>What is batch code?  -  Batch codes are mostly short codes printed or stamped on the package with different font from the product specification, e.g. XLO25LA</p></div>
@@ -260,7 +268,7 @@ line-height: 55px;
 		<h4>Production/Expiration Date</h4><br>
 					<div >
 					<label for="selectBar">Select A Brand</label>	
-					<select id="brandId" class="form-control" name="selectBar">
+					<select id="brandId" class="form-control" name="selectBar" style="border-radius:20px;">
 							<c:set var="reloadBrandId" scope="session" value="${reloadBrandId}"/>
 							<c:forEach items='${Brands}' var="items">
 							<c:if test="${reloadBrandId!=items.brandId}">
@@ -274,7 +282,7 @@ line-height: 55px;
 					</div>
 					<div >
 					<label for="batchCode">Batch Code</label>	
-					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}"/></div>
+					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}" style="border-radius:20px;"/></div>
 					<div style="display: inline-block;float:right;">
 					<br>
 					<button id="searchDate" class="btn btn-default btn-lg btn-block" >Calculate</button></div>
@@ -307,12 +315,12 @@ line-height: 55px;
 	
 	
 	</div>
-			<div class="row">
+ 			<div class="row"> 
 			<div  class="col-md-1">
 			</div>
 			<div id="proList" class="col-md-10 col-sm-7">
 			</div>
-			</div>
+ 			</div> 
 	<!-- ////////////////////////////////////////////////////////////////////-->
 
 <!--加入footer -->
