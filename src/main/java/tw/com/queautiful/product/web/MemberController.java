@@ -169,8 +169,10 @@ public class MemberController {
     public String memberLikePage(HttpServletRequest request, Model model){
     	Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
+		Set<Article> articles = member.getArticlesSavedByMember();
+		model.addAttribute("articles", articles);
 		model.addAttribute("member", member);
-    	return "/member/memberLike";
+    	return "/member/memberLike0";
     }
 	
 	//member文章收藏頁面

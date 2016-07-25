@@ -336,9 +336,9 @@ $(function(){
 	    	var totalPages = $('#reviewsTotalPages').val();
 	    	var loadedPageNum = $('#reviewsPageNum').val();
 	    	var pageNum = parseInt(loadedPageNum)+1;
-// 	    	console.log("totalPages: "+totalPages);
-// 	    	console.log("loadedPageNum: "+loadedPageNum);
-// 	    	console.log("pageNum: "+pageNum);
+	    	console.log("totalPages: "+totalPages);
+	    	console.log("loadedPageNum: "+loadedPageNum);
+	    	console.log("pageNum: "+pageNum);
 	    	if(loadedPageNum < totalPages){
 	    	$.ajax({
 	    		url: '/members/post/review/'+pageNum,
@@ -347,7 +347,6 @@ $(function(){
 				contextType: 'application/json; charset=utf-8;',
 				success: function(response){
 					var result = response[0];
-					console.log("result: "+result);
 					var reviews = result.reviews;
 					var reviewsPageNum = result.reviewsPageNum;
 					var products = result.products;
@@ -368,7 +367,7 @@ $(function(){
 						for(var j=0; j<reviewRating; j++){
 							rating += dimand;
 						}
-						$($('#articlesPageNum').html()
+						$($('#reviewTemplate').html()
 							.replace('_year', year)
 							.replace('_day', day)
 							.replace('_month', month)
@@ -407,13 +406,9 @@ $(function(){
  					contextType: 'application/json; charset=utf-8;',
  					success: function(response){
  						var result = response[0];
- 						console.log("result: "+result);
  						var articles = result.articles;
  						var articlesPageNum = result.articlesPageNum;
  						var member = result.member;
- 						console.log("articles: "+articles);
- 						console.log("articlesPageNum: "+articlesPageNum);
- 						console.log("member: "+member);
  						
  						$('#articlesPageNum').val(articlesPageNum);
  						

@@ -77,12 +77,14 @@
 	font-weight: lighter;
 	line-height:1.5;
 	letter-spacing:1px;
-	color: #AAAFB0;
+	color: #AAAFB0;	/*AAAFB0;*/
 	white-space:nowrap;
  	-webkit-transition: 0.25s; 
  	transition: 0.25s; 
 }
+#navigationMenu span.nav-span:hover{
+	color: #70C1B3;
+}
 #navigationMenu span.nav-active{
-	color: #313131;
-	
+	color: #000;
 }

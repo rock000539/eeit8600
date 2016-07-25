@@ -11,7 +11,7 @@
 	    </li>
 	    <li>
 	    	<a class="profile" href="/members/profile">
-	            <span class="nav-span nav-active">Profile</span>
+	            <span class="nav-span">Profile</span>
 	        </a>
 	    </li>
 	    <li>
