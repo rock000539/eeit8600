@@ -232,8 +232,12 @@ background-image: url("/images/expdateSearchBackground.jpg");
 -webkit-background-size:cover;
 -o-background-size:cover;
 background-size:cover;
-min-height: 500px;}
+min-height: 610px;}
 .div-inline{ display:inline} 
+#information div{
+width: 380px;
+margin: auto auto;}
+
 </style>
 </head>
 
@@ -252,7 +256,7 @@ min-height: 500px;}
 <!-- 檢查會員登入與否用的token -->
 <div class="grey_bg row">
 	<div class="col-md-6" id="information">
-	<h1>Welcome to Qutie 2016!</h1>
+	<div><h1>Welcome to Qutie 2016!</h1></div>
 	<br>
 	<div><p>Qutie helps you calculate your cosmetics' production date or expiration date from the batch code found on the product package.</p></div>
 	<div><p>What is batch code?  -  Batch codes are mostly short codes printed or stamped on the package with different font from the product specification, e.g. XLO25LA</p></div>
@@ -264,7 +268,7 @@ min-height: 500px;}
 		<h4>Production/Expiration Date</h4><br>
 					<div >
 					<label for="selectBar">Select A Brand</label>	
-					<select id="brandId" class="form-control" name="selectBar">
+					<select id="brandId" class="form-control" name="selectBar" style="border-radius:20px;">
 							<c:set var="reloadBrandId" scope="session" value="${reloadBrandId}"/>
 							<c:forEach items='${Brands}' var="items">
 							<c:if test="${reloadBrandId!=items.brandId}">
@@ -278,7 +282,7 @@ min-height: 500px;}
 					</div>
 					<div >
 					<label for="batchCode">Batch Code</label>	
-					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}"/></div>
+					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}" style="border-radius:20px;"/></div>
 					<div style="display: inline-block;float:right;">
 					<br>
 					<button id="searchDate" class="btn btn-default btn-lg btn-block" >Calculate</button></div>
