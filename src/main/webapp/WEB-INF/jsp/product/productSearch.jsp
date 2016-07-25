@@ -184,7 +184,7 @@
 							console.log(response);
 							var select = $('#sprod').empty();
 							select.append($('<option>請選擇產品</option>'));
-							for(i=0; i<response.length; i++){
+							for(i=0; i<response.length; i++) {
 								select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
 							}
 						}
@@ -196,10 +196,12 @@
 			
 			// Search Button Click
 			$('#search').on('click', function() {
-				if($('#sprod').val() == '') {
-					$.redirect('/products/inventory', { 'brandId': $('#sbrand').val() });
+				if($('#sprod').val() == '請選擇產品') {
+					//$.redirect('/products/inventory', { 'brandId': $('#sbrand').val() });
+					document.location.href='/products/inventory?brandId=' + $('#sbrand').val();
 				} else if($('#sprod').val() != '') {
-					$.redirect('/products/view', { 'prodId': $('#sprod').val() });
+					//$.redirect('/products/view', { 'prodId': $('#sprod').val() });
+					document.location.href='/products/view?prodId=' + $('#sprod').val();
 				}
 			});
 			
@@ -212,7 +214,8 @@
 		
 		// Category Button Click
 		function category_click(a) {
-			$.redirect('/products/inventory', { 'categoryId': $(a).attr('data-categoryId') });
+			//$.redirect('/products/inventory', { 'categoryId': $(a).attr('data-categoryId') });
+			document.location.href='/products/inventory?categoryId=' + $(a).attr('data-categoryId');
 		}
 
 	</script>

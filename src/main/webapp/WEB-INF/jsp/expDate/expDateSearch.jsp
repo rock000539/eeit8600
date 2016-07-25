@@ -11,7 +11,10 @@
 	<!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-
+<script src="/js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/fms/style.css">
+  <link rel="stylesheet" href="/css/fms/fms-customize.css">
 <script type="text/javascript" src="/js/fms/swipe.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
@@ -19,9 +22,9 @@
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
-  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/fms/style.css">
-    <link rel="stylesheet" href="/css/fms/fms-customize.css">
+
+
+
 <script>
 	$(function() {
 		var mfdDate;
@@ -113,13 +116,33 @@
 					}
 					);
 			
-						
+			var BatchCodeinformations=$("#information p");
+			$("#information p:gt(0)").hide();
+			var count=0;
+			setInterval(function(){
+				
+				var tearget=$("#information p:eq("+count+")");
+				console.log(tearget);
+				$("#information p:eq("+count+")").hide("Fade" ,"swing","slow",callback());
+				count++;
+				if(count==4){
+					count=0;
+					}
+			},7000);
+		    function callback() {
+		        if(count<3){
+		        $("#information p:eq("+(count+1)+")").show("Fade" ,"swing","slow");
+		        }else{
+		        $("#information p:eq("+0+")").show("Fade" ,"swing","slow");
+		        }
+		    };
+			
 	})//---end onload
 </script>
 <style>
 #mainSpace{
  width: 450px;
- margin-top:100px;
+ margin-top:50px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -136,7 +159,7 @@ margin: auto auto;
 .dividerHeading h3{
 margin-left:180px; }
 .grey_bg{
-min-height: 450px;}
+min-height: 500px;}
 
 .portfolio-content {
 	border: 1px solid #E7E6E6;
@@ -202,6 +225,10 @@ body {
 	color: #ffffff;
 	margin: 5px;
 }
+#information p{
+font-size: 24px;
+line-height: 55px;
+}
 .div-inline{ display:inline} 
 </style>
 </head>
@@ -220,10 +247,20 @@ body {
 		</c:if>
 <!-- 檢查會員登入與否用的token -->
 <div class="grey_bg row">
-	<div id="mainSpace">	
-		<h1>Date Query</h1>
-					<div style="display: inline-block;">	
-					<select id="brandId" class="form-control">
+	<div class="col-md-6" id="information">
+	<h1>Welcome to Qutie 2016!</h1>
+	<br>
+	<div><p>Qutie helps you calculate your cosmetics' production date or expiration date from the batch code found on the product package.</p></div>
+	<div><p>What is batch code?  -  Batch codes are mostly short codes printed or stamped on the package with different font from the product specification, e.g. XLO25LA</p></div>
+	<div><p>The brands that can be calculated are Anna Sui, Aveda, Biotherm, BODY SHOP, Burt's bees, Chanel, Christian Dior, Clarins, Clinique, Decleor, Elizabeth Arden, Estee lauder, Givenchy, Guerlain, H2O+, Helena Rubinstein, Kiehl's , Lancome, L'occitane, L'Oreal, MAC, Neutrogena , Origins, Sisley, Sofina, Vichy, and YSL.</p></div>
+	<div><p>Check the color and smell if you think that your product has expired. Strange smell, separation of oil, change of color are signs of expiration.</p></div>
+	</div>
+	<div id="mainSpace" class="col-md-6">	
+		<h1>CHECK YOUR COSMETICS</h1><br>
+		<h4>Production/Expiration Date</h4><br>
+					<div >
+					<label for="selectBar">Select A Brand</label>	
+					<select id="brandId" class="form-control" name="selectBar">
 							<c:set var="reloadBrandId" scope="session" value="${reloadBrandId}"/>
 							<c:forEach items='${Brands}' var="items">
 							<c:if test="${reloadBrandId!=items.brandId}">
@@ -235,9 +272,12 @@ body {
 							</c:forEach>
 					</select>
 					</div>
-					<div style="display: inline-block;"><input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}"/></div>
+					<div >
+					<label for="batchCode">Batch Code</label>	
+					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}"/></div>
 					<div style="display: inline-block;float:right;">
-					<button id="searchDate" class="btn btn-default btn-lg btn-block" >查詢</button></div>
+					<br>
+					<button id="searchDate" class="btn btn-default btn-lg btn-block" >Calculate</button></div>
 					
 			
 		
@@ -264,6 +304,8 @@ body {
 			</div>
 
 	</div>
+	
+	
 	</div>
 			<div class="row">
 			<div  class="col-md-1">
