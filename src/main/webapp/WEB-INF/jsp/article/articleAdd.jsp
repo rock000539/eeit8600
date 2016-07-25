@@ -157,11 +157,15 @@ select {
 			            </div>
 			        </div>
 		</section>
-	<FORM id="addForm" action="/articles/insert" method="post">
+	<FORM id="addForm">
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-3">
 				<input type="hidden" name="memberId" value="${memberId}"/>
+				<input type="hidden" name="articleView" value="0"/>
+				<input type="hidden" name="articleCollect" value="0"/>
+				<input type="hidden" name="articleShow" value="true"/>
+				<input type="hidden" name="articleReport" value="0"/>
 				<select name="articleType" class="form-control" >
 				<option value="" disabled selected hidden>--Select your Type--</option>
 				<option value="news">情報</option>
@@ -229,7 +233,6 @@ select {
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	
-
 	<script src="/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>

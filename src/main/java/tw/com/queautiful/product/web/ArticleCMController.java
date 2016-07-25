@@ -2,6 +2,8 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +16,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.ArticleCMService;
+import tw.com.queautiful.product.service.ArticleService;
+import tw.com.queautiful.product.service.MemberService;
 
 @Controller
 @RequestMapping("/articleCMs")
 public class ArticleCMController {
 
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private ArticleCMService service;
+	
+	@Autowired
+	private ArticleService articleService;
+	
+	@Autowired
+	private MemberService memberService;
+	
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -42,6 +55,11 @@ public class ArticleCMController {
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
 	public ArticleCM insert(@RequestBody ArticleCM articleCM){
+		articleCM.setAcmTime(new java.sql.Timestamp(System.currentTimeMillis()));
+		
+		articleCM.setMember(memberService.getById(articleCM.getMemberId()));
+		articleCM.setArticle(articleService.getById(articleCM.getArticleId()));
+
 		service.insert(articleCM);
 		return articleCM;
 	}

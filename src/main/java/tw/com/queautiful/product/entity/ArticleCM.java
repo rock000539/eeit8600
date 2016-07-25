@@ -14,59 +14,70 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="ARTICLECM")
+@Table(name = "ARTICLECM")
 public class ArticleCM {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ARTICLECMID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ARTICLECMID")
 	private Long acmId;
-	
-	@Column(name="ARTICLECMMSG",length=200)
+
+	@Column(name = "ARTICLECMTITLE", columnDefinition = "nvarchar(30)")
+	private String acmTitle;
+
+	@Column(name = "ARTICLECMMSG", columnDefinition = "nvarchar(200)")
 	private String acmMsg;
 
-	@Column(name="ARTICLECMTIME")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	@Column(name = "ARTICLECMTIME")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
 	private java.sql.Timestamp acmTime;
-	
-	@Column(name="ARTICLECMSHOW")
+
+	@Column(name = "ARTICLECMSHOW")
 	private Boolean acmShow;
-	
-	@Column(name="ARTICLECMREPORT") //被檢舉次數
+
+	@Column(name = "ARTICLECMREPORT") // 被檢舉次數
 	private Integer acmReport;
-	
+
 	@ManyToOne
-	@JoinColumn(name="ARTICLEID") //留言對應文章
+	@JoinColumn(name = "ARTICLEID") // 留言對應文章
 	@JsonIgnore
 	private Article article;
-	
+
 	@Transient
 	private Long articleId;
-	
+
 	@ManyToOne
-	@JoinColumn(name="MEMBERID") //留言撰寫作者
+	@JoinColumn(name = "MEMBERID") // 留言撰寫作者
 	@JsonIgnore
 	private Member member;
-	
+
 	@Transient
 	private Long memberId;
 
 	public Long getAcmId() {
 		return acmId;
 	}
-	
+
 	public void setAcmId(Long acmId) {
 		this.acmId = acmId;
+	}
+
+	public String getAcmTitle() {
+		return acmTitle;
+	}
+
+	public void setAcmTitle(String acmTitle) {
+		this.acmTitle = acmTitle;
 	}
 
 	public String getAcmMsg() {
 		return acmMsg;
 	}
-	
+
 	public void setAcmMsg(String acmMsg) {
 		this.acmMsg = acmMsg;
 	}
-	
+
 	public java.sql.Timestamp getAcmTime() {
 		return acmTime;
 	}
@@ -74,19 +85,19 @@ public class ArticleCM {
 	public void setAcmTime(java.sql.Timestamp acmTime) {
 		this.acmTime = acmTime;
 	}
-	
+
 	public Boolean getAcmShow() {
 		return acmShow;
 	}
-	
+
 	public void setAcmShow(Boolean acmShow) {
 		this.acmShow = acmShow;
 	}
-	
+
 	public Integer getAcmReport() {
 		return acmReport;
 	}
-	
+
 	public void setAcmReport(Integer acmReport) {
 		this.acmReport = acmReport;
 	}
@@ -97,13 +108,17 @@ public class ArticleCM {
 
 	public void setArticle(Article article) {
 		this.article = article;
-		if(!article.getAcms().contains(this)){
+		if (!article.getAcms().contains(this)) {
 			article.getAcms().add(this);
 		}
 	}
 
 	public Long getArticleId() {
-		return this.article.getArticleId();
+		if (articleId == null && article != null) {
+			return this.getArticle().getArticleId();
+		} else {
+			return this.articleId;
+		}
 	}
 
 	public void setArticleId(Long articleId) {
@@ -116,17 +131,21 @@ public class ArticleCM {
 
 	public void setMember(Member member) {
 		this.member = member;
-		if(!member.getAcmsWroteByAuthor().contains(this)){
+		if (!member.getAcmsWroteByAuthor().contains(this)) {
 			member.getAcmsWroteByAuthor().add(this);
 		}
 	}
 
 	public Long getMemberId() {
-		return this.member.getMemberId();
+		if (this.memberId == null && member != null) {
+			return this.getMember().getMemberId();
+		} else {
+			return this.memberId;
+		}
 	}
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
-	
+
 }

@@ -79,7 +79,7 @@ public class Article {
 	private String nickname;
 	
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
-	@OrderBy("ARTICLECMTIME DESC")
+	@OrderBy("ARTICLECMTIME ASC")
 	private Set<ArticleCM> acms;
 
 	@Override

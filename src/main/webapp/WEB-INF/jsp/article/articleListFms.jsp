@@ -28,45 +28,49 @@
 				<div class="grey_bg row">
 				<div class="rs_box  wow bounceInRight" data-wow-offset="500">
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                        <div class="serviceBox_3">
+                        <a href="/articles/listfms?articleType=NEWS">
+                        <div class="serviceBox_3" id="NEWS">
                             <div class="service-icon">
                                 <i class="fa fa-bullhorn"></i>
                             </div>
                             <h3>NEWS</h3>
                             <p>情報區</p>
-<!--                             <a class="read" href="#">Read more</a> -->
                         </div>
+                        </a>
                     </div>
 
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                        <div class="serviceBox_3">
+                    	<a href="/articles/listfms?articleType=SOLICIT">
+                        <div class="serviceBox_3" id="SOLICIT">
                             <div class="service-icon">
                                 <i class="fa fa-file-text"></i>
                             </div>
                             <h3>SOLICIT</h3>
                             <p>徵文區</p>
-<!--                             <a class="read" href="#">Read more</a> -->
                         </div>
+                        </a>
                     </div>
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                        <div class="serviceBox_3">
+                    	<a href="/articles/listfms?articleType=QUESTION">
+                        <div class="serviceBox_3" id="QUESTION">
                             <div class="service-icon">
                                 <i class="fa fa-question-circle"></i>
                             </div>
                             <h3>QUESTION</h3>
                             <p>問題區</p>
-<!--                             <a class="read" href="#">Read more</a> -->
                         </div>
+                        </a>
                     </div>
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                        <div class="serviceBox_3">
+                    	<a href="/articles/listfms?articleType=CHAT">
+                        <div class="serviceBox_3" id="CHAT">
                             <div class="service-icon">
                                 <i class="fa fa-wechat"></i>
                             </div>
                             <h3>CHAT</h3>
                             <p>閒聊區</p>
-<!--                             <a class="read" href="#">Read more</a> -->
                         </div>
+                        </a>
                     </div>
                 </div> <!-- end of rs_box -->
                 
@@ -190,20 +194,25 @@
 	<script>
 	$(function(){
 		$('#allpost').on('click',function(){
-// 			$('tbody>tr').show();
 			$.redirect('/articles/listfms');
 		});
 		
 // 		$(".serviceBox_3").on('click',function(){
-// 			var aType = $(this).find('h3').text();
-// 			$('tbody>tr[data-type!='+aType+']').hide();
-// 			$('tbody>tr[data-type='+aType+']').show();
-// 		});
-
-		$(".serviceBox_3").on('click',function(){
 // 			console.log($(this).find('h3').text());
-			$.redirect('/articles/listfms?articleType='+$(this).find('h3').text());
-		});
+//  			$.redirect('/articles/listfms?articleType='+$(this).find('h3').text());
+// 		});
+		
+		
+		var href = window.location.href;
+		var typeIndex = href.lastIndexOf('=');
+		var type = href.substring(typeIndex+1);
+// 		console.log(href);
+// 		console.log(typeIndex);
+// 		console.log(type);	
+		$(".serviceBox_3").removeClass('active');
+		if(typeIndex!=-1){
+			$('#'+type).addClass('active');	
+		}
 		
 		$('#page_btn').bootpag({
 		    total:"${totalPage}",
@@ -226,10 +235,6 @@
 		   });
 		});
 		
-		
-// 		$('.articleTitle').click(function(){
-// 			console.log($(this).text());		
-// 		});
 	});
 	
 

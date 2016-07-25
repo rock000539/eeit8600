@@ -66,7 +66,9 @@
     right:50%;
 }
 .serviceBox_3:hover h3:after,
-.serviceBox_3:hover h3:before{
+.serviceBox_3:hover h3:before,
+.active h3:after,
+.active h3:before{
     width:100%;
 }
 .serviceBox_3  i {
@@ -74,7 +76,7 @@
     font-size:3em;
     line-height:70px;
 }
-.serviceBox_3:hover .service-icon{
+.serviceBox_3:hover .service-icon, .active .service-icon{
     background:#727CB6;
     color:#fff;
 }

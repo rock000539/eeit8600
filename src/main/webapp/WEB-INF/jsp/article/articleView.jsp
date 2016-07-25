@@ -19,6 +19,7 @@
 <!--     <link rel="stylesheet" href="/css/article/view.css"> -->
 		
 </head>
+
 <style>
 table{
 	border:1px solid black;
@@ -62,9 +63,9 @@ border:1px solid black;
 .breadcrumb>li+li:before{font-family:"FontAwesome";content:"\f054";vertical-align:middle;color: #ccc;}
 .breadcrumb li:last-child a{font-weight:700;color:#888}
 
-/* ==================================================
-   authordiv
-================================================== */
+/* ==============
+   Author div
+================= */
 .authordiv {
 	position: relative;
 	width: 80px;
@@ -88,6 +89,10 @@ border:1px solid black;
 	height: auto;
 }
 
+
+/* ==============
+   Post Area
+================= */
 .post{
 /* 	background-color:white; */
 	border:#e8ecf3 solid 1px;
@@ -110,7 +115,6 @@ border:1px solid black;
 	margin:5px 0 0;
 }
 
-
 .postbody{
 	padding:0px 20px 0 30px;
 	border-left:#e8ecf3 solid 1px;
@@ -130,8 +134,6 @@ border:1px solid black;
 
 .pbhead{
 	border-bottom: 4px solid #e5e5e5;
-/* 	border-spacing: 10px; */
-/* 	padding-bottom:10px; */
 }
 .pbhead:after{
     bottom: 0;
@@ -144,7 +146,9 @@ border:1px solid black;
     background-color: #ee836e;
 }
 
-/*reply area*/
+/* ==============
+   Reply Area
+================= */
 /*dividerHeading*/
 .dividerHeading,
 .widget_title
@@ -277,7 +281,7 @@ border:1px solid black;
 				<ul>
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
-					<li><a href="#" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
+					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 					<li><a href="/articles/edit?articleId=${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 				</ul>
 				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(article.articleTime,0,19)}</small>
@@ -312,7 +316,7 @@ border:1px solid black;
 				<ul>
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
-<!-- 					<li><a href="#" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li> -->
+					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 					<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 				</ul>
 				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(acm.acmTime,0,19)}</small>
@@ -333,26 +337,28 @@ border:1px solid black;
 			            </div>
 			        </div>
 		</section>
-		<FORM id="addForm" action="/articles/insert" method="post">
-		<div class="row">
+		<FORM id="addForm">
+		<div class="row" id="replyarea">
 			<div class="form-group">
 				<div class="col-lg-12">
 					<input type="hidden" name="memberId" value="${memberId}"/>
-					<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="RE:【${article.articleType}】${article.articleTitle}">
+					<input type="hidden" name="articleId" value="${article.articleId}"/>
+					<input type="hidden" name="acmReport" value="0"/>
+					<input type="hidden" name="acmShow" value="true"/>
+					<input type="text" name="acmTitle" id="acmTitle" class="form-control" value="RE:【${article.articleType}】${article.articleTitle}">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12">
-					<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
+					<textarea class="ckeditor" id="acmMsg" name="acmMsg" cols="80" rows="12"></textarea>
 				</div>
 			</div>
 		</div>	
 		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12 hasbutton">
-	<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
 					<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspReply</button>
 				</div>
 			</div>
@@ -393,6 +399,8 @@ border:1px solid black;
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	
+	<script src="/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
@@ -410,27 +418,73 @@ border:1px solid black;
 		 */
 		var w = $('.authorimg',this).width();
 		var h = $('.authorimg',this).height();
-		console.log(w);
-		console.log(h);
+// 		console.log(w);
+// 		console.log(h);
 		if (h > w) {
 			$('.authorimg',this).addClass('portrait');
 		} else {
 			$('.authorimg',this).removeClass('portrait');
 		}
 		
-// 		$('.post').hover(function(){
-// 			$(this).addClass();
-// 		})
+		//驗證
+		$('#addForm').validate({
+			onfocusout: function (element) {
+		        $(element).valid();
+		    },
+			rules:{
+				acmTitle:{required:true},
+			},//end of rules
+			messages:{
+// 				acmTitle:'必填'
+			},//end of messages			
+		});
+		
+		$('#confirm').on('click',function(){
+			$('#acmMsg').val(CKEDITOR.instances['acmMsg'].getData());
+			$.ajax({
+					url:'/articleCMs/insert',
+					type:'post',
+					contentType:'application/json;charset=UTF-8',
+					data:JSON.stringify($('#addForm').serializeObject()),
+					dataType:'json',
+					success:function(data){
+						console.log(data);
+// 						location.href="/articles/listfms";
+	 				},
+	 				error:function(x,y,z){
+	 					console.log('x-->'+x);
+	 					console.log('y-->'+y);
+	 					console.log('z-->'+z);
+	 				}
+				});		
+			
+		});
+		
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		};
 		
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
+		if($('#addForm').validate().form() && CKEDITOR.instances['acmMsg'].getData()!=""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
-							.append('<p>Post Type：'+$(':selected').val()+'</p>')
-							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
-							.append('<p>Content：'+ CKEDITOR.instances['articleContent'].getData() +'</p>');
+							.append('<p>Title：'+ $(':text[name=acmTitle]').val() +'</p>')		
+							.append('<p>Content：'+ CKEDITOR.instances['acmMsg'].getData() +'</p>');
 			$('#confirm').show();
 		}else{
 			$(".modal-title").text('Please Modify Your Post');
