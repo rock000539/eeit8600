@@ -118,13 +118,13 @@ public class ReviewController {
 		return "/review/reviews";
 	}
 
-	@RequestMapping("/review")
+	@RequestMapping("/reviewTest")
 	public String review(Model model) {
 		model.addAttribute("review", service.getAll());
-		return "/review/review";
+		return "/review/reviewTest";
 	}
 
-	@RequestMapping("/reviewjQueryRain")
+	@RequestMapping("/review")
 	public String reviewjQueryRain(Model model,Long reviewId) throws ParseException {
 		Review review = service.getById(reviewId);
 		log.debug("{}", review);
@@ -166,7 +166,7 @@ public class ReviewController {
 //		model.addAttribute("reviewCMs",reviewCMs);
 		
 		
-		return "/review/reviewjQueryRain";
+		return "/review/review";
 	}
 	
 	@RequestMapping("/search")

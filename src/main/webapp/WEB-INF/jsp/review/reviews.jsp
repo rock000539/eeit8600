@@ -36,7 +36,7 @@
 	  <div class="col-sm-6 col-md-3 body" name="body">
 	    <div class="thumbnail" >
 					<!-- Img start -->
-			<a href="/reviews/reviewjQueryRain?reviewId=${review.reviewId}" >
+			<a href="/reviews/review?reviewId=${review.reviewId}" >
 	    	<div class="reviewImg">
 	      		<img class="reviewImg-Img" src="/products/show?prodImg=${review.product.prodImg}">
 	      	</div></a>
@@ -83,9 +83,9 @@
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				
 				<!--心得內容Start -->
-				<a class="review-link" href="/reviews/reviewjQueryRain?reviewId=${review.reviewId}" > ${review.review}</a>
+				<a class="review-link" href="/reviews/review?reviewId=${review.reviewId}" > ${review.review}</a>
 				 <!--心得內容end -->
-				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/reviewjQueryRain?reviewId=${review.reviewId}" > ${review.reviewTitle}</a>
+				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/review?reviewId=${review.reviewId}" > ${review.reviewTitle}</a>
 <%-- 		      		<div  name="review-bottom-title" class="review-bottom-title" id="review-bottom-title">${review.reviewTitle}</div> --%>
 <!-- 		        </a> -->
 	        </div>

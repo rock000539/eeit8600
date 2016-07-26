@@ -73,16 +73,14 @@ public class ReviewCMController {
 		return reviewCMs;	
 	}
 	
-	@RequestMapping(value="/selects",method=RequestMethod.POST)
+	@RequestMapping(value="/select_data",method=RequestMethod.POST)
 	@ResponseBody
-	public List<ReviewCM> selects(@RequestParam(value="reviewId") Long reviewId,@RequestParam(value="memberId",required = false) Long memberId,@RequestParam(value="rcmMsg",required = false) String rcmMsg){
-//		log.debug("ReviewId={}",reviewId);		
-		
+	public List<ReviewCM> selects(@RequestParam Long reviewId){
+		log.debug("ReviewId={}",reviewId);		
 		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
 		log.debug("ReviewCMs={}",reviewCMs);
 		
 		return reviewCMs;	
-//		return null;	
 	}
 	
 	@RequestMapping(value="/select/{id}",method=RequestMethod.POST)
@@ -93,7 +91,6 @@ public class ReviewCMController {
 		log.debug("ReviewCMs={}",reviewCMs);
 		
 		return reviewCMs;	
-//		return null;	
 	}
 	
 	@RequestMapping("/edit")
