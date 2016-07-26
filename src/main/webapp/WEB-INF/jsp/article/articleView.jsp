@@ -98,16 +98,17 @@ border:1px solid black;
 ================= */
 .post{
 /* 	background-color:white; */
-	border:#e8ecf3 solid 1px;
- 	background-color:#fff;
+ 	border:#e8ecf3 solid 1px;
+	border-top:#e8ecf3 solid 3px;
+  	background-color:#fff;
  	margin-bottom:10px;
  	border-radius:4px;
+ 	transition: all 0.5s ease-in-out;
 }
 .post:hover{
-/* 	background-color:white; */
 /* 	border:#ccd3ff solid 2px; */
-	border-top:#727CB6 solid 2px;
-	transition: all 0.3s ease-in-out;
+	border-top:#727CB6 solid 3px;
+ 	transition: all 0.3s ease-in-out;
 }
 .postprofile{
 /* 	border:#e8ecf3 solid 1px; */
@@ -309,37 +310,37 @@ border:1px solid black;
 		
 		<!-- start articleReply -->
 		<div id="articleReply">
-		<c:forEach var="areplies" items="${article.areplies}">
+		<c:forEach var="areply" items="${article.areplies}">
 		<div class="col-lg-12 post">
 			<div class="postprofile col-lg-3">
 				<dl>
 					<dt>
 						<div class="authordiv img-circle">
-						<img  class="authorimg" src="/members/show?memberId=${areplies.memberId}">
+						<img  class="authorimg" src="/members/show?memberId=${areply.memberId}">
 						</div>
-						<h3><a href="#">${areplies.member.nickname}</a></h3>
+						<h3><a href="#">${areply.member.nickname}</a></h3>
 						
 					</dt>
 					<dd>Post:</dd>
-					<dd>Joined:${areplies.member.memberRegiDate}</dd>
+					<dd>Joined:${areply.member.memberRegiDate}</dd>
 				</dl>
 			
 			</div>
 			<div class="postbody col-lg-9">		
 				<div class="pbhead">
-				<h2>${areplies.arTitle}</h2>
+				<h2>${areply.arTitle}</h2>
 				<ul>
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
 					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
-					<c:if test="${areplies.memberId==memberId}">
+					<c:if test="${areply.memberId==memberId}">
 						<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 					</c:if>
 				</ul>
-				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(areplies.arTime,0,19)}</small>
+				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(areply.arTime,0,19)}</small>
 				</div>
 				<div class="content">
-				${areplies.arContent}
+				${areply.arContent}
 				</div>
 			</div>
 		</div>		
@@ -465,6 +466,14 @@ border:1px solid black;
 	
 	<script>
 	$(function(){
+		console.log("hi");
+// 		console.log('${article.areplies.iterator().next()}');
+		
+// 		console.log('${article.areplies.toArray()[0]}');
+		console.log('${article.areplies.size()-1}');
+		var num = '${article.areplies.size()-1}';
+		console.log(num);
+		
 		/*
 		 * ============ USER IMG ===========
 		 */

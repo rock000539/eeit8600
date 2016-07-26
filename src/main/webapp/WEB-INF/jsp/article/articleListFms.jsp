@@ -189,6 +189,8 @@
 	
 	<script>
 	$(function(){
+		console.log('${articles[0]}');
+		
 		$('#allpost').on('click',function(){
 			$.redirect('/articles/listfms');
 		});
