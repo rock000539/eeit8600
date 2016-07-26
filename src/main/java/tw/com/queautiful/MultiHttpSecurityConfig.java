@@ -122,7 +122,9 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/expdate/batchCodeController","/reviews/reviews","/reviews/review","/reviews/reviewjQueryRain",
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
-                "/ingredients/startSearch") 
+                "/ingredients/startSearch",
+                "/articles/listfms","/articles/view","/articles/list_data",
+                "/products/**") 
                 .permitAll()      //設定過濾條件 ↓         
                 //沒有設ROLE(一般人)，permitAll():表示以上路徑都可訪問                            
                 .anyRequest().authenticated() // #7所有其他的URL都需要用户進行驗證 (固定會加的東西)
