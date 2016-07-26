@@ -51,7 +51,7 @@
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
-			<h1 class="page-header">會員管理列表 <small>會員停權復權管理</small></h1>
+			<h1 class="page-header">成份管理列表 <small></small></h1>
 			
 			<!-- 內文 -->
 			<div class="row">

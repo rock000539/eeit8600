@@ -56,9 +56,6 @@ public class ArticleController {
 	@ResponseBody
 	public List<Article> select() {
 		List<Article> articles = articleService.getAll();
-		for (Article a : articles) {
-//			log.debug("{}", a.getArticleTime());
-		}
 		return articles;
 	}
 
@@ -81,9 +78,6 @@ public class ArticleController {
 	public Article insert(@RequestBody Article article) {
 		article.setArticleTime(new java.sql.Timestamp(System.currentTimeMillis()));
 
-		// insert FK : memberID
-		// Long memberId = 1L; //test
-		// article.setMember(memberService.getById(memberId));
 		log.debug("{}", article.getArticleTime());
 		log.debug("{}", article);
 		article.setMember(memberService.getById(article.getMemberId()));
@@ -127,29 +121,20 @@ public class ArticleController {
 		// 初始頁碼、每頁幾筆資料
 		Pageable pageable = new PageRequest(0, 10,  new Sort(Sort.Direction.DESC,"articleTime"));
 
-		// 查詢資料
+		// 設定查詢條件、查詢資料
 		Page<Article> a_page = null;
-		if (articleType == null) {
-			a_page = articleService.getAll(pageable);
-		} else {
-			Article a_spec = new Article();
+		Article a_spec = new Article();
+		a_spec.setArticleShow(true);
+		if (articleType != null) {
 			a_spec.setArticleType(articleType);
-			a_page = articleService.getAll(Spec.byAuto(em, a_spec), pageable);
 		}
+		a_page = articleService.getAll(Spec.byAuto(em, a_spec), pageable);
 
 		log.debug("pages.getContent()-->{}", a_page.getContent());
 
 		List<Article> a_list = a_page.getContent();
-		List<ArticleListFms> articles = new ArrayList<>();
-
-		ArticleListFms article = null;
-		for (Article temp : a_list) {
-			article = new ArticleListFms();
-			BeanUtils.copyProperties(temp, article);
-			article.setAcmsSize(temp.getAcms().size());
-			articles.add(article);
-		}
-
+		List<ArticleListFms> articles = articleService.getAllByVOListFms(a_list);
+		
 		log.debug("ArticleListFms(articles)-->{}", articles);
 		log.debug("totalPage-->{}",a_page.getTotalPages());
 
@@ -158,79 +143,30 @@ public class ArticleController {
 
 		return "/article/articleListFms";
 	}
-
-//	 @RequestMapping("/listfms")
-//	 public String listFmsPage(Model model) {
-//	 // 初始頁碼、每頁幾筆資料
-//	 Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC,"articleTime"));
-//	
-//	 // 查詢資料
-//	 Page<Article> a_page = articleService.getAll(pageable);
-//	
-//	 log.debug("pages.getContent()-->{}", a_page.getContent());
-//	
-//	 List<Article> a_list = a_page.getContent();
-//	 List<ArticleListFms> articles = new ArrayList<>();
-//	
-//	 ArticleListFms article = null;
-//	 for (Article temp : a_list) {
-//	 article = new ArticleListFms();
-//	 BeanUtils.copyProperties(temp, article);
-//	 article.setAcmsSize(temp.getAcms().size());
-//	 articles.add(article);
-//	 }
-//	
-//	 log.debug("ArticleListFms(articles)-->{}",articles);
-//	
-//	 model.addAttribute("articles", articles);
-//	 model.addAttribute("totalPage", a_page.getTotalPages());
-//	
-//	 return "/article/articleListFms";
-//	 }
-
+	
 	@RequestMapping("/list_data")
 	@ResponseBody
-	public List<Article> listFmsData(Integer page, Integer rows) {
-		Pageable pageable = new PageRequest(page - 1, rows);
-		Page<Article> pages = articleService.findByOrderByArticleTimeDesc(pageable);
+	public List<ArticleListFms> listFmsData(Integer page, Integer rows,@RequestParam(required = false) ArticleType articleType) {
+		log.debug("{}",articleType);
+		// 初始頁碼、每頁幾筆資料
+		Pageable pageable = new PageRequest(page - 1, rows, new Sort(Sort.Direction.DESC,"articleTime"));
+		
+		// 設定查詢條件、查詢資料
+		Page<Article> a_page = null;
+		Article a_spec = new Article();
+		a_spec.setArticleShow(true);
+		if (articleType != null) {
+			a_spec.setArticleType(articleType);
+		}
+		a_page = articleService.getAll(Spec.byAuto(em, a_spec), pageable);
+		
+		log.debug("list_data:pages.getContent()-->{}", a_page.getContent());
 
-		log.debug("list_data:pages.getContent()-->{}", pages.getContent());
-		return pages.getContent();
+		List<Article> a_list = a_page.getContent();
+		List<ArticleListFms> articles = articleService.getAllByVOListFms(a_list);
+		
+		return articles;
 	}
-	
-
-//	@RequestMapping("/selectbyarticletype")
-//	@ResponseBody
-//	public List<Article> selectByArticleType(@RequestParam ArticleType articleType) {
-//		Article article = new Article();
-//		article.setArticleType(articleType);
-//		List<Article> articles = articleService.getAll(Spec.byAuto(em, article));
-//		return articles;
-//	}
-
-//	@RequestMapping("/selectbyarticletype")
-//	public String selectByArticleType(@RequestParam ArticleType articleType, Model model) {
-//		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC, "articleTime"));
-//		Article a_spec = new Article();
-//		a_spec.setArticleType(articleType);
-//		Page<Article> a_page = articleService.getAll(Spec.byAuto(em, a_spec), pageable);
-//		
-//		List<Article> a_list = a_page.getContent();
-//		List<ArticleListFms> articles = new ArrayList<>();
-//		ArticleListFms article = null;
-//		for(Article temp : a_list){
-//			article = new ArticleListFms();
-//			BeanUtils.copyProperties(temp,article);
-//			article.setAcmsSize(temp.getAcms().size());
-//			articles.add(article);
-//		}
-//		
-//		log.debug("selectByArticleType-->{}",articles);
-//		
-//		model.addAttribute("articles", articles);
-//		model.addAttribute("totalPage",a_page.getTotalPages());
-//		return "/article/articleListFms";
-//	}
 
 	@RequestMapping("/view")
 	public String articleView(@RequestParam Long articleId, Model model) {

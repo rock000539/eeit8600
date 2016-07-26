@@ -27,6 +27,7 @@
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
 				<div class="rs_box  wow bounceInRight" data-wow-offset="500">
+					<input type="hidden" id="articleType" value=""/>
                     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                         <a href="/articles/listfms?articleType=NEWS">
                         <div class="serviceBox_3" id="NEWS">
@@ -74,7 +75,7 @@
                     </div>
                 </div> <!-- end of rs_box -->
                 
-                <div class="container" style="margin-top: 250px">
+                <div class="container" style="margin-top: 250px" id="articleArea">
 <!--                 <div class="page-header page-heading"> -->
 <!-- 				    <h1 class="pull-left">Forums</h1> -->
 <!-- 				    <ol class="breadcrumb pull-right where-am-i"> -->
@@ -89,7 +90,7 @@
 				  	<i class="fa fa-plus"></i>&nbspNew Topic
 				  </button></a>
 				  <table class="table forum table-striped">
-				    <thead>
+				    <thead id="thead">
 				      <tr>
 				        <th class="cell-stat"></th>
 				        <th>
@@ -127,12 +128,7 @@
 				          </h4>
 				        </td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.acmsSize}</a></td>
-				        <c:if test="${empty article.articleView}">
-				        	<td class="text-center hidden-xs hidden-sm"><a href="#">0</a></td>
-				        </c:if>
-				        <c:if test="${not empty article.articleView}">
-				        	<td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
-				        </c:if>
+				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
 				        <td class="hidden-xs hidden-sm">
 				        	<i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a><br>
 				        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
@@ -197,44 +193,42 @@
 			$.redirect('/articles/listfms');
 		});
 		
-// 		$(".serviceBox_3").on('click',function(){
-// 			console.log($(this).find('h3').text());
-//  			$.redirect('/articles/listfms?articleType='+$(this).find('h3').text());
-// 		});
-		
-		
 		var href = window.location.href;
 		var typeIndex = href.lastIndexOf('=');
 		var type = href.substring(typeIndex+1);
 // 		console.log(href);
 // 		console.log(typeIndex);
-// 		console.log(type);	
+// 		console.log(type);
+
+		/* 設定點擊serviceBox_3後樣式改變*/
 		$(".serviceBox_3").removeClass('active');
 		if(typeIndex!=-1){
-			$('#'+type).addClass('active');	
+			$('#'+type).addClass('active');
+			$('#articleType').val(type); //設定type="hidden" id="articleType"的value
 		}
 		
 		$('#page_btn').bootpag({
 		    total:"${totalPage}",
  		    page:1,
 		    maxVisible: 5,
-		    href: '#pro-page-{{number}}',
-			leaps: false,
+// 		    href: '#pro-page-{{number}}',
+ 			leaps: false,
 		}).on('page', function(event, num){
 // 		   console.log(event);
 // 		   console.log(num);
+// 		   console.log($('#articleType').val());
 		   $.ajax({
 			   url:'/articles/list_data',
 			   type:'POST',
 			   contextType: 'application/json; charset=utf-8;',
-			   data:{'page':num,'rows':10},
+			   data:{'page':num,'rows':10, 'articleType':$('#articleType').val()},
 			   dataType: 'json',
 			   success:function(result){
 				   appendArticle(result);
+				   location.href="#articleArea";
 			   }
 		   });
-		});
-		
+		});		
 	});
 	
 
@@ -244,7 +238,7 @@
 	}
 	
 	function appendArticle(result){
-		console.log(result);
+// 		console.log(result);
 		$('tbody').empty();
 		   
 		   for(var i = 0; i < result.length; i++) {
@@ -275,7 +269,7 @@
 		   			.replace("_articleTitle", result[i].articleTitle)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
-		   			.replace("_acmsSize", result[i].acms.length)
+		   			.replace("_acmsSize", result[i].acmsSize)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
 					).appendTo($('tbody'));

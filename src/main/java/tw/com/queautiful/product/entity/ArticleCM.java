@@ -54,6 +54,12 @@ public class ArticleCM {
 	@Transient
 	private Long memberId;
 
+	@Transient
+	private String nickname;
+	
+	@Transient
+	private java.sql.Date memberRegiDate;
+	
 	public Long getAcmId() {
 		return acmId;
 	}
@@ -147,5 +153,31 @@ public class ArticleCM {
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
+
+	public String getNickname() {
+		if(this.nickname == null && this.member!=null){
+			return this.getMember().getNickname();
+		}else{
+			return this.nickname;
+		}
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public java.sql.Date getMemberRegiDate() {
+		if(this.memberRegiDate == null && this.member!=null){
+			return this.getMember().getMemberRegiDate();
+		}else{
+			return memberRegiDate;
+		}
+	}
+
+	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+		this.memberRegiDate = memberRegiDate;
+	}
+	
+	
 
 }

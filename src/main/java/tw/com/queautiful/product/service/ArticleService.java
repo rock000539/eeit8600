@@ -1,10 +1,11 @@
 package tw.com.queautiful.product.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.crsh.console.jline.internal.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.ArticleDao;
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.vo.article.ArticleListFms;
 
 @Service
 public class ArticleService {
@@ -44,17 +46,17 @@ public class ArticleService {
 		return articleDao.findAll(pageable);
 	}
 
-	public List<Article> findByOrderByArticleTimeDesc() {
-		return articleDao.findByOrderByArticleTimeDesc();
-	}
-
-	public Page<Article> findByOrderByArticleTimeDesc(Pageable pageable) {
-		return articleDao.findByOrderByArticleTimeDesc(pageable);
-	}
-
-	public Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable){
-		return articleDao.findByOrderByArticleTimeDesc(spec, pageable);
-	}
+//	public List<Article> findByOrderByArticleTimeDesc() {
+//		return articleDao.findByOrderByArticleTimeDesc();
+//	}
+//
+//	public Page<Article> findByOrderByArticleTimeDesc(Pageable pageable) {
+//		return articleDao.findByOrderByArticleTimeDesc(pageable);
+//	}
+//
+//	public Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable){
+//		return articleDao.findByOrderByArticleTimeDesc(spec, pageable);
+//	}
 	
 	public void insert(Article article) {
 		articleDao.save(article);
@@ -70,15 +72,23 @@ public class ArticleService {
 
 	public Article viewNCount(Long articleId) {
 		Article article = articleDao.findOne(articleId);
-		Integer articleView = article.getArticleView();
-		articleView = (articleView == null ? 0 : articleView);
-//		if (articleView == null) {
-//			article.setArticleView(1);
-//		} else {
-		article.setArticleView(articleView + 1);
-//		}
+		article.setArticleView(article.getArticleView() + 1);
 		articleDao.save(article);
 		return article;
+	}
+	
+	public List<ArticleListFms> getAllByVOListFms(List<Article> list){
+		List<Article> a_list = list;
+		List<ArticleListFms> articles = new ArrayList<>();
+
+		ArticleListFms article = null;
+		for (Article temp : a_list) {
+			article = new ArticleListFms();
+			BeanUtils.copyProperties(temp, article);
+			article.setAcmsSize(temp.getAcms().size());
+			articles.add(article);
+		}		
+		return articles;	
 	}
 
 }
