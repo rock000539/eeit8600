@@ -95,7 +95,7 @@ width: 80px;}
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
-			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
+			<h1 class="page-header">產品成份對應管理 <small></small></h1>
 			
 			<!-- 內文 -->
 			<div class="row">

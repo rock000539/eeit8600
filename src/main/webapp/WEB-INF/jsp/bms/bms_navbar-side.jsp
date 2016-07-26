@@ -39,7 +39,7 @@
 							<li><a href="<% request.getContextPath(); %>/brands/list">品牌資料</a></li>
 							<li><a href="<% request.getContextPath(); %>/categories/list">產品類別</a></li>
 							<li><a href="<% request.getContextPath(); %>/ingredients/list">產品成份</a></li>
-							<li><a href="<% request.getContextPath(); %>/prodIngreList/list">產品成分對應表</a></li>
+							<li><a href="<% request.getContextPath(); %>/prodIngreList/list">產品成份對應表</a></li>
 						</ul>
 					</li>
 					
