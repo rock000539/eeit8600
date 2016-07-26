@@ -169,7 +169,7 @@
                         <!--News Comments-->
                         <div class="news_comments">
                             <div class="dividerHeading">
-                                <h4 id="Comments"><span>Comments (${review.reviewCMs.size()})</span></h4>
+                                <h4 id="Comments"><span id="MyComments">Comments (${review.reviewCMs.size()})</span></h4>
                             </div>
                             <div id="comment">
                                 <ul id="comment-list">
@@ -204,6 +204,9 @@
 						<form id="addForm" action="/reviewCMs/insert" method="post">
                             <input type="hidden" name="memberId" id="memberInfo" value="${memberId}"/>
                             <input id="reviewId" type="hidden" name="reviewId" value="${review.reviewId}"/>
+                           
+                            <input id="rcmShow" type="hidden" name="rcmShow" value="true"/>
+                            <input id="rcmReport" type="hidden" name="rcmReport" value="0"/>
                             <div class="comment-box row">
                                 <div class="col-sm-12">
                                     <p>	
@@ -420,7 +423,6 @@ $(function(){  //=$(document.)ready
 		    return o;
 		}; //serializeObject end
 			
-		console.log("reviewId="+$('#reviewId').val());
 // 			$.ajax({
 // 				url:"/reviewCMs/select/"+$('#reviewId').val(),
 // 				type:'POST',
@@ -446,7 +448,7 @@ $(function(){  //=$(document.)ready
 				data:{'reviewId':$('#reviewId').val()},
 				dataType:'json',
 				success:function(result){
-					console.log("result1="+result);
+// 					console.log("result1="+result);
 					appendReviewCM(result);
 				},error:function(x,y,z){
 					console.log("x="+x);
@@ -472,9 +474,10 @@ $(function(){  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(result){
-// 					console.log("result1="+result);
+					console.log("result1="+result);
 					appendReviewCM(result);
 					CKEDITOR.instances['rcmMsg'].setData("");
+					$("#MyComments").text('Comments (' + (parseInt($("#MyComments").text().substr(10, 1)) + 1) + ')');
 // 					location.href="#addForm";
 				},error:function(x,y,z){
 					console.log("x="+x);
@@ -485,19 +488,19 @@ $(function(){  //=$(document.)ready
 		})//#postComment click end
 
 		function appendReviewCM(result){
-			console.log("result2="+result);
+// 			console.log("result2="+result);
 			$('#comment-list').empty();
 			
-			console.log("result[0]=",result[0]);
-			console.log("result[0].memberId=",result[0].memberId);
-			console.log("result[0].nickname=",result[0].nickname);
-			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
-			console.log("result[0].rcmMsg=",result[0].rcmMsg);
+// 			console.log("result[0]=",result[0]);
+// 			console.log("result[0].memberId=",result[0].memberId);
+// 			console.log("result[0].nickname=",result[0].nickname);
+// 			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
+// 			console.log("result[0].rcmMsg=",result[0].rcmMsg);
 			
 			
 			for(var i=0 ; i < result.length; i++){
 				var str =$('#reviewCM_mode').html();
-				console.log("str="+str);
+// 				console.log("str="+str);
 				
 				$(str.replace("_memberId",result[i].memberId)
 					  .replace("_memberNickname",result[i].nickname)

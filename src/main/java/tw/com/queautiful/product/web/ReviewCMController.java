@@ -54,6 +54,7 @@ public class ReviewCMController {
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
 	public List<ReviewCM> insert(@RequestBody ReviewCM reviewCM){
+		log.debug("{}",reviewCM);
 		//FK
 //		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
 //		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
@@ -62,6 +63,8 @@ public class ReviewCMController {
 //		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 		reviewCM.setReview(reveiwService.getById(reviewCM.getReviewId()));
+		reviewCM.setRcmShow(reviewCM.getRcmShow());
+		reviewCM.setRcmReport(reviewCM.getRcmReport());
 		log.debug("{}",reviewCM);
 		service.insert(reviewCM);
 		
@@ -83,15 +86,15 @@ public class ReviewCMController {
 		return reviewCMs;	
 	}
 	
-	@RequestMapping(value="/select/{id}",method=RequestMethod.POST)
-	@ResponseBody
-	public List<ReviewCM> selects2(@PathVariable("id") Long reviewId){
-		log.debug("ReviewId={}",reviewId);		
-		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
-		log.debug("ReviewCMs={}",reviewCMs);
-		
-		return reviewCMs;	
-	}
+//	@RequestMapping(value="/select/{id}",method=RequestMethod.POST)
+//	@ResponseBody
+//	public List<ReviewCM> selects2(@PathVariable("id") Long reviewId){
+//		log.debug("ReviewId={}",reviewId);		
+//		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
+//		log.debug("ReviewCMs={}",reviewCMs);
+//		
+//		return reviewCMs;	
+//	}
 	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long rcmId,Model model){
