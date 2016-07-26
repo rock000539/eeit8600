@@ -2,6 +2,7 @@ package tw.com.queautiful.product.entity;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -57,6 +59,9 @@ public class Product {
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	@OrderBy("REVIEWTIME DESC")
 	private List<Review> reviews;
+	
+	@ManyToMany(mappedBy = "productSavedByMember") 
+	private Set<Member> memberSave;
 
 	@Column(name = "WEIGHT")
 	private Double weight;
@@ -176,6 +181,14 @@ public class Product {
 		if (review.getProduct() != this) { //review對應的product不是對應到review的list的product就重設product
 			review.setProduct(this);
 		}
+	}
+	
+	public Set<Member> getMemberSave() {
+		return memberSave;
+	}
+
+	public void setMemberSave(Set<Member> memberSave) {
+		this.memberSave = memberSave;
 	}
 
 	public Double getWeight() {

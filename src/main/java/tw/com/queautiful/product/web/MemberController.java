@@ -115,7 +115,7 @@ public class MemberController {
 		return "/member/memberProfile-edit";
 	}
 	
-	//WishList : member-product
+	// WishList
 	@RequestMapping("/wishlist")
 	public String wishListPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");

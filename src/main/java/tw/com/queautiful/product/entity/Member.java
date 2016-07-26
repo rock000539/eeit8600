@@ -88,6 +88,11 @@ public class Member {
 	@Column(name="RESETPSWEXP")
 	private java.sql.Date resetPswExp; //重設密碼期限
 	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinTable(name="wishlist", joinColumns=@JoinColumn(name="MEMBERID",referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="PRODID",referencedColumnName="PRODID"))
+	@JsonIgnore
+	private Set<Product> productSavedByMember;
+	
 	//文章收藏
 	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@OrderBy("ARTICLETIME DESC")
@@ -155,8 +160,15 @@ public class Member {
 	public void setMemberSuspendExp(java.sql.Date memberSuspendExp) {
 		this.memberSuspendExp = memberSuspendExp;
 	}
-
 	
+	public Set<Product> getProductSavedByMember() {
+		return productSavedByMember;
+	}
+
+	public void setProductSavedByMember(Set<Product> productSavedByMember) {
+		this.productSavedByMember = productSavedByMember;
+	}
+
 	public Long getMemberId() {
 		return memberId;
 	}

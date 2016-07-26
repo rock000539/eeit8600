@@ -33,13 +33,13 @@
 		
 		
 		
-	</div> <!-- col-lg -->
+	</div> <!-- memberDiv -->
 	
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 	
-</div> <!-- row -->
+</div> <!-- detail-div -->
 					
-				</div>        
+				</div> <!-- grey_bg -->
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
