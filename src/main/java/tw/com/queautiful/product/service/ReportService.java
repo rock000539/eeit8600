@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.Article_report;
 import tw.com.queautiful.product.entity.Member;
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.entity.WebMail;
 
 @Service
@@ -37,6 +39,12 @@ public class ReportService {
 		
 		if(webMail.getArticleid()!=null){
 		Article	article=articleService.getById(webMail.getArticleid());
+		int articleReportCount=(article.getArticleReport()+1);
+		article.setArticleReport(articleReportCount);
+		if(articleReportCount>=5){
+			article.setArticleShow(false);
+		}
+		articleService.update(article);
 		Member member=article.getMember();
 		long article_athorId=member.getMemberId();
 		athorId=article_athorId;
@@ -45,8 +53,13 @@ public class ReportService {
 					report_date,article_athorId,webMail.getMailTitle());
 		
 		}else if(webMail.getReviewId()!=null){
-			
-			long review_author=reviewService.getById(webMail.getReviewId()).getMemberId();
+			Review review=reviewService.getById(webMail.getReviewId());
+			long review_author=review.getMemberId();
+			int reviewReportCount=review.getReviewReport()+1;
+			review.setReviewReport(reviewReportCount);
+			if(reviewReportCount>=5){
+				review.setReviewShow(false);	
+			}
 			athorId=review_author;
 			String insertReport=
 " insert into [review_report] ([reviewid], memberid, [report_content] , report_date , [review_author] , report_title) values"
@@ -57,8 +70,8 @@ public class ReportService {
 		}else{}
 		
 		
-		List article_reportList=article_reportService.findByMemberId(athorId);
-		List review_reportList=review_reportService.findBymenberId(athorId);
+		List<Object[]> article_reportList=article_reportService.findByMemberId(athorId);
+		List<Object[]> review_reportList=review_reportService.findBymenberId(athorId);
 		
 		int ReportsSum=(article_reportList.size()+review_reportList.size());
 		
