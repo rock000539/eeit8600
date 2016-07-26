@@ -13,9 +13,9 @@ import tw.com.queautiful.product.entity.Member;
 
 public interface ArticleDao extends JpaRepository<Article, Long>, JpaSpecificationExecutor<Article> {
 
-	List<Article> findByOrderByArticleTimeDesc();
-	Page<Article> findByOrderByArticleTimeDesc(Pageable pageable);
-	Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable);
+//	List<Article> findByOrderByArticleTimeDesc();
+//	Page<Article> findByOrderByArticleTimeDesc(Pageable pageable);
+//	Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable);
 	
 	List<Article> findByMember(Member member);
 }

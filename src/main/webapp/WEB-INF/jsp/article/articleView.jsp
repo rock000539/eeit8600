@@ -53,11 +53,14 @@ border:1px solid black;
 .breadcrumb li{display:inline}
 .breadcrumb li a{-webkit-transition:none 0s ease 0s;transition:none 0s ease 0s;text-align:center;text-decoration:none;}
 .breadcrumb li:first-child a{
-	background:#c8d2d8;
+    background: #00d8b2;
+    background: #707478; 
+/* 	background:#c8d2d8; */
 	padding: 11px 15px;
 	display:inline-block;
 	border-radius:4px 0 0 4px;
-	color: #888;
+	color: #fff;
+/* 	color: #888; */
 }
 .breadcrumb .icon{font-size:18px}
 .breadcrumb>li+li:before{font-family:"FontAwesome";content:"\f054";vertical-align:middle;color: #ccc;}
@@ -239,6 +242,13 @@ border:1px solid black;
 	margin-bottom:20px;
 }
 
+.btn-like{
+	background: #ff9b9b;
+}
+
+.btn-like:hover{
+	background: #ff7f7f;
+}
 
 
 </style>
@@ -282,7 +292,10 @@ border:1px solid black;
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
 					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
-					<li><a href="/articles/edit?articleId=${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+					<c:if test="${article.memberId==memberId}">
+						<li><a href="/articles/edit?articleId=${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+					</c:if>
+					<li><a href="/members/like/article/insert?articleId=${article.articleId}" class="btn-info btn-like" title="like"><i class="fa fa-heart"></i></a></li>
 				</ul>
 				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(article.articleTime,0,19)}</small>
 				</div>
@@ -294,6 +307,7 @@ border:1px solid black;
 		<!-- end of article -->
 		
 		<!-- start articleCM -->
+		<div id="articleCM">
 		<c:forEach var="acm" items="${article.acms}">
 		<div class="col-lg-12 post">
 			<div class="postprofile col-lg-3">
@@ -317,7 +331,9 @@ border:1px solid black;
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
 					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
-					<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+					<c:if test="${acm.memberId==memberId}">
+						<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+					</c:if>
 				</ul>
 				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(acm.acmTime,0,19)}</small>
 				</div>
@@ -327,18 +343,19 @@ border:1px solid black;
 			</div>
 		</div>		
 		</c:forEach>
+		</div>
 		<!-- end of articleCM -->
 		
 		<!-- REPLY -->
 		<section class="team row sub_content">
-					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
+					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;" id="replyarea">
 			            <div class="dividerHeading">
 			                <h4><span>Reply</span></h4>
 			            </div>
 			        </div>
 		</section>
 		<FORM id="addForm">
-		<div class="row" id="replyarea">
+		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12">
 					<input type="hidden" name="memberId" value="${memberId}"/>
@@ -359,7 +376,7 @@ border:1px solid black;
 		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12 hasbutton">
-					<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspReply</button>
+					<button class="btn btn-default btn-lg" id="btn_reply" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-reply fa-fw" aria-hidden="true"></i>&nbspReply</button>
 				</div>
 			</div>
 		</div>		
@@ -370,8 +387,7 @@ border:1px solid black;
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
+    <div class="modal-dialog">    
 <!--       Modal content -->
       <div class="modal-content">
         <div class="modal-header">
@@ -411,6 +427,41 @@ border:1px solid black;
 	
 	<script src="/ckeditor/ckeditor.js"></script>
 	
+	<!-- template -->
+	<script id="article_reply" type="text/template">
+	<div class="col-lg-12 post">
+		<div class="postprofile col-lg-3">
+			<dl>
+				<dt>
+					<div class="authordiv img-circle">
+					<img  class="authorimg" src="/members/show?memberId=_memberId">
+					</div>
+					<h3><a href="#">_nickname</a></h3>
+					
+				</dt>
+				<dd>Post:</dd>
+				<dd>Joined:_memberRegiDate</dd>
+			</dl>
+		
+		</div>
+		<div class="postbody col-lg-9">		
+			<div class="pbhead">
+			<h2>_acmTitle</h2>
+			<ul>
+				<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
+				<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
+				<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
+				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+			</ul>
+			<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp_acmTime</small>
+			</div>
+			<div class="content">
+			_acmMsg
+			</div>
+		</div>
+	</div>		
+	</script>
+	
 	<script>
 	$(function(){
 		/*
@@ -449,7 +500,16 @@ border:1px solid black;
 					dataType:'json',
 					success:function(data){
 						console.log(data);
-// 						location.href="/articles/listfms";
+						$('#acmTitle').val('RE:【${article.articleType}】${article.articleTitle}');
+						CKEDITOR.instances['acmMsg'].setData('');
+						$($('#article_reply').html()
+										.replace('_memberId',data.memberId)
+										.replace('_nickname',data.nickname)
+										.replace('_memberRegiDate',data.memberRegiDate)
+										.replace('_acmTitle',data.acmTitle)
+										.replace('_acmTime',data.acmTime)
+										.replace('_acmMsg',data.acmMsg))
+										.appendTo($('#articleCM'));						
 	 				},
 	 				error:function(x,y,z){
 	 					console.log('x-->'+x);
