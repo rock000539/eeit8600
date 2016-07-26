@@ -112,6 +112,7 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
-
+	
+	<script src="/js/member/member.js"></script>
 </body>
 </html>

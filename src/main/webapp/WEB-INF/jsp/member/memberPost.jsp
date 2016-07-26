@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script src="https://use.typekit.net/riz5mva.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+	<script src="/js/member/member.js"></script>
 <style>
 h2, h4{
 	margin: 0;
