@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -76,13 +77,12 @@ public class MemberController {
 		date.setTime(regiDate);
 		String memberRegiDate = sDateFormat.format(date.getTime());
 		
-		
 		model.addAttribute("member", member);
 		model.addAttribute("memberRegiDate", memberRegiDate);
 		model.addAttribute("expDates", expDateService.getByMemberId(memberId).size());
 		model.addAttribute("postedReviews", member.getReviewsWorteByAuthor().size());
 		model.addAttribute("postedArticles", member.getArticlesWorteByAuthor().size());
-		
+		model.addAttribute("wishlist", member.getProductSavedByMember().size());
 		model.addAttribute("member", member);
 		model.addAttribute("likedReviews", member.getReviewsSavedByMember().size());
 		model.addAttribute("likedArticles", member.getArticlesSavedByMember().size());
@@ -125,7 +125,15 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "/member/memberWishList";
 	}
+	
+	
+	//insert wishlist
+	//xxxxxxxxxxxxx
+	
+	//delete wishlist
+	//xxxxxxxxxxxxxx
 
+	
 	//保存期限頁面
     @RequestMapping("/product-exp")
     public String listPage(Model model, HttpServletRequest request)
@@ -174,17 +182,22 @@ public class MemberController {
         return "/member/memberExpDate";
     }
     
-    
+    //member收藏心得/文章
     @RequestMapping("/like")
     public String memberLikePage(HttpServletRequest request, Model model){
     	Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		Set<Article> articles = member.getArticlesSavedByMember();
+		Set<Review> reviews = member.getReviewsSavedByMember();
+		List<String> dates = formatDate(reviews);
 		model.addAttribute("articles", articles);
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("dates", dates);
 		model.addAttribute("member", member);
-    	return "/member/memberLike0";
+    	return "/member/memberLike";
     }
 	
+    
 	//member文章收藏頁面
 	@RequestMapping("/like/article")
 	public String memberLikeArticlePage(HttpServletRequest request, Model model){
@@ -362,7 +375,7 @@ public class MemberController {
 	}
 	
 	//format date
-	private List<String> formatDate(List<Review> reviews){
+	private List<String> formatDate(Collection<Review> reviews){
 		List<String> dates = new ArrayList();
 		for(Review review: reviews){
 			java.sql.Date reviewTime = review.getReviewTime();

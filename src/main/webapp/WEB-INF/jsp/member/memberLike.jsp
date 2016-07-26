@@ -18,8 +18,6 @@
     
 	<script type="text/javascript" src="/js/jquery.min.js"></script> 
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script src="https://use.typekit.net/riz5mva.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 	<script src="/js/member/member.js"></script>
 <style>
 h2, h4{
@@ -61,10 +59,8 @@ h2, h4{
 .prod{
 	color:#000;
 	font-weight: 400;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: 14px;
 	display:inline-block;
-	padding-bottom: 5px;
 }
 .reviewTime, .articleTime{
 	position:relative;
@@ -124,6 +120,7 @@ h2, h4{
 	letter-spacing: 0.05em;
 	padding-bottom: 5px;
 }
+
 .reviewContent h2.reviewTitle>span, .articleEdit{
 	display: inline-block;
 	vertical-align: middle;
@@ -136,7 +133,7 @@ h2, h4{
 	line-height: 20px;
 }
 .reviewContent h2>span:hover , .articleEdit:hover{
-	background: #000;
+	background: #FF1E76;
 }
 .preview{
 	overflow: hidden; 
@@ -180,6 +177,9 @@ h2, h4{
 	padding: 13px 16px;
 	text-transform: uppercase;
 }
+.subject i{
+	color: #FF1E76;
+}
 .articleType{
 	color: #df3331;
 	font-family: "Irvin Text",Georgia,"Times New Roman",Times,serif;
@@ -187,7 +187,25 @@ h2, h4{
     line-height: 1.25;
     margin-bottom: 12px;
 }
-
+.author{
+	line-height: 14px;
+    font-size: 12px;
+	font-family: Savoy,Georgia,serif;
+    padding-right: 5px;
+    color: #999;
+    font-style: italic;
+    margin-top: 5px;
+}
+.author a{
+	font-family: FranklinGothic,Helvetica,sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: #333;
+    text-decoration: underline;
+}
+.author a:hover{
+	color: #FF1E76;
+}
 </style>
 </head>
 <body>
@@ -213,7 +231,7 @@ h2, h4{
 	<div class="tab-content clearfix">
 	    <div id="review" class="tab-pane fade active in">
 	    	<div class="subject">
-				<p>POSTED REVIEWS (${fn:length(reviews)})</p>
+				<p><i class="fa fa-heart"></i> LIKED REVIEWS (${fn:length(reviews)})</p>
 			</div>
 			<div class="subtab">
 				
@@ -239,10 +257,13 @@ h2, h4{
 	        	</div>
 		        <div class="reviewImg"><a href="/products/view?prodId=${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
 		        <div class="reviewContent">
-		        	<h2 class="reviewTitle">${item.reviewTitle} <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		        	<h2 class="reviewTitle">${item.reviewTitle} <span><a href="#"><i class="fa fa-pencil"></i>DisLike</a></span></h2>
+		        	
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
+		        	<h6 class="author">by&nbsp;
+		        		<a href="<%=request.getContextPath()%>/members/overview/${item.memberId}">${item.member.nickname}</a></h6>
 		        	<p class="preview">${item.review}</p>
-		        	<a class="singlepage" href="/reviews/reviewjQueryRain?reviewId=${item.reviewId}">read more</a>
+		        	<a class="singlepage" href="/reviews/review?reviewId=${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
 	        </div> <!-- reviews -->
@@ -255,7 +276,7 @@ h2, h4{
 	    
 	    <div id="article" class="tab-pane fade">
         	<div class="subject">
-				<p>POSTED ARTICLES (${fn:length(articles)})</p>
+				<p><i class="fa fa-heart"></i> LIKED ARTICLES (${fn:length(articles)})</p>
 			</div>
 			<div class="subtab">
 			</div> <!-- subtab -->

@@ -80,7 +80,7 @@
 		<div class="col-lg-4"><span class="count">${postedArticles}</span><br><span class="source">Articles</span></div>
 	</div>
 	<div class="row">
-		<div class="col-lg-4"><span class="count">XXX</span><br><span class="source">WishList</span></div>
+		<div class="col-lg-4"><span class="count">${wishlist}</span><br><span class="source">WishList</span></div>
 		<div class="col-lg-4"><span class="count">${likedReviews}</span><br><span class="source"><i class="fa fa-heart"></i> Reviews</span></div>
 		<div class="col-lg-4"><span class="count">${likedArticles}</span><br><span class="source"><i class="fa fa-heart"></i> Articles</span></div>
 	</div>
