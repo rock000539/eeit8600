@@ -79,11 +79,11 @@ public class ReviewController {
 		return reviewPage;
 	}
 
-	@RequestMapping("/list")
+	@RequestMapping("/listOld")
 	// original + boostrap
 	public String listPage(Model model) {
 		model.addAttribute("reviews", service.getAll());
-		return "/review/reviewList";
+		return "/review/reviewListOld";
 	}
 
 	@RequestMapping("/listoriginal")
@@ -92,9 +92,9 @@ public class ReviewController {
 		return "/review/reviewListOriginal";
 	}
 
-	@RequestMapping("/listgrid")
+	@RequestMapping("/list")
 	public String listGrid() {
-		return "/review/reviewListGrid";
+		return "/review/reviewList";
 	}
 
 	@RequestMapping("/reviews")
@@ -118,13 +118,13 @@ public class ReviewController {
 		return "/review/reviews";
 	}
 
-	@RequestMapping("/review")
+	@RequestMapping("/reviewTest")
 	public String review(Model model) {
 		model.addAttribute("review", service.getAll());
-		return "/review/review";
+		return "/review/reviewTest";
 	}
 
-	@RequestMapping("/reviewjQueryRain")
+	@RequestMapping("/review")
 	public String reviewjQueryRain(Model model,Long reviewId) throws ParseException {
 		Review review = service.getById(reviewId);
 		log.debug("{}", review);
@@ -166,7 +166,7 @@ public class ReviewController {
 //		model.addAttribute("reviewCMs",reviewCMs);
 		
 		
-		return "/review/reviewjQueryRain";
+		return "/review/review";
 	}
 	
 	@RequestMapping("/search")
@@ -188,17 +188,18 @@ public class ReviewController {
 
 	}
 
-	@RequestMapping("/edit")
-	public String editPage(@RequestPart Long reviewId, Model model) {
+	@RequestMapping("/editOld")
+	public String editPageOld(@RequestPart Long reviewId, Model model) {
 		model.addAttribute("review", service.getById(reviewId));
-		return "/review/reviewEdit";
+		
+		return "/review/reviewEditOriginal";
 	}
 
-	@RequestMapping("/editgrid")
-	public String editPageGrid(@RequestParam Long reviewId, Model model) { // @RequestParam
+	@RequestMapping("/edit")
+	public String editPage(@RequestParam Long reviewId, Model model) { // @RequestParam
 																			// 類似getParameter
 		model.addAttribute("review", service.getById(reviewId));
-		return "/review/reviewEditGrid";
+		return "/review/reviewEdit";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

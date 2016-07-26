@@ -143,6 +143,7 @@
 	<script src="/js/bms/bms.js"></script>
 		<script>
 $(function(){
+	$("#insertNewIngredient").hide();
 	//功能1 跳出modal-----
 	$(".details").click(function (e){
 		var btnP=$(this);
@@ -153,8 +154,12 @@ $(function(){
 		var mailTitle=webMail[1].children[0].innerHTML;
 		var mailContent=webMail[2].children[0].innerHTML;
 		var mailContentType=webMail[3].children[0].innerHTML;
+		var mailType=webMail[4].children[0].innerHTML;
 		var mailSendDate=webMail[5].children[0].innerHTML;
 					
+		if(mailType=="Report"){
+		$("#insertNewIngredient").show();
+		}else{$("#insertNewIngredient").hide();}
 		$("#mailDetailsTable").empty();
 		$("#mailDetailsTable").append(
 				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
