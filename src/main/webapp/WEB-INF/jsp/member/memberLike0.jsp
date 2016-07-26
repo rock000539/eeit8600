@@ -71,13 +71,11 @@
 <div id="container">
 	<div class="tab-content clearfix">	
 		<div id="review" class="tab-pane fade active in">
-		aaaaaaaaaaa${pageContext.request.contextPath}
-		<%=request.getContextPath()%>
-		<%=request.getServerName()%>
+		
 		</div>
 		
 		<div id="article" class="tab-pane fade">
-		bbbbbbbbbbb
+		
 		</div>
 	</div> <!-- tab-content -->
 </div> <!-- tabContent -->	

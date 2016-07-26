@@ -61,7 +61,8 @@ h2, h4{
 .prod{
 	color:#000;
 	font-weight: 400;
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 20px;
 	display:inline-block;
 	padding-bottom: 5px;
 }
@@ -134,7 +135,10 @@ h2, h4{
 	color: #fff;
 	line-height: 20px;
 }
-.prereview{
+.reviewContent h2>span:hover , .articleEdit:hover{
+	background: #000;
+}
+.preview{
 	overflow: hidden; 
 	display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -237,7 +241,7 @@ h2, h4{
 		        <div class="reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle} <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
-		        	<p class="prereview">${item.review}</p>
+		        	<p class="preview">${item.review}</p>
 		        	<a class="singlepage" href="/reviews/reviewjQueryRain?reviewId=${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
@@ -264,7 +268,7 @@ h2, h4{
 				</div>
 				<div class="articleContent">
 					<h2 class="articleTitle">${item.articleTitle} <span class="articleEdit"><a href="/articles/edit?articleId=${item.articleId}"><i class="fa fa-pencil"></i>edit</a></span></h2>
-					<p class="prereview">${item.articleContent}</p>
+					<p class="preview">${item.articleContent}</p>
 					<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 				</div>
@@ -308,7 +312,7 @@ h2, h4{
 	<div class="reviewContent">
 		<h2 class="reviewTitle">_reviewTitle <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
 		<h4 class="prod">_prodName | _brandName </h4>		
-		<p class="prereview">_review</p>
+		<p class="preview">_review</p>
 		<a class="singlepage" href="/reviews/reviewjQueryRain?reviewId=_reviewId">read more</a>
 		<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 	</div>
@@ -323,7 +327,7 @@ h2, h4{
 	</div>
 	<div class="articleContent">
 		<h2 class="articleTitle">_articleTitle <span class="articleEdit"><a href="/articles/edit?articleId=articleId"><i class="fa fa-pencil"></i>edit</a></span></h2>
-		<p class="prereview">_articleContent</p>
+		<p class="preview">_articleContent</p>
 		<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 	</div>
