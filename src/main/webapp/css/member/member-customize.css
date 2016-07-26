@@ -1,5 +1,6 @@
 .grey_bg{
 	background: #F8F9FA;
+	min-height: 450px;
 }
 .detail-div{
 	margin-left: 80px;
