@@ -20,6 +20,25 @@
 	
 	<script src="/js/jquery.min.js"></script>
 </head> 
+<style>
+.pbhead  ul > li{
+    margin-top:10px;
+	float: right;
+}
+
+.pbhead  ul > li>a{
+	float: right;
+	height:50px;
+}
+
+.btn-like{
+	background: #ff9b9b;
+}
+
+.btn-like:hover{
+	background: #ff7f7f;
+}
+</style>
 <body>
 
 <!--加入header&nav -->
@@ -68,7 +87,7 @@
                                         <div class="metaInfo">
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
                                             <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
-                                            <span><i class="fa fa-comments"></i> <a href="#Comments">12 Comments</a></span> <!--做動態抓留言數 -->
+                                            <span><i class="fa fa-comments"></i> <a href="#Comments">${review.reviewCMs.size()} Comments</a></span> <!--做動態抓留言數 -->
 <!--                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span> --><!--??tag標籤數量?? -->
                                         <!--心得評分 start-->
 											<span class="review-uc-diamond">
@@ -113,6 +132,14 @@
                                     <li><a class="yahoo" href="#" data-placement="bottom" data-toggle="tooltip" title="Yahoo"></a></li>
                                     <li><a class="linkedin" href="#" data-placement="bottom" data-toggle="tooltip" title="LinkedIn"></a></li>
                                 </ul>
+                                <div class="pbhead">
+                                <ul>
+                                    <li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning" style="font-size:22px;margin:12px 11px"></i></a></li>
+									<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
+									<li><a href="#Comments" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
+									<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
+                                </ul>
+                                </div>	
                             </article>
                             <div class="about_author">
                                 <div class="author_desc">
@@ -142,7 +169,7 @@
                         <!--News Comments-->
                         <div class="news_comments">
                             <div class="dividerHeading">
-                                <h4 id="Comments"><span>Comments (6)</span></h4>
+                                <h4 id="Comments"><span>Comments (${review.reviewCMs.size()})</span></h4>
                             </div>
                             <div id="comment">
                                 <ul id="comment-list">
@@ -372,7 +399,7 @@ $(function(){  //=$(document.)ready
 			$.ajax({
 				url:"/reviewCMs/selects",
 				type:'POST',
-// 				contentType:'application/json;charset=UTF-8',
+				contextType:'application/json;charset=UTF-8',
 // 				data:JSON.stringify($('#addForm').serializeObject()),
 				data:{'reviewId':$('#reviewId').val()},
 				dataType:'json',
@@ -405,6 +432,7 @@ $(function(){  //=$(document.)ready
 				success:function(result){
 // 					console.log("result1="+result);
 					appendReviewCM(result);
+					CKEDITOR.instances['rcmMsg'].setData("");
 // 					location.href="#addForm";
 				},error:function(x,y,z){
 					console.log("x="+x);

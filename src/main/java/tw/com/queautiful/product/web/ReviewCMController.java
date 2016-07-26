@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ReviewCMService;
@@ -74,8 +75,9 @@ public class ReviewCMController {
 	
 	@RequestMapping(value="/selects",method=RequestMethod.POST)
 	@ResponseBody
-	public List<ReviewCM> selects(@RequestParam("reviewId") Long reviewId){
-		log.debug("ReviewId={}",reviewId);		
+	public List<ReviewCM> selects(@RequestParam(value="reviewId") Long reviewId,@RequestParam(value="memberId",required = false) Long memberId,@RequestParam(value="rcmMsg",required = false) String rcmMsg){
+//		log.debug("ReviewId={}",reviewId);		
+		
 		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
 		log.debug("ReviewCMs={}",reviewCMs);
 		

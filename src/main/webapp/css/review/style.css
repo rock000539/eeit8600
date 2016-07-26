@@ -1532,9 +1532,10 @@ figure:hover .option .fa-search {
     padding:50px 0;
 }
 .blog_large .post, .blog_single .post{
-    padding-bottom:50px;
+    padding-bottom:70px;
     margin-bottom:50px;
     border-bottom:1px solid #f2f2f2;
+    
 }
 .blog_large .post_img, .blog_single .post_img {
     margin-bottom: 25px;
@@ -1857,7 +1858,7 @@ figure:hover .option .fa-search {
 
 /* Post Share Article
 ================================================== */
-.shares { background: #f2f2f2; list-style: none; overflow: hidden; margin: 50px 0 0;padding:0;}
+.shares { background: #f2f2f2; list-style: none; overflow: hidden; margin: 10px 0 0;padding:0;}
 .shares li { float: left; border-right: 1px solid #fff; }
 .shares li.shareslabel h3 {padding: 8px 20px; font-weight: 600; text-transform: uppercase; font-size: 18px;margin: 0;}
 .shares li a { display: block; width: 45px; height: 46px; background-repeat: no-repeat; background-position: 7px 7px; -webkit-transition: all 150ms ease-in-out;
@@ -1873,7 +1874,6 @@ figure:hover .option .fa-search {
 .shares li a.pinterest { background-image: url(/images/review/pinterest.png); }
 .shares li a.yahoo { background-image: url(/images/review/yahoo.png); }
 .shares li a.linkedin { background-image: url(/images/review/linkedin.png); }
-
 
 /* About Author
 ====================================*/

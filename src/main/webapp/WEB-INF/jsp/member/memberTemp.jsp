@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Member XXX</title>
+    <title>${nickname}'s XXX</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,13 +33,13 @@
 		
 		
 		
-	</div> <!-- col-lg -->
+	</div> <!-- memberDiv -->
 	
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 	
-</div> <!-- row -->
+</div> <!-- detail-div -->
 					
-				</div>        
+				</div> <!-- grey_bg -->
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
