@@ -79,11 +79,11 @@ public class ReviewController {
 		return reviewPage;
 	}
 
-	@RequestMapping("/list")
+	@RequestMapping("/listOld")
 	// original + boostrap
 	public String listPage(Model model) {
 		model.addAttribute("reviews", service.getAll());
-		return "/review/reviewList";
+		return "/review/reviewListOld";
 	}
 
 	@RequestMapping("/listoriginal")
@@ -92,9 +92,9 @@ public class ReviewController {
 		return "/review/reviewListOriginal";
 	}
 
-	@RequestMapping("/listgrid")
+	@RequestMapping("/list")
 	public String listGrid() {
-		return "/review/reviewListGrid";
+		return "/review/reviewList";
 	}
 
 	@RequestMapping("/reviews")
