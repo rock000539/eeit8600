@@ -88,7 +88,9 @@ public class Member {
 	@Column(name="RESETPSWEXP")
 	private java.sql.Date resetPswExp; //重設密碼期限
 	
+	//WishList
 	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OrderBy("SCORE DESC")
 	@JoinTable(name="wishlist", joinColumns=@JoinColumn(name="MEMBERID",referencedColumnName="MEMBERID"), inverseJoinColumns=@JoinColumn(name="PRODID",referencedColumnName="PRODID"))
 	@JsonIgnore
 	private Set<Product> productSavedByMember;

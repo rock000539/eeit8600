@@ -13,9 +13,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
+    <link rel="stylesheet" href="/css/animate.css">
     <!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
 </head>
@@ -212,6 +212,7 @@ $(function(){
 			console.log("show"+$(this));
 		});
 	}
+	
 });
 </script>
 </body>
