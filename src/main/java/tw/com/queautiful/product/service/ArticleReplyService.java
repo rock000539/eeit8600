@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.queautiful.product.dao.ArticleCMDao;
 import tw.com.queautiful.product.dao.ArticleReplyDao;
-import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ArticleReply;
 
 @Service
