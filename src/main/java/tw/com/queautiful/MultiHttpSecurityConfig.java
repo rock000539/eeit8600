@@ -119,7 +119,8 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .authorizeRequests()  //開始設定路徑&權限
                 .antMatchers(
                 "/","/expdate/search","/**/show","/**/select",
-                "/expdate/batchCodeController","/reviews/reviews","/reviews/review","/reviews/reviewjQueryRain",
+                "/expdate/batchCodeController","/reviews/reviews",
+                "/reviews/review","/reviews/reviewjQueryRain","/reviews/**",
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
                 "/ingredients/startSearch",

@@ -2,6 +2,7 @@ package tw.com.queautiful.product.web;
 
 import java.util.List;
 
+import org.apache.hadoop.mapred.gethistory_jsp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ReviewCMController {
 	private ReviewCMService service;
 
 	@Autowired
-	private ReviewService reveiwService;
+	private ReviewService reviewService;
 	
 	@Autowired
 	private MemberService memberService;
@@ -53,34 +54,29 @@ public class ReviewCMController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public List<ReviewCM> insert(@RequestBody ReviewCM reviewCM){
-		log.debug("{}",reviewCM);
+	public ReviewCM insert(@RequestBody ReviewCM reviewCM){
 		//FK
-//		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
-//		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
+		reviewCM.setReview(reviewService.getById(reviewCM.getReviewId()));
+		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 		
+		log.debug("{}",reviewCM);
 		reviewCM.setReviewCMTime(new java.sql.Timestamp(System.currentTimeMillis()));
 //		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
-		reviewCM.setReview(reveiwService.getById(reviewCM.getReviewId()));
+		reviewCM.setReview(reviewService.getById(reviewCM.getReviewId()));
 		reviewCM.setRcmShow(reviewCM.getRcmShow());
 		reviewCM.setRcmReport(reviewCM.getRcmReport());
 		log.debug("{}",reviewCM);
 		service.insert(reviewCM);
 		
-		//一篇心得內的所有留言
-		log.debug("ReviewId={}",reviewCM.getReviewId());		
-		List<ReviewCM> reviewCMs = reveiwService.getById(reviewCM.getReviewId()).getReviewCMs();
-		log.debug("ReviewCMs={}",reviewCMs);
-		
-		return reviewCMs;	
+		return reviewCM;	
 	}
 	
 	@RequestMapping(value="/select_data",method=RequestMethod.POST)
 	@ResponseBody
 	public List<ReviewCM> selects(@RequestParam Long reviewId){
 		log.debug("ReviewId={}",reviewId);		
-		List<ReviewCM> reviewCMs = reveiwService.getById(reviewId).getReviewCMs();
+		List<ReviewCM> reviewCMs = reviewService.getById(reviewId).getReviewCMs();
 		log.debug("ReviewCMs={}",reviewCMs);
 		
 		return reviewCMs;	
@@ -107,8 +103,8 @@ public class ReviewCMController {
 	public ReviewCM update(@RequestBody ReviewCM reviewCM){
 		
 		//FK
-		reviewCM.setReview(reveiwService.getById(reviewCM.getRcmId()));
-		reviewCM.setMember(memberService.getById(reviewCM.getRcmId()));
+		reviewCM.setReview(reviewService.getById(reviewCM.getReviewId()));
+		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 
 		service.update(reviewCM);
 		return reviewCM;

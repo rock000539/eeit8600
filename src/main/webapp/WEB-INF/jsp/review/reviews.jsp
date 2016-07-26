@@ -43,7 +43,7 @@
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>
 						<!--(???心得table要再加"推"?,心得留言table要再加"數量") -->
-		      	<div class="reviewState">1推,1留言</div>
+		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp留言</div>
 		      	
 		      	<div class="caption">
 						<!--心得發布者資訊start -->
@@ -77,7 +77,6 @@
 							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
 						</div>
 						<!--心得評分  end -->
-						<!-- ???到時候抓會員的肌膚和年齡 -->
 						<div class="user-skin">${review.member.skinType}性肌膚、${review.member.age}歲</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
