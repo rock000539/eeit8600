@@ -109,6 +109,9 @@ i{
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
 }
+.is-hidden {
+  visibility: hidden;
+}
 </style>
 <body>
 <!--加入header&nav -->
@@ -185,6 +188,10 @@ $(function(){
 	});
 	
 	
+	var timelineBlocks = $('.portfolio-item'),
+	offset = 0.8;
+	
+	hideBlocks(timelineBlocks, offset);
 	
 	$(window).on('scroll', function(){
 		(!window.requestAnimationFrame) 
@@ -194,13 +201,14 @@ $(function(){
 
 	function hideBlocks(blocks, offset) {
 		blocks.each(function(){
-			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.team-pic, .team-profile, .team-social-media').addClass('is-hidden');
+			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.prodContent').addClass('is-hidden');
+			console.log("hide");
 		});
 	}
 
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
-			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.team-pic').hasClass('is-hidden') ) && $(this).find('.team-pic, .team-profile, .team-social-media').removeClass('is-hidden').addClass('bounce-in');
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.prodContent').hasClass('is-hidden') ) && $(this).find('.prodContent').removeClass('is-hidden').addClass('fadeInDown');
 			console.log("show"+$(this));
 		});
 	}
