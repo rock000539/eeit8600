@@ -188,17 +188,18 @@ public class ReviewController {
 
 	}
 
-	@RequestMapping("/edit")
-	public String editPage(@RequestPart Long reviewId, Model model) {
+	@RequestMapping("/editOld")
+	public String editPageOld(@RequestPart Long reviewId, Model model) {
 		model.addAttribute("review", service.getById(reviewId));
-		return "/review/reviewEdit";
+		
+		return "/review/reviewEditOriginal";
 	}
 
-	@RequestMapping("/editgrid")
-	public String editPageGrid(@RequestParam Long reviewId, Model model) { // @RequestParam
+	@RequestMapping("/edit")
+	public String editPage(@RequestParam Long reviewId, Model model) { // @RequestParam
 																			// 類似getParameter
 		model.addAttribute("review", service.getById(reviewId));
-		return "/review/reviewEditGrid";
+		return "/review/reviewEdit";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

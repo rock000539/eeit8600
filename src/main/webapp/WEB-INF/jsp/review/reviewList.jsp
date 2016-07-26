@@ -18,9 +18,7 @@
 	
 	<!-- 一定要放在Header、NavBar css的後面  -->
     <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
-	<script>
-		$.jgrid.defaults.width = 780;
-	</script>
+
 	
 	<style>
 		.ui-th-column {
@@ -53,11 +51,11 @@
 			<ol class="breadcrumb pull-right">
 				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
 				<li><a href="javascript:;">檢舉系統</a></li>
-				<li class="active">會員管理</li>
+				<li class="active">心得管理</li>
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
-			<h1 class="page-header">會員管理列表 <small>會員停權復權管理</small></h1>
+			<h1 class="page-header">心得管理列表 <small>心得停權復權管理</small></h1>
 			
 			<!-- 內文 -->
 			<div class="row">
@@ -75,16 +73,19 @@
 			</div> <!-- /end .row -->
 		</div>
 		<!-- /end #content -->
+		
 		<!-- scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 	</div>
 	<!-- /end page container -->
-		<!--  BASE JS  -->
+	
+	<!--  BASE JS  -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery-ui.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/bms/jquery.slimscroll.min.js"></script>
 	<script src="/js/bms/bms.js"></script>
+	
 	<!-- jqGrid js、css -->
     <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
     <script src="/js/trirand/jquery.jqGrid.min.js"></script>
