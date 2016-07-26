@@ -134,7 +134,7 @@
                                 </ul>
                                 <div class="pbhead">
                                 <ul>
-                                    <li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning" style="font-size:22px;margin:12px 11px"></i></a></li>
+                                    <li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:22px;margin:12px 11px"></i></a></li>
 									<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
 									<li><a href="#Comments" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
 									<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
@@ -202,7 +202,7 @@
                                 <h4><span>Leave a comment</span></h4>
                                 </div>
 						<form id="addForm" action="/reviewCMs/insert" method="post">
-                            <input type="hidden" name="memberId" value="${memberId}"/>
+                            <input type="hidden" name="memberId" id="memberInfo" value="${memberId}"/>
                             <input id="reviewId" type="hidden" name="reviewId" value="${review.reviewId}"/>
                             <div class="comment-box row">
                                 <div class="col-sm-12">
@@ -265,7 +265,7 @@
                                             </li>
                                             <li class="comments_list clearfix">
                                                 <a class="post-thumbnail" href="#"><img width="60" height="60" src="/images/review/recent_1.png" alt="#"></a>
-                                         <       <p><strong><a href="#">Makaroni</a> <i>says: </i> </strong> Tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada.</p>
+                                                <p><strong><a href="#">Makaroni</a> <i>says: </i> </strong> Tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada.</p>
                                             </li>
                                             <li class="comments_list clearfix">
                                                 <a class="post-thumbnail" href="#"><img width="60" height="60" src="/images/review/recent_2.png" alt="#"></a>
@@ -308,6 +308,48 @@
     <!--end footer-->
 <!-- </section> -->
 <!--end wrapper-->
+
+<!-- 使用model1 ----------------------------------------------------------------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+          	<!-- title 位置 --><input type="text" id="reportTitle" name="reportTitle" placeholder="檢舉標題">
+            </h4>
+         </div>
+        
+         <div class="modal-body" id="modal-body">
+<!--在这里添加一些文本-->				
+			
+			<br>
+			<textarea cols="50" rows="5" id="reportDetile" name="reportDetile" placeholder="檢舉內容"></textarea>
+			<br><br>
+<!-- 		<input type="button" name="cancel" class="btn btn-sm btn-default" value="cancel" > -->
+			<button id="sendReprot" class="btn btn-sm btn-default" name="submit" >送出檢舉</button>
+         </div>
+         
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default"   id="cancelInsert"   data-dismiss="modal" >
+         	   關閉視窗
+            </button>
+<!--             <button type="button" class="btn btn-primary" id="insertNewIngredient" > -->
+<!--             	   提交更改 -->
+<!--             </button> -->
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+<!-- 結束model1 ----------------------------------------------------------------->
+
+
+
+
             <!-- **每頁不同的內容結束** -->
 
 <!--加入footer -->
@@ -466,9 +508,35 @@ $(function(){  //=$(document.)ready
 			
 		}//appendReviewCM end
 		
-		
-		
-
+		//--檢舉功能----------------------------------
+		$("#reportBtn").click(function (){
+			$('#myModal').modal("toggle");				
+		});
+		// 文章新增檢舉
+			$("#sendReprot").click(function(){
+			var reportTitle=$("#reportTitle").val();
+			var reportDetile=$("#reportDetile").val();
+			var memberid=$("#memberInfo").attr("value");
+			var reviewId=$("#reviewId").attr("value");
+			var articleid=0;  //不用參數要設0
+			var acmId=0;
+			var rcmId=0;
+// 			alert("reportTitle="+reportTitle+" reportDetile="+reportDetile+" memberid="+memberid+"reviewId="+reviewId);
+			$.ajax({
+			"url":"/webmail/sendmail",
+				type:"POST",
+				data:{"memberid":memberid,
+			"articleid":articleid,
+			"reviewId":reviewId,
+			"acmId":acmId,
+			"rcmId":rcmId,
+			"reportTitle":reportTitle,
+			"reportDetile":reportDetile},
+				success:function(result){
+				$('#myModal').modal("toggle");		
+				}
+				})
+				})
 		
 		
 		

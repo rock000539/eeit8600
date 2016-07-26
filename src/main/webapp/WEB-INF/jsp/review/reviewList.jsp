@@ -3,16 +3,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<!-- **加入5個css ref，請按照此順序** -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/metisMenu.min.css" rel="stylesheet">
-<link href="/css/sb-admin-2.css" rel="stylesheet">
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/css/bms-customize.css" rel="stylesheet" >
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--  BASE CSS STYLE  -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bms/style.min.css" rel="stylesheet">
+	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
+	<link href="/css/bms/bms-customize.css" rel="stylesheet">
+	<!--  BASE JS  -->
+	<script src="/js/bms/pace.min.js"></script>
+	
+	<!-- 一定要放在Header、NavBar css的後面  -->
+    <link rel="stylesheet" href="/css/trirand/ui.jqgrid-bootstrap.css" />
+
 <title>Review List</title>
 <style>
 table{border:3px solid black; 
@@ -25,22 +28,31 @@ th,td{border:1px solid black;
 </head>
 <body>
 
-<!-- 內文全部用wrapper包起來 -->
-<div id="wrapper">
-
-<!-- 加入上方及側邊Nav-Bar -->	
-<c:import url="../bms_header.jsp" />
-<c:import url="../bms_navbar-side.jsp" />
-<!-- ?? url有沒有更好的寫法 ?? -->
-
-
-<!-- Page Content --> 
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">DashBoard</h1>   <!-- **內文中的標題，請修改** -->
-                <!-- **每頁不同的內容從這裡開始** -->
+	<!-- Loading animate -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+	
+	<!-- page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+	
+	<c:import url="/WEB-INF/jsp/bms/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms/bms_navbar-side.jsp" />	
+	
+		<!-- page content -->
+		<div id="content" class="content">
+			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">檢舉系統</a></li>
+				<li class="active">會員管理</li>
+			</ol>
+			
+			<!-- page-header 每頁標題 副標 -->
+			<h1 class="page-header">會員管理列表 <small>會員停權復權管理</small></h1>
+			
+			<!-- 內文 -->
+			<div class="row">
+			    <div class="col-md-12 ui-sortable">
+	            <!-- **每頁不同的內容從這裡開始** -->
 
 <h2>Review List</h2>
 <!-- <input type="button" name="add" value="add" onClick="location='/reviews/add'"> -->
@@ -82,25 +94,28 @@ th,td{border:1px solid black;
 </table>
 
 
-<!-- **每頁不同的內容 end** -->
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
+              <!-- **每頁不同的內容 end** -->     
+			    </div><!-- /end .col-md-12 -->
+			</div> <!-- /end .row -->
+		</div>
+		<!-- /end #content -->
+		<!-- scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+	</div>
+	<!-- /end page container -->
 
-</div>
-<!-- /#wrapper -->
-
-
-<!-- **加入4個js，請按照此順序** -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/metisMenu.min.js"></script>
-<script src="/js/sb-admin-2.js"></script>
-
+	<!--  BASE JS  -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/bms.js"></script>
+	<!-- jqGrid js、css -->
+    <script src="/js/trirand/i18n/grid.locale-tw.js"></script>
+    <script src="/js/trirand/jquery.jqGrid.min.js"></script>
+    
+<script>
+	$.jgrid.defaults.width = 780;
+</script>
 </body>
 </html>

@@ -12,8 +12,7 @@
 <script>
 $(function(){
 	$("#reportBtn").click(function (){
-		$('#myModal').modal("toggle");
-				
+		$('#myModal').modal("toggle");				
 	});
 	
 	// 文章新增檢舉
@@ -39,7 +38,7 @@ $(function(){
 			}
 		})
 		
-	})
+		})
 	
 	
 	//-文章檢舉 搜尋By作者Id
@@ -110,7 +109,7 @@ $(function(){
 	
 
 	var memberid=2;
-	var articleid=0;
+	var articleid=0; //不用參數要設0
 	var reviewId=1;
 	var acmId=0;
 	var rcmId=0;
