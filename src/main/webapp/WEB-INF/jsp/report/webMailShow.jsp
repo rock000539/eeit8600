@@ -184,6 +184,7 @@
 	
 <script>
 $(function(){
+	$("#insertNewIngredient").hide();
 	//功能1 跳出modal-----
 	$(".details").click(function (e){
 		var btnP=$(this);
@@ -194,8 +195,11 @@ $(function(){
 		var mailTitle=webMail[1].children[0].innerHTML;
 		var mailContent=webMail[2].children[0].innerHTML;
 		var mailContentType=webMail[3].children[0].innerHTML;
+		var mailType=webMail[4].children[0].innerHTML;
 		var mailSendDate=webMail[5].children[0].innerHTML;
-		
+		if(mailType=="Report"){
+			$("#insertNewIngredient").show();
+		}else{$("#insertNewIngredient").hide();}
 		$("#myModalLabel").empty();
 		$("#myModalLabel").append("標題 :"+mailTitle);
 		$("#mailDetailsTable").empty();

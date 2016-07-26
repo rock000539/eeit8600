@@ -31,7 +31,16 @@ public class ExpDateSearchService {
 		List<Product> products = new ArrayList<Product>();
 
 		List<Product> productList = new ArrayList<Product>();
+		
+		products = productServ.getAll();
+		for (int i = 0; i < products.size(); i++) {
 
+			if (products.get(i).getBrand().getBrandId() == brandId) {
+
+				productList.add(products.get(i));
+			}
+		}
+		System.out.println(productList.size());
 		try {
 			if (brandId == 1) {
 				Biore(batchCode);
@@ -45,7 +54,7 @@ public class ExpDateSearchService {
 				result.put("expDate", expStr);
 				result.put("productList", productList);
 			} else if (brandId == 3) {
-				Biore(batchCode);
+				MAC(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productList);
@@ -75,19 +84,40 @@ public class ExpDateSearchService {
 			return result;
 		}
 
-		products = productServ.getAll();
-		for (int i = 0; i < products.size(); i++) {
 
-			if (products.get(i).getBrand().getBrandId() == brandId) {
-
-				productList.add(products.get(i));
-			}
-		}
 
 		return result;
 	}
 
-	private void Biore(String batchCode) throws Exception {
+	//-各家廠牌Code號--------------------------------------------------------------
+	private void Biore(String batchCode) throws Exception{
+		if(batchCode.length()==8){
+			String patternStr = "[a-zA-Z|\\.]*";
+			if(batchCode.substring(0, 1).matches(patternStr)){
+				int day=Integer.parseInt(batchCode.substring(4, 7));
+				if(day<=365){
+				int year=Integer.parseInt(batchCode.substring(7))+2010;
+				Calendar date= Calendar.getInstance();
+				date.set(Calendar.DAY_OF_YEAR,day);
+				date.set(Calendar.YEAR,year);
+				int month=date.get(Calendar.MONTH)+1;
+				System.out.println("date= "+date);
+				mfdStr= year + "-" + month;
+				expStr = (year + 2) + "-" + month;
+				}else{
+					throw new NumberFormatException();
+				}
+			}else{
+				throw new NumberFormatException();
+			}
+		}else{
+			throw new NumberFormatException();
+		}
+	}
+	
+	
+	
+	private void MAC(String batchCode) throws Exception {
 		String patternStr = "[a-zA-Z|\\.]*";
 
 		if (batchCode.length() > 3 || !(batchCode.substring(0, 1).matches(patternStr))) {
@@ -225,7 +255,7 @@ public class ExpDateSearchService {
 		Calendar tempDay=Calendar.getInstance();
 		
 		tempDay.set(Calendar.DAY_OF_YEAR,day);
-		int month=tempDay.MONTH;
+		int month=tempDay.get(Calendar.MONTH);
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 		
@@ -292,7 +322,7 @@ public class ExpDateSearchService {
 		Calendar tempDay=Calendar.getInstance();
 		
 		tempDay.set(Calendar.DAY_OF_YEAR,day);
-		int month=tempDay.MONTH;
+		int month=tempDay.get(Calendar.MONTH);
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 		
