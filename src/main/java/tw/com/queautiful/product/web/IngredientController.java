@@ -146,4 +146,6 @@ public class IngredientController {
 	public String IngredientMain(){
 		return "/ingredient/ingredientmain";
 	}
+		
+
 }

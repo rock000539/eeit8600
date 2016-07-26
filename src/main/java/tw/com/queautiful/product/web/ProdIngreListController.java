@@ -226,4 +226,29 @@ public class ProdIngreListController {
 	public String resultPage() {
 		return "/ingredient/showSearchResult";
 	}
+	
+	//進入前台share頁面
+	@RequestMapping("/shareMainPage")
+	public String shareMainPage(){
+		return "/ingredient/share_editIngredient";
+	}
+	
+	//前台用戶share分享用-------
+	@RequestMapping("/share_editIngredient")
+	public String shareEditIngredient(Model model,@RequestParam String proIdStr){
+		List<Ingredient> ingredients = new ArrayList<Ingredient>();
+
+		long prodId = Long.parseLong(proIdStr);
+
+		String productName = productService.getById(prodId).getProdName();
+
+		ingredients = prodIngreListService.findByProdIdEndsWith(prodId);
+		
+
+		model.addAttribute("ingredients", ingredients);
+		model.addAttribute("productName", productName);
+		model.addAttribute("productId",proIdStr);
+				
+		return "/ingredient/share_editIngredient";
+	}
 }
