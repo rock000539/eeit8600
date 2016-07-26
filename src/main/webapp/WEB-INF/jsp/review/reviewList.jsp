@@ -206,7 +206,7 @@
 						resizable: false,
 						fixed: true,
 			            formatter: function (cellvalue, options, rowObject) {
-			            	var str = '/reviews/show?reviewId='+ rowObject.reviewId;
+			            	var str = '/reviews/show?reviewImg='+ rowObject.reviewImg;
 			                return "<img height='30' src=" + str + " />";
 			            },
 					},
@@ -234,7 +234,7 @@
                 width: 'auto', // 寬度
 				height: 380, // 高度
 				shrinkToFit: false,
-				rowNum: 3, // 每頁顯示列數
+				rowNum: 7, // 每頁顯示列數
 				rownumbers: true, // 第n列
 				rownumWidth: 35, // 第n列寬度
 				caption: 'Reviews Grid View', // 最上方的標題和收合Table

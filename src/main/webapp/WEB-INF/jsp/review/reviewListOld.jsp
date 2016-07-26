@@ -82,7 +82,7 @@ th,td{border:1px solid black;
 		<td>${review.review}</td>
 		<td>${review.reviewRating}</td>
 		<td>${review.reviewImg}</td>
-		<td><img height="30" src="/reviews/show?reviewId=${review.reviewId}"></td>
+		<td><img height="30" src="/reviews/show?reviewImg=${review.reviewImg}"></td>
 		<td>${review.reviewTime}</td>
 		<td>${review.rewCollect}</td>
 		<td>${review.reviewShow}</td>
