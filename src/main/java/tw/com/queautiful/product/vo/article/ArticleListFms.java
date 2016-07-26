@@ -1,6 +1,9 @@
 package tw.com.queautiful.product.vo.article;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tw.com.queautiful.commons.enums.ArticleType;
+import tw.com.queautiful.product.entity.ArticleReply;
 
 public class ArticleListFms {
 
@@ -12,6 +15,7 @@ public class ArticleListFms {
 	
 	private String articleContent;
 	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private java.sql.Timestamp articleTime;
 	
 	//文章觀看次數
@@ -21,8 +25,13 @@ public class ArticleListFms {
 	
 	private String nickname;
 	
+	private java.sql.Date memberRegiDate;
+	
 	//回覆數
 	private Integer arSize;
+	
+	//最新回覆
+	private ArticleReply theLatestReply;
 
 	//留言數
 	private Integer acmsSize;
@@ -98,12 +107,28 @@ public class ArticleListFms {
 		this.nickname = nickname;
 	}
 	
+	public java.sql.Date getMemberRegiDate() {
+		return memberRegiDate;
+	}
+
+	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+		this.memberRegiDate = memberRegiDate;
+	}
+
 	public Integer getArSize() {
 		return arSize;
 	}
 
 	public void setArSize(Integer arSize) {
 		this.arSize = arSize;
+	}
+	
+	public ArticleReply getTheLatestReply() {
+		return theLatestReply;
+	}
+
+	public void setTheLatestReply(ArticleReply theLatestReply) {
+		this.theLatestReply = theLatestReply;
 	}
 
 	public Integer getAcmsSize() {

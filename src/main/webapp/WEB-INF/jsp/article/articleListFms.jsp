@@ -129,11 +129,21 @@
 				        </td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.arSize}</a></td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
-				        <td class="hidden-xs hidden-sm">
-				        	<i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a><br>
-				        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
-				        </td>
+				        <c:if test="${empty article.theLatestReply}">
+					        <td class="hidden-xs hidden-sm">
+					        	<i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a><br>
+					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
+					        </td>
+				        </c:if>
+				        <c:if test="${not empty article.theLatestReply}">
+					        <td class="hidden-xs hidden-sm">
+					        	<i class="fa fa-user"></i><a href="#">&nbsp${article.theLatestReply.member.nickname}</a><br>
+					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.theLatestReply.arTime,0,19)}</small>
+					        </td>
+				        </c:if>
+				        
 				      </tr>
+<%-- 				      ${article.theLatestReply} --%>
 				    </c:forEach>
 				    </tbody>
 				  </table>
@@ -189,7 +199,6 @@
 	
 	<script>
 	$(function(){
-		console.log('${articles[0]}');
 		
 		$('#allpost').on('click',function(){
 			$.redirect('/articles/listfms');

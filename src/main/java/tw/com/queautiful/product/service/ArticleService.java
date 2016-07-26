@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.ArticleDao;
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.ArticleReply;
+import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.vo.article.ArticleListFms;
 
 @Service
@@ -85,7 +87,18 @@ public class ArticleService {
 		for (Article temp : a_list) {
 			article = new ArticleListFms();
 			BeanUtils.copyProperties(temp, article);
-			article.setArSize(temp.getAreplies().size());
+			Integer arSize = temp.getAreplies().size();
+			article.setArSize(arSize);
+			if(arSize!=0){
+				ArticleReply theLatestReply = temp.getAreplies().get(arSize-1);
+				article.setTheLatestReply(theLatestReply);
+			}
+			Member member = temp.getMember();
+			log.debug("member-->{}",member);
+			article.setMemberId(member.getMemberId());
+			article.setNickname(member.getNickname());
+			article.setMemberRegiDate(member.getMemberRegiDate());
+//			Object[] reply = temp.getAreplies().toArray();
 //			article.setAcmsSize(temp.getAcms().size());
 			articles.add(article);
 		}		

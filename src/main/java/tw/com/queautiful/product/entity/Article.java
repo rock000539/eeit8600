@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -80,7 +81,7 @@ public class Article {
 	
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 	@OrderBy("ARTICLEREPLYTIME ASC")
-	private Set<ArticleReply> areplies;
+	private List<ArticleReply> areplies;
 	
 //	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 //	@OrderBy("ARTICLECMTIME ASC")
@@ -207,11 +208,11 @@ public class Article {
 		this.nickname = nickname;
 	}
 
-	public Set<ArticleReply> getAreplies() {
+	public List<ArticleReply> getAreplies() {
 		return areplies;
 	}
 
-	public void setAreplies(Set<ArticleReply> areplies) {
+	public void setAreplies(List<ArticleReply> areplies) {
 		this.areplies = areplies;
 	}
 

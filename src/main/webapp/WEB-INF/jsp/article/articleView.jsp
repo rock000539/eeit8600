@@ -466,13 +466,6 @@ border:1px solid black;
 	
 	<script>
 	$(function(){
-		console.log("hi");
-// 		console.log('${article.areplies.iterator().next()}');
-		
-// 		console.log('${article.areplies.toArray()[0]}');
-		console.log('${article.areplies.size()-1}');
-		var num = '${article.areplies.size()-1}';
-		console.log(num);
 		
 		/*
 		 * ============ USER IMG ===========
