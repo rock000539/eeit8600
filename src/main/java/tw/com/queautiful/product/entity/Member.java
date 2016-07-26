@@ -120,10 +120,15 @@ public class Member {
 	@OrderBy("REVIEWCMTIME DESC")
 	private List<ReviewCM> rcmsWroteByAuthor;
 
-	//文章留言
+	//文章回覆
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
-	@OrderBy("ARTICLECMTIME DESC")
-	private Set<ArticleCM> acmsWroteByAuthor;
+	@OrderBy("ARTICLEREPLYTIME DESC")
+	private Set<ArticleReply> arepliesWroteByAuthor;
+
+	//文章留言
+//	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+//	@OrderBy("ARTICLECMTIME DESC")
+//	private Set<ArticleCM> acmsWroteByAuthor;
 	
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Review_Report> review_Reports;
@@ -376,13 +381,21 @@ public class Member {
 		}
 	}
 	
-	public Set<ArticleCM> getAcmsWroteByAuthor() {
-		return acmsWroteByAuthor;
+	public Set<ArticleReply> getArepliesWroteByAuthor() {
+		return arepliesWroteByAuthor;
 	}
 
-	public void setAcmsWroteByAuthor(Set<ArticleCM> acmsWroteByAuthor) {
-		this.acmsWroteByAuthor = acmsWroteByAuthor;
+	public void setArepliesWroteByAuthor(Set<ArticleReply> arepliesWroteByAuthor) {
+		this.arepliesWroteByAuthor = arepliesWroteByAuthor;
 	}
+	
+//	public Set<ArticleCM> getAcmsWroteByAuthor() {
+//		return acmsWroteByAuthor;
+//	}
+//
+//	public void setAcmsWroteByAuthor(Set<ArticleCM> acmsWroteByAuthor) {
+//		this.acmsWroteByAuthor = acmsWroteByAuthor;
+//	}
 
 	public Integer getAge() {
 		return age;

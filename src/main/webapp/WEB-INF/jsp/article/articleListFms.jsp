@@ -127,7 +127,7 @@
 				          </small>
 				          </h4>
 				        </td>
-				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.acmsSize}</a></td>
+				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.arSize}</a></td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
 				        <td class="hidden-xs hidden-sm">
 				        	<i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a><br>
@@ -177,7 +177,7 @@
 						</small>
 				    </h4>
 				</td>
-				<td class="text-center hidden-xs hidden-sm"><a href="#">_acmsSize</a></td>
+				<td class="text-center hidden-xs hidden-sm"><a href="#">_arSize</a></td>
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_articleView</a></td>
 				<td class="hidden-xs hidden-sm">
 				    <i class="fa fa-user"></i><a href="#">&nbsp_memberNickname</a><br>
@@ -269,7 +269,7 @@
 		   			.replace("_articleTitle", result[i].articleTitle)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
-		   			.replace("_acmsSize", result[i].acmsSize)
+		   			.replace("_arSize", result[i].arSize)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
 					).appendTo($('tbody'));

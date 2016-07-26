@@ -14,29 +14,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "ARTICLECM")
-public class ArticleCM {
+@Table(name = "ARTICLEREPLY")
+public class ArticleReply {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ARTICLECMID")
-	private Long acmId;
+	@Column(name = "ARTICLEREPLYID")
+	private Long arId;
 
-	@Column(name = "ARTICLECMTITLE", columnDefinition = "nvarchar(30)")
-	private String acmTitle;
+	@Column(name = "ARTICLEREPLYTITLE", columnDefinition = "nvarchar(30)")
+	private String arTitle;
 
-	@Column(name = "ARTICLECMMSG", columnDefinition = "nvarchar(200)")
-	private String acmMsg;
+	@Column(name = "ARTICLEREPLYCONTENT", columnDefinition = "nvarchar(200)")
+	private String arContent;
 
-	@Column(name = "ARTICLECMTIME")
+	@Column(name = "ARTICLEREPLYTIME")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
-	private java.sql.Timestamp acmTime;
+	private java.sql.Timestamp arTime;
 
-	@Column(name = "ARTICLECMSHOW")
-	private Boolean acmShow;
+	@Column(name = "ARTICLEREPLYSHOW")
+	private Boolean arShow;
 
-	@Column(name = "ARTICLECMREPORT") // 被檢舉次數
-	private Integer acmReport;
+	@Column(name = "ARTICLEREPLYREPORT") // 被檢舉次數
+	private Integer arReport;
 
 	@ManyToOne
 	@JoinColumn(name = "ARTICLEID") // 留言對應文章
@@ -60,64 +60,71 @@ public class ArticleCM {
 	@Transient
 	private java.sql.Date memberRegiDate;
 	
-	public Long getAcmId() {
-		return acmId;
+	@Override
+	public String toString() {
+		return "ArticleReply [arId=" + arId + ", arTitle=" + arTitle + ", arContent=" + arContent + ", arTime=" + arTime
+				+ ", arShow=" + arShow + ", arReport=" + arReport + ", articleId=" + articleId + ", memberId="
+				+ memberId + ", nickname=" + nickname + ", memberRegiDate=" + memberRegiDate + "]";
 	}
 
-	public void setAcmId(Long acmId) {
-		this.acmId = acmId;
+	public Long getArId() {
+		return arId;
 	}
 
-	public String getAcmTitle() {
-		return acmTitle;
+	public void setArId(Long arId) {
+		this.arId = arId;
 	}
 
-	public void setAcmTitle(String acmTitle) {
-		this.acmTitle = acmTitle;
+	public String getArTitle() {
+		return arTitle;
 	}
 
-	public String getAcmMsg() {
-		return acmMsg;
+	public void setArTitle(String arTitle) {
+		this.arTitle = arTitle;
 	}
 
-	public void setAcmMsg(String acmMsg) {
-		this.acmMsg = acmMsg;
+	public String getArContent() {
+		return arContent;
 	}
 
-	public java.sql.Timestamp getAcmTime() {
-		return acmTime;
+	public void setArContent(String arContent) {
+		this.arContent = arContent;
 	}
 
-	public void setAcmTime(java.sql.Timestamp acmTime) {
-		this.acmTime = acmTime;
+	public java.sql.Timestamp getArTime() {
+		return arTime;
 	}
 
-	public Boolean getAcmShow() {
-		return acmShow;
+	public void setArTime(java.sql.Timestamp arTime) {
+		this.arTime = arTime;
 	}
 
-	public void setAcmShow(Boolean acmShow) {
-		this.acmShow = acmShow;
+	public Boolean getArShow() {
+		return arShow;
 	}
 
-	public Integer getAcmReport() {
-		return acmReport;
+	public void setArShow(Boolean arShow) {
+		this.arShow = arShow;
 	}
 
-	public void setAcmReport(Integer acmReport) {
-		this.acmReport = acmReport;
+	public Integer getArReport() {
+		return arReport;
+	}
+
+	public void setArReport(Integer arReport) {
+		this.arReport = arReport;
 	}
 
 	public Article getArticle() {
 		return article;
 	}
 
-//	public void setArticle(Article article) {
-//		this.article = article;
-//		if (!article.getAcms().contains(this)) {
-//			article.getAcms().add(this);
-//		}
-//	}
+	public void setArticle(Article article) {
+		this.article = article;
+		if(!article.getAreplies().contains(this)){
+			article.getAreplies().add(this);
+		}
+	}
 
 	public Long getArticleId() {
 		if (articleId == null && article != null) {
@@ -135,12 +142,12 @@ public class ArticleCM {
 		return member;
 	}
 
-//	public void setMember(Member member) {
-//		this.member = member;
-//		if (!member.getAcmsWroteByAuthor().contains(this)) {
-//			member.getAcmsWroteByAuthor().add(this);
-//		}
-//	}
+	public void setMember(Member member) {
+		this.member = member;
+		if (!member.getArepliesWroteByAuthor().contains(this)) {
+			member.getArepliesWroteByAuthor().add(this);
+		}
+	}
 
 	public Long getMemberId() {
 		if (this.memberId == null && member != null) {
@@ -178,6 +185,6 @@ public class ArticleCM {
 		this.memberRegiDate = memberRegiDate;
 	}
 	
-	
+
 
 }

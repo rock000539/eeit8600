@@ -13,20 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.queautiful.product.entity.ArticleCM;
-import tw.com.queautiful.product.entity.Review;
-import tw.com.queautiful.product.service.ArticleCMService;
+import tw.com.queautiful.product.entity.ArticleReply;
+import tw.com.queautiful.product.service.ArticleReplyService;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.MemberService;
 
 @Controller
-@RequestMapping("/articleCMs")
-public class ArticleCMController {
+@RequestMapping("/articlereplies")
+public class ArticleReplyController {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private ArticleCMService service;
+	private ArticleReplyService service;
 	
 	@Autowired
 	private ArticleService articleService;
@@ -37,50 +36,50 @@ public class ArticleCMController {
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
-		model.addAttribute("articleCMs",service.getAll());
-		return"/articleCM/articleCMList";
+		model.addAttribute("articleReplies",service.getAll());
+		return"/articleReply/articleReplyList";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam Long acmId){
-		service.delete(acmId);
-		return"redirect:/articleCMs/list";
+	public String delete(@RequestParam Long arId){
+		service.delete(arId);
+		return"redirect:/articleReplies/list";
 	}
 	
 	@RequestMapping("/add")
 	public String addPage(){
-		return"/articleCM/articleCMAdd";
+		return"/articleReply/articleReplyAdd";
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public ArticleCM insert(@RequestBody ArticleCM articleCM){
-		articleCM.setAcmTime(new java.sql.Timestamp(System.currentTimeMillis()));
+	public ArticleReply insert(@RequestBody ArticleReply articleReply){
+		articleReply.setArTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		
-//		articleCM.setMember(memberService.getById(articleCM.getMemberId()));
-//		articleCM.setArticle(articleService.getById(articleCM.getArticleId()));
+		articleReply.setMember(memberService.getById(articleReply.getMemberId()));
+		articleReply.setArticle(articleService.getById(articleReply.getArticleId()));
 
-		service.insert(articleCM);
-		return articleCM;
+		service.insert(articleReply);
+		return articleReply;
 	}
 	
 	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long acmId,Model model){
-		model.addAttribute("articleCM", service.getById(acmId));
-		return"/articleCM/articleCMEdit";
+	public String editPage(@RequestParam Long arId,Model model){
+		model.addAttribute("articleReply", service.getById(arId));
+		return"/articleReply/articleReplyEdit";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
-	public ArticleCM update(@RequestBody ArticleCM articleCM){
-		service.update(articleCM);
-		return articleCM;
+	public ArticleReply update(@RequestBody ArticleReply articleReply){
+		service.update(articleReply);
+		return articleReply;
 	}
 	
 	// 提供一般抓取資料使用
 	@RequestMapping("/select")
 	@ResponseBody
-	public List<ArticleCM> select() {
+	public List<ArticleReply> select() {
 		return service.getAll();
 	}
 }

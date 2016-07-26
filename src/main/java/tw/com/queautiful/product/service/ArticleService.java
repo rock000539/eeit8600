@@ -85,7 +85,8 @@ public class ArticleService {
 		for (Article temp : a_list) {
 			article = new ArticleListFms();
 			BeanUtils.copyProperties(temp, article);
-			article.setAcmsSize(temp.getAcms().size());
+			article.setArSize(temp.getAreplies().size());
+//			article.setAcmsSize(temp.getAcms().size());
 			articles.add(article);
 		}		
 		return articles;	

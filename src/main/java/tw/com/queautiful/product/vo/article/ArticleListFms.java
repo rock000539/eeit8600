@@ -21,6 +21,9 @@ public class ArticleListFms {
 	
 	private String nickname;
 	
+	//回覆數
+	private Integer arSize;
+
 	//留言數
 	private Integer acmsSize;
 
@@ -93,6 +96,14 @@ public class ArticleListFms {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	
+	public Integer getArSize() {
+		return arSize;
+	}
+
+	public void setArSize(Integer arSize) {
+		this.arSize = arSize;
 	}
 
 	public Integer getAcmsSize() {

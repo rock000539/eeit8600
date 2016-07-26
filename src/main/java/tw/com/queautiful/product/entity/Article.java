@@ -79,8 +79,12 @@ public class Article {
 	private String nickname;
 	
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
-	@OrderBy("ARTICLECMTIME ASC")
-	private Set<ArticleCM> acms;
+	@OrderBy("ARTICLEREPLYTIME ASC")
+	private Set<ArticleReply> areplies;
+	
+//	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
+//	@OrderBy("ARTICLECMTIME ASC")
+//	private Set<ArticleCM> acms;
 
 	@Override
 	public String toString() {
@@ -203,13 +207,21 @@ public class Article {
 		this.nickname = nickname;
 	}
 
-	public Set<ArticleCM> getAcms() {
-		return acms;
+	public Set<ArticleReply> getAreplies() {
+		return areplies;
 	}
 
-	public void setAcms(Set<ArticleCM> acms) {
-		this.acms = acms;
+	public void setAreplies(Set<ArticleReply> areplies) {
+		this.areplies = areplies;
 	}
+
+//	public Set<ArticleCM> getAcms() {
+//		return acms;
+//	}
+//
+//	public void setAcms(Set<ArticleCM> acms) {
+//		this.acms = acms;
+//	}
 
 	
 }
