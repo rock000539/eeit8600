@@ -51,18 +51,7 @@ public class MultiHttpSecurityConfig {
     	
         auth.inMemoryAuthentication()
         .withUser("user").password("p").roles("USER");
-        
-//        List<Member> members = new ArrayList<Member>();
-//        members = memberService.getAll();
-//        
-//        for (int i = 0; i < members.size(); i++)
-//        {
-//            Member member = new Member();
-//            member = (Member) members.get(i);
-//            auth.inMemoryAuthentication().withUser(member.getEmail()).password(member.getPassword())
-//                    .roles("USER");
-//        }
-   
+          
     }   
     
     @Configuration
@@ -124,7 +113,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
                 "/ingredients/startSearch",
-                "/articles/listfms","/articles/view","/articles/list_data",
+                "/articles/listfms","/articles/view","/articles/list_data","/js/**",
                 "/products/**") 
                 .permitAll()      //設定過濾條件 ↓         
                 //沒有設ROLE(一般人)，permitAll():表示以上路徑都可訪問                            

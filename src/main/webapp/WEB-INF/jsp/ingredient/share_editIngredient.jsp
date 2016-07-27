@@ -26,11 +26,12 @@
 	<script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 	
-<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/ingredient/share_editIngredient.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
-<script src="/js/ingredient/share_editIngredient.js"></script>
+
 
 <style>
 body {

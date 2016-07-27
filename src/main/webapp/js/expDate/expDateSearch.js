@@ -39,10 +39,10 @@
 				$("#proList").append(	//---------------------------------
 				"<div class='col-md-4 portfolio-item' name="+categoryId+"><div class='portfolio-all'>"
 				+"<div class='portfolio-title'>"
-				+"<a href='/products/view?prodId="+prodId+"'><h3>"+prodName+"</h3></a></div>"
+				+"<a href='/products/view/"+prodId+"'><h3>"+prodName+"</h3></a></div>"
 				+"<div class='portfolio-content'>"
 				+"<div class='portfolio-img'>"
-				+"<a href='/products/view?prodId="+prodId+"'><img src='/products/show?prodImg="+prodImg+"'/></a>"
+				+"<a href='/products/view/"+prodId+"'><img src='/products/show?prodImg="+prodImg+"'/></a>"
 				+"</div>"
 				+"<div class='portfolio-btn'>"
  				+"<button class='saveDate btn btn-default' name='"
