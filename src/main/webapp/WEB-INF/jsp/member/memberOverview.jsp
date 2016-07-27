@@ -19,8 +19,22 @@
     <!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
 <style>
+
+.page-title{
+	padding-top: 10px;
+	height: 5rem;
+    margin: 0;
+    text-align: center;
+}
+.page-title span{
+	border-bottom: .3rem solid #000;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 3rem;
+    color: #181818;
+	font-weight: bold;
+}
 #overview{
- 	padding: 40px 40px 85px 100px;
+ 	padding: 20px 40px 85px 100px;
 	color: #000;
 /* 	letter-spacing: 1px; */
 }
@@ -42,7 +56,7 @@
 	font-size: 16px;
 }
 .since{
-	margin-top: 80px;
+	margin-top: 50px;
 	text-align: center;
 }
 .since>h4{
@@ -70,7 +84,7 @@
 				<div class="grey_bg row">
 
 <div class="row detail-div">
-	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
+	<div class="col-lg-10 col-sm-6 animated fadeIn delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 
 <div id="overview">

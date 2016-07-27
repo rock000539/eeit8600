@@ -90,6 +90,7 @@
 }
 #navigationMenu span.nav-active{
 	color: #000;
+	border-bottom: .1rem solid #000;
 }
 .is-hidden {
   visibility: hidden;

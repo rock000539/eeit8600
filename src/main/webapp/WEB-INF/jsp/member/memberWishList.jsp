@@ -30,11 +30,11 @@ i{
 }
 .portfolio-item{
 	margin-bottom: 30px;
-	padding: 0 10px 0 10px;
+	padding: 0 5px 0 5px;
 	
 }
 .prodContent{
- 	padding: 0 16px 30px 16px;
+ 	padding: 0 10px 30px 10px;
 	overflow: hidden;
 	border-top: 3px solid #000;
     border-radius: 1px;
@@ -54,7 +54,6 @@ i{
 	margin-bottom: 5px;
 }
 .prodInfo .brand{
-	margin-top: 30px;
 	color: #000;
     display: block;
     font-size: 16px;
@@ -85,6 +84,9 @@ i{
 }
 .btn-delete{
 	margin-top: 10px;
+	background: #000;
+	border-radius: 0px;
+	padding: 3px 8px 3px 8px;
 }
 .hvr-float {
   display: inline-block;

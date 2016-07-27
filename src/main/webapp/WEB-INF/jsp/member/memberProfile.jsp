@@ -65,14 +65,13 @@
 			       <h3>${member.nickname}</h3>
 			       <p>${member.gender}, ${member.skinType} skin, from ${member.addr}</p>
 			       <a id="editProfile" class="btn btn-default" 
-			       		onclick="location.replace("http://www.w3schools.com")"
 			       		href="<% request.getContextPath(); %>/members/profile/edit">
 			       		<i class="fa fa-pencil"></i> EDIT PROFILE</a>
 			</div>
 		</div>		
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left fa-lg"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Email</h3>
@@ -81,7 +80,7 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left fa-lg"></i>
 			</div>
 			<div class="detail-list-col2">
 			    <div style="display:inline-block; margin-right: 30px;">
@@ -96,7 +95,7 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Gender</h3>
@@ -105,7 +104,7 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Birthday</h3>
@@ -114,7 +113,7 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Phone</h3>
@@ -123,7 +122,7 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Address</h3>
@@ -132,7 +131,7 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa-paw"></i>
+			   	<i class="fa fa-quote-left fa-lg"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Your Registration Date</h3>
