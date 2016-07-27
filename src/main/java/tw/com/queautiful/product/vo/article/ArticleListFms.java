@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.vo.article;
 
+import javax.persistence.Column;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.com.queautiful.commons.enums.ArticleType;
@@ -17,6 +19,9 @@ public class ArticleListFms {
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private java.sql.Timestamp articleTime;
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	private java.sql.Timestamp aEditTime;
 	
 	//文章觀看次數
 	private Integer articleView;
@@ -81,6 +86,14 @@ public class ArticleListFms {
 
 	public void setArticleTime(java.sql.Timestamp articleTime) {
 		this.articleTime = articleTime;
+	}
+	
+	public java.sql.Timestamp getaEditTime() {
+		return aEditTime;
+	}
+
+	public void setaEditTime(java.sql.Timestamp aEditTime) {
+		this.aEditTime = aEditTime;
 	}
 
 	public Integer getArticleView() {
