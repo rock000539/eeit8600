@@ -91,3 +91,6 @@
 #navigationMenu span.nav-active{
 	color: #000;
 }
+.is-hidden {
+  visibility: hidden;
+}

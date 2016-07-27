@@ -88,7 +88,7 @@ public class MemberController {
 		model.addAttribute("member", member);
 		model.addAttribute("likedReviews", member.getReviewsSavedByMember().size());
 		model.addAttribute("likedArticles", member.getArticlesSavedByMember().size());
-		return "/member/memberOverview";
+		return "/member/memberOverview"; 
 	}
 	
 	//profile頁面
@@ -160,10 +160,39 @@ public class MemberController {
 	
 	
 	//insert wishlist
-	//xxxxxxxxxxxxx
+	@RequestMapping("/like/product")
+	@ResponseBody
+	public Boolean wishListInsert(@RequestParam Long prodId, HttpServletRequest request, Model model){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		Product product = productService.getById(prodId);
+		Set<Product> products = member.getProductSavedByMember();
+		products.add(product);
+		member.setProductSavedByMember(products);
+		memberService.update(member);
+		return true;
+	}
 	
 	//delete wishlist
-	//xxxxxxxxxxxxxx
+	@RequestMapping("/like/product/delete")
+	@ResponseBody
+	public Boolean wishListDelete(@RequestParam Long prodId, HttpServletRequest request, Model model){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		log.debug("{} wishlist", memberId.toString());
+		Set<Product> products = member.getProductSavedByMember();
+		Product product = productService.getById(prodId);
+		
+		if(products.contains(product)){
+			products.remove(product);
+			member.setProductSavedByMember(products);
+			memberService.update(member);
+		}
+		if(products.contains(product)){
+			return false;
+		}
+		return true;
+	}
 
 	
 	//保存期限頁面
@@ -214,7 +243,7 @@ public class MemberController {
         return "/member/memberExpDate";
     }
     
-    //member收藏心得/文章 頁面
+    //member收藏心得/文章頁面
     @RequestMapping("/like")
     public String memberLikePage(HttpServletRequest request, Model model){
     	Long memberId = (Long)request.getSession().getAttribute("memberId");

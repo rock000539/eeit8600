@@ -32,7 +32,7 @@ i{
 	
 }
 .prodContent{
- 	padding: 0 16px 0 16px;
+ 	padding: 0 16px 30px 16px;
 	overflow: hidden;
 	border-top: 3px solid #000;
     border-radius: 1px;
@@ -42,13 +42,14 @@ i{
 }
 .prodImg{
 	text-align: center;
+	margin-top: 5px; 
 }
 .prodImg img{
 	width: 100%;
 	
 }
 .prodInfo{
-	margin-bottom: 30px;
+	margin-bottom: 5px;
 }
 .prodInfo .brand{
 	margin-top: 30px;
@@ -72,23 +73,17 @@ i{
     margin-top: 10px;
     color: #000;
     letter-spacing: 0.5px;
+    margin-top: 5px;
+}
+.prodInfo p{
+	margin-bottom: 5px;
 }
 .prodContent a:hover{
 	color: rgba(0,0,0,0.6);
 }
-.content1 p{
-	padding-top:0px;
-	overflow: hidden; 
-	display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    text-align: justify;
-    margin-top: 10px;
+.btn-delete{
+	margin-top: 10px;
 }
-.content1 p>span{
-	color: color: rgba(0,0,0,0.8);
-}
-
 .hvr-float {
   display: inline-block;
   vertical-align: middle;
@@ -109,8 +104,30 @@ i{
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
 }
-.is-hidden {
-  visibility: hidden;
+.modal-content{
+	text-align: center;
+	padding: 10px;
+}
+.modal-content h2{
+	font-weight: 400;
+}
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 </style>
 <body>
@@ -125,7 +142,7 @@ i{
 
 <div id="prodDiv" class="row">
 	<c:forEach var="item" items="${products}">
-    <div class="col-md-4 portfolio-item hvr-float">
+    <div class="col-md-4 portfolio-item hvr-float" dataId="${item.prodId}">
         <div class="prodContent">
 	        <div class="prodImg">
 	         	<a href="<%=request.getContextPath() %>/products/view/${item.prodId}">
@@ -136,13 +153,28 @@ i{
 	         	<h2><a href="<%=request.getContextPath() %>/products/view/${item.prodId}">${item.prodName}</a></h2>
 	         	<p>
 		         	<c:forEach begin="1" end="${item.score}"><i class="fa fa-diamond"></i></c:forEach>
-		         	&nbsp;<span>(${item.score})</span>
 	         	</p>
+	         	<span>(${item.score})</span>
+	         </div>
+	         <div>
+	         	<button class="btn btn-default btn-delete" value="${item.prodId}"
+	         		 data-toggle="modal" data-target="#myModal">DELETE</button>
 	         </div>
          </div>
     </div> <!-- portfolio-item -->
     </c:forEach>
 </div> <!-- #prodDiv -->
+
+
+<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+    	<h2>Do you want to delete ${product.prodName} ?</h2>
+    	<br>
+    	<button id="del-confirm" class="btn btn-default">Confirm</button>
+    </div>
+  </div>
+</div>
 
 </div> <!-- memberDiv -->
 
@@ -172,20 +204,28 @@ i{
 	<script src="/js/member/member.js"></script>
 <script>
 $(function(){
-	$('.btnDislike').click(function(){
-		var btn1 = $(this);
-		var articleId = $(this).next().val();
-		$.ajax({
-			url:"/members/like/article/delete",
-			data:{"articleId": articleId},
-			type:'get',
-			success:function(result){
-				if(result){
-					btn1.parent().parent().parent().parent().remove();
+	$('.btn-delete').click(function(e){
+		var btn1 = e.target;
+		var prodId = btn1.getAttribute('value');
+		console.log(btn1);
+		console.log(prodId);
+		
+		$('#del-confirm').click(function(){
+			$.ajax({
+				url:"/members/like/product/delete",
+				data:{"prodId": prodId},
+				type:'get',
+				success:function(result){
+					console.log(result);
+					if(result){
+ 						$(".portfolio-item[dataId*="+prodId+"]").remove();
+					}
+					$('#myModal').modal('toggle');
 				}
-			}
+			}); //ajax
 		});
-	});
+		
+	});//btn-delete onClick
 	
 	
 	var timelineBlocks = $('.portfolio-item'),
@@ -208,7 +248,7 @@ $(function(){
 
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
-			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.prodContent').hasClass('is-hidden') ) && $(this).find('.prodContent').removeClass('is-hidden').addClass('fadeInDown');
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.prodContent').hasClass('is-hidden') ) && $(this).find('.prodContent').removeClass('is-hidden').addClass('animated fadeInDown');
 			console.log("show"+$(this));
 		});
 	}
