@@ -27,7 +27,7 @@
                 <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
             </li>
             <li>
-                <a href="#"><span>${nickname}</span></a>
+                <a href="/members/overview/${memberId}"><span>${nickname}</span></a>
             </li>
             <li>
                 <a class="" href="#">

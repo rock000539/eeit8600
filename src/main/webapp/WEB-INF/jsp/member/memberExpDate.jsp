@@ -139,7 +139,7 @@ td.data{
 <!-- ExpDate Row -->
 <div id="exprow" class="row">
 	<c:forEach items="${beans}" var="item">
-    <div class="col-md-4 portfolio-item">
+    <div class="col-md-4 portfolio-item" dateId="${item.expDate.dateId}">
     	<div class="portfolio-all">
     		<c:set var="expDays" value="${item.lastsDay}"></c:set>
 	    	<c:if test="${expDays>60}">
@@ -216,16 +216,15 @@ $(function(){
     $('.btn-delete').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
-    	console.log(dateIdStr);
-    	console.log(target);
     	
     	$('#del-confirm').click(function(){
+    	
     		$.ajax({
         		url:'/expdate/delete',
           		type : 'GET',
           		data : {"dateIdStr":dateIdStr},
           		success : function(result){
-          			console.log(result);
+          			$(".portfolio-item[dateId*="+dateIdStr+"]").remove();
           			$('#myModal').modal('toggle');
           			
           		}
