@@ -91,5 +91,29 @@
             </ul>
         </div>
     </div>
+   
+ <script src="/js/jquery.min.js"></script>
+ <script type='text/javascript'>
+$(function(){
+	var start = Date.now() ;
+	var pageUrl = window.location.toString();
+	window.onunload=visitTime;
+	
+	var memberId=${memberId};
+	function visitTime(){
+		var end = Date.now() ;
+		var timeOnSiteStr=(end-start);
+		$.ajax({
+			url:"/timeonsite/record",
+			type:"POST",
+			traditional: true,
+			data:{"timeOnSiteStr":timeOnSiteStr,"pageUrl":pageUrl,"memberId":memberId},
+			success:function(){
+			}
+		})
+	}
+})
+</script>   
+    
 </header>
 <!--End Header-->

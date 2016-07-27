@@ -28,15 +28,20 @@
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
 				
-				
 <!-- <div class="container text-center" style="text-align: center"> -->
 <div class="container">
+<div>
+<a href="/reviews/add"><button class="btn btn-danger btn-lg" type="button" >寫心得</button></a>	
+<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+
+<!-- <input type ="button" onclick="history.back()" class="btn btn-danger btn-lg" value="回到上一頁"></input> -->
+</div>
 <!-- <div class="row row-body"> -->
 	<c:forEach var='review' items="${reviews}" >
 	  <div class="col-sm-6 col-md-3 body" name="body">
 	    <div class="thumbnail" >
 					<!-- Img start -->
-			<a href="/reviews/review?reviewId=${review.reviewId}" >
+			<a href="/reviews/review/${review.reviewId}" >
 	    	<div class="reviewImg">
 	      		<img class="reviewImg-Img" src="/products/show?prodImg=${review.product.prodImg}">
 	      	</div></a>
@@ -82,9 +87,9 @@
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				
 				<!--心得內容Start -->
-				<a class="review-link" href="/reviews/review?reviewId=${review.reviewId}" > ${review.review}</a>
+				<a class="review-link" href="/reviews/review/${review.reviewId}" > ${review.review}</a>
 				 <!--心得內容end -->
-				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/review?reviewId=${review.reviewId}" > ${review.reviewTitle}</a>
+				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/review/${review.reviewId}" > ${review.reviewTitle}</a>
 <%-- 		      		<div  name="review-bottom-title" class="review-bottom-title" id="review-bottom-title">${review.reviewTitle}</div> --%>
 <!-- 		        </a> -->
 	        </div>

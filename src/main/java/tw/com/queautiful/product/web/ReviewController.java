@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -105,7 +106,7 @@ public class ReviewController {
 		log.debug("{}", list);
 //		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 //		 model.addAttribute("reviews", service.findByOrderByReviewReportDesc());
-		
+	
 		
 		//會員年齡
 //		String y = service.getAll().get ).getMember().getBirthDay().toString();
@@ -124,8 +125,8 @@ public class ReviewController {
 		return "/review/reviewTest";
 	}
 
-	@RequestMapping("/review")
-	public String reviewjQueryRain(Model model,Long reviewId) throws ParseException {
+	@RequestMapping("/review/{reviewId}")
+	public String reviewjQueryRain(Model model,@PathVariable Long reviewId) throws ParseException {
 		Review review = service.getById(reviewId);
 		log.debug("{}", review);
 		model.addAttribute("review", review);
@@ -153,19 +154,6 @@ public class ReviewController {
 		//會員年齡
 		review.getMember().setAge(memberService.getMemberAge(review.getMember().getBirthDay()));
 		
-		//心得留言
-		
-		List<ReviewCM> reviewCMs = reveiwCMService.getAll();
-		log.debug("x={}",review.getReviewCMs());
-//		for(int i=0; i<reviewCMs.size(); i++){
-			
-//			Integer age = memberService.getMemberAge(reviewCMs.get(i).getMember().getBirthDay());
-//			reviewCMs.get(i).getMember().setAge(age);
-//		}
-		
-//		model.addAttribute("reviewCMs",reviewCMs);
-		
-		
 		return "/review/review";
 	}
 	
@@ -185,20 +173,17 @@ public class ReviewController {
 	@ResponseBody
 	public void delete(@RequestBody Review review) {
 		service.delete(review.getReviewId());
-
 	}
 
 	@RequestMapping("/editOld")
 	public String editPageOld(@RequestPart Long reviewId, Model model) {
-		model.addAttribute("review", service.getById(reviewId));
-		
+		model.addAttribute("review", service.getById(reviewId));	
 		return "/review/reviewEditOriginal";
 	}
 
 	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long reviewId, Model model) { // @RequestParam
-																			// 類似getParameter
-		model.addAttribute("review", service.getById(reviewId));
+	public String editPage(@RequestParam Long reviewId, Model model) { // @RequestParam														
+		model.addAttribute("review", service.getById(reviewId));           // 類似getParameter
 		return "/review/reviewEdit";
 	}
 
@@ -227,17 +212,50 @@ public class ReviewController {
 			// 將檔案路徑存成Entity的屬性
 			review.setReviewImg(reviewImg);
 		}
-
 		service.update(review);
 		return review;
-
 	}
 
-	@RequestMapping("/add")
-	public String addPage() {
+	@RequestMapping("/add_bms")
+	public String addBmsPage() {
 		return "/review/reviewAdd";
 	}
+	
+	@RequestMapping("/add")
+	public String addPage(@RequestParam(value="prodId",required=false) Long prodId) {
+		return "/review/reviewAddFms";
+	}
+	
+	@RequestMapping("/test")
+	public String testPage() {
+		return "/review/test";
+	}
 
+	@RequestMapping(value="/insert_fms", method=RequestMethod.POST)
+	@ResponseBody
+	public Review insertFms(@RequestPart("review") Review review,
+			@RequestPart("reviewImgFile") MultipartFile reviewImgFile) {
+
+		// FK設定
+		review.setProduct(prodService.getById(review.getProdId()));
+		review.setMember(memberService.getById(review.getMemberId()));
+
+		// 取得品牌名稱當作檔名
+		String reviewTitle = review.getReviewTitle();
+
+		// 存圖片-->直接使用FileProcessing檔的saveImg方法
+		// 傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
+		// 傳回檔案儲存的路徑
+		String reviewImg = FileProcessing.saveImg(reviewTitle, "review",
+				reviewImgFile);
+
+		// 將檔案路徑存成Entity的屬性
+		review.setReviewImg(reviewImg);
+
+		service.insert(review);
+		return review;
+	}
+	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public Review insert(@RequestPart("review") Review review,
@@ -280,10 +298,8 @@ public class ReviewController {
 	@RequestMapping("/show_old")
 	public void show(HttpServletResponse resp, @RequestParam Long reviewId) {
 		Review review = service.getById(reviewId);
-
 		// 取得檔案路徑
 		String reviewImg = review.getReviewImg();
-
 		// 在網頁中顯示圖片-->直接使用FileProcessing檔的showImg方法
 		// 傳入參數:1.HttpServletResponse, 2.檔案路徑
 		FileProcessing.showImg(resp, reviewImg);
