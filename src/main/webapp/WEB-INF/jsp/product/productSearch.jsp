@@ -29,6 +29,13 @@
 	
 	<style>
 		
+		.bgcolor{
+			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
+		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
+		  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
+		  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+		}
+		
 		#categoryContainer {
  		    width: 79vw;
  		    margin: 0 auto;
@@ -43,7 +50,7 @@
 	<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 
 	<!-- **每頁不同的內容從這裡開始** -->
-	<div class="grey_bg row">
+	<div class="grey_bg row bgcolor">
 	
 		<section class="content service">
 			<div class="container">

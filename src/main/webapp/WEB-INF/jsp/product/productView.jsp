@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,6 +20,9 @@
 	
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>
+	
+	<!-- Sweet Alert 2 -->
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductView</title>
@@ -46,7 +49,7 @@
 		
 		.img-prod
 		{
-			border: 3px solid #727CB6;
+ 			border: 3px solid #727CB6;
 			border-radius: 20px;
 		
 			-moz-box-shadow: 0 0 5px #fff;
@@ -57,7 +60,129 @@
 		.view_tab span {
 			font-size: 13px;
 		}
-
+		
+		.bgcolor{
+			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
+		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
+		  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
+		  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+		}
+		
+		.dividerHeading h4 span {
+		    background: #EBDBFF;
+		}
+		
+		.our-team .names {
+		    border-top: 3px solid #bdbacf;
+		}
+		
+		.team-social-media {
+			background: #faeae1
+		}
+		
+		.swal {
+		    border-radius: 20px !important;
+		    width: 400px !important;
+		    margin-left: -200px !important;
+		}
+		
+		a.save{
+			background: #EA3556;
+			color: #fff;
+		}
+		a.write{
+			background: #ED146F;
+			color: #fff;
+		}
+		a.share{
+			background: #3b5998;
+			color: #fff;
+		}
+		a.analyze{
+			background: #41ced9;
+			color: #fff;
+		}
+		
+		#navigationDiv{
+			float:left;
+			margin-left: 50px;
+		}
+		#navigationMenu li{
+			list-style:none;
+			height:39px;
+			width:40px;
+			padding:2px;
+		}
+		#navigationMenu span.nav-span{
+			width:0;
+			right:38px;
+			padding:0;
+			position:absolute;
+			overflow:hidden;
+			font-family:Microsoft JhengHei, "Droid Serif", serif;
+			font-size:18px;
+			font-weight:bold;
+			letter-spacing:0.6px;
+			white-space:nowrap;
+			line-height:39px;
+			-webkit-transition: 0.25s;
+			transition: 0.25s;
+		}
+		#navigationMenu a{
+			height:39px;
+			width:38px;
+			display:block;
+			position:relative;
+			text-align: center;
+		}
+		#navigationMenu a>span.nav-icon{
+			display: inline-block;
+			padding-top: 9px;
+			font-size: 22px;
+		}
+		#navigationMenu a:hover span.nav-span{
+			width:auto; 
+			padding:0 20px;
+			overflow:visible; 
+		}
+		#navigationMenu a:hover{
+			text-decoration:none;
+			-webkit-box-shadow:0 0 5px #9ddff5;
+			box-shadow:0 0 5px #9ddff5;
+		}
+		#navigationMenu .save {	background-position:0 0;}
+		#navigationMenu .save:hover {	background-position:0 -39px;}
+		#navigationMenu .save span.nav-span{
+			background-color: #EA3556;
+			color: #fff;
+		/* 	text-shadow:1px 1px 0 #99bf31; */
+		}
+		#navigationMenu .write { background-position:-38px 0;}
+		#navigationMenu .write:hover { background-position:-38px -39px;}
+		#navigationMenu .write span.nav-span{
+			background-color: #ED146F;
+			color: #fff;
+		/* 	text-shadow:1px 1px 0 #44a8d0; */
+		}
+		#navigationMenu .share { background-position:-152px 0;}
+		#navigationMenu .share:hover { background-position:-152px -39px;}
+		#navigationMenu .share span.nav-span{
+			background-color: #3b5998;
+			color: #fff;
+		/* 	text-shadow:1px 1px 0 #d244a6; */
+		}
+		#navigationMenu .analyze { background-position:-76px 0;}
+		#navigationMenu .analyze:hover { background-position:-76px -39px;}
+		#navigationMenu .analyze span.nav-span{
+			background-color: #41ced9;
+			color: #fff;
+		/* 	text-shadow:1px 1px 0 #d28344; */
+		}
+		
+		a {
+			cursor: pointer;
+		}
+		
 	</style>
 	
 </head>
@@ -67,7 +192,7 @@
 	<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 
 	<!-- **每頁不同的內容從這裡開始** -->
-	<div class="grey_bg row">
+	<div class="grey_bg row bgcolor">
 	
 		<div class="row">
 			<div class="col-sm-2"></div>
@@ -85,9 +210,37 @@
 		
 		<div class="row">
 		
-			<div class="col-sm-2"></div>
+			<div class="col-sm-1"></div>
 			
-			<div class="col-sm-3" style="text-align: center;">
+			<div class="col-sm-4" style="text-align: center;">
+				<div id="navigationDiv">
+					<ul id="navigationMenu">
+					    <li>
+						    <a class="save" data-prodId="${product.prodId}" onClick="save_prod_click($(this))">
+						    	<span class="nav-icon"><i class="fa fa-heart"></i></span>
+					            <span class="nav-span">收藏</span>
+					        </a>
+					    </li>
+					    <li>
+					    	<a class="write" data-prodId="${product.prodId}" onClick="write_review_click($(this))">
+					            <span class="nav-icon"><i class="fa fa-pencil"></i></span>
+					            <span class="nav-span">寫心得</span>
+					        </a>
+					    </li>
+					    <li>
+					    	<a class="analyze" data-toggle="modal" data-target="#myModal" onClick="">
+					    		<span class="nav-icon"><i class="fa fa-bar-chart"></i></span>
+					            <span class="nav-span">心得分析</span>
+					        </a>
+					    </li>
+					    <li>
+					    	<a class="share">
+					    		<span class="nav-icon"><i class="fa fa-facebook"></i></span>
+					            <span class="nav-span">分享</span>
+					        </a>
+					    </li>
+					</ul>
+				</div>
 				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" />
 			</div>
 			
@@ -114,7 +267,7 @@
 				<div class="col-sm-6">
 					<div class="view_tab" style="margin-top: 15px;">
 				    	<label for="tab-one">
-				    		<span>Qutie分數 : 
+				    		<span>Qutie分數&nbsp;:&nbsp;
 				    			<c:forEach begin="1" end="${product.score}">
 									<i class="fa fa-diamond"></i>
 								</c:forEach>
@@ -138,7 +291,7 @@
 				</div>
 			
 			</div>
-				
+			
 			<div class="col-sm-2"></div>
 			
 		</div>
@@ -166,7 +319,7 @@
 		<!-- 		                    <div class="team-overlay"></div> -->
 				                    <div class="serviceBox_4">
 					                    <div class="service-icon">
-					                        <a href="#">
+					                        <a>
 					                            <span>
 					                            	<img src="<%= request.getContextPath() %>/members/show?memberId=${review.member.memberId}" style="transform:rotate(-60deg); margin-top:-2px;">
 					                            </span>
@@ -198,8 +351,8 @@
 				                </div>
 				
 				                <div class="team-social-media" style="text-align: center;">
-				                	<a class="btn btn-primary" style="margin-top:-2.5%;" data-reviewId="${review.reviewId}" onClick="save_click($(this))"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏心得</a>
-				                	<a class="btn btn-primary" style="margin-top:-2.5%;" data-reviewId="${review.reviewId}" onClick="watch_click($(this))"><i class="fa fa-eye"></i>&nbsp;&nbsp;觀看心得</a>
+				                	<a class="btn btn-default" style="margin-top:-2.5%;" data-reviewId="${review.reviewId}" onClick="save_review_click($(this))"><i class="fa fa-heart"></i>&nbsp;&nbsp;收藏心得</a>
+				                	<a class="btn btn-default" style="margin-top:-2.5%;" data-reviewId="${review.reviewId}" onClick="watch_review_click($(this))"><i class="fa fa-eye"></i>&nbsp;&nbsp;觀看心得</a>
 				                </div>
 				            </div>
 				        </div>
@@ -214,7 +367,29 @@
 			
 		</div>
 		
-	</div>        
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+	
+		<div class="modal-dialog">
+			<!--       Modal content -->
+		    <div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				  	<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">Confirm</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+		    </div>
+	    </div>
+	    
+	</div>
+	<!-- end of Modal -->
+	
     <!-- **每頁不同的內容結束** -->
 	
 	<!--加入footer -->
@@ -225,14 +400,90 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 	
+	<!-- Sweet Alert 2 -->
+	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
+	
 	<script>
 	
-		function save_click (a) {
-			console.log($(a).attr('data-reviewId'));
+		$(function(){
+			console.log("${ages}[0]");
+			console.log("${stars}");
+		});
+	
+		function save_review_click (a) {
+			
+			var reviewId = $(a).attr('data-reviewId');
+			
+			swal({
+				type: 'success',
+				text: '<h1 style="line-height:0px;">Save this review!</h1>',
+				showConfirmButton: false,
+				customClass: 'swal',
+				timer: 1000,
+			});
+			
+			$.ajax({
+				url: '',
+				type: 'POST',
+				dataType: 'json',
+				contextType: 'application/json; charset=utf-8;',
+				data: { 'reviewId': reviewId },
+				success: function(response) {
+					if(response == true) {
+						swal({
+							type: 'success',
+							text: '<h1 style="line-height:0px;">Save this review!</h1>',
+							showConfirmButton: false,
+							customClass: 'swal',
+							timer: 1000,
+						});
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log('jqXHR = ' + jqXHR + ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+				},
+			});
+			
 		}
 		
-		function watch_click (a) {
-			document.location.href='/reviews/reviewjQueryRain?reviewId=' + $(a).attr('data-reviewId');
+		function watch_review_click (a) {
+			document.location.href='/reviews/review?reviewId=' + $(a).attr('data-reviewId');
+		}
+		
+		function save_prod_click(a) {
+			
+			var prodId = $(a).attr('data-prodId');
+			
+			$.ajax({
+				url: '',
+				type: 'POST',
+				dataType: 'json',
+				contextType: 'application/json; charset=utf-8;',
+				data: { 'prodId': prodId },
+				success: function(response) {
+					if(response == true) {
+						swal({
+							type: 'success',
+							text: '<h1 style="line-height:0px;">Save this product!</h1>',
+							showConfirmButton: false,
+							customClass: 'swal',
+							timer: 1000,
+						});
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log('jqXHR = ' + jqXHR + ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+				},
+			});
+			
+		}
+		
+		function write_review_click(a) {
+			document.location.href='/reviews/add?reviewId=' + $(a).attr('data-reviewId');
+		}
+		
+		function share_prod_click(a) {
+			
 		}
 	
 	</script>

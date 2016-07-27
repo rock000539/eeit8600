@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.web;
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
+import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
@@ -50,6 +54,9 @@ public class ProductController {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -251,12 +258,31 @@ public class ProductController {
 
 	@RequestMapping("/view/{prodId}")
 	public String viewPage(@PathVariable Long prodId, Model model) {
+		
+		Product product = prodService.getById(prodId);
+		
+		int[] ages = new int[10]; 
+		int[] stars = new int[6];
+		
+		for(Review review : product.getReviews()) {
+			
+			try {
+				ages[memberService.getMemberAge(review.getMember().getBirthDay())/10] ++;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			stars[review.getReviewRating()] ++;
+			
+		}
+		
+		model.addAttribute("ages", ages);
+		model.addAttribute("stars", stars);
 		model.addAttribute("product", prodService.getByIdByVoView(prodId));
 		return "/product/productView";
 	}
 
 	@RequestMapping("/login")
-	public String rankPage(Model model) {
+	public String loginPage(Model model) {
 		return "/product/login";
 	}
 

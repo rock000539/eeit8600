@@ -9,7 +9,7 @@ body {
 
 .portfolio-title {
 	height: 60px;
-	background-color: #98DaD6;  /*blue */
+	background-color: #5bc0de;  /*blue */
 	border-bottom: 1px solid #4FBAAA;
 	color: #ffffff;
 	text-align: center;
@@ -17,9 +17,9 @@ body {
 }
 
 #proList div:nth-child(4n+2) .portfolio-title {
-	background-color: #DDD5C9;	/*beige*/
+	background-color: #999;	/*beige*/
 	border-bottom: 1px solid #C6BFB4;
-} 
+}
 
 #proList div:nth-child(4n+3) .portfolio-title {
 	background-color: #FF95CA;	/*beige*/
@@ -144,30 +144,6 @@ button.on {
 	margin-bottom: 10px;
 }
 
-.portfolio-title {
-	height: 60px;
-	background-color: #98DaD6;  /*blue */
-	border-bottom: 1px solid #4FBAAA;
-	color: #ffffff;
-	text-align: center;
-	padding: 15px 10px 10px 10px;
-}
-
-#proList div:nth-child(4n+2) .portfolio-title {
-	background-color: #DDD5C9;	/*beige*/
-	border-bottom: 1px solid #C6BFB4;
-} 
-
-#proList div:nth-child(4n+3) .portfolio-title {
-	background-color: #FF95CA;	/*beige*/
-	border-bottom: 1px solid #C6BFB4;
-} 
-
-#proList div:nth-child(4n+4) .portfolio-title {
-	background-color: #FF9985;	/*pink*/
-	border-bottom: 1px solid #D97F88;
-}
-
 .portfolio-title h3 {
 	font-size: 15px;
  	line-height: 15px; 
@@ -257,7 +233,7 @@ button.on {
 
 .info,
 .bookmark {
-	padding-top:2px;
+	padding-top:4px;
 	color: #fff;
 }
 

@@ -2,6 +2,8 @@ package tw.com.queautiful.product.service;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -34,6 +36,9 @@ public class ProductServiceTest {
 	
 	@Autowired
 	private BrandService brandService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -55,9 +60,38 @@ public class ProductServiceTest {
 //		}
 		
 		Product product = productService.getById(1L);
+		
+		log.debug("reivew_size = {}", product.getReviews().size());
+		
+		int[] ages = new int[10]; 
+		int[] stars = new int[6];
+		
 		for(Review review : product.getReviews()) {
-			log.debug("review = {}", review);
+			
+			log.debug("review_star = {}", review.getReviewRating());
+			
+			Date date = review.getMember().getBirthDay();
+			
+			int age = 0;
+			try {
+				age = memberService.getMemberAge(date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			ages[age/10] ++;
+			stars[review.getReviewRating()] ++;
+			
 		}
+		
+		for(int i = 0; i<ages.length; i++) {
+			log.debug("ages {} = {}", i, ages[i]);
+		}
+		
+		for(int i = 0; i<stars.length; i++) {
+			log.debug("stars {} = {}", i, stars[i]);
+		}
+		
 	}
 
 }
