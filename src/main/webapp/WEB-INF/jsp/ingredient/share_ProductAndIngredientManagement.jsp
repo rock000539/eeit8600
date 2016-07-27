@@ -51,7 +51,7 @@ $(function(){
  //----------------------------------------------
  		$(".checkIngredient").click(function(e){
 			var proIdStr=e.target.name;
-			document.location.href="/prodIngreList/editIngredient?proIdStr="+proIdStr;
+			document.location.href="/prodIngreList/share_editIngredient?proIdStr="+proIdStr;
 
 			
 		});//end of $(".checkIngredient").click
@@ -76,15 +76,29 @@ height: 100px;
 width:500px;
 margin: auto auto;}
 #buttonTd{
-width: 80px;}
+width: 80px;
+padding-left: 20px;}
+.grey_bg{
+min-height: 500px;
+background-image: url("/images/IngredientBackground.jpg");
+-moz-background-size:cover;
+-webkit-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+}
+#searchIngerdinet{
+color:white;}
 </style>
 </head>
 <body>
-!--加入header&nav -->
+<!--加入header&nav -->
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 <!-- ////////////////////////////////////////////////////////////////////-->
+<div class="grey_bg row ">
+
+<br><br>
 <table id="mainSpace" >
 <tr><td colspan="2">請輸入產品名/部分產品名，查詢成份</td></tr>
 <form action="">
@@ -97,6 +111,8 @@ width: 80px;}
 </table>	
 <table id="productList" class="table  table-hover"></table>
 <div id="showArea"></div>
+
+</div>
 	<!-- ////////////////////////////////////////////////////////////////////-->
             <!-- **每頁不同的內容結束** -->
 

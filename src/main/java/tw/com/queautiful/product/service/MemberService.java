@@ -66,6 +66,9 @@ public class MemberService {
 	}
 
 	public void update(Member member) {
+		if (member.getMemberImg() == null) {
+			member.setMemberImg("src/main/webapp/WEB-INF/img/member/member_default.png");
+		}
 		memberDao.save(member);
 	}
 

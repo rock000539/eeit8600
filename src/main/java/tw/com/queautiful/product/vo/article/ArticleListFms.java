@@ -25,13 +25,13 @@ public class ArticleListFms {
 	
 	private String nickname;
 	
-	private java.sql.Date memberRegiDate;
+//	private java.sql.Date memberRegiDate;
 	
 	//回覆數
 	private Integer arSize;
 	
 	//最新回覆
-	private ArticleReply theLatestReply;
+	private ArticleReply lastPost;
 
 	//留言數
 	private Integer acmsSize;
@@ -107,13 +107,13 @@ public class ArticleListFms {
 		this.nickname = nickname;
 	}
 	
-	public java.sql.Date getMemberRegiDate() {
-		return memberRegiDate;
-	}
-
-	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
-		this.memberRegiDate = memberRegiDate;
-	}
+//	public java.sql.Date getMemberRegiDate() {
+//		return memberRegiDate;
+//	}
+//
+//	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+//		this.memberRegiDate = memberRegiDate;
+//	}
 
 	public Integer getArSize() {
 		return arSize;
@@ -123,12 +123,12 @@ public class ArticleListFms {
 		this.arSize = arSize;
 	}
 	
-	public ArticleReply getTheLatestReply() {
-		return theLatestReply;
+	public ArticleReply getLastPost() {
+		return lastPost;
 	}
 
-	public void setTheLatestReply(ArticleReply theLatestReply) {
-		this.theLatestReply = theLatestReply;
+	public void setLastPost(ArticleReply lastPost) {
+		this.lastPost = lastPost;
 	}
 
 	public Integer getAcmsSize() {

@@ -59,8 +59,10 @@ h2, h4{
 .prod{
 	color:#000;
 	font-weight: 400;
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 20px;
 	display:inline-block;
+	padding-bottom: 5px;
 }
 .reviewTime, .articleTime{
 	position:relative;
@@ -133,7 +135,7 @@ h2, h4{
 	line-height: 20px;
 }
 .reviewContent h2>span:hover , .articleEdit:hover{
-	background: #FF1E76;
+	background: #000;
 }
 .preview{
 	overflow: hidden; 

@@ -22,7 +22,6 @@
 <style>
 .memberDiv{
 	margin-bottom: 100px;
-	padding-left: 100px;
 	padding-right: 80px;
 }
 .delay-05s { 
@@ -66,6 +65,7 @@
 			       <h3>${member.nickname}</h3>
 			       <p>${member.gender}, ${member.skinType} skin, from ${member.addr}</p>
 			       <a id="editProfile" class="btn btn-default" 
+			       		onclick="location.replace("http://www.w3schools.com")"
 			       		href="<% request.getContextPath(); %>/members/profile/edit">
 			       		<i class="fa fa-pencil"></i> EDIT PROFILE</a>
 			</div>

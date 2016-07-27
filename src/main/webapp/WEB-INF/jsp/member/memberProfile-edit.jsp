@@ -55,8 +55,7 @@
 				<div class="grey_bg row">
 
 <div class="row detail-div">
-	<div id="div1" class="col-lg-2"></div>
-	<div class="col-lg-6 col-sm-6 wow fadeInLeft delay-05s memberDiv">
+	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		
 <form accept-charset="UTF-8" class="form-horizontal" id="editForm">
 	<div id="member-header" class="detail-list">
@@ -142,8 +141,26 @@
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="skinType">SkinType</label>
 	    <div class="col-sm-7">
-	    	<input type="text" class="form-control" id="skinType"
-	    		name="skinType" value="${member.skinType}">
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Normal" ${member.skinType=='Normal'? 'checked':''}> Normal
+		    </label>
+		    <label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Combination" ${member.skinType=='Combination'? 'checked':''}> Combination
+			</label>
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Dry" ${member.skinType=='Dry'? 'checked':''}> Dry
+		    </label>
+		    <label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Oily" ${member.skinType=='Oily'? 'checked':''}> Oily
+			</label>
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Sensitive" ${member.skinType=='Sensitive'? 'checked':''}> Sensitive
+		    </label>
 	    </div>
 	</div>
 	<div class="form-group">
@@ -169,8 +186,6 @@
 </form>
 
 	</div> <!-- col-lg -->
-	
-	<div class="col-lg-1"></div>
 	
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 	
@@ -230,7 +245,7 @@
 			formdata.append('member', new Blob([JSON.stringify($('#editForm').serializeObject())],
 							{type: 'application/json'})); 			
 			$.ajax({
-				url : "/members/insert",
+				url : "/members/update",
 				type : "POST",
 				contentType : false,
 				processData : false, 
@@ -239,7 +254,7 @@
 				success : function(result) {
 					//$(':text:gt(0)').val(" ");//clear the form except id
 					console.log(result);//test
-					
+					location.href="/members/profile";
 				}
 			});
  		}

@@ -13,9 +13,11 @@
          <c:if test="${empty nickname}">
 		<!--  登入前 -->
             <li>
+            <c:if test="${empty memberId}">
                 <a href="/fmslogin"><i class="fa fa-user" aria-hidden="true"></i>
-                <span style="font-family: Open Sans;">&nbsp Login / Sign Up<span>
+                <span style="font-family: Open Sans;">&nbsp Login / Sign Up</span>
                 </a>
+            </c:if>
             </li>
             
         </c:if>
