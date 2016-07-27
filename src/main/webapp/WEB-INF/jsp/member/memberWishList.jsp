@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/css/animate.css">
     <!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
+    
+    <script src="/js/jquery.min.js"></script>
 </head>
 <style>
 #prodDiv{
@@ -166,6 +168,8 @@ i{
 </div> <!-- #prodDiv -->
 
 
+</div> <!-- memberDiv -->
+
 <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -175,8 +179,6 @@ i{
     </div>
   </div>
 </div>
-
-</div> <!-- memberDiv -->
 
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 
@@ -191,7 +193,6 @@ i{
 			
 
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
@@ -204,28 +205,30 @@ i{
 	<script src="/js/member/member.js"></script>
 <script>
 $(function(){
+	var btn1;
+	var prodId;
+	
 	$('.btn-delete').click(function(e){
-		var btn1 = e.target;
-		var prodId = btn1.getAttribute('value');
+		btn1 = e.target;
+		prodId = btn1.getAttribute('value');
 		console.log(btn1);
-		console.log(prodId);
-		
-		$('#del-confirm').click(function(){
-			$.ajax({
-				url:"/members/like/product/delete",
-				data:{"prodId": prodId},
-				type:'get',
-				success:function(result){
-					console.log(result);
-					if(result){
- 						$(".portfolio-item[dataId*="+prodId+"]").remove();
-					}
-					$('#myModal').modal('toggle');
-				}
-			}); //ajax
-		});
-		
+		console.log(prodId);	
 	});//btn-delete onClick
+		
+	$('#del-confirm').click(function(){		
+		$.ajax({
+			url:"/members/like/product/delete",
+			data:{"prodId": prodId},
+			type:'get',
+			success:function(result){
+				console.log(result);
+				if(result){
+						$(".portfolio-item[dataId*="+prodId+"]").remove();
+				}
+				$('#myModal').modal('toggle');
+			}
+		}); //ajax
+	});
 	
 	
 	var timelineBlocks = $('.portfolio-item'),
