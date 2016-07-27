@@ -26,6 +26,8 @@ background-image: url("/images/IngredientBackground.jpg");
 -o-background-size:cover;
 background-size:cover;
 min-height: 500px;}
+.item{
+margin: 6px;}
 </style>		
 </head>
 
@@ -35,10 +37,11 @@ min-height: 500px;}
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row ">
+				<br><br>
 				<div class="container">
 				<div class=" row ">
 				
-					<div class="item mobile isotope-item" style="width: 376px; height: 270px;display:inline-block;position:relative;float:left;transform: translate3d(130px, 30px, 0px);text-align:center;">
+					<div class="item mobile isotope-item" style="width: 376px; height: 270px;display:inline-block;position:relative;float:left;text-align:center;">
                             <figure class="touching effect-bubba">
                                 <img src="/img/cosmeticProducts.jpg"  alt="" class="img-responsive" >
 
@@ -53,7 +56,7 @@ min-height: 500px;}
                         </div>
                          
                                                                     
-                        <div class="item mobile isotope-item" style="width: 376px; height: 270px; display:inline-block;position:relative;transform: translate3d(280px, 30px, 0px);text-align:center;">
+                        <div class="item mobile isotope-item" style="width: 376px; height: 270px; display:inline-block;position:relative;text-align:center;">
                             <figure class="touching effect-bubba">
                                 <img src="/img/1-1502031R346120.jpg" alt="" class="img-responsive">
 
@@ -66,6 +69,23 @@ min-height: 500px;}
                                 </figcaption>
                             </figure>
                             <div><h1>Find by Ingredient</h1></div>
+                        </div>
+                        
+                        
+                        
+                       <div class="item mobile isotope-item" style="width: 376px; height: 270px; display:inline-block;position:relative;text-align:center;">
+                            <figure class="touching effect-bubba">
+                                <img src="/img/shareProductIngredient.jpg" alt="" class="img-responsive">
+
+                                <div class="option">
+                                    <a href="/prodIngreList/shareMainPage" class="fa fa-link"></a>
+                                </div>
+                                <figcaption class="item-description">
+                                    <h5>分享產品成份資訊</h5>
+                                    
+                                </figcaption>
+                            </figure>
+                            <div><h1>Share your Information</h1></div>
                         </div>
 					
 				</div></div></div>     

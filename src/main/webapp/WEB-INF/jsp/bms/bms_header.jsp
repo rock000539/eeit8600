@@ -36,6 +36,7 @@
 							<i class="fa fa-bell-o"></i>
 							<span class="label">5</span>
 						</a>
+			<!-- //////////////////////////////////////////////////////////////////////// -->			
 						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
                             <li class="dropdown-header">Notifications (5)</li>
                             <li class="media">
@@ -89,6 +90,7 @@
                                 <a href="javascript:;">View more</a>
                             </li>
 						</ul>
+				<!-- //////////////////////////////////////////////////////////////////////// -->		
 					</li>
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
