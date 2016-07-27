@@ -92,8 +92,8 @@
         </div>
     </div>
    
- <script src="/js/jquery.min.js"></script>
- <script type='text/javascript'>
+
+<script type='text/javascript'> 
 $(function(){
 	var start = Date.now() ;
 	var pageUrl = window.location.toString();
@@ -113,7 +113,7 @@ $(function(){
 		})
 	}
 })
-</script>   
+ </script>   
     
 </header>
 <!--End Header-->

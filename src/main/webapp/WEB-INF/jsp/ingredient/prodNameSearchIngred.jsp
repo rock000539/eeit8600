@@ -65,7 +65,13 @@ margin: auto auto;
     -moz-border-radius: 2px;
 }
 .grey_bg{
-min-height: 450px;}
+min-height: 500px;
+background-image: url("/images/IngredientBackground.jpg");
+-moz-background-size:cover;
+-webkit-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+}
 button{color:white;
 }
 </style>

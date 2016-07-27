@@ -100,7 +100,7 @@ color:white;}
 
 <br><br>
 <table id="mainSpace" >
-<tr><td colspan="2">請輸入產品名/部分產品名，查詢成份</td></tr>
+<tr><td colspan="2">請輸入產品名/部分產品名，決定產品</td></tr>
 <form action="">
 
 <tr>
