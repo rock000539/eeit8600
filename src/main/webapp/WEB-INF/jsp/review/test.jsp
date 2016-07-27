@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
 <style>
+/* ===========Slidebar  Start=================== */
 body {
     position: relative;
     overflow-x: hidden;
@@ -312,7 +313,127 @@ html { height: 100%;}
     bottom: 0;
     z-index: 1;
 }
+/* ===========Slidebar  End=================== */
 
+
+
+
+/* ===========article  Start=================== */
+
+.bgcolor{
+/* 	background-color:#EBDBFF; */
+	background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+/* 	padding:40px; */
+/* 	border-radius:10px; */
+}
+
+.article > section{
+	padding-top: 0;
+	padding-bottom:10px;
+}
+
+#addForm > table{
+width:72vw;
+}
+
+/*dividerHeading*/
+.dividerHeading,
+.widget_title
+{
+    text-align: center;
+    position: relative;
+    margin-bottom:25px;
+}
+.dividerHeading h4,
+.widget_title h4
+{
+    font-size:18px;
+    position:relative;
+    line-height:0;
+    border-bottom: 1px solid #727CB6;
+}
+.dividerHeading h4 span{
+    background:white;
+    position:relative;
+    line-height: 7px;
+    top: 4px;
+    display: inline-block;
+
+}
+.dividerHeading h4 span:before,
+.dividerHeading h4 span:after,
+.widget_title h4 span:after,
+.widget_title h4 span:before
+{
+    color:#E74C3C;
+    font-size:10px;
+    content: "\f10c";
+    font-family:fontawesome;
+    display: inline-block;
+
+}
+.dividerHeading h4 span:before,
+.widget_title h4 span:before
+{
+    margin-right:10px ;
+}
+.dividerHeading h4 span:after,
+.widget_title h4 span:after
+{
+    margin-left:10px ;
+}
+
+/* 修改樣式 */
+
+.dividerHeading h4 span:after, 
+.widget_title h4 span:after, 
+.widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span:before, 
+.dividerHeading h4 span:after, 
+.widget_title h4 span:after, 
+.widget_title h4 span:before {
+    color: #727CB6;
+}
+
+.dividerHeading h4 span {
+    background: #EBDBFF; /*new post bgcolor*/
+}
+		
+.dividerHeading h4,
+.widget_title h4{
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.dividerHeading h4::before, .widget_title h4::before { 
+	border: 0px;
+    content: none;
+}
+
+#addForm button{
+	margin:0 5px;
+}
+
+select { 
+	text-align-last:center; 
+}
+
+.hasbutton{
+	text-align:center; 
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+/* ===========article  End=================== */
 </style>
 </head>
 
@@ -322,12 +443,10 @@ html { height: 100%;}
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
-<div class="grey_bg row">
-    
-    
+<div class="grey_bg row bgcolor">
+<FORM id="addForm">
     <div id="wrapper">
         <div class="overlay"></div>
-    
         <!-- Sidebar -->
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" style="margin-top:135px;height:350px;">
             <ul class="nav sidebar-nav">
@@ -347,33 +466,63 @@ html { height: 100%;}
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
-        <div class="col-lg-1 col-md-1 col-sm-1">111111111111111111111111</div>
-        <div class="col-lg-10 col-md-10 col-sm-10">22222
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10 article">
 <!-- 	        <div id="page-content-wrapper"> -->
-	            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-	                <span class="hamb-top"></span>
-	    			<span class="hamb-middle"></span>
-					<span class="hamb-bottom"></span>
-	            </button>
-	                <div class="row">
-	                    <div class="col-lg-8 col-lg-offset-2">
-	                        <h1>Fancy Toggle Sidebar Navigation</h1>
-	                        <p>Bacon ipsum dolor sit amet tri-tip shoulder tenderloin shankle. Bresaola tail pancetta ball tip doner meatloaf corned beef. Kevin pastrami tri-tip prosciutto ham hock pork belly bacon pork loin salami pork chop shank corned beef tenderloin meatball cow. Pork bresaola meatloaf tongue, landjaeger tail andouille strip steak tenderloin sausage chicken tri-tip. Pastrami tri-tip kielbasa sausage porchetta pig sirloin boudin rump meatball andouille chuck tenderloin biltong shank </p>
-	                        <p>Pig meatloaf bresaola, spare ribs venison short loin rump pork loin drumstick jowl meatball brisket. Landjaeger chicken fatback pork loin doner sirloin cow short ribs hamburger shoulder salami pastrami. Pork swine beef ribs t-bone flank filet mignon, ground round tongue. Tri-tip cow turducken shank beef shoulder bresaola tongue flank leberkas ball tip.</p>
-	                        <p>Filet mignon brisket pancetta fatback short ribs short loin prosciutto jowl turducken biltong kevin pork chop pork beef ribs bresaola. Tongue beef ribs pastrami boudin. Chicken bresaola kielbasa strip steak biltong. Corned beef pork loin cow pig short ribs boudin bacon pork belly chicken andouille. Filet mignon flank turkey tongue. Turkey ball tip kielbasa pastrami flank tri-tip t-bone kevin landjaeger capicola tail fatback pork loin beef jerky.</p>
-	                        <p>Chicken ham hock shankle, strip steak ground round meatball pork belly jowl pancetta sausage spare ribs. Pork loin cow salami pork belly. Tri-tip pork loin sausage jerky prosciutto t-bone bresaola frankfurter sirloin pork chop ribeye corned beef chuck. Short loin hamburger tenderloin, landjaeger venison porchetta strip steak turducken pancetta beef cow leberkas sausage beef ribs. Shoulder ham jerky kielbasa. Pig doner short loin pork chop. Short ribs frankfurter rump meatloaf.</p>
-	                        <p>Filet mignon biltong chuck pork belly, corned beef ground round ribeye short loin rump swine. Hamburger drumstick turkey, shank rump biltong pork loin jowl sausage chicken. Rump pork belly fatback ball tip swine doner pig. Salami jerky cow, boudin pork chop sausage tongue andouille turkey.</p>                         
-	                    </div>
-	                </div>
-<!-- 	        </div> -->
-        <!-- /#page-content-wrapper -->
+
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+    			<span class="hamb-middle"></span>
+				<span class="hamb-bottom"></span>
+            </button>
+            
+          	<section class="team row sub_content">
+				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
+		            <div class="dividerHeading">
+		                <h4><span style="font-family:'Microsoft JhengHei';">寫心得</span></h4>
+		            </div>
+		        </div>
+			</section>  
+			 
+			
+			<div class="row">
+				<div class="form-group">
+					<div class="col-lg-7 col-md-7 col-sm-7">
+						<input type="hidden" name="memberId" value="${memberId}"/>
+						<input type="hidden" name="rewCollect" value="0"/>
+						<input type="hidden" name="reviewShow" value="true"/>
+						<input type="hidden" name="reviewReport" value="0"/>
+						
+						<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;"/>
+<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
+			
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-5">
+						<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${param.articleTitle}" placeholder="Please Enter Your Title"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-lg-12">
+						<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
+					</div>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="form-group">
+					<div class="col-lg-12 hasbutton">
+						<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
+					</div>
+				</div>
+			</div>		
+<!-- 	        </div> <!-- /#page-content-wrapper -->-->
         </div>
-        <div class="col-lg-1 col-md-1 col-sm-1">1111111</div>
-
-
-    </div>
-    <!-- /#wrapper -->
-				</div>        
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    </div><!-- /#wrapper -->
+</FORM>
+</div>        
             <!-- **每頁不同的內容結束** -->
 </div>
 <!--加入footer -->
@@ -382,14 +531,19 @@ html { height: 100%;}
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	
+	<script src="/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
+	
+	<script type="text/javascript" src="/js/article/summernote.js"></script>
+	
+	<script src="/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript">
 	$(document).ready(function () {
@@ -419,7 +573,67 @@ html { height: 100%;}
 		  $('[data-toggle="offcanvas"]').click(function () {
 		        $('#wrapper').toggleClass('toggled');
 		  });  
+		  
+		/*  ===================================================== */
+		  
+		//驗證
+// 			$('#addForm').validate({
+// 				onfocusout: function (element) {
+// 			        $(element).valid();
+// 			    },
+// 				rules:{
+// 					articleType:{required:true},
+// 					articleTitle:{required:true},
+// //	 				articleContent:{required:true},
+// 				},//end of rules
+// 				messages:{
+// //	 				articleType:'必填',
+// //	 				articleTitle:'必填',
+// //	 				articleContent:'必填'
+// 				},//end of messages			
+// 			});
+			
+
+			$('#confirm').on('click',function(){
+
+//	 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
+//	 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
+//	 			console.log(JSON.stringify(datas));
+				$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
+				$.ajax({
+						url:'/articles/insert',
+						type:'post',
+						contentType:'application/json;charset=UTF-8',
+//	 					data:JSON.stringify(datas),
+						data:JSON.stringify($('#addForm').serializeObject()),
+						dataType:'json',
+						success:function(data){
+							location.href="/articles/listfms";
+		 				}
+					});		
+				
+			});
+
+			$.fn.serializeObject = function()
+			{
+			    var o = {};
+			    var a = this.serializeArray();
+			    $.each(a, function() {
+			        if (o[this.name] !== undefined) {
+			            if (!o[this.name].push) {
+			                o[this.name] = [o[this.name]];
+			            }
+			            o[this.name].push(this.value || '');
+			        } else {
+			            o[this.name] = this.value || '';
+			        }
+			    });
+			    return o;
+			};
 		});
+		
+		
+		
 	
 	</script>
 </body>

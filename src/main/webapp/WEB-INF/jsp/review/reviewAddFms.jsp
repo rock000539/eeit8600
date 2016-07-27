@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Review Add</title>
+    <title>Article Edit</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +33,7 @@
 	padding-bottom:10px;
 }
 
-#addForm > table{
+#editForm > table{
 width:72vw;
 }
 
@@ -117,7 +117,7 @@ width:72vw;
     content: none;
 }
 
-#addForm button{
+#editForm button{
 	margin:0 5px;
 }
 
@@ -153,31 +153,31 @@ select {
 		<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
 			            <div class="dividerHeading">
-			                <h4><span>Post A New Review</span></h4>
+			                <h4><span>Edit your Post</span></h4>
 			            </div>
 			        </div>
 		</section>
-	<FORM id="addForm">
+	<FORM id="editForm">
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-3">
+				
 				<input type="hidden" name="memberId" value="${memberId}"/>
 				<input type="hidden" name="rewCollect" value="0"/>
 				<input type="hidden" name="reviewShow" value="true"/>
 				<input type="hidden" name="reviewReport" value="0"/>
 				
 				<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea>
-	
+				
 				<select name="articleType" class="form-control" >
-				<option value="" disabled selected hidden>--Select your Type--</option>
-				<option value="news">情報</option>
-				<option value="solicit">徵文</option>
-				<option value="question">問題</option>
-				<option value="chat">閒聊</option>			
+				<option id="NEWS" value="news">情報</option>
+				<option id="SOLICIT" value="solicit">徵文</option>
+				<option id="QUESTION" value="question">問題</option>
+				<option id="CHAT" value="chat">閒聊</option>			
 				</select>
 			</div>
 			<div class="col-lg-9">
-				<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${param.articleTitle}" placeholder="Please Enter Your Title">
+				<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${article.articleTitle}">
 			</div>
 		</div>
 	</div>
@@ -250,9 +250,16 @@ select {
 	
 	<script>
 	$(function(){
+//  		console.log('${article.articleContent}');
+//  		console.log("CKEDITOR.instances=="+CKEDITOR.instances);
+// 		console.log('${article.articleType}');
+		CKEDITOR.replace('articleContent');
+		CKEDITOR.instances['articleContent'].setData('${article.articleContent}');
+		// 設定文章Type & Content
+		$('#${article.articleType}').attr('selected',true);
 		
 		//驗證
-		$('#addForm').validate({
+		$('#editForm').validate({
 			onfocusout: function (element) {
 		        $(element).valid();
 		    },
@@ -271,19 +278,16 @@ select {
 
 		$('#confirm').on('click',function(){
 
-// 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
-// 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
-// 			console.log(JSON.stringify(datas));
 			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
 			$.ajax({
-					url:'/articles/insert',
+					url:'/articles/update',
 					type:'post',
 					contentType:'application/json;charset=UTF-8',
-// 					data:JSON.stringify(datas),
-					data:JSON.stringify($('#addForm').serializeObject()),
+					data:JSON.stringify($('#editForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
-						location.href="/articles/listfms";
+						console.log(data);
+// 						location.href="/articles/listfms";
 	 				}
 				});		
 			
@@ -308,7 +312,7 @@ select {
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
+		if($('#editForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Post Type：'+$(':selected').val()+'</p>')
