@@ -222,8 +222,13 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/add")
-	public String addPage() {
+	public String addPage(@RequestParam(value="prodId",required=false) Long prodId) {
 		return "/review/reviewAddFms";
+	}
+	
+	@RequestMapping("/test")
+	public String testPage() {
+		return "/review/test";
 	}
 
 	@RequestMapping(value="/insert_fms", method=RequestMethod.POST)
