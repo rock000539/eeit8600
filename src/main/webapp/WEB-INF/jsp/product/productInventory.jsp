@@ -35,7 +35,27 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductInventory</title>
 
-	<style></style>
+	<style>
+	
+		.bgcolor{
+			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
+		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
+		  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
+		  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+		}
+		
+		.blog_medium .post_meta h2 {
+		    margin-bottom: 5px;
+		    margin-top: 0;
+		}
+		
+		.blog_medium .post_meta .metaInfo {
+		    font-size: 0.95em;
+		    margin: 0 auto;
+		    padding: 0px;
+		}
+		
+	</style>
 
 </head>
 <body>
@@ -46,7 +66,7 @@
 	<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 	
 	<!-- **每頁不同的內容從這裡開始** -->
-	<div class="grey_bg row">
+	<div class="grey_bg row bgcolor">
 	
 		<input id="mode" type="hidden" value="list" />
 		<input id="brandId" type="hidden" value="${brandId}" />
@@ -64,7 +84,7 @@
 		
 		<div id="list" class="row sub_content">
 			
-			<div id="lpost_list" class="col-lg-6 col-md-4 col-sm-2 col-xs-12 blog_medium wow fadeInDown" style="margin-top:50px; border:3px solid black;">
+			<div id="lpost_list" class="col-lg-6 col-md-4 col-sm-2 col-xs-12 blog_medium wow fadeInDown" style="margin-top:50px; padding-left:45px;">
 				
 				<c:forEach items="${products}" var="product" begin="0" step="2">
 					<article class="post">
@@ -98,7 +118,7 @@
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
 							</c:if>
 							<span style="float:right;">
-								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;收藏商品</a>
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 							</span>
 			            </div>
@@ -108,7 +128,7 @@
 				
 			</div>
 		
-			<div id="rpost_list" class="col-lg-6 col-md-4 col-sm-2 col-xs-12 blog_medium wow fadeInDown" style="margin-top:50px; border:3px solid black;">
+			<div id="rpost_list" class="col-lg-6 col-md-4 col-sm-2 col-xs-12 blog_medium wow fadeInDown" style="margin-top:50px; padding-right:45px;">
 				
 				<c:forEach items="${products}" var="product" begin="1" step="2">
 					<article class="post">
@@ -142,7 +162,7 @@
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
 							</c:if>
 							<span style="float:right;">
-								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;收藏商品</a>
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 							</span>
 			            </div>
@@ -215,7 +235,7 @@
 				</div>
 				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>				
 				<span style="float:right;">
-					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="save_click($(this))"> <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏商品</a>
+					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;&nbsp;收藏商品</a>
 					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
 				</span>
             </div>
@@ -239,7 +259,7 @@
 					<div class="card__share">
 			            <div class="card__social">  
 			                <a class="share-icon info" data-prodId="_prodId" onClick="info_click($(this))"><span class="fa fa-info"></span></a>
-			                <a class="share-icon bookmark" data-prodId="_prodId" onClick="save_click($(this))"><span class="fa fa-bookmark"></span></a>
+			                <a class="share-icon bookmark" data-prodId="_prodId" onClick="save_click($(this))"><span class="fa fa-heart"></span></a>
 			            </div>
 			            <a id="share" class="share-toggle share-icon" href="#"></a>
 			        </div>
@@ -386,7 +406,31 @@
 		
 		// 收藏商品
 		function save_click (a) {
-			console.log($(a).attr('data-prodId'));
+			
+			var prodId = $(a).attr('data-prodId');
+			
+			$.ajax({
+				url: '',
+				type: 'POST',
+				dataType: 'json',
+				contextType: 'application/json; charset=utf-8;',
+				data: { 'prodId': prodId },
+				success: function(response) {
+					if(response == true) {
+						swal({
+							type: 'success',
+							text: '<h1 style="line-height:0px;">Save this product!</h1>',
+							showConfirmButton: false,
+							customClass: 'swal',
+							timer: 1000,
+						});
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log('jqXHR = ' + jqXHR + ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+				},
+			});
+			
 		}
 		
 		// Grid/List System

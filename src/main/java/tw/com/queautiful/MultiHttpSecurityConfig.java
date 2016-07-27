@@ -51,18 +51,7 @@ public class MultiHttpSecurityConfig {
     	
         auth.inMemoryAuthentication()
         .withUser("user").password("p").roles("USER");
-        
-//        List<Member> members = new ArrayList<Member>();
-//        members = memberService.getAll();
-//        
-//        for (int i = 0; i < members.size(); i++)
-//        {
-//            Member member = new Member();
-//            member = (Member) members.get(i);
-//            auth.inMemoryAuthentication().withUser(member.getEmail()).password(member.getPassword())
-//                    .roles("USER");
-//        }
-   
+          
     }   
     
     @Configuration

@@ -247,5 +247,7 @@ $(function(){
 		
 		    $( "#IngredientArea" ).sortable();
 	        $( "#IngredientArea" ).disableSelection();
+	        
+   
 		    
 }) //--end of $(function)

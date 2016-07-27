@@ -6,6 +6,8 @@ import tw.com.queautiful.product.entity.Review;
 
 public class ProductView {
 	
+	private Long prodId;
+	
 	private String prodName;
 
 	private String brandName;
@@ -23,6 +25,14 @@ public class ProductView {
 	private String prodImg;
 	
 	private List<Review> reviews;
+
+	public Long getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
 
 	public String getProdName() {
 		return prodName;
