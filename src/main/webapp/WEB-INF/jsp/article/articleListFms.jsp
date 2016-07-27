@@ -85,10 +85,13 @@
 <!-- 				    <div class="clearfix"></div> -->
 <!-- 				</div> -->
 <!-- 				<p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p> -->
-				  <button class="btn btn-default btn-lg" type="button" style="width:150px;margin-right:10px;" id="allpost">All Post</button>
+				  <a href="/articles/listfms">
+				  	<button class="btn btn-default btn-lg" type="button" style="width:150px;margin-right:10px;" id="allpost">All Post</button>
+				  </a>
 				  <a href="/articles/add"><button class="btn btn-default btn-lg" type="button" style="width:150px">
-				  	<i class="fa fa-plus"></i>&nbspNew Topic
-				  </button></a>
+				  	<i class="fa fa-plus"></i>&nbsp;New Topic</button>
+				  </a>
+				  
 				  <table class="table forum table-striped">
 				    <thead id="thead">
 				      <tr>
@@ -120,25 +123,25 @@
 						</c:choose>
 				        
 				        <td>
-				          <h4><a data-articleId="${article.articleId}" class="articleTitle" onclick="info_click($(this))">【${article.articleType}】${article.articleTitle}</a><br>
+				          <h4><a class="articleTitle" onclick="location.href='/articles/view/${article.articleId}'">【${article.articleType}】${article.articleTitle}</a><br>
 				          <small>
-				          <i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a> &nbsp&nbsp
-				          <i class="fa fa-clock-o"></i>&nbsp${fn:substring(article.articleTime,0,19)}
+				          <i class="fa fa-user"></i><a href="#">&nbsp;${article.nickname}</a> &nbsp;&nbsp;
+				          <i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)}
 				          </small>
 				          </h4>
 				        </td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.arSize}</a></td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
-				        <c:if test="${empty article.theLatestReply}">
+				        <c:if test="${empty article.lastPost}">
 					        <td class="hidden-xs hidden-sm">
-					        	<i class="fa fa-user"></i><a href="#">&nbsp${article.nickname}</a><br>
+					        	<i class="fa fa-user"></i><a href="#">&nbsp;${article.nickname}</a><br>
 					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
 					        </td>
 				        </c:if>
-				        <c:if test="${not empty article.theLatestReply}">
+				        <c:if test="${not empty article.lastPost}">
 					        <td class="hidden-xs hidden-sm">
-					        	<i class="fa fa-user"></i><a href="#">&nbsp${article.theLatestReply.member.nickname}</a><br>
-					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.theLatestReply.arTime,0,19)}</small>
+					        	<i class="fa fa-user"></i><a href="#">&nbsp;${article.lastPost.member.nickname}</a><br>
+					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.lastPost.arTime,0,19)}</small>
 					        </td>
 				        </c:if>
 				        
@@ -169,9 +172,6 @@
 	
 	<!-- Pagination Plugin -->
 	<script src="/js/product/inventory/jquery.bootpag.min.js"></script>
-	
-	<!-- jQuery Redirect Plugin -->
-	<script src="/js/jquery.redirect.js"></script>
 		
 	<!-- template -->
 	<script id="article_list" type="text/template">
@@ -180,18 +180,18 @@
 				<td class="text-center"><i class="fa _type fa-2x _color"></i></td>
 				
 				<td>
-				    <h4><a data-articleId="_articleId" class="articleTitle" onclick="info_click($(this))">【_articleType】_articleTitle</a><br>
+				    <h4><a class="articleTitle" onclick="location.href='/articles/view/_articleId'">【_articleType】_articleTitle</a><br>
 				    	<small>
-							<i class="fa fa-user"></i><a href="#">&nbsp_memberNickname</a>&nbsp&nbsp
-				    		<i class="fa fa-clock-o"></i>&nbsp_articleTime
+							<i class="fa fa-user"></i><a href="#">&nbsp;_memberNickname</a>&nbsp;&nbsp;
+				    		<i class="fa fa-clock-o"></i>&nbsp;_articleTime
 						</small>
 				    </h4>
 				</td>
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_arSize</a></td>
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_articleView</a></td>
 				<td class="hidden-xs hidden-sm">
-				    <i class="fa fa-user"></i><a href="#">&nbsp_memberNickname</a><br>
-					<small><i class="fa fa-clock-o"></i>_articleTime</small>
+				    <i class="fa fa-user"></i><a href="#">&nbsp;_lpmemberNickname</a><br>
+					<small><i class="fa fa-clock-o"></i>_lparticleTime</small>
 				</td>
 				
 			</tr>
@@ -199,10 +199,6 @@
 	
 	<script>
 	$(function(){
-		
-		$('#allpost').on('click',function(){
-			$.redirect('/articles/listfms');
-		});
 		
 		var href = window.location.href;
 		var typeIndex = href.lastIndexOf('=');
@@ -218,6 +214,7 @@
 			$('#articleType').val(type); //設定type="hidden" id="articleType"的value
 		}
 		
+		//分頁功能
 		$('#page_btn').bootpag({
 		    total:"${totalPage}",
  		    page:1,
@@ -242,14 +239,8 @@
 		});		
 	});
 	
-
-	function info_click(a) {
-// 		console.log($(a).attr('data-articleId'));
-		$.redirect('/articles/view', { 'articleId': $(a).attr('data-articleId') });
-	}
-	
 	function appendArticle(result){
-// 		console.log(result);
+		console.log(result);
 		$('tbody').empty();
 		   
 		   for(var i = 0; i < result.length; i++) {
@@ -257,6 +248,7 @@
 			   var str = $('#article_list').html();
 //				   console.log(str);
 			   
+			   //設定文章icon
 			   var str1 = '';
 			   if(result[i].articleType == 'news') {
 				   	str1 = str.replace('_type','fa-bullhorn').replace('_color', 'text-primary');
@@ -267,22 +259,24 @@
 			   } else if(result[i].articleType == 'chat') {
 				   	str1 = str.replace('_type','fa-wechat').replace('_color', 'text-warning');
 			   }
-			   
+			    
+			   //設定LastPost
 			   var str2 = '';
-			   if(result[i].articleView==null) {
-				   str2 = str1.replace("_articleView", 0);
+			   if(result[i].lastPost == null){
+				   str2 = str1.replace("_lpmemberNickname", result[i].nickname)
+		   						.replace("_lparticleTime", result[i].articleTime);
 			   } else {
-				   str2 = str1.replace("_articleView", result[i].articleView);
-			   }
+				   str2 = str1.replace("_lpmemberNickname", result[i].lastPost.nickname)
+								.replace("_lparticleTime", result[i].lastPost.arTime);
+			   }		   
 			   $(str2.replace("_articleType", result[i].articleType.toUpperCase())
 				    .replace("_articleId", result[i].articleId)
 		   			.replace("_articleType", result[i].articleType.toUpperCase())
 		   			.replace("_articleTitle", result[i].articleTitle)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
-		   			.replace("_arSize", result[i].arSize)
-		   			.replace("_memberNickname", result[i].nickname)
-		   			.replace("_articleTime", result[i].articleTime)
+		   			.replace("_arSize", result[i].arSize)	
+		   			.replace("_articleView", result[i].articleView)
 					).appendTo($('tbody'));
 		   }
 	}

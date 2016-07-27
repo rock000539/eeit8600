@@ -90,14 +90,14 @@ public class ArticleService {
 			Integer arSize = temp.getAreplies().size();
 			article.setArSize(arSize);
 			if(arSize!=0){
-				ArticleReply theLatestReply = temp.getAreplies().get(arSize-1);
-				article.setTheLatestReply(theLatestReply);
+				ArticleReply lastPost = temp.getAreplies().get(arSize-1);
+				article.setLastPost(lastPost);
 			}
-			Member member = temp.getMember();
-			log.debug("member-->{}",member);
-			article.setMemberId(member.getMemberId());
-			article.setNickname(member.getNickname());
-			article.setMemberRegiDate(member.getMemberRegiDate());
+//			Member member = temp.getMember();
+//			log.debug("member-->{}",member);
+//			article.setMemberId(member.getMemberId());
+//			article.setNickname(member.getNickname());
+//			article.setMemberRegiDate(member.getMemberRegiDate());
 //			Object[] reply = temp.getAreplies().toArray();
 //			article.setAcmsSize(temp.getAcms().size());
 			articles.add(article);
