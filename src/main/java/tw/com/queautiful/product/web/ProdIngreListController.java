@@ -230,7 +230,7 @@ public class ProdIngreListController {
 	//進入前台share頁面
 	@RequestMapping("/shareMainPage")
 	public String shareMainPage(){
-		return "/ingredient/share_editIngredient";
+		return "/ingredient/share_ProductAndIngredientManagement";
 	}
 	
 	//前台用戶share分享用-------
