@@ -249,7 +249,6 @@ select {
 	
 	<script>
 	$(function(){
-//  		console.log('${article.articleContent}');
 //  		console.log("CKEDITOR.instances=="+CKEDITOR.instances);
 // 		console.log('${article.articleType}');
 		CKEDITOR.replace('articleContent');
@@ -277,7 +276,7 @@ select {
 
 		$('#confirm').on('click',function(){
 
-			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
+			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData().replace(/\n/g,""));
 			$.ajax({
 					url:'/articles/update',
 					type:'post',
