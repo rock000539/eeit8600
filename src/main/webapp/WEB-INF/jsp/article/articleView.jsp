@@ -479,6 +479,11 @@ border:1px solid black;
 		} else {
 			$('.authorimg',this).removeClass('portrait');
 		}
+		console.log('memberid-->${memberId}')
+		
+		if('${memberId}' == ""){
+			$('#btn_reply').attr('disabled',true);
+		}
 		
 		//驗證
 		$('#addForm').validate({
