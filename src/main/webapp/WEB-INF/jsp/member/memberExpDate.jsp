@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
 	<!-- Scripts -->
@@ -119,6 +118,9 @@ td.data{
 .modal-content h2{
 	font-weight: 400;
 }
+.btn-delete{
+	background:#8A817C;
+}
 </style>
 </head>
 <body>
@@ -166,7 +168,7 @@ td.data{
 			        </table>
 		        </div>
 		        <div class="portfolio-btn">
-				    <button type="button" name="${items.expDate.dateId}" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Delete</button>
+				    <button type="button" name="${item.expDate.dateId}" class="btn btn-default btn-delete" data-toggle="modal" data-target="#myModal">Delete</button>
 				</div>
 	        </div> <!-- portfolio-content -->
         </div> <!-- portfolio-all -->
@@ -176,12 +178,12 @@ td.data{
 </div> <!-- col -->
 
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
     	<h2>Do you want to delete ${product.prodName} ?</h2>
     	<br>
-    	<button id="dialog-confirm" class="btn btn-default">Confirm</button>
+    	<button id="del-confirm" class="btn btn-default">Confirm</button>
     </div>
   </div>
 </div>
@@ -208,42 +210,27 @@ td.data{
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
 <script src="/js/member/member.js"></script>
 <script>
 $(function(){
-    $('.deleteDate').click(function(e){
+    $('.btn-delete').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
     	console.log(dateIdStr);
     	console.log(target);
-	//----dialog--------------------------
-	   $( "#dialog-confirm" ).dialog({
-        resizable: false,
-        height:190,width:300,
-        modal: true,
-        buttons: {
-          "刪除確認": function() {
-      // 刪除功能--------------------------------        
-          	$.ajax({
-      		url:'/expdate/delete',
-      		type : 'GET',
-      		data : {"dateIdStr":dateIdStr},
-      		success : function(date){
-      		
-      		$(target).parent().parent().parent().parent().remove();
-      		}
-      		})
-      // 刪除功能-------------------------------- 		
-      		
-            $( this ).dialog( "close" );
-          },
-          "取消": function() {
-            $( this ).dialog( "close" );
-          }
-        }
-      });
-
+    	
+    	$('#del-confirm').click(function(){
+    		$.ajax({
+        		url:'/expdate/delete',
+          		type : 'GET',
+          		data : {"dateIdStr":dateIdStr},
+          		success : function(result){
+          			console.log(result);
+          			$('#myModal').modal('toggle');
+          			
+          		}
+        	});
+    	});
     });//end $('#delete').click
 	
     /*----------------------------------------------------*/
