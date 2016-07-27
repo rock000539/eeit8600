@@ -113,7 +113,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
                 "/ingredients/startSearch",
-                "/articles/listfms","/articles/view","/articles/list_data","/js/**",
+                "/articles/listfms","/articles/view/**","/articles/list_data",
                 "/products/**") 
                 .permitAll()      //設定過濾條件 ↓         
                 //沒有設ROLE(一般人)，permitAll():表示以上路徑都可訪問                            

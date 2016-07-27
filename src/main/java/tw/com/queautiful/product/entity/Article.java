@@ -47,6 +47,10 @@ public class Article {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private java.sql.Timestamp articleTime;
 	
+	@Column(name = "AEDITTIME")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	private java.sql.Timestamp aEditTime;
+	
 	//文章觀看次數
 	@Column(name="ARTICLEVIEW") 
 	private Integer articleView;
@@ -134,6 +138,14 @@ public class Article {
 
 	public void setArticleTime(java.sql.Timestamp articleTime) {
 		this.articleTime = articleTime;
+	}
+	
+	public java.sql.Timestamp getaEditTime() {
+		return aEditTime;
+	}
+
+	public void setaEditTime(java.sql.Timestamp aEditTime) {
+		this.aEditTime = aEditTime;
 	}
 
 	public Integer getArticleView() {

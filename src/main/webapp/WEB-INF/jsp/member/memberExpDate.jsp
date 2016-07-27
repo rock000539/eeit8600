@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
 	<!-- customize -->
@@ -80,12 +82,16 @@ body {
 	margin-top: 20px;
 }
 p.bell{
+	margin-top: 10px;
 	font-size: 16px;
-	line-height: 36px;
-	color: #000;
+	line-height: 26px;
+	
 }
 .bell span{
 	font-size: 20px;
+}
+.days{
+	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
 }
 div.expinfo{
 	text-align: left;
@@ -121,6 +127,12 @@ td.data{
 .btn-delete{
 	background:#8A817C;
 }
+.expired{
+	color: #9A9A9A;
+}
+.within30{
+	color: #FF1E76;
+}
 </style>
 </head>
 <body>
@@ -130,7 +142,7 @@ td.data{
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
 <div class="row detail-div">
-	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
+	<div class="col-lg-10 col-sm-6 delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 		
 		
@@ -142,24 +154,33 @@ td.data{
     <div class="col-md-4 portfolio-item" dateId="${item.expDate.dateId}">
     	<div class="portfolio-all">
     		<c:set var="expDays" value="${item.lastsDay}"></c:set>
-	    	<c:if test="${expDays>60}">
+	    	<c:if test="${expDays>31 || expDays<=0}">
 	    	<div class="portfolio-title">
 	    		<small>${item.brandName}</small>
 		        <h3>${item.product.prodName}</h3>
 		    </div>
 		    </c:if>
 		    
-		    <c:if test="${expDays<60}">
-		    	<div class="portfolio-title pink">
+		    <c:if test="${expDays<=31 && expDays>0}">
+		    <div class="portfolio-title pink">
 	    		<small>${item.brandName}</small>
 		        <h3>${item.product.prodName}</h3>
 		    </div>
 		    </c:if>
 		    <div class="portfolio-content">
-		        <div class="portfolio-img"><a href="#">
+		        <div class="portfolio-img">
+		        	<a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}">
 		            <img src="/products/show?prodImg=${item.product.prodImg}"/>
 		        </a></div>
-		        <p class="bell"><i class="fa fa-bell-o"></i> Valid for &nbsp;<span>${item.lastsDay}</span>&nbsp;Days</p>
+		        
+		        <p class="bell <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<30 && expDays>0}"> within30</c:if>">
+		        	<i class="fa fa-bell-o "></i>&nbsp;
+		        	<c:if test="${expDays>=0}">
+		        		Valid for &nbsp;<span class="days">${item.lastsDay}</span>&nbsp;Days</c:if>
+		        	<c:if test="${expDays<0}">
+		        		Expired&nbsp;<span class="days">${item.lastsDay}</span>&nbsp;Days</c:if>
+		        </p>  <!-- ${fn:substringAfter(expDays, '-')} -->
+		        
 		        <div class="expinfo">
 			        <table>
 			        <tr><td class="info">Production&nbsp;&nbsp;</td><td class="data">${item.mfd}</td></tr>
@@ -226,18 +247,37 @@ $(function(){
           		success : function(result){
           			$(".portfolio-item[dateId*="+dateIdStr+"]").remove();
           			$('#myModal').modal('toggle');
-          			
           		}
         	});
     	});
     });//end $('#delete').click
 	
-    /*----------------------------------------------------*/
-    /*	Same Height Div's
-     /*----------------------------------------------------*/
-    if(jQuery.isFunction(jQuery.fn.matchHeight)){
-        $('.same-height').matchHeight();
-    }
+    
+    var timelineBlocks = $('.portfolio-item'),
+	offset = 0.8;
+	
+	hideBlocks(timelineBlocks, offset);
+	
+	$(window).on('scroll', function(){
+		(!window.requestAnimationFrame) 
+			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+	});
+
+	function hideBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.portfolio-all').addClass('is-hidden');
+			console.log("hide");
+		});
+	}
+
+	function showBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.portfolio-all').hasClass('is-hidden') ) && $(this).find('.portfolio-all').removeClass('is-hidden').addClass('animated fadeInUp');
+			console.log("show"+$(this));
+		});
+	}
+
 })
 </script>		
 </body>
