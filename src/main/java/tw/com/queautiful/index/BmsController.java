@@ -40,12 +40,20 @@ public class BmsController {
 	public String bmsPage(Model model){
 		Map<String, Object> dataMap =new HashMap<String, Object>();
 		
+		List memebers=memberService.getAll();
+		int membersNumber=memebers.size();
+		dataMap.put("membersNumber", membersNumber);
+		
+		
+		
+		
+		//計算網站停留時間資料----------------------------------------------------
 		String queryAvgTime="SELECT AVG([time_on_site]) From [timeonsite]";
 		List<BigInteger> resultList =manager.createNativeQuery(queryAvgTime).getResultList();
 		BigInteger bigId=resultList.get(0);
 		long avgTimeMs=bigId.longValue();
 		SimpleDateFormat sdf=new SimpleDateFormat("00:mm:ss",Locale.US);
-		String avgTimeOnSite=sdf.format(new Date(avgTimeMs+57600000));		
+		String avgTimeOnSite=sdf.format(new Date(avgTimeMs));		
 		dataMap.put("avgTimeOnSite", avgTimeOnSite);
 		model.addAttribute("dataMap", dataMap);
 		//信件用--------------------------------------------

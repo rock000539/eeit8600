@@ -59,8 +59,8 @@
 					<div class="widget widget-stats bg-blue">
 						<div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
 						<div class="stats-info">
-							<h4>BOUNCE RATE</h4>
-							<p>20.44%</p>	
+							<h4>TOTAL MEMBERS</h4>
+							<p>${dataMap.membersNumber}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
