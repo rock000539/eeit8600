@@ -204,28 +204,30 @@ i{
 	<script src="/js/member/member.js"></script>
 <script>
 $(function(){
+	var btn1;
+	var prodId;
+	
 	$('.btn-delete').click(function(e){
-		var btn1 = e.target;
-		var prodId = btn1.getAttribute('value');
+		btn1 = e.target;
+		prodId = btn1.getAttribute('value');
 		console.log(btn1);
-		console.log(prodId);
-		
-		$('#del-confirm').click(function(){
-			$.ajax({
-				url:"/members/like/product/delete",
-				data:{"prodId": prodId},
-				type:'get',
-				success:function(result){
-					console.log(result);
-					if(result){
- 						$(".portfolio-item[dataId*="+prodId+"]").remove();
-					}
-					$('#myModal').modal('toggle');
-				}
-			}); //ajax
-		});
-		
+		console.log(prodId);	
 	});//btn-delete onClick
+		
+	$('#del-confirm').click(function(){		
+		$.ajax({
+			url:"/members/like/product/delete",
+			data:{"prodId": prodId},
+			type:'get',
+			success:function(result){
+				console.log(result);
+				if(result){
+						$(".portfolio-item[dataId*="+prodId+"]").remove();
+				}
+				$('#myModal').modal('toggle');
+			}
+		}); //ajax
+	});
 	
 	
 	var timelineBlocks = $('.portfolio-item'),
