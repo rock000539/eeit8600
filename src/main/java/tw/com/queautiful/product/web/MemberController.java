@@ -47,6 +47,7 @@ import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewService;
+import tw.com.queautiful.product.vo.member.MemberEditVO;
 import tw.com.queautiful.product.vo.product.ProductView;
 
 @Controller
@@ -67,6 +68,7 @@ public class MemberController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	//overview頁面
 	@RequestMapping("/overview/{memberId}")
 	public String memberOverviewPage(@PathVariable Long memberId, HttpServletRequest request, Model model){
 		Member member = memberService.getById(memberId);
@@ -89,6 +91,7 @@ public class MemberController {
 		return "/member/memberOverview";
 	}
 	
+	//profile頁面
 	@RequestMapping("/profile")
 	public String memberPersonalPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
@@ -102,6 +105,7 @@ public class MemberController {
 		return "/member/memberProfile";
 	}
 	
+	//profile-edit頁面
 	@RequestMapping("/profile/edit")
 	public String memberPersonalEditPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
@@ -115,7 +119,35 @@ public class MemberController {
 		return "/member/memberProfile-edit";
 	}
 	
-	// WishList
+	//member update
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	@ResponseBody
+	public Boolean update(@RequestPart(name="member") MemberEditVO memberEditVO, 
+			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile,
+			HttpServletRequest request){
+		Long memberId = (Long)request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		
+		if(memberImgFile!=null){
+			String mId = "member"+memberEditVO.getMemberId();
+			String memberImg = FileProcessing.saveImg(mId, "member", memberImgFile);
+			memberEditVO.setMemberImg(memberImg);
+		}
+		
+		request.getSession().setAttribute("MemberNickname", memberEditVO.getNickname());
+		
+		try {
+			BeanUtils.copyProperties(memberEditVO, member);
+			memberService.update(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+		
+	
+	// WishList頁面
 	@RequestMapping("/wishlist")
 	public String wishListPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
@@ -182,7 +214,7 @@ public class MemberController {
         return "/member/memberExpDate";
     }
     
-    //member收藏心得/文章
+    //member收藏心得/文章 頁面
     @RequestMapping("/like")
     public String memberLikePage(HttpServletRequest request, Model model){
     	Long memberId = (Long)request.getSession().getAttribute("memberId");
@@ -320,9 +352,9 @@ public class MemberController {
 		List<ProductView> products = new ArrayList();
 		for(Review review:reviews){
 			Long prodId = review.getProduct().getProdId();
-			ProductView product = new ProductView();
-			BeanUtils.copyProperties(productService.getById(prodId), product);
-			products.add(product);
+			ProductView productView = new ProductView();
+			BeanUtils.copyProperties(productService.getById(prodId), productView);
+			products.add(productView);
 		}
 		
 		//pass to front-end
@@ -505,27 +537,13 @@ public class MemberController {
 		return memberService.getById(member.getMemberId());
 	}
 	
+	//後台edit頁面
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long memberId, Model model){
 		model.addAttribute("member", memberService.getById(memberId));
 		return "/member/memberEdit";
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	@ResponseBody
-	public Member update(@RequestPart(name="member") Member member, 
-			@RequestPart(value="memberImgFile", required = false) MultipartFile memberImgFile){
-		log.debug(member.getMemberId().toString());
-		if(memberImgFile!=null){
-			String mId = "member"+member.getMemberId();
-			String memberImg = FileProcessing.saveImg(mId, "member", memberImgFile);
-			member.setMemberImg(memberImg);
-		}
-		log.debug(member.getMemberId().toString());
-		log.debug(member.getMemberImg());//test
-		memberService.update(member);
-		return memberService.getById(member.getMemberId());
-	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
