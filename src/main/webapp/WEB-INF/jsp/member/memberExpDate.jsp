@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 	<!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
 	<!-- Scripts -->
@@ -36,20 +35,17 @@ body {
 
 .portfolio-title{
 	height: 60px;
-	background-color: #98DaD6;  /*blue */
-	border-bottom: 1px solid #4FBAAA;
+	background-color: #DDD5C9;  /*beige default*/  /* #98DaD6 blue  #4FBAAA*/
+	border-bottom: 1px solid #C6BFB4;
 	color: #ffffff;
 	text-align: center;
 	padding: 10px;
 }
-#exprow div:nth-child(3n+2) .portfolio-title{
-	background-color: #DDD5C9;	/*beige*/
-	border-bottom: 1px solid #C6BFB4;
-} 
-#exprow div:nth-child(3n+3) .portfolio-title{
+.pink{
 	background-color: #FF9985;	/*pink*/
 	border-bottom: 1px solid #D97F88;
-}
+} 
+
 .portfolio-title h3 {
 	font-size: 15px;
  	line-height: 15px; 
@@ -80,15 +76,51 @@ body {
 	height: 130px;
 	width: 130px;
 }
-.portfolio-content p {
-	line-height: 1.1;
-	margin: 5px;
-	font-size: 15px;
-}
 .portfolio-btn {
 	margin-top: 20px;
 }
-
+p.bell{
+	font-size: 16px;
+	line-height: 36px;
+	color: #000;
+}
+.bell span{
+	font-size: 20px;
+}
+div.expinfo{
+	text-align: left;
+	padding-left: 10px;
+	font-size: 14px;
+	line-height: 16px;
+}
+.expinfo tr{
+	text-align: left;
+	height: 25px;
+	font-size: 14px;
+	line-height: 16px;
+}
+td.info{
+	font-size: 14px;
+	line-height: 16px;
+	padding-right: 10px;
+}
+td.data{
+	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
+	font-style: normal;
+	font-size: 15px;
+	color: #000;
+	vertical-align: middle;
+}
+.modal-content{
+	text-align: center;
+	padding: 10px;
+}
+.modal-content h2{
+	font-weight: 400;
+}
+.btn-delete{
+	background:#8A817C;
+}
 </style>
 </head>
 <body>
@@ -106,24 +138,37 @@ body {
 <div class="col-lg-12">
 <!-- ExpDate Row -->
 <div id="exprow" class="row">
-	<c:forEach items="${beans}" var="items">
-    <div class="col-md-4 portfolio-item">
+	<c:forEach items="${beans}" var="item">
+    <div class="col-md-4 portfolio-item" dateId="${item.expDate.dateId}">
     	<div class="portfolio-all">
+    		<c:set var="expDays" value="${item.lastsDay}"></c:set>
+	    	<c:if test="${expDays>60}">
 	    	<div class="portfolio-title">
-	    		<small>${items.brandName}</small>
-		        <h3>${items.product.prodName}</h3>
+	    		<small>${item.brandName}</small>
+		        <h3>${item.product.prodName}</h3>
 		    </div>
+		    </c:if>
+		    
+		    <c:if test="${expDays<60}">
+		    	<div class="portfolio-title pink">
+	    		<small>${item.brandName}</small>
+		        <h3>${item.product.prodName}</h3>
+		    </div>
+		    </c:if>
 		    <div class="portfolio-content">
 		        <div class="portfolio-img"><a href="#">
-		            <img src="/products/show?prodImg=${items.product.prodImg}"/>
+		            <img src="/products/show?prodImg=${item.product.prodImg}"/>
 		        </a></div>
-		        <p><i class="fa fa-bell-o"></i>&nbsp; 還有&nbsp;${items.lastsDay}&nbsp;天到期</p>
-		        <p>製造日期 ${items.mfd}</p>
-		        <p>到期日 ${items.exp}</p>
+		        <p class="bell"><i class="fa fa-bell-o"></i> Valid for &nbsp;<span>${item.lastsDay}</span>&nbsp;Days</p>
+		        <div class="expinfo">
+			        <table>
+			        <tr><td class="info">Production&nbsp;&nbsp;</td><td class="data">${item.mfd}</td></tr>
+			        <tr><td class="info">Expiration&nbsp;&nbsp;</td><td class="data">${item.exp}</td></tr>
+			        <tr><td class="info">BatchCode&nbsp;&nbsp;</td><td class="data">${item.batchCode}</td></tr>
+			        </table>
+		        </div>
 		        <div class="portfolio-btn">
-				    <button class="btn btn-default">修改</button> &nbsp;
-				    <button class="btn btn-default deleteDate" name="${items.expDate.dateId}">刪除</button>
-
+				    <button type="button" name="${item.expDate.dateId}" class="btn btn-default btn-delete" data-toggle="modal" data-target="#myModal">Delete</button>
 				</div>
 	        </div> <!-- portfolio-content -->
         </div> <!-- portfolio-all -->
@@ -133,11 +178,15 @@ body {
 </div> <!-- col -->
 
 
-<!-- 跳出刪除確認視窗 -->
-<div id="dialog-confirm" title="確定刪除這筆資料?" style="display: none">
-<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;" ></span>資料刪除後將不可回復<!-- 可在此輸入文字加在跳出視窗說明--></p>
+<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+    	<h2>Do you want to delete ${product.prodName} ?</h2>
+    	<br>
+    	<button id="del-confirm" class="btn btn-default">Confirm</button>
+    </div>
+  </div>
 </div>
-<!-- ////////////////////////////////////////////////////////////////////-->
 
 
 	</div> <!-- col-lg -->
@@ -161,42 +210,26 @@ body {
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
 <script src="/js/member/member.js"></script>
 <script>
 $(function(){
-    $('.deleteDate').click(function(e){
+    $('.btn-delete').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
-    	console.log(dateIdStr);
-    	console.log(target);
-	//----dialog--------------------------
-	   $( "#dialog-confirm" ).dialog({
-        resizable: false,
-        height:190,width:300,
-        modal: true,
-        buttons: {
-          "刪除確認": function() {
-      // 刪除功能--------------------------------        
-          	$.ajax({
-      		url:'/expdate/delete',
-      		type : 'GET',
-      		data : {"dateIdStr":dateIdStr},
-      		success : function(date){
-      		
-      		$(target).parent().parent().parent().parent().remove();
-      		}
-      		})
-      // 刪除功能-------------------------------- 		
-      		
-            $( this ).dialog( "close" );
-          },
-          "取消": function() {
-            $( this ).dialog( "close" );
-          }
-        }
-      });
-
+    	
+    	$('#del-confirm').click(function(){
+    	
+    		$.ajax({
+        		url:'/expdate/delete',
+          		type : 'GET',
+          		data : {"dateIdStr":dateIdStr},
+          		success : function(result){
+          			$(".portfolio-item[dateId*="+dateIdStr+"]").remove();
+          			$('#myModal').modal('toggle');
+          			
+          		}
+        	});
+    	});
     });//end $('#delete').click
 	
     /*----------------------------------------------------*/

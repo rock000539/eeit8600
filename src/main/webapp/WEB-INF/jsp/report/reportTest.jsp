@@ -146,6 +146,34 @@ $(function(){
 	})
 		
 	
+//------------------------------------------------------------
+//時間統計
+
+	var t = performance.timing;
+	var pageloadtime = t.loadEventStart - t.navigationStart;
+	var dns = t.domainLookupEnd - t.domainLookupStart;
+	var tcp = t.connectEnd - t.connectStart;
+	var ttfb = t.responseStart - t.navigationStart;
+	console.log(pageloadtime);
+	console.log(dns);
+	console.log(tcp);
+	console.log(ttfb);
+	
+	var start = performance.now();
+	
+	$("#timeCheck").click(function(){
+		var end = performance.now();
+		console.log('耗时：' + (end - start) + '微秒。');
+	});
+	
+	var start2 = Date.now();
+	
+	$("#timeCheck2").click(function(){
+		var end2 = Date.now();
+		console.log('耗时：' + (end2 - start2) + '微秒。');
+	});
+
+
 	
 })//end of onload
 </script>
@@ -163,6 +191,11 @@ $(function(){
 <input type="button" id="SelectReview" value="SelectReview">
 <hr><hr>
 <input type="button" id="deleteTag" value="deleteTag">
+
+<br><br><br>
+<input type="button" id="timeCheck" value="timeCheck">
+<input type="button" id="timeCheck2" value="timeCheck">
+
 <!-- 使用model1 ----------------------------------------------------------------->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
