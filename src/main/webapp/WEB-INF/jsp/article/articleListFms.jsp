@@ -126,7 +126,8 @@
 				          <h4><a class="articleTitle" onclick="location.href='/articles/view/${article.articleId}'">【${article.articleType}】${article.articleTitle}</a><br>
 				          <small>
 				          <i class="fa fa-user"></i><a href="#">&nbsp;${article.nickname}</a> &nbsp;&nbsp;
-				          <i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)}
+				          <i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)} &nbsp;&nbsp;
+				          <i class="fa fa-clock-o"></i>&nbsp;${article.aEditTime}
 				          </small>
 				          </h4>
 				        </td>

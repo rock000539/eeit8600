@@ -33,7 +33,7 @@
 	padding-bottom:10px;
 }
 
-#addForm > table{
+#editForm > table{
 width:72vw;
 }
 
@@ -117,7 +117,7 @@ width:72vw;
     content: none;
 }
 
-#addForm button{
+#editForm button{
 	margin:0 5px;
 }
 
@@ -157,21 +157,22 @@ select {
 			            </div>
 			        </div>
 		</section>
-	<FORM id="addForm">
+	<FORM id="editForm">
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-3">
+				<input type="hidden" name="articleId" value="${article.articleId}"/>
 				<input type="hidden" name="memberId" value="${memberId}"/>
+				<input type="hidden" name="articleTime" value="${article.articleTime}"/>
 				<input type="hidden" name="articleView" value="${article.articleView}"/>
 				<input type="hidden" name="articleCollect" value="${article.articleCollect}"/>
 				<input type="hidden" name="articleShow" value="${article.articleShow}"/>
 				<input type="hidden" name="articleReport" value="${article.articleReport}"/>
 				<select name="articleType" class="form-control" >
-				<option value="" disabled selected hidden>--Select your Type--</option>
-				<option value="news">情報</option>
-				<option value="solicit">徵文</option>
-				<option value="question">問題</option>
-				<option value="chat">閒聊</option>			
+				<option id="NEWS" value="news">情報</option>
+				<option id="SOLICIT" value="solicit">徵文</option>
+				<option id="QUESTION" value="question">問題</option>
+				<option id="CHAT" value="chat">閒聊</option>			
 				</select>
 			</div>
 			<div class="col-lg-9">
@@ -248,11 +249,16 @@ select {
 	
 	<script>
 	$(function(){
-		console.log('${article.articleContent}')
-		console.log("CKEDITOR.instances=="+CKEDITOR.instances)
-		CKEDITOR.instances['articleContent'].setData('abc');
+//  		console.log('${article.articleContent}');
+//  		console.log("CKEDITOR.instances=="+CKEDITOR.instances);
+// 		console.log('${article.articleType}');
+		CKEDITOR.replace('articleContent');
+		CKEDITOR.instances['articleContent'].setData('${article.articleContent}');
+		// 設定文章Type & Content
+		$('#${article.articleType}').attr('selected',true);
+		
 		//驗證
-		$('#addForm').validate({
+		$('#editForm').validate({
 			onfocusout: function (element) {
 		        $(element).valid();
 		    },
@@ -271,19 +277,16 @@ select {
 
 		$('#confirm').on('click',function(){
 
-// 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
-// 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
-// 			console.log(JSON.stringify(datas));
 			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
 			$.ajax({
-					url:'/articles/insert',
+					url:'/articles/update',
 					type:'post',
 					contentType:'application/json;charset=UTF-8',
-// 					data:JSON.stringify(datas),
-					data:JSON.stringify($('#addForm').serializeObject()),
+					data:JSON.stringify($('#editForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
-						location.href="/articles/listfms";
+						console.log(data);
+// 						location.href="/articles/listfms";
 	 				}
 				});		
 			
@@ -308,7 +311,7 @@ select {
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
+		if($('#editForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Post Type：'+$(':selected').val()+'</p>')

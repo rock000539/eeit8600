@@ -96,7 +96,7 @@ public class ArticleController {
 	@ResponseBody
 	public Article update(@RequestBody Article article) {
 		// log.debug("{}",article);
-		// article.setArticleTime(new Date(System.currentTimeMillis()));
+		article.setaEditTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		log.debug("{}", article.getMemberId());
 		log.debug("{}", article);
 		article.setMember(memberService.getById(article.getMemberId()));

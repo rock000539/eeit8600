@@ -299,7 +299,7 @@ border:1px solid black;
 					</c:if>
 					<li><a href="/members/like/article/insert?articleId=${article.articleId}" class="btn-info btn-like" title="like"><i class="fa fa-heart"></i></a></li>
 				</ul>
-				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(article.articleTime,0,19)}</small>
+				<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)}</small>
 				</div>
 				<div class="content">
 				${article.articleContent}
@@ -337,7 +337,7 @@ border:1px solid black;
 						<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 					</c:if>
 				</ul>
-				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(areply.arTime,0,19)}</small>
+				<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(areply.arTime,0,19)}</small>
 				</div>
 				<div class="content">
 				${areply.arContent}
@@ -378,7 +378,8 @@ border:1px solid black;
 		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12 hasbutton">
-					<button class="btn btn-default btn-lg" id="btn_reply" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-reply fa-fw" aria-hidden="true"></i>&nbspReply</button>
+					<button class="btn btn-default btn-lg" id="btn_reply" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-reply fa-fw" aria-hidden="true"></i>&nbsp;Reply</button>
+					<a href = "/login"><button class="btn btn-warning btn-lg" id="btn_login" type="button">&nbsp;Please Login</button></a>
 				</div>
 			</div>
 		</div>		
@@ -455,7 +456,7 @@ border:1px solid black;
 				<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 			</ul>
-			<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp_arTime</small>
+			<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;_arTime</small>
 			</div>
 			<div class="content">
 			_arContent
@@ -467,9 +468,7 @@ border:1px solid black;
 	<script>
 	$(function(){
 		
-		/*
-		 * ============ USER IMG ===========
-		 */
+		/* ============ USER IMG =========== */
 		var w = $('.authorimg',this).width();
 		var h = $('.authorimg',this).height();
 // 		console.log(w);
@@ -479,10 +478,16 @@ border:1px solid black;
 		} else {
 			$('.authorimg',this).removeClass('portrait');
 		}
-		console.log('memberid-->${memberId}')
 		
-		if('${memberId}' == ""){
-			$('#btn_reply').attr('disabled',true);
+		//未登入不可reply
+		if('${memberId}'== ''){
+			$('#btn_login').show();
+			$('#btn_reply').hide();
+// 			$('#btn_reply').attr('disabled',true);
+		}else{ 
+ 			$('#btn_login').hide();
+			$('#btn_reply').show();
+// 			$('#btn_reply').attr('disabled',false);
 		}
 		
 		//驗證
