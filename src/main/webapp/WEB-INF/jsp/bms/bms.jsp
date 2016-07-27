@@ -40,10 +40,64 @@
 			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
 			
 			<!-- 內文 -->
-			<div class="row">
-			    <div class="col-md-12 ui-sortable">
 	            <!-- **每頁不同的內容從這裡開始** -->
-	                   
+		<div class="row">
+		<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg-green">
+						<div class="stats-icon"><i class="fa fa-desktop"></i></div>
+						<div class="stats-info">
+							<h4>TOTAL VISITORS</h4>
+							<p>3,291,922</p>	
+						</div>
+						<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				
+		<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
+						<div class="stats-info">
+							<h4>TOTAL MEMBERS</h4>
+							<p>${dataMap.membersNumber}</p>	
+						</div>
+						<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+		</div>		
+				
+		<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg-purple">
+						<div class="stats-icon"><i class="fa fa-users"></i></div>
+						<div class="stats-info">
+							<h4>UNIQUE VISITORS</h4>
+							<p>1,291,922</p>	
+						</div>
+						<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+		</div>		
+			
+		<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg-red">
+						<div class="stats-icon"><i class="fa fa-clock-o"></i></div>
+						<div class="stats-info">
+							<h4>AVG TIME ON SITE</h4>
+							<p>${dataMap.avgTimeOnSite}</p>	
+						</div>
+						<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+		</div>	
+				
+		</div>	        
+		<!-- //////////////////////////////////////////////////////////////////// --> 
+	            <div class="row">
+	                <div class="col-md-12 ui-sortable">
 	                   <div class="panel panel-inverse">
 	                       <div class="panel-heading">
 	                           <div class="panel-heading-btn">
@@ -61,7 +115,7 @@
 	<tr>
 	<th>發信人</th><th>標題</th><th>內容</th><th>狀態</th><th>信件類型</th><th>發信日期</th>
 	</tr>
-	<c:forEach var="items" items="${result}">	
+	<c:forEach var="items" items="${Mailresult}">	
 	<tr>
 	<td class="details"  name="${items.webMail.webMailId}" value="${items.webMail.webMailSender}">
 	<a href="#">${items.nickName}</a>
@@ -162,10 +216,10 @@ $(function(){
 		}else{$("#insertNewIngredient").hide();}
 		$("#mailDetailsTable").empty();
 		$("#mailDetailsTable").append(
-				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
-				webMailId+"></td></tr><tr><td>標題</td><td>"
-				+mailTitle+"</td><td>日期</td><td>"+mailSendDate+"</td></tr>"
-				+"<tr><td>內文</td><td><div>"+mailContent+"</div></td></tr>"
+				"<tr><td><h4>寄信者:</h4></td><td>"+webMailSender+"</td><td id='webMailId' value="+
+				webMailId+"></td></tr><tr><td><h4>標題:</h4></td><td>"
+				+mailTitle+"</td><td><h4>日期:</h4></td><td>"+mailSendDate+"</td></tr>"
+				+"<tr><td><h4>內文:</h4></td><td><div>"+mailContent+"</div></td></tr>"
 				);
 		//功能1-2 修改信件為已讀---
 			$.ajax({

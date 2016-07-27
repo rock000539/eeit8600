@@ -1,9 +1,16 @@
 package tw.com.queautiful.index;
 
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,19 +19,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import tw.com.queautiful.product.entity.WebMail;
 import tw.com.queautiful.product.service.MemberService;
+import tw.com.queautiful.product.service.TimeOnSiteService;
 import tw.com.queautiful.product.service.WebMailService;
 
 @Controller
 public class BmsController {
 	@Autowired
-	WebMailService webMailService;
+	private WebMailService webMailService;
+	
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
+	
+	@Autowired
+	private TimeOnSiteService timeOnSiteService;
+	
+	@PersistenceContext
+	private EntityManager manager;
 	
 	@RequestMapping("/bms")
 	public String bmsPage(Model model){
-		List<Map<String, Object>> result=new ArrayList<Map<String, Object>>();
+		Map<String, Object> dataMap =new HashMap<String, Object>();
 		
+		List memebers=memberService.getAll();
+		int membersNumber=memebers.size();
+		dataMap.put("membersNumber", membersNumber);
+		
+		
+		
+		
+		//計算網站停留時間資料----------------------------------------------------
+		String queryAvgTime="SELECT AVG([time_on_site]) From [timeonsite]";
+		List<BigInteger> resultList =manager.createNativeQuery(queryAvgTime).getResultList();
+		BigInteger bigId=resultList.get(0);
+		long avgTimeMs=bigId.longValue();
+		SimpleDateFormat sdf=new SimpleDateFormat("00:mm:ss",Locale.US);
+		String avgTimeOnSite=sdf.format(new Date(avgTimeMs));		
+		dataMap.put("avgTimeOnSite", avgTimeOnSite);
+		model.addAttribute("dataMap", dataMap);
+		//信件用--------------------------------------------
+		List<Map<String, Object>> Mailresult=new ArrayList<Map<String, Object>>();
 		List<WebMail> webMails = webMailService.findAll();
 		for(int i=0;i<webMails.size();i++){
 			Map<String, Object> resultMap=new HashMap<String, Object>();
@@ -37,9 +70,12 @@ public class BmsController {
 				resultMap.put("nickName", nickName);
 			}
 			resultMap.put("webMail",webMails.get(i));
-			result.add(resultMap);
+			Mailresult.add(resultMap);
 		}
-		model.addAttribute("result",result);
+		
+		
+		
+		model.addAttribute("Mailresult",Mailresult);
 		return "/bms/bms";
 	}
 }

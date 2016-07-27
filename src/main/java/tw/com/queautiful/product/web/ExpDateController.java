@@ -203,7 +203,6 @@ public class ExpDateController
         return "/expDate/expDateEdit";
     }
 
-    @PostAuthorize("hasPermission('USER', 'parker')")
     @RequestMapping("/delete")
     @ResponseBody
     public String delete(String dateIdStr)
@@ -211,7 +210,7 @@ public class ExpDateController
         System.out.println("start delete");
         long dateId = Long.parseLong(dateIdStr);
         expDateService.delete(dateId);
-        String successMSG = "刪除資料成功";
+        String successMSG = "success";
         return successMSG;
     }
 
