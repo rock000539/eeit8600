@@ -38,6 +38,18 @@
 .btn-like:hover{
 	background: #ff7f7f;
 }
+
+.pbhead_comment  ul > li{
+    margin-bottom:10px;
+	float: right;
+}
+
+.pbhead_comment ul > li>a{
+ 	float: right; 
+	height: 27px;
+	width: 27px;
+}
+
 </style>
 <body>
 
@@ -87,7 +99,7 @@
                                         <div class="metaInfo">
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
                                             <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
-                                            <span><i class="fa fa-comments"></i> <a href="#Comments">${review.reviewCMs.size()} Comments</a></span> <!--做動態抓留言數 -->
+                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.reviewCMs.size()} Comments</a></span> 
 <!--                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span> --><!--??tag標籤數量?? -->
                                         <!--心得評分 start-->
 											<span class="review-uc-diamond">
@@ -174,6 +186,27 @@
                             <div id="comment">
                                 <ul id="comment-list">
                                 
+                                
+<!--                                 	<li class="comment"> -->
+<!-- 								    	<div class="avatar"><img alt="" src="/members/show?memberId=_memberId" class="avatar"></div> -->
+<!-- 								        <div class="comment-container"> -->
+<!-- 									        <h4 class="comment-author"><a href="#">_memberNickname</a></span></h4> -->
+<!-- 								            <div class="comment-meta"><a href="#" class="comment-date link-style1">_reviewCMTime </a></div> -->
+<!-- 								            <div class="comment-body"> -->
+<!-- 								    	        <p>_reviewCMMsg</p> -->
+								    	        
+<!-- 								            </div> -->
+<!-- 								        </div> -->
+<!-- 								     	<div class="pbhead_comment"> -->
+<!-- 					                        <ul> -->
+<!-- 					                            <li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:13px;margin:8px 8px"></i></a></li> -->
+<!-- 												<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:13px;margin:8px 8px"></i></a></li> -->
+<!-- 												<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:13px;margin:8px 8px"></i></a></li> -->
+<!-- 					                        </ul> -->
+<!-- 					                    </div> -->
+<!-- 								    </li> -->
+								    
+								    
 <!--                                     <li class="comment"> -->
 <!--                                         <div class="avatar"><img alt="" src="/images/review/avatar_1.png" class="avatar"></div> -->
 <!--                                         <div class="comment-container"> -->
@@ -389,6 +422,13 @@
     	        <p>_reviewCMMsg</p>
             </div>
         </div>
+     	<div class="pbhead_comment">
+			 <ul>
+				<li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:13px;margin:8px 8px"></i></a></li>
+				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:13px;margin:8px 8px"></i></a></li>
+				<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:13px;margin:8px 8px"></i></a></li>
+			 </ul>
+		</div>
     </li>
 
 </script>    	  
@@ -449,14 +489,13 @@ $(function(){  //=$(document.)ready
 				dataType:'json',
 				success:function(result){
 // 					console.log("result1="+result);
-					appendReviewCM(result);
+					appendReviewCMData(result);
 				},error:function(x,y,z){
 					console.log("x="+x);
 					console.log("y="+y);
 					console.log("z="+z);
 				}
 			})//onload ajax
-
 
 		$('#postComment').click(function(){
 			var value=CKEDITOR.instances['rcmMsg'].getData();
@@ -474,10 +513,11 @@ $(function(){  //=$(document.)ready
 				data:JSON.stringify($('#addForm').serializeObject()),
 				dataType:'json',
 				success:function(result){
-					console.log("result1="+result);
+// 					console.log("result1="+result);
+					$("#MyComments").text('Comments (' + (parseInt($("#MyComments").text().substr(10, 1)) + 1) + ')');
+					$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
 					appendReviewCM(result);
 					CKEDITOR.instances['rcmMsg'].setData("");
-					$("#MyComments").text('Comments (' + (parseInt($("#MyComments").text().substr(10, 1)) + 1) + ')');
 // 					location.href="#addForm";
 				},error:function(x,y,z){
 					console.log("x="+x);
@@ -487,29 +527,36 @@ $(function(){  //=$(document.)ready
 			})
 		})//#postComment click end
 
-		function appendReviewCM(result){
+		function appendReviewCMData(result){
 // 			console.log("result2="+result);
-			$('#comment-list').empty();
 			
 // 			console.log("result[0]=",result[0]);
 // 			console.log("result[0].memberId=",result[0].memberId);
 // 			console.log("result[0].nickname=",result[0].nickname);
 // 			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
 // 			console.log("result[0].rcmMsg=",result[0].rcmMsg);
-			
-			
 			for(var i=0 ; i < result.length; i++){
 				var str =$('#reviewCM_mode').html();
 // 				console.log("str="+str);
-				
 				$(str.replace("_memberId",result[i].memberId)
 					  .replace("_memberNickname",result[i].nickname)
 					  .replace("_reviewCMTime",result[i].reviewCMTime)
-					  .replace("_reviewCMMsg",result[i].rcmMsg))
+					  .replace("_reviewCMMsg",result[i].rcmMsg))					  
 					  .appendTo($('#comment-list'));
 			}
-			
+		}//appendReviewCMData end
+		
+		function appendReviewCM(result){
+// 			console.log("result3="+result);
+				var str =$('#reviewCM_mode').html();
+// 				console.log("str="+str);
+				$(str.replace("_memberId",result.memberId)
+					  .replace("_memberNickname",result.nickname)
+					  .replace("_reviewCMTime",result.reviewCMTime)
+					  .replace("_reviewCMMsg",result.rcmMsg))
+					  .appendTo($('#comment-list'));
 		}//appendReviewCM end
+		
 		
 		//--檢舉功能----------------------------------
 		$("#reportBtn").click(function (){

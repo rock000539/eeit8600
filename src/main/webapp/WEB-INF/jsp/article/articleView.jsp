@@ -98,15 +98,17 @@ border:1px solid black;
 ================= */
 .post{
 /* 	background-color:white; */
-	border:#e8ecf3 solid 1px;
- 	background-color:#fff;
+ 	border:#e8ecf3 solid 1px;
+	border-top:#e8ecf3 solid 3px;
+  	background-color:#fff;
  	margin-bottom:10px;
  	border-radius:4px;
+ 	transition: all 0.5s ease-in-out;
 }
 .post:hover{
-/* 	background-color:white; */
-	border:#ccd3ff solid 2px;
-	transition: all 0.3s ease-in-out;
+/* 	border:#ccd3ff solid 2px; */
+	border-top:#727CB6 solid 3px;
+ 	transition: all 0.3s ease-in-out;
 }
 .postprofile{
 /* 	border:#e8ecf3 solid 1px; */
@@ -306,45 +308,45 @@ border:1px solid black;
 		</div>
 		<!-- end of article -->
 		
-		<!-- start articleCM -->
-		<div id="articleCM">
-		<c:forEach var="acm" items="${article.acms}">
+		<!-- start articleReply -->
+		<div id="articleReply">
+		<c:forEach var="areply" items="${article.areplies}">
 		<div class="col-lg-12 post">
 			<div class="postprofile col-lg-3">
 				<dl>
 					<dt>
 						<div class="authordiv img-circle">
-						<img  class="authorimg" src="/members/show?memberId=${acm.memberId}">
+						<img  class="authorimg" src="/members/show?memberId=${areply.memberId}">
 						</div>
-						<h3><a href="#">${acm.member.nickname}</a></h3>
+						<h3><a href="#">${areply.member.nickname}</a></h3>
 						
 					</dt>
 					<dd>Post:</dd>
-					<dd>Joined:${acm.member.memberRegiDate}</dd>
+					<dd>Joined:${areply.member.memberRegiDate}</dd>
 				</dl>
 			
 			</div>
 			<div class="postbody col-lg-9">		
 				<div class="pbhead">
-				<h2>RE:【${article.articleType}】${article.articleTitle}</h2>
+				<h2>${areply.arTitle}</h2>
 				<ul>
 					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
 					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
-					<c:if test="${acm.memberId==memberId}">
+					<c:if test="${areply.memberId==memberId}">
 						<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 					</c:if>
 				</ul>
-				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(acm.acmTime,0,19)}</small>
+				<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp${fn:substring(areply.arTime,0,19)}</small>
 				</div>
 				<div class="content">
-				${acm.acmMsg}
+				${areply.arContent}
 				</div>
 			</div>
 		</div>		
 		</c:forEach>
 		</div>
-		<!-- end of articleCM -->
+		<!-- end of articleReply -->
 		
 		<!-- REPLY -->
 		<section class="team row sub_content">
@@ -360,16 +362,16 @@ border:1px solid black;
 				<div class="col-lg-12">
 					<input type="hidden" name="memberId" value="${memberId}"/>
 					<input type="hidden" name="articleId" value="${article.articleId}"/>
-					<input type="hidden" name="acmReport" value="0"/>
-					<input type="hidden" name="acmShow" value="true"/>
-					<input type="text" name="acmTitle" id="acmTitle" class="form-control" value="RE:【${article.articleType}】${article.articleTitle}">
+					<input type="hidden" name="arReport" value="0"/>
+					<input type="hidden" name="arShow" value="true"/>
+					<input type="text" name="arTitle" id="arTitle" class="form-control" value="RE:【${article.articleType}】${article.articleTitle}">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12">
-					<textarea class="ckeditor" id="acmMsg" name="acmMsg" cols="80" rows="12"></textarea>
+					<textarea class="ckeditor" id="arContent" name="arContent" cols="80" rows="12"></textarea>
 				</div>
 			</div>
 		</div>	
@@ -446,17 +448,17 @@ border:1px solid black;
 		</div>
 		<div class="postbody col-lg-9">		
 			<div class="pbhead">
-			<h2>_acmTitle</h2>
+			<h2>_arTitle</h2>
 			<ul>
 				<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
 				<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
 				<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 			</ul>
-			<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp_acmTime</small>
+			<small style="clear:both;">&nbsp&nbsp<i class="fa fa-clock-o"></i>&nbsp_arTime</small>
 			</div>
 			<div class="content">
-			_acmMsg
+			_arContent
 			</div>
 		</div>
 	</div>		
@@ -464,6 +466,7 @@ border:1px solid black;
 	
 	<script>
 	$(function(){
+		
 		/*
 		 * ============ USER IMG ===========
 		 */
@@ -483,33 +486,33 @@ border:1px solid black;
 		        $(element).valid();
 		    },
 			rules:{
-				acmTitle:{required:true},
+				arTitle:{required:true},
 			},//end of rules
 			messages:{
-// 				acmTitle:'必填'
+// 				arTitle:'必填'
 			},//end of messages			
 		});
 		
 		$('#confirm').on('click',function(){
-			$('#acmMsg').val(CKEDITOR.instances['acmMsg'].getData());
+			$('#arContent').val(CKEDITOR.instances['arContent'].getData());
 			$.ajax({
-					url:'/articleCMs/insert',
+					url:'/articlereplies/insert',
 					type:'post',
 					contentType:'application/json;charset=UTF-8',
 					data:JSON.stringify($('#addForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
 						console.log(data);
-						$('#acmTitle').val('RE:【${article.articleType}】${article.articleTitle}');
-						CKEDITOR.instances['acmMsg'].setData('');
+						$('#arTitle').val('RE:【${article.articleType}】${article.articleTitle}');
+						CKEDITOR.instances['arContent'].setData('');
 						$($('#article_reply').html()
 										.replace('_memberId',data.memberId)
 										.replace('_nickname',data.nickname)
 										.replace('_memberRegiDate',data.memberRegiDate)
-										.replace('_acmTitle',data.acmTitle)
-										.replace('_acmTime',data.acmTime)
-										.replace('_acmMsg',data.acmMsg))
-										.appendTo($('#articleCM'));						
+										.replace('_arTitle',data.arTitle)
+										.replace('_arTime',data.arTime)
+										.replace('_arContent',data.arContent))
+										.appendTo($('#articleReply'));						
 	 				},
 	 				error:function(x,y,z){
 	 					console.log('x-->'+x);
@@ -540,11 +543,11 @@ border:1px solid black;
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['acmMsg'].getData()!=""){
+		if($('#addForm').validate().form() && CKEDITOR.instances['arContent'].getData()!=""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
-							.append('<p>Title：'+ $(':text[name=acmTitle]').val() +'</p>')		
-							.append('<p>Content：'+ CKEDITOR.instances['acmMsg'].getData() +'</p>');
+							.append('<p>Title：'+ $(':text[name=arTitle]').val() +'</p>')		
+							.append('<p>Content：'+ CKEDITOR.instances['arContent'].getData() +'</p>');
 			$('#confirm').show();
 		}else{
 			$(".modal-title").text('Please Modify Your Post');
