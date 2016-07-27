@@ -5,9 +5,11 @@
 .detail-div{
 	margin-left: 80px;
 	margin-right: 80px;
+	padding-left: 80px;
 }
 .memberDiv{
 	margin-bottom: 100px;
+	padding-right: 60px;
 }
 #member-header{
 	padding-bottom: 15px;
