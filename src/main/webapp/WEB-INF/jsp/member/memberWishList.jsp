@@ -110,7 +110,7 @@ i{
 }
 .modal-content{
 	text-align: center;
-	padding: 10px;
+	padding: 30px 0 20px 0;
 }
 .modal-content h2{
 	font-weight: 400;
