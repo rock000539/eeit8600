@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
     
     <script src="/js/jquery.min.js"></script>
+    
+    <!-- FileInput -->	
+    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
+    <script src="/js/fileinput.min.js"></script>
+    
 <style>
 /* ===========Slidebar  Start=================== */
 body {
@@ -565,11 +570,23 @@ select {
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4">
-						<h3 style="margin:0;padding-bottom: 0">&nbsp;&nbsp;&nbsp;封面圖片</h3>
-						<div class="reviewImg">
-							<img alt="" src="">
-						</div>
-<%-- 						<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${param.articleTitle}" placeholder="Please Enter Your Title"/> --%>
+						<h3 style="margin:0 100px 10px 0;padding-bottom: 0;float: left">&nbsp;&nbsp;&nbsp;封面圖片</h3>
+						<input id="reviewImg" name="reviewImg" type="file" class="file-loading" >
+						<script>
+							$(document).on('ready', function() {
+								$("#reviewImg").fileinput({
+									showCaption: false,
+									browseClass: 'btn btn-default',
+							    	showRemove: false,
+							    	showUpload : false,
+							    	maxFileCount: 1,
+							    	previewSettings:{image: {width: "auto", height: "150px"}},
+							    });
+// 								$('#reviewImg').on('fileimageloaded', function(event, previewId) {
+// 									console.log("fileimageloaded");
+// 								});
+							});
+						</script>						
 					</div>
 				</div>
 			</div>
@@ -647,7 +664,20 @@ select {
 		  });  
 		  
 		/*  ===================================================== */
-		  
+		
+	var formdata = new FormData(); 
+	formdata.append('reviewImg', $('#reviewImg').prop('files')[0]); 
+	
+	$('#reviewImg').on('click',function(){
+		 if($(".file-input	")[0]){
+		$('#reviewImgFake').removeClass("reviewImg");
+			 console.log("yes pp")
+			} else {
+		$('#reviewImgFake').addClass("reviewImg");
+				console.log("no pp")}
+	})
+	
+
 		//驗證
 // 			$('#addForm').validate({
 // 				onfocusout: function (element) {
