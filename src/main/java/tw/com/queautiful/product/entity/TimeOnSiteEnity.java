@@ -19,13 +19,31 @@ private String pageUrl;
 
 private Long memberId;
 
+private String clientIp;
+
+
+
+
 
 
 @Override
 public String toString() {
 	return "TimeOnSiteEnity [id=" + id + ", timeOnSite=" + timeOnSite + ", pageUrl=" + pageUrl + ", memberId="
-			+ memberId + "]";
+			+ memberId + ", clientIp=" + clientIp + "]";
 }
+
+
+public String getClientIp() {
+	return clientIp;
+}
+
+
+public void setClientIp(String clientIp) {
+	this.clientIp = clientIp;
+}
+
+
+
 public Long getMemberId() {
 	return memberId;
 }

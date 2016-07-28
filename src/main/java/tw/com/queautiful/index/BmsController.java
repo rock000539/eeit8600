@@ -49,11 +49,7 @@ public class BmsController {
 		
 		List memebers=memberService.getAll();
 		int membersNumber=memebers.size();
-		dataMap.put("membersNumber", membersNumber);
-		
-		
-		
-		
+		dataMap.put("membersNumber", membersNumber);	
 		//計算網站停留時間資料----------------------------------------------------
 		String queryAvgTime="SELECT AVG([time_on_site]) From [timeonsite]";
 		List<BigInteger> resultList =manager.createNativeQuery(queryAvgTime).getResultList();
@@ -62,6 +58,8 @@ public class BmsController {
 		SimpleDateFormat sdf=new SimpleDateFormat("00:mm:ss",Locale.US);
 		String avgTimeOnSite=sdf.format(new Date(avgTimeMs));		
 		dataMap.put("avgTimeOnSite", avgTimeOnSite);
+		//計算瀏覽人數-------------------------------------------
+		dataMap.put("visitors",timeOnSiteService.findAll().size());
 		model.addAttribute("dataMap", dataMap);
 		//信件用--------------------------------------------
 		List<Map<String, Object>> Mailresult=new ArrayList<Map<String, Object>>();
