@@ -14,7 +14,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -333,6 +332,7 @@ public class MemberController {
 		model.addAttribute("reviews", pages.getContent());
 		model.addAttribute("reviewsPageNum", pages.getNumber());
 		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
+		model.addAttribute("reviewsTotalElement", pages.getTotalElements());
 		
 		Page<Article> articlePages =
 				memberService.getArticlesPaging(memberId, null, 0, null, null);
@@ -340,6 +340,7 @@ public class MemberController {
 		model.addAttribute("articles", articlePages.getContent());
 		model.addAttribute("articlesPageNum", articlePages.getNumber());
 		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
+		model.addAttribute("articlesTotalElement", articlePages.getTotalElements());
 		model.addAttribute("member", member);
 		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", articlePages.getSize()); //size of the slice
