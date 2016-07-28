@@ -147,17 +147,6 @@ h2, h4{
 .blog_single .month{
 	padding: 2px 8px 4px;
 }
-.subject{
-	text-align: center;
-	letter-spacing: 1px;
-	font-family: "Proxima Nova",sans-serif;
-	font-size: 14px;
-	padding: 13px 16px;
-	text-transform: uppercase;
-}
-.subject i{
-	color: #FF1E76;
-}
 .articleType{
 	color: #df3331;
 	font-family: "Irvin Text",Georgia,"Times New Roman",Times,serif;

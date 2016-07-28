@@ -111,3 +111,14 @@
 	color: #000;
 	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
 }
+.subject{
+	text-align: center;
+	letter-spacing: 1px;
+	font-family: "Proxima Nova",sans-serif;
+	font-size: 14px;
+	padding: 13px 16px;
+	text-transform: uppercase;
+}
+.subject i{
+	color: #FF1E76;
+}

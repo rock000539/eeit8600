@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -34,7 +35,7 @@ i{
 	
 }
 .prodContent{
- 	padding: 0 10px 30px 10px;
+ 	padding: 10px 10px 30px 10px;
 	overflow: hidden;
 	border-top: 3px solid #000;
     border-radius: 1px;
@@ -56,8 +57,10 @@ i{
 .prodInfo .brand{
 	color: #000;
     display: block;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 .prodInfo h2, .prodInfo h2 a{
 	font-size: 20px;
@@ -143,17 +146,22 @@ i{
 <div class="row detail-div">
 	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
-
+		<div class="subject">
+			<p id="count-review"><i class="fa fa-heart"></i> WISH LIST (${fn:length(products)})</p>
+		</div>
 <div id="prodDiv" class="row">
 	<c:forEach var="item" items="${products}">
     <div class="col-md-4 portfolio-item hvr-float" dataId="${item.prodId}">
         <div class="prodContent">
+	        <div class="prodInfo">
+	        	<span class="brand">${item.brandName}</span>
+	        	<span class="category">${item.categoryName}</span>
+	        </div>
 	        <div class="prodImg">
 	         	<a href="<%=request.getContextPath() %>/products/view/${item.prodId}">
 	         		<img src="/products/show?prodImg=${item.prodImg}"/></a>
 	        </div>        
 	        <div class="prodInfo">
-	         	<span class="brand">${item.brandName} | ${item.categoryName}</span>
 	         	<h2><a href="<%=request.getContextPath() %>/products/view/${item.prodId}">${item.prodName}</a></h2>
 	         	<p>
 		         	<c:forEach begin="1" end="${item.score}"><i class="fa fa-diamond"></i></c:forEach>
