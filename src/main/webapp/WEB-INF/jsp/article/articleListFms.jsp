@@ -17,7 +17,11 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/article/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
-		
+    
+    <!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+			
 </head>
 
 <body>
@@ -127,7 +131,7 @@
 				          <small>
 				          <i class="fa fa-user"></i><a href="#">&nbsp;${article.nickname}</a> &nbsp;&nbsp;
 				          <i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)} &nbsp;&nbsp;
-				          <i class="fa fa-clock-o"></i>&nbsp;${article.aEditTime}
+<%-- 				          <i class="fa fa-clock-o"></i>&nbsp;${article.aEditTime} --%>
 				          </small>
 				          </h4>
 				        </td>
@@ -159,10 +163,6 @@
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
-			
-	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>

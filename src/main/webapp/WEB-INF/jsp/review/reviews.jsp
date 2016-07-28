@@ -48,7 +48,7 @@
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>
 						<!--(???心得table要再加"推"?,心得留言table要再加"數量") -->
-		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp留言</div>
+		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;留言</div>
 		      	
 		      	<div class="caption">
 						<!--心得發布者資訊start -->
@@ -63,7 +63,7 @@
 						<div class="user-name">
 							<a href="/members/list">${review.member.nickname}</a> <!-- ???*同38行*放no1會員有發過的心得list連結-->
 						</div>
-						<!--心得評分 end-->
+						<!--心得評分 start-->
 						<div class="review-uc-diamond">
 							<div class="urcosme-score-display">
 								<span class=" fa fa-diamond diamond" id="tb${review.reviewId}diamond1"></span>

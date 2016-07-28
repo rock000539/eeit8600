@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
 <!--     <link rel="stylesheet" href="/css/article/view.css"> -->
+	
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 		
 </head>
 
@@ -295,7 +299,7 @@ border:1px solid black;
 					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
 					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 					<c:if test="${article.memberId==memberId}">
-						<li><a href="/articles/edit?articleId=${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+						<li><a href="/articles/edit/${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 					</c:if>
 					<li><a href="/members/like/article/insert?articleId=${article.articleId}" class="btn-info btn-like" title="like"><i class="fa fa-heart"></i></a></li>
 				</ul>
@@ -414,11 +418,8 @@ border:1px solid black;
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
-			
+
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	
 	<script src="/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
@@ -553,7 +554,7 @@ border:1px solid black;
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['arContent'].getData()!=""){
+		if($('#addForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Title：'+ $(':text[name=arTitle]').val() +'</p>')		

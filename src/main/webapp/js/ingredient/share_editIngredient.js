@@ -5,14 +5,12 @@ $(function(){
 		rules:
 	{
 		ingredName:{required:true},
-		ingredChar:{required:true},
 		ingredIrritant:{digits:true},
 		ingredAcne:{digits:true},
 		ingredSafety:{digits:true}
 		},
 	messages:{
 	ingredName:"必填項目",
-	ingredChName:"必填項目",
 	ingredChar:"必填項目",
 	ingredIrritant:"必須為數字",
 	ingredAcne:"必須為數字",
@@ -136,7 +134,7 @@ $(function(){
 		
 		if(checkValidate){		
 		$.ajax({
-			"url":'/ingredients/insert',
+			"url":'/ingredients/clientinsert',
 			"type":"POST",
 			"contentType": 'application/json; charset=utf-8',
 			"dataType":"json",

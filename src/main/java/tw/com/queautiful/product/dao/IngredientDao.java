@@ -19,5 +19,7 @@ public interface IngredientDao extends JpaRepository<Ingredient, Long>{
 	
 	@Query("select s from Ingredient s where s.ingredName = ?")
 	Ingredient findByIngredCorrectName(String ingredName);
+	@Query("select s from Ingredient s where s.CheckedData = ?")
+	public List<Ingredient> findByCheckedDataIs(boolean CheckedData);
 	
 }

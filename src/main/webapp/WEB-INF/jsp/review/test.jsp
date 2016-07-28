@@ -15,11 +15,14 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
+    
+    <script src="/js/jquery.min.js"></script>
 <style>
 /* ===========Slidebar  Start=================== */
 body {
     position: relative;
     overflow-x: hidden;
+    font-family:"Microsoft JhengHei"; 
 }
 body,
 html { height: 100%;}
@@ -189,13 +192,13 @@ html { height: 100%;}
 /*-------------------------------*/
 
 .hamburger {
-  position: fixed; 
-  top: 150px;  
+  position: relative; 
+  top: 10px;  
   z-index: 999;
   display: block;
   width: 32px;
   height: 32px;
-  margin-left: 15px;
+  margin-left: 15px; 
   background: transparent;
   border: none;
 }
@@ -332,7 +335,7 @@ html { height: 100%;}
 
 .article > section{
 	padding-top: 0;
-	padding-bottom:10px;
+	padding-bottom:0;
 }
 
 #addForm > table{
@@ -434,6 +437,59 @@ select {
 }
 
 /* ===========article  End=================== */
+.reviewImg{
+/* 	text-align: center; */
+/*     position: absolute; */
+    top: 0;
+    margin: 0 auto;
+    width: 300px;
+    height: 210px;
+    z-index: 5;
+    border: 1px solid #ccc;
+    float: left;
+    background-color: white;
+    border-radius:20px;
+}
+
+
+.review-uc-diamond {
+/* 	position: absolute; */
+    top: 26px;
+    left: 70px;
+    color: #4D4D4D;
+/*     font-size: 12px; */
+     letter-spacing:-7px;  /* diamond間距加寬*/
+}
+
+.urcosme-score-display{
+	display: inline-block;
+	background-color:white;
+	border:#cccccc solid 1px;
+	border-radius:20px;
+	height: 44px;
+	width: 250px;
+}
+
+.diamond{
+	margin:6px 0px 0px 15px;
+	font-size: 32px;
+	width: 30px;
+/* 	color:#FF5151;有得分(紅色) */
+	color:#BEBEBE; /*沒有得分(灰色)*/
+}
+
+.review-rating{
+	margin-left:20px;
+	letter-spacing:3px;
+	font-size: 20px;
+	font-family:"Microsoft JhengHei";
+}
+
+/* .li{color:rgb(100, 140, 213);}  /*有顏色*/ 
+.li{color:#FF5151;}  /*diamond粉紅色*/
+/* .d1 {margin:40px 160px;} */
+  /*width:100%;height:140px;*/
+
 </style>
 </head>
 
@@ -467,7 +523,7 @@ select {
 
         <!-- Page Content -->
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
-        <div class="col-lg-10 col-md-10 col-sm-10 article">
+        <div class="col-lg-10 col-md-10 col-sm-10 article" >
 <!-- 	        <div id="page-content-wrapper"> -->
 
             <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
@@ -476,8 +532,8 @@ select {
 				<span class="hamb-bottom"></span>
             </button>
             
-          	<section class="team row sub_content">
-				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
+          	<section class="team row sub_content" style="padding-bottom: 0">
+				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;padding-bottom: 0">
 		            <div class="dividerHeading">
 		                <h4><span style="font-family:'Microsoft JhengHei';">寫心得</span></h4>
 		            </div>
@@ -487,25 +543,40 @@ select {
 			
 			<div class="row">
 				<div class="form-group">
-					<div class="col-lg-7 col-md-7 col-sm-7">
+					<div class="col-lg-8 col-md-8 col-sm-8">
 						<input type="hidden" name="memberId" value="${memberId}"/>
 						<input type="hidden" name="rewCollect" value="0"/>
 						<input type="hidden" name="reviewShow" value="true"/>
 						<input type="hidden" name="reviewReport" value="0"/>
-						
-						<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;"/>
+						<h3 style="margin:0;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
+						<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';"/>
 <!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
-			
+						<!-- 評分 -->
+						<h3 style="margin:0;padding-bottom: 0;color: #ff7080;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;評分</h3>
+						<div class="review-uc-diamond">
+						    <ul class="urcosme-score-display">
+						        <li id="d1"  class="fa fa-diamond diamond" aria-hidden="true"/>
+						        <li id="d2"  class="fa fa-diamond diamond" aria-hidden="true"/>
+						        <li id="d3"  class="fa fa-diamond diamond" aria-hidden="true"/>
+						        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
+						        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
+						    </ul>
+						    <b id="p1" class="review-rating" name="reviewRating">1~5分，由你決定!</b>
+						</div>
 					</div>
-					<div class="col-lg-5 col-md-5 col-sm-5">
-						<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${param.articleTitle}" placeholder="Please Enter Your Title"/>
+					<div class="col-lg-4 col-md-4 col-sm-4">
+						<h3 style="margin:0;padding-bottom: 0">&nbsp;&nbsp;&nbsp;封面圖片</h3>
+						<div class="reviewImg">
+							<img alt="" src="">
+						</div>
+<%-- 						<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${param.articleTitle}" placeholder="Please Enter Your Title"/> --%>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-lg-12">
-						<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
+			<div class="row" style="margin-top: 20px" >
+				<div class="form-group" >
+					<div class="col-lg-12" >
+						<textarea class="ckeditor" id="review" name="review" cols="80" rows="12"></textarea>
 					</div>
 				</div>
 			</div>	
@@ -517,7 +588,7 @@ select {
 					</div>
 				</div>
 			</div>		
-<!-- 	        </div> <!-- /#page-content-wrapper -->-->
+<!-- 	        </div> <!-- /#page-content-wrapper -->
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
     </div><!-- /#wrapper -->
@@ -529,7 +600,7 @@ select {
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 			
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
+	
 	<script src="/js/bootstrap.min.js"></script>
 	
 	<script src="/js/jquery.validate.min.js"></script>
@@ -546,6 +617,7 @@ select {
 	<script src="/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript">
+	
 	$(document).ready(function () {
 		  var trigger = $('.hamburger'),
 		      overlay = $('.overlay'),
@@ -584,12 +656,12 @@ select {
 // 				rules:{
 // 					articleType:{required:true},
 // 					articleTitle:{required:true},
-// //	 				articleContent:{required:true},
+// //	 				review:{required:true},
 // 				},//end of rules
 // 				messages:{
 // //	 				articleType:'必填',
 // //	 				articleTitle:'必填',
-// //	 				articleContent:'必填'
+// //	 				review:'必填'
 // 				},//end of messages			
 // 			});
 			
@@ -597,9 +669,9 @@ select {
 			$('#confirm').on('click',function(){
 
 //	 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
-//	 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
+//	 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
 //	 			console.log(JSON.stringify(datas));
-				$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
+				$('#review').val(CKEDITOR.instances['review'].getData());
 				$.ajax({
 						url:'/articles/insert',
 						type:'post',
@@ -630,11 +702,59 @@ select {
 			    });
 			    return o;
 			};
-		});
 		
 		
-		
+	/*  ===================================================== */
+var flag = false;
+    for (var i = 1; i <= 5; i++) {
+        with (document.getElementById("d" + i)) {
+            addEventListener("mouseover", function () { mouseOver(this.id) });  //哪個img id觸發了mouseOver事件讓星星變亮 
+            addEventListener("mouseout", function () { mouseOut(this.id) }); //哪個img id觸發了mouseOut事件讓星星變暗 
+            addEventListener("click", function () { Click(this.id) }); //id哪個img id觸發了onClick事件讓星星變亮 
+        }
+    }
+
+
+function Click(id) {  //id哪個img id觸發了onClick事件讓星星變亮 
+    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4.... 
+        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
+    }
+    flag = true; //click的時候不能讓星星變黑白
+}
+
+function mouseOut(id) {//哪個img id觸發了mouseOut事件讓星星變暗 
+    if (flag == false) { //click的時候不能讓星星變黑白
+        for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
+            document.getElementById("d" + i).className ="fa fa-diamond diamond";
+        }
+        document.getElementById("p1").textContent = "1~5分，由你決定!";
+    }
+    flag = false; //click後mouseout的時候mouseout功能恢復
+}
+
+function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮 
+    for (var i = 1; i <= 5; i++) { //把星星點亮前先設為不亮(讓click之後回到預設狀態) 
+        document.getElementById("d" + i).className = "fa fa-diamond diamond";
+    }
+    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
+        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
+    }
+	    switch (id.substr(1)) {
+		    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
+		             break;
+		    case "2":  document.getElementById("p1").textContent =id.substr(1) + "分，勉強接受...";
+		             break;
+		    case "3":  document.getElementById("p1").textContent =id.substr(1) + "分，普通啦！";
+		             break;
+		    case "4":  document.getElementById("p1").textContent =id.substr(1) + "分，相當不錯！";
+		             break;
+		    case "5":  document.getElementById("p1").textContent =id.substr(1) + "分，超棒！超讚的！";
+		             break;
+		}
+	}
 	
+	
+});
 	</script>
 </body>
 </html>
