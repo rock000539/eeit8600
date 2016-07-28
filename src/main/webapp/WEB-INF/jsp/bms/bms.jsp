@@ -46,8 +46,8 @@
 					<div class="widget widget-stats bg-green">
 						<div class="stats-icon"><i class="fa fa-desktop"></i></div>
 						<div class="stats-info">
-							<h4>TOTAL VISITORS</h4>
-							<p>3,291,922</p>	
+							<h4>訪客人數</h4>
+							<p>${dataMap.visitors}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -59,7 +59,7 @@
 					<div class="widget widget-stats bg-blue">
 						<div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
 						<div class="stats-info">
-							<h4>TOTAL MEMBERS</h4>
+							<h4>會員總數</h4>
 							<p>${dataMap.membersNumber}</p>	
 						</div>
 						<div class="stats-link">
@@ -85,7 +85,7 @@
 					<div class="widget widget-stats bg-red">
 						<div class="stats-icon"><i class="fa fa-clock-o"></i></div>
 						<div class="stats-info">
-							<h4>AVG TIME ON SITE</h4>
+							<h4>訪客平均停留時間</h4>
 							<p>${dataMap.avgTimeOnSite}</p>	
 						</div>
 						<div class="stats-link">
