@@ -1,7 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Date;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +31,6 @@ import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
-import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
@@ -55,9 +52,6 @@ public class ProductController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@Autowired
-	private MemberService memberService;
-
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -261,20 +255,11 @@ public class ProductController {
 		
 		Product product = prodService.getById(prodId);
 		
-		int[] ages = new int[10]; 
-		int[] stars = new int[6];
+		List<Review> reviews = product.getReviews();
+		int[] ages = prodService.calcAges(reviews); 
+		int[] stars = prodService.calcStars(reviews);
 		
-		for(Review review : product.getReviews()) {
-			
-			try {
-				ages[memberService.getMemberAge(review.getMember().getBirthDay())/10] ++;
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			stars[review.getReviewRating()] ++;
-			
-		}
-		
+		model.addAttribute("size", reviews.size());
 		model.addAttribute("ages", ages);
 		model.addAttribute("stars", stars);
 		model.addAttribute("product", prodService.getByIdByVoView(prodId));

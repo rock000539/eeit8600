@@ -93,8 +93,8 @@
 							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
 							
 							<div class="option" style="margin-top:30px;">
-							    <a href="/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
-							    <a href="#" class="fa fa-link"></a>
+							    <a href="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
+							    <a href="<%= request.getContextPath() %>/products/view/${product.prodId}" class="fa fa-link"></a>
 							</div>
 							
 							<figcaption class="item-description"></figcaption>
@@ -138,7 +138,7 @@
 							
 							<div class="option" style="margin-top:30px;">
 							    <a href="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
-							    <a href="#" class="fa fa-link"></a>
+							    <a href="<%= request.getContextPath() %>/products/view/${product.prodId}" class="fa fa-link"></a>
 							</div>
 							
 							<figcaption class="item-description"></figcaption>
@@ -216,7 +216,7 @@
 				
 				<div class="option" style="margin-top:30px;">
 				    <a href="<%= request.getContextPath() %>/products/show?prodImg=_prodImg" class="fa fa-search mfp-image"></a>
-				    <a href="#" class="fa fa-link"></a>
+				    <a href="<%= request.getContextPath() %>/products/view/_prodId" class="fa fa-link"></a>
 				</div>
 				
 				<figcaption class="item-description"></figcaption>
@@ -272,6 +272,7 @@
 
 	</script>
 	
+	<script src="/js/product/inventory/jquery.bootpag.min.js"></script>
 	<script>
 		
 		// 初始化資料
@@ -345,15 +346,12 @@
 							var list = i%2 == 0 ? l_list : r_list;
 							
 							$($('#list_mode').html()
-								.replace('_prodImg', products[i].prodImg)
-								.replace('_prodImg', products[i].prodImg)
-								.replace('_prodName', products[i].prodName)
-								.replace('_launchDate', products[i].launchDate)
-								.replace('_brandName', products[i].brandName)
-								.replace('_size', products[i].rSize)
+								.replace(/_prodId/g, products[i].prodId)
+								.replace(/_prodName/g, products[i].prodName)
+								.replace(/_prodImg/g, products[i].prodImg)
 								//.replace('_prodDesc', products[i].prodDesc)
-								.replace('_prodId', products[i].prodId)
-								.replace('_prodId', products[i].prodId))
+								.replace(/_launchDate/g, products[i].launchDate)
+								.replace(/_size/g, products[i].rSize))
 								.appendTo(list);
 							
 						}
@@ -373,12 +371,9 @@
 						for(var i=0; i<products.length; i++) {
 							
 							$($('#grid_mode').html()
-								.replace('_prodId', products[i].prodId)
-								.replace('_prodImg', products[i].prodImg)
-								.replace('_prodId', products[i].prodId)
-								.replace('_prodId', products[i].prodId)
-								.replace('_prodId', products[i].prodId)
-								.replace('_prodName', products[i].prodName))
+								.replace(/_prodId/g, products[i].prodId)
+								.replace(/_prodImg/g, products[i].prodImg)
+								.replace(/_prodName/g, products[i].prodName))
 								.appendTo(list);
 							
 						}

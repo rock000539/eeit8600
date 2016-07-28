@@ -63,10 +63,13 @@ public class ProductServiceTest {
 		
 		log.debug("reivew_size = {}", product.getReviews().size());
 		
-		int[] ages = new int[10]; 
+		List<Review> reviews = product.getReviews();
+		
+		int size = reviews.size();
+		int[] ages = new int[5]; 
 		int[] stars = new int[6];
 		
-		for(Review review : product.getReviews()) {
+		for(Review review : reviews) {
 			
 			log.debug("review_star = {}", review.getReviewRating());
 			
@@ -79,7 +82,19 @@ public class ProductServiceTest {
 				e.printStackTrace();
 			}
 			
-			ages[age/10] ++;
+			
+			if(age<=19) {
+				ages[0]++;
+			} else if(age>=20 && age<=24) {
+				ages[1]++;
+			} else if(age>=25 && age<=29) {
+				ages[2]++;
+			} else if(age>=30 && age<=34) {
+				ages[3]++;
+			} else {
+				ages[4]++;
+			}
+			
 			stars[review.getReviewRating()] ++;
 			
 		}
