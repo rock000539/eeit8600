@@ -183,6 +183,14 @@
 			cursor: pointer;
 		}
 		
+		.progress-skill-bar .lable {
+			width: 80px;
+		}
+		
+		.progress_skill .bar {
+			text-indent: 8px;
+		}
+		
 	</style>
 	
 </head>
@@ -228,7 +236,7 @@
 					        </a>
 					    </li>
 					    <li>
-					    	<a class="analyze" data-toggle="modal" data-target="#myModal" onClick="">
+					    	<a class="analyze" data-toggle="modal" data-target="#myModal">
 					    		<span class="nav-icon"><i class="fa fa-bar-chart"></i></span>
 					            <span class="nav-span">心得分析</span>
 					        </a>
@@ -371,24 +379,112 @@
 	
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
-	
 		<div class="modal-dialog">
-			<!--       Modal content -->
 		    <div class="modal-content">
+		    
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				  	<h4 class="modal-title"></h4>
+				  	<h3 class="modal-title">心得投稿分析</h3>
 				</div>
-				<div class="modal-body"></div>
+				
+				<div class="modal-body">
+					<div class="row sub_content">
+					
+			            <div class="col-lg-6 ">
+			            	
+			            	<ul class="progress-skill-bar mrg-0">
+			                    <li>
+			                        <span class="lable">1顆鑽石</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${stars[1]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">2顆鑽石</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${stars[2]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">3顆鑽石</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${stars[3]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">4顆鑽石</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${stars[4]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">5顆鑽石</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${stars[5]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                </ul>
+			                
+			            </div>
+			
+			            <div class="col-lg-6 ">
+			                <ul class="progress-skill-bar mrg-0">
+			                    <li>
+			                        <span class="lable">19 歲以下</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${ages[0]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">20 - 24歲</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${ages[1]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">25 - 29歲</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${ages[2]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">30 - 34歲</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${ages[3]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                    <li>
+			                        <span class="lable">35 歲以上</span>
+			                        <div class="progress_skill">
+			                            <div data-height="100" role="progressbar" data-value="${ages[4]/size}" class="bar" style="width: 0px; height: 0px;">
+			                            </div>
+			                        </div>
+			                    </li>
+			                </ul>
+			            </div>
+			            
+			        </div>
+				</div>
+				
+				<!--
 				<div class="modal-footer">
 					<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">Confirm</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
+				-->
+				
 		    </div>
 	    </div>
-	    
 	</div>
-	<!-- end of Modal -->
 	
     <!-- **每頁不同的內容結束** -->
 	
@@ -403,24 +499,14 @@
 	<!-- Sweet Alert 2 -->
 	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
 	
+	<script type="text/javascript" src="/js/product/view/main.js"></script>
+	
 	<script>
-	
-		$(function(){
-			console.log("${ages}[0]");
-			console.log("${stars}");
-		});
-	
+		
+		// 收藏心得
 		function save_review_click (a) {
 			
 			var reviewId = $(a).attr('data-reviewId');
-			
-			swal({
-				type: 'success',
-				text: '<h1 style="line-height:0px;">Save this review!</h1>',
-				showConfirmButton: false,
-				customClass: 'swal',
-				timer: 1000,
-			});
 			
 			$.ajax({
 				url: '',
@@ -446,10 +532,12 @@
 			
 		}
 		
+		// 觀看心得
 		function watch_review_click (a) {
 			document.location.href='/reviews/review?reviewId=' + $(a).attr('data-reviewId');
 		}
 		
+		// 收藏產品
 		function save_prod_click(a) {
 			
 			var prodId = $(a).attr('data-prodId');
@@ -478,10 +566,12 @@
 			
 		}
 		
+		// 寫心得
 		function write_review_click(a) {
 			document.location.href='/reviews/add?reviewId=' + $(a).attr('data-reviewId');
 		}
 		
+		// 分享產品
 		function share_prod_click(a) {
 			
 		}

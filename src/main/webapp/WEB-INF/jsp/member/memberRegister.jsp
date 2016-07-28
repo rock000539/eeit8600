@@ -167,8 +167,26 @@
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="skinType">肌膚性質</label>
 	    <div class="col-sm-7">
-	    	<input type="text" class="form-control" id="skinType" 
-	    		name="skinType" value="${member.skinType}">
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Normal" ${member.skinType=='Normal'? 'checked':''}> Normal
+		    </label>
+		    <label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Combination" ${member.skinType=='Combination'? 'checked':''}> Combination
+			</label>
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Dry" ${member.skinType=='Dry'? 'checked':''}> Dry
+		    </label>
+		    <label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Oily" ${member.skinType=='Oily'? 'checked':''}> Oily
+			</label>
+	    	<label class="radio-inline">
+			    <input type="radio"
+			    	name="skinType" value="Sensitive" ${member.skinType=='Sensitive'? 'checked':''}> Sensitive
+		    </label>
 	    </div>
 	</div>
 	<div class="form-group">

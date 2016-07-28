@@ -30,5 +30,10 @@ public class IndexController {
 		return "/report/reportTest";
 	}
 	
+//	@RequestMapping("/connect/facebook")
+//	public String test() {
+//		System.out.println("test");
+//		return "/connect/facebookConnected";
+//	}
 	
 }

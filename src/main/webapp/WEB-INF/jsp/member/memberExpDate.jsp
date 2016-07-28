@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/css/member/member-customize.css">
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
-
 <style>
 body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
@@ -119,7 +118,7 @@ td.data{
 }
 .modal-content{
 	text-align: center;
-	padding: 10px;
+	padding: 30px 0 20px 0;
 }
 .modal-content h2{
 	font-weight: 400;
@@ -220,7 +219,7 @@ td.data{
 <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-    	<h2>Do you want to delete ${product.prodName} ?</h2>
+    	<h2>Do you want to delete ?</h2>
     	<br>
     	<button id="del-confirm" class="btn btn-default">Confirm</button>
     </div>
@@ -241,7 +240,6 @@ td.data{
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
 <!-- Scripts -->
-<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/fms/swipe.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
