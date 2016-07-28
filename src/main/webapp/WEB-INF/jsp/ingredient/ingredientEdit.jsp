@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ingredient editPage</title>
+<script src="/js/jquery.min.js"></script>
 	<!--  BASE CSS STYLE  -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="/css/bootstrap.min.css" rel="stylesheet">

@@ -170,8 +170,12 @@ $(function(){
 	
 	$("#timeCheck2").click(function(){
 		var end2 = Date.now();
-		console.log('耗时：' + (end2 - start2) + '微秒。');
+		console.log('耗时：' + (end2 - start2) + '微秒。'); 
+		
 	});
+
+	
+	
 
 
 	

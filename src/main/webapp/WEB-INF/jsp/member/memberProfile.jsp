@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
     <!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
-
+	
+	<script src="/js/jquery.min.js"></script>
 <style>
 .memberDiv{
 	margin-bottom: 100px;
@@ -150,7 +151,6 @@
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>

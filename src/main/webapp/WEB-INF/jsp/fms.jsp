@@ -895,6 +895,26 @@
 <script type="text/javascript" src="/js/fms/swipe.js"></script>
 <script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
+<script type='text/javascript'> 
+$(function(){
+	var start = Date.now() ;
+	var pageUrl = window.location.toString();
+	window.onunload=visitTime;
 
+	var forCheckLogin=$("#forCheckLogin").attr("value");
+	function visitTime(){
+		var end = Date.now() ;
+		var timeOnSiteStr=(end-start);
+		$.ajax({
+			url:"/timeonsite/record",
+			type:"POST",
+			traditional: true,
+			data:{"timeOnSiteStr":timeOnSiteStr,"pageUrl":pageUrl,"memberId":forCheckLogin},
+			success:function(){
+			}
+		})
+	}
+})
+ </script> 
 </body>
 </html>

@@ -20,12 +20,12 @@ body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
 }
 .grey_bg{
-background-image: url("/images/IngredientBackground.jpg");
+/* background-image: url("/images/IngredientBackground.jpg"); */
 -moz-background-size:cover;
 -webkit-background-size:cover;
 -o-background-size:cover;
 background-size:cover;
-min-height: 500px;}
+min-height: 650px;}
 .item{
 margin: 6px;}
 </style>		
@@ -49,7 +49,7 @@ margin: 6px;}
                                     <a href="/prodIngreList/prodNameSearchIngred" class="fa fa-link" ></a>
                                 </div>
                                 <figcaption class="item-description">
-                                    <h5>查看產品成份</h5>
+                                    <h5>產品成份查詢</h5>
                                 </figcaption>
                             </figure>
                             <div><h1>Find by Product</h1></div>
@@ -64,7 +64,7 @@ margin: 6px;}
                                     <a href="/ingredients/search" class="fa fa-link"></a>
                                 </div>
                                 <figcaption class="item-description">
-                                    <h5>利用成份查詢產品</h5>
+                                    <h5>單一成份查詢</h5>
                                     
                                 </figcaption>
                             </figure>
@@ -82,7 +82,6 @@ margin: 6px;}
                                 </div>
                                 <figcaption class="item-description">
                                     <h5>分享產品成份資訊</h5>
-                                    
                                 </figcaption>
                             </figure>
                             <div><h1>Share your Information</h1></div>

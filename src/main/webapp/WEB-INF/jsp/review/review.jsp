@@ -147,7 +147,9 @@
                                 <div class="pbhead">
                                 <ul>
                                     <li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:22px;margin:12px 11px"></i></a></li>
-									<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
+									<c:if test="${review.memberId==memberId}">
+										<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
+									</c:if>
 									<li><a href="#Comments" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
 									<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
                                 </ul>

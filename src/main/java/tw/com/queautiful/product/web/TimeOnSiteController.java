@@ -17,7 +17,6 @@ public class TimeOnSiteController {
 	@RequestMapping("/record")
 	@ResponseBody
 	public String record(Integer timeOnSiteStr,String pageUrl,Long memberId){
-		System.out.println("in controller+"+timeOnSiteStr+" pageUrl="+pageUrl+" memberId="+memberId);
 		TimeOnSiteEnity timeOnSiteEnity=new TimeOnSiteEnity();
 		
 		timeOnSiteEnity.setPageUrl(pageUrl);

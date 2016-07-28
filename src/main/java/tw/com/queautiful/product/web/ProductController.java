@@ -1,9 +1,8 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Date;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,6 @@ import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.service.BrandService;
 import tw.com.queautiful.product.service.CategoryService;
-import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
@@ -55,11 +55,11 @@ public class ProductController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@Autowired
-	private MemberService memberService;
-
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	// 提供一般抓取資料使用
 	@RequestMapping("/select")
@@ -261,20 +261,11 @@ public class ProductController {
 		
 		Product product = prodService.getById(prodId);
 		
-		int[] ages = new int[10]; 
-		int[] stars = new int[6];
+		List<Review> reviews = product.getReviews();
+		int[] ages = prodService.calcAges(reviews); 
+		int[] stars = prodService.calcStars(reviews);
 		
-		for(Review review : product.getReviews()) {
-			
-			try {
-				ages[memberService.getMemberAge(review.getMember().getBirthDay())/10] ++;
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			stars[review.getReviewRating()] ++;
-			
-		}
-		
+		model.addAttribute("size", reviews.size());
 		model.addAttribute("ages", ages);
 		model.addAttribute("stars", stars);
 		model.addAttribute("product", prodService.getByIdByVoView(prodId));
@@ -285,5 +276,14 @@ public class ProductController {
 	public String loginPage(Model model) {
 		return "/product/login";
 	}
+	
+	@RequestMapping("/i18n")
+	@ResponseBody
+	public String getMessage() {
+		Locale locale = LocaleContextHolder.getLocale();
+		String msg = messageSource.getMessage("home", null, locale);
+		log.debug("msg = {}", msg);
+		return msg;
+	} 
 
 }

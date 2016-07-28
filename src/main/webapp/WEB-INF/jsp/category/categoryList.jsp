@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Category List</title>
+<script src="/js/jquery.min.js"></script>
 <style>
 table{border:1px solid black;
 	  width:600px;}

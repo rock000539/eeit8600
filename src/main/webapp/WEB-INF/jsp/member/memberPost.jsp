@@ -10,6 +10,7 @@
 	<title>${member.nickname}'s Posted</title>
 
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/fms/style.css">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
@@ -79,12 +80,15 @@ h2, h4{
 	margin-bottom: 20px;
 	width: 90px;
 	top:2px;
-	border-top: 2px solid #727CB6;
-	font-family: "Neutra Face","Helvetica Neue",Helvetica,Arial,sans-serif;
+	border-top: 2px solid #000;
+	font-family: FranklinGothic,Helvetica,sans-serif;
 }
 .reviewTime>span{
 	display: block;
-	font-size: 18px;
+	font-size: 15px;
+	line-height: 24px;
+}
+.articleTime h4{
 	font-family: FranklinGothic,Helvetica,sans-serif;
 }
 .reviewImg{
@@ -95,19 +99,7 @@ h2, h4{
 .reviewImg img{
 	width: 100%;
 }
-.rating{
-	margin-top: 100px;
-	font-size: 12px;
-}
-.info{
-	position:relative;
-	display: block;
-	float: right;
-	clear: both;
-	margin-left: 5px;
-	margin-top: 10px;
-	font-size: 12px;
-}
+
 .reviewContent{
 	display: table-cell;
 	padding-left: 30px;
@@ -130,13 +122,15 @@ h2, h4{
 	font-size: 10px;
 	padding: 0 10px 0 4px;
 	background: #727CB6;
+	cursor: pointer;
 }
-.reviewContent h2>span>a, .articleEdit>a{
+.reviewContent h2>span, .articleEdit{
 	color: #fff;
 	line-height: 20px;
 }
 .reviewContent h2>span:hover , .articleEdit:hover{
 	background: #000;
+	color:fff;
 }
 .preview{
 	overflow: hidden; 
@@ -184,7 +178,7 @@ h2, h4{
 	color: #df3331;
 	font-family: "Irvin Text",Georgia,"Times New Roman",Times,serif;
     font-size: 12px;
-    line-height: 1.25;
+   	line-height: 24px;
     margin-bottom: 12px;
 }
 
@@ -196,7 +190,7 @@ h2, h4{
 
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
-<div class="row detail-div">
+<div class="row detail-div animated fadeIn">
 	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 		
@@ -213,7 +207,7 @@ h2, h4{
 	<div class="tab-content clearfix">
 	    <div id="review" class="tab-pane fade active in">
 	    	<div class="subject">
-				<p>POSTED REVIEWS (${fn:length(reviews)})</p>
+				<p>POSTED REVIEWS (${reviewsTotalElement})</p>
 			</div>
 			<div class="subtab">
 				
@@ -221,28 +215,20 @@ h2, h4{
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
 	        	<div class="reviewTime">
-	        		<c:set var="index"  value="${vs.index}"/>
-	        		<c:set var="reviewTime"  value="${dates[index]}"/>
-	        		<c:set var="time"  value="${fn:split(reviewTime,',')}"/>
-	        		<span>${time[2]}</span>
-	        		<div class="blog_single">
-		        		<div class="post_date">
-							<span class="day">${time[1]}</span>
-							<span class="month">${time[0]}</span>
-						</div>
-					</div>
+	        		<span>${item.reviewTime}</span>
 					<div class="rating">
 					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
 	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>
 	        	</div>
-		        <div class="reviewImg"><a href="/products/view?prodId=${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
+		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
 		        <div class="reviewContent">
-		        	<h2 class="reviewTitle">${item.reviewTitle} <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
+		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
 		        	<p class="preview">${item.review}</p>
-		        	<a class="singlepage" href="/reviews/reviewjQueryRain?reviewId=${item.reviewId}">read more</a>
+		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
 	        </div> <!-- reviews -->
@@ -255,7 +241,7 @@ h2, h4{
 	    
 	    <div id="article" class="tab-pane fade">
         	<div class="subject">
-				<p>POSTED ARTICLES (${fn:length(articles)})</p>
+				<p>POSTED ARTICLES (${articlesTotalElement})</p>
 			</div>
 			<div class="subtab">
 			</div> <!-- subtab -->
@@ -267,9 +253,12 @@ h2, h4{
 					
 				</div>
 				<div class="articleContent">
-					<h2 class="articleTitle">${item.articleTitle} <span class="articleEdit"><a href="/articles/edit?articleId=${item.articleId}"><i class="fa fa-pencil"></i>edit</a></span></h2>
+					<h2 class="articleTitle">${item.articleTitle}&nbsp;
+						<a  class="articleEdit" href="/articles/edit/${item.articleId}">
+						<span>
+						<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
 					<p class="preview">${item.articleContent}</p>
-					<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
+					<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 				</div>
 			</div>
@@ -294,41 +283,38 @@ h2, h4{
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
 <script id="reviewTemplate" type="text/template">
-<div class="reviews col-lg-12">
+<div class="reviews col-lg-12 animated fadeIn">
 	<div class="reviewTime">
-		<span>_year</span>
-	    <div class="blog_single">
-	    	<div class="post_date">
-			<span class="day">_day</span>
-			<span class="month">_month</span>
-			</div>
-		</div>
+		<span>_reviewTime</span>
 		<div class="rating">_rating</div>
 		<div class="info"><i class="fa fa-heart"></i> _rewCollect
 			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rewCollect</div>
 	</div>
-	<div class="reviewImg"><a href="/products/view?prodId=_prodId">
+	<div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/_prodId">
 		<img src="/products/show?prodImg=_prodImg"/></a></div>
 	<div class="reviewContent">
-		<h2 class="reviewTitle">_reviewTitle <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		<h2 class="reviewTitle">_reviewTitle&nbsp;
+			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
 		<h4 class="prod">_prodName | _brandName </h4>		
 		<p class="preview">_review</p>
-		<a class="singlepage" href="/reviews/reviewjQueryRain?reviewId=_reviewId">read more</a>
+		<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/_reviewId">read more</a>
 		<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 	</div>
 </div>
 </script>
 <script id="articleTemplate" type="text/template">
-<div class="articles col-lg-12">
+<div class="articles col-lg-12 animated fadeIn">
 	<div class="articleTime">
 		<h4>_articleTime</h4>
 		<h4 class="articleType">_articleType</h4>
 		
 	</div>
 	<div class="articleContent">
-		<h2 class="articleTitle">_articleTitle <span class="articleEdit"><a href="/articles/edit?articleId=articleId"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		<h2 class="articleTitle">_articleTitle&nbsp;
+			<a class="articleEdit" href="/articles/edit/_articleId">
+			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
 		<p class="preview">_articleContent</p>
-		<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
+		<a class="singlepage" href="/articles/view/_articleId">read more</a>
        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 	</div>
 </div>
@@ -336,6 +322,9 @@ h2, h4{
 <script>
 $(function(){
 	$(window).scroll(function(){
+		console.log($(window).scrollTop());
+		console.log($(window).height());
+		console.log($(document).height());
 	if($(window).scrollTop() + $(window).height() >= $(document).height()){	
 		if($('#tab-r').hasClass('active')){
 	    	var totalPages = $('#reviewsTotalPages').val();
@@ -356,16 +345,11 @@ $(function(){
 					var reviewsPageNum = result.reviewsPageNum;
 					var products = result.products;
 					var member = result.member;
-					var dates = result.dates;
 					
 					$('#reviewsPageNum').val(reviewsPageNum);
 					
 					for(var i=0; i<reviews.length; i++){
 						console.log("prodId: "+reviews[i].prodId);
-						var month = dates[i].substring(0,3);
-						var day = dates[i].substring(4,5);
-						var year = dates[i].substring(7);
-						console.log(year+" "+day+" "+month);
 						var reviewRating = reviews[i].reviewRating;
 						var dimand = '<i class="fa fa-diamond"></i>';
 						var rating = "";
@@ -373,11 +357,8 @@ $(function(){
 							rating += dimand;
 						}
 						$($('#reviewTemplate').html()
-							.replace('_year', year)
-							.replace('_day', day)
-							.replace('_month', month)
-							.replace('_rating', rating)
 							.replace('_reviewTime', reviews[i].reviewTime)
+							.replace('_rating', rating)
 							.replace('_rewCollect', reviews[i].rewCollect)
 							.replace('_rewCollect', reviews[i].rewCollect)
 							.replace('_prodId', reviews[i].prodId)
@@ -435,10 +416,6 @@ $(function(){
 	}); /* onScroll */
 	
 	
-	
-		
-	    	
-	    	
 	    	
 	
 	  /*============ BUTTON UP ===========*/

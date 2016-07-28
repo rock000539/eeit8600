@@ -11,7 +11,6 @@
 	<link href="/css/sb-admin-2.css" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="/css/bms-customize.css" rel="stylesheet" >
-	
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/sb-admin-2.js"></script>

@@ -15,7 +15,7 @@
 	<link href="/css/bms/style.min.css" rel="stylesheet">
 	<link href="/css/bms/default.css" rel="stylesheet" id="theme">
 	<link href="/css/bms/bms-customize.css" rel="stylesheet">
-	
+	<script src="/js/jquery.min.js"></script>
 	<!--  BASE JS  -->
 	<script src="/js/bms/pace.min.js"></script>
 	<script src="/js/jquery.min.js"></script>

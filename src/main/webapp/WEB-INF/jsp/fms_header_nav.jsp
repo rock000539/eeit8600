@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+
 <!--start wrapper-->
 <section class="wrapper container">
 <!--Start Header-->
@@ -70,28 +72,28 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
             	<li class="active"><a href="/fms"><img src="/images/logo_qutie-02.png"/></a><li>
-                <li><a href="/fms">Home</a></li>
+                <li><a href="/fms"><s:message code="home"></s:message></a></li>
 
-                <li><a href="/expdate/search">Date</a></li>
+                <li><a href="/expdate/search"><s:message code="date"></s:message></a></li>
 
-                <li><a href="/ingredients/main">Ingredient</a>
+                <li><a href="/ingredients/main"><s:message code="ingredient"></s:message></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/prodIngreList/prodNameSearchIngred">Via Product</a></li>
-                        <li><a href="/ingredients/search">Via Ingredient</a></li>
+                        <li><a href="/prodIngreList/prodNameSearchIngred"><s:message code="via_product"></s:message></a></li>
+                        <li><a href="/ingredients/search"><s:message code="via_ingredient"></s:message></a></li>
                     </ul>
                 </li>
 
-                <li><a href="#">Order</a></li>
+                <li><a href="#"><s:message code="order"></s:message></a></li>
 
-                <li><a href="/products/search"><span class="data-hover" data-hover="blog">Product</span></a></li>
+                <li><a href="/products/search"><span class="data-hover" data-hover="blog"><s:message code="product"></s:message></span></a></li>
 
-                <li><a href="/reviews/reviews">Review</a></li>
-                <li><a href="/articles/listfms">Forum</a></li>
-				<li><a href="/contact">Contact</a></li>
+                <li><a href="/reviews/reviews"><s:message code="review"></s:message></a></li>
+                <li><a href="/articles/listfms"><s:message code="forum"></s:message></a></li>
+				<li><a href="/contact"><s:message code="contact"></s:message></a></li>
             </ul>
         </div>
     </div>
-   
+ 
 
 <script type='text/javascript'> 
 $(function(){

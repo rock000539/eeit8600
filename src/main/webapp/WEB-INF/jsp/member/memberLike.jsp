@@ -10,6 +10,7 @@
 	<title>${member.nickname}'s Posted</title>
 
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/fms/style.css">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
@@ -77,12 +78,12 @@ h2, h4{
 	margin-bottom: 20px;
 	width: 90px;
 	top:2px;
-	border-top: 2px solid #727CB6;
+	border-top: 2px solid #000;
 	font-family: "Neutra Face","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .reviewTime>span{
 	display: block;
-	font-size: 18px;
+	font-size: 15px;
 	font-family: FranklinGothic,Helvetica,sans-serif;
 }
 .reviewImg{
@@ -92,19 +93,6 @@ h2, h4{
 }
 .reviewImg img{
 	width: 100%;
-}
-.rating{
-	margin-top: 100px;
-	font-size: 12px;
-}
-.info{
-	position:relative;
-	display: block;
-	float: right;
-	clear: both;
-	margin-left: 5px;
-	margin-top: 10px;
-	font-size: 12px;
 }
 .reviewContent{
 	display: table-cell;
@@ -123,30 +111,18 @@ h2, h4{
 	padding-bottom: 5px;
 }
 
-.reviewContent h2.reviewTitle>span, .articleEdit{
+.btn-delete, .articleDel{
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 10px;
-	padding: 0 10px 0 4px;
-	background: #727CB6;
-}
-.reviewContent h2>span>a, .articleEdit>a{
-	color: #fff;
 	line-height: 20px;
+	padding: 3px 6px;
+	background: #727CB6;
+	color: #fff;
+	cursor: pointer;
 }
-.reviewContent h2>span:hover , .articleEdit:hover{
+.reviewContent h2>span:hover , .articleDel:hover{
 	background: #000;
-}
-.preview{
-	overflow: hidden; 
-	display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-align: justify;
-    line-height: 20px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #333;
 }
 .singlepage{
     font-family: Savoy,Georgia,serif;
@@ -186,7 +162,7 @@ h2, h4{
 	color: #df3331;
 	font-family: "Irvin Text",Georgia,"Times New Roman",Times,serif;
     font-size: 12px;
-    line-height: 1.25;
+    line-height: 24px;
     margin-bottom: 12px;
 }
 .author{
@@ -207,6 +183,42 @@ h2, h4{
 }
 .author a:hover{
 	color: #FF1E76;
+}
+.preview{
+	overflow: hidden; 
+	display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+    line-height: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+}
+.modal-content{
+	text-align: center;
+	padding: 30px 0 20px 0;
+}
+.modal-content h2{
+	font-weight: 400;
+}
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 </style>
 </head>
@@ -233,79 +245,84 @@ h2, h4{
 	<div class="tab-content clearfix">
 	    <div id="review" class="tab-pane fade active in">
 	    	<div class="subject">
-				<p><i class="fa fa-heart"></i> LIKED REVIEWS (${fn:length(reviews)})</p>
+				<p id="count-review"><i class="fa fa-heart"></i> LIKED REVIEWS (${fn:length(reviews)})</p>
 			</div>
 			<div class="subtab">
 				
 			</div> <!-- subtab -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
-	        <div class="reviews col-lg-12">
+	        <div class="reviews col-lg-12" dataId=${item.reviewId}>
+	        <div class="review-all">
 	        	<div class="reviewTime">
-	        		<c:set var="index"  value="${vs.index}"/>
-	        		<c:set var="reviewTime"  value="${dates[index]}"/>
-	        		<c:set var="time"  value="${fn:split(reviewTime,',')}"/>
-	        		<span>${time[2]}</span>
-	        		<div class="blog_single">
-		        		<div class="post_date">
-							<span class="day">${time[1]}</span>
-							<span class="month">${time[0]}</span>
-						</div>
-					</div>
+	        		<span>${item.reviewTime}</span>
 					<div class="rating">
 					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
 	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>
 	        	</div>
-		        <div class="reviewImg"><a href="/products/view?prodId=${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
+		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
 		        <div class="reviewContent">
-		        	<h2 class="reviewTitle">${item.reviewTitle} <span><a href="#"><i class="fa fa-pencil"></i>DisLike</a></span></h2>
+		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
+		        	<span class="btn-delete"  value="${item.reviewId}"
+	         		 data-toggle="modal" data-target="#myModal"><i class="fa fa-heartbeat" value="${item.reviewId}"></i>&nbsp;DisLike</span></h2>
 		        	
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
 		        	<h6 class="author">by&nbsp;
 		        		<a href="<%=request.getContextPath()%>/members/overview/${item.memberId}">${item.member.nickname}</a></h6>
-		        	<p class="preview">${item.review}</p>
-		        	<a class="singlepage" href="/reviews/review?reviewId=${item.reviewId}">read more</a>
+		        	<p class="preview">${fn:substring(item.review, 0, 76)} ...</p>
+		        	<a class="singlepage" href="/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
+		    </div>
 	        </div> <!-- reviews -->
 	        </c:forEach>
-	        <input type="hidden" id="reviewsPageNum" value="${reviewsPageNum}">
-			<input type="hidden" id="reviewsTotalPages" value="${reviewsTotalPages}">
 	    </div>
+	    
+	    
 	    
 	    <!-- articles -->
 	    
 	    <div id="article" class="tab-pane fade">
         	<div class="subject">
-				<p><i class="fa fa-heart"></i> LIKED ARTICLES (${fn:length(articles)})</p>
+				<p id="count-article"><i class="fa fa-heart"></i> LIKED ARTICLES (${fn:length(articles)})</p>
 			</div>
 			<div class="subtab">
 			</div> <!-- subtab -->
 			<c:forEach var="item" items="${articles}" varStatus="vs">
-			<div class="articles col-lg-12">
+			<div class="articles col-lg-12" dataId="${item.articleId}">
 				<div class="articleTime">
 					<h4>${item.articleTime}</h4>
 					<h4 class="articleType">${item.articleType}</h4>
 					
 				</div>
 				<div class="articleContent">
-					<h2 class="articleTitle">${item.articleTitle} <span class="articleEdit"><a href="/articles/edit?articleId=${item.articleId}"><i class="fa fa-pencil"></i>edit</a></span></h2>
+					<h2 class="articleTitle">${item.articleTitle}&nbsp;
+						<span class="articleDel" name="${item.articleId}"
+	         		 	data-toggle="modal" data-target="#myModal"><i class="fa fa-heartbeat" name="${item.articleId}"></i>&nbsp;DisLike</span></h2>
+					<h6 class="author">by&nbsp;
+		        <a href="<%=request.getContextPath()%>/members/overview/${item.memberId}">${item.member.nickname}</a></h6>	
 					<p class="preview">${item.articleContent}</p>
-					<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
+					<a class="singlepage" href="<%=request.getContextPath()%>/articles/view/${item.articleId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 				</div>
 			</div>
 			</c:forEach>
-			<input type="hidden" id="articlesPageNum" value="${articlesPageNum}">
-			<input type="hidden" id="articlesTotalPages" value="${articlesTotalPages}">
     	</div>
 	</div> <!-- tab-content -->
 </div> <!-- tabContent -->
 
-
-
 	</div> <!-- col-lg -->
+	
+<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+    	<h2>Delete ?</h2>
+    	<br>
+    	<button id="del-confirm" class="btn btn-default">Confirm</button>
+    </div>
+  </div>
+</div>
 	
 	<c:import url="/WEB-INF/jsp/member/memberPages-nav.jsp" />
 	
@@ -316,152 +333,89 @@ h2, h4{
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
-<script id="reviewTemplate" type="text/template">
-<div class="reviews col-lg-12">
-	<div class="reviewTime">
-		<span>_year</span>
-	    <div class="blog_single">
-	    	<div class="post_date">
-			<span class="day">_day</span>
-			<span class="month">_month</span>
-			</div>
-		</div>
-		<div class="rating">_rating</div>
-		<div class="info"><i class="fa fa-heart"></i> _rewCollect
-			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rewCollect</div>
-	</div>
-	<div class="reviewImg"><a href="/products/view?prodId=_prodId">
-		<img src="/products/show?prodImg=_prodImg"/></a></div>
-	<div class="reviewContent">
-		<h2 class="reviewTitle">_reviewTitle <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
-		<h4 class="prod">_prodName | _brandName </h4>		
-		<p class="preview">_review</p>
-		<a class="singlepage" href="/reviews/reviewjQueryRain?reviewId=_reviewId">read more</a>
-		<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
-	</div>
-</div>
-</script>
-<script id="articleTemplate" type="text/template">
-<div class="articles col-lg-12">
-	<div class="articleTime">
-		<h4>_articleTime</h4>
-		<h4 class="articleType">_articleType</h4>
 		
-	</div>
-	<div class="articleContent">
-		<h2 class="articleTitle">_articleTitle <span class="articleEdit"><a href="/articles/edit?articleId=articleId"><i class="fa fa-pencil"></i>edit</a></span></h2>
-		<p class="preview">_articleContent</p>
-		<a class="singlepage" href="/articles/article-page?articleId=${item.articleId}">read more</a>
-       	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
-	</div>
-</div>
-</script>		
 <script>
 $(function(){
-	$(window).scroll(function(){
-	if($(window).scrollTop() + $(window).height() >= $(document).height()){	
-		if($('#tab-r').hasClass('active')){
-	    	var totalPages = $('#reviewsTotalPages').val();
-	    	var loadedPageNum = $('#reviewsPageNum').val();
-	    	var pageNum = parseInt(loadedPageNum)+1;
-	    	console.log("totalPages: "+totalPages);
-	    	console.log("loadedPageNum: "+loadedPageNum);
-	    	console.log("pageNum: "+pageNum);
-	    	if(loadedPageNum < totalPages){
-	    	$.ajax({
-	    		url: '/members/post/review/'+pageNum,
-				type: 'POST',
-				dataType: 'json',
-				contextType: 'application/json; charset=utf-8;',
-				success: function(response){
-					var result = response[0];
-					var reviews = result.reviews;
-					var reviewsPageNum = result.reviewsPageNum;
-					var products = result.products;
-					var member = result.member;
-					var dates = result.dates;
-					
-					$('#reviewsPageNum').val(reviewsPageNum);
-					
-					for(var i=0; i<reviews.length; i++){
-						console.log("prodId: "+reviews[i].prodId);
-						var month = dates[i].substring(0,3);
-						var day = dates[i].substring(4,5);
-						var year = dates[i].substring(7);
-						console.log(year+" "+day+" "+month);
-						var reviewRating = reviews[i].reviewRating;
-						var dimand = '<i class="fa fa-diamond"></i>';
-						var rating = "";
-						for(var j=0; j<reviewRating; j++){
-							rating += dimand;
-						}
-						$($('#reviewTemplate').html()
-							.replace('_year', year)
-							.replace('_day', day)
-							.replace('_month', month)
-							.replace('_rating', rating)
-							.replace('_reviewTime', reviews[i].reviewTime)
-							.replace('_rewCollect', reviews[i].rewCollect)
-							.replace('_rewCollect', reviews[i].rewCollect)
-							.replace('_prodId', reviews[i].prodId)
-							.replace('_prodImg', products[i].prodImg)
-							.replace('_reviewTitle', reviews[i].reviewTitle)
-							.replace('_prodName', products[i].prodName)
-							.replace('_brandName', products[i].brandName)
-							.replace('_review', reviews[i].review)
-							.replace('_reviewId', reviews[i].reviewId))
-							.appendTo($('#review'));
-						
-					}
-				} /* success */
-	    	});} /* ajax */
-	    }  /* if #tab-r active*/
-	    
-	    
-		if($('#tab-a').hasClass('active')){
-			var totalPages = $('#articlesTotalPages').val();
-	    	var loadedPageNum = $('#articlesPageNum').val();
-	    	var pageNum = parseInt(loadedPageNum)+1;
-	    	console.log("totalPages: "+totalPages);
-//  	    	console.log("loadedPageNum: "+loadedPageNum);
-//  	    	console.log("pageNum: "+pageNum);
- 	    	
- 	    	if(loadedPageNum < totalPages){
- 		    	$.ajax({
- 		    		url: '/members/post/article/'+pageNum,
- 					type: 'POST',
- 					dataType: 'json',
- 					contextType: 'application/json; charset=utf-8;',
- 					success: function(response){
- 						var result = response[0];
- 						var articles = result.articles;
- 						var articlesPageNum = result.articlesPageNum;
- 						var member = result.member;
- 						
- 						$('#articlesPageNum').val(articlesPageNum);
- 						
- 						for(var i=0; i<articles.length; i++){
- 							$($('#articleTemplate').html()
- 								.replace('_articleTime', articles[i].articleTime)
- 								.replace('_articleType', articles[i].articleType)
- 								.replace('_articleTitle', articles[i].articleTitle)
- 								.replace('_articleId', articles[i].articleId)
- 								.replace('_articleContent', articles[i].articleContent)
-								.replace('_articleId', articles[i].articleId))
-								.appendTo($('#article'));
-  						}
- 					} /* success */
- 		    	});} /* ajax */
- 	    	
-		}
-	}  /* scroll-bottom*/
-	}); /* onScroll */
+	//review
+	var btn1;
+	var reviewId;
+	$('.btn-delete').click(function(e){
+		btn1 = e.target;
+		reviewId = btn1.getAttribute('value');
+		console.log(btn1);
+		console.log(reviewId);	
+	});//btn-delete onClick
+	
+	//article
+	var btna;
+	var articleId;
+	$('.articleDel').click(function(e){
+		btna = e.target;
+		articleId = btna.getAttribute('name');
+		console.log(btna);
+		console.log(articleId);	
+	});//btn-delete onClick
 	
 	
-	
+	$('#del-confirm').click(function(){		
+		if(reviewId != null){
+		$.ajax({
+			url:"/members/like/review/delete",
+			data:{"reviewId": reviewId},
+			type:'get',
+			success:function(result){
+				console.log(result);
+				$(".reviews[dataId*="+reviewId+"]").remove();
+				$('#count-review').html('<i class="fa fa-heart"></i> LIKED REVIEWS ('+result+')');
+				$('#myModal').modal('toggle');
+				reviewId=null;
+			}
+		}); //ajax
+		} //if review
 		
-	    	
-	    	
+		if(articleId != null){
+			$.ajax({
+				url:"/members/like/article/delete",
+				data:{"articleId": articleId},
+				type:'get',
+				success:function(result){
+					console.log(result);
+					$(".articles[dataId*="+articleId+"]").remove();
+					$('#count-article').html('<i class="fa fa-heart"></i> LIKED ARTICLES ('+result+')');
+					$('#myModal').modal('toggle');
+					articleId = null;
+				}
+			}); //ajax
+		} //if article
+	});
+		
+	
+	
+	//timeline
+	var timelineBlocks = $('.reviews'),
+	offset = 0.95;
+	
+	hideBlocks(timelineBlocks, offset);
+	
+	$(window).on('scroll', function(){
+		(!window.requestAnimationFrame) 
+			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+	});
+
+	function hideBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.review-all').addClass('is-hidden');
+			console.log("hide");
+		});
+	}
+
+	function showBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.review-all').hasClass('is-hidden') ) && $(this).find('.review-all').removeClass('is-hidden').addClass('animated fadeInDown');
+			console.log("show"+$(this));
+		});
+	}  	
 	    	
 	
 	  /*============ BUTTON UP ===========*/

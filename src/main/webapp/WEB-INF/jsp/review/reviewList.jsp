@@ -8,6 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Review List</title>
 	<!--  BASE CSS STYLE  -->
+	<script src="/js/jquery.min.js"></script>
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/bms/style.min.css" rel="stylesheet">
