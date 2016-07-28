@@ -14,11 +14,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-=======
-import javax.transaction.Transactional;
-
->>>>>>> branch 'master' of https://github.com/rock000539/eeit8600.git
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -45,7 +40,6 @@ import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
-import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
@@ -268,6 +262,7 @@ public class MemberController {
 	public Boolean reviewLikedInsert(@RequestParam Long reviewId, HttpServletRequest request, Model model){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
+		log.debug("memberId {} saved review {}", memberId.toString(), reviewId.toString());
 		Set<Review> reviews = member.getReviewsSavedByMember();
 		Review review = reviewService.getById(reviewId);
 		reviews.add(review);
