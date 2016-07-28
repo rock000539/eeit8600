@@ -228,6 +228,11 @@ public class Review {
 	}
 
 	public Integer getRewCollect() {
+		if(memberSave!=null){
+			rewCollect = memberSave.size();
+		}else{
+			rewCollect = 0;
+		}
 		return rewCollect;
 	}
 
