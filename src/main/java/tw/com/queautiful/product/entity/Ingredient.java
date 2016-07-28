@@ -34,14 +34,29 @@ public class Ingredient {
 	
 	@Column(name="INGREDSafety")
 	private Integer ingredSafety;
+	
+	private boolean CheckedData;
+	
 
-	
-	
+
 	@Override
 	public String toString() {
 		return "Ingredient [ingredId=" + ingredId + ", ingredName=" + ingredName + ", ingredChName=" + ingredChName
 				+ ", ingredChar=" + ingredChar + ", ingredIrritant=" + ingredIrritant + ", ingredAcne=" + ingredAcne
-				+ ", ingredSafety=" + ingredSafety + "]";
+				+ ", ingredSafety=" + ingredSafety + ", CheckedData=" + CheckedData + ", isCheckedData()="
+				+ isCheckedData() + ", getIngredId()=" + getIngredId() + ", getIngredName()=" + getIngredName()
+				+ ", getIngredChName()=" + getIngredChName() + ", getIngredChar()=" + getIngredChar()
+				+ ", getIngredIrritant()=" + getIngredIrritant() + ", getIngredAcne()=" + getIngredAcne()
+				+ ", getIngredSafety()=" + getIngredSafety() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+	public boolean isCheckedData() {
+		return CheckedData;
+	}
+
+	public void setCheckedData(boolean checkedData) {
+		CheckedData = checkedData;
 	}
 
 	public Long getIngredId() {

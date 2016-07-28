@@ -72,6 +72,7 @@ public class ProdIngreListService {
 	public void delete(Long prodId) {
 		prodIngreListDao.delete(prodId);
 	}
+	
 //---後台修改資料用----------------------------------------------------------------	
 	@Transactional
 	public ProdIngreList findOneByProidAndIngredientName(String proid ,String IngredientName){

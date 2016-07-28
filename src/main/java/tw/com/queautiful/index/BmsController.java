@@ -16,8 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.queautiful.product.entity.Ingredient;
 import tw.com.queautiful.product.entity.WebMail;
+import tw.com.queautiful.product.service.IngredientService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.TimeOnSiteService;
 import tw.com.queautiful.product.service.WebMailService;
@@ -35,6 +39,9 @@ public class BmsController {
 	
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired
+	private IngredientService ingredientService;
 	
 	@RequestMapping("/bms")
 	public String bmsPage(Model model){
@@ -78,4 +85,21 @@ public class BmsController {
 		model.addAttribute("Mailresult",Mailresult);
 		return "/bms/bms";
 	}
+	
+	@RequestMapping(value="/bms/getUnreadData",method=RequestMethod.POST)
+	@ResponseBody
+	public Map getUnreadData(){
+		Map<String, List<?>> resultMap=new HashMap<String, List<?>>();
+		List result=new ArrayList();
+		
+		List<WebMail> webMails=webMailService.findByMailReadTypeIs(false);
+		resultMap.put("webMails", webMails);
+		
+		List <Ingredient> Ingredients=ingredientService.findByCheckedDataIs(false);
+		resultMap.put("Ingredients", Ingredients);
+		
+		return resultMap;
+		
+	}
+	
 }

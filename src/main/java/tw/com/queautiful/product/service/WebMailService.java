@@ -28,4 +28,8 @@ public class WebMailService {
 	public void delete(long webMailId){
 		webMailDao.delete(webMailId);
 	}
+	
+	public List<WebMail> findByMailReadTypeIs(boolean mailReadType){
+		return webMailDao.findByMailReadTypeIs(mailReadType);
+	}
 }

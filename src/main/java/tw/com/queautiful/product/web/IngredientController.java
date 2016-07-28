@@ -72,6 +72,15 @@ public class IngredientController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public Ingredient post(@RequestBody Ingredient ingredient) {
+		ingredient.setCheckedData(true);
+		service.insert(ingredient);
+		return ingredient;
+	}
+	
+	@RequestMapping(value = "/clientinsert", method = RequestMethod.POST)
+	@ResponseBody
+	public Ingredient clientpost(@RequestBody Ingredient ingredient) {
+		ingredient.setCheckedData(false);
 		service.insert(ingredient);
 		return ingredient;
 	}
@@ -81,7 +90,9 @@ public class IngredientController {
 	public Ingredient ajaxPost(@RequestParam String NewingredName, @RequestParam String NewingredChName, @RequestParam String NewIngredChar) {
 		Ingredient ingredient=new Ingredient();
 		ingredient.setIngredName(NewingredName);
-		
+		ingredient.setIngredChName(NewingredChName);
+		ingredient.setIngredChar(NewIngredChar);
+		ingredient.setCheckedData(true);
 		service.insert(ingredient);
 		return ingredient;
 	}
@@ -99,11 +110,11 @@ public class IngredientController {
 		return service.getById(ingredient.getIngredId());
 	}
 	
-	@RequestMapping("/delete")
-	public String delete(@RequestParam Long ingredId){
-		System.out.println(ingredId);
-		service.delete(ingredId);
-		return "redirect:/ingredients/list";
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void delete(@RequestParam Ingredient ingredient){
+		service.delete(ingredient.getIngredId());
+//		return "redirect:/ingredients/list";
 	}
 		
 	
