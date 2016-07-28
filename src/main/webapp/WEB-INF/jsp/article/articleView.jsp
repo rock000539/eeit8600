@@ -25,236 +25,244 @@
 </head>
 
 <style>
-table{
-	border:1px solid black;
-}
-th,td{
-border:1px solid black;
-}
-
-.bgcolor{
-	background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
- 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
-  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
-  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
-}
-
-.breadcrumb-line{position:relative;margin:0 0 35px;border-radius:4px;background-color:#e1e5eb;}
-.breadcrumb{
-/*  	background:rgba(0,0,0,0); */
-/* 	border-radius:0; */
-	height:40px;
-	line-height:40px;
-	margin:0;
-	overflow:hidden;
-	padding:0 20px 0 0;
-	text-overflow:ellipsis;
-	white-space:nowrap
-}
-.breadcrumb-buttons{background:#d7dee3;border-radius:0 4px 4px 0;display:inline-block;list-style:none;margin:0;padding-left:15px;position:absolute;right:0;top:0}
-.breadcrumb .icon,.breadcrumb-buttons .icon{font-size:18px;vertical-align:text-bottom}
-.breadcrumb-buttons li a{line-height:40px;position:relative;margin-right:14px;text-decoration:none}
-.breadcrumb li{display:inline}
-.breadcrumb li a{-webkit-transition:none 0s ease 0s;transition:none 0s ease 0s;text-align:center;text-decoration:none;}
-.breadcrumb li:first-child a{
-    background: #00d8b2;
-    background: #707478; 
-/* 	background:#c8d2d8; */
-	padding: 11px 15px;
-	display:inline-block;
-	border-radius:4px 0 0 4px;
-	color: #fff;
-/* 	color: #888; */
-}
-.breadcrumb .icon{font-size:18px}
-.breadcrumb>li+li:before{font-family:"FontAwesome";content:"\f054";vertical-align:middle;color: #ccc;}
-.breadcrumb li:last-child a{font-weight:700;color:#888}
-
-/* ==============
-   Author div
-================= */
-.authordiv {
-	position: relative;
-	width: 80px;
-	height: 80px;
-	overflow: hidden;
-}
-/*橫*/
-.authordiv img {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	height: 100%;
-	width: auto;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-/*直*/
-.authordiv img.portrait {
-	width: 100%;
-	height: auto;
-}
-
-
-/* ==============
-   Post Area
-================= */
-.post{
-/* 	background-color:white; */
- 	border:#e8ecf3 solid 1px;
-	border-top:#e8ecf3 solid 3px;
-  	background-color:#fff;
- 	margin-bottom:10px;
- 	border-radius:4px;
- 	transition: all 0.5s ease-in-out;
-}
-.post:hover{
-/* 	border:#ccd3ff solid 2px; */
-	border-top:#727CB6 solid 3px;
- 	transition: all 0.3s ease-in-out;
-}
-.postprofile{
-/* 	border:#e8ecf3 solid 1px; */
-	padding-top:20px;
-/* 	border-right:#e8ecf3 solid 1px; */
-	
-}
-.postprofile h3{
-	margin:5px 0 0;
-}
-
-.postbody{
-	padding:0px 20px 0 30px;
-	border-left:#e8ecf3 solid 1px;
-}
-.postbody ul {
-	margin:10px;
-}
-.postbody  ul > li{
-	float: right;
-}
-
-.postbody  ul > li >a {
-    border-radius: 5px;
-    padding: 4px 7px;
-    margin-left:5px;
-}
-
-.pbhead{
-	border-bottom: 4px solid #e5e5e5;
-}
-.pbhead:after{
-    bottom: 0;
-    display: block;
-    width: 80px;
-    height: 4px;
-    margin-bottom: -4px;
-    margin-top:15px;
-    content: "";
-    background-color: #ee836e;
-}
-
-/* ==============
-   Reply Area
-================= */
-/*dividerHeading*/
-.dividerHeading,
-.widget_title
-{
-    text-align: center;
-    position: relative;
-    margin-bottom:25px;
-}
-.dividerHeading h4,
-.widget_title h4
-{
-    font-size:18px;
-    position:relative;
-    line-height:0;
-    border-bottom: 1px solid #727CB6;
-}
-.dividerHeading h4 span{
-    background:white;
-    position:relative;
-    line-height: 7px;
-    top: 4px;
-    display: inline-block;
-
-}
-.dividerHeading h4 span:before,
-.dividerHeading h4 span:after,
-.widget_title h4 span:after,
-.widget_title h4 span:before
-{
-    color:#E74C3C;
-    font-size:10px;
-    content: "\f10c";
-    font-family:fontawesome;
-    display: inline-block;
-
-}
-.dividerHeading h4 span:before,
-.widget_title h4 span:before
-{
-    margin-right:10px ;
-}
-.dividerHeading h4 span:after,
-.widget_title h4 span:after
-{
-    margin-left:10px ;
-}
-
-/* 修改樣式 */
-
-.dividerHeading h4 span:after, 
-.widget_title h4 span:after, 
-.widget_title h4 span:before {
-    color: #727CB6;
-}
-
-.dividerHeading h4 span:before, 
-.dividerHeading h4 span:after, 
-.widget_title h4 span:after, 
-.widget_title h4 span:before {
-    color: #727CB6;
-}
-
-.dividerHeading h4 span {
-    background: #faeadf; /*new post bgcolor*/
-}
+		table{
+			border:1px solid black;
+		}
+		th,td{
+		border:1px solid black;
+		}
 		
-.dividerHeading h4,
-.widget_title h4{
-    font-size: 21px;
-    font-weight: normal;
-    margin-bottom: 0px;
-    padding: 0px;
-    position: relative;
-}
-
-.dividerHeading h4::before, .widget_title h4::before { 
-	border: 0px;
-    content: none;
-}
-
-#addForm button{
-	margin:0 5px;
-}
-
-.hasbutton{
-	text-align:center; 
-	margin-top:20px;
-	margin-bottom:20px;
-}
-
-.btn-like{
-	background: #ff9b9b;
-}
-
-.btn-like:hover{
-	background: #ff7f7f;
-}
+		.bgcolor{
+			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
+		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
+		  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
+		  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+		}
+		
+		.breadcrumb-line{position:relative;margin:0 0 35px;border-radius:4px;background-color:#e1e5eb;}
+		.breadcrumb{
+		/*  	background:rgba(0,0,0,0); */
+		/* 	border-radius:0; */
+			height:40px;
+			line-height:40px;
+			margin:0;
+			overflow:hidden;
+			padding:0 20px 0 0;
+			text-overflow:ellipsis;
+			white-space:nowrap
+		}
+		.breadcrumb-buttons{background:#d7dee3;border-radius:0 4px 4px 0;display:inline-block;list-style:none;margin:0;padding-left:15px;position:absolute;right:0;top:0}
+		.breadcrumb .icon,.breadcrumb-buttons .icon{font-size:18px;vertical-align:text-bottom}
+		.breadcrumb-buttons li a{line-height:40px;position:relative;margin-right:14px;text-decoration:none}
+		.breadcrumb li{display:inline}
+		.breadcrumb li a{-webkit-transition:none 0s ease 0s;transition:none 0s ease 0s;text-align:center;text-decoration:none;}
+		.breadcrumb li:first-child a{
+		    background: #00d8b2;
+		    background: #707478; 
+		/* 	background:#c8d2d8; */
+			padding: 11px 15px;
+			display:inline-block;
+			border-radius:4px 0 0 4px;
+			color: #fff;
+		/* 	color: #888; */
+		}
+		.breadcrumb .icon{font-size:18px}
+		.breadcrumb>li+li:before{font-family:"FontAwesome";content:"\f054";vertical-align:middle;color: #ccc;}
+		.breadcrumb li:last-child a{font-weight:700;color:#888}
+		
+		/* ==============
+		   Author div
+		================= */
+		.authordiv {
+			position: relative;
+			width: 80px;
+			height: 80px;
+			overflow: hidden;
+		}
+		/*橫*/
+		.authordiv img {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			height: 100%;
+			width: auto;
+			-webkit-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+		/*直*/
+		.authordiv img.portrait {
+			width: 100%;
+			height: auto;
+		}
+		
+		
+		/* ==============
+		   Post Area
+		================= */
+		.post{
+		/* 	background-color:white; */
+		 	border:#e8ecf3 solid 1px;
+			border-top:#e8ecf3 solid 3px;
+		  	background-color:#fff;
+		 	margin-bottom:10px;
+		 	border-radius:4px;
+		 	transition: all 0.5s ease-in-out;
+		}
+		.post:hover{
+		/* 	border:#ccd3ff solid 2px; */
+			border-top:#727CB6 solid 3px;
+		 	transition: all 0.3s ease-in-out;
+		}
+		.postprofile{
+		/* 	border:#e8ecf3 solid 1px; */
+			padding-top:20px;
+		/* 	border-right:#e8ecf3 solid 1px; */
+			
+		}
+		.postprofile h3{
+			margin:5px 0 0;
+		}
+		
+		.postbody{
+			padding:0px 20px 0 30px;
+			border-left:#e8ecf3 solid 1px;
+		}
+		.postbody ul {
+			margin:10px;
+		}
+		.postbody  ul > li{
+		 	font-size:20px;
+			float: right;
+		}
+		
+		.postbody  ul > li >a {
+		    border-radius: 5px;
+		    padding: 4px 7px;
+		    margin-left:5px;
+		}
+		
+		.pbhead{
+			border-bottom: 4px solid #e5e5e5;
+		}
+		.pbhead:after{
+		    bottom: 0;
+		    display: block;
+		    width: 80px;
+		    height: 4px;
+		    margin-bottom: -4px;
+		    margin-top:15px;
+		    content: "";
+		    background-color: #ee836e;
+		}
+		
+		.content ul > li{
+			font-size:16px;
+			margin-left:20px;
+		}
+		
+		/* ==============
+		   Reply Area
+		================= */
+		/*dividerHeading*/
+		.dividerHeading,
+		.widget_title
+		{
+		    text-align: center;
+		    position: relative;
+		    margin-bottom:25px;
+		}
+		.dividerHeading h4,
+		.widget_title h4
+		{
+		    font-size:18px;
+		    position:relative;
+		    line-height:0;
+		    border-bottom: 1px solid #727CB6;
+		}
+		.dividerHeading h4 span{
+		    background:white;
+		    position:relative;
+		    line-height: 7px;
+		    top: 4px;
+		    display: inline-block;
+		
+		}
+		.dividerHeading h4 span:before,
+		.dividerHeading h4 span:after,
+		.widget_title h4 span:after,
+		.widget_title h4 span:before
+		{
+		    color:#E74C3C;
+		    font-size:10px;
+		    content: "\f10c";
+		    font-family:fontawesome;
+		    display: inline-block;
+		
+		}
+		.dividerHeading h4 span:before,
+		.widget_title h4 span:before
+		{
+		    margin-right:10px ;
+		}
+		.dividerHeading h4 span:after,
+		.widget_title h4 span:after
+		{
+		    margin-left:10px ;
+		}
+		
+		/* 修改樣式 */
+		
+		.dividerHeading h4 span:after, 
+		.widget_title h4 span:after, 
+		.widget_title h4 span:before {
+		    color: #727CB6;
+		}
+		
+		.dividerHeading h4 span:before, 
+		.dividerHeading h4 span:after, 
+		.widget_title h4 span:after, 
+		.widget_title h4 span:before {
+		    color: #727CB6;
+		}
+		
+		.dividerHeading h4 span {
+		    background: #faeadf; /*new post bgcolor*/
+		}
+				
+		.dividerHeading h4,
+		.widget_title h4{
+		    font-size: 21px;
+		    font-weight: normal;
+		    margin-bottom: 0px;
+		    padding: 0px;
+		    position: relative;
+		}
+		
+		.dividerHeading h4::before, .widget_title h4::before { 
+			border: 0px;
+		    content: none;
+		}
+		
+		#addForm button{
+			margin:0 5px;
+		}
+		
+		.hasbutton{
+			text-align:center; 
+			margin-top:20px;
+			margin-bottom:20px;
+		}
+		
+		.btn-like{
+		/* 	background: #ff9b9b; */
+			background: #ff2691;
+		}
+		
+		.btn-like:hover{
+		/* 	background: #ff7f7f; */
+			background: #ff007f;
+		}
 
 
 </style>
@@ -269,12 +277,13 @@ border:1px solid black;
 <div class="row sub_content">
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
 	<div class="col-lg-10 col-md-10 col-sm-10 article">
-	<div class="breadcrumb-line clearfix">
-		<ul class="breadcrumb">
-				   <li><a href="/articles/listfms" data-original-title="" title=""><span class="icon fa fa-home"></span></a></li>
-		   		   <li><a href="/articles/listfms?articleType=${article.articleType}" data-navbar-reference="index" itemprop="url" data-original-title="" title=""><span itemprop="title">${article.articleType}</span></a></li>
-		</ul>
-	</div>
+	
+		<div class="breadcrumb-line clearfix">
+			<ul class="breadcrumb">
+					   <li><a href="/articles/listfms" data-original-title="" title=""><span class="icon fa fa-home"></span></a></li>
+			   		   <li><a href="/articles/listfms?articleType=${article.articleType}" data-navbar-reference="index" itemprop="url" data-original-title="" title=""><span itemprop="title">${article.articleType}</span></a></li>
+			</ul>
+		</div>
 		<!-- start article -->
 		<div class="col-lg-12 post">
 			<div class="postprofile col-lg-3">
@@ -288,27 +297,50 @@ border:1px solid black;
 					</dt>
 					<dd>Post:</dd>
 					<dd>Joined:${article.member.memberRegiDate}</dd>
-				</dl>
-			
+				</dl>			
 			</div>
+			
 			<div class="postbody col-lg-9">		
 				<div class="pbhead">
-				<h2>【${article.articleType}】${article.articleTitle}</h2>
-				<ul>
-					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
-					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
-					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
-					<c:if test="${article.memberId==memberId}">
-						<li><a href="/articles/edit/${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
-					</c:if>
-					<li><a href="/members/like/article/insert?articleId=${article.articleId}" class="btn-info btn-like" title="like"><i class="fa fa-heart"></i></a></li>
-				</ul>
-				<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)}</small>
+					<h2>【${article.articleType}】${article.articleTitle}</h2>
+					<ul>
+						<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
+						<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
+						<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
+						<c:if test="${article.memberId==memberId}">
+							<li><a href="/articles/edit/${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+						</c:if>
+						<li><a href="/members/like/article/insert?articleId=${article.articleId}" class="btn-info btn-like" title="like"><i class="fa fa-heart"></i></a></li>
+					</ul>
+					<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)}</small>
 				</div>
 				<div class="content">
-				${article.articleContent}
+					${article.articleContent}
+					<ul>
+						<li style="color:#4cae4c;"><i class="fa fa-comments-o"></i>&nbsp;${article.acms.size()}</li>
+						<li style="color:#ff9600;"><i class="fa fa-reply"></i>&nbsp;${article.areplies.size()}</li>
+						<li style="color:#ff007f;"><i class="fa fa-heart"></i>&nbsp;${article.memberSave.size()}</li>
+					</ul>
 				</div>
 			</div>
+			
+			<div class="col-lg-12">
+				<div id="articleMsgArea">
+					<c:forEach var="acm" items="${article.acms}">
+					${acm.member.nickname}:${acm.acmMsg}  time:${acm.acmTime}<br/>
+					</c:forEach>
+				</div>
+	
+				<form id="leaveMsg">
+					<input type="hidden" name="memberId" value="${memberId}"/>
+					<input type="hidden" name="articleId" value="${article.articleId}"/>
+					<input type="hidden" name="acmShow" value="true"/>
+					<input type="hidden" name="acmReport" value="0"/>
+					<textarea name="acmMsg" class="form-control" placeholder="Leave Some Message"></textarea>
+					<button class="btn btn-default btn-sm" id="btn_reply" type="button" onclick="save_msg($(this))"><i class="fa fa-check fa-fw"></i>&nbsp;OK</button>
+				</form>
+			</div>
+			
 		</div>
 		<!-- end of article -->
 		
@@ -344,7 +376,7 @@ border:1px solid black;
 				<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(areply.arTime,0,19)}</small>
 				</div>
 				<div class="content">
-				${areply.arContent}
+					${areply.arContent}
 				</div>
 			</div>
 		</div>		
@@ -352,7 +384,7 @@ border:1px solid black;
 		</div>
 		<!-- end of articleReply -->
 		
-		<!-- REPLY -->
+		<!-- Reply form-->
 		<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;" id="replyarea">
 			            <div class="dividerHeading">
@@ -388,6 +420,8 @@ border:1px solid black;
 			</div>
 		</div>		
 		</FORM>
+		<!-- end of Reply form -->
+	
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>	
 </div>
@@ -470,15 +504,17 @@ border:1px solid black;
 	$(function(){
 		
 		/* ============ USER IMG =========== */
-		var w = $('.authorimg',this).width();
-		var h = $('.authorimg',this).height();
-// 		console.log(w);
-// 		console.log(h);
-		if (h > w) {
-			$('.authorimg',this).addClass('portrait');
-		} else {
-			$('.authorimg',this).removeClass('portrait');
+		var list = $('.authorimg');
+		for(var i = 0; i < list.length; i++) {
+			var temp = $(list[i]);
+			if (temp.height() > temp.width()) {
+				temp.addClass('portrait');
+			} else {
+				temp.removeClass('portrait');
+			}
 		}
+		console.log(list);
+		
 		
 		//未登入不可reply
 		if('${memberId}'== ''){
@@ -567,6 +603,26 @@ border:1px solid black;
 			$('#confirm').hide();
 			
 		}
+	}
+	
+	function save_msg(a){
+// 		console.log("hi");
+		console.log(JSON.stringify($('#leaveMsg').serializeObject()));
+		$.ajax({
+			url:'/articleCMs/insert',
+			type:'post',
+			contentType:'application/json;charset=UTF-8',
+			data:JSON.stringify($('#leaveMsg').serializeObject()),
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				var name = data.nickname;
+				var Msg = data.acmMsg;
+				var time = data.acmTime;
+				$('#articleMsgArea').append(name+":"+Msg+" time:"+time);
+// 				$(name+name).appendTo($('#articleMsgArea'));
+			}
+		});
 	}
 	
 	</script>

@@ -55,9 +55,9 @@ public class Article {
 	@Column(name="ARTICLEVIEW") 
 	private Integer articleView;
 	
-	//文章收藏數
-	@Column(name = "ARTICLECOLLECT") 
-	private Integer	articleCollect;
+//	//文章收藏數
+//	@Column(name = "ARTICLECOLLECT") 
+//	private Integer	articleCollect;
 	
 	@Column(name = "ARTICLESHOW")
 	private Boolean articleShow;
@@ -83,19 +83,20 @@ public class Article {
 	@Transient
 	private String nickname;
 	
+	//文章回覆
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 	@OrderBy("ARTICLEREPLYTIME ASC")
 	private List<ArticleReply> areplies;
 	
-//	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
-//	@OrderBy("ARTICLECMTIME ASC")
-//	private Set<ArticleCM> acms;
+	//文章留言
+	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
+	@OrderBy("ARTICLECMTIME ASC")
+	private Set<ArticleCM> acms;
 
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
 				+ ", articleContent=" + articleContent + ", articleTime=" + articleTime + ", articleView=" + articleView
-				+ ", articleCollect=" + articleCollect
 				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", memberId=" + memberId + "]";
 	}
 
@@ -156,13 +157,17 @@ public class Article {
 		this.articleView = articleView;
 	}
 
-	public Integer getArticleCollect() {
-		return articleCollect;
-	}
-
-	public void setArticleCollect(Integer articleCollect) {
-		this.articleCollect = articleCollect;
-	}
+//	public Integer getArticleCollect() {
+//		if(memberSave != null){
+//			return articleCollect=memberSave.size();
+//		}else{
+//			return 0;
+//		}
+//	}
+//
+//	public void setArticleCollect(Integer articleCollect) {
+//		this.articleCollect = articleCollect;
+//	}
 
 	public Boolean getArticleShow() {
 		return articleShow;
@@ -228,13 +233,13 @@ public class Article {
 		this.areplies = areplies;
 	}
 
-//	public Set<ArticleCM> getAcms() {
-//		return acms;
-//	}
-//
-//	public void setAcms(Set<ArticleCM> acms) {
-//		this.acms = acms;
-//	}
+	public Set<ArticleCM> getAcms() {
+		return acms;
+	}
+
+	public void setAcms(Set<ArticleCM> acms) {
+		this.acms = acms;
+	}
 
 	
 }

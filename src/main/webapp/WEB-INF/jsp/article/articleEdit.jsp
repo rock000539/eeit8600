@@ -169,7 +169,6 @@ select {
 				<input type="hidden" name="memberId" value="${memberId}"/>
 				<input type="hidden" name="articleTime" value="${article.articleTime}"/>
 				<input type="hidden" name="articleView" value="${article.articleView}"/>
-				<input type="hidden" name="articleCollect" value="${article.articleCollect}"/>
 				<input type="hidden" name="articleShow" value="${article.articleShow}"/>
 				<input type="hidden" name="articleReport" value="${article.articleReport}"/>
 				<select name="articleType" class="form-control" >

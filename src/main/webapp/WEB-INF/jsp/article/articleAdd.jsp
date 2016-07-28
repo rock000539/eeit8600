@@ -167,7 +167,6 @@ select {
 			<div class="col-lg-3">
 				<input type="hidden" name="memberId" value="${memberId}"/>
 				<input type="hidden" name="articleView" value="0"/>
-				<input type="hidden" name="articleCollect" value="0"/>
 				<input type="hidden" name="articleShow" value="true"/>
 				<input type="hidden" name="articleReport" value="0"/>
 				<select name="articleType" class="form-control" >
