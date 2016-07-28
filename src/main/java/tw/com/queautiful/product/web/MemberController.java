@@ -257,45 +257,42 @@ public class MemberController {
 		model.addAttribute("member", member);
     	return "/member/memberLike";
     }
-	
     
-	//member文章收藏頁面
-	@RequestMapping("/like/article")
-	public String memberLikeArticlePage(HttpServletRequest request, Model model){
-		Long memberId = (Long)request.getSession().getAttribute("memberId");
-		Member member = memberService.getById(memberId);
-		Set<Article> articles = member.getArticlesSavedByMember();
-		model.addAttribute("articles", articles);
-		model.addAttribute("member", member);
-		return "/member/memberLike-article";
-	}
-	
-	//取消文章收藏
-	@RequestMapping("/like/article/delete")
+	//新增心得收藏
+	@RequestMapping("/like/review")
 	@ResponseBody
-	public Boolean memberLikedDelete(@RequestParam Long articleId, Model model){
-		Long memberId = 1L;//test
-		Member member = memberService.getById(memberId); //test
-		Set<Article> articles = member.getArticlesSavedByMember();
-		Article article = articleService.getById(articleId);
-		log.debug("before delete: {}", articles.contains(article));
-		if(articles.contains(article)){
-			articles.remove(article);
-			member.setArticlesSavedByMember(articles);
-			memberService.update(member);
-		}
-		log.debug("after delete: {} ,target: {}", articles.contains(article), article.getArticleId().toString());
-		if(articles.contains(article)){
-			return false;
-		}
+	public Boolean reviewLikedInsert(@RequestParam Long reviewId, HttpServletRequest request, Model model){
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		Set<Review> reviews = member.getReviewsSavedByMember();
+		Review review = reviewService.getById(reviewId);
+		reviews.add(review);
+		member.setReviewsSavedByMember(reviews);
+		memberService.update(member);
 		return true;
 	}
 	
-	//新增文章收藏
-	@RequestMapping("/like/article/insert")
+	//取消心得收藏
+	@RequestMapping("/like/review/delete")
 	@ResponseBody
-	public Boolean memberLikedInsert(@RequestParam Long articleId){
-		Long memberId = 1L;//test
+	public Integer memberLikedDelete(@RequestParam Long reviewId, HttpServletRequest request, Model model){
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
+		Member member = memberService.getById(memberId);
+		Set<Review> reviews = member.getReviewsSavedByMember();
+		Review review = reviewService.getById(reviewId);
+		if(reviews.contains(review)){
+			reviews.remove(review);
+			member.setReviewsSavedByMember(reviews);
+			memberService.update(member);
+		}
+		return reviews.size();
+	}
+    
+	//新增文章收藏
+	@RequestMapping("/like/article")
+	@ResponseBody
+	public Boolean articleLikedInsert(@RequestParam Long articleId, HttpServletRequest request, Model model){
+		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		Set<Article> articles = member.getArticlesSavedByMember();
 		Article article = articleService.getById(articleId);
@@ -305,32 +302,54 @@ public class MemberController {
 		return true;
 	}
 	
-	//member文章收藏頁面
-	@RequestMapping("/like/review")
-	public String memberLikedReviewPage(Model model){
-		
-		return "/member/memberLike-review";
-	}
-	
-	
-	//member-post article文章頁面
-//	@RequestMapping("/post/article")
-	public String memberPostedArticlePage(HttpServletRequest request, Model model){
+	//取消文章收藏
+	@RequestMapping("/like/article/delete")
+	@ResponseBody
+	public Integer articleLikedDelete(@RequestParam Long articleId, HttpServletRequest request, Model model){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
-		Page<Article> pages = memberService.getArticlesPaging(memberId, null, 0, null, null);
-			log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
-			log.debug("page size = {}", pages.getSize()); //size of the slice
-			log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
-			log.debug("totalPages() = {}", pages.getTotalPages()); 
-			log.debug("totalElements = {}", pages.getTotalElements()); 
-		model.addAttribute("articles", pages.getContent());
-		model.addAttribute("pageNum", pages.getNumber());
-		model.addAttribute("totalPages", pages.getTotalPages());
-		model.addAttribute("member", member);
-		return "/member/memberPost-article";
+		Set<Article> articles = member.getArticlesSavedByMember();
+		Article article = articleService.getById(articleId);
+		log.debug("before delete: {}", articles.contains(article));
+		if(articles.contains(article)){
+			articles.remove(article);
+			member.setArticlesSavedByMember(articles);
+			memberService.update(member);
+		}
+		log.debug("after delete: {} ,target: {}", articles.contains(article), article.getArticleId().toString());
+		return articles.size();
 	}
-	
+		
+	//review-post頁面
+	@RequestMapping("/post/{memberId}")
+	public String memberPostedReviewPage(@PathVariable Long memberId, Model model, HttpServletRequest request){
+		Member member = memberService.getById(memberId);
+		
+		Page<Review> pages = 
+				memberService.getReviewsPaging("", memberId, 0, null, null);
+		List<Review> reviews = pages.getContent();
+//			List<String> dates = formatDate(reviews);
+		
+		model.addAttribute("reviews", pages.getContent());
+		model.addAttribute("reviewsPageNum", pages.getNumber());
+		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
+		
+		Page<Article> articlePages =
+				memberService.getArticlesPaging(memberId, null, 0, null, null);
+		
+		model.addAttribute("articles", articlePages.getContent());
+		model.addAttribute("articlesPageNum", articlePages.getNumber());
+		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
+		model.addAttribute("member", member);
+		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
+		log.debug("page size = {}", articlePages.getSize()); //size of the slice
+		log.debug("page numberOfElements = {}", articlePages.getNumberOfElements()); //elements on this slice
+		log.debug("totalPages() = {}", articlePages.getTotalPages()); 
+		log.debug("totalElements = {}", articlePages.getTotalElements()); 
+		
+		return "/member/memberPost";
+	}
+		
 	//article 分頁, 分類(news,solicit,question,chat), 排序(articleTime)
 	@RequestMapping(value="/post/article/{pageNum}")
 	@ResponseBody
@@ -346,7 +365,6 @@ public class MemberController {
 		Page<Article> pages = 
 				memberService.getArticlesPaging(memberId, articleType, pageNum, sortProperty, direction);
 		
-		//pass to front-end
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("articles", pages.getContent());
@@ -386,7 +404,6 @@ public class MemberController {
 			products.add(productView);
 		}
 		
-		//pass to front-end
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviews", reviews);
@@ -404,36 +421,7 @@ public class MemberController {
 		return result;
 	}
 	
-	//review-post頁面
-	@RequestMapping("/post/{memberId}")
-	public String memberPostedReviewPage(@PathVariable Long memberId, Model model, HttpServletRequest request){
-		Member member = memberService.getById(memberId);
-		
-		Page<Review> pages = 
-				memberService.getReviewsPaging("", memberId, 0, null, null);
-		List<Review> reviews = pages.getContent();
-		List<String> dates = formatDate(reviews);
-		
-		model.addAttribute("dates", dates);
-		model.addAttribute("reviews", pages.getContent());
-		model.addAttribute("reviewsPageNum", pages.getNumber());
-		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
-		
-		Page<Article> articlePages =
-				memberService.getArticlesPaging(memberId, null, 0, null, null);
-		
-		model.addAttribute("articles", articlePages.getContent());
-		model.addAttribute("articlesPageNum", articlePages.getNumber());
-		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
-		model.addAttribute("member", member);
-		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
-		log.debug("page size = {}", articlePages.getSize()); //size of the slice
-		log.debug("page numberOfElements = {}", articlePages.getNumberOfElements()); //elements on this slice
-		log.debug("totalPages() = {}", articlePages.getTotalPages()); 
-		log.debug("totalElements = {}", articlePages.getTotalElements()); 
-		
-		return "/member/memberPost";
-	}
+
 	
 	//format date
 	private List<String> formatDate(Collection<Review> reviews){
