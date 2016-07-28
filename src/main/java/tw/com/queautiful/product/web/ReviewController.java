@@ -31,11 +31,15 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.entity.ReviewCM;
+import tw.com.queautiful.product.service.BrandService;
+import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewCMService;
 import tw.com.queautiful.product.service.ReviewService;
 import tw.com.queautiful.product.service.Review_TagListService;
+import tw.com.queautiful.product.vo.brand.BrandSearch;
+import tw.com.queautiful.product.vo.category.CategorySearch;
 
 @Controller
 @RequestMapping("/reviews")
@@ -54,6 +58,12 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewCMService reveiwCMService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private BrandService brandService;
 	
 	@Autowired
 	private Review_TagListService review_TagListService;
@@ -222,7 +232,16 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/add")
-	public String addPage(@RequestParam(value="prodId",required=false) Long prodId) {
+	public String addPage(@RequestParam(value="prodId",required=false) Long prodId,Model model) {
+		
+		// 類別
+		List<CategorySearch> categories = categoryService.getAllByVoSearch();
+		model.addAttribute("categories", categories);
+
+		// 品牌
+		List<BrandSearch> brands = brandService.getAllByVoSearch();
+		model.addAttribute("brands", brands);
+		
 		return "/review/reviewAddFms";
 	}
 	
