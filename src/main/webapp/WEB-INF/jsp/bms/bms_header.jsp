@@ -2,7 +2,20 @@
     pageEncoding="UTF-8"%>
 		<!-- header -->
 		<div id="header" class="header navbar navbar-default navbar-fixed-top">
-<!-- ///////////////////////////////////////////////////////////////////////// -->		
+<!-- ///////////////////////////////////////////////////////////////////////// -->	
+<script type="text/template" id="bmsNotification">
+<li class="media">
+<a href="_href">
+    <div class="media-left"><i class="fa  media-object  _fa-icon _bg-color"></i></div>
+    <div class="media-body">
+        <h6 class="media-heading">_media-heading</h6>
+ 		<p>_media-text</p>
+        <div class="text-muted f-s-11">_media-time</div>
+    </div>
+</a>
+</li>
+</script>
+	
 <script>	
 $(function(){
 	$.ajax({
@@ -11,10 +24,44 @@ $(function(){
 		data:{},
 		success:function(result){
 			var webMailsLength=result.webMails.length;
-			var 
+			var IngredientsLength=result.Ingredients.length;
+			var UnReadNumber=webMailsLength+IngredientsLength;
 			
 			
-			$("#bellLabel").append();
+			var IngredientsLengthFORloop=0;
+			if(IngredientsLength>5){
+				IngredientsLengthFORloop=5;
+			}else{
+				IngredientsLengthFORloop=IngredientsLength;
+			}	
+			
+			$("#bellLabel").append(UnReadNumber);
+			$("#Notifications").append("Notifications ("+UnReadNumber+")");
+			
+			for(var i=0;i<webMailsLength;i++){
+	 			$($('#bmsNotification').html()
+	 				.replace('_href','/webmail/webmaillist')
+					.replace('_media-heading', '新進信件來自'+result.nickNames[i])
+					.replace('_media-time', '')
+					.replace('_media-text', result.webMails[i].mailTitle)
+					.replace('_bg-color', 'bg-blue')
+					.replace('_fa-icon', 'fa-envelope'))
+				.appendTo($("#notificationList"));
+			}
+				
+			
+		
+			for(var i=0;i<IngredientsLengthFORloop;i++){
+	 			$($('#bmsNotification').html()
+	 				.replace('_href','/ingredients/edit?ingredId='+result.Ingredients[i].ingredId)
+					.replace('_media-heading', '會員新增成份')
+					.replace('_media-time', '')
+					.replace('_media-text', result.Ingredients[i].ingredName)
+					.replace('_bg-color', 'bg-red')
+					.replace('_fa-icon', 'fa-flask'))
+					.appendTo($("#notificationList"));
+			}
+			
 		}
 	})	
 })
@@ -52,61 +99,16 @@ $(function(){
 							<i class="fa fa-bell-o"></i>
 							<span class="label" id="bellLabel"></span>
 						</a>
-			<!-- //////////////////////////////////////////////////////////////////////// -->			
-						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                            <li class="dropdown-header" id="Notifications">Notifications (5)</li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="fa fa-bug media-object bg-red"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Server Error Reports</h6>
-                                        <div class="text-muted f-s-11">3 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">John Smith</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">25 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Olivia</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">35 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="fa fa-plus media-object bg-green"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New User Registered</h6>
-                                        <div class="text-muted f-s-11">1 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="fa fa-envelope media-object bg-blue"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New Email From John</h6>
-                                        <div class="text-muted f-s-11">2 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer text-center">
-                                <a href="javascript:;">View more</a>
-                            </li>
+	
+						<ul class="dropdown-menu media-list pull-right animated fadeInDown" id="notificationList">
+                            <li class="dropdown-header" id="Notifications"></li>
+                          
+      <!-- //////////////////////////////////////////////////////////////////////// -->		
+<!--                           	<li class="dropdown-footer text-center"> -->
+<!--                                 <a href="javascript:;">View more</a> -->
+<!--                             </li> -->
+     <!-- //////////////////////////////////////////////////////////////////////// -->                        
 						</ul>
-				<!-- //////////////////////////////////////////////////////////////////////// -->		
 					</li>
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">

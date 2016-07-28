@@ -93,8 +93,24 @@ public class BmsController {
 		List result=new ArrayList();
 		
 		List<WebMail> webMails=webMailService.findByMailReadTypeIs(false);
-		resultMap.put("webMails", webMails);
+		List<String> nickNameList=new ArrayList();
+		for(int i=0;i<webMails.size();i++){
+			Long SenderId=webMails.get(i).getWebMailSender();
+			String nickName="";
+			if(SenderId==null||SenderId==0){
+				nickName=webMails.get(i).getAnonymousName();
+			}else{
+				nickName=memberService.getById(SenderId).getNickname();
+			}
+			
+			if(nickName==null||nickName==""){
+				nickName="匿名";
+			}
+			nickNameList.add(nickName);
+		}
 		
+		resultMap.put("webMails", webMails);
+		resultMap.put("nickNames", nickNameList);
 		List <Ingredient> Ingredients=ingredientService.findByCheckedDataIs(false);
 		resultMap.put("Ingredients", Ingredients);
 		

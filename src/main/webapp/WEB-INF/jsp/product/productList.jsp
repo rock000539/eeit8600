@@ -9,7 +9,7 @@
 	<title>ProductList</title>
 	
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	
+	<script src="/js/jquery.min.js"></script>
 	<!--  BASE CSS STYLE  -->
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/bms/style.min.css" rel="stylesheet">

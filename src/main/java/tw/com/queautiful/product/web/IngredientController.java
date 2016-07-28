@@ -106,6 +106,7 @@ public class IngredientController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public Ingredient update(@RequestBody Ingredient ingredient ) {
+		ingredient.setCheckedData(true);
 		service.update(ingredient);
 		return service.getById(ingredient.getIngredId());
 	}
