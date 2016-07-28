@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
     <link rel="stylesheet" href="/css/article/summernote.css">
+    
+    <!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 
 <style>
 .bgcolor{
@@ -190,9 +194,9 @@ select {
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-12 hasbutton">
-<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
-				<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
-				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
+<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button> -->
+				<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button>
+				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location.href='/articles/view/${article.articleId}'"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cancel</button>
 			</div>
 		</div>
 	</div>		
@@ -229,11 +233,8 @@ select {
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
-			
-	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
 	
+	<!-- Scripts -->
 	<script src="/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
@@ -249,12 +250,13 @@ select {
 	
 	<script>
 	$(function(){
-//  		console.log("CKEDITOR.instances=="+CKEDITOR.instances);
-// 		console.log('${article.articleType}');
-		CKEDITOR.replace('articleContent');
-		CKEDITOR.instances['articleContent'].setData('${article.articleContent}');
+
 		// 設定文章Type & Content
 		$('#${article.articleType}').attr('selected',true);
+
+		// 設定原始文章內容
+		CKEDITOR.replace('articleContent');
+		CKEDITOR.instances['articleContent'].setData('${article.articleContent}');
 		
 		//驗證
 		$('#editForm').validate({
@@ -276,7 +278,9 @@ select {
 
 		$('#confirm').on('click',function(){
 
+			// 將文章內容放入#articleContent中, 取代 enter-->空白
 			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData().replace(/\n/g,""));
+			
 			$.ajax({
 					url:'/articles/update',
 					type:'post',
@@ -285,7 +289,7 @@ select {
 					dataType:'json',
 					success:function(data){
 						console.log(data);
-// 						location.href="/articles/listfms";
+						location.href='/articles/view/${article.articleId}';
 	 				}
 				});		
 			
@@ -310,19 +314,18 @@ select {
 	});
 	
 	function toModal(){
-		if($('#editForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
+		if($('#editForm').validate().form() && CKEDITOR.instances['articleContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){  //驗證成功
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Post Type：'+$(':selected').val()+'</p>')
 							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
 							.append('<p>Content：'+ CKEDITOR.instances['articleContent'].getData() +'</p>');
 			$('#confirm').show();
-		}else{
+		}else{  //驗證失敗
 			$(".modal-title").text('Please Modify Your Post');
 			$(".modal-body").empty()
 							.append('<p>Please Enter the Required Fields</p>');
-			$('#confirm').hide();
-			
+			$('#confirm').hide();		
 		}
 	}
 

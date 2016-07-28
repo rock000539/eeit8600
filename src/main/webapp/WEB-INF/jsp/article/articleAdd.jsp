@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
     <link rel="stylesheet" href="/css/article/summernote.css">
+    
+    <!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 
 <style>
 .bgcolor{
@@ -189,9 +193,10 @@ select {
 	<div class="row">
 		<div class="form-group">
 			<div class="col-lg-12 hasbutton">
-<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
-				<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
-				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
+<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button> -->
+<!-- 				<button class="btn btn-default btn-lg" type="button" onclick="check()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Check</button> -->
+				<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button>
+				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cancel</button>
 			</div>
 		</div>
 	</div>		
@@ -230,9 +235,6 @@ select {
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 			
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	
 	<script src="/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
@@ -272,7 +274,7 @@ select {
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'articleContent':ckeditorvalue};
 // 			console.log(JSON.stringify(datas));
-			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData());
+			$('#articleContent').val(CKEDITOR.instances['articleContent'].getData().replace(/\n/g,""));
 			$.ajax({
 					url:'/articles/insert',
 					type:'post',
@@ -281,6 +283,7 @@ select {
 					data:JSON.stringify($('#addForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
+// 						console.log(data);
 						location.href="/articles/listfms";
 	 				}
 				});		
@@ -306,12 +309,12 @@ select {
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData()!=""){
+		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
+// 		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData() != ""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
-							.append('<p>Post Type：'+$(':selected').val()+'</p>')
-							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
-							.append('<p>Content：'+ CKEDITOR.instances['articleContent'].getData() +'</p>');
+							.append('<h2>【'+$(':selected').val()+'】'+$(':text[name=articleTitle]').val() +'</h2>')	
+							.append(CKEDITOR.instances['articleContent'].getData());
 			$('#confirm').show();
 		}else{
 			$(".modal-title").text('Please Modify Your Post');
@@ -321,6 +324,11 @@ select {
 			
 		}
 	}
+	
+// 	function check(){
+// // 		console.log(CKEDITOR.instances['articleContent'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length);
+// 		console.log(CKEDITOR.instances['articleContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length);
+// 	}
 
 
 	</script>

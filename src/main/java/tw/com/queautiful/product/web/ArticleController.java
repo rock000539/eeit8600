@@ -86,8 +86,8 @@ public class ArticleController {
 		return article;
 	}
 
-	@RequestMapping("/edit")
-	public String editPage(@RequestParam Long articleId, Model model) {
+	@RequestMapping("/edit/{articleId}")
+	public String editPage(@PathVariable Long articleId, Model model) {
 		model.addAttribute("article", articleService.getById(articleId));
 		return "/article/articleEdit";
 	}
