@@ -59,8 +59,8 @@
 					<div class="widget widget-stats bg-blue">
 						<div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
 						<div class="stats-info">
-							<h4>會員總數</h4>
-							<p>${dataMap.membersNumber}</p>	
+							<h4>跳出率</h4>
+							<p>${dataMap.BounceRate}%</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -72,7 +72,7 @@
 					<div class="widget widget-stats bg-purple">
 						<div class="stats-icon"><i class="fa fa-users"></i></div>
 						<div class="stats-info">
-							<h4>UNIQUE VISITORS</h4>
+							<h4>不重複造訪者</h4>
 							<p>1,291,922</p>	
 						</div>
 						<div class="stats-link">

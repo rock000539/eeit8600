@@ -112,7 +112,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/reviews/review","/reviews/reviewjQueryRain","/reviews/**",
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
-                "/ingredients/startSearch",
+                "/ingredients/**","/prodIngreList/**",
                 "/articles/listfms","/articles/view/**","/articles/list_data","/timeonsite/**",
                 "/products/**") 
                 .permitAll()      //設定過濾條件 ↓         

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.Ingredient;
+import tw.com.queautiful.product.entity.TimeOnSiteEnity;
 import tw.com.queautiful.product.entity.WebMail;
 import tw.com.queautiful.product.service.IngredientService;
 import tw.com.queautiful.product.service.MemberService;
@@ -46,10 +47,21 @@ public class BmsController {
 	@RequestMapping("/bms")
 	public String bmsPage(Model model){
 		Map<String, Object> dataMap =new HashMap<String, Object>();
-		
-		List memebers=memberService.getAll();
-		int membersNumber=memebers.size();
-		dataMap.put("membersNumber", membersNumber);	
+		double Bounce=0;
+		//計算跳出率----------------------------------------------------------
+		List timeOnSiteDatas=timeOnSiteService.findAll();
+		for(int i=0;i<timeOnSiteDatas.size();i++){
+			TimeOnSiteEnity	timeOnSite=(TimeOnSiteEnity) timeOnSiteDatas.get(i);
+			String pageUrl=timeOnSite.getPageUrl();
+			String[] pageUrlArray=pageUrl.split("/");
+			if(pageUrlArray[3].equalsIgnoreCase("fms")||pageUrlArray[3]==null){
+				if(timeOnSite.getTimeOnSite()<5000){
+					Bounce++;	
+				}
+			}
+		}
+		double BounceRate=(Bounce/timeOnSiteDatas.size())*10000d;
+		dataMap.put("BounceRate",(Math.ceil(BounceRate)/100));
 		//計算網站停留時間資料----------------------------------------------------
 		String queryAvgTime="SELECT AVG([time_on_site]) From [timeonsite]";
 		List<BigInteger> resultList =manager.createNativeQuery(queryAvgTime).getResultList();
@@ -59,7 +71,7 @@ public class BmsController {
 		String avgTimeOnSite=sdf.format(new Date(avgTimeMs));		
 		dataMap.put("avgTimeOnSite", avgTimeOnSite);
 		//計算瀏覽人數-------------------------------------------
-		dataMap.put("visitors",timeOnSiteService.findAll().size());
+		dataMap.put("visitors",timeOnSiteDatas.size());
 		model.addAttribute("dataMap", dataMap);
 		//信件用--------------------------------------------
 		List<Map<String, Object>> Mailresult=new ArrayList<Map<String, Object>>();
