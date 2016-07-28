@@ -1,8 +1,12 @@
 package tw.com.queautiful.product.service;
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ProductDao;
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.vo.product.ProductInventory;
 import tw.com.queautiful.product.vo.product.ProductSearch;
 import tw.com.queautiful.product.vo.product.ProductView;
@@ -19,8 +24,13 @@ import tw.com.queautiful.product.vo.product.ProductView;
 @Service
 public class ProductService {
 	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private MemberService memberService;
 
 	public Product getById(Long prodId) {
 		return productDao.findOne(prodId);
@@ -52,6 +62,49 @@ public class ProductService {
 
 	public void delete(Long productId) {
 		productDao.delete(productId);
+	}
+	
+	public int[] calcAges(List<Review> reviews) {
+		
+		int[] ages = new int[5];
+		
+		for(Review review : reviews) {
+			
+			Date date = review.getMember().getBirthDay();
+			
+			int age = 0;
+			try {
+				age = memberService.getMemberAge(date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			if(age<=19) {
+				ages[0]++;
+			} else if(age>=20 && age<=24) {
+				ages[1]++;
+			} else if(age>=25 && age<=29) {
+				ages[2]++;
+			} else if(age>=30 && age<=34) {
+				ages[3]++;
+			} else {
+				ages[4]++;
+			}
+			
+		}
+		
+		return ages;
+	}
+	
+	public int[] calcStars(List<Review> reviews) {
+		
+		int[] stars = new int[6];
+		
+		for(Review review : reviews) {
+			stars[review.getReviewRating()] ++;
+		}
+		
+		return stars;
 	}
 	
 	public ProductView getByIdByVoView(Long prodId) {
