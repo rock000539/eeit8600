@@ -2,6 +2,7 @@ package tw.com.queautiful.product.web;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -54,6 +57,9 @@ public class ProductController {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	// 提供一般抓取資料使用
 	@RequestMapping("/select")
@@ -270,5 +276,14 @@ public class ProductController {
 	public String loginPage(Model model) {
 		return "/product/login";
 	}
+	
+	@RequestMapping("/i18n")
+	@ResponseBody
+	public String getMessage() {
+		Locale locale = LocaleContextHolder.getLocale();
+		String msg = messageSource.getMessage("home", null, locale);
+		log.debug("msg = {}", msg);
+		return msg;
+	} 
 
 }
