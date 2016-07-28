@@ -158,9 +158,9 @@ public class MemberController {
 	
 	
 	//insert wishlist
-	@RequestMapping("/like/product")
+	@RequestMapping("/like/product/{prodId}")
 	@ResponseBody
-	public Boolean wishListInsert(@RequestParam Long prodId, HttpServletRequest request, Model model){
+	public Boolean wishListInsert(@PathVariable Long prodId, HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		Product product = productService.getById(prodId);
@@ -257,9 +257,9 @@ public class MemberController {
     }
     
 	//新增心得收藏
-	@RequestMapping("/like/review")
+	@RequestMapping("/like/review/{reviewId}")
 	@ResponseBody
-	public Boolean reviewLikedInsert(@RequestParam Long reviewId, HttpServletRequest request, Model model){
+	public Boolean reviewLikedInsert(@PathVariable Long reviewId, HttpServletRequest request, Model model){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		log.debug("memberId {} saved review {}", memberId.toString(), reviewId.toString());
@@ -288,9 +288,9 @@ public class MemberController {
 	}
     
 	//新增文章收藏
-	@RequestMapping("/like/article")
+	@RequestMapping("/like/article/{articleId}")
 	@ResponseBody
-	public Boolean articleLikedInsert(@RequestParam Long articleId, HttpServletRequest request, Model model){
+	public Boolean articleLikedInsert(@PathVariable Long articleId, HttpServletRequest request, Model model){
 		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		Set<Article> articles = member.getArticlesSavedByMember();

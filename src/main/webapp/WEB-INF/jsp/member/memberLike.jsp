@@ -78,7 +78,7 @@ h2, h4{
 	margin-bottom: 20px;
 	width: 90px;
 	top:2px;
-	border-top: 2px solid #727CB6;
+	border-top: 2px solid #000;
 	font-family: "Neutra Face","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .reviewTime>span{
@@ -393,7 +393,7 @@ $(function(){
 	
 	//timeline
 	var timelineBlocks = $('.reviews'),
-	offset = 0.9;
+	offset = 0.95;
 	
 	hideBlocks(timelineBlocks, offset);
 	

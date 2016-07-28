@@ -10,6 +10,7 @@
 	<title>${member.nickname}'s Posted</title>
 
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/fms/style.css">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
@@ -79,7 +80,7 @@ h2, h4{
 	margin-bottom: 20px;
 	width: 90px;
 	top:2px;
-	border-top: 2px solid #727CB6;
+	border-top: 2px solid #000;
 	font-family: FranklinGothic,Helvetica,sans-serif;
 }
 .reviewTime>span{
@@ -189,7 +190,7 @@ h2, h4{
 
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
-<div class="row detail-div">
+<div class="row detail-div animated fadeIn">
 	<div class="col-lg-10 col-sm-6 wow fadeInLeft delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 		
@@ -224,7 +225,7 @@ h2, h4{
 		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
 		        <div class="reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
-		        	<span><i class="fa fa-pencil"></i>edit</span></h2>
+		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
 		        	<p class="preview">${item.review}</p>
 		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>
@@ -253,9 +254,9 @@ h2, h4{
 				</div>
 				<div class="articleContent">
 					<h2 class="articleTitle">${item.articleTitle}&nbsp;
-						<a  class="articleEdit" href="/articles/edit?articleId=${item.articleId}">
+						<a  class="articleEdit" href="/articles/edit/${item.articleId}">
 						<span>
-						<i class="fa fa-pencil"></i>edit</span></a></h2>
+						<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
 					<p class="preview">${item.articleContent}</p>
 					<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
@@ -282,7 +283,7 @@ h2, h4{
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
 <script id="reviewTemplate" type="text/template">
-<div class="reviews col-lg-12">
+<div class="reviews col-lg-12 animated fadeIn">
 	<div class="reviewTime">
 		<span>_reviewTime</span>
 		<div class="rating">_rating</div>
@@ -292,7 +293,8 @@ h2, h4{
 	<div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/_prodId">
 		<img src="/products/show?prodImg=_prodImg"/></a></div>
 	<div class="reviewContent">
-		<h2 class="reviewTitle">_reviewTitle <span><a href="#"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		<h2 class="reviewTitle">_reviewTitle&nbsp;
+			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
 		<h4 class="prod">_prodName | _brandName </h4>		
 		<p class="preview">_review</p>
 		<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/_reviewId">read more</a>
@@ -301,14 +303,16 @@ h2, h4{
 </div>
 </script>
 <script id="articleTemplate" type="text/template">
-<div class="articles col-lg-12">
+<div class="articles col-lg-12 animated fadeIn">
 	<div class="articleTime">
 		<h4>_articleTime</h4>
 		<h4 class="articleType">_articleType</h4>
 		
 	</div>
 	<div class="articleContent">
-		<h2 class="articleTitle">_articleTitle <span class="articleEdit"><a href="/articles/edit?articleId=_articleId"><i class="fa fa-pencil"></i>edit</a></span></h2>
+		<h2 class="articleTitle">_articleTitle&nbsp;
+			<a class="articleEdit" href="/articles/edit/_articleId">
+			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
 		<p class="preview">_articleContent</p>
 		<a class="singlepage" href="/articles/view/_articleId">read more</a>
        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
