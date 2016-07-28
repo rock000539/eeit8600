@@ -66,4 +66,7 @@ public class IngredientService {
 		return ingredientDao.findByIngredChCorrectName(ingredName);
 	}
 	
+	public List<Ingredient> findByCheckedDataIs(boolean CheckedData){
+		return ingredientDao.findByCheckedDataIs(CheckedData);
+	}
 }

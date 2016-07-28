@@ -27,7 +27,7 @@
                 <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
             </li>
             <li>
-                <a href="/members/overview/${memberId}"><span>${nickname}</span></a>
+                <a href="/members/overview/${memberId}"><span id="forCheckLogin" value="${memberId}">${nickname}</span></a>
             </li>
             <li>
                 <a class="" href="#">
@@ -98,8 +98,8 @@ $(function(){
 	var start = Date.now() ;
 	var pageUrl = window.location.toString();
 	window.onunload=visitTime;
-	
-	var memberId=${memberId};
+
+	var forCheckLogin=$("#forCheckLogin").attr("value");
 	function visitTime(){
 		var end = Date.now() ;
 		var timeOnSiteStr=(end-start);
@@ -107,7 +107,7 @@ $(function(){
 			url:"/timeonsite/record",
 			type:"POST",
 			traditional: true,
-			data:{"timeOnSiteStr":timeOnSiteStr,"pageUrl":pageUrl,"memberId":memberId},
+			data:{"timeOnSiteStr":timeOnSiteStr,"pageUrl":pageUrl,"memberId":forCheckLogin},
 			success:function(){
 			}
 		})

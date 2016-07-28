@@ -9,9 +9,12 @@ $(function(){
 		url:"/bms/getUnreadData",
 		type:"POST",
 		data:{},
-		success:function(resultList){
+		success:function(result){
+			var webMailsLength=result.webMails.length;
+			var 
 			
 			
+			$("#bellLabel").append();
 		}
 	})	
 })
@@ -47,11 +50,11 @@ $(function(){
 					<li class="dropdown">
 						<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
 							<i class="fa fa-bell-o"></i>
-							<span class="label">5</span>
+							<span class="label" id="bellLabel"></span>
 						</a>
 			<!-- //////////////////////////////////////////////////////////////////////// -->			
 						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                            <li class="dropdown-header">Notifications (5)</li>
+                            <li class="dropdown-header" id="Notifications">Notifications (5)</li>
                             <li class="media">
                                 <a href="javascript:;">
                                     <div class="media-left"><i class="fa fa-bug media-object bg-red"></i></div>

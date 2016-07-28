@@ -24,28 +24,6 @@
 <script type="text/javascript" src="/js/fms/fms-main.js"></script>
 
 <script type="text/javascript" src="/js/expDate/expDateSearch.js"></script>
-
-<script type='text/javascript'>
-$(function(){
-	var start = Date.now() ;
-	var pageUrl = window.location.toString();
-	window.onunload=visitTime;
-	
-	var memberId=${memberId};
-	function visitTime(){
-		var end = Date.now() ;
-		var timeOnSiteStr=(end-start);
-		$.ajax({
-			url:"/timeonsite/record",
-			type:"POST",
-			traditional: true,
-			data:{"timeOnSiteStr":timeOnSiteStr,"pageUrl":pageUrl,"memberId":memberId},
-			success:function(){
-			}
-		})
-	}
-})
-</script>
 <style>
 #mainSpace{
  width: 450px;
