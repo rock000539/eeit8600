@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.queautiful.product.entity.WebMail;
 import tw.com.queautiful.product.service.MemberService;
@@ -78,4 +80,17 @@ public class BmsController {
 		model.addAttribute("Mailresult",Mailresult);
 		return "/bms/bms";
 	}
+	
+	@RequestMapping(value="/bms/getUnreadData",method=RequestMethod.POST)
+	@ResponseBody
+	public Map getUnreadData(Model model){
+		Map<String, List<?>> resultMap=new HashMap<String, List<?>>();
+		List result=new ArrayList();
+		List<WebMail> webMails=webMailService.findByMailReadTypeIs(false);
+		resultMap.put("webMails", webMails);
+		model.addAttribute("resultData", resultMap);
+		return resultMap;
+		
+	}
+	
 }

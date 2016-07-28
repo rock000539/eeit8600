@@ -2,6 +2,9 @@ package tw.com.queautiful.product.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +20,8 @@ import tw.com.queautiful.product.entity.Member;
 public class IngredientService {
 	@Autowired
 	private IngredientDao ingredientDao;
+	@PersistenceContext
+	private EntityManager manager;
 	
 	public Ingredient getById(Long ingredId){
 		return ingredientDao.findOne(ingredId);
@@ -40,6 +45,9 @@ public class IngredientService {
 	
 	public void delete(Long ingredId){
 		ingredientDao.delete(ingredId);
+		String deleteProdIngreListData=
+		"Delete form [proingrelist] where [ingredid]="+ingredId;
+		manager.createNativeQuery(deleteProdIngreListData).executeUpdate();
 	}
 	
 	public List<Ingredient> findByIngredName(String ingredName){

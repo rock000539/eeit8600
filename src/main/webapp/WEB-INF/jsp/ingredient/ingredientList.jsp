@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ingredient ListPage</title>
 
-	
+	<script src="/js/jquery.min.js"></script>
 	<!--  BASE CSS STYLE  -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -133,7 +133,7 @@ $(function () {
 		        	closeOnEscape: true,
 		        	url: '/ingredients/delete',
 		        	ajaxDelOptions: { contentType: 'application/json; charset=utf-8;', dataType: 'json' },
-		        	serializeDelData: function(postdata) { return JSON.stringify({ 'ingredId': $(this).getRowData(postdata.id).ingredId }); },
+		        	serializeDelData: function(postdata) { return JSON.stringify({'ingredId':$(this).getRowData(postdata.id).ingredId}); },
 		        	afterSubmit: function(response) { $("#jqGrid").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid'); console.log(response); return [true, '', false]; }
 		        },
 		    }       

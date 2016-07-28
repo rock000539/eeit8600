@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 		<!-- header -->
 		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+<!-- ///////////////////////////////////////////////////////////////////////// -->		
+<script>	
+$(function(){
+	$.ajax({
+		url:"/bms/getUnreadData",
+		type:"POST",
+		data:{},
+		success:function(resultList){
 			
+			
+		}
+	})	
+})
+</script>			
+<!-- ///////////////////////////////////////////////////////////////////////// -->		
 			<!-- begin container-fluid -->
 			<div class="container-fluid">
 				
