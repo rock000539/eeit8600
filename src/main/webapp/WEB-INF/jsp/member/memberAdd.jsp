@@ -40,8 +40,8 @@
 
 <!-- Button trigger modal -->
 <a data-toggle="modal" class="btn btn-info" href="/members/register" data-target="#regiModal">SignUp !</a>
-<!-- modal -->
-<c:import url="../register_modal.jsp" />
+<!-- registration modal -->
+<c:import url="/WEB-INF/jsp/member/register_modal.jsp" />
 	
 <a href="/members/forgotpsw">Forgot Password</a>
                 </article>
