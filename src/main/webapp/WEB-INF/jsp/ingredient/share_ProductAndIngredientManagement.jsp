@@ -72,6 +72,8 @@ body {
 #productList img{width:100px;
 height: 100px;
 }
+#mainSpace tr td{
+text-align: center;}
 #mainSpace{
 width:500px;
 margin: auto auto;}
@@ -79,8 +81,8 @@ margin: auto auto;}
 width: 80px;
 padding-left: 20px;}
 .grey_bg{
-min-height: 500px;
-background-image: url("/images/IngredientBackground.jpg");
+min-height: 650px;
+/* background-image: url("/images/IngredientBackground.jpg"); */
 -moz-background-size:cover;
 -webkit-background-size:cover;
 -o-background-size:cover;
@@ -98,13 +100,14 @@ color:white;}
 <!-- ////////////////////////////////////////////////////////////////////-->
 <div class="grey_bg row ">
 
-<br><br>
+<br><br><br><br><br><br>
 <table id="mainSpace" >
-<tr><td colspan="2">請輸入產品名/部分產品名，決定產品</td></tr>
+<tr><td><h3>請輸入產品名/部分產品名，決定產品</h3><br></td><td></td></tr>
 <form action="">
 
 <tr>
-<td><input type="text" name="prodName" id="prodName" class="form-control" ></td> 
+<td><input type="text" name="prodName" id="prodName" class="form-control" style="border-radius:20px;"></td> 
+
 <td id="buttonTd"><input type="button" id="searchIngerdinet" value="Search" class="btn btn-default" style="margin-bottom: 10px;"></td>
 </tr>
 </form>
