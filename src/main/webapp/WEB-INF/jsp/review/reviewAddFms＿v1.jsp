@@ -587,10 +587,6 @@ select {
 					<input type="hidden" name="rewCollect" value="0"/>
 					<input type="hidden" name="reviewShow" value="true"/>
 					<input type="hidden" name="reviewReport" value="0"/>
-					<input type="hidden" name="reviewRating" id="reviewRating"/>
-					<input type="hidden" name="prodId" id="prodId"/>
-		
-					
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="">
 							<i class="fa fa-search" aria-hidden="true">
@@ -607,8 +603,7 @@ select {
 						        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
 						        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
 						    </ul>
-						    <div id="p1" class="review-rating" style="margin:15px 0 5px 15px;">1~5分，由你決定!
-						    </div>
+						    <div id="p1" class="review-rating" name="reviewRating"  style="margin:15px 0 5px 15px;">1~5分，由你決定!</div>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4">
@@ -653,7 +648,7 @@ select {
 			<div class="row">
 				<div class="form-group">
 					<div class="col-lg-12 hasbutton">
-						<button id="save"class="btn btn-default btn-lg" type="button" ><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+						<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
 						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
 					</div>
 				</div>
@@ -772,26 +767,24 @@ select {
 	
 	
 	$('#sprod').on('select2:select', function (evt) {
-		
 		var prodNum=$(this).val();
-		
-		$('#prodId').val(prodNum); //產品id評分到後端
-		
 		if(prodNum > 0) {
 			// show img
 			$('#prodImgLi').show();
 			$('#prodImg').show()
 						.attr("src","/reviews/showProd?prodId="+prodNum);
 			$('#check').show();
-			
 			$('#check').on('click',function(){
 				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
 			})
 		}
 	});
 	
-	/*  ============================================= */
-	
+// 	$('#check').on('click',function(){
+		
+// 	})
+			
+			
 // 	$('#reviewImg').on('click',function(){
 // 		 if($(".file-input	")[0]){
 // 		$('#reviewImgFake').removeClass("reviewImg");
@@ -820,21 +813,21 @@ select {
 // 			});
 			
 
-			$('#save').on('click',function(){
+			$('#confirm').on('click',function(){
+
 //	 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 //	 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
 //	 			console.log(JSON.stringify(datas));
-				$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
+				$('#review').val(CKEDITOR.instances['review'].getData());
 				$.ajax({
-						url:'/reviews/insert_fms',
+						url:'/articles/insert',
 						type:'post',
 						contentType:'application/json;charset=UTF-8',
 //	 					data:JSON.stringify(datas),
 						data:JSON.stringify($('#addForm').serializeObject()),
 						dataType:'json',
 						success:function(data){
-							console.log("data="+data);
-// 							location.href="/articles/listfms";
+							location.href="/articles/listfms";
 		 				}
 					});		
 				
@@ -858,7 +851,7 @@ select {
 			};
 		
 		
-	/*  ===================== diamond ================================ */
+	/*  ===================================================== */
 var flag = false;
     for (var i = 1; i <= 5; i++) {
         with (document.getElementById("d" + i)) {
@@ -893,8 +886,6 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
     for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
         document.getElementById("d" + i).className = "fa fa-diamond diamond li";
     }
-    $('#reviewRating').val(id.substr(1)); //心得評分到後端
-    
 	    switch (id.substr(1)) {
 		    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
 		             break;
