@@ -717,12 +717,7 @@ select {
 		  $('[data-toggle="offcanvas"]').click(function () {
 		        $('#wrapper').toggleClass('toggled');
 		  });  
-		  
-		/*  =====================Img upload ======================== */
-		
-	var formdata = new FormData(); 
-	formdata.append('reviewImg', $('#reviewImg').prop('files')[0]); 
-	
+
 		/*  =====================Prod Search ======================== */
 		
 	// hide  select
@@ -819,43 +814,8 @@ select {
 // 				},//end of messages			
 // 			});
 			
+		  
 
-			$('#save').on('click',function(){
-//	 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
-//	 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
-//	 			console.log(JSON.stringify(datas));
-				$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
-				$.ajax({
-						url:'/reviews/insert_fms',
-						type:'post',
-						contentType:'application/json;charset=UTF-8',
-//	 					data:JSON.stringify(datas),
-						data:JSON.stringify($('#addForm').serializeObject()),
-						dataType:'json',
-						success:function(data){
-							console.log("data="+data);
-// 							location.href="/articles/listfms";
-		 				}
-					});		
-				
-			});
-
-			$.fn.serializeObject = function()
-			{
-			    var o = {};
-			    var a = this.serializeArray();
-			    $.each(a, function() {
-			        if (o[this.name] !== undefined) {
-			            if (!o[this.name].push) {
-			                o[this.name] = [o[this.name]];
-			            }
-			            o[this.name].push(this.value || '');
-			        } else {
-			            o[this.name] = this.value || '';
-			        }
-			    });
-			    return o;
-			};
 		
 		
 	/*  ===================== diamond ================================ */
@@ -908,7 +868,59 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 		             break;
 		}
 	}
-	
+/*  ============================================= */
+
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		};
+
+
+
+
+
+/*  =====================Img upload ======================== */
+
+
+
+/*  ============================================= */
+		$('#save').on('click',function(){
+			
+			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
+			var formdata = new FormData(); 
+				formdata.append('reviewImgFile', $('#reviewImg').prop('files')[0]); 
+				formdata.append('review', new Blob([JSON.stringify($('#addForm').serializeObject())],
+											{type: 'application/json'})); 
+// 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
+// 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
+// 			console.log(JSON.stringify(datas));
+			$.ajax({
+					url:'/reviews/insert_fms',
+					type:'post',
+					contentType : false,
+					processData : false, 
+					data:formdata,
+					dataType:'json',
+					success:function(data){
+						console.log("data="+data);
+//							location.href="/articles/listfms";
+	 				}
+				});		
+		});
+
+
 	
 });
 	</script>

@@ -112,9 +112,9 @@ public class ReviewController {
 	public String reviews(Model model) throws ParseException {
 		
 		List<Review> list = service.getAll();
-		model.addAttribute("reviews", list);
+//		model.addAttribute("reviews", list);
 		log.debug("{}", list);
-//		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
+		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 //		 model.addAttribute("reviews", service.findByOrderByReviewReportDesc());
 	
 		
@@ -243,13 +243,25 @@ public class ReviewController {
 
 	@RequestMapping(value="/insert_fms", method=RequestMethod.POST)
 	@ResponseBody
-	public Review insertFms(@RequestBody Review review) {
+	public Review insertFms(@RequestPart(name="review") Review review,
+			@RequestPart(value="reviewImgFile",required = false) MultipartFile reviewImgFile) {
+		
 		// FK設定
 //		review.setProduct(prodService.getById(review.getProdId()));
 //		review.setMember(memberService.getById(review.getMemberId()));
-		log.debug("{}",review);
+		
 		review.setReviewTime(new java.sql.Timestamp(System.currentTimeMillis()));
-		log.debug("{}",review.getReviewTime());
+		if (reviewImgFile != null) {
+			String reviewTitle = review.getReviewTitle();
+			String reviewImg = FileProcessing.saveImg(reviewTitle, "review",reviewImgFile);
+			review.setReviewImg(reviewImg);
+			}
+		log.debug("{}",review);
+		review.setMember(memberService.getById(review.getMemberId()));
+		review.setProduct(prodService.getById(review.getProdId()));
+		
+		service.insert(review);
+		
 		
 		return review;
 	}
