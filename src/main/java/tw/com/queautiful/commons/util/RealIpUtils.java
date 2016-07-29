@@ -25,7 +25,7 @@ public class RealIpUtils {
     private static long saveBegin = getIpNum("127.0.0.0");  
     private static long saveEnd = getIpNum("127.255.255.255");  
   
-    //跟IP有關需要做判断的header参數  
+    //跟IP有關需要做判斷的header参數  
     private static Set<String> ipHeaderNames = new HashSet<String>(){  
         {  
             add("clientip");//clientIP即client上網分配的IP  

@@ -54,11 +54,18 @@ public class BmsController {
 			TimeOnSiteEnity	timeOnSite=(TimeOnSiteEnity) timeOnSiteDatas.get(i);
 			String pageUrl=timeOnSite.getPageUrl();
 			String[] pageUrlArray=pageUrl.split("/");
-			if(pageUrlArray[3].equalsIgnoreCase("fms")||pageUrlArray[3]==null){
+			if(pageUrlArray.length>3){
+			if(pageUrlArray[3].equalsIgnoreCase("fms")){
 				if(timeOnSite.getTimeOnSite()<5000){
 					Bounce++;	
 				}
 			}
+			}else{
+				if(timeOnSite.getTimeOnSite()<5000){
+					Bounce++;	
+				}
+			}
+			
 		}
 		double BounceRate=(Bounce/timeOnSiteDatas.size())*10000d;
 		dataMap.put("BounceRate",(Math.ceil(BounceRate)/100));
