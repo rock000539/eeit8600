@@ -47,7 +47,7 @@
 						<div class="stats-icon"><i class="fa fa-desktop"></i></div>
 						<div class="stats-info">
 							<h4>訪客人數</h4>
-							<p>${dataMap.visitors}</p>	
+							<p>${dataMap.visitors+100}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -73,7 +73,7 @@
 						<div class="stats-icon"><i class="fa fa-users"></i></div>
 						<div class="stats-info">
 							<h4>不重複造訪者</h4>
-							<p>1,291,922</p>	
+							<p>${dataMap.uniqueVisitors}</p>	
 						</div>
 						<div class="stats-link">
 							<a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>

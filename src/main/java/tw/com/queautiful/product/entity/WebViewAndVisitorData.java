@@ -12,7 +12,6 @@ public class WebViewAndVisitorData {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private long webView;
 	
 	private long totalVisitors;
 	
@@ -24,14 +23,6 @@ public class WebViewAndVisitorData {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public long getWebView() {
-		return webView;
-	}
-
-	public void setWebView(long webView) {
-		this.webView = webView;
 	}
 
 	public long getTotalVisitors() {
