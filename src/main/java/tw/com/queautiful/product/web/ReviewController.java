@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
@@ -110,9 +112,9 @@ public class ReviewController {
 	public String reviews(Model model) throws ParseException {
 		
 		List<Review> list = service.getAll();
-		model.addAttribute("reviews", list);
+//		model.addAttribute("reviews", list);
 		log.debug("{}", list);
-//		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
+		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 //		 model.addAttribute("reviews", service.findByOrderByReviewReportDesc());
 	
 		
@@ -140,7 +142,7 @@ public class ReviewController {
 		model.addAttribute("review", review);
 
 		// 得到英文月份
-		Date temp = review.getReviewTime();
+		java.sql.Timestamp temp = review.getReviewTime();
 		log.debug("{}", temp);
 		// 準備輸出的格式，如：Jun,18,16
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM,d,yy", Locale.US);
@@ -238,34 +240,29 @@ public class ReviewController {
 		
 		return "/review/reviewAddFms";
 	}
-	
-	@RequestMapping("/test")
-	public String testPage() {
-		return "/review/test";
-	}
 
 	@RequestMapping(value="/insert_fms", method=RequestMethod.POST)
 	@ResponseBody
-	public Review insertFms(@RequestPart("review") Review review,
-			@RequestPart("reviewImgFile") MultipartFile reviewImgFile) {
-
+	public Review insertFms(@RequestPart(name="review") Review review,
+			@RequestPart(value="reviewImgFile",required = false) MultipartFile reviewImgFile) {
+		
 		// FK設定
-		review.setProduct(prodService.getById(review.getProdId()));
+//		review.setProduct(prodService.getById(review.getProdId()));
+//		review.setMember(memberService.getById(review.getMemberId()));
+		
+		review.setReviewTime(new java.sql.Timestamp(System.currentTimeMillis()));
+		if (reviewImgFile != null) {
+			String reviewTitle = review.getReviewTitle();
+			String reviewImg = FileProcessing.saveImg(reviewTitle, "review",reviewImgFile);
+			review.setReviewImg(reviewImg);
+			}
+		log.debug("{}",review);
 		review.setMember(memberService.getById(review.getMemberId()));
-
-		// 取得品牌名稱當作檔名
-		String reviewTitle = review.getReviewTitle();
-
-		// 存圖片-->直接使用FileProcessing檔的saveImg方法
-		// 傳入參數:1.imgName(檔名), 2.folderName(資料夾名稱), 3.MultipartFile
-		// 傳回檔案儲存的路徑
-		String reviewImg = FileProcessing.saveImg(reviewTitle, "review",
-				reviewImgFile);
-
-		// 將檔案路徑存成Entity的屬性
-		review.setReviewImg(reviewImg);
-
+		review.setProduct(prodService.getById(review.getProdId()));
+		
 		service.insert(review);
+		
+		
 		return review;
 	}
 	
@@ -325,4 +322,6 @@ public class ReviewController {
 		String result=review_TagListService.deleteReview_TagList(reviewid, reviewtagid);
 		return result;
 	}
+	
+	
 }
