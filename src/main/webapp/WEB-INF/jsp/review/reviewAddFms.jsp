@@ -515,7 +515,7 @@ select {
     <div id="wrapper">
         <div class="overlay"></div>
         <!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" style="margin-top:135px;height:350px;">
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" style="margin-top:135px;height:390px;">
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand">
                     <a  class="fa fa-search" style="height: 65px;font-size: 26px;padding:20px 0 0 10px">&nbsp;&nbsp;Product Search</a>
@@ -536,17 +536,24 @@ select {
 						</div>
 					</a>
                 </li>
-                <li>
+                <li id="sprodLi">
                     <a >
                     	<div class="row">
 							<select id="sprod" class="js-example-basic-single" style="width: 90%"></select>
 						</div>                 
                     </a>
                 </li>
-                <li>
+                <li id="prodImgLi">
                     <a >
                         <div class="row">
-							<img id="prodImg" alt="" src="" class="js-example-basic-single" style="width: 90%;visibility: hidden;"></select>
+							<img id="prodImg" class="js-example-basic-single" alt="prodImg" style="width: auto;height: 120px;margin-left: 30px"></select>
+						</div>
+                    </a>
+                </li>
+                <li id="check">
+                    <a >
+                        <div class="row">
+							<button  class="btn" type="button" style="margin:0 0 0 45px;background:rgb(255, 81, 101);"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Check</button>
 						</div>
                     </a>
                 </li>
@@ -597,6 +604,7 @@ select {
 						    <b id="p1" class="review-rating" name="reviewRating">1~5分，由你決定!</b>
 						</div>
 					</div>
+					
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<h3 style="margin:0 100px 10px 0;padding-bottom: 0;float: left">&nbsp;&nbsp;&nbsp;封面圖片</h3>
 						<input id="reviewImg" name="reviewImg" type="file" class="file-loading" >
@@ -702,6 +710,10 @@ select {
 		
 	// hide  select
 	$('#sprod').hide();
+	$('#sprodLi').hide();
+	$('#prodImg').hide();
+	$('#prodImgLi').hide();
+	$('#check').hide();
 	
 	// select-brand init
 	$('#sbrand').select2({
@@ -713,6 +725,8 @@ select {
 	$('#sbrand').on('select2:select', function (evt) {
 		
 		if($(this).val() > 0) {
+			
+			$('#sprodLi').show();
 			
 			// select-product init
 			$('#sprod').select2({
@@ -740,29 +754,15 @@ select {
 	
 	
 	$('#sprod').on('select2:select', function (evt) {
-		
+
 		if($(this).val() > 0) {
-						
 			// show img
-			$('#prodImg').show();
-			
-			// append data to select #sprod
-// 			$.ajax({
-// 				url: '/products/search/' + $(this).val(),
-// 				type: 'POST',
-// 				dataType: 'json',
-// 				contextType: 'application/json; charset=utf-8;',
-// 				success:function(response){
-// 					var select = $('#sprod').empty();
-// 					select.append($('<option>請選擇產品</option>'));
-// 					for(i=0; i<response.length; i++) {
-// 						select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
-// 					}
-// 				}
-// 			});
+			$('#prodImgLi').show();
+			$('#prodImg').show()
+						.attr("src","/reviews/showProd?prodId="+$(this).val());
+			$('#check').show();
 			
 		}
-		
 	});
 			
 			

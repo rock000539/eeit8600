@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.util.FileProcessing;
+import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.BrandService;
@@ -58,9 +59,6 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewCMService reveiwCMService;
-	
-	@Autowired
-	private CategoryService categoryService;
 	
 	@Autowired
 	private BrandService brandService;
@@ -234,10 +232,6 @@ public class ReviewController {
 	@RequestMapping("/add")
 	public String addPage(@RequestParam(value="prodId",required=false) Long prodId,Model model) {
 		
-		// 類別
-		List<CategorySearch> categories = categoryService.getAllByVoSearch();
-		model.addAttribute("categories", categories);
-
 		// 品牌
 		List<BrandSearch> brands = brandService.getAllByVoSearch();
 		model.addAttribute("brands", brands);
@@ -314,14 +308,14 @@ public class ReviewController {
 		}
 	}
 	
-	@RequestMapping("/show_old")
-	public void show(HttpServletResponse resp, @RequestParam Long reviewId) {
-		Review review = service.getById(reviewId);
+	@RequestMapping("/showProd")
+	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
+		 Product prod = prodService.getById(prodId);
 		// 取得檔案路徑
-		String reviewImg = review.getReviewImg();
+		 String prodImg = prod.getProdImg();
 		// 在網頁中顯示圖片-->直接使用FileProcessing檔的showImg方法
 		// 傳入參數:1.HttpServletResponse, 2.檔案路徑
-		FileProcessing.showImg(resp, reviewImg);
+		FileProcessing.showImg(resp, prodImg);
 	}
 	
 	@RequestMapping(value="/deleteTag", method=RequestMethod.POST)
