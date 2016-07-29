@@ -7,28 +7,67 @@ body {
 	font-family: Microsoft JhengHei, "Droid Serif", serif;
 }
 
+.bgcolor{
+	background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+}
+
+.blog_medium .post_meta h2 {
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.blog_medium .post_meta .metaInfo {
+    font-size: 0.95em;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.hvr-float {
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: transform;
+	transition-property: transform;
+	-webkit-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+}
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+	-webkit-transform: translateY(-8px);
+	transform: translateY(-8px);
+}
+
 .portfolio-title {
 	height: 60px;
-	background-color: #5bc0de;  /*blue */
-	border-bottom: 1px solid #4FBAAA;
+	background-color: #999;
+	/*border-bottom: 1px solid #4FBAAA;*/
 	color: #ffffff;
 	text-align: center;
 	padding: 15px 10px 10px 10px;
 }
 
 #proList div:nth-child(4n+2) .portfolio-title {
-	background-color: #999;	/*beige*/
-	border-bottom: 1px solid #C6BFB4;
+	background-color: #31708f;
+	/*border-bottom: 1px solid #C6BFB4;*/
 }
 
 #proList div:nth-child(4n+3) .portfolio-title {
-	background-color: #FF95CA;	/*beige*/
-	border-bottom: 1px solid #C6BFB4;
+	background-color: #337ab7;
+	/*border-bottom: 1px solid #C6BFB4;*/
 } 
 
 #proList div:nth-child(4n+4) .portfolio-title {
-	background-color: #FF9985;	/*pink*/
-	border-bottom: 1px solid #D97F88;
+	background-color: #FF95CA;
+	/*border-bottom: 1px solid #D97F88;*/
 }
 
 .blog_medium .post {
@@ -44,14 +83,14 @@ body {
 }
 
 a:hover {
-			cursor:pointer;
-	}
+	cursor:pointer;
+}
 	
-	.widget_title h4 {
-		margin-top: 20px;
-		margin-bottom: 5px;
-    font-size: 18px;
-    text-transform: uppercase;
+.widget_title h4 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+   	font-size: 18px;
+   	text-transform: uppercase;
 }
 
 .img-prod
@@ -135,9 +174,11 @@ button.on {
  	padding: 15px; 
 }
 
+/*
 .portfolio-item:hover .portfolio-content{
 	border-bottom-color:#727CB6; 
 }
+*/
 
 .portfolio-all {
 	background-color: #ffffff;
@@ -176,8 +217,8 @@ button.on {
 .card__social--active {
 	visibility: visible;
 	transform: translateZ(0);
-		transform: translateX(-6px);
- 		transition: transform 0.35s ease;
+	transform: translateX(-6px);
+	transition: transform 0.35s ease;
 }
 
 .share-toggle {
@@ -185,13 +226,13 @@ button.on {
 }
 
 .share-toggle:before {
-	content: "\f1e0";
+	/*content: "\f1e0";*/
 	font-family: 'FontAwesome';
-	color: #3498db;
+	color: #fff;
 }
 
 .share-toggle.share-expanded:before {
-	content: "\f00d";
+	/*content: "\f00d";*/
 }
 
 .share-icon {
@@ -201,13 +242,13 @@ button.on {
 	line-height: 30px;
 	text-align: center;
 	border-radius: 50%;
-	background-color: #fff;
+	background-color: #FF1E76;
 	transition: all 0.3s ease;
 	outline: 0;
 
 	box-shadow: 
-	  		0 2px 4px rgba(0,0,0, 0.12),
-	    	0 2px 4px rgba(0,0,0, 0.24);
+  		0 2px 4px rgba(0,0,0, 0.12),
+    	0 2px 4px rgba(0,0,0, 0.24);
 }
 
 .share-icon:hover,
@@ -228,7 +269,7 @@ button.on {
 }
 
 .bookmark {
-	background-color: #FF8040;
+	background-color: #FF1E76;
 }
 
 .info,

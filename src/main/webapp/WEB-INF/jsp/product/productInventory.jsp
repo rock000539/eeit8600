@@ -32,35 +32,24 @@
 	<!-- jQuery Redirect Plugin -->
 	<script src="/js/jquery.redirect.js"></script>	
 	
+	<!-- Sweet Alert 2 -->
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
+	
+	<link rel="stylesheet" href="/css/animate.css">
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductInventory</title>
 
 	<style>
-	
-		.bgcolor{
-			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
-		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
-		  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
-		  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
+		.swal {
+		    border-radius: 20px !important;
+		    width: 400px !important;
+		    margin-left: -200px !important;
 		}
-		
-		.blog_medium .post_meta h2 {
-		    margin-bottom: 5px;
-		    margin-top: 0;
-		}
-		
-		.blog_medium .post_meta .metaInfo {
-		    font-size: 0.95em;
-		    margin: 0 auto;
-		    padding: 0px;
-		}
-		
 	</style>
 
 </head>
 <body>
-
-	<!-- http://codepen.io/amortka/pen/KqfoB -->
 
 	<!--加入header&nav -->
 	<c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
@@ -88,16 +77,9 @@
 				
 				<c:forEach items="${products}" var="product" begin="0" step="2">
 					<article class="post">
-						
-						<figure class="post_img effect-bubba" style="margin-left:50px;">
+					
+						<figure class="post_img" style="margin-left:50px;">
 							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
-							
-							<div class="option" style="margin-top:30px;">
-							    <a href="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
-							    <a href="<%= request.getContextPath() %>/products/view/${product.prodId}" class="fa fa-link"></a>
-							</div>
-							
-							<figcaption class="item-description"></figcaption>
 						</figure>
 						
 						<div class="post_content">
@@ -112,7 +94,7 @@
 								</div>
 							</div>
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
-								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
+								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p>
 							</c:if>
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
 								<p>${fn:substring(review.review, 0, 25)} ... </p>
@@ -132,16 +114,9 @@
 				
 				<c:forEach items="${products}" var="product" begin="1" step="2">
 					<article class="post">
-						
-						<figure class="post_img effect-bubba" style="margin-left:50px;">
+					
+						<figure class="post_img" style="margin-left:50px;">
 							<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="border:1px solid #f2f2f2;">
-							
-							<div class="option" style="margin-top:30px;">
-							    <a href="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" class="fa fa-search mfp-image"></a>
-							    <a href="<%= request.getContextPath() %>/products/view/${product.prodId}" class="fa fa-link"></a>
-							</div>
-							
-							<figcaption class="item-description"></figcaption>
 						</figure>
 						
 						<div class="post_content">
@@ -156,10 +131,10 @@
 								</div>
 							</div>
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
-								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>
+								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p>
 							</c:if>
 							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
-								<p>${fn:substring(review.review, 0, 25)} ... </p>
+								<p>${fn:substring(review.review, 0, 20)} ... </p>
 							</c:if>
 							<span style="float:right;">
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;收藏商品</a>
@@ -200,6 +175,9 @@
     <script src="/js/product/swipe.js"></script>
     
     <script src="/js/product/inventory/main.js"></script>
+    
+    <!-- Sweet Alert 2 -->
+	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
 
 	<script src="/js/product/wow.min.js"></script>
     <script>
@@ -211,15 +189,8 @@
 		
 		<article class="post">
 						
-			<figure class="post_img effect-bubba" style="margin-left:50px;">
+			<figure class="post_img" style="margin-left:50px;">
 				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=_prodImg" style="border:1px solid #f2f2f2;">
-				
-				<div class="option" style="margin-top:30px;">
-				    <a href="<%= request.getContextPath() %>/products/show?prodImg=_prodImg" class="fa fa-search mfp-image"></a>
-				    <a href="<%= request.getContextPath() %>/products/view/_prodId" class="fa fa-link"></a>
-				</div>
-				
-				<figcaption class="item-description"></figcaption>
 			</figure>
 			
 			<div class="post_content">
@@ -233,7 +204,7 @@
 						<span><i class="fa fa-comments"></i> _size </span>
 					</div>
 				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit. Qui tever iluma facete gubergren ... </p>				
+				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p>				
 				<span style="float:right;">
 					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;&nbsp;收藏商品</a>
 					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
@@ -246,7 +217,7 @@
 	
 	<script id="grid_mode" type="text/template">
 		
-		<div class="col-md-3 portfolio-item">
+		<div class="col-md-3 portfolio-item hvr-float">
 			<div class="portfolio-all">
 				<div class="portfolio-content">
 					<div class="portfolio-img">
@@ -257,11 +228,7 @@
 				</div>
 				<div class="portfolio-title">
 					<div class="card__share">
-			            <div class="card__social">  
-			                <a class="share-icon info" data-prodId="_prodId" onClick="info_click($(this))"><span class="fa fa-info"></span></a>
-			                <a class="share-icon bookmark" data-prodId="_prodId" onClick="save_click($(this))"><span class="fa fa-heart"></span></a>
-			            </div>
-			            <a id="share" class="share-toggle share-icon" href="#"></a>
+						<a class="share-icon bookmark" data-prodId="_prodId" onClick="save_click($(this))"><span class="fa fa-heart" style="margin-left:1px;"></span></a>
 			        </div>
 					<a data-prodId="_prodId" onClick="info_click($(this))">
 						<h3>_prodName</h3>
@@ -290,8 +257,10 @@
 			   next: 'next',
 			   prev: 'prev',
 			}).on('page', function(event, num) {
-				$('#page').val(num);
-				appendData();
+				if($('#page').val() != num) {
+					$('#page').val(num);
+					appendData();
+				}
 			});
 			
 		});
@@ -344,14 +313,14 @@
 						for(var i=0; i<products.length; i++) {
 							
 							var list = i%2 == 0 ? l_list : r_list;
-							
 							$($('#list_mode').html()
 								.replace(/_prodId/g, products[i].prodId)
 								.replace(/_prodName/g, products[i].prodName)
 								.replace(/_prodImg/g, products[i].prodImg)
 								//.replace('_prodDesc', products[i].prodDesc)
 								.replace(/_launchDate/g, products[i].launchDate)
-								.replace(/_size/g, products[i].rSize))
+								.replace(/_size/g, products[i].rSize)
+								.replace(/_brandName/g, products[i].brandName))
 								.appendTo(list);
 							
 						}
@@ -405,19 +374,25 @@
 			var prodId = $(a).attr('data-prodId');
 			
 			$.ajax({
-				url: '',
-				type: 'POST',
+				url: '/members/like/product/' + prodId,
 				dataType: 'json',
 				contextType: 'application/json; charset=utf-8;',
-				data: { 'prodId': prodId },
 				success: function(response) {
 					if(response == true) {
 						swal({
 							type: 'success',
-							text: '<h1 style="line-height:0px;">Save this product!</h1>',
+							text: '<h1 style="line-height:0px;">收藏成功!</h1>',
 							showConfirmButton: false,
 							customClass: 'swal',
-							timer: 1000,
+							timer: 1500,
+						});
+					} else {
+						swal({
+							type: 'info',
+							text: '<h1 style="line-height:0px;">已經收藏過囉!</h1>',
+							showConfirmButton: false,
+							customClass: 'swal',
+							timer: 1500,
 						});
 					}
 				},
@@ -431,7 +406,7 @@
 		// Grid/List System
 		function bindShareEvent() {
 			$('.card__share > a').on('click', function(e){ 
-				e.preventDefault() // prevent default action - hash doesn't appear in url
+				e.preventDefault()
 		   		$(this).parent().find( 'div' ).toggleClass( 'card__social--active' );
 				$(this).toggleClass('share-expanded');
 		    });
