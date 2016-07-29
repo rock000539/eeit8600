@@ -29,18 +29,6 @@
 	
 	<style>
 		
-		.bgcolor{
-			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
-		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
-		  	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
-		  	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
-		}
-		
-		#categoryContainer {
- 		    width: 79vw;
- 		    margin: 0 auto;
-		}
-		
 	</style>
 	
 </head>

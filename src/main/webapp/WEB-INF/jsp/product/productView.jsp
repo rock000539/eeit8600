@@ -24,6 +24,8 @@
 	<!-- Sweet Alert 2 -->
 	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
 	
+	<link rel="stylesheet" href="/css/animate.css">
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ProductView</title>
 	
@@ -191,6 +193,25 @@
 			text-indent: 8px;
 		}
 		
+		.star-icon {
+			content: 'f219';
+		    color: blue;
+		}
+		.star-icon.full:before {
+		    text-shadow: 0 0 2px rgba(0,0,0,0.7);
+		    color: #FDE16D;
+		    content: '\f219';
+		    left: 0;
+		}
+		.star-icon.half:before {
+		    text-shadow: 0 0 2px rgba(0,0,0,0.7);
+		    color: #FDE16D;
+		    content: '\f219';
+		    left: 0;
+		    width: 50%;
+		    overflow: hidden;
+		}
+		
 	</style>
 	
 </head>
@@ -279,6 +300,10 @@
 				    			<c:forEach begin="1" end="${product.score}">
 									<i class="fa fa-diamond"></i>
 								</c:forEach>
+								<c:if test="${product.score/1!=0}">
+									<i class="fa fa-diamond"></i>
+								</c:if>
+								&nbsp;${product.score}
 				    		</span>
 				    	</label>
 				    </div>
@@ -320,8 +345,8 @@
 					
 					<c:forEach items="${product.reviews}" var="review">
 					
-				        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
-				            <div class="our-team" style="height:455px;">
+				        <div class="col-md-4 col-sm-6 portfolio-item" style="margin-bottom: 30px;">
+				            <div class="our-team prodContent" style="height:455px;">
 				                <div class="team-pic image">
 				                    <img src="<%= request.getContextPath() %>/products/show?prodImg=${review.reviewImg}" style="width:auto; height:245.06px; margin:0 auto; padding: 10% 0;">
 		<!-- 		                    <div class="team-overlay"></div> -->
@@ -543,19 +568,25 @@
 			var prodId = $(a).attr('data-prodId');
 			
 			$.ajax({
-				url: '',
-				type: 'POST',
+				url: '/members/like/product/' + prodId,
 				dataType: 'json',
 				contextType: 'application/json; charset=utf-8;',
-				data: { 'prodId': prodId },
 				success: function(response) {
 					if(response == true) {
 						swal({
 							type: 'success',
-							text: '<h1 style="line-height:0px;">Save this product!</h1>',
+							text: '<h1 style="line-height:0px;">收藏成功!</h1>',
 							showConfirmButton: false,
 							customClass: 'swal',
-							timer: 1000,
+							timer: 1500,
+						});
+					} else {
+						swal({
+							type: 'info',
+							text: '<h1 style="line-height:0px;">已經收藏過囉!</h1>',
+							showConfirmButton: false,
+							customClass: 'swal',
+							timer: 1500,
 						});
 					}
 				},
@@ -580,12 +611,11 @@
 	
 	<script>
 	
-		var timelineBlocks = $('.our-team'),
-		offset = 0.9;
+		var timelineBlocks = $('.portfolio-item'),
+		offset = 0.8;
 
 		hideBlocks(timelineBlocks, offset);
 	
-		//on scolling, show/animate timeline blocks when enter the viewport
 		$(window).on('scroll', function(){
 			(!window.requestAnimationFrame) 
 				? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
@@ -594,17 +624,16 @@
 	
 		function hideBlocks(blocks, offset) {
 			blocks.each(function(){
-				( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.team-pic, .team-profile, .team-social-media').addClass('is-hidden');
+				( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.prodContent').addClass('is-hidden');
 			});
 		}
 	
 		function showBlocks(blocks, offset) {
 			blocks.each(function(){
-				( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.team-pic').hasClass('is-hidden') ) && $(this).find('.team-pic, .team-profile, .team-social-media').removeClass('is-hidden').addClass('bounce-in');
-				console.log("show"+$(this));
+				( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.prodContent').hasClass('is-hidden') ) && $(this).find('.prodContent').removeClass('is-hidden').addClass('animated fadeInDown');
 			});
 		}
-			
+		
 	</script>
 	
 </body>
