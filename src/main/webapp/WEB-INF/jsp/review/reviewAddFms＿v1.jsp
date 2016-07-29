@@ -26,6 +26,9 @@
    	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
 	<script src="/js/product/search/select2.min.js"></script>
+	
+	<!-- Sweet Alert 2 -->
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
     
 <style>
 /* ===========Slidebar  Start=================== */
@@ -118,41 +121,13 @@ html { height: 100%;}
     z-index: -1;
     height: 100%;
     width: 3px;
-    background-color: #1c1c1c;
     -webkit-transition: width .2s ease-in;
       -moz-transition:  width .2s ease-in;
        -ms-transition:  width .2s ease-in;
             transition: width .2s ease-in;
 
 }
-.sidebar-nav li:first-child a {
-    color: #fff;
-    background-color: rgba(28, 97, 223, 0.83);
-}
-.sidebar-nav li:nth-child(2):before {
-    background-color: #ec1b5a;   
-}
-.sidebar-nav li:nth-child(3):before {
-    background-color: #79aefe;   
-}
-.sidebar-nav li:nth-child(4):before {
-    background-color: #314190;   
-}
-.sidebar-nav li:nth-child(5):before {
-    background-color: #279636;   
-}
-.sidebar-nav li:nth-child(6):before {
-    background-color: #7d5d81;   
-}
-.sidebar-nav li:nth-child(7):before {
-    background-color: #ead24c;   
-}
-.sidebar-nav li:nth-child(8):before {
-    background-color: #2d2366;   
-}
-.sidebar-nav li:nth-child(9):before {
-    background-color: #35acdf;   
-}
+
 .sidebar-nav li:hover:before,
 .sidebar-nav li.open:hover:before {
     width: 100%;
@@ -587,6 +562,10 @@ select {
 					<input type="hidden" name="rewCollect" value="0"/>
 					<input type="hidden" name="reviewShow" value="true"/>
 					<input type="hidden" name="reviewReport" value="0"/>
+					<input type="hidden" name="reviewRating" id="reviewRating"/>
+					<input type="hidden" name="prodId" id="prodId"/>
+		
+					
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="">
 							<i class="fa fa-search" aria-hidden="true">
@@ -603,7 +582,8 @@ select {
 						        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
 						        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
 						    </ul>
-						    <div id="p1" class="review-rating" name="reviewRating"  style="margin:15px 0 5px 15px;">1~5分，由你決定!</div>
+						    <div id="p1" class="review-rating" style="margin:15px 0 5px 15px;">1~5分，由你決定!
+						    </div>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4">
@@ -648,7 +628,7 @@ select {
 			<div class="row">
 				<div class="form-group">
 					<div class="col-lg-12 hasbutton">
-						<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+						<button id="save" class="btn btn-default btn-lg" type="button" ><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
 						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
 					</div>
 				</div>
@@ -712,12 +692,7 @@ select {
 		  $('[data-toggle="offcanvas"]').click(function () {
 		        $('#wrapper').toggleClass('toggled');
 		  });  
-		  
-		/*  =====================Img upload ======================== */
-		
-	var formdata = new FormData(); 
-	formdata.append('reviewImg', $('#reviewImg').prop('files')[0]); 
-	
+
 		/*  =====================Prod Search ======================== */
 		
 	// hide  select
@@ -767,24 +742,26 @@ select {
 	
 	
 	$('#sprod').on('select2:select', function (evt) {
+		
 		var prodNum=$(this).val();
+		
+		$('#prodId').val(prodNum); //產品id評分到後端
+		
 		if(prodNum > 0) {
 			// show img
 			$('#prodImgLi').show();
 			$('#prodImg').show()
 						.attr("src","/reviews/showProd?prodId="+prodNum);
 			$('#check').show();
+			
 			$('#check').on('click',function(){
 				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
 			})
 		}
 	});
 	
-// 	$('#check').on('click',function(){
-		
-// 	})
-			
-			
+	/*  ============================================= */
+	
 // 	$('#reviewImg').on('click',function(){
 // 		 if($(".file-input	")[0]){
 // 		$('#reviewImgFake').removeClass("reviewImg");
@@ -812,46 +789,11 @@ select {
 // 				},//end of messages			
 // 			});
 			
+		  
 
-			$('#confirm').on('click',function(){
-
-//	 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
-//	 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
-//	 			console.log(JSON.stringify(datas));
-				$('#review').val(CKEDITOR.instances['review'].getData());
-				$.ajax({
-						url:'/articles/insert',
-						type:'post',
-						contentType:'application/json;charset=UTF-8',
-//	 					data:JSON.stringify(datas),
-						data:JSON.stringify($('#addForm').serializeObject()),
-						dataType:'json',
-						success:function(data){
-							location.href="/articles/listfms";
-		 				}
-					});		
-				
-			});
-
-			$.fn.serializeObject = function()
-			{
-			    var o = {};
-			    var a = this.serializeArray();
-			    $.each(a, function() {
-			        if (o[this.name] !== undefined) {
-			            if (!o[this.name].push) {
-			                o[this.name] = [o[this.name]];
-			            }
-			            o[this.name].push(this.value || '');
-			        } else {
-			            o[this.name] = this.value || '';
-			        }
-			    });
-			    return o;
-			};
 		
 		
-	/*  ===================================================== */
+	/*  ===================== diamond ================================ */
 var flag = false;
     for (var i = 1; i <= 5; i++) {
         with (document.getElementById("d" + i)) {
@@ -886,6 +828,8 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
     for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
         document.getElementById("d" + i).className = "fa fa-diamond diamond li";
     }
+    $('#reviewRating').val(id.substr(1)); //心得評分到後端
+    
 	    switch (id.substr(1)) {
 		    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
 		             break;
@@ -899,7 +843,61 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 		             break;
 		}
 	}
-	
+/*  ============================================= */
+
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		};
+
+
+
+
+
+/*  =====================Img upload ======================== */
+
+
+
+/*  ============================================= */
+// 			event.preventDefault();
+		$('#save').on('click',function(){
+		    
+			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
+			var formdata = new FormData(); 
+				formdata.append('reviewImgFile', $('#reviewImg').prop('files')[0]); 
+				formdata.append('review', new Blob([JSON.stringify($('#addForm').serializeObject())],
+											{type: 'application/json'})); 
+// 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
+// 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
+// 			console.log(JSON.stringify(datas));
+			$.ajax({
+					url:'/reviews/insert_fms',
+					type:'post',
+					contentType : false,
+					processData : false, 
+					data:formdata,
+					dataType:'json',
+					success:function(data){
+						console.log("data="+data);
+						
+// 						history.back(1);
+	 				}
+				});		
+		});
+
+
 	
 });
 	</script>

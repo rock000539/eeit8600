@@ -18,6 +18,9 @@
     <link href="/css/review/style.css" rel="stylesheet" >
 	<link href="/css/review/reviewjQueryRain-customize.css" rel="stylesheet">
 	
+	<!-- Sweet Alert 2 -->
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
+	
 	<script src="/js/jquery.min.js"></script>
 </head> 
 <style>
@@ -49,6 +52,7 @@
 	height: 27px;
 	width: 27px;
 }
+
 
 </style>
 <body>
@@ -129,8 +133,6 @@
                                     <blockquote class="default">
                                        
                                     <p>${review.review}</p>
-                                        Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque eget tempor tellus. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.
-                                    <p>${review.review}</p>
                                     </blockquote>
                                     
                                     
@@ -151,7 +153,7 @@
 										<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
 									</c:if>
 									<li><a href="#Comments" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
-									<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
+									<li><a href="#replyarea" class="btn-warning btn-like" title="like" data-prodId="${review.reviewId}" onClick="save_review_click($(this))"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
                                 </ul>
                                 </div>	
                             </article>
@@ -412,6 +414,8 @@
     <script src="/js/review/main.js"></script>
     	  <script src="/ckeditor/ckeditor.js"></script>
     	  
+   	<!-- Sweet Alert 2 -->
+		  <script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
     	  
 <script id="reviewCM_mode" type="text/template">
 
@@ -593,6 +597,42 @@ $(function(){  //=$(document.)ready
 		
 		
 });//$(function () end
+
+		
+	//收藏心得
+	function save_review_click(a) {
+	
+		var reviewId = $(a).attr('data-prodId');
+		
+		$.ajax({
+			url: '/members/like/review/' + reviewId,
+			dataType: 'json',
+			contextType: 'application/json; charset=utf-8;',
+			success: function(response) {
+				if(response == true) {
+					swal({
+						type: 'success',
+						text: '<h1 style="line-height:0px;">收藏成功!</h1>',
+						showConfirmButton: false,
+						customClass: 'swal',
+						timer: 1500,
+					});
+				} else {
+					swal({
+						type: 'info',
+						text: '<h1 style="line-height:0px;">已經收藏過囉!</h1>',
+						showConfirmButton: false,
+						customClass: 'swal',
+						timer: 1500,
+					});
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log('jqXHR = ' + jqXHR + ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+			},
+		});
+		
+	}
 
 
 
