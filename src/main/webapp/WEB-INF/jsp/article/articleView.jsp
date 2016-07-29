@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
 <!--     <link rel="stylesheet" href="/css/article/view.css"> -->
 	
+	<!-- Sweet Alert 2 -->
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
+	
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -264,8 +267,14 @@
 			background: #ff007f;
 		}
 
+		.swal {
+		    border-radius: 20px !important;
+		    width: 400px !important;
+		    margin-left: -200px !important;
+		}
 
 </style>
+
 
 <body>
 <!--加入header&nav -->
@@ -284,6 +293,53 @@
 			   		   <li><a href="/articles/listfms?articleType=${article.articleType}" data-navbar-reference="index" itemprop="url" data-original-title="" title=""><span itemprop="title">${article.articleType}</span></a></li>
 			</ul>
 		</div>
+		
+		<div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+<!--                 <div class="panel panel-default"> -->
+<!--                     <div class="panel-heading button_outer_rounded" role="tab" id="heading"> -->
+<!--                         <h4 class="panel-title"> -->
+<!--                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="true" aria-controls="collapseOne"> -->
+<!--                                 Stunning Design & Countless Options -->
+<!--                             </a> -->
+<!--                         </h4> -->
+<!--                     </div> -->
+<!--                     <div id="collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading"> -->
+<!--                         <div class="panel-body"> -->
+<!--                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue lorem ut augue aliquam, ut rutrum nulla eleifend. Nunc aliquam suscipit leo, in mattis massa ullamcorper sed. Pellentesque dictum erat at eros egestas, vel convallis nibh pharetra. Class aptent taciti sociosqu ad litora torquent. -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+        		<div class="panel panel-default">
+                    <div class="panel-heading button_outer_rounded" role="tab" id="heading1">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapseTwo">
+                                Tons of customization options
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue lorem ut augue aliquam, ut rutrum nulla eleifend. Nunc aliquam suscipit leo, in mattis massa ullamcorper sed. Pellentesque dictum erat at eros egestas, vel convallis nibh pharetra. Class aptent taciti sociosqu ad litora torquent.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading button_outer_rounded" role="tab" id="heading2">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapseThree">
+                                Ease of Content creation and modification
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue lorem ut augue aliquam, ut rutrum nulla eleifend. Nunc aliquam suscipit leo, in mattis massa ullamcorper sed. Pellentesque dictum erat at eros egestas, vel convallis nibh pharetra. Class aptent taciti sociosqu ad litora torquent.
+                        </div>
+                    </div>
+                </div>
+        		        
+		</div>
+		
 		<!-- start article -->
 		<div class="col-lg-12 post">
 			<div class="postprofile col-lg-3">
@@ -342,6 +398,7 @@
 			</div>
 			
 		</div>
+		
 		<!-- end of article -->
 		
 		<!-- start articleReply -->
@@ -463,6 +520,9 @@
 	<script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 	
+	<!-- Sweet Alert 2 -->
+	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
+	
 	<script src="/ckeditor/ckeditor.js"></script>
 	
 	<!-- template -->
@@ -474,8 +534,7 @@
 					<div class="authordiv img-circle">
 					<img  class="authorimg" src="/members/show?memberId=_memberId">
 					</div>
-					<h3><a href="#">_nickname</a></h3>
-					
+					<h3><a href="#">_nickname</a></h3>					
 				</dt>
 				<dd>Post:</dd>
 				<dd>Joined:_memberRegiDate</dd>
@@ -515,7 +574,7 @@
 		console.log(list);
 
 		//未登入不可reply
-		if('${memberId}'==''){
+		if('${memberId}' == ''){
 			$('#btn_login').show();
 // 			$('#btn_reply').hide();
 			$('#btn_reply').attr('disabled',true);
@@ -599,9 +658,24 @@
 				console.log(result);
 // 				console.log('${article.memberSave.size()}'+1);
 				if(result){
-// 					$('#memberSave_num').text(result);
+					swal({
+						type: 'success',
+						text: '<h1 style="line-height:0px;">收藏成功!</h1>',
+						showConfirmButton: false,
+						customClass: 'swal',
+						timer: 1500,
+					});
+					$('#memberSave_num').text(" "+(parseInt($('#memberSave_num').text())+1));
 // 					console.log(parseInt($('#memberSave_num').text())+1);
-				};			
+				} else {
+					swal({
+						type: 'info',
+						text: '<h1 style="line-height:0px;">已經收藏過囉!</h1>',
+						showConfirmButton: false,
+						customClass: 'swal',
+						timer: 1500,
+					});
+				}			
 			}			
 		});
 	}// end of 文章收藏
@@ -621,7 +695,7 @@
 				var Msg = data.acmMsg;
 				var time = data.acmTime;
 				$('#articleMsgArea').append(name+":"+Msg+" time:"+time+"<br/>");
-				$('#acms_num').text(parseInt($('#acms_num').text())+1);
+				$('#acms_num').text(" "+(parseInt($('#acms_num').text())+1));
 			}
 		});
 	}// end of 留言 
