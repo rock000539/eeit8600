@@ -23,6 +23,7 @@ public class TimeOnSiteController {
 		TimeOnSiteEnity timeOnSiteEnity=new TimeOnSiteEnity();
 		
 		timeOnSiteEnity.setPageUrl(pageUrl);
+		timeOnSiteEnity.setPageUrlTrimmed(pageUrl);
 		if(memberId!=null&&memberId!=0){
 		timeOnSiteEnity.setMemberId(memberId);
 		}else{

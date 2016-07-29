@@ -184,45 +184,29 @@
 		</div> <!-- /end .row -->
 </div>
  <!-- 直條圖//////////////////////////////////////////////////////////// -->    
-<div class="col-md-6 ui-sortable">
-                    <div class="panel panel-inverse" data-sortable-id="flot-chart-3">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" data-original-title="" title=""><i class="fa fa-repeat"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                            <h4 class="panel-title">各頁瀏覽量  Page View</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div id="bar-chart" class="height-sm" style="padding: 0px; position: relative;">
-                            <canvas class="flot-base" width="288" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 288px; height: 300px;"></canvas>
-                            <div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);">
-                           
-                            <div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 283px; left: 16px; text-align: center;">Date</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 283px; left: 58px; text-align: center;">Ingredient</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 283px; left: 130px; text-align: center;">Product</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 283px; left: 189px; text-align: center;">Review</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 283px; left: 244px; text-align: center;">Forum</div>
-                          		  <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 283px; left: 297px; text-align: center;">Member</div>
-                            </div>
-                            
-                            <div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; top: 270px; left: 7px; text-align: right;">0</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; top: 202px; left: 7px; text-align: right;">5</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; top: 135px; left: 0px; text-align: right;">10</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; top: 68px; left: 0px; text-align: right;">15</div>
-                           		 <div class="flot-tick-label tickLabel" style="position: absolute; top: 1px; left: 0px; text-align: right;">20</div>
-                            </div>
-                            
-                            </div>
-                            <canvas class="flot-overlay" width="288" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 288px; height: 300px;"></canvas>
-                           	</div>
-                        </div>
-                    </div>
-		        </div>
+<div class="row">
+
+    <!-- begin col-6 -->
+    <div class="col-md-6">
+              <div class="panel panel-inverse" data-sortable-id="flot-chart-3">
+                  <div class="panel-heading">
+                      <div class="panel-heading-btn">
+                          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                      </div>
+                      <h4 class="panel-title">分頁瀏覽數</h4>
+                  </div>
+                  <div class="panel-body">
+                      <div id="bar-chart" class="height-sm"></div>
+                  </div>
+              </div>
+    </div>
+    <!-- end col-6 -->
+    
+</div>
+ <!-- end row -->
 
 <!-- //////////////////////////////////////////////////////////// -->
  <!-- **每頁不同的內容 end** -->   
@@ -237,9 +221,56 @@
 	<script src="/js/jquery-ui.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/bms/jquery.slimscroll.min.js"></script>
+	<script src="/js/bms/jquery.flot.min.js"></script>
+	<script src="/js/bms/chart-flot.demo.min.js"></script>
 	<script src="/js/bms/bms.js"></script>
 		<script>
 $(function(){
+	
+	$(document).ready(function() {
+		var indexNum=${pageVisitorBarChart.index};
+		var expdateNum=${pageVisitorBarChart.expdate};
+		var ingredientNum=${pageVisitorBarChart.ingredient};
+		var productNum=${pageVisitorBarChart.product};
+		var reviewNum=${pageVisitorBarChart.review};
+		var forumNum=${pageVisitorBarChart.forum};
+		var memberNum=${pageVisitorBarChart.member};
+		var contactNum=${pageVisitorBarChart.contact};
+		
+		var pages = [
+		 			[1, indexNum],
+		 			[2, expdateNum],
+		 			[3, ingredientNum],
+		 			[4, productNum],
+		 			[5, reviewNum],
+		 			[6, forumNum],
+		 			[7, memberNum],
+		 			[8, contactNum]
+		 		];
+		
+		$.plot($("#bar-chart"), [{data:pages, color:purple}], {
+			series: {
+                bars: {
+                    show: true,
+                    barWidth: .4,
+                    align: "center",
+                    fill: true,
+                    fillColor: purple,
+                    zero: true
+                }
+            },
+            xaxis: {
+                mode: "pages",
+                tickColor: "#ddd",
+                tickLength: 0
+            },
+            grid: {
+                borderWidth: 0
+            }
+		});
+		
+	});
+	
 	$("#insertNewIngredient").hide();
 	//功能1 跳出modal-----
 	$(".details").click(function (e){

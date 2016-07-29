@@ -69,20 +69,28 @@ public class BmsController {
 		}
 		double BounceRate=(Bounce/timeOnSiteDatas.size())*10000d;
 		dataMap.put("BounceRate",(Math.ceil(BounceRate)/100));
+		
 		//計算網站停留時間資料----------------------------------------------------
+		
 		String queryAvgTime="SELECT AVG([time_on_site]) From [timeonsite]";
 		List<BigInteger> resultList =manager.createNativeQuery(queryAvgTime).getResultList();
 		BigInteger bigId=resultList.get(0);
 		long avgTimeMs=bigId.longValue();
+		
 		SimpleDateFormat sdf=new SimpleDateFormat("00:mm:ss",Locale.US);
 		String avgTimeOnSite=sdf.format(new Date(avgTimeMs));		
 		dataMap.put("avgTimeOnSite", avgTimeOnSite);
+		
 		//計算瀏覽人數-------------------------------------------
+		
 		dataMap.put("visitors",timeOnSiteDatas.size());
 		model.addAttribute("dataMap", dataMap);
+		
 		//信件用--------------------------------------------
+		
 		List<Map<String, Object>> Mailresult=new ArrayList<Map<String, Object>>();
 		List<WebMail> webMails = webMailService.findAll();
+		
 		for(int i=0;i<webMails.size();i++){
 			Map<String, Object> resultMap=new HashMap<String, Object>();
 			Long memeberId=webMails.get(i).getWebMailSender();
@@ -98,7 +106,7 @@ public class BmsController {
 		}
 		
 		
-		
+		model.addAttribute("pageVisitorBarChart", timeOnSiteService.getPagesVisitorNum());
 		model.addAttribute("Mailresult",Mailresult);
 		return "/bms/bms";
 	}

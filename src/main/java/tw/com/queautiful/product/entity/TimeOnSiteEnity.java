@@ -1,10 +1,13 @@
 package tw.com.queautiful.product.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "TIMEONSITE")
@@ -21,7 +24,7 @@ private Long memberId;
 
 private String clientIp;
 
-
+private String pageUrlTrimmed; 
 
 
 
@@ -31,6 +34,42 @@ public String toString() {
 	return "TimeOnSiteEnity [id=" + id + ", timeOnSite=" + timeOnSite + ", pageUrl=" + pageUrl + ", memberId="
 			+ memberId + ", clientIp=" + clientIp + "]";
 }
+
+
+
+public String getPageUrlTrimmed() {
+	if(pageUrl != null){
+		String[] pageUrlArray = pageUrl.split("/");
+		if(pageUrlArray.length>3){
+		if(pageUrlArray[3].equalsIgnoreCase("fms")){
+			pageUrlTrimmed = "index";
+		}
+		}else{
+			pageUrlTrimmed = pageUrlArray[4];
+		}
+	}
+	return pageUrlTrimmed;
+}
+
+
+
+public void setPageUrlTrimmed(String pageUrlTrimmed) {
+	if(pageUrl != null){
+		String[] pageUrlArray = pageUrl.split("/");
+		if(pageUrlArray.length>3){
+			if(pageUrlArray[3].equalsIgnoreCase("fms")){
+				pageUrlTrimmed = "index";
+			}else{
+				pageUrlTrimmed = pageUrlArray[3];
+			}
+		}else{
+			pageUrlTrimmed = "index";
+		}
+	}
+	System.out.println(pageUrl);
+	this.pageUrlTrimmed = pageUrlTrimmed;
+}
+
 
 
 public String getClientIp() {
