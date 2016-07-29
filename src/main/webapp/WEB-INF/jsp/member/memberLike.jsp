@@ -283,7 +283,7 @@ h2, h4{
 				<div class="articleTime">
 					<h4>${item.articleTime}</h4>
 					<h4 class="articleType">${item.articleType}</h4>
-					<h4 class="info"><i class="fa fa-comments"></i> ${item.arepliesNum}</h4>
+					<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
 				</div>
 				<div class="articleContent">
 					<h2 class="articleTitle">${item.articleTitle}&nbsp;

@@ -259,7 +259,7 @@ h2, h4{
 				<div class="articleTime">
 					<h4>${item.articleTime}</h4>
 					<h4 class="articleType">${item.articleType}</h4>
-					<h4 class="info"><i class="fa fa-comments"></i> ${item.arepliesNum}</h4>
+					<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
 				</div>
 				<div class="articleContent">
 					<h2 class="articleTitle">${item.articleTitle}&nbsp;
@@ -290,7 +290,7 @@ h2, h4{
 
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
-
+<script type="text/javascript" src="/js/jquery.min.js"></script> 
 <script id="reviewTemplate" type="text/template">
 <div class="reviews col-lg-12 animated fadeIn">
 	<div class="reviewTime">
@@ -316,7 +316,7 @@ h2, h4{
 	<div class="articleTime">
 		<h4>_articleTime</h4>
 		<h4 class="articleType">_articleType</h4>
-		
+		<h4 class="info"><i class="fa fa-comments"></i> _arSize</h4>
 	</div>
 	<div class="articleContent">
 		<h2 class="articleTitle">_articleTitle&nbsp;
@@ -330,117 +330,125 @@ h2, h4{
 </script>		
 <script>
 $(function(){
-	var articleType;
-	
 	$('.subtabs>.subtab').click(function(){
-		console.log($(this).html());
+		console.log($(this).attr('value'));
 		articleType = $(this).html();
 		$('.subtabs>.selected').removeClass('selected');
 		$(this).addClass('selected');
 	});
 	
 	$(window).scroll(function(){
-		console.log($(window).scrollTop());
-		console.log($(window).height());
-		console.log($(document).height());
 		
 		if($(window).scrollTop() + $(window).height() >= $(document).height()){	
-			
+			if($('#tab-r').hasClass('active')){
+				
+			}
+			if($('#tab-a').hasClass('active')){
+				console.log(articlesPageNum);
+				var nextPage = parseInt($('#articlesPageNum').val())+1;
+				console.log("article next page: "+ nextPage);
+				loadArticleData(nextPage, articleType, direction);
+			}
 		}  /* scroll-bottom*/
 	}); /* onScroll */
 	
 	
-	var pageNum;
-	var articleType;
-	var sortProperty;
-	var direction;
+	function loadReviewData(){
+    	totalPages = $('#reviewsTotalPages').val();
+    	loadedPageNum = $('#reviewsPageNum').val();
+    	pageNum = parseInt(loadedPageNum)+1;
+    	console.log("totalPages: "+totalPages);
+    	console.log("loadedPageNum: "+loadedPageNum);
+    	console.log("pageNum: "+nextPageNum);
+    	
+    	if(loadedPageNum < totalPages){
+    	$.ajax({
+    		url: '/members/post/review/'+pageNum,
+			type: 'POST',
+			dataType: 'json',
+			contextType: 'application/json; charset=utf-8;',
+			success: function(response){
+				var result = response[0];
+				var reviews = result.reviews;
+				var reviewsPageNum = result.reviewsPageNum;
+				var reviewsTotalPages = result.reviewsTotalPages;
+				var products = result.products;
+				var member = result.member;
+				
+				$('#reviewsPageNum').val(reviewsPageNum);
+				$('#reviewsTotalPages').val(reviewsTotalPages);
+				
+				for(var i=0; i<reviews.length; i++){
+					console.log("prodId: "+reviews[i].prodId);
+					var reviewRating = reviews[i].reviewRating;
+					var dimand = '<i class="fa fa-diamond"></i>';
+					var rating = "";
+					for(var j=0; j<reviewRating; j++){
+						rating += dimand;
+					}
+					$($('#reviewTemplate').html()
+						.replace('_reviewTime', reviews[i].reviewTime)
+						.replace('_rating', rating)
+						.replace('_rewCollect', reviews[i].rewCollect)
+						.replace('_rcmNum', reviews[i].rcmNum)
+						.replace('_prodId', reviews[i].prodId)
+						.replace('_prodImg', products[i].prodImg)
+						.replace('_reviewTitle', reviews[i].reviewTitle)
+						.replace('_prodName', products[i].prodName)
+						.replace('_brandName', products[i].brandName)
+						.replace('_review', reviews[i].review)
+						.replace('_reviewId', reviews[i].reviewId))
+						.appendTo($('#review'));
+					
+				}
+			} /* success */
+    	});} /* ajax */
+	} /* loadReviewData */ 
 	
-	function loadData(){
-		if($('#tab-r').hasClass('active')){
-	    	var totalPages = $('#reviewsTotalPages').val();
-	    	var loadedPageNum = $('#reviewsPageNum').val();
-	    	var nextPageNum = parseInt(loadedPageNum)+1;
-	    	console.log("totalPages: "+totalPages);
-	    	console.log("loadedPageNum: "+loadedPageNum);
-	    	console.log("pageNum: "+nextPageNum);
-	    	if(loadedPageNum < totalPages){
+	
+	function loadArticleData(pageNum, articleType, direction){
+		var data= {"articlesPageNum": pageNum, "articleType": articleType, "direction": direction};
+		
+		var totalPages = $('#articlesTotalPages').val();
+    	var loadedPageNum = $('#articlesPageNum').val();
+    	
+    	if(loadedPageNum < totalPages){
 	    	$.ajax({
-	    		url: '/members/post/review/'+nextPageNum,
+	    		url: '/members/post/article/'+pageNum,
 				type: 'POST',
+				data: data,
 				dataType: 'json',
 				contextType: 'application/json; charset=utf-8;',
 				success: function(response){
 					var result = response[0];
-					var reviews = result.reviews;
-					var reviewsPageNum = result.reviewsPageNum;
-					var products = result.products;
+					var articles = result.articles;
+					var returnPagea = result.articlesPageNum;
+					var articlesTotalPages = result.articlesTotalPages;
 					var member = result.member;
 					
-					$('#reviewsPageNum').val(reviewsPageNum);
 					
-					for(var i=0; i<reviews.length; i++){
-						console.log("prodId: "+reviews[i].prodId);
-						var reviewRating = reviews[i].reviewRating;
-						var dimand = '<i class="fa fa-diamond"></i>';
-						var rating = "";
-						for(var j=0; j<reviewRating; j++){
-							rating += dimand;
-						}
-						$($('#reviewTemplate').html()
-							.replace('_reviewTime', reviews[i].reviewTime)
-							.replace('_rating', rating)
-							.replace('_rewCollect', reviews[i].rewCollect)
-							.replace('_rcmNum', reviews[i].rcmNum)
-							.replace('_prodId', reviews[i].prodId)
-							.replace('_prodImg', products[i].prodImg)
-							.replace('_reviewTitle', reviews[i].reviewTitle)
-							.replace('_prodName', products[i].prodName)
-							.replace('_brandName', products[i].brandName)
-							.replace('_review', reviews[i].review)
-							.replace('_reviewId', reviews[i].reviewId))
-							.appendTo($('#review'));
-						
+					console.log("return page: "+returnPagea);
+					console.log("return totalpage: "+articlesTotalPages);
+					
+					$('#articlesPageNum').attr("value",returnPagea);
+					$('#articlesTotalPages').val(articlesTotalPages);
+					
+					console.log("after val: "+ $('#articlesPageNum').val());
+					for(var i=0; i<articles.length; i++){
+						$($('#articleTemplate').html()
+							.replace('_articleTime', articles[i].articleTime)
+							.replace('_articleType', articles[i].articleType)
+							.replace('_arSize', articles[i].arSize)
+							.replace('_articleTitle', articles[i].articleTitle)
+							.replace('_articleId', articles[i].articleId)
+							.replace('_articleContent', articles[i].articleContent)
+							.replace('_articleId', articles[i].articleId))
+							.appendTo($('#article'));
 					}
 				} /* success */
 	    	});} /* ajax */
-	    }  /* if #tab-r active*/
-	    
-		if($('#tab-a').hasClass('active')){
-			var totalPages = $('#articlesTotalPages').val();
-	    	var loadedPageNum = $('#articlesPageNum').val();
-	    	var pageNum = parseInt(loadedPageNum)+1;
-	    	console.log("totalPages: "+totalPages);
-//  	    	console.log("loadedPageNum: "+loadedPageNum);
-//  	    	console.log("pageNum: "+pageNum);
- 	    	
- 	    	if(loadedPageNum < totalPages){
- 		    	$.ajax({
- 		    		url: '/members/post/article/'+pageNum,
- 					type: 'POST',
- 					dataType: 'json',
- 					contextType: 'application/json; charset=utf-8;',
- 					success: function(response){
- 						var result = response[0];
- 						var articles = result.articles;
- 						var articlesPageNum = result.articlesPageNum;
- 						var member = result.member;
- 						
- 						$('#articlesPageNum').val(articlesPageNum);
- 						
- 						for(var i=0; i<articles.length; i++){
- 							$($('#articleTemplate').html()
- 								.replace('_articleTime', articles[i].articleTime)
- 								.replace('_articleType', articles[i].articleType)
- 								.replace('_articleTitle', articles[i].articleTitle)
- 								.replace('_articleId', articles[i].articleId)
- 								.replace('_articleContent', articles[i].articleContent)
-								.replace('_articleId', articles[i].articleId))
-								.appendTo($('#article'));
-  						}
- 					} /* success */
- 		    	});} /* ajax */
-		} /* if tab-a active */
-	}
+ 			
+	} /* loadArticleData */
 	    	
 	
 	  /*============ BUTTON UP ===========*/

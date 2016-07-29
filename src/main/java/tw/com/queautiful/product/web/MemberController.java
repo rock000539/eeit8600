@@ -329,7 +329,7 @@ public class MemberController {
 		return articles.size();
 	}
 		
-	//review-post頁面
+	//review n article - post頁面
 	@RequestMapping("/post/{memberId}")
 	public String memberPostedReviewPage(@PathVariable Long memberId, Model model, HttpServletRequest request){
 		Member member = memberService.getById(memberId);
@@ -380,6 +380,7 @@ public class MemberController {
 		map.put("articles", pages.getContent());
 		map.put("articlesPageNum", pages.getNumber());
 		map.put("member", memberService.getById(memberId));
+		map.put("articlesTotalPages", pages.getTotalPages());
 		result.add(map);
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", pages.getSize()); //size of the slice
@@ -420,6 +421,7 @@ public class MemberController {
 		map.put("dates", dates);
 		map.put("products", products);
 		map.put("reviewsPageNum", pages.getNumber());
+		map.put("reviewsTotalPages", pages.getTotalPages());
 		map.put("member", memberService.getById(memberId));
 		result.add(map);
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
