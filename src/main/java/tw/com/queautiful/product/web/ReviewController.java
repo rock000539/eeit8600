@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hazelcast.hibernate.local.Timestamp;
+
 
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Product;
