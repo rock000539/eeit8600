@@ -87,8 +87,9 @@ public class ArticleService {
 		for (Article temp : a_list) {
 			article = new ArticleListFms();
 			BeanUtils.copyProperties(temp, article);
-			Integer arSize = temp.getAreplies().size();
-			article.setArSize(arSize);
+//			Integer arSize = temp.getAreplies().size();
+			Integer arSize = temp.getArSize();
+//			article.setArSize(arSize);
 			if(arSize!=0){
 				ArticleReply lastPost = temp.getAreplies().get(arSize-1);
 				article.setLastPost(lastPost);
