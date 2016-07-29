@@ -40,6 +40,7 @@ import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
@@ -165,6 +166,9 @@ public class MemberController {
 		Member member = memberService.getById(memberId);
 		Product product = productService.getById(prodId);
 		Set<Product> products = member.getProductSavedByMember();
+		if(products.contains(product)){
+			return false;
+		}
 		products.add(product);
 		member.setProductSavedByMember(products);
 		memberService.update(member);
@@ -265,6 +269,9 @@ public class MemberController {
 		log.debug("memberId {} saved review {}", memberId.toString(), reviewId.toString());
 		Set<Review> reviews = member.getReviewsSavedByMember();
 		Review review = reviewService.getById(reviewId);
+		if(reviews.contains(review)){
+			return false;
+		}
 		reviews.add(review);
 		member.setReviewsSavedByMember(reviews);
 		memberService.update(member);
@@ -295,6 +302,9 @@ public class MemberController {
 		Member member = memberService.getById(memberId);
 		Set<Article> articles = member.getArticlesSavedByMember();
 		Article article = articleService.getById(articleId);
+		if(articles.contains(article)){
+			return false;
+		}
 		articles.add(article);
 		member.setArticlesSavedByMember(articles);
 		memberService.update(member);
@@ -327,7 +337,6 @@ public class MemberController {
 		Page<Review> pages = 
 				memberService.getReviewsPaging("", memberId, 0, null, null);
 		List<Review> reviews = pages.getContent();
-//			List<String> dates = formatDate(reviews);
 		
 		model.addAttribute("reviews", pages.getContent());
 		model.addAttribute("reviewsPageNum", pages.getNumber());

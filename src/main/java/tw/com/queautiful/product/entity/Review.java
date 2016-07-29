@@ -55,6 +55,9 @@ public class Review {
 	@Transient
 	private Long rcmId;
 	
+	@Transient
+	private Integer rcmNum;
+	
 	@ManyToMany(mappedBy="reviewsSavedByMember")
 	@JsonIgnore
 	private Set<Member> memberSave;
@@ -185,8 +188,28 @@ public class Review {
 			reviewCMs.setReview(this);
 		}
 	}
-
 	
+	public Long getRcmId() {
+		return rcmId;
+	}
+
+	public void setRcmId(Long rcmId) {
+		this.rcmId = rcmId;
+	}
+
+	public Integer getRcmNum() {
+		if(reviewCMs != null){
+			rcmNum = reviewCMs.size();
+		}else{
+			rcmNum = 0;
+		}
+		return rcmNum;
+	}
+
+	public void setRcmNum(Integer rcmNum) {
+		this.rcmNum = rcmNum;
+	}
+
 	public String getReviewTitle() {
 		return reviewTitle;
 	}
