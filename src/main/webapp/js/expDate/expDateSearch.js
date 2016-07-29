@@ -96,23 +96,23 @@
 					);
 			
 			var BatchCodeinformations=$("#information p");
-			$("#information p:gt(0)").hide();
-			var count=0;
+			$("#information div:gt(1)").hide();
+			var count=1;
 			setInterval(function(){
 				
-				var tearget=$("#information p:eq("+count+")");
+				var tearget=$("#information div:eq("+count+")");
 				
-				$("#information p:eq("+count+")").hide("Fade" ,"swing","slow",callback());
+				$("#information div:eq("+count+")").hide("blind" ,"easeInQuart",'2500',callback());
 				count++;
-				if(count==4){
-					count=0;
+				if(count==5){
+					count=1;
 					}
 			},7000);
 		    function callback() {
-		        if(count<3){
-		        $("#information p:eq("+(count+1)+")").show("Fade" ,"swing","slow");
+		        if(count<4){
+		        $("#information div:eq("+(count+1)+")").show("blind" ,"easeInQuart",'2500');
 		        }else{
-		        $("#information p:eq("+0+")").show("Fade" ,"swing","slow");
+		        $("#information div:eq("+1+")").show("blind" ,"easeInQuart",'2500');
 		        }
 		    };
 			
