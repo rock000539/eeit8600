@@ -66,6 +66,14 @@ public class Article {
 	@Column(name = "ARTICLEREPORT") 
 	private Integer articleReport;
 	
+	//回覆數
+	@Transient
+	private Integer arSize;
+
+	//留言數
+	@Transient
+	private Integer acmsSize;
+
 	//文章收藏者
 	@ManyToMany(mappedBy = "articlesSavedByMember") 
 	@JsonIgnore
@@ -183,6 +191,30 @@ public class Article {
 
 	public void setArticleReport(Integer articleReport) {
 		this.articleReport = articleReport;
+	}
+
+	public Integer getArSize() {
+		if(this.getAreplies()!=null){			
+			return this.getAreplies().size();
+		}else {
+			return 0 ;
+		}
+	}
+
+	public void setArSize(Integer arSize) {
+		this.arSize = arSize;
+	}
+
+	public Integer getAcmsSize() {
+		if(this.getAcms()!=null){			
+			return this.getAcms().size();
+		}else {
+			return 0 ;
+		}
+	}
+
+	public void setAcmsSize(Integer acmsSize) {
+		this.acmsSize = acmsSize;
 	}
 
 	public Member getMember() {
