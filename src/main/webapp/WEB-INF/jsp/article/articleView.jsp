@@ -28,13 +28,6 @@
 </head>
 
 <style>
-		table{
-			border:1px solid black;
-		}
-		th,td{
-		border:1px solid black;
-		}
-		
 		.bgcolor{
 			background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
 		 	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
@@ -82,6 +75,14 @@
 			height: 80px;
 			overflow: hidden;
 		}
+		
+		.msgAuthordiv {
+			position: relative;
+			width: 25px;
+			height: 25px;
+			overflow: hidden;
+		}
+
 		/*橫*/
 		.authordiv img {
 			position: absolute;
@@ -98,8 +99,7 @@
 			width: 100%;
 			height: auto;
 		}
-		
-		
+				
 		/* ==============
 		   Post Area
 		================= */
@@ -112,6 +112,7 @@
 		 	border-radius:4px;
 		 	transition: all 0.5s ease-in-out;
 		}
+		
 		.post:hover{
 		/* 	border:#ccd3ff solid 2px; */
 			border-top:#727CB6 solid 3px;
@@ -162,6 +163,32 @@
 		.content ul > li{
 			font-size:16px;
 			margin-left:20px;
+		}
+		
+ 		.content ul > li:first-child{
+ 			cursor:pointer;  /* for comment+num*/
+ 		}
+ 				
+ 		/* ==============
+		   Comment Area
+		================= */
+		.panel.panel-default{
+			border-top: none;
+			border-bottom: none;
+		}
+		
+		.panel>.list-group:first-child .list-group-item:first-child, 
+		.panel>.panel-collapse>.list-group:first-child .list-group-item:first-child{
+			border-top: 1px solid #4cae4c;
+		}
+		
+		.panel-group .panel-footer{
+			border-bottom: 1px solid #ddd;		
+		}
+		
+		.panel>.panel-collapse>.list-group .list-group-item:hover {
+			background:#f5f5f5;
+			border-width: 0px 0;
 		}
 		
 		/* ==============
@@ -247,7 +274,7 @@
 		    content: none;
 		}
 		
-		#addForm button{
+		#replyForm button{
 			margin:0 5px;
 		}
 		
@@ -294,54 +321,8 @@
 			</ul>
 		</div>
 		
-		<div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
-<!--                 <div class="panel panel-default"> -->
-<!--                     <div class="panel-heading button_outer_rounded" role="tab" id="heading"> -->
-<!--                         <h4 class="panel-title"> -->
-<!--                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="true" aria-controls="collapseOne"> -->
-<!--                                 Stunning Design & Countless Options -->
-<!--                             </a> -->
-<!--                         </h4> -->
-<!--                     </div> -->
-<!--                     <div id="collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading"> -->
-<!--                         <div class="panel-body"> -->
-<!--                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue lorem ut augue aliquam, ut rutrum nulla eleifend. Nunc aliquam suscipit leo, in mattis massa ullamcorper sed. Pellentesque dictum erat at eros egestas, vel convallis nibh pharetra. Class aptent taciti sociosqu ad litora torquent. -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-        		<div class="panel panel-default">
-                    <div class="panel-heading button_outer_rounded" role="tab" id="heading1">
-                        <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapseTwo">
-                                Tons of customization options
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
-                        <div class="panel-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue lorem ut augue aliquam, ut rutrum nulla eleifend. Nunc aliquam suscipit leo, in mattis massa ullamcorper sed. Pellentesque dictum erat at eros egestas, vel convallis nibh pharetra. Class aptent taciti sociosqu ad litora torquent.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading button_outer_rounded" role="tab" id="heading2">
-                        <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapseThree">
-                                Ease of Content creation and modification
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
-                        <div class="panel-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue lorem ut augue aliquam, ut rutrum nulla eleifend. Nunc aliquam suscipit leo, in mattis massa ullamcorper sed. Pellentesque dictum erat at eros egestas, vel convallis nibh pharetra. Class aptent taciti sociosqu ad litora torquent.
-                        </div>
-                    </div>
-                </div>
-        		        
-		</div>
-		
 		<!-- start article -->
-		<div class="col-lg-12 post">
+		<div class="col-lg-12 post" style="margin-bottom:0px; border-top:#727CB6 solid 3px;">
 			<div class="postprofile col-lg-3">
 				<dl>
 					<dt>
@@ -351,7 +332,7 @@
 						<h3><a href="#">${article.nickname}</a></h3>
 						
 					</dt>
-					<dd>Post:</dd>
+					<dd>Post:${article.member.articlesWorteByAuthor.size()}</dd>
 					<dd>Joined:${article.member.memberRegiDate}</dd>
 				</dl>			
 			</div>
@@ -361,7 +342,7 @@
 					<h2>【${article.articleType}】${article.articleTitle}</h2>
 					<ul>
 						<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
-						<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
+						<li><a href="#collapse1" class="btn-success" title="comments" data-toggle="collapse" data-target="#collapse1"><i class="fa fa-comments-o"></i></a></li>
 						<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 						<c:if test="${article.memberId==memberId}">
 							<li><a href="/articles/edit/${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
@@ -373,33 +354,52 @@
 				<div class="content">
 					${article.articleContent}
 					<ul>
-						<li style="color:#4cae4c;"><i class="fa fa-comments-o"></i><span  id="acms_num">&nbsp;${article.acmsSize}</span></li>
+						<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapse1">
+<!-- 							<a data-toggle="collapse" href="#collapse1"> -->
+							<i class="fa fa-comments-o"></i><span  id="acms_num">&nbsp;${article.acmsSize}</span>
+<!-- 							</a> -->
+						</li>
 						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span  id="ar_num">&nbsp;${article.arSize}</span></li>
 						<li style="color:#ff007f;"><i class="fa fa-heart"></i><span  id="memberSave_num">&nbsp;${article.memberSave.size()}</span></li>
 					</ul>
 				</div>
-			</div>
-			
-			<div class="col-lg-12">
-				<div id="articleMsgArea">
-					<c:forEach var="acm" items="${article.acms}">
-					${acm.member.nickname}:${acm.acmMsg}  time:${acm.acmTime}<br/>
-					</c:forEach>
-				</div>
-	
-				<form id="leaveMsg">
-					<input type="hidden" name="memberId" value="${memberId}"/>
-					<input type="hidden" name="articleId" value="${article.articleId}"/>
-					<input type="hidden" name="acmShow" value="true"/>
-					<input type="hidden" name="acmReport" value="0"/>
-					<textarea name="acmMsg" class="form-control" placeholder="Leave Some Message"></textarea>
-					<button class="btn btn-default btn-sm" id="btn_leaveMsg" type="button" onclick="save_msg($(this))"><i class="fa fa-check fa-fw"></i>&nbsp;OK</button>
-				</form>
-			</div>
-			
+			</div>			
 		</div>
 		
+		<!-- start articleComment -->
+		<div class="col-lg-12" style="padding:0px;">
+			<div class="panel-group">
+				<div class="panel panel-default">
+			      	<div id="collapse1" class="panel-collapse collapse">
+			        <ul class="list-group" id="articleCMsArea" >
+			        	<c:forEach var="acm" items="${article.acms}">
+				        	<li class="list-group-item">
+					        	<div class="msgAuthordiv authordiv img-circle" style="float:left;">
+									<img  class="authorimg" src="/members/show?memberId=${acm.memberId}">
+								</div>
+					        	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">${acm.nickname}：</span>
+					        	<span>${acm.acmMsg}</span>  
+					        	<span style="float:right;">${fn:substring(acm.acmTime,0,19)}<a href="#" style="margin-left:20px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a></span>			        	
+				        	</li>
+						</c:forEach>
+			        </ul>
+			        <div class="panel-footer">
+			        	<form id="leaveMsg">
+							<input type="hidden" name="memberId" value="${memberId}"/>
+							<input type="hidden" name="articleId" value="${article.articleId}"/>
+							<input type="hidden" name="acmShow" value="true"/>
+							<input type="hidden" name="acmReport" value="0"/>
+							<div class="col-lg-9"></div>
+							<textarea name="acmMsg" id="acmMsg" class="form-control" placeholder="Write a comment" rows="1"></textarea>
+						</form>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+		</div>
+		<!-- end of articleComment -->
 		<!-- end of article -->
+		
 		
 		<!-- start articleReply -->
 		<div id="articleReply">
@@ -440,7 +440,7 @@
 		</c:forEach>
 		</div>
 		<!-- end of articleReply -->
-		
+
 		<!-- Reply form-->
 		<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;" id="replyarea">
@@ -449,7 +449,7 @@
 			            </div>
 			        </div>
 		</section>
-		<FORM id="addForm">
+		<FORM id="replyForm">
 		<div class="row">
 			<div class="form-group">
 				<div class="col-lg-12">
@@ -559,6 +559,17 @@
 	</div>		
 	</script>
 	
+	<script id="article_cm" type="text/template">
+	<li class="list-group-item">
+       	<div class="msgAuthordiv authordiv img-circle" style="float:left;">
+			<img  class="authorimg" src="/members/show?memberId=_memberId">
+		</div>
+       	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">_nickname：</span>
+       	<span>_acmMsg</span>  
+       	<span style="float:right;">_acmTime<a href="#" style="margin-left:20px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a></span>			        	
+    </li>
+	</script>
+	
 	<script>
 	$(function(){
 		/* ============ USER IMG =========== */
@@ -571,7 +582,7 @@
 				temp.removeClass('portrait');
 			}
 		}
-		console.log(list);
+// 		console.log(list);
 
 		//未登入不可reply
 		if('${memberId}' == ''){
@@ -584,8 +595,8 @@
 			$('#btn_reply').attr('disabled',false);
 		}
 		
-		//驗證
-		$('#addForm').validate({
+		//replyform驗證
+		$('#replyForm').validate({
 			onfocusout: function (element) {
 		        $(element).valid();
 		    },
@@ -597,13 +608,15 @@
 			},//end of messages			
 		});
 		
+		
+		// 文章回覆
 		$('#confirm').on('click',function(){
 			$('#arContent').val(CKEDITOR.instances['arContent'].getData());
 			$.ajax({
 					url:'/articlereplies/insert',
 					type:'post',
 					contentType:'application/json;charset=UTF-8',
-					data:JSON.stringify($('#addForm').serializeObject()),
+					data:JSON.stringify($('#replyForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
 						console.log(data);
@@ -617,7 +630,7 @@
 										.replace('_arTime',data.arTime)
 										.replace('_arContent',data.arContent))
 										.appendTo($('#articleReply'));
-						$('#ar_num').text(parseInt($('#ar_num').text())+1);
+						$('#ar_num').text(" " + (parseInt($('#ar_num').text()) + 1));
 	 				},
 	 				error:function(x,y,z){
 	 					console.log('x-->'+x);
@@ -626,6 +639,14 @@
 	 				}
 				});		
 			
+		}); //end of 文章回覆
+		
+		// 留言 (keydown觸發事件 → 驗證  → 呼叫 save_msg())	
+		$('textarea[name="acmMsg"]').keydown(function(event){ 
+		    var keyCode = (event.keyCode ? event.keyCode : event.which);  
+		    if($('textarea[name="acmMsg"]').val().trim()!=""  && keyCode == 13){
+			    save_msg($(this));
+		    }
 		});
 		
 		$.fn.serializeObject = function()
@@ -655,9 +676,7 @@
 			type:'POST',
 			dataType:'json',
 			success:function(result){
-				console.log(result);
-// 				console.log('${article.memberSave.size()}'+1);
-				if(result){
+				if(result){  //true-->收藏成功
 					swal({
 						type: 'success',
 						text: '<h1 style="line-height:0px;">收藏成功!</h1>',
@@ -665,9 +684,8 @@
 						customClass: 'swal',
 						timer: 1500,
 					});
-					$('#memberSave_num').text(" "+(parseInt($('#memberSave_num').text())+1));
-// 					console.log(parseInt($('#memberSave_num').text())+1);
-				} else {
+					$('#memberSave_num').text(" " + (parseInt($('#memberSave_num').text()) + 1));
+				} else {  //false-->收藏失敗
 					swal({
 						type: 'info',
 						text: '<h1 style="line-height:0px;">已經收藏過囉!</h1>',
@@ -682,26 +700,30 @@
 	
 	// 留言
 	function save_msg(a){
-		console.log(JSON.stringify($('#leaveMsg').serializeObject()));
+		console.log(a);
+// 		console.log(JSON.stringify($('#leaveMsg').serializeObject()));
 		$.ajax({
 			url:'/articleCMs/insert',
 			type:'post',
 			contentType:'application/json;charset=UTF-8',
 			data:JSON.stringify($('#leaveMsg').serializeObject()),
 			dataType:'json',
-			success:function(data){
-				console.log(data);
-				var name = data.nickname;
-				var Msg = data.acmMsg;
-				var time = data.acmTime;
-				$('#articleMsgArea').append(name+":"+Msg+" time:"+time+"<br/>");
+			success:function(result){
+// 				console.log(result);
+				$($('#article_cm').html()
+								.replace('_memberId',result.memberId)
+								.replace('_nickname',result.nickname)
+								.replace('_acmMsg',result.acmMsg)
+								.replace('_acmTime',result.acmTime)
+								).appendTo($('#articleCMsArea'));
 				$('#acms_num').text(" "+(parseInt($('#acms_num').text())+1));
+				$('textarea[name="acmMsg"]').val("");
 			}
 		});
 	}// end of 留言 
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
+		if($('#replyForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Title：'+ $(':text[name=arTitle]').val() +'</p>')		
