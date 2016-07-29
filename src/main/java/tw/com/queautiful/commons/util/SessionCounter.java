@@ -40,32 +40,9 @@ public class SessionCounter implements HttpSessionListener, ServletRequestListen
         log.info("SessionCounter doGet!");
         response.setContentType(CONTENT_TYPE);
         HttpSession session = request.getSession();
-		Cookie[] cookies=request.getCookies();
-		
-		System.out.println("p1");
-	       if(cookies != null) {
-	    	   System.out.println("p2");
-	    	   for(Cookie cookie : cookies) {
-	    		   System.out.println("p3");
-	                String name = cookie.getName();
-	                String value = cookie.getValue();
-	                if("qutie".equals(name) && "qutie".equals(value)) {
-	                	System.out.println("pAA");
-	                }else{
-	                	System.out.println("p4");
-	                	setCrunchifyCookie(request,response);
-	                }
-	            }
-	        }
+
         
     }
-    
-	public void setCrunchifyCookie(HttpServletRequest request, HttpServletResponse response){
-	    Cookie crunchifyCookie = new Cookie("qutie", "qutie");
-	    crunchifyCookie.setMaxAge(6 * 4 * 7 * 24 * 60 * 60);
-	    response.addCookie(crunchifyCookie);
-	    System.out.println("p5");
-		}
 
     public void destroy() {
         log.info("SessionCounter destroy!");
@@ -78,6 +55,7 @@ public class SessionCounter implements HttpSessionListener, ServletRequestListen
 
     public void requestInitialized(ServletRequestEvent sre){
         request=(HttpServletRequest)sre.getServletRequest();
+       
 //        log.info("SessionCounter requestInitialized!");
         
     } 
