@@ -1,11 +1,14 @@
 package tw.com.queautiful.product.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.queautiful.commons.util.RealIpUtils;
 import tw.com.queautiful.product.entity.TimeOnSiteEnity;
 import tw.com.queautiful.product.service.TimeOnSiteService;
 
@@ -16,7 +19,7 @@ public class TimeOnSiteController {
 	private TimeOnSiteService timeOnSiteService;
 	@RequestMapping("/record")
 	@ResponseBody
-	public String record(Integer timeOnSiteStr,String pageUrl,Long memberId){
+	public String record(Integer timeOnSiteStr,String pageUrl,Long memberId,HttpServletRequest req){
 		TimeOnSiteEnity timeOnSiteEnity=new TimeOnSiteEnity();
 		
 		timeOnSiteEnity.setPageUrl(pageUrl);
@@ -27,6 +30,10 @@ public class TimeOnSiteController {
 		}
 		long timeOnSite=Long.valueOf(timeOnSiteStr);
 		timeOnSiteEnity.setTimeOnSite(timeOnSite);
+		
+//		String realIp=RealIpUtils.getRealIpAddr(req);
+//		timeOnSiteEnity.setClientIp(realIp);
+		
 		timeOnSiteService.insert(timeOnSiteEnity);
 		return "";
 	}
