@@ -187,7 +187,7 @@
 <div class="row">
 
     <!-- begin col-6 -->
-    <div class="col-md-6">
+    <div class="col-md-8">
               <div class="panel panel-inverse" data-sortable-id="flot-chart-3">
                   <div class="panel-heading">
                       <div class="panel-heading-btn">
@@ -248,8 +248,18 @@ $(function(){
 		 			[8, contactNum]
 		 		];
 		
+		var categories = [
+		            [1, "Index"],
+		            [2, "ExpDate"],
+		            [3, "Ingredient"],
+		            [4, "Product"],
+		            [5, "Review"],
+		            [6, "Forum"],
+		            [7, "Member"],
+		            [8, "Contact"]];
+		
 		$.plot($("#bar-chart"), [{data:pages, color:purple}], {
-			series: {
+			series: {  //類型: bars (直條圖)
                 bars: {
                     show: true,
                     barWidth: .4,
@@ -260,9 +270,10 @@ $(function(){
                 }
             },
             xaxis: {
-                mode: "pages",
+                mode: "categories",
+                ticks: categories,
                 tickColor: "#ddd",
-                tickLength: 0
+                tickLength: 10
             },
             grid: {
                 borderWidth: 0
