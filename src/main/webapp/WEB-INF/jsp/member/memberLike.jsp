@@ -236,9 +236,9 @@ h2, h4{
 	    	<div class="subject">
 				<p id="count-review"><i class="fa fa-heart"></i> LIKED REVIEWS (${fn:length(reviews)})</p>
 			</div>
-			<div class="subtab">
+			<div class="subtabs">
 				
-			</div> <!-- subtab -->
+			</div> <!-- subtabs -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12" dataId=${item.reviewId}>
 	        <div class="review-all">
@@ -248,7 +248,7 @@ h2, h4{
 					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
-	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>
+	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rcmNum}</div>
 	        	</div>
 		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
 		        <div class="reviewContent">
@@ -276,14 +276,14 @@ h2, h4{
         	<div class="subject">
 				<p id="count-article"><i class="fa fa-heart"></i> LIKED ARTICLES (${fn:length(articles)})</p>
 			</div>
-			<div class="subtab">
-			</div> <!-- subtab -->
+			<div class="subtabs">
+			</div> <!-- subtabs -->
 			<c:forEach var="item" items="${articles}" varStatus="vs">
 			<div class="articles col-lg-12" dataId="${item.articleId}">
 				<div class="articleTime">
 					<h4>${item.articleTime}</h4>
 					<h4 class="articleType">${item.articleType}</h4>
-					
+					<h4 class="info"><i class="fa fa-comments"></i> ${item.arepliesNum}</h4>
 				</div>
 				<div class="articleContent">
 					<h2 class="articleTitle">${item.articleTitle}&nbsp;

@@ -209,9 +209,9 @@ h2, h4{
 	    	<div class="subject">
 				<p>POSTED REVIEWS (${reviewsTotalElement})</p>
 			</div>
-			<div class="subtab">
-				
-			</div> <!-- subtab -->
+			<div class="subtabs">
+			
+			</div> <!-- subtabs -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
 	        	<div class="reviewTime">
@@ -220,7 +220,7 @@ h2, h4{
 					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
-	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rewCollect}</div>
+	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rcmNum}</div>
 	        	</div>
 		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
 		        <div class="reviewContent">
@@ -243,14 +243,23 @@ h2, h4{
         	<div class="subject">
 				<p>POSTED ARTICLES (${articlesTotalElement})</p>
 			</div>
-			<div class="subtab">
-			</div> <!-- subtab -->
+			<div class="subtabs">
+				<span value="null" class="subtab selected">ALL (${articlesTotalElement})</span>
+				<span class="sep"> · </span>
+				<span value="NEWS" class="subtab">NEWS</span>
+				<span class="sep"> · </span>
+				<span value="SOLICIT" class="subtab">SOLICIT</span>
+				<span class="sep"> · </span>
+				<span value="QUESTION" class="subtab">QUESTION</span>
+				<span class="sep"> · </span>
+				<span value="CHAT" class="subtab">CHAT</span>
+			</div> <!-- subtabs -->
 			<c:forEach var="item" items="${articles}" varStatus="vs">
 			<div class="articles col-lg-12">
 				<div class="articleTime">
 					<h4>${item.articleTime}</h4>
 					<h4 class="articleType">${item.articleType}</h4>
-					
+					<h4 class="info"><i class="fa fa-comments"></i> ${item.arepliesNum}</h4>
 				</div>
 				<div class="articleContent">
 					<h2 class="articleTitle">${item.articleTitle}&nbsp;
@@ -288,7 +297,7 @@ h2, h4{
 		<span>_reviewTime</span>
 		<div class="rating">_rating</div>
 		<div class="info"><i class="fa fa-heart"></i> _rewCollect
-			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rewCollect</div>
+			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rcmNum</div>
 	</div>
 	<div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/_prodId">
 		<img src="/products/show?prodImg=_prodImg"/></a></div>
@@ -321,21 +330,42 @@ h2, h4{
 </script>		
 <script>
 $(function(){
+	var articleType;
+	
+	$('.subtabs>.subtab').click(function(){
+		console.log($(this).html());
+		articleType = $(this).html();
+		$('.subtabs>.selected').removeClass('selected');
+		$(this).addClass('selected');
+	});
+	
 	$(window).scroll(function(){
 		console.log($(window).scrollTop());
 		console.log($(window).height());
 		console.log($(document).height());
-	if($(window).scrollTop() + $(window).height() >= $(document).height()){	
+		
+		if($(window).scrollTop() + $(window).height() >= $(document).height()){	
+			
+		}  /* scroll-bottom*/
+	}); /* onScroll */
+	
+	
+	var pageNum;
+	var articleType;
+	var sortProperty;
+	var direction;
+	
+	function loadData(){
 		if($('#tab-r').hasClass('active')){
 	    	var totalPages = $('#reviewsTotalPages').val();
 	    	var loadedPageNum = $('#reviewsPageNum').val();
-	    	var pageNum = parseInt(loadedPageNum)+1;
+	    	var nextPageNum = parseInt(loadedPageNum)+1;
 	    	console.log("totalPages: "+totalPages);
 	    	console.log("loadedPageNum: "+loadedPageNum);
-	    	console.log("pageNum: "+pageNum);
+	    	console.log("pageNum: "+nextPageNum);
 	    	if(loadedPageNum < totalPages){
 	    	$.ajax({
-	    		url: '/members/post/review/'+pageNum,
+	    		url: '/members/post/review/'+nextPageNum,
 				type: 'POST',
 				dataType: 'json',
 				contextType: 'application/json; charset=utf-8;',
@@ -360,7 +390,7 @@ $(function(){
 							.replace('_reviewTime', reviews[i].reviewTime)
 							.replace('_rating', rating)
 							.replace('_rewCollect', reviews[i].rewCollect)
-							.replace('_rewCollect', reviews[i].rewCollect)
+							.replace('_rcmNum', reviews[i].rcmNum)
 							.replace('_prodId', reviews[i].prodId)
 							.replace('_prodImg', products[i].prodImg)
 							.replace('_reviewTitle', reviews[i].reviewTitle)
@@ -374,7 +404,6 @@ $(function(){
 				} /* success */
 	    	});} /* ajax */
 	    }  /* if #tab-r active*/
-	    
 	    
 		if($('#tab-a').hasClass('active')){
 			var totalPages = $('#articlesTotalPages').val();
@@ -410,12 +439,8 @@ $(function(){
   						}
  					} /* success */
  		    	});} /* ajax */
- 	    	
-		}
-	}  /* scroll-bottom*/
-	}); /* onScroll */
-	
-	
+		} /* if tab-a active */
+	}
 	    	
 	
 	  /*============ BUTTON UP ===========*/
@@ -434,6 +459,8 @@ $(function(){
    });
 
 });
+	
+
 </script>
 </body>
 </html>

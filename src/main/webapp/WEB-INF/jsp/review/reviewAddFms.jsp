@@ -53,7 +53,7 @@ html { height: 100%;}
 }
 
 #wrapper.toggled {
-    padding-left: 140px;
+    padding-left: 70px; /*main往右多少*/
 }
 
 #sidebar-wrapper {
@@ -546,7 +546,7 @@ select {
                 <li id="prodImgLi">
                     <a >
                         <div class="row">
-							<img id="prodImg" class="js-example-basic-single" alt="prodImg" style="width: auto;height: 120px;margin-left: 30px"></select>
+							<img id="prodImg" class="js-example-basic-single" alt="prodImg" style="width: auto;height: 120px;margin-left: 30px">
 						</div>
                     </a>
                 </li>
@@ -588,21 +588,34 @@ select {
 						<input type="hidden" name="rewCollect" value="0"/>
 						<input type="hidden" name="reviewShow" value="true"/>
 						<input type="hidden" name="reviewReport" value="0"/>
-						<h3 style="margin:0;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="">
+									<i class="fa fa-search" aria-hidden="true">
+									</i>&nbsp;請先找到您要發表心得的產品唷
+								</button>
+								
+								<!-- 評分 -->
+								<h3 style="margin:0;padding-bottom: 0;color: #ff7080;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;評分</h3>
+								<div class="review-uc-diamond">
+								    <ul class="urcosme-score-display">
+								        <li id="d1"  class="fa fa-diamond diamond" aria-hidden="true"/>
+								        <li id="d2"  class="fa fa-diamond diamond" aria-hidden="true"/>
+								        <li id="d3"  class="fa fa-diamond diamond" aria-hidden="true"/>
+								        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
+								        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
+								    </ul>
+								    <div id="p1" class="review-rating" name="reviewRating"  style="margin:15px 0 5px 15px;">1~5分，由你決定!</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="row" style="border: 1px solid red;width: 200px;height: 270px;float:right;">
+									<img id="prodImgMain" class="js-example-basic-single" style="max-width: 300px;max-height: 380px;width: auto;height: auto;margin-left: 25px;overflow:hidden;　">
+								</div>
+							</div>
+							
+						<h3 style="margin:15px 0 5px 15px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
 						<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';"/>
 <!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
-						<!-- 評分 -->
-						<h3 style="margin:0;padding-bottom: 0;color: #ff7080;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;評分</h3>
-						<div class="review-uc-diamond">
-						    <ul class="urcosme-score-display">
-						        <li id="d1"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d2"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d3"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						    </ul>
-						    <b id="p1" class="review-rating" name="reviewRating">1~5分，由你決定!</b>
-						</div>
 					</div>
 					
 					<div class="col-lg-4 col-md-4 col-sm-4">
@@ -637,7 +650,7 @@ select {
 				<div class="form-group">
 					<div class="col-lg-12 hasbutton">
 						<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
-						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location='/articles/listfms'"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
+						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
 					</div>
 				</div>
 			</div>		
@@ -714,6 +727,7 @@ select {
 	$('#prodImg').hide();
 	$('#prodImgLi').hide();
 	$('#check').hide();
+// 	$('#prodImgMain').hide();
 	
 	// select-brand init
 	$('#sbrand').select2({
@@ -754,16 +768,22 @@ select {
 	
 	
 	$('#sprod').on('select2:select', function (evt) {
-
-		if($(this).val() > 0) {
+		var prodNum=$(this).val();
+		if(prodNum > 0) {
 			// show img
 			$('#prodImgLi').show();
 			$('#prodImg').show()
-						.attr("src","/reviews/showProd?prodId="+$(this).val());
+						.attr("src","/reviews/showProd?prodId="+prodNum);
 			$('#check').show();
-			
+			$('#check').on('click',function(){
+				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
+			})
 		}
 	});
+	
+// 	$('#check').on('click',function(){
+		
+// 	})
 			
 			
 // 	$('#reviewImg').on('click',function(){

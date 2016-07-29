@@ -122,3 +122,34 @@
 .subject i{
 	color: #FF1E76;
 }
+.subject p{
+	margin:0;
+}
+.subtabs{
+	color: #000;
+    background-color: transparent;
+    display: block;
+}
+.subtabs .subtab {
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #a9a9a9;
+    padding: 0 2px;
+    padding-bottom: 25px;
+    height: 12px;
+    font-size: 12px;
+    line-height: 22px;
+    cursor: pointer;
+}
+.subtabs .subtab.selected, .subtabs .subtab:hover {
+    color: #000;
+    background-color: transparent;
+}
+.sep{
+	letter-spacing: 1.3px;
+	color: #a9a9a9;
+}
+.tab-content{
+	padding: 0px;
+}

@@ -310,16 +310,16 @@
 						<c:if test="${article.memberId==memberId}">
 							<li><a href="/articles/edit/${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 						</c:if>
-						<li><a href="/members/like/article/insert?articleId=${article.articleId}" class="btn-info btn-like" title="like"><i class="fa fa-heart"></i></a></li>
+						<li><a class="btn-info btn-like" title="like" onclick="like_article(${article.articleId})"><i class="fa fa-heart"></i></a></li>
 					</ul>
 					<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)}</small>
 				</div>
 				<div class="content">
 					${article.articleContent}
 					<ul>
-						<li style="color:#4cae4c;"><i class="fa fa-comments-o"></i>&nbsp;${article.acms.size()}</li>
-						<li style="color:#ff9600;"><i class="fa fa-reply"></i>&nbsp;${article.areplies.size()}</li>
-						<li style="color:#ff007f;"><i class="fa fa-heart"></i>&nbsp;${article.memberSave.size()}</li>
+						<li style="color:#4cae4c;"><i class="fa fa-comments-o"></i><span  id="acms_num">&nbsp;${article.acmsSize}</span></li>
+						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span  id="ar_num">&nbsp;${article.arSize}</span></li>
+						<li style="color:#ff007f;"><i class="fa fa-heart"></i><span  id="memberSave_num">&nbsp;${article.memberSave.size()}</span></li>
 					</ul>
 				</div>
 			</div>
@@ -337,7 +337,7 @@
 					<input type="hidden" name="acmShow" value="true"/>
 					<input type="hidden" name="acmReport" value="0"/>
 					<textarea name="acmMsg" class="form-control" placeholder="Leave Some Message"></textarea>
-					<button class="btn btn-default btn-sm" id="btn_reply" type="button" onclick="save_msg($(this))"><i class="fa fa-check fa-fw"></i>&nbsp;OK</button>
+					<button class="btn btn-default btn-sm" id="btn_leaveMsg" type="button" onclick="save_msg($(this))"><i class="fa fa-check fa-fw"></i>&nbsp;OK</button>
 				</form>
 			</div>
 			
@@ -502,7 +502,6 @@
 	
 	<script>
 	$(function(){
-		
 		/* ============ USER IMG =========== */
 		var list = $('.authorimg');
 		for(var i = 0; i < list.length; i++) {
@@ -514,17 +513,16 @@
 			}
 		}
 		console.log(list);
-		
-		
+
 		//未登入不可reply
-		if('${memberId}'== ''){
+		if('${memberId}'==''){
 			$('#btn_login').show();
-			$('#btn_reply').hide();
-// 			$('#btn_reply').attr('disabled',true);
-		}else{ 
+// 			$('#btn_reply').hide();
+			$('#btn_reply').attr('disabled',true);
+		} else { 
  			$('#btn_login').hide();
-			$('#btn_reply').show();
-// 			$('#btn_reply').attr('disabled',false);
+// 			$('#btn_reply').show();
+			$('#btn_reply').attr('disabled',false);
 		}
 		
 		//驗證
@@ -559,7 +557,8 @@
 										.replace('_arTitle',data.arTitle)
 										.replace('_arTime',data.arTime)
 										.replace('_arContent',data.arContent))
-										.appendTo($('#articleReply'));						
+										.appendTo($('#articleReply'));
+						$('#ar_num').text(parseInt($('#ar_num').text())+1);
 	 				},
 	 				error:function(x,y,z){
 	 					console.log('x-->'+x);
@@ -589,6 +588,44 @@
 		
 	});
 	
+	//文章收藏
+	function like_article(aId){
+		console.log(aId);
+		$.ajax({
+			url:'/members/like/article/'+ aId,
+			type:'POST',
+			dataType:'json',
+			success:function(result){
+				console.log(result);
+// 				console.log('${article.memberSave.size()}'+1);
+				if(result){
+// 					$('#memberSave_num').text(result);
+// 					console.log(parseInt($('#memberSave_num').text())+1);
+				};			
+			}			
+		});
+	}// end of 文章收藏
+	
+	// 留言
+	function save_msg(a){
+		console.log(JSON.stringify($('#leaveMsg').serializeObject()));
+		$.ajax({
+			url:'/articleCMs/insert',
+			type:'post',
+			contentType:'application/json;charset=UTF-8',
+			data:JSON.stringify($('#leaveMsg').serializeObject()),
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				var name = data.nickname;
+				var Msg = data.acmMsg;
+				var time = data.acmTime;
+				$('#articleMsgArea').append(name+":"+Msg+" time:"+time+"<br/>");
+				$('#acms_num').text(parseInt($('#acms_num').text())+1);
+			}
+		});
+	}// end of 留言 
+	
 	function toModal(){
 		if($('#addForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
 			$(".modal-title").text('Please Check Your Post');
@@ -603,26 +640,6 @@
 			$('#confirm').hide();
 			
 		}
-	}
-	
-	function save_msg(a){
-// 		console.log("hi");
-		console.log(JSON.stringify($('#leaveMsg').serializeObject()));
-		$.ajax({
-			url:'/articleCMs/insert',
-			type:'post',
-			contentType:'application/json;charset=UTF-8',
-			data:JSON.stringify($('#leaveMsg').serializeObject()),
-			dataType:'json',
-			success:function(data){
-				console.log(data);
-				var name = data.nickname;
-				var Msg = data.acmMsg;
-				var time = data.acmTime;
-				$('#articleMsgArea').append(name+":"+Msg+" time:"+time);
-// 				$(name+name).appendTo($('#articleMsgArea'));
-			}
-		});
 	}
 	
 	</script>
