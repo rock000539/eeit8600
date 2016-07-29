@@ -77,25 +77,25 @@ public class MemberService {
 	}
 	
 	//reviews Saved/Wroted ByMember PAGEDnSORTED
-		public Page<Review> getReviewsPaging(String findby, Long memberId, Integer pageNum,
-				String sortProperty, String direction){
-			Review review = new Review();
-			review.setMember(getById(memberId));
-			
-			Specification<Review> spec = Spec.byAuto(em, review);
-			
-			Direction sortDirection = Sort.Direction.DESC;
-			if("ASC".equals(direction)){
-				sortDirection = Sort.Direction.ASC;		
-			}
-			
-			if(sortProperty==null)
-				sortProperty = "reviewTime";
-			
-			//PageRequest(int page, int size, Sort.Direction direction, String... properties)
-			Pageable pageable = new PageRequest(pageNum, 3, new Sort(sortDirection, sortProperty));
-			return reviewService.getAll(spec, pageable);
+	public Page<Review> getReviewsPaging(String findby, Long memberId, Integer pageNum,
+			String sortProperty, String direction){
+		Review review = new Review();
+		review.setMember(getById(memberId));
+		
+		Specification<Review> spec = Spec.byAuto(em, review);
+		
+		Direction sortDirection = Sort.Direction.DESC;
+		if("ASC".equals(direction)){
+			sortDirection = Sort.Direction.ASC;		
 		}
+		
+		if(sortProperty==null)
+			sortProperty = "reviewTime";
+		
+		//PageRequest(int page, int size, Sort.Direction direction, String... properties)
+		Pageable pageable = new PageRequest(pageNum, 3, new Sort(sortDirection, sortProperty));
+		return reviewService.getAll(spec, pageable);
+	}
 	
 	//articlesSavedByMember pagination and sorted
 	public Page<Article> getArticlesPaging(Long memberId, ArticleType articleType, Integer pageNum,

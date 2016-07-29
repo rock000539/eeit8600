@@ -40,6 +40,7 @@ import tw.com.queautiful.product.entity.ExpDate;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.entity.ReviewCM;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.ExpDateService;
 import tw.com.queautiful.product.service.MemberService;
@@ -327,7 +328,6 @@ public class MemberController {
 		Page<Review> pages = 
 				memberService.getReviewsPaging("", memberId, 0, null, null);
 		List<Review> reviews = pages.getContent();
-//			List<String> dates = formatDate(reviews);
 		
 		model.addAttribute("reviews", pages.getContent());
 		model.addAttribute("reviewsPageNum", pages.getNumber());
