@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -112,9 +111,9 @@ public class ReviewController {
 	public String reviews(Model model) throws ParseException {
 		
 		List<Review> list = service.getAll();
-//		model.addAttribute("reviews", list);
+		model.addAttribute("reviews", list);
 		log.debug("{}", list);
-		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
+//		 model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
 //		 model.addAttribute("reviews", service.findByOrderByReviewReportDesc());
 	
 		

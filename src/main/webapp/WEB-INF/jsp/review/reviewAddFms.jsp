@@ -26,6 +26,9 @@
    	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
 	<script src="/js/product/search/select2.min.js"></script>
+	
+	<!-- Sweet Alert 2 -->
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
     
 <style>
 /* ===========Slidebar  Start=================== */
@@ -118,41 +121,13 @@ html { height: 100%;}
     z-index: -1;
     height: 100%;
     width: 3px;
-    background-color: #1c1c1c;
     -webkit-transition: width .2s ease-in;
       -moz-transition:  width .2s ease-in;
        -ms-transition:  width .2s ease-in;
             transition: width .2s ease-in;
 
 }
-.sidebar-nav li:first-child a {
-    color: #fff;
-    background-color: rgba(28, 97, 223, 0.83);
-}
-.sidebar-nav li:nth-child(2):before {
-    background-color: #ec1b5a;   
-}
-.sidebar-nav li:nth-child(3):before {
-    background-color: #79aefe;   
-}
-.sidebar-nav li:nth-child(4):before {
-    background-color: #314190;   
-}
-.sidebar-nav li:nth-child(5):before {
-    background-color: #279636;   
-}
-.sidebar-nav li:nth-child(6):before {
-    background-color: #7d5d81;   
-}
-.sidebar-nav li:nth-child(7):before {
-    background-color: #ead24c;   
-}
-.sidebar-nav li:nth-child(8):before {
-    background-color: #2d2366;   
-}
-.sidebar-nav li:nth-child(9):before {
-    background-color: #35acdf;   
-}
+
 .sidebar-nav li:hover:before,
 .sidebar-nav li.open:hover:before {
     width: 100%;
@@ -464,7 +439,7 @@ select {
 
 
 .review-uc-diamond {
-/* 	position: absolute; */
+/*  	position: absolute;  */
     top: 26px;
     left: 70px;
     color: #4D4D4D;
@@ -474,8 +449,6 @@ select {
 
 .urcosme-score-display{
 	display: inline-block;
-	background-color:white;
-	border:#cccccc solid 1px;
 	border-radius:20px;
 	height: 44px;
 	width: 250px;
@@ -490,9 +463,8 @@ select {
 }
 
 .review-rating{
-	margin-left:20px;
-	letter-spacing:3px;
-	font-size: 20px;
+	letter-spacing:1px;
+	font-size: 18px;
 	font-family:"Microsoft JhengHei";
 }
 
@@ -591,69 +563,86 @@ select {
 					<input type="hidden" name="prodId" id="prodId"/>
 		
 					
-					<div class="col-lg-4 col-md-4 col-sm-4">
-						<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="">
-							<i class="fa fa-search" aria-hidden="true">
-							</i>&nbsp;請先找到您要發表心得的產品唷
-						</button>
-						
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="row">
+							<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="width:450px">
+								<i class="fa fa-search" aria-hidden="true">
+								</i>&nbsp;請先找到您要發表心得的產品唷
+							</button>
+						</div>
+					
+						<div class="col-lg-6 col-md-6 col-sm-6" style="border: 1px solid black;width:210px;height: 210px;margin: 20px 0 0 0;background: white"> 
+							<div class="row"> 						<!-- max-width:240px;max-height:270px; -->
+								<img id="prodImgMain" class="js-example-basic-single" style="overflow:hidden;　">
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6" style="margin:0 0 0 10px ">
+							<div class="row">
+								<h3 style="margin-bottom: 50px">品牌名稱</h3>
+								
+								<h3>產品名稱</h3>
+							</div>
+						</div>
+						<!-- 評分  -->
+						<div style="border:1px solid blue;margin:250px 0 0 0 ">
+							<h3 style="margin:0;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;評分:
+								<b id="p1" class="review-rating" style="margin:15px 0 5px 15px;">1~5分，由你決定!</b>
+							</h3>
+							<div class="review-uc-diamond">
+							    <ul class="urcosme-score-display">
+							        <li id="d1"  class="fa fa-diamond diamond" aria-hidden="true"/>
+							        <li id="d2"  class="fa fa-diamond diamond" aria-hidden="true"/>
+							        <li id="d3"  class="fa fa-diamond diamond" aria-hidden="true"/>
+							        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
+							        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
+							    </ul>
+							</div>
+						</div>	
 						<!-- 評分 -->
-						<h3 style="margin:0;padding-bottom: 0;color: #ff7080;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;評分</h3>
-						<div class="review-uc-diamond">
-						    <ul class="urcosme-score-display">
-						        <li id="d1"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d2"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d3"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d4"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						        <li id="d5"  class="fa fa-diamond diamond" aria-hidden="true"/>
-						    </ul>
-						    <div id="p1" class="review-rating" style="margin:15px 0 5px 15px;">1~5分，由你決定!
-						    </div>
-						</div>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4">
-						<div class="row" style="border: 1px solid red;max-width:240px;max-height:270px;width:auto;height: auto;float:right;">
-							<img id="prodImgMain" class="js-example-basic-single" style=";overflow:hidden;　">
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4">
-						<h3 style="margin:0 80px 10px 0;padding-bottom: 0;float: left">&nbsp;&nbsp;&nbsp;封面圖片</h3>
-						<input id="reviewImg" name="reviewImg" type="file" class="file-loading" >
-							<script>
-								$(document).on('ready', function() {
-									$("#reviewImg").fileinput({
-										showCaption: false,
-										browseClass: 'btn btn-default',
-								    	showRemove: false,
-								    	showUpload : false,
-								    	maxFileCount: 1,
-								    	previewSettings:{image: {width: "auto", height: "150px"}},
-								    });
-	// 								$('#reviewImg').on('fileimageloaded', function(event, previewId) {
-	// 									console.log("fileimageloaded");
-	// 								});
-								});
-							</script>						
+					<div class="col-lg-6 col-md-6 col-sm-6" style="border: 1px solid red;">
+						<div class="row">
+							<h3	style="margin:0 200px 10px 0;padding-bottom: 0;float: left">&nbsp;&nbsp;&nbsp;封面圖片</h3>
+							<input id="reviewImg" name="reviewImg" type="file" class="file-loading" >
+								<script>
+									$(document).on('ready', function() {
+										$("#reviewImg").fileinput({
+											showCaption: false,
+											browseClass: 'btn btn-default',
+									    	showRemove: false,
+									    	showUpload : false,
+									    	maxFileCount: 1,
+									    	previewSettings:{image: {width: "auto", height: "150px"}},
+									    });
+		// 								$('#reviewImg').on('fileimageloaded', function(event, previewId) {
+		// 									console.log("fileimageloaded");
+		// 								});
+									});
+								</script>	
+						</div>					
 					</div>
 						
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h3 style="margin:15px 0 5px 15px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
-						<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';"/>
-	<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
+						<div class="row">
+							<h3 style="margin:15px 0 5px 15px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
+							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';"/>
+		<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row" style="margin-top: 20px" >
-				<div class="form-group" >
-					<div class="col-lg-12" >
+			
+			<div class="col-lg-12 col-md-12 col-sm-12" >
+				<div class="row" style="margin-top: 20px" >
+					<div class="form-group" >
 						<textarea class="ckeditor" id="review" name="review" cols="80" rows="12"></textarea>
 					</div>
 				</div>
 			</div>	
-			<div class="row">
-				<div class="form-group">
-					<div class="col-lg-12 hasbutton">
-						<button id="save"class="btn btn-default btn-lg" type="button" ><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+			<div class="col-lg-12 col-md-12 col-sm-12 hasbutton">
+				<div class="row">
+					<div class="form-group">
+						<button id="save" class="btn btn-default btn-lg" type="button" ><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
 						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
 					</div>
 				</div>
@@ -896,8 +885,9 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 
 
 /*  ============================================= */
+// 			event.preventDefault();
 		$('#save').on('click',function(){
-			
+		    
 			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
 			var formdata = new FormData(); 
 				formdata.append('reviewImgFile', $('#reviewImg').prop('files')[0]); 
@@ -915,7 +905,8 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 					dataType:'json',
 					success:function(data){
 						console.log("data="+data);
-//							location.href="/articles/listfms";
+						
+// 						history.back(1);
 	 				}
 				});		
 		});
