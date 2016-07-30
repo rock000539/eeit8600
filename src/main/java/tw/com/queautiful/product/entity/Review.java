@@ -80,7 +80,7 @@ public class Review {
 	
 	//心得發布時間
 	@Column(name="REVIEWTIME")
-	private java.sql.Timestamp reviewTime;
+	private Date reviewTime;
 	
 	//心得收藏數
 	@Column(name="REWCOLLECT")
@@ -242,12 +242,12 @@ public class Review {
 		this.reviewImg = reviewImg;
 	}
 
-	public java.sql.Timestamp getReviewTime() {
+	public Date getReviewTime() {
 		return reviewTime;
 	}
 
-	public void setReviewTime(java.sql.Timestamp reviewTime) {
-		this.reviewTime = reviewTime;
+	public void setReviewTime(Date date) {
+		this.reviewTime = date;
 	}
 
 	public Integer getRewCollect() {

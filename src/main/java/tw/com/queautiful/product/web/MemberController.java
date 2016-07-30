@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -441,7 +440,7 @@ public class MemberController {
 	private List<String> formatDate(Collection<Review> reviews){
 		List<String> dates = new ArrayList();
 		for(Review review: reviews){
-			Timestamp reviewTime = review.getReviewTime();
+			Date reviewTime = review.getReviewTime();
 			SimpleDateFormat sDateFormat = new SimpleDateFormat("MMM,d,yyyy", Locale.US);
 			Calendar date = Calendar.getInstance();
 			date.setTime(reviewTime);

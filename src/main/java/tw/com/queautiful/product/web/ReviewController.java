@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.web;
 
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 
 
 
@@ -141,7 +143,7 @@ public class ReviewController {
 		model.addAttribute("review", review);
 
 		// 得到英文月份
-		java.sql.Timestamp temp = review.getReviewTime();
+		Date temp = review.getReviewTime();
 		log.debug("{}", temp);
 		// 準備輸出的格式，如：Jun,18,16
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM,d,yy", Locale.US);
@@ -249,7 +251,7 @@ public class ReviewController {
 //		review.setProduct(prodService.getById(review.getProdId()));
 //		review.setMember(memberService.getById(review.getMemberId()));
 		
-		review.setReviewTime(new java.sql.Timestamp(System.currentTimeMillis()));
+		review.setReviewTime(new java.sql.Date(System.currentTimeMillis()));
 		if (reviewImgFile != null) {
 			String reviewTitle = review.getReviewTitle();
 			String reviewImg = FileProcessing.saveImg(reviewTitle, "review",reviewImgFile);
