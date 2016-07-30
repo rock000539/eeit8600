@@ -431,8 +431,6 @@
      	<div class="pbhead_comment">
 			 <ul>
 				<li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:13px;margin:8px 8px"></i></a></li>
-				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:13px;margin:8px 8px"></i></a></li>
-				<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:13px;margin:8px 8px"></i></a></li>
 			 </ul>
 		</div>
     </li>

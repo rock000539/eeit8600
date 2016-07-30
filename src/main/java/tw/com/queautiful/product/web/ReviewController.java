@@ -238,7 +238,7 @@ public class ReviewController {
 		// 品牌
 		List<BrandSearch> brands = brandService.getAllByVoSearch();
 		model.addAttribute("brands", brands);
-		
+
 		return "/review/reviewAddFms";
 	}
 
