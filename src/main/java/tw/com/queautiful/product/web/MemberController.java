@@ -48,7 +48,6 @@ import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewService;
 import tw.com.queautiful.product.vo.member.MemberEditVO;
-import tw.com.queautiful.product.vo.member.MemberVO;
 import tw.com.queautiful.product.vo.product.ProductView;
 
 @Controller
@@ -420,8 +419,6 @@ public class MemberController {
 			BeanUtils.copyProperties(productService.getById(prodId), productView);
 			products.add(productView);
 		}
-		MemberVO member = new MemberVO();
-		BeanUtils.copyProperties(memberService.getById(memberId), member);
 		
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -429,7 +426,7 @@ public class MemberController {
 		map.put("products", products);
 		map.put("reviewsPageNum", pages.getNumber());
 		map.put("reviewsTotalPages", pages.getTotalPages());
-		map.put("member", member);
+		map.put("member", memberService.getById(memberId));
 		result.add(map);
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", pages.getSize()); //size of the slice
