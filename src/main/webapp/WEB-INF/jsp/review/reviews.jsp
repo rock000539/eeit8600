@@ -47,7 +47,6 @@
 	      	</div></a>
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>
-						<!--(???心得table要再加"推"?,心得留言table要再加"數量") -->
 		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;留言</div>
 		      	
 		      	<div class="caption">

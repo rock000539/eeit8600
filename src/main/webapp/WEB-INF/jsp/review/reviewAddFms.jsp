@@ -67,7 +67,7 @@ html { height: 100%;}
     margin-left: -220px;
     overflow-y: auto;
     overflow-x: hidden;
-    background: #648cd5; 
+    background: #ffffff; 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -140,7 +140,7 @@ html { height: 100%;}
 
 .sidebar-nav li a {
     display: block;
-    color: #fff;
+    color: white;
     text-decoration: none;
     padding: 10px 15px 10px 30px;    
     font-size: 14px;
@@ -468,6 +468,16 @@ select {
 	font-family:"Microsoft JhengHei";
 }
 
+.prodImgMain{
+	width:210px;
+	display: table-cell;
+    text-align: center;
+	overflow: hidden;
+    margin: 0px auto;
+    padding: 0px;
+    vertical-align: middle;
+    border-radius:20px;
+}
 /* .li{color:rgb(100, 140, 213);}  /*有顏色*/ 
 .li{color:#FF5151;}  /*diamond粉紅色*/
 /* .d1 {margin:40px 160px;} */
@@ -489,11 +499,11 @@ select {
         <!-- Sidebar -->
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" style="margin-top:135px;height:390px;">
             <ul class="nav sidebar-nav">
-                <li class="sidebar-brand">
+                <li class="sidebar-brand" style="background: black;">
                     <a  class="fa fa-search" style="height: 65px;font-size: 26px;padding:20px 0 0 10px">&nbsp;&nbsp;Product Search</a>
                 </li>
                 <li>
-                    <a >選擇品牌名稱，搜尋產品！</a>
+                    <a style="color: #565656;font-size: 14px;">選擇品牌名稱，搜尋產品！</a>
                 </li>
                 <li>
                     <a >
@@ -525,7 +535,7 @@ select {
                 <li id="check">
                     <a >
                         <div class="row">
-							<button  class="btn" type="button" style="margin:0 0 0 45px;background:rgb(255, 81, 101);"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Check</button>
+							<button  class="btn btn-default" type="button" style="margin:0 0 0 45px;"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Check</button>
 						</div>
                     </a>
                 </li>
@@ -535,14 +545,9 @@ select {
 
         <!-- Page Content -->
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
-        <div class="col-lg-10 col-md-10 col-sm-10 article" >
+        <div class="col-lg-10 col-md-10 col-sm-10 article">
+        
 <!-- 	        <div id="page-content-wrapper"> -->
-
-            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-                <span class="hamb-top"></span>
-    			<span class="hamb-middle"></span>
-				<span class="hamb-bottom"></span>
-            </button>
             
           	<section class="team row sub_content" style="padding-bottom: 0">
 				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;padding-bottom: 0">
@@ -565,26 +570,26 @@ select {
 					
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="row">
-							<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="width:450px">
+							<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="width:400px;margin-left: 35px">
 								<i class="fa fa-search" aria-hidden="true">
 								</i>&nbsp;請先找到您要發表心得的產品唷
 							</button>
 						</div>
 					
-						<div class="col-lg-6 col-md-6 col-sm-6" style="border: 1px solid black;width:210px;height: 210px;margin: 20px 0 0 0;background: white"> 
+						<div class="col-lg-5 col-md-5 col-sm-5" style="width:210px;height: 210px;margin: 20px 0 0 20px;">
 							<div class="row"> 						<!-- max-width:240px;max-height:270px; -->
-								<img id="prodImgMain" class="js-example-basic-single" style="overflow:hidden;　">
+								<input id="prodImgButton" type="text" class="form-control" placeholder="&nbsp;&nbsp;產品圖片" style="border-radius:20px;font-family:'Microsoft JhengHei';height: 210px;font-size:35px;"/>
+								<img id="prodImgMain" class="js-example-basic-single prodImgMain">
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6" style="margin:0 0 0 10px ">
+						<div class="col-lg-5 col-md-5 col-sm-5" style="margin:0 0 0 10px ">
 							<div class="row">
-								<h3 style="margin-bottom: 50px">品牌名稱</h3>
-								
-								<h3>產品名稱</h3>
+								<div id="brandName" style="margin:70px 0 50px 10px;font-family:'Microsoft JhengHei';font-size:20px;">品牌名稱</div>
+								<div id="prodName"style="margin:0 0 0 10px;font-family:'Microsoft JhengHei';font-size:20px;">產品名稱</div>
 							</div>
 						</div>
 						<!-- 評分  -->
-						<div style="border:1px solid blue;margin:250px 0 0 0 ">
+						<div style="margin:250px 0 0 20px">
 							<h3 style="margin:0;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;評分:
 								<b id="p1" class="review-rating" style="margin:15px 0 5px 15px;">1~5分，由你決定!</b>
 							</h3>
@@ -600,9 +605,9 @@ select {
 						</div>	
 						<!-- 評分 -->
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6" style="border: 1px solid red;">
+					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="row">
-							<h3	style="margin:0 200px 10px 0;padding-bottom: 0;float: left">&nbsp;&nbsp;&nbsp;封面圖片</h3>
+							<h3	style="margin:0 20px 10px 0;padding-bottom: 0;float: left">&nbsp;&nbsp;&nbsp;封面圖片</h3>
 							<input id="reviewImg" name="reviewImg" type="file" class="file-loading" >
 								<script>
 									$(document).on('ready', function() {
@@ -612,7 +617,7 @@ select {
 									    	showRemove: false,
 									    	showUpload : false,
 									    	maxFileCount: 1,
-									    	previewSettings:{image: {width: "auto", height: "150px"}},
+									    	previewSettings:{image: {width: "auto", height: "175px"}},
 									    });
 		// 								$('#reviewImg').on('fileimageloaded', function(event, previewId) {
 		// 									console.log("fileimageloaded");
@@ -624,8 +629,8 @@ select {
 						
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="row">
-							<h3 style="margin:15px 0 5px 15px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
-							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';"/>
+							<h3 style="margin:15px 0 5px 35px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
+							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';margin-left: 35px"/>
 		<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
 						</div>
 					</div>
@@ -633,7 +638,7 @@ select {
 			</div>
 			
 			<div class="col-lg-12 col-md-12 col-sm-12" >
-				<div class="row" style="margin-top: 20px" >
+				<div class="row" style="margin-top: 20px;margin-left: 15px" >
 					<div class="form-group" >
 						<textarea class="ckeditor" id="review" name="review" cols="80" rows="12"></textarea>
 					</div>
@@ -654,10 +659,11 @@ select {
 </FORM>
 </div>        
             <!-- **每頁不同的內容結束** -->
-</div>
+</div>			
+
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
-			
+	
 	<!-- Scripts -->
 	
 	<script src="/js/bootstrap.min.js"></script>
@@ -680,29 +686,7 @@ select {
 	/*  ==================== Side Bar ======================== */
 	
 	$(document).ready(function () {
-		  var trigger = $('.hamburger'),
-		      overlay = $('.overlay'),
-		     isClosed = false;
-
-		    trigger.click(function () {
-		      hamburger_cross();      
-		    });
-
-		    function hamburger_cross() {
-
-		      if (isClosed == true) {          
-		        overlay.hide();
-		        trigger.removeClass('is-open');
-		        trigger.addClass('is-closed');
-		        isClosed = false;
-		      } else {   
-		        overlay.show();
-		        trigger.removeClass('is-closed');
-		        trigger.addClass('is-open');
-		        isClosed = true;
-		      }
-		  }
-		  
+		
 		  $('[data-toggle="offcanvas"]').click(function () {
 		        $('#wrapper').toggleClass('toggled');
 		  });  
@@ -719,15 +703,16 @@ select {
 	
 	// select-brand init
 	$('#sbrand').select2({
-		placeholder: 'Select a brand',
+		placeholder: 'Select a	 brand',
 		allowClear: true,
 		theme: 'classic', 
 	});
 	
 	$('#sbrand').on('select2:select', function (evt) {
-		
+
 		if($(this).val() > 0) {
 			
+			$('#brandName').text($(this).select2('data')[0].text);
 			$('#sprodLi').show();
 			
 			// select-product init
@@ -762,6 +747,7 @@ select {
 		$('#prodId').val(prodNum); //產品id評分到後端
 		
 		if(prodNum > 0) {
+			$('#prodName').text($(this).select2('data')[0].text);
 			// show img
 			$('#prodImgLi').show();
 			$('#prodImg').show()
@@ -769,7 +755,9 @@ select {
 			$('#check').show();
 			
 			$('#check').on('click',function(){
+				$("#prodImgButton").remove();
 				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
+				$('#wrapper').toggleClass('toggled'); //sidebar open/close
 			})
 		}
 	});
@@ -876,18 +864,11 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 		    return o;
 		};
 
-
-
-
-
-/*  =====================Img upload ======================== */
-
-
-
-/*  ============================================= */
+/*  =================save click============================ */
 // 			event.preventDefault();
 		$('#save').on('click',function(){
 		    
+			//ckEditor and addform input formdata
 			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
 			var formdata = new FormData(); 
 				formdata.append('reviewImgFile', $('#reviewImg').prop('files')[0]); 
@@ -905,13 +886,10 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 					dataType:'json',
 					success:function(data){
 						console.log("data="+data);
-						
-// 						history.back(1);
+						history.back(1);
 	 				}
 				});		
 		});
-
-
 	
 });
 	</script>
