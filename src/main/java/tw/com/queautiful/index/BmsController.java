@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tw.com.queautiful.product.entity.Ingredient;
 import tw.com.queautiful.product.entity.TimeOnSiteEnity;
 import tw.com.queautiful.product.entity.WebMail;
+import tw.com.queautiful.product.entity.WebViewAndVisitorData;
 import tw.com.queautiful.product.service.IngredientService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.TimeOnSiteService;
 import tw.com.queautiful.product.service.WebMailService;
+import tw.com.queautiful.product.service.WebViewAndVisitorDataService;
 
 @Controller
 public class BmsController {
@@ -44,10 +46,21 @@ public class BmsController {
 	@Autowired
 	private IngredientService ingredientService;
 	
+	@Autowired
+	private WebViewAndVisitorDataService webViewAndVisitorDataService;
+	
 	@RequestMapping("/bms")
 	public String bmsPage(Model model){
 		Map<String, Object> dataMap =new HashMap<String, Object>();
 		double Bounce=0;
+		
+		//取出瀏覽人數資料-----------------------------------------------------
+		
+		WebViewAndVisitorData webViewAndVisitorData=webViewAndVisitorDataService.findOne();
+		long totalVisitors = webViewAndVisitorData.getTotalVisitors();
+		long uniqueVisitors = webViewAndVisitorData.getUniqueVisitors();
+		dataMap.put("totalVisitors", totalVisitors);
+		dataMap.put("uniqueVisitors", uniqueVisitors);
 		//計算跳出率----------------------------------------------------------
 		List timeOnSiteDatas=timeOnSiteService.findAll();
 		for(int i=0;i<timeOnSiteDatas.size();i++){

@@ -222,4 +222,4 @@ INSERT INTO REVIEWCM (REVIEWID, MEMBERID,REVIEWCMMSG, REVIEWCMTIME, REVIEWCMSHOW
 
 INSERT INTO TIMEONSITE (member_id,page_url,time_on_site,client_ip) values (1,'http://localhost:8080/reviews/reviews',2595547,'192.168.133.1')
 
-INSERT INTO webviewandvisitordata (total_visitors,unique_visitors,web_view) values(100,50,150)
+INSERT INTO webviewandvisitordata (total_visitors,unique_visitors) values(100,50)
