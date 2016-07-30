@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.ArticleDao;
 import tw.com.queautiful.product.entity.Article;
@@ -105,5 +106,8 @@ public class ArticleService {
 		}		
 		return articles;	
 	}
-
+	
+	public Long getCountByMemberAndArticleType(Member member, ArticleType articleType){
+		return articleDao.countByMemberAndArticleType(member, articleType);
+	}
 }

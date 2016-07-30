@@ -242,13 +242,13 @@ h2, h4{
 			<div class="subtabs">
 				<span class="subtab selected">ALL (${articlesTotalElement})</span>
 				<span class="sep"> · </span>
-				<span value="NEWS" class="subtab">NEWS</span>
+				<span value="NEWS" class="subtab">NEWS (${countNews})</span>
 				<span class="sep"> · </span>
-				<span value="SOLICIT" class="subtab">SOLICIT</span>
+				<span value="SOLICIT" class="subtab">SOLICIT (${countSolicit})</span>
 				<span class="sep"> · </span>
-				<span value="QUESTION" class="subtab">QUESTION</span>
+				<span value="QUESTION" class="subtab">QUESTION (${countQuestion})</span>
 				<span class="sep"> · </span>
-				<span value="CHAT" class="subtab">CHAT</span>
+				<span value="CHAT" class="subtab">CHAT (${countChat})</span>
 			</div> <!-- subtabs -->
 			<div id="articleContentDiv">
 				<c:forEach var="item" items="${articles}" varStatus="vs">
@@ -328,6 +328,8 @@ h2, h4{
 </script>		
 <script>
 $(function(){
+	var memberId = ${member.memberId};
+	console.log(memberId);
 	var articleType;
 	var direction = "DESC";
 	
@@ -420,7 +422,7 @@ $(function(){
 	
 	
 	function loadArticleData(pageNum, articleType, direction){
-		var data= {"articlesPageNum": pageNum, "articleType": articleType, "direction": direction};
+		var data= {"memberId": memberId, "articleType": articleType, "direction": direction};
 		console.log(data);
 		var totalPages = $('#articlesTotalPages').val();
     	var loadedPageNum = $('#articlesPageNum').val();

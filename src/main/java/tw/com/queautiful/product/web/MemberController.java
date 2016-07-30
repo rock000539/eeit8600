@@ -49,6 +49,7 @@ import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewService;
 import tw.com.queautiful.product.vo.member.MemberEditVO;
+import tw.com.queautiful.product.vo.member.MemberVO;
 import tw.com.queautiful.product.vo.product.ProductView;
 
 @Controller
@@ -353,6 +354,11 @@ public class MemberController {
 		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
 		model.addAttribute("articlesTotalElement", articlePages.getTotalElements());
 		model.addAttribute("member", member);
+		model.addAttribute("countNews", articleService.getCountByMemberAndArticleType(member, ArticleType.NEWS));
+		model.addAttribute("countChat", articleService.getCountByMemberAndArticleType(member, ArticleType.CHAT));
+		model.addAttribute("countQuestion", articleService.getCountByMemberAndArticleType(member, ArticleType.QUESTION));
+		model.addAttribute("countSolicit", articleService.getCountByMemberAndArticleType(member, ArticleType.SOLICIT));
+		
 		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", articlePages.getSize()); //size of the slice
 		log.debug("page numberOfElements = {}", articlePages.getNumberOfElements()); //elements on this slice
@@ -384,6 +390,7 @@ public class MemberController {
 		map.put("member", memberService.getById(memberId));
 		map.put("articlesTotalPages", pages.getTotalPages());
 		result.add(map);
+		
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", pages.getSize()); //size of the slice
 		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
@@ -398,17 +405,15 @@ public class MemberController {
 	@ResponseBody
 	public  List<Map> memberPostReviewPageSort(
 			@PathVariable(value="pageNum") Integer pageNum,
+			@RequestParam(value="memberId") Long memberId,
 			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			HttpServletRequest request, Model model){
-		log.debug("page: {}",pageNum);
-		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		
 		Page<Review> pages = 
 				memberService.getReviewsPaging("", memberId, pageNum, sortProperty, direction);
 		
 		List<Review> reviews = pages.getContent();
-		List<String> dates = formatDate(reviews);
 		List<ProductView> products = new ArrayList();
 		for(Review review:reviews){
 			Long prodId = review.getProduct().getProdId();
@@ -416,15 +421,16 @@ public class MemberController {
 			BeanUtils.copyProperties(productService.getById(prodId), productView);
 			products.add(productView);
 		}
+		MemberVO member = new MemberVO();
+		BeanUtils.copyProperties(memberService.getById(memberId), member);
 		
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviews", reviews);
-		map.put("dates", dates);
 		map.put("products", products);
 		map.put("reviewsPageNum", pages.getNumber());
 		map.put("reviewsTotalPages", pages.getTotalPages());
-		map.put("member", memberService.getById(memberId));
+		map.put("member", member);
 		result.add(map);
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", pages.getSize()); //size of the slice

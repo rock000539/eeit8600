@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.Member;
 
@@ -18,4 +19,6 @@ public interface ArticleDao extends JpaRepository<Article, Long>, JpaSpecificati
 //	Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable);
 	
 	List<Article> findByMember(Member member);
+	
+	Long countByMemberAndArticleType(Member member, ArticleType articleType);
 }
