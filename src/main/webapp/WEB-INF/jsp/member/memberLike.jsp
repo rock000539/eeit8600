@@ -52,10 +52,6 @@ h2, h4{
  	border: 0px;
  	padding-left: 0px;
 }
-.reviews, .articles{
-	padding: 33px 0 40px 0;
-	border-top: 1px solid #E0E0E0;
-}
 
 .prod{
 	color:#000;

@@ -129,6 +129,7 @@
 	color: #000;
     background-color: transparent;
     display: block;
+    border-bottom: 1px solid #000;
 }
 .subtabs .subtab {
     display: inline-block;
@@ -141,6 +142,7 @@
     font-size: 12px;
     line-height: 22px;
     cursor: pointer;
+    font-family: "Proxima Nova",sans-serif;
 }
 .subtabs .subtab.selected, .subtabs .subtab:hover {
     color: #000;
@@ -152,4 +154,8 @@
 }
 .tab-content{
 	padding: 0px;
+}
+.reviews, .articles{
+	padding: 33px 0 40px 0;
+	border-bottom: 1px solid #E0E0E0;
 }

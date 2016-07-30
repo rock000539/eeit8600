@@ -54,10 +54,6 @@ h2, h4{
  	border: 0px;
  	padding-left: 0px;
 }
-.reviews, .articles{
-	padding: 33px 0 40px 0;
-	border-top: 1px solid #E0E0E0;
-}
 
 .prod{
 	color:#000;
@@ -244,7 +240,7 @@ h2, h4{
 				<p>POSTED ARTICLES (${articlesTotalElement})</p>
 			</div>
 			<div class="subtabs">
-				<span value="null" class="subtab selected">ALL (${articlesTotalElement})</span>
+				<span class="subtab selected">ALL (${articlesTotalElement})</span>
 				<span class="sep"> · </span>
 				<span value="NEWS" class="subtab">NEWS</span>
 				<span class="sep"> · </span>
@@ -254,24 +250,26 @@ h2, h4{
 				<span class="sep"> · </span>
 				<span value="CHAT" class="subtab">CHAT</span>
 			</div> <!-- subtabs -->
-			<c:forEach var="item" items="${articles}" varStatus="vs">
-			<div class="articles col-lg-12">
-				<div class="articleTime">
-					<h4>${item.articleTime}</h4>
-					<h4 class="articleType">${item.articleType}</h4>
-					<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
+			<div id="articleContentDiv">
+				<c:forEach var="item" items="${articles}" varStatus="vs">
+				<div class="articles col-lg-12">
+					<div class="articleTime">
+						<h4>${item.articleTime}</h4>
+						<h4 class="articleType">${item.articleType}</h4>
+						<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
+					</div>
+					<div class="articleContent">
+						<h2 class="articleTitle">${item.articleTitle}&nbsp;
+							<a  class="articleEdit" href="/articles/edit/${item.articleId}">
+							<span>
+							<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
+						<p class="preview">${item.articleContent}</p>
+						<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
+			        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
+					</div>
 				</div>
-				<div class="articleContent">
-					<h2 class="articleTitle">${item.articleTitle}&nbsp;
-						<a  class="articleEdit" href="/articles/edit/${item.articleId}">
-						<span>
-						<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
-					<p class="preview">${item.articleContent}</p>
-					<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
-		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
-				</div>
+				</c:forEach>
 			</div>
-			</c:forEach>
 			<input type="hidden" id="articlesPageNum" value="${articlesPageNum}">
 			<input type="hidden" id="articlesTotalPages" value="${articlesTotalPages}">
     	</div>
@@ -330,11 +328,25 @@ h2, h4{
 </script>		
 <script>
 $(function(){
+	var articleType;
+	var direction = "DESC";
+	
 	$('.subtabs>.subtab').click(function(){
+		// 改變樣式，但同一個tab不作用
+		if($(this).hasClass('selected')){
+			return;
+		}
 		console.log($(this).attr('value'));
-		articleType = $(this).html();
 		$('.subtabs>.selected').removeClass('selected');
 		$(this).addClass('selected');
+		
+		// articles
+		if($('#tab-a').hasClass('active')){
+			articleType = $(this).attr('value');
+			$('#articlesPageNum').attr("value", 0);
+			$('#articleContentDiv').empty();
+			loadArticleData(0, articleType, direction);
+		}
 	});
 	
 	$(window).scroll(function(){
@@ -348,6 +360,7 @@ $(function(){
 				var nextPage = parseInt($('#articlesPageNum').val())+1;
 				console.log("article next page: "+ nextPage);
 				loadArticleData(nextPage, articleType, direction);
+				console.log("articleType: "+articleType);
 			}
 		}  /* scroll-bottom*/
 	}); /* onScroll */
@@ -408,7 +421,7 @@ $(function(){
 	
 	function loadArticleData(pageNum, articleType, direction){
 		var data= {"articlesPageNum": pageNum, "articleType": articleType, "direction": direction};
-		
+		console.log(data);
 		var totalPages = $('#articlesTotalPages').val();
     	var loadedPageNum = $('#articlesPageNum').val();
     	
@@ -443,7 +456,7 @@ $(function(){
 							.replace('_articleId', articles[i].articleId)
 							.replace('_articleContent', articles[i].articleContent)
 							.replace('_articleId', articles[i].articleId))
-							.appendTo($('#article'));
+							.appendTo($('#articleContentDiv'));
 					}
 				} /* success */
 	    	});} /* ajax */
