@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    
+    	
+   	<!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
     
     <!-- FileInput -->	
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
@@ -26,9 +28,6 @@
    	<!-- Select2 Plugin -->
 	<link href="/css/product/select2.min.css" rel="stylesheet" />
 	<script src="/js/product/search/select2.min.js"></script>
-	
-	<!-- Sweet Alert 2 -->
-	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
     
 <style>
 /* ===========Slidebar  Start=================== */
@@ -174,120 +173,6 @@ html { height: 100%;}
 }
 
 /*-------------------------------*/
-/*       Hamburger-Cross         */
-/*-------------------------------*/
-
-.hamburger {
-  position: relative; 
-  top: 10px;  
-  z-index: 999;
-  display: block;
-  width: 32px;
-  height: 32px;
-  margin-left: 15px; 
-  background: transparent;
-  border: none;
-}
-.hamburger:hover,
-.hamburger:focus,
-.hamburger:active {
-  outline: none;
-}
-.hamburger.is-closed:before {
-  content: '';
-  display: block;
-  width: 100px;
-  font-size: 14px;
-  color: #fff;
-  line-height: 32px;
-  text-align: center;
-  opacity: 0;
-  -webkit-transform: translate3d(0,0,0);
-  -webkit-transition: all .35s ease-in-out;
-}
-.hamburger.is-closed:hover:before {
-  opacity: 1;
-  display: block;
-  -webkit-transform: translate3d(-100px,0,0);
-  -webkit-transition: all .35s ease-in-out;
-}
-
-.hamburger.is-closed .hamb-top,
-.hamburger.is-closed .hamb-middle,
-.hamburger.is-closed .hamb-bottom,
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-middle,
-.hamburger.is-open .hamb-bottom {
-  position: absolute;
-  left: 0;
-  height: 4px;
-  width: 100%;
-}
-.hamburger.is-closed .hamb-top,
-.hamburger.is-closed .hamb-middle,
-.hamburger.is-closed .hamb-bottom {
-  background-color: #1a1a1a;
-}
-.hamburger.is-closed .hamb-top { 
-  top: 5px; 
-  -webkit-transition: all .35s ease-in-out;
-}
-.hamburger.is-closed .hamb-middle {
-  top: 50%;
-  margin-top: -2px;
-}
-.hamburger.is-closed .hamb-bottom {
-  bottom: 5px;  
-  -webkit-transition: all .35s ease-in-out;
-}
-
-.hamburger.is-closed:hover .hamb-top {
-  top: 0;
-  -webkit-transition: all .35s ease-in-out;
-}
-.hamburger.is-closed:hover .hamb-bottom {
-  bottom: 0;
-  -webkit-transition: all .35s ease-in-out;
-}
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-middle,
-.hamburger.is-open .hamb-bottom {
-  background-color: #1a1a1a;
-}
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-bottom {
-  top: 50%;
-  margin-top: -2px;  
-}
-.hamburger.is-open .hamb-top { 
-  -webkit-transform: rotate(45deg);
-  -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
-}
-.hamburger.is-open .hamb-middle { display: none; }
-.hamburger.is-open .hamb-bottom {
-  -webkit-transform: rotate(-45deg);
-  -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
-}
-.hamburger.is-open:before {
-  content: '';
-  display: block;
-  width: 100px;
-  font-size: 14px;
-  color: #fff;
-  line-height: 32px;
-  text-align: center;
-  opacity: 0;
-  -webkit-transform: translate3d(0,0,0);
-  -webkit-transition: all .35s ease-in-out;
-}
-.hamburger.is-open:hover:before {
-  opacity: 1;
-  display: block;
-  -webkit-transform: translate3d(-100px,0,0);
-  -webkit-transition: all .35s ease-in-out;
-}
-
-/*-------------------------------*/
 /*            Overlay            */
 /*-------------------------------*/
 
@@ -303,9 +188,6 @@ html { height: 100%;}
     z-index: 1;
 }
 /* ===========Slidebar  End=================== */
-
-
-
 
 /* ===========article  Start=================== */
 
@@ -437,14 +319,11 @@ select {
     border-radius:20px;
 }
 
-
 .review-uc-diamond {
-/*  	position: absolute;  */
     top: 26px;
     left: 70px;
     color: #4D4D4D;
-/*     font-size: 12px; */
-     letter-spacing:-7px;  /* diamond間距加寬*/
+    letter-spacing:-7px;  /* diamond間距加寬*/
 }
 
 .urcosme-score-display{
@@ -458,7 +337,6 @@ select {
 	margin:6px 0px 0px 15px;
 	font-size: 32px;
 	width: 30px;
-/* 	color:#FF5151;有得分(紅色) */
 	color:#BEBEBE; /*沒有得分(灰色)*/
 }
 
@@ -478,10 +356,9 @@ select {
     vertical-align: middle;
     border-radius:20px;
 }
-/* .li{color:rgb(100, 140, 213);}  /*有顏色*/ 
-.li{color:#FF5151;}  /*diamond粉紅色*/
-/* .d1 {margin:40px 160px;} */
-  /*width:100%;height:140px;*/
+.li{
+	color:#FF5151; /*diamond粉紅色*/
+	}  
 
 </style>
 </head>
@@ -552,7 +429,7 @@ select {
           	<section class="team row sub_content" style="padding-bottom: 0">
 				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;padding-bottom: 0">
 		            <div class="dividerHeading">
-		                <h4><span style="font-family:'Microsoft JhengHei';">寫心得</span></h4>
+		                <h4><span style="font-family:'Microsoft JhengHei';">Post A New Review</span></h4>
 		            </div>
 		        </div>
 			</section>  
@@ -617,7 +494,7 @@ select {
 									    	showRemove: false,
 									    	showUpload : false,
 									    	maxFileCount: 1,
-									    	previewSettings:{image: {width: "auto", height: "175px"}},
+									    	previewSettings:{image: {width: "auto", height: "210px"}},
 									    });
 		// 								$('#reviewImg').on('fileimageloaded', function(event, previewId) {
 		// 									console.log("fileimageloaded");
@@ -630,7 +507,7 @@ select {
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="row">
 							<h3 style="margin:15px 0 5px 35px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
-							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control" value="${param.reviewTitle}" placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';margin-left: 35px"/>
+							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control"  placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';margin-left: 35px"/>
 		<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
 						</div>
 					</div>
@@ -664,9 +541,7 @@ select {
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 	
-	<!-- Scripts -->
-	
-	<script src="/js/bootstrap.min.js"></script>
+	<!-- Scripts -->	
 	
 	<script src="/js/jquery.validate.min.js"></script>
 
@@ -691,7 +566,7 @@ select {
 		        $('#wrapper').toggleClass('toggled');
 		  });  
 
-		/*  =====================Prod Search ======================== */
+	/*  =====================Prod Search ======================== */
 		
 	// hide  select
 	$('#sprod').hide();
@@ -763,20 +638,11 @@ select {
 	});
 	
 	/*  ============================================= */
-	
-// 	$('#reviewImg').on('click',function(){
-// 		 if($(".file-input	")[0]){
-// 		$('#reviewImgFake').removeClass("reviewImg");
-// 			 console.log("yes pp")
-// 			} else {
-// 		$('#reviewImgFake').addClass("reviewImg");
-// 				console.log("no pp")}
-// 	})
-	
 
 		//驗證
 // 			$('#addForm').validate({
 // 				onfocusout: function (element) {
+// 					console.log(element);
 // 			        $(element).valid();
 // 			    },
 // 				rules:{
@@ -792,8 +658,6 @@ select {
 // 			});
 			
 		  
-
-		
 		
 	/*  ===================== diamond ================================ */
 var flag = false;
@@ -892,6 +756,6 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 		});
 	
 });
-	</script>
+</script>
 </body>
 </html>
