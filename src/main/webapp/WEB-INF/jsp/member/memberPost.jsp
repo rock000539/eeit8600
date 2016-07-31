@@ -208,9 +208,8 @@ h2, h4{
 				<span value="HAIR" class="subtab">HAIR</span>
 				
 				<div class="dropdown">
-				  <div style="float: left">Order By</div> 
 				  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				    Order
+				    Time
 				    <span class="caret"></span>
 				  </div>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -219,6 +218,7 @@ h2, h4{
 				    <li><a value="rewCollect">Liked</a></li>
 				  </ul>
 				</div>
+				<div style="display:inline-block; float:right;">Order By</div>
 			</div> <!-- subtabs -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">

@@ -333,7 +333,7 @@ public class MemberController {
 		Member member = memberService.getById(memberId);
 		
 		Page<Review> pages = 
-				memberService.getReviewsPaging("", memberId, 0, null, null);
+				memberService.getReviewsPaging("", memberId, 0, CategoryTitle.HAIR, null, null);
 		List<Review> reviews = pages.getContent();
 		
 		model.addAttribute("reviews", pages.getContent());
@@ -357,12 +357,6 @@ public class MemberController {
 		model.addAttribute("countChat", articleService.getCountByMemberAndArticleType(member, ArticleType.CHAT));
 		model.addAttribute("countQuestion", articleService.getCountByMemberAndArticleType(member, ArticleType.QUESTION));
 		model.addAttribute("countSolicit", articleService.getCountByMemberAndArticleType(member, ArticleType.SOLICIT));
-		
-		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
-		log.debug("page size = {}", articlePages.getSize()); //size of the slice
-		log.debug("page numberOfElements = {}", articlePages.getNumberOfElements()); //elements on this slice
-		log.debug("totalPages() = {}", articlePages.getTotalPages()); 
-		log.debug("totalElements = {}", articlePages.getTotalElements()); 
 		
 		return "/member/memberPost";
 	}
@@ -405,12 +399,13 @@ public class MemberController {
 	public  List<Map> memberPostReviewPageSort(
 			@PathVariable(value="pageNum") Integer pageNum,
 			@RequestParam(value="memberId") Long memberId,
+			@RequestParam(value="categoryTitle", required=false) CategoryTitle categoryTitle,
 			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			HttpServletRequest request, Model model){
 		
 		Page<Review> pages = 
-				memberService.getReviewsPaging("", memberId, pageNum, sortProperty, direction);
+				memberService.getReviewsPaging("", memberId, pageNum, categoryTitle, sortProperty, direction);
 		
 		List<Review> reviews = pages.getContent();
 		List<ProductView> products = new ArrayList();
