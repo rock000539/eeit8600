@@ -227,6 +227,12 @@ public class ReviewController {
 		return review;
 	}
 
+	@RequestMapping("/edit_fms/{reviewId}")
+	public String editFms(@PathVariable Long reviewId,Model model){
+		model.addAttribute("review", service.getById(reviewId));
+		return "/review/reviewEditFms";
+	}
+	
 	@RequestMapping("/add_bms")
 	public String addBmsPage() {
 		return "/review/reviewAdd";
@@ -238,7 +244,11 @@ public class ReviewController {
 		// 品牌
 		List<BrandSearch> brands = brandService.getAllByVoSearch();
 		model.addAttribute("brands", brands);
-
+		
+		//商品
+		Product product = prodService.getById(prodId);
+		model.addAttribute("product", product);
+		
 		return "/review/reviewAddFms";
 	}
 

@@ -599,7 +599,7 @@
 		
 		// 寫心得
 		function write_review_click(a) {
-			document.location.href='/reviews/add?reviewId=' + $(a).attr('data-reviewId');
+			document.location.href='/reviews/add?prodId=' + $(a).attr('data-reviewId');
 		}
 		
 		// 分享產品

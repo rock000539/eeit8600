@@ -14,6 +14,7 @@
 	
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/metisMenu.min.js"></script>
 	<script src="/js/sb-admin-2.js"></script>
 
 	<!-- BootStrap 基本檔案  -->
@@ -33,7 +34,7 @@
     <script src="/js/metisMenu.min.js"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Reivew Edit</title>
+	<title>Review Edit</title>
 	
 	<style>
 		.col-md-6 {
@@ -58,14 +59,15 @@
 	<div id="wrapper">
 	
 	<!-- 加入上方及側邊Nav-Bar -->	
-	<c:import url="../bms_header.jsp" />
-	<c:import url="../bms_navbar-side.jsp" />
-	
-	<!-- Page Content --> 
-	<div id="page-wrapper">
-	    <div class="container-fluid">
-	        <div class="row">
-	            <div class="col-lg-12">
+	<c:import url="/WEB-INF/jsp/bms_header.jsp" />
+	<c:import url="/WEB-INF/jsp/bms_navbar-side.jsp" />
+		
+<!-- Page Content --> 
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Review Edit</h1>
 	                 <!-- **每頁不同的內容從這裡開始** -->
 	                 
                 	<div class="col-md-2"></div>
@@ -258,18 +260,18 @@
 					</div>
 					<div class="col-md-2"></div>
 	                
-	                <!-- **每頁不同的內容 end** -->
-	            </div>
-	            <!-- /.col-lg-12 -->
-	        </div>
-	        <!-- /.row -->
-	    </div>
-	    <!-- /.container-fluid -->
-	</div>
-	<!-- /#page-wrapper -->
-	
-	</div>
-	<!-- /#wrapper -->
+                <!-- **每頁不同的內容 end** -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 	
 	<script type="text/javascript">
 	

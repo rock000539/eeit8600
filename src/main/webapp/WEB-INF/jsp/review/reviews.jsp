@@ -31,7 +31,9 @@
 <!-- <div class="container text-center" style="text-align: center"> -->
 <div class="container">
 <div>
-<a href="/reviews/add"><button class="btn btn-danger btn-lg" type="button" >寫心得</button></a>	
+<a href="/reviews/add"><button class="btn btn-danger btn-lg" type="button" style="width:150px;margin:10px 0 0 10px">
+	<i class="fa fa-plus"></i>&nbsp;New Review</button>
+</a>	
 <!-- <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
 
 <!-- <input type ="button" onclick="history.back()" class="btn btn-danger btn-lg" value="回到上一頁"></input> -->
