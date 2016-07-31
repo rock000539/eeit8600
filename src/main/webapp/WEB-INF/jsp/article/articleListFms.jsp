@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Article List FMS</title>
+    <title></title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -200,6 +200,7 @@
 	
 	<script>
 	$(function(){
+		$('title').text("Qutie ♥ FORUM");
 		
 		var href = window.location.href;
 		var typeIndex = href.lastIndexOf('=');
@@ -213,6 +214,9 @@
 		if(typeIndex!=-1){
 			$('#'+type).addClass('active');
 			$('#articleType').val(type); //設定type="hidden" id="articleType"的value
+			$('title').text("Qutie ♥ FORUM【"+type+"】");
+		} else {
+			$('title').text("Qutie ♥ FORUM");
 		}
 		
 		//分頁功能

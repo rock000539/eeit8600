@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import tw.com.queautiful.commons.util.RealIpUtils;
 import tw.com.queautiful.product.entity.Brand;
 import tw.com.queautiful.product.service.BrandService;
+import tw.com.queautiful.product.service.MemberService;
 
 @Controller
 public class IndexController {
 	 @Autowired
 	    private BrandService brandService;
+	 @Autowired
+	 private MemberService memberService;
 	 
 	@RequestMapping("/")
 	public String indexPage() {

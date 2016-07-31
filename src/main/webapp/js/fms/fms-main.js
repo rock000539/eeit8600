@@ -1,38 +1,5 @@
 $(function() {
 
-	/*----------------------------------------------------*/
-	/*
-	 * Fraction Slider /*----------------------------------------------------
-	 */
-	if (jQuery.isFunction(jQuery.fn.fractionSlider)) {
-		$(window).load(function() {
-			$('.slider').fractionSlider({
-				'fullWidth' : true,
-				'controls' : true,
-				'responsive' : true,
-				'dimensions' : "1170,355",
-				'timeout' : 5000,
-				'increase' : true,
-				'pauseOnHover' : true,
-				'slideEndAnimation' : false,
-				'autoChange' : true
-			});
-		});
-	}
-
-	// ===================
-	// = Flickr Gallery =
-	// ===================
-//	$('#flickrFeed')
-//			.jflickrfeed(
-//					{
-//						limit : 9,
-//						qstrings : {
-//							// id: '124787947@N07' our id //
-//							id : '124787947@N07'
-//						},
-//						itemTemplate : '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
-//					});
 	// ============================
 	// = Scroll event function =
 	// ===========================
