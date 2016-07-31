@@ -22,6 +22,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.commons.enums.ArticleType;
+import tw.com.queautiful.commons.enums.CategoryTitle;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.MemberDao;
 import tw.com.queautiful.product.entity.Article;
@@ -100,8 +101,17 @@ public class MemberService {
 		return reviewService.getAll(spec, pageable);
 	}
 
-//	public Integer getReviewCategoryNum(Long memberId, String categoryTitle){
+//	public Integer getReviewCategoryNum(Long memberId, CategoryTitle categoryTitle){
+//		Review review = new Review();
+//		review.setMember(getById(memberId));
 //		
+//		Product product = new Product();
+//		product.setCategoryTitle(categoryTitle);
+//		review.setProduct(product);
+//		
+//		Specification<Review> spec = Spec.byAuto(em, review);
+//		
+//		return reviewService.getAll(spec).size();
 //	}
 	
 	

@@ -221,7 +221,7 @@ h2, h4{
 		        <div class="reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
 		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
-		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
+		        	<h4 class="prod">${item.product.prodName} | ${item.product.brandName}</h4>
 		        	<div class="preview">${item.review}</div>
 		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
@@ -337,12 +337,19 @@ $(function(){
 		if($(this).hasClass('selected')){
 			return;
 		}
-		console.log($(this).attr('value'));
-		$('.subtabs>.selected').removeClass('selected');
-		$(this).addClass('selected');
+		
+		//review
+		if($('#tab-r').hasClass('active')){
+			$('#review .subtabs>.selected').removeClass('selected');
+			$(this).addClass('selected');
+			
+		}
+		
 		
 		// articles
 		if($('#tab-a').hasClass('active')){
+			$('#article .subtabs>.selected').removeClass('selected');
+			$(this).addClass('selected');
 			articleType = $(this).attr('value');
 			$('#articlesPageNum').attr("value", 0);
 			$('#articleContentDiv').empty();
@@ -354,14 +361,11 @@ $(function(){
 		
 		if($(window).scrollTop() + $(window).height() >= $(document).height()){	
 			if($('#tab-r').hasClass('active')){
-				
+				loadReviewData();
 			}
 			if($('#tab-a').hasClass('active')){
-				console.log(articlesPageNum);
 				var nextPage = parseInt($('#articlesPageNum').val())+1;
-				console.log("article next page: "+ nextPage);
 				loadArticleData(nextPage, articleType, direction);
-				console.log("articleType: "+articleType);
 			}
 		}  /* scroll-bottom*/
 	}); /* onScroll */
@@ -413,7 +417,7 @@ $(function(){
 						.replace('_review', reviews[i].review)
 						.replace('_reviewId', reviews[i].reviewId))
 						.appendTo($('#review'));
-					
+				 
 				}
 			} /* success */
     	});} /* ajax */
@@ -440,14 +444,9 @@ $(function(){
 					var articlesTotalPages = result.articlesTotalPages;
 					var member = result.member;
 					
-					
-					console.log("return page: "+returnPagea);
-					console.log("return totalpage: "+articlesTotalPages);
-					
 					$('#articlesPageNum').attr("value",returnPagea);
 					$('#articlesTotalPages').val(articlesTotalPages);
 					
-					console.log("after val: "+ $('#articlesPageNum').val());
 					for(var i=0; i<articles.length; i++){
 						$($('#articleTemplate').html()
 							.replace('_articleTime', articles[i].articleTime)

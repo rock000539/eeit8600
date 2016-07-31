@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.enums.ArticleType;
+import tw.com.queautiful.commons.enums.CategoryTitle;
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Article;
@@ -179,22 +180,18 @@ public class MemberController {
 	//delete wishlist
 	@RequestMapping("/like/product/delete")
 	@ResponseBody
-	public Boolean wishListDelete(@RequestParam Long prodId, HttpServletRequest request, Model model){
+	public Integer wishListDelete(@RequestParam Long prodId, HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		log.debug("{} wishlist", memberId.toString());
 		Set<Product> products = member.getProductSavedByMember();
 		Product product = productService.getById(prodId);
-		
 		if(products.contains(product)){
 			products.remove(product);
 			member.setProductSavedByMember(products);
 			memberService.update(member);
 		}
-		if(products.contains(product)){
-			return false;
-		}
-		return true;
+		return products.size();
 	}
 
 	
@@ -343,7 +340,7 @@ public class MemberController {
 		model.addAttribute("reviewsPageNum", pages.getNumber());
 		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
 		model.addAttribute("reviewsTotalElement", pages.getTotalElements());
-//		model.addAttribute("countMakeUp", memberService.getReviewCategoryNum(memberId, "MAKEUP"));
+//		model.addAttribute("countMakeUp", memberService.getReviewCategoryNum(memberId, CategoryTitle.MAKEUP));
 //		model.addAttribute("countSkinCare", memberService.getReviewCategoryNum(memberId, "SKINCARE"));
 //		model.addAttribute("countBath&Body", memberService.getReviewCategoryNum(memberId, "BATHBODY"));
 //		model.addAttribute("countHair", memberService.getReviewCategoryNum(memberId, "HAIR"));
