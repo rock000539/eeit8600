@@ -206,6 +206,18 @@ h2, h4{
 				<span value="BATHBODY" class="subtab">BATHBODY</span>
 				<span class="sep"> · </span>
 				<span value="HAIR" class="subtab">HAIR</span>
+				
+				<div class="dropdown">
+				  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    Order
+				    <span class="caret"></span>
+				  </div>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a value="reviewTime">Time</a></li>
+				    <li><a value="reviewRating">Rating</a></li>
+				    <li><a value="rewCollect">Liked</a></li>
+				  </ul>
+				</div>
 			</div> <!-- subtabs -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
@@ -329,8 +341,16 @@ h2, h4{
 $(function(){
 	var memberId = ${member.memberId};
 	console.log(memberId);
+	var sortProperty;
+	
 	var articleType;
 	var direction = "DESC";
+	
+	$('.dropdown-menu a').click(function(){
+		sortProperty = $(this).attr('value');
+		console.log(sortProperty);
+		$('#dropdownMenu1').html($(this).html()+' <span class="caret"></span>');
+	});
 	
 	$('.subtabs>.subtab').click(function(){
 		// 改變樣式，但同一個tab不作用
@@ -344,7 +364,6 @@ $(function(){
 			$(this).addClass('selected');
 			
 		}
-		
 		
 		// articles
 		if($('#tab-a').hasClass('active')){
@@ -361,7 +380,8 @@ $(function(){
 		
 		if($(window).scrollTop() + $(window).height() >= $(document).height()){	
 			if($('#tab-r').hasClass('active')){
-				loadReviewData();
+				var nextPage = parseInt($('#reviewsPageNum').val())+1;
+				loadReviewData(nextPage, sortProperty, direction);
 			}
 			if($('#tab-a').hasClass('active')){
 				var nextPage = parseInt($('#articlesPageNum').val())+1;
@@ -371,19 +391,22 @@ $(function(){
 	}); /* onScroll */
 	
 	
-	function loadReviewData(){
+	function loadReviewData(pageNum, sortProperty, direction){
+		var data= {"memberId": memberId, "sortProperty": sortProperty, "direction": direction};
+		console.log(data);
+		
     	totalPages = $('#reviewsTotalPages').val();
     	loadedPageNum = $('#reviewsPageNum').val();
-    	pageNum = parseInt(loadedPageNum)+1;
     	console.log("totalPages: "+totalPages);
     	console.log("loadedPageNum: "+loadedPageNum);
-    	console.log("pageNum: "+nextPageNum);
+    	console.log("pageNum: "+pageNum);
     	
     	if(loadedPageNum < totalPages){
     	$.ajax({
     		url: '/members/post/review/'+pageNum,
 			type: 'POST',
 			dataType: 'json',
+			data: data,
 			contextType: 'application/json; charset=utf-8;',
 			success: function(response){
 				var result = response[0];

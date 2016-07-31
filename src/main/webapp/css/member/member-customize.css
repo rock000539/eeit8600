@@ -173,3 +173,12 @@
     font-weight: bold;
     position: absolute;
 }
+.dropdown{
+	display: inline-block;
+	border-radius: 0;
+	background: transparent;
+	color: #000;
+	float: right;
+	cursor: pointer;
+	padding: 0 16px;
+}
