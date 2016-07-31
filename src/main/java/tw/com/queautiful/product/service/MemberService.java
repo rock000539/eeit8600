@@ -85,7 +85,7 @@ public class MemberService {
 	
 	//reviews Saved/Wroted ByMember PAGEDnSORTED
 	public Page<Review> getReviewsPaging(String findby, Long memberId, Integer pageNum,
-			String sortProperty, String direction){
+			CategoryTitle categoryTitle, String sortProperty, String direction){
 		Review review = new Review();
 		review.setMember(getById(memberId));
 		
@@ -108,13 +108,18 @@ public class MemberService {
 //		Review review = new Review();
 //		review.setMember(getById(memberId));
 //		
-//		Product product = new Product();
-//		product.setCategoryTitle(categoryTitle);
+//		Product product = productService.getById(review.getProdId());
 //		review.setProduct(product);
 //		
-//		Specification<Review> spec = Spec.byAuto(em, review);
+//		Specification<Review> spec1 = Spec.byAuto(em, review);
 //		
-//		return reviewService.getAll(spec).size();
+//		Product product = new Product();
+//		product.setCategory();
+//		
+//		Specification<Product> spec2 = Spec.byAuto(em, product);
+//		log.debug(reviewService.getAll(spec1, spec2).toString());
+//		
+//		return reviewService.getAll(spec1).size();
 //	}
 	
 	
