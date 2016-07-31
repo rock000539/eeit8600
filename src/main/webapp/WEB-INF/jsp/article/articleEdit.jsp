@@ -315,7 +315,13 @@ select {
 	});
 	
 	function toModal(){
-		if($('#editForm').validate().form() && CKEDITOR.instances['articleContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){  //驗證成功
+		if($('#editForm').validate().form() && 
+				CKEDITOR.instances['articleContent']
+						.getData()
+						.replace(/&nbsp;/g,'')
+						.replace(/<p>/g, "")
+						.replace(/<\/p>/g,"")
+						.trim().length != 0){  //驗證成功
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Post Type：'+$(':selected').val()+'</p>')

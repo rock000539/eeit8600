@@ -1,12 +1,17 @@
 package tw.com.queautiful.product.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -59,6 +64,15 @@ public class ArticleReply {
 	
 	@Transient
 	private java.sql.Date memberRegiDate;
+	
+	//回覆留言
+	@OneToMany(mappedBy="articleReply" , fetch = FetchType.LAZY) 
+	@OrderBy("ARTICLERCMTIME ASC")
+	private Set<ArticleRCM> arcms;
+	
+	//回覆留言數
+	@Transient
+	private Integer arcmsSize;
 	
 	@Override
 	public String toString() {
@@ -184,7 +198,25 @@ public class ArticleReply {
 	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
 		this.memberRegiDate = memberRegiDate;
 	}
-	
 
+	public Set<ArticleRCM> getArcms() {
+		return arcms;
+	}
+
+	public void setArcms(Set<ArticleRCM> arcms) {
+		this.arcms = arcms;
+	}
+
+	public Integer getArcmsSize() {
+		if(this.getArcms()!=null){
+			return this.getArcms().size();
+		} else {
+			return 0 ;
+		}
+	}
+
+	public void setArcmsSize(Integer arcmsSize) {
+		this.arcmsSize = arcmsSize;
+	}
 
 }
