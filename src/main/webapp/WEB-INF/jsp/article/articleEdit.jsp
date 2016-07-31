@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Article Edit</title>
+    <title></title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -250,6 +250,8 @@ select {
 	<script>
 	$(function(){
 
+		$('title').text("Forum - Edit【${article.articleType}】${article.articleTitle}");
+		
 		// 設定文章Type & Content
 		$('#${article.articleType}').attr('selected',true);
 

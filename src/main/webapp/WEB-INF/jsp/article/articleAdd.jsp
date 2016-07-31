@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Article Add</title>
+    <title>FORUM - Post A New Topic</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>FMS Template</title>
+    <title></title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -390,7 +390,7 @@
 							<input type="hidden" name="acmShow" value="true"/>
 							<input type="hidden" name="acmReport" value="0"/>
 							<div class="col-lg-9"></div>
-							<textarea name="acmMsg" id="acmMsg" class="form-control" placeholder="Write a comment" rows="1"></textarea>
+							<textarea name="acmMsg" id="acmMsg" class="form-control" placeholder="Write a comment" rows="1" style="resize:none;"></textarea>
 						</form>
 			        </div>
 			      </div>
@@ -572,6 +572,9 @@
 	
 	<script>
 	$(function(){
+		
+		$('title').text("【${article.articleType}】${article.articleTitle}");
+		
 		/* ============ USER IMG =========== */
 		var list = $('.authorimg');
 		for(var i = 0; i < list.length; i++) {
