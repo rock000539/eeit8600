@@ -30,6 +30,10 @@ public class ReviewService {
 		return reviewDAO.findAll(pageable);
 	}
 	
+	public List<Review> getAll(Specification<Review> spec) {
+		return reviewDAO.findAll(spec);
+	}
+	
 	public Page<Review> getAll(Specification<Review> spec, Pageable pageable) {
 		return reviewDAO.findAll(spec, pageable);
 	}

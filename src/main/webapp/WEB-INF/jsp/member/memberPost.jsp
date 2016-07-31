@@ -208,6 +208,7 @@ h2, h4{
 				<span value="HAIR" class="subtab">HAIR</span>
 				
 				<div class="dropdown">
+				  <div style="float: left">Order By</div> 
 				  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				    Order
 				    <span class="caret"></span>
