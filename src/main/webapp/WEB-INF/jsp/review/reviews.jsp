@@ -47,7 +47,7 @@
 	      	</div></a>
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>
-		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;留言</div>
+		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;Comments</div>
 		      	
 		      	<div class="caption">
 						<!--心得發布者資訊start -->
@@ -78,10 +78,10 @@
 										}
 									});
 								</script>
-							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
+							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}scores</span>  
 						</div>
 						<!--心得評分  end -->
-						<div class="user-skin">${review.member.skinType}性肌膚、${review.member.age}歲</div>
+						<div class="user-skin">${review.member.skinType}&nbsp;Skin、${review.member.age}&nbsp;Age</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				

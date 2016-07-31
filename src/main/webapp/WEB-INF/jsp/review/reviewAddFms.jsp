@@ -764,7 +764,7 @@ select {
 					dataType:'json',
 					success:function(data){
 // 						console.log("data="+data);
-						history.back(1);
+// 						history.back(1);
 	 				}
 				});
 		    }
@@ -782,7 +782,9 @@ select {
 	// 			$("#myModal").modal("show").on("shown", function () {
 			    window.setTimeout(function () {
 			        $("#myModal").modal("hide");
-			    }, 3000);
+			        history.back(1);
+			    }, 2500);
+				
 // 			});
 		}else{
 			$(".modal-title").empty()
