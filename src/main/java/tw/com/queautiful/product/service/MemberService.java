@@ -1,7 +1,10 @@
 package tw.com.queautiful.product.service;
 
+import java.math.BigInteger;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -240,6 +243,31 @@ public class MemberService {
 		log.debug("{}=years old", age);
 		return age;
 	}
-
-
+	
+	public List<Review> findReviewByCategory(long categoryId,long memberId){
+	String findReviewByCategory=
+	"select reviewid,reviewtitle,review,reviewimg,reviewrating,reviewtime,rewcollect from review r join " 
+	+"(select p.prodid from product p join category c on  p.categoryid =c.categoryid "
+	+ "where p.categoryid="+categoryId+") t "
+	+"on r.prodid = t.prodid where r.memberid = "+memberId;
+	
+	List<Object[]> resultList = em.createNativeQuery(findReviewByCategory).getResultList();
+	List<Review> result=new ArrayList<Review>();
+		for(int i=0;i<resultList.size();i++){
+			Review review=new Review();
+			Object[] datas=resultList.get(i);
+			BigInteger bigId= (BigInteger) datas[0];
+			long BigInteger=bigId.longValue();
+			review.setReviewId(BigInteger);
+			review.setReviewTitle((String) datas[1]);
+			review.setReview((String) datas[2]);
+			review.setReviewImg((String)datas[3]);
+			review.setReviewRating((Integer)datas[4]);
+			review.setReviewTime((Date)datas[5]);
+			review.setRewCollect((Integer)datas[6]);
+			result.add(review);
+		}
+		
+		return result;
+	}
 }
