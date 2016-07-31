@@ -67,6 +67,7 @@ h2, h4{
 	position:relative;
 	display: block;
 	float: left;
+	min-height: 200px;
 	text-align: right;
 	font-size: 12px;
 	line-height: 24px;
@@ -128,17 +129,7 @@ h2, h4{
 	background: #000;
 	color:fff;
 }
-.preview{
-	overflow: hidden; 
-	display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-align: justify;
-    line-height: 20px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #333;
-}
+
 .singlepage{
     font-family: Savoy,Georgia,serif;
     font-size: 16px;
@@ -206,7 +197,15 @@ h2, h4{
 				<p>POSTED REVIEWS (${reviewsTotalElement})</p>
 			</div>
 			<div class="subtabs">
-			
+				<span class="subtab selected">ALL (${reviewsTotalElement})</span>
+				<span class="sep"> · </span>
+				<span value="NEWS" class="subtab">MAKEUP</span>
+				<span class="sep"> · </span>
+				<span value="SKINCARE" class="subtab">SKINCARE</span>
+				<span class="sep"> · </span>
+				<span value="BATHBODY" class="subtab">BATHBODY</span>
+				<span class="sep"> · </span>
+				<span value="HAIR" class="subtab">HAIR</span>
 			</div> <!-- subtabs -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
@@ -223,7 +222,7 @@ h2, h4{
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
 		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
-		        	<p class="preview">${item.review}</p>
+		        	<div class="preview">${item.review}</div>
 		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
@@ -254,7 +253,7 @@ h2, h4{
 				<c:forEach var="item" items="${articles}" varStatus="vs">
 				<div class="articles col-lg-12">
 					<div class="articleTime">
-						<h4>${item.articleTime}</h4>
+						<h4>${fn:substring(item.articleTime,0,19)}</h4>
 						<h4 class="articleType">${item.articleType}</h4>
 						<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
 					</div>
@@ -263,7 +262,7 @@ h2, h4{
 							<a  class="articleEdit" href="/articles/edit/${item.articleId}">
 							<span>
 							<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
-						<p class="preview">${item.articleContent}</p>
+						<div class="preview">${item.articleContent}</div>
 						<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
 			        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 					</div>

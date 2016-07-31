@@ -343,6 +343,10 @@ public class MemberController {
 		model.addAttribute("reviewsPageNum", pages.getNumber());
 		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
 		model.addAttribute("reviewsTotalElement", pages.getTotalElements());
+//		model.addAttribute("countMakeUp", memberService.getReviewCategoryNum(memberId, "MAKEUP"));
+//		model.addAttribute("countSkinCare", memberService.getReviewCategoryNum(memberId, "SKINCARE"));
+//		model.addAttribute("countBath&Body", memberService.getReviewCategoryNum(memberId, "BATHBODY"));
+//		model.addAttribute("countHair", memberService.getReviewCategoryNum(memberId, "HAIR"));
 		
 		Page<Article> articlePages =
 				memberService.getArticlesPaging(memberId, null, 0, null, null);

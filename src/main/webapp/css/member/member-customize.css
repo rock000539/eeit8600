@@ -159,3 +159,17 @@
 	padding: 33px 0 40px 0;
 	border-bottom: 1px solid #E0E0E0;
 }
+.preview{
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    position: relative;
+    line-height: 20px;
+    height: 100px; /* line-height的5倍, show 5行文字 */
+    overflow: hidden;
+}
+.preview::after {
+    content: "...";
+    font-weight: bold;
+    position: absolute;
+}
