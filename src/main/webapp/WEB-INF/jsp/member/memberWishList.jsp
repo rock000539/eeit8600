@@ -233,7 +233,9 @@ $(function(){
 			success:function(result){
 				console.log(result);
 				if(result){
-						$(".portfolio-item[dataId*="+prodId+"]").remove();
+					$(".portfolio-item[dataId*="+prodId+"]").remove();
+					
+					$('#count-review').html('<i class="fa fa-heart"></i> WISH LIST ('+result+')');
 				}
 				$('#myModal').modal('toggle');
 			}

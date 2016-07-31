@@ -123,18 +123,12 @@
 												</span>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}score</span>  
 											</span>
 											<!--心得評分  end -->
-                                        
-                                        
                                         </div>
                                     </div>
                                     
-                                         <img class="reviewImg" src="/reviews/show?reviewImg=${review.reviewImg}" alt="reviewImg">
-                                    
                                     <blockquote class="default">
-                                       
-                                    <p>${review.review}</p>
+                                    	<p>${review.review}</p>
                                     </blockquote>
-                                    
                                     
                                 </div>
                                 <ul class="shares" id="shares">
@@ -172,9 +166,9 @@
                                 <div class="author_bio">
                                     <h3 class="author_name"><a href="/members/post/review?memberId=${review.member.memberId}">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
                                   	<ul>
-                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性別:&nbsp;${review.member.gender}</li>
-                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;膚質:&nbsp;${review.member.skinType}性肌膚</li>
-                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:&nbsp;${review.member.age}歲</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender:&nbsp;${review.member.gender}</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skin Type:&nbsp;${review.member.skinType}&nbsp;Skin</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age:&nbsp;${review.member.age}&nbsp;Age</li>
                                   		<p></p><!--不可以刪,為了版型好看-->
                                   	</ul>
                                 </div>
@@ -431,8 +425,6 @@
      	<div class="pbhead_comment">
 			 <ul>
 				<li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:13px;margin:8px 8px"></i></a></li>
-				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:13px;margin:8px 8px"></i></a></li>
-				<li><a href="#replyarea" class="btn-warning btn-like" title="like"><i class="fa fa-heart" style="font-size:13px;margin:8px 8px"></i></a></li>
 			 </ul>
 		</div>
     </li>

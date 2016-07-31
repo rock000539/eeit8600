@@ -52,10 +52,6 @@ h2, h4{
  	border: 0px;
  	padding-left: 0px;
 }
-.reviews, .articles{
-	padding: 33px 0 40px 0;
-	border-top: 1px solid #E0E0E0;
-}
 
 .prod{
 	color:#000;
@@ -69,6 +65,7 @@ h2, h4{
 	position:relative;
 	display: block;
 	float: left;
+	min-height: 200px;
 	text-align: right;
 	font-size: 12px;
 	line-height: 24px;
@@ -173,17 +170,6 @@ h2, h4{
 .author a:hover{
 	color: #FF1E76;
 }
-.preview{
-	overflow: hidden; 
-	display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    text-align: justify;
-    line-height: 20px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #333;
-}
 .modal-content{
 	text-align: center;
 	padding: 30px 0 20px 0;
@@ -259,7 +245,7 @@ h2, h4{
 		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
 		        	<h6 class="author">by&nbsp;
 		        		<a href="<%=request.getContextPath()%>/members/overview/${item.memberId}">${item.member.nickname}</a></h6>
-		        	<p class="preview">${fn:substring(item.review, 0, 76)} ...</p>
+		        	<div class="preview">${item.review}</div>
 		        	<a class="singlepage" href="/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
@@ -281,7 +267,7 @@ h2, h4{
 			<c:forEach var="item" items="${articles}" varStatus="vs">
 			<div class="articles col-lg-12" dataId="${item.articleId}">
 				<div class="articleTime">
-					<h4>${item.articleTime}</h4>
+					<h4>${fn:substring(item.articleTime,0,19)}</h4>
 					<h4 class="articleType">${item.articleType}</h4>
 					<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
 				</div>
@@ -290,8 +276,8 @@ h2, h4{
 						<span class="articleDel" name="${item.articleId}"
 	         		 	data-toggle="modal" data-target="#myModal"><i class="fa fa-heartbeat" name="${item.articleId}"></i>&nbsp;DisLike</span></h2>
 					<h6 class="author">by&nbsp;
-		        <a href="<%=request.getContextPath()%>/members/overview/${item.memberId}">${item.member.nickname}</a></h6>	
-					<p class="preview">${item.articleContent}</p>
+		        	<a href="<%=request.getContextPath()%>/members/overview/${item.memberId}">${item.member.nickname}</a></h6>	
+					<div class="preview">${item.articleContent}</div>
 					<a class="singlepage" href="<%=request.getContextPath()%>/articles/view/${item.articleId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 				</div>

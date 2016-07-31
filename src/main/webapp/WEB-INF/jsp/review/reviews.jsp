@@ -32,7 +32,7 @@
 <div class="container">
 <div>
 <a href="/reviews/add"><button class="btn btn-danger btn-lg" type="button" >寫心得</button></a>	
-<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+<!-- <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
 
 <!-- <input type ="button" onclick="history.back()" class="btn btn-danger btn-lg" value="回到上一頁"></input> -->
 </div>
@@ -47,8 +47,7 @@
 	      	</div></a>
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>
-						<!--(???心得table要再加"推"?,心得留言table要再加"數量") -->
-		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;留言</div>
+		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;Comments</div>
 		      	
 		      	<div class="caption">
 						<!--心得發布者資訊start -->
@@ -79,10 +78,10 @@
 										}
 									});
 								</script>
-							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}分</span>  
+							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}scores</span>  
 						</div>
 						<!--心得評分  end -->
-						<div class="user-skin">${review.member.skinType}性肌膚、${review.member.age}歲</div>
+						<div class="user-skin">${review.member.skinType}&nbsp;Skin、${review.member.age}&nbsp;Age</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				

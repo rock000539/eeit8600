@@ -54,10 +54,6 @@ h2, h4{
  	border: 0px;
  	padding-left: 0px;
 }
-.reviews, .articles{
-	padding: 33px 0 40px 0;
-	border-top: 1px solid #E0E0E0;
-}
 
 .prod{
 	color:#000;
@@ -71,6 +67,7 @@ h2, h4{
 	position:relative;
 	display: block;
 	float: left;
+	min-height: 200px;
 	text-align: right;
 	font-size: 12px;
 	line-height: 24px;
@@ -132,17 +129,7 @@ h2, h4{
 	background: #000;
 	color:fff;
 }
-.preview{
-	overflow: hidden; 
-	display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-align: justify;
-    line-height: 20px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #333;
-}
+
 .singlepage{
     font-family: Savoy,Georgia,serif;
     font-size: 16px;
@@ -210,7 +197,15 @@ h2, h4{
 				<p>POSTED REVIEWS (${reviewsTotalElement})</p>
 			</div>
 			<div class="subtabs">
-			
+				<span class="subtab selected">ALL (${reviewsTotalElement})</span>
+				<span class="sep"> · </span>
+				<span value="NEWS" class="subtab">MAKEUP</span>
+				<span class="sep"> · </span>
+				<span value="SKINCARE" class="subtab">SKINCARE</span>
+				<span class="sep"> · </span>
+				<span value="BATHBODY" class="subtab">BATHBODY</span>
+				<span class="sep"> · </span>
+				<span value="HAIR" class="subtab">HAIR</span>
 			</div> <!-- subtabs -->
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
@@ -226,8 +221,8 @@ h2, h4{
 		        <div class="reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
 		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
-		        	<h4 class="prod">${item.product.prodName} | ${item.product.brand.brandName} </h4>
-		        	<p class="preview">${item.review}</p>
+		        	<h4 class="prod">${item.product.prodName} | ${item.product.brandName}</h4>
+		        	<div class="preview">${item.review}</div>
 		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
@@ -244,34 +239,36 @@ h2, h4{
 				<p>POSTED ARTICLES (${articlesTotalElement})</p>
 			</div>
 			<div class="subtabs">
-				<span value="null" class="subtab selected">ALL (${articlesTotalElement})</span>
+				<span class="subtab selected">ALL (${articlesTotalElement})</span>
 				<span class="sep"> · </span>
-				<span value="NEWS" class="subtab">NEWS</span>
+				<span value="NEWS" class="subtab">NEWS (${countNews})</span>
 				<span class="sep"> · </span>
-				<span value="SOLICIT" class="subtab">SOLICIT</span>
+				<span value="SOLICIT" class="subtab">SOLICIT (${countSolicit})</span>
 				<span class="sep"> · </span>
-				<span value="QUESTION" class="subtab">QUESTION</span>
+				<span value="QUESTION" class="subtab">QUESTION (${countQuestion})</span>
 				<span class="sep"> · </span>
-				<span value="CHAT" class="subtab">CHAT</span>
+				<span value="CHAT" class="subtab">CHAT (${countChat})</span>
 			</div> <!-- subtabs -->
-			<c:forEach var="item" items="${articles}" varStatus="vs">
-			<div class="articles col-lg-12">
-				<div class="articleTime">
-					<h4>${item.articleTime}</h4>
-					<h4 class="articleType">${item.articleType}</h4>
-					<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
+			<div id="articleContentDiv">
+				<c:forEach var="item" items="${articles}" varStatus="vs">
+				<div class="articles col-lg-12">
+					<div class="articleTime">
+						<h4>${fn:substring(item.articleTime,0,19)}</h4>
+						<h4 class="articleType">${item.articleType}</h4>
+						<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
+					</div>
+					<div class="articleContent">
+						<h2 class="articleTitle">${item.articleTitle}&nbsp;
+							<a  class="articleEdit" href="/articles/edit/${item.articleId}">
+							<span>
+							<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
+						<div class="preview">${item.articleContent}</div>
+						<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
+			        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
+					</div>
 				</div>
-				<div class="articleContent">
-					<h2 class="articleTitle">${item.articleTitle}&nbsp;
-						<a  class="articleEdit" href="/articles/edit/${item.articleId}">
-						<span>
-						<i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
-					<p class="preview">${item.articleContent}</p>
-					<a class="singlepage" href="/articles/view/${item.articleId}">read more</a>
-		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
-				</div>
+				</c:forEach>
 			</div>
-			</c:forEach>
 			<input type="hidden" id="articlesPageNum" value="${articlesPageNum}">
 			<input type="hidden" id="articlesTotalPages" value="${articlesTotalPages}">
     	</div>
@@ -330,23 +327,44 @@ h2, h4{
 </script>		
 <script>
 $(function(){
+	var memberId = ${member.memberId};
+	console.log(memberId);
+	var articleType;
+	var direction = "DESC";
+	
 	$('.subtabs>.subtab').click(function(){
-		console.log($(this).attr('value'));
-		articleType = $(this).html();
-		$('.subtabs>.selected').removeClass('selected');
-		$(this).addClass('selected');
+		// 改變樣式，但同一個tab不作用
+		if($(this).hasClass('selected')){
+			return;
+		}
+		
+		//review
+		if($('#tab-r').hasClass('active')){
+			$('#review .subtabs>.selected').removeClass('selected');
+			$(this).addClass('selected');
+			
+		}
+		
+		
+		// articles
+		if($('#tab-a').hasClass('active')){
+			$('#article .subtabs>.selected').removeClass('selected');
+			$(this).addClass('selected');
+			articleType = $(this).attr('value');
+			$('#articlesPageNum').attr("value", 0);
+			$('#articleContentDiv').empty();
+			loadArticleData(0, articleType, direction);
+		}
 	});
 	
 	$(window).scroll(function(){
 		
 		if($(window).scrollTop() + $(window).height() >= $(document).height()){	
 			if($('#tab-r').hasClass('active')){
-				
+				loadReviewData();
 			}
 			if($('#tab-a').hasClass('active')){
-				console.log(articlesPageNum);
 				var nextPage = parseInt($('#articlesPageNum').val())+1;
-				console.log("article next page: "+ nextPage);
 				loadArticleData(nextPage, articleType, direction);
 			}
 		}  /* scroll-bottom*/
@@ -399,7 +417,7 @@ $(function(){
 						.replace('_review', reviews[i].review)
 						.replace('_reviewId', reviews[i].reviewId))
 						.appendTo($('#review'));
-					
+				 
 				}
 			} /* success */
     	});} /* ajax */
@@ -407,8 +425,8 @@ $(function(){
 	
 	
 	function loadArticleData(pageNum, articleType, direction){
-		var data= {"articlesPageNum": pageNum, "articleType": articleType, "direction": direction};
-		
+		var data= {"memberId": memberId, "articleType": articleType, "direction": direction};
+		console.log(data);
 		var totalPages = $('#articlesTotalPages').val();
     	var loadedPageNum = $('#articlesPageNum').val();
     	
@@ -426,14 +444,9 @@ $(function(){
 					var articlesTotalPages = result.articlesTotalPages;
 					var member = result.member;
 					
-					
-					console.log("return page: "+returnPagea);
-					console.log("return totalpage: "+articlesTotalPages);
-					
 					$('#articlesPageNum').attr("value",returnPagea);
 					$('#articlesTotalPages').val(articlesTotalPages);
 					
-					console.log("after val: "+ $('#articlesPageNum').val());
 					for(var i=0; i<articles.length; i++){
 						$($('#articleTemplate').html()
 							.replace('_articleTime', articles[i].articleTime)
@@ -443,7 +456,7 @@ $(function(){
 							.replace('_articleId', articles[i].articleId)
 							.replace('_articleContent', articles[i].articleContent)
 							.replace('_articleId', articles[i].articleId))
-							.appendTo($('#article'));
+							.appendTo($('#articleContentDiv'));
 					}
 				} /* success */
 	    	});} /* ajax */

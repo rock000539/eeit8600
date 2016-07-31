@@ -1,6 +1,5 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.queautiful.commons.enums.ArticleType;
+import tw.com.queautiful.commons.enums.CategoryTitle;
 import tw.com.queautiful.commons.util.EmailSender;
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Article;
@@ -180,22 +180,18 @@ public class MemberController {
 	//delete wishlist
 	@RequestMapping("/like/product/delete")
 	@ResponseBody
-	public Boolean wishListDelete(@RequestParam Long prodId, HttpServletRequest request, Model model){
+	public Integer wishListDelete(@RequestParam Long prodId, HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
 		log.debug("{} wishlist", memberId.toString());
 		Set<Product> products = member.getProductSavedByMember();
 		Product product = productService.getById(prodId);
-		
 		if(products.contains(product)){
 			products.remove(product);
 			member.setProductSavedByMember(products);
 			memberService.update(member);
 		}
-		if(products.contains(product)){
-			return false;
-		}
-		return true;
+		return products.size();
 	}
 
 	
@@ -344,6 +340,10 @@ public class MemberController {
 		model.addAttribute("reviewsPageNum", pages.getNumber());
 		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
 		model.addAttribute("reviewsTotalElement", pages.getTotalElements());
+//		model.addAttribute("countMakeUp", memberService.getReviewCategoryNum(memberId, CategoryTitle.MAKEUP));
+//		model.addAttribute("countSkinCare", memberService.getReviewCategoryNum(memberId, "SKINCARE"));
+//		model.addAttribute("countBath&Body", memberService.getReviewCategoryNum(memberId, "BATHBODY"));
+//		model.addAttribute("countHair", memberService.getReviewCategoryNum(memberId, "HAIR"));
 		
 		Page<Article> articlePages =
 				memberService.getArticlesPaging(memberId, null, 0, null, null);
@@ -353,6 +353,11 @@ public class MemberController {
 		model.addAttribute("articlesTotalPages", articlePages.getTotalPages());
 		model.addAttribute("articlesTotalElement", articlePages.getTotalElements());
 		model.addAttribute("member", member);
+		model.addAttribute("countNews", articleService.getCountByMemberAndArticleType(member, ArticleType.NEWS));
+		model.addAttribute("countChat", articleService.getCountByMemberAndArticleType(member, ArticleType.CHAT));
+		model.addAttribute("countQuestion", articleService.getCountByMemberAndArticleType(member, ArticleType.QUESTION));
+		model.addAttribute("countSolicit", articleService.getCountByMemberAndArticleType(member, ArticleType.SOLICIT));
+		
 		log.debug("page number = {}", articlePages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", articlePages.getSize()); //size of the slice
 		log.debug("page numberOfElements = {}", articlePages.getNumberOfElements()); //elements on this slice
@@ -384,6 +389,7 @@ public class MemberController {
 		map.put("member", memberService.getById(memberId));
 		map.put("articlesTotalPages", pages.getTotalPages());
 		result.add(map);
+		
 		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
 		log.debug("page size = {}", pages.getSize()); //size of the slice
 		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
@@ -398,17 +404,15 @@ public class MemberController {
 	@ResponseBody
 	public  List<Map> memberPostReviewPageSort(
 			@PathVariable(value="pageNum") Integer pageNum,
+			@RequestParam(value="memberId") Long memberId,
 			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			HttpServletRequest request, Model model){
-		log.debug("page: {}",pageNum);
-		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		
 		Page<Review> pages = 
 				memberService.getReviewsPaging("", memberId, pageNum, sortProperty, direction);
 		
 		List<Review> reviews = pages.getContent();
-		List<String> dates = formatDate(reviews);
 		List<ProductView> products = new ArrayList();
 		for(Review review:reviews){
 			Long prodId = review.getProduct().getProdId();
@@ -420,7 +424,6 @@ public class MemberController {
 		List<Map> result = new ArrayList<Map>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviews", reviews);
-		map.put("dates", dates);
 		map.put("products", products);
 		map.put("reviewsPageNum", pages.getNumber());
 		map.put("reviewsTotalPages", pages.getTotalPages());
@@ -441,7 +444,7 @@ public class MemberController {
 	private List<String> formatDate(Collection<Review> reviews){
 		List<String> dates = new ArrayList();
 		for(Review review: reviews){
-			Timestamp reviewTime = review.getReviewTime();
+			Date reviewTime = review.getReviewTime();
 			SimpleDateFormat sDateFormat = new SimpleDateFormat("MMM,d,yyyy", Locale.US);
 			Calendar date = Calendar.getInstance();
 			date.setTime(reviewTime);
