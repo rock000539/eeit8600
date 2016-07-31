@@ -9,7 +9,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Fortune Responsive Multipurpose Template</title>
+    <title>Qutie</title>
     <meta name="description" content="">
 
     <!-- CSS FILES -->
@@ -36,39 +36,36 @@
         <div class="fs_loader"></div>
 
 <!-- slide1 -->
-        <div class="slide">
-            <img src="/images/fms/fraction-slider/base.jpg" width="1170" height="auto" data-in="top" data-out="fade" data-delay=""/>
-            <img src="/images/fms/fraction-slider/jmnashi.jpg" width="380" height="252" data-position="60,650" data-in="right" data-out="left" data-delay="1500"/>
+<!--         <div class="slide"> -->
+<!--             <img src="/images/fms/fraction-slider/base.jpg" width="1170" height="auto" data-in="top" data-out="fade" data-delay=""/> -->
+<!--             <img src="/images/fms/fraction-slider/jmnashi.jpg" width="380" height="252" data-position="60,650" data-in="right" data-out="left" data-delay="1500"/> -->
 
-            <p class="slide-1" data-position="100,170" data-in="top" data-out="bottom" data-delay="2500">premium layer slider use</p>
-            <p class="slide-1 a " data-position="145,170" data-in="right" data-out="left" data-delay="2900">come in 40 colors</p>
-            <p class="slide-1 " data-position="190,170" data-in="left" data-out="right" data-delay="3300">Easy to use and customize </p>
-            <p class="slide-1 a" data-position="235,170" data-in="bottom" data-out="top" data-delay="3700">super clean and responsive design </p>
-        </div>
+<!--             <p class="slide-1" data-position="100,170" data-in="top" data-out="bottom" data-delay="2500">premium layer slider use</p> -->
+<!--             <p class="slide-1 a " data-position="145,170" data-in="right" data-out="left" data-delay="2900">come in 40 colors</p> -->
+<!--             <p class="slide-1 " data-position="190,170" data-in="left" data-out="right" data-delay="3300">Easy to use and customize </p> -->
+<!--             <p class="slide-1 a" data-position="235,170" data-in="bottom" data-out="top" data-delay="3700">super clean and responsive design </p> -->
+<!--         </div> -->
 
 <!-- slide2 -->
         <div class="slide">
-            <img src="/images/fms/fraction-slider/base_2.jpg" width="1170" height="auto" data-in="fade" data-out="fade"/>
+            <img src="/images/fms/fraction-slider/pauljoe.jpg" width="1170" height="auto" data-in="top" data-out="fade"/>
 
-            <p class="slide-2 " data-position="30,430" data-in="top" data-out="top" data-delay="500">Awesome Features</p>
-            <p class="slide-2a " data-position="70,200" data-in="top" data-out="top" data-delay="400">Cors justo odio dapibus ac facilisis in, egestas eget quam.vestibulum id</p>
+            <p class="slide-2 " data-position="50,50" data-in="top" data-out="top" data-delay="1000">Summer 2016 Makeup Collection</p>
 
-            <img src="/images/fms/fraction-slider/pj.jpg" width="223" height="260" data-position="100,500" data-in="fade" data-out="fade" data-delay="1500"/>
+            <img src="/images/fms/fraction-slider/pjcatlip1.png" width="50" height="auto" data-position="150,200" data-in="right" data-out="left" data-delay="1500" />
+            <img src="/images/fms/fraction-slider/pjcatlip2.png" width="50" height="auto" data-position="110,240" data-in="right" data-out="left" data-delay="1600" />
+            <img src="/images/fms/fraction-slider/pjcatlip3.png" width="50" height="auto" data-position="170,280" data-in="right" data-out="left" data-delay="1700" />
+            <img src="/images/fms/fraction-slider/pjcatlip2.png" width="50" height="auto" data-position="170,160" data-in="right" data-out="left" data-delay="1900" />
+            <img src="/images/fms/fraction-slider/pjcatlip1.png" width="50" height="auto" data-position="110,120" data-in="right" data-out="left" data-delay="2100" />
+            <img src="/images/fms/fraction-slider/pjcatlip2.png" width="50" height="auto" data-position="150,80" data-in="right" data-out="left" data-delay="1800" />
+            <img src="/images/fms/fraction-slider/pjcatlip3.png" width="50" height="auto" data-position="170,40" data-in="right" data-out="left" data-delay="2000" />
 
-            <p class="slide-2icon" data-position="110,380" data-in="right" data-out="left" data-delay="2000"><i class="fa fa-user"></i></p>
-            <p class="slide-2icon-a " data-position="190,300" data-in="right" data-out="left" data-delay="3000">Easy instrucation</p>
-
-            <p class="slide-2icon bg " data-position="220,270" data-in="right" data-out="left" data-delay="2400"><i class="fa fa-star"></i>
-            </p>
-            <p class="slide-2icon-a " data-position="300,200" data-in="right" data-out="left" data-delay="3500">Easy & Responsive Design</p>
-
-            <p class="slide-2icon bga " data-position="110,790" data-in="left" data-out="right" data-delay="2000"><i class="fa fa-cog"></i>
-            </p>
-            <p class="slide-2icon-a " data-position="190,750" data-in="left" data-out="right" data-delay="3500">Personal cabinet</p>
-
-            <p class="slide-2icon bgb " data-position="220,900" data-in="left" data-out="right" data-delay="2400"><i class="fa fa-unlock"></i>
-            </p>
-            <p class="slide-2icon-a " data-position="300,840" data-in="left" data-out="right" data-delay="4000">100% Server Update</p>
+            <img src="/images/fms/fraction-slider/pjcat1.png" width="65" height="auto" data-position="200,390" data-in="top" data-out="bottom" data-delay="2000" data-ease-in="easeOutBack"/>
+            <p class="slide-2icon-a " data-position="270,350" data-in="top" data-out="bottom" data-delay="2000" data-ease-in="easeOutBack">001 Catamaran</p>
+            <img src="/images/fms/fraction-slider/pjcat2.png" width="65" height="auto" data-position="100,500" data-in="bottom" data-out="top" data-delay="2600" data-ease-in="easeOutBack"/>
+            <p class="slide-2icon-a " data-position="170,440" data-in="bottom" data-out="top" data-delay="2300" data-ease-in="easeOutBack">002 Smooth Sailing</p>
+            <img src="/images/fms/fraction-slider/pjcat3.png" width="65" height="auto" data-position="230,570" data-in="top" data-out="bottom" data-delay="2300" data-ease-in="easeOutBack"/>
+            <p class="slide-2icon-a " data-position="300,555" data-in="top" data-out="bottom" data-delay="2600" data-ease-in="easeOutBack">003 Ahoy!</p>
         </div>
 
 <!-- slide3 -->
@@ -91,7 +88,7 @@
             <p class=" icon" data-position="150,180" data-in="top" data-out="bottom" data-delay="1200" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
             <p class=" icon" data-position="180,180" data-in="top" data-out="bottom" data-delay="1300" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
  
-            <a href=""	class="slider-read" data-position="210,180" data-in="bottom" data-out="bottom" data-ease-in="easeOutBounce" data-delay="2000">Check Now</a>
+            <a class="slider-read" data-position="210,180" data-in="bottom" data-out="bottom" data-ease-in="easeOutBounce" data-delay="2000">Check Now</a>
         </div>
     </div>
 </div>
@@ -914,6 +911,34 @@ $(function(){
 			}
 		})
 	}
+	
+	 /* Fraction Slider */
+	if (jQuery.isFunction(jQuery.fn.fractionSlider)) {
+		$(window).load(function() {
+			$('.slider').fractionSlider({
+				'fullWidth' : true,
+				'controls' : true,
+				'responsive' : true,
+				'dimensions' : "1170,355",
+				'timeout' : 5000,
+				'increase' : true,
+				'pauseOnHover' : true,
+				'slideEndAnimation' : false,
+				'autoChange' : true
+			});
+		});
+	}
+	 
+	/* Flickr Gallery */
+	$('#flickrFeed')
+		.jflickrfeed({
+			limit : 9,
+			qstrings : {
+				// id: '124787947@N07' our id //
+				id : '124787947@N07'
+			},
+			itemTemplate : '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
+		});
 })
  </script> 
 </body>
