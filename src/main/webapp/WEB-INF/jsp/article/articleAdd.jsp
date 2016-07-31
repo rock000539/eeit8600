@@ -308,7 +308,7 @@ select {
 	});
 	
 	function toModal(){
-		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
+		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
 // 		if($('#addForm').validate().form() && CKEDITOR.instances['articleContent'].getData() != ""){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()

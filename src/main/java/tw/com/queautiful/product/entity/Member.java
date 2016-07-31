@@ -132,6 +132,11 @@ public class Member {
 	@OrderBy("ARTICLECMTIME DESC")
 	private Set<ArticleCM> acmsWroteByAuthor;
 	
+	//文章回覆留言
+	@OneToMany(mappedBy="member",fetch=FetchType.LAZY)
+	@OrderBy("ARTICLERCMTIME DESC")
+	private Set<ArticleRCM> arcmsWroteByAuthor;
+
 	@OneToMany(mappedBy="member",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Review_Report> review_Reports;
 	
@@ -397,6 +402,14 @@ public class Member {
 
 	public void setAcmsWroteByAuthor(Set<ArticleCM> acmsWroteByAuthor) {
 		this.acmsWroteByAuthor = acmsWroteByAuthor;
+	}
+	
+	public Set<ArticleRCM> getArcmsWroteByAuthor() {
+		return arcmsWroteByAuthor;
+	}
+
+	public void setArcmsWroteByAuthor(Set<ArticleRCM> arcmsWroteByAuthor) {
+		this.arcmsWroteByAuthor = arcmsWroteByAuthor;
 	}
 
 	public Integer getAge() {

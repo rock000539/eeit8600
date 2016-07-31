@@ -108,7 +108,7 @@
 		 	border:#e8ecf3 solid 1px;
 			border-top:#e8ecf3 solid 3px;
 		  	background-color:#fff;
-		 	margin-bottom:10px;
+/* 		 	margin-bottom:10px; */
 		 	border-radius:4px;
 		 	transition: all 0.5s ease-in-out;
 		}
@@ -342,7 +342,7 @@
 					<h2>【${article.articleType}】${article.articleTitle}</h2>
 					<ul>
 						<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
-						<li><a href="#collapse1" class="btn-success" title="comments" data-toggle="collapse" data-target="#collapse1"><i class="fa fa-comments-o"></i></a></li>
+						<li><a href="#collapseArticle" class="btn-success" title="comments" data-toggle="collapse" data-target="#collapseArticle"><i class="fa fa-comments-o"></i></a></li>
 						<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 						<c:if test="${article.memberId==memberId}">
 							<li><a href="/articles/edit/${article.articleId}" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
@@ -354,13 +354,11 @@
 				<div class="content">
 					${article.articleContent}
 					<ul>
-						<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapse1">
-<!-- 							<a data-toggle="collapse" href="#collapse1"> -->
-							<i class="fa fa-comments-o"></i><span  id="acms_num">&nbsp;${article.acmsSize}</span>
-<!-- 							</a> -->
+						<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapseArticle">
+							<i class="fa fa-comments-o"></i><span id="acms_num">&nbsp;${article.acmsSize}</span>
 						</li>
-						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span  id="ar_num">&nbsp;${article.arSize}</span></li>
-						<li style="color:#ff007f;"><i class="fa fa-heart"></i><span  id="memberSave_num">&nbsp;${article.memberSave.size()}</span></li>
+						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span id="ar_num">&nbsp;${article.arSize}</span></li>
+						<li style="color:#ff007f;"><i class="fa fa-heart"></i><span id="memberSave_num">&nbsp;${article.memberSave.size()}</span></li>
 					</ul>
 				</div>
 			</div>			
@@ -370,7 +368,7 @@
 		<div class="col-lg-12" style="padding:0px;">
 			<div class="panel-group">
 				<div class="panel panel-default">
-			      	<div id="collapse1" class="panel-collapse collapse">
+			      	<div id="collapseArticle" class="panel-collapse collapse">
 			        <ul class="list-group" id="articleCMsArea" >
 			        	<c:forEach var="acm" items="${article.acms}">
 				        	<li class="list-group-item">
@@ -379,7 +377,11 @@
 								</div>
 					        	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">${acm.nickname}：</span>
 					        	<span>${acm.acmMsg}</span>  
-					        	<span style="float:right;">${fn:substring(acm.acmTime,0,19)}<a href="#" style="margin-left:20px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a></span>			        	
+					        	<span style="float:right;">
+					        		${fn:substring(acm.acmTime,0,19)}
+					        		<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a>
+					        		<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
+					        		</span>			        	
 				        	</li>
 						</c:forEach>
 			        </ul>
@@ -389,7 +391,6 @@
 							<input type="hidden" name="articleId" value="${article.articleId}"/>
 							<input type="hidden" name="acmShow" value="true"/>
 							<input type="hidden" name="acmReport" value="0"/>
-							<div class="col-lg-9"></div>
 							<textarea name="acmMsg" id="acmMsg" class="form-control" placeholder="Write a comment" rows="1" style="resize:none;"></textarea>
 						</form>
 			        </div>
@@ -403,41 +404,83 @@
 		
 		<!-- start articleReply -->
 		<div id="articleReply">
-		<c:forEach var="areply" items="${article.areplies}">
-		<div class="col-lg-12 post">
-			<div class="postprofile col-lg-3">
-				<dl>
-					<dt>
-						<div class="authordiv img-circle">
-						<img  class="authorimg" src="/members/show?memberId=${areply.memberId}">
-						</div>
-						<h3><a href="#">${areply.member.nickname}</a></h3>
-						
-					</dt>
-					<dd>Post:</dd>
-					<dd>Joined:${areply.member.memberRegiDate}</dd>
-				</dl>
+			<c:forEach var="areply" items="${article.areplies}">
+			<div class="col-lg-12 post">
+				<div class="postprofile col-lg-3">
+					<dl>
+						<dt>
+							<div class="authordiv img-circle">
+							<img  class="authorimg" src="/members/show?memberId=${areply.memberId}">
+							</div>
+							<h3><a href="#">${areply.member.nickname}</a></h3>
+							
+						</dt>
+						<dd>Post:</dd>
+						<dd>Joined:${areply.member.memberRegiDate}</dd>
+					</dl>
+				
+				</div>
+				<div class="postbody col-lg-9">		
+					<div class="pbhead">
+					<h2>${areply.arTitle}</h2>
+					<ul>
+						<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
+						<li><a href="#collapse${areply.arId}" class="btn-success" title="comments" data-toggle="collapse" data-target="#collapse${areply.arId}"><i class="fa fa-comments-o"></i></a></li>
+						<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
+						<c:if test="${areply.memberId==memberId}">
+							<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
+						</c:if>
+					</ul>
+					<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(areply.arTime,0,19)}</small>
+					</div>
+					<div class="content">
+						${areply.arContent}
+						<ul>
+							<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapse${areply.arId}">
+								<i class="fa fa-comments-o"></i><span id="arcms${areply.arId}_num">&nbsp;${areply.arcmsSize}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 			
-			</div>
-			<div class="postbody col-lg-9">		
-				<div class="pbhead">
-				<h2>${areply.arTitle}</h2>
-				<ul>
-					<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
-					<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
-					<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
-					<c:if test="${areply.memberId==memberId}">
-						<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
-					</c:if>
-				</ul>
-				<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;${fn:substring(areply.arTime,0,19)}</small>
+			<!-- start articleReply comment-->
+			<div class="col-lg-12" style="padding:0px;">
+				<div class="panel-group">
+					<div class="panel panel-default">
+				      	<div id="collapse${areply.arId}" class="panel-collapse collapse">
+				        <ul class="list-group">
+				        	<c:forEach var="arcm" items="${areply.arcms}">
+					        	<li class="list-group-item">
+						        	<div class="msgAuthordiv authordiv img-circle" style="float:left;">
+										<img  class="authorimg" src="/members/show?memberId=${arcm.memberId}">
+									</div>
+						        	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">${arcm.nickname}：</span>
+						        	<span>${arcm.arcmMsg}</span>  
+						        	<span style="float:right;">
+						        		${fn:substring(arcm.arcmTime,0,19)}
+						        		<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a>
+						        		<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
+						        	</span>			        	
+					        	</li>
+							</c:forEach>
+				        </ul>
+				        <div class="panel-footer">
+				        	<form name="leaveRCM">
+								<input type="hidden" name="memberId" value="${memberId}"/>
+								<input type="hidden" name="arId" value="${areply.arId}"/>
+								<input type="hidden" name="arcmShow" value="true"/>
+								<input type="hidden" name="arcmReport" value="0"/>
+								<textarea name="arcmMsg" class="form-control" placeholder="Write a comment" rows="1" style="resize:none;" onkeydown="save_arcm(event,$(this))"></textarea>
+							</form>
+				        </div>
+				      </div>
+				    </div>
 				</div>
-				<div class="content">
-					${areply.arContent}
-				</div>
-			</div>
-		</div>		
-		</c:forEach>
+			</div>		
+			<!-- end of articleReply comment-->		
+			
+			</c:forEach>
 		</div>
 		<!-- end of articleReply -->
 
@@ -539,24 +582,48 @@
 				<dd>Post:</dd>
 				<dd>Joined:_memberRegiDate</dd>
 			</dl>
-		
 		</div>
 		<div class="postbody col-lg-9">		
 			<div class="pbhead">
 			<h2>_arTitle</h2>
 			<ul>
 				<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
-				<li><a href="#" class="btn-success" title="comments"><i class="fa fa-comments-o"></i></a></li>
+				<li><a href="#collapse_arId" class="btn-success" title="comments" data-toggle="collapse" data-target="#collapse_arId"><i class="fa fa-comments-o"></i></a></li>
 				<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 				<li><a href="#" class="btn-info" title="edit"><i class="fa fa-pencil"></i></a></li>
 			</ul>
 			<small style="clear:both;">&nbsp;&nbsp;<i class="fa fa-clock-o"></i>&nbsp;_arTime</small>
 			</div>
 			<div class="content">
-			_arContent
+				_arContent
+				<ul>
+					<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapse_arId">
+						<i class="fa fa-comments-o"></i><span id="arcms_arId_num">&nbsp;_arcmsSize</span>
+					</li>
+				</ul>
 			</div>
 		</div>
-	</div>		
+	</div>
+
+	<div class="col-lg-12" style="padding:0px;">
+		<div class="panel-group">
+			<div class="panel panel-default">
+		      	<div id="collapse_arId" class="panel-collapse collapse">
+		        <ul class="list-group">
+		        </ul>
+		        <div class="panel-footer">
+		        	<form name="leaveRCM">
+						<input type="hidden" name="memberId" value="_memberId"/>
+						<input type="hidden" name="arId" value="_arId"/>
+						<input type="hidden" name="arcmShow" value="true"/>
+						<input type="hidden" name="arcmReport" value="0"/>
+						<textarea name="arcmMsg" class="form-control" placeholder="Write a comment" rows="1" style="resize:none;" onkeydown="save_arcm(event,$(this))"></textarea>
+					</form>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+	</div>			
 	</script>
 	
 	<script id="article_cm" type="text/template">
@@ -566,7 +633,10 @@
 		</div>
        	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">_nickname：</span>
        	<span>_acmMsg</span>  
-       	<span style="float:right;">_acmTime<a href="#" style="margin-left:20px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a></span>			        	
+       	<span style="float:right;">_acmTime
+			<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a>
+			<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
+		</span>	
     </li>
 	</script>
 	
@@ -622,7 +692,7 @@
 					data:JSON.stringify($('#replyForm').serializeObject()),
 					dataType:'json',
 					success:function(data){
-						console.log(data);
+// 						console.log(data);
 						$('#arTitle').val('RE:【${article.articleType}】${article.articleTitle}');
 						CKEDITOR.instances['arContent'].setData('');
 						$($('#article_reply').html()
@@ -630,9 +700,18 @@
 										.replace('_nickname',data.nickname)
 										.replace('_memberRegiDate',data.memberRegiDate)
 										.replace('_arTitle',data.arTitle)
+										.replace('_arId',data.arId)
+										.replace('_arId',data.arId)
 										.replace('_arTime',data.arTime)
-										.replace('_arContent',data.arContent))
-										.appendTo($('#articleReply'));
+										.replace('_arContent',data.arContent)
+										.replace('_arId',data.arId)
+										.replace('_arId',data.arId)
+										.replace('_arcmsSize',data.arcmsSize)
+										.replace('_arId',data.arId)
+										.replace('_memberId',data.memberId)
+										.replace('_arId',data.arId)
+										
+						).appendTo($('#articleReply'));
 						$('#ar_num').text(" " + (parseInt($('#ar_num').text()) + 1));
 	 				},
 	 				error:function(x,y,z){
@@ -644,7 +723,7 @@
 			
 		}); //end of 文章回覆
 		
-		// 留言 (keydown觸發事件 → 驗證  → 呼叫 save_msg())	
+		// 文章留言 (keydown觸發事件 → 驗證  → 呼叫 save_msg())	
 		$('textarea[name="acmMsg"]').keydown(function(event){ 
 		    var keyCode = (event.keyCode ? event.keyCode : event.which);  
 		    if($('textarea[name="acmMsg"]').val().trim()!=""  && keyCode == 13){
@@ -673,7 +752,7 @@
 	
 	//文章收藏
 	function like_article(aId){
-		console.log(aId);
+// 		console.log(aId);
 		$.ajax({
 			url:'/members/like/article/'+ aId,
 			type:'POST',
@@ -701,9 +780,9 @@
 		});
 	}// end of 文章收藏
 	
-	// 留言
+	// 文章留言
 	function save_msg(a){
-		console.log(a);
+// 		console.log(a);
 // 		console.log(JSON.stringify($('#leaveMsg').serializeObject()));
 		$.ajax({
 			url:'/articleCMs/insert',
@@ -723,10 +802,38 @@
 				$('textarea[name="acmMsg"]').val("");
 			}
 		});
-	}// end of 留言 
+	}// end of 文章留言
+	
+	// 回覆留言
+	function save_arcm(event,a){
+	    var keyCode = (event.keyCode ? event.keyCode : event.which);  
+	    if(a.val().trim()!=""  && keyCode == 13){
+// 			console.log(JSON.stringify(a.parent().serializeObject()));
+// 			console.log(a.parent().parent().prev());
+			$.ajax({
+	 			url:'/articleRCMs/insert',
+	 			type:'post',
+	 			contentType:'application/json;charset=UTF-8',
+	 			data:JSON.stringify(a.parent().serializeObject()),
+	 			dataType:'json',
+	 			success:function(result){
+// 					console.log(result);
+					var arId = result.arId;
+	 				$($('#article_cm').html()
+	 								.replace('_memberId',result.memberId)
+	 								.replace('_nickname',result.nickname)
+	 								.replace('_acmMsg',result.arcmMsg)
+	 								.replace('_acmTime',result.arcmTime)
+	 								).appendTo(a.parent().parent().prev());
+	 				$('#arcms'+arId+'_num').text(" "+(parseInt($('#arcms'+arId+'_num').text())+1));
+	 				a.val("");
+	 			}
+	 		});
+	    }
+	}// end of 回覆留言
 	
 	function toModal(){
-		if($('#replyForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
+		if($('#replyForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
 			$(".modal-title").text('Please Check Your Post');
 			$(".modal-body").empty()
 							.append('<p>Title：'+ $(':text[name=arTitle]').val() +'</p>')		
@@ -741,10 +848,12 @@
 		}
 	}
 	
+	
 	</script>
 <!-- https://themeforest.net/item/flatboots-phpbb-31-and-30-/8536771 -->
 <!-- http://preview.themeforest.net/item/flatboots-phpbb-31-and-30-/full_screen_preview/8536771 -->
 <!-- http://preview.themeforest.net/item/eles-responsive-phpbb-31-theme/full_screen_preview/13769708 -->
 <!-- http://www.rockettheme.com/phpbb/styles -->
+<%-- ${article.member.articlesWorteByAuthor.size()} --%>
 </body>
 </html>
