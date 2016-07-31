@@ -20,6 +20,8 @@
    	<!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<!-- 表單驗證  -->
+	<script src="/js/jquery.validate.min.js"></script>
     
     <!-- FileInput -->	
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" />
@@ -457,6 +459,7 @@ select {
 							<div class="row"> 						<!-- max-width:240px;max-height:270px; -->
 								<input id="prodImgButton" type="text" class="form-control" placeholder="&nbsp;&nbsp;產品圖片" style="border-radius:20px;font-family:'Microsoft JhengHei';height: 210px;font-size:35px;"/>
 								<img id="prodImgMain" class="js-example-basic-single prodImgMain">
+								
 							</div>
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-5" style="margin:0 0 0 10px ">
@@ -505,7 +508,7 @@ select {
 					</div>
 						
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="row">
+						<div class="row" >
 							<h3 style="margin:15px 0 5px 35px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
 							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control"  placeholder="請輸入心得標題" style="border-radius:20px;font-family:'Microsoft JhengHei';margin-left: 35px"/>
 		<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
@@ -524,7 +527,7 @@ select {
 			<div class="col-lg-12 col-md-12 col-sm-12 hasbutton">
 				<div class="row">
 					<div class="form-group">
-						<button id="save" class="btn btn-default btn-lg" type="button" ><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
+						<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
 						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
 					</div>
 				</div>
@@ -534,6 +537,28 @@ select {
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
     </div><!-- /#wrapper -->
 </FORM>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+<!--       Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+	        	<button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+<!-- end of Modal -->
+
 </div>        
             <!-- **每頁不同的內容結束** -->
 </div>			
@@ -542,9 +567,6 @@ select {
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 	
 	<!-- Scripts -->	
-	
-	<script src="/js/jquery.validate.min.js"></script>
-
 	<script type="text/javascript" src="/js/fms/swipe.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
@@ -557,15 +579,31 @@ select {
 	<script src="/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript">
+	$(document).ready(function () {
 	
 	/*  ==================== Side Bar ======================== */
-	
-	$(document).ready(function () {
 		
 		  $('[data-toggle="offcanvas"]').click(function () {
 		        $('#wrapper').toggleClass('toggled');
 		  });  
 
+	/*  ================驗     證============================= */
+	
+	$('#addForm').validate({
+		onkeyup: true,
+		onfocusout: function (element) {
+	        $(element).valid();
+	    },
+	    focusInvalid: true,
+		rules:{
+			reviewTitle:{required:true},
+// 			review:{required:true}, //ckeditor沒有效果
+		},//end of rules
+		messages:{
+				reviewTitle:{required:'please enter review title'},
+// 				review:{required:'please enter review'},
+		},//end of messages	
+	});
 	/*  =====================Prod Search ======================== */
 		
 	// hide  select
@@ -574,7 +612,6 @@ select {
 	$('#prodImg').hide();
 	$('#prodImgLi').hide();
 	$('#check').hide();
-// 	$('#prodImgMain').hide();
 	
 	// select-brand init
 	$('#sbrand').select2({
@@ -637,80 +674,58 @@ select {
 		}
 	});
 	
-	/*  ============================================= */
-
-		//驗證
-// 			$('#addForm').validate({
-// 				onfocusout: function (element) {
-// 					console.log(element);
-// 			        $(element).valid();
-// 			    },
-// 				rules:{
-// 					articleType:{required:true},
-// 					articleTitle:{required:true},
-// //	 				review:{required:true},
-// 				},//end of rules
-// 				messages:{
-// //	 				articleType:'必填',
-// //	 				articleTitle:'必填',
-// //	 				review:'必填'
-// 				},//end of messages			
-// 			});
-			
-		  
-		
 	/*  ===================== diamond ================================ */
-var flag = false;
-    for (var i = 1; i <= 5; i++) {
-        with (document.getElementById("d" + i)) {
-            addEventListener("mouseover", function () { mouseOver(this.id) });  //哪個img id觸發了mouseOver事件讓星星變亮 
-            addEventListener("mouseout", function () { mouseOut(this.id) }); //哪個img id觸發了mouseOut事件讓星星變暗 
-            addEventListener("click", function () { Click(this.id) }); //id哪個img id觸發了onClick事件讓星星變亮 
-        }
-    }
-
-
-function Click(id) {  //id哪個img id觸發了onClick事件讓星星變亮 
-    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4.... 
-        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
-    }
-    flag = true; //click的時候不能讓星星變黑白
-}
-
-function mouseOut(id) {//哪個img id觸發了mouseOut事件讓星星變暗 
-    if (flag == false) { //click的時候不能讓星星變黑白
-        for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
-            document.getElementById("d" + i).className ="fa fa-diamond diamond";
-        }
-        document.getElementById("p1").textContent = "1~5分，由你決定!";
-    }
-    flag = false; //click後mouseout的時候mouseout功能恢復
-}
-
-function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮 
-    for (var i = 1; i <= 5; i++) { //把星星點亮前先設為不亮(讓click之後回到預設狀態) 
-        document.getElementById("d" + i).className = "fa fa-diamond diamond";
-    }
-    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
-        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
-    }
-    $('#reviewRating').val(id.substr(1)); //心得評分到後端
-    
-	    switch (id.substr(1)) {
-		    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
-		             break;
-		    case "2":  document.getElementById("p1").textContent =id.substr(1) + "分，勉強接受...";
-		             break;
-		    case "3":  document.getElementById("p1").textContent =id.substr(1) + "分，普通啦！";
-		             break;
-		    case "4":  document.getElementById("p1").textContent =id.substr(1) + "分，相當不錯！";
-		             break;
-		    case "5":  document.getElementById("p1").textContent =id.substr(1) + "分，超棒！超讚的！";
-		             break;
-		}
+	
+	var flag = false;
+	    for (var i = 1; i <= 5; i++) {
+	        with (document.getElementById("d" + i)) {
+	            addEventListener("mouseover", function () { mouseOver(this.id) });  //哪個img id觸發了mouseOver事件讓星星變亮 
+	            addEventListener("mouseout", function () { mouseOut(this.id) }); //哪個img id觸發了mouseOut事件讓星星變暗 
+	            addEventListener("click", function () { Click(this.id) }); //id哪個img id觸發了onClick事件讓星星變亮 
+	        }
+	    }
+	
+	
+	function Click(id) {  //id哪個img id觸發了onClick事件讓星星變亮 
+	    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4.... 
+	        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
+	    }
+	    flag = true; //click的時候不能讓星星變黑白
 	}
+	
+	function mouseOut(id) {//哪個img id觸發了mouseOut事件讓星星變暗 
+	    if (flag == false) { //click的時候不能讓星星變黑白
+	        for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
+	            document.getElementById("d" + i).className ="fa fa-diamond diamond";
+	        }
+	        document.getElementById("p1").textContent = "1~5分，由你決定!";
+	    }
+	    flag = false; //click後mouseout的時候mouseout功能恢復
+	}
+	
+	function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮 
+	    for (var i = 1; i <= 5; i++) { //把星星點亮前先設為不亮(讓click之後回到預設狀態) 
+	        document.getElementById("d" + i).className = "fa fa-diamond diamond";
+	    }
+	    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
+	        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
+	    }
+	    $('#reviewRating').val(id.substr(1)); //心得評分到後端
+	    
+		    switch (id.substr(1)) {
+			    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
+			             break;
+			    case "2":  document.getElementById("p1").textContent =id.substr(1) + "分，勉強接受...";
+			             break;
+			    case "3":  document.getElementById("p1").textContent =id.substr(1) + "分，普通啦！";
+			             break;
+			    case "4":  document.getElementById("p1").textContent =id.substr(1) + "分，相當不錯！";
+			             break;
+			    case "5":  document.getElementById("p1").textContent =id.substr(1) + "分，超棒！超讚的！";
+			             break;
+			}
+		}
 /*  ============================================= */
-
 		$.fn.serializeObject = function()
 		{
 		    var o = {};
@@ -727,11 +742,10 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 		    });
 		    return o;
 		};
-
 /*  =================save click============================ */
-// 			event.preventDefault();
+
 		$('#save').on('click',function(){
-		    
+		    if($('#addForm').validate().form()){
 			//ckEditor and addform input formdata
 			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
 			var formdata = new FormData(); 
@@ -749,13 +763,36 @@ function mouseOver(id) {//哪個img id觸發了mouseOver事件讓星星變亮
 					data:formdata,
 					dataType:'json',
 					success:function(data){
-						console.log("data="+data);
-						history.back(1);
+// 						console.log("data="+data);
+// 						history.back(1);
 	 				}
-				});		
+				});
+		    }
 		});
 	
 });
+	/*  ================= Modal ============================ */
+	function toModal(){
+		if($('#addForm').validate().form() && CKEDITOR.instances['review'].getData().replace(/[&nbsp;<p><\/p>]/g,'').trim().length != 0){
+			$(".modal-title").empty()
+							 .append('<img style="width: 100px;height: auto;margin-left:230px" src="/images/review/thumbs-up.jpg">');
+			$(".modal-body").empty()
+							.append('<h2 style="margin-left:90px">Congratulation! Your Review Will Post</h2>')	
+			$('#close').hide();
+	// 			$("#myModal").modal("show").on("shown", function () {
+			    window.setTimeout(function () {
+			        $("#myModal").modal("hide");
+			        history.back(1);
+			    }, 2500);
+				
+// 			});
+		}else{
+			$(".modal-title").empty()
+							 .text('Please Modify Your Post');
+			$(".modal-body").empty()
+							.append('<p>Please Enter the Required Fields</p>');
+		}
+	}
 </script>
 </body>
 </html>

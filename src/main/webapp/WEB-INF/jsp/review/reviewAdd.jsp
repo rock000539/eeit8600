@@ -12,6 +12,7 @@
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<!-- 表單驗證  -->
 <script src="/src/js/jquery.validate.min.js"></script>
 </head>
 <body>
