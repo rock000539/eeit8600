@@ -50,6 +50,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
  <body>
 <!--加入header&nav -->			
 <!-- **每頁不同的內容從這裡開始** -->
+<div class="row">
+<div class="col-lg-4"></div>
+<div  class="col-lg-4" style="text-align: center;"><a href="/fms"><figure><img src="/images/fms/logo_qutie.jpg"></figure></a></div>
+
+</div>
 
 <div class="row">
     <div class="wrapper col-md-12">
