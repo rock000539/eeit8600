@@ -40,8 +40,6 @@ public class SessionCounter implements HttpSessionListener, ServletRequestListen
         log.info("SessionCounter doGet!");
         response.setContentType(CONTENT_TYPE);
         HttpSession session = request.getSession();
-
-        
     }
 
     public void destroy() {
