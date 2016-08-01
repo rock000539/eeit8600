@@ -716,82 +716,71 @@
         </div>
     </div> -->
 
-    <!-- <div class="row super_sub_content">
+    <div class="row super_sub_content">
         <div class="col-md-12">
             <div class="dividerHeading">
-                <h4><span>Recent news</span></h4>
+                <h4><span>Top 10 Product</span></h4>
             </div>
 
             <div id="post-slider" class="owl-carousel">
-                <div class="post-slide">
-                    <div class="post-img">
-                        <img src="images/blog/blog_1.png">
+<!--                 <div class="post-slide"> -->
+<!--                     <div class="post-img"> -->
+<!--                         <img src="/images/fms/fraction-slider/pauljoe.jpg"> -->
+<!--                     </div> -->
+<!--                     <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5> -->
+<!--                     <div class="post-date"> -->
+<!--                         <i class="fa fa-calendar"></i> April 23, 2015 -->
+<!--                     </div> -->
+<!--                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p> -->
+<!--                     <a class="readmore" href="">Read more</a> -->
+<!--                 </div> -->  
+				<c:forEach var="product" items="${prodTop10}">      
+					<div class="post-slide">					
+                        <div class="serviceBox_5">
+                            <div class="service-image">
+                                <img src="/products/show?prodImg=${product.prodImg}" style="height:100px; width:auto;"/>
+                            </div>
+                            <div class="service-content bg1">
+                                <div class="internal">
+                                    <div class="item_content">
+<!--                                         <div class="service-icon"> -->
+<!--                                             <img src="images/services/service-3-icon.png"/> -->
+<!--                                         </div> -->
+                                        <h3>${product.prodName}<br>${product.brandName}</h3>
+                                        <a class="read" href="">more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                 
                     </div>
-                    <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                    <div class="post-date">
-                        <i class="fa fa-calendar"></i> April 23, 2015
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                    <a class="readmore" href="">Read more</a>
-                </div>
-                <div class="post-slide">
-                    <div class="post-img">
-                        <img src="images/blog/blog_2.png">
-                    </div>
-                    <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                    <div class="post-date">
-                        <i class="fa fa-calendar"></i> April 23, 2015
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                    <a class="readmore" href="">Read more</a>
-                </div>
-                <div class="post-slide">
-                    <div class="post-img">
-                        <img src="images/blog/blog_3.png">
-                    </div>
-                    <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                    <div class="post-date">
-                        <i class="fa fa-calendar"></i> April 23, 2015
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                    <a class="readmore" href="">Read more</a>
-                </div>
-                <div class="post-slide">
-                    <div class="post-img">
-                        <img src="images/blog/blog-4.png">
-                    </div>
-                    <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                    <div class="post-date">
-                        <i class="fa fa-calendar"></i> April 23, 2015
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                    <a class="readmore" href="">Read more</a>
-                </div>
-                <div class="post-slide">
-                    <div class="post-img">
-                        <img src="images/blog/blog_1.png">
-                    </div>
-                    <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                    <div class="post-date">
-                        <i class="fa fa-calendar"></i> April 23, 2015
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                    <a class="readmore" href="">Read more</a>
-                </div>
-                <div class="post-slide">
-                    <div class="post-img">
-                        <img src="images/blog/blog_2.png">
-                    </div>
-                    <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                    <div class="post-date">
-                        <i class="fa fa-calendar"></i> April 23, 2015
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                    <a class="readmore" href="">Read more</a>
-                </div>
+     			</c:forEach>
+                <c:forEach var="product" items="${prodTop10}">
+	                <div class="post-slide">
+	                    <div class="post-img">
+	                        <img src="/products/show?prodImg=${product.prodImg}" style="height:100px; width:auto;">
+	                    </div>
+	                    <h5 class="post-title"><a href="blog-post.html">${product.brandName} ${product.prodName}</a></h5>
+	                    <div class="post-date">
+	                        <i class="fa fa-calendar"></i> ${product.launchDate}
+	                    </div>
+	                    <p>
+	                    	<span>Score&nbsp;:&nbsp;
+				    			<c:forEach begin="1" end="${product.score}">
+									<i class="fa fa-diamond" style="color:#f94877"></i>
+								</c:forEach>
+								<c:if test="${product.score/1!=0}">
+									<i class="fa fa-diamond" style="color:#f94877"></i>
+								</c:if>
+								&nbsp;${product.score}
+				    		</span>
+	                    
+	                    </p>
+	                    <a class="readmore" href="">Read more</a>
+	                </div>
+                </c:forEach>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- <section class="promo_box wow bounceInUp row" data-wow-offset="50">
         <div class=" container-fluid">
@@ -886,8 +875,11 @@
 <script type="text/javascript" src="/js/fms/jquery.fractionslider.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.min.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/fms/owl.carousel.min.js"></script>
+
 <script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
+
 
 <script type="text/javascript" src="/js/fms/swipe.js"></script>
 <script type="text/javascript" src="/js/fms/jquery-scrolltofixed-min.js"></script>
@@ -928,6 +920,34 @@ $(function(){
 			});
 		});
 	}
+	 
+	
+    /*	Owl Carousel*/
+    if(jQuery.isFunction(jQuery.fn.owlCarousel)){
+
+        // Recent Work Slider
+        $("#recent-work-slider").owlCarousel({
+            navigation : true,
+            pagination : false,
+            items : 5,
+            itemsDesktop:[1199,4],
+            itemsTablet : [768, 3],
+            itemsDesktopSmall : [992, 3],
+            itemsMobile : [480,1],
+            navigationText : ["",""]
+        });
+
+        // Post News Slider
+        $("#post-slider").owlCarousel({
+            navigation : true,
+            pagination : false,
+            items : 4,
+            itemsDesktop:[1199,3],
+            itemsDesktopSmall:[980,2],
+            itemsMobile : [479,1],
+            navigationText : ["",""]
+        });
+    }
 	 
 	/* Flickr Gallery */
 	$('#flickrFeed')

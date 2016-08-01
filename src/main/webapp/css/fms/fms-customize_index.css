@@ -1,18 +1,20 @@
-.wrapper{
-            margin-top: 0px; 
-        }
+.wrapper {
+	margin-top: 0px;
+}
 
-        #header{
-            padding: 25px 0;
-        }
-        #logo{
-            margin-bottom:0;
-        }
-        .navbar-default .navbar-nav > li > a {
-            padding: 10px 12px;
-            letter-spacing: 2px;
-        }
-        /*.login, .login>span{
+#header {
+	padding: 25px 0;
+}
+
+#logo {
+	margin-bottom: 0;
+}
+
+.navbar-default .navbar-nav>li>a {
+	padding: 10px 12px;
+	letter-spacing: 2px;
+}
+/*.login, .login>span{
             float:right;
             width:40px;
             text-align:center;
@@ -21,47 +23,208 @@
         .login:hover,  .login>span:hover{
             color:hsl(219, 57%, 61%);
         }*/
+.top-nav ul {
+	line-height: 40px;
+}
 
-        .top-nav ul{
-            line-height:40px;
-        }
+.top-nav ul li {
+	float: right;
+	margin-left: 10px;
+}
 
-        .top-nav ul li{
-            float:right;
-            margin-left: 10px;
-        }
-        .top-nav ul li a{
-            color:hsl(0, 0%, 48%);
-        }
-        .top-nav ul li a:hover{
-            color:hsl(219, 57%, 61%);
+.top-nav ul li a {
+	color: hsl(0, 0%, 48%);
+}
 
-        }
+.top-nav ul li a:hover {
+	color: hsl(219, 57%, 61%);
+}
 
-        /*userimg*/
-        .userdiv {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            overflow: hidden;
-        }        
-        /*橫*/
-        .userdiv img {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            height: 100%;
-            width: auto;
-            -webkit-transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
-        }
-        /*直*/
-        .userdiv img.portrait {
-            width: 100%;
-            height: auto;
-        }
+/*userimg*/
+.userdiv {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+}
+/*橫*/
+.userdiv img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100%;
+	width: auto;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+/*直*/
+.userdiv img.portrait {
+	width: 100%;
+	height: auto;
+}
 
-        .pk_bg{
-            background: pink;
-        }
+
+/* service Box 5
+====================================*/
+.serviceBox_5{
+    margin-bottom: -10px;
+    line-height: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.serviceBox_5 .service-image{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s ease 0s;
+    margin-bottom: 10px;
+}
+.serviceBox_5 .service-image > img {
+    width: 100%;
+}
+.serviceBox_5 .service-image:hover{
+    opacity: 0.7;
+    transition: all 0.5s ease 0s;
+}
+.serviceBox_5 .service-content{
+    padding-top: 62px;
+    position: relative;
+}
+.serviceBox_5 .service-content::before {
+    background: hsl(188, 30%, 39%) none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 500px;
+    left: -20%;
+    position: absolute;
+    top: 0;
+    transform: rotate(7deg);
+    transition: all 0.3s ease 0s;
+    width: 400px;
+}
+.serviceBox_5 .service-content::after {
+    background: hsl(188, 30%, 39%) none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 500px;
+    left: 30%;
+    position: absolute;
+    top: 30px;
+    transform: rotate(-35deg);
+    transition: all 0.3s ease 0s;
+    width: 400px;
+}
+
+.serviceBox_5 .service-content .internal::before {
+    background: hsl(188, 35%, 31%) none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 500px;
+    left: -50%;
+    position: absolute;
+    top: 3%;
+    transform: rotate(14deg);
+    transition: all 0.3s ease 0s;
+    width: 400px;
+    z-index: 1;
+}
+.serviceBox_5 .service-content .internal::after {
+    background: hsl(188, 35%, 31%) none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 500px;
+    left: 57%;
+    position: absolute;
+    top: 30px;
+    transform: rotate(-52deg);
+    transition: al
+    l 0.3s ease 0s;
+    width: 400px;
+    z-index: 1;
+}
+.serviceBox_5 .service-content .item_content{
+    background: hsl(188, 35%, 31%) none repeat scroll 0 0;
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+.serviceBox_5 .service-content.bg1::before {
+    background:#4D8D72;
+}
+.serviceBox_5 .service-content.bg1::after {
+    background:#4D8D72;
+}
+
+.serviceBox_5 .service-content.bg1 .internal::before {
+    background:#407A61;
+}
+.serviceBox_5 .service-content.bg1 .internal::after {
+    background:#407A61;
+}
+.serviceBox_5 .service-content.bg1 .item_content{
+    background:#407A61;
+}
+
+.serviceBox_5 .service-content.bg2::before {
+    background:#C2D4A4;
+}
+.serviceBox_5 .service-content.bg2::after {
+    background:#C2D4A4;
+}
+.serviceBox_5 .service-content.bg2 .internal::before {
+    background:#ABBD8C;
+}
+.serviceBox_5 .service-content.bg2 .internal::after {
+    background:#ABBD8C;
+}
+.serviceBox_5 .service-content.bg2 .item_content{
+    background:#ABBD8C;
+}
+
+.serviceBox_5 .service-content.bg3::before {
+    background:#E9DC9F;
+}
+.serviceBox_5 .service-content.bg3::after {
+    background:#E9DC9F;
+}
+.serviceBox_5 .service-content.bg3 .internal::before {
+    background:#D8CC93;
+}
+.serviceBox_5 .service-content.bg3 .internal::after {
+    background:#D8CC93;
+}
+.serviceBox_5 .service-content.bg3 .item_content{
+    background:#D8CC93;
+}
+
+.serviceBox_5 .service-content h3{
+    color: hsl(0, 0%, 100%);
+    font: 400 20px/24px "Trebuchet MS",Tahoma,sans-serif;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+.serviceBox_5 .service-content a{
+    color: hsl(0, 0%, 100%);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 38px;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+}
+.serviceBox_5 .service-content a:hover{
+    color:#000000;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+
+}
+.serviceBox_5 .service-content:hover::before {
+    transform: rotate(-7deg);
+}
+.serviceBox_5 .service-content:hover .internal::before {
+    transform: rotate(10deg);
+}
