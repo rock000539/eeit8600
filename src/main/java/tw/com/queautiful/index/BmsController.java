@@ -1,5 +1,8 @@
 package tw.com.queautiful.index;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -155,5 +159,7 @@ public class BmsController {
 		return resultMap;
 		
 	}
+	
+
 	
 }

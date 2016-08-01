@@ -31,6 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 
+
+
+import com.sun.research.ws.wadl.Request;
+
 import tw.com.queautiful.commons.util.FileProcessing;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
@@ -44,6 +48,7 @@ import tw.com.queautiful.product.service.ReviewService;
 import tw.com.queautiful.product.service.Review_TagListService;
 import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
+import tw.com.queautiful.product.vo.product.ProductSearch;
 
 @Controller
 @RequestMapping("/reviews")
@@ -104,11 +109,13 @@ public class ReviewController {
 		return "/review/reviewListOriginal";
 	}
 
+	//後端心得list
 	@RequestMapping("/list")
 	public String listGrid() {
 		return "/review/reviewList";
 	}
 
+	//前端心得總覽頁面
 	@RequestMapping("/reviews")
 	public String reviews(Model model) throws ParseException {
 		
@@ -136,6 +143,7 @@ public class ReviewController {
 		return "/review/reviewTest";
 	}
 
+	//前端單面心得頁面
 	@RequestMapping("/review/{reviewId}")
 	public String reviewjQueryRain(Model model,@PathVariable Long reviewId) throws ParseException {
 		Review review = service.getById(reviewId);
@@ -180,6 +188,7 @@ public class ReviewController {
 	// return "redirect:/reviews/list";
 	// }
 
+	//後端的review list的delete功能
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	@ResponseBody
 	public void delete(@RequestBody Review review) {
@@ -192,19 +201,19 @@ public class ReviewController {
 		return "/review/reviewEditOriginal";
 	}
 
+	//後端心得編輯頁面
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam Long reviewId, Model model) { // @RequestParam														
 		model.addAttribute("review", service.getById(reviewId));           // 類似getParameter
 		return "/review/reviewEdit";
 	}
 
+	//後端心得編輯頁面的update
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	// 傳回json字串
-	public Review update(
-			@RequestPart("review") Review review, // @RequestPart類似RequestParam
-													// ,
-			@RequestPart(value = "reviewImgFile", required = false) MultipartFile reviewImgFile) {
+	public Review update(@RequestPart("review") Review review, // @RequestPart類似RequestParam
+						 @RequestPart(value = "reviewImgFile", required = false) MultipartFile reviewImgFile) {
 		// FK設定
 		review.setProduct(prodService.getById(review.getProdId()));
 		review.setMember(memberService.getById(review.getMemberId()));
@@ -227,17 +236,55 @@ public class ReviewController {
 		return review;
 	}
 
+	//前端心得編輯頁面
 	@RequestMapping("/edit_fms/{reviewId}")
 	public String editFms(@PathVariable Long reviewId,Model model){
+		
+		// 品牌
+		List<BrandSearch> brands = brandService.getAllByVoSearch();
+		model.addAttribute("brands", brands);
+		
+		//產品
+		List<Product> products = prodService.getAll();
+		model.addAttribute("products", products);
+		
 		model.addAttribute("review", service.getById(reviewId));
+		
 		return "/review/reviewEditFms";
 	}
 	
+	//前端心得編輯頁面的新增
+	@RequestMapping(value="/update_fms",method=RequestMethod.POST)
+	@ResponseBody
+	public Review updateFms(@RequestPart(name="review") Review review,
+			@RequestPart(value="reviewImgFile",required=false)MultipartFile reviewImgFile){
+
+		// FK設定
+		review.setProduct(prodService.getById(review.getProdId()));
+		review.setMember(memberService.getById(review.getMemberId()));
+		
+		review.setReviewTime(new java.sql.Date(System.currentTimeMillis()));
+		if (reviewImgFile != null) {
+			String reviewTitle = "review"+review.getReviewId();
+			String reviewImg = FileProcessing.saveImg(reviewTitle, "review",reviewImgFile);
+			review.setReviewImg(reviewImg);
+			}
+		log.debug("{}",review);
+		review.setMember(memberService.getById(review.getMemberId()));
+		review.setProduct(prodService.getById(review.getProdId()));
+		
+		service.update(review);
+
+		return review;
+	}
+	
+	//後端新增心得頁面
 	@RequestMapping("/add_bms")
 	public String addBmsPage() {
 		return "/review/reviewAdd";
 	}
 	
+	//前端新增心得頁面
 	@RequestMapping("/add")
 	public String addPage(@RequestParam(value="prodId",required=false) Long prodId,Model model) {
 		
@@ -253,19 +300,20 @@ public class ReviewController {
 		
 		return "/review/reviewAddFms";
 	}
-
+	
+	//前端新增心得頁面的insert
 	@RequestMapping(value="/insert_fms", method=RequestMethod.POST)
 	@ResponseBody
 	public Review insertFms(@RequestPart(name="review") Review review,
 			@RequestPart(value="reviewImgFile",required = false) MultipartFile reviewImgFile) {
 		
 		// FK設定
-//		review.setProduct(prodService.getById(review.getProdId()));
-//		review.setMember(memberService.getById(review.getMemberId()));
+		review.setProduct(prodService.getById(review.getProdId()));
+		review.setMember(memberService.getById(review.getMemberId()));
 		
 		review.setReviewTime(new java.sql.Date(System.currentTimeMillis()));
 		if (reviewImgFile != null) {
-			String reviewTitle = review.getReviewTitle();
+			String reviewTitle = "review"+review.getReviewId();
 			String reviewImg = FileProcessing.saveImg(reviewTitle, "review",reviewImgFile);
 			review.setReviewImg(reviewImg);
 			}
@@ -275,10 +323,10 @@ public class ReviewController {
 		
 		service.insert(review);
 		
-		
 		return review;
 	}
 	
+	//後端新增心得頁面的insert
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public Review insert(@RequestPart("review") Review review,
@@ -304,13 +352,14 @@ public class ReviewController {
 		return review;
 	}
 
-	// 提供一般抓取資料使用
+	// 提供一般抓取資料使用(Json格式)
 	@RequestMapping("/select")
 	@ResponseBody
 	public List<Review> select() {
 		return service.getAll();
 	}
 
+	//心得圖片顯示
 	@RequestMapping("/show")
 	public void show(HttpServletResponse resp,@RequestParam String reviewImg){
 		if(reviewImg !=null){
@@ -318,6 +367,7 @@ public class ReviewController {
 		}
 	}
 	
+	//心得新增和編輯頁面用來顯示product Img
 	@RequestMapping("/showProd")
 	public void show(HttpServletResponse resp, @RequestParam Long prodId) {
 		 Product prod = prodService.getById(prodId);

@@ -49,7 +49,7 @@
 						    <i class="fa fa-suitcase"></i> <span>檢舉系統管理</span> 
 						</a>
 						<ul class="sub-menu">
-							<li><a href=".jsp">設定檢舉條件</a></li>
+							<li><a href="/bms/reportcontroller">設定檢舉條件</a></li>
 							<li><a href="<% request.getContextPath(); %>/members/list">會員管理</a></li>
 							<li><a href="<% request.getContextPath(); %>/reviews/list">心得管理</a></li>
 							<li><a href="<% request.getContextPath(); %>/articles/list">討論區管理</a></li>
