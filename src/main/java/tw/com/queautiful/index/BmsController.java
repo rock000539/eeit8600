@@ -1,5 +1,8 @@
 package tw.com.queautiful.index;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -154,6 +158,27 @@ public class BmsController {
 		
 		return resultMap;
 		
+	}
+	
+	@RequestMapping("/bms/reportcontroller")
+	public String reportPropertyController(Model model){
+		Properties properties = new Properties();
+		String configFile = "src/main/resources/application.properties";
+		try {
+			properties.load(new FileInputStream(configFile));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String reportProperty=properties.getProperty("reportProperty");
+		String reviewReportProperty=properties.getProperty("review.reportProperty");
+		String articleReportProperty=properties.getProperty("article.reportProperty");
+		model.addAttribute("reportProperty",reportProperty);
+		model.addAttribute("reviewReportProperty",reviewReportProperty);
+		model.addAttribute("articleReportProperty",articleReportProperty);
+		
+		return "/report/reportPropertyController";
 	}
 	
 }

@@ -37,7 +37,7 @@
 			</ol>
 			
 			<!-- page-header 每頁標題/副標 -->
-			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
+			<h1 class="page-header">網站數據分析 <small></small></h1>
 			
 			<!-- 內文 -->
 	            <!-- **每頁不同的內容從這裡開始** -->
@@ -106,7 +106,7 @@
 	                               <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 	                               <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 	                           </div>
-	                           <h4 class="panel-title">Panel Title here</h4>
+	                           <h4 class="panel-title">新進信件</h4>
 	                       </div>
 	                       <div class="panel-body">
 	                       <!-- //////////////////////////////////////////////////////////// -->
@@ -301,10 +301,10 @@ $(function(){
 		}else{$("#insertNewIngredient").hide();}
 		$("#mailDetailsTable").empty();
 		$("#mailDetailsTable").append(
-				"<tr><td><h4>寄信者:</h4></td><td>"+webMailSender+"</td><td id='webMailId' value="+
-				webMailId+"></td></tr><tr><td><h4>標題:</h4></td><td>"
-				+mailTitle+"</td><td><h4>日期:</h4></td><td>"+mailSendDate+"</td></tr>"
-				+"<tr><td><h4>內文:</h4></td><td><div>"+mailContent+"</div></td></tr>"
+				"<tr><td><i class='fa fa-group fa-fw'></i><span class='email-from text-inverse f-w-600'>寄信者:</span></td><td>"+webMailSender+"</td><td id='webMailId' value="+
+				webMailId+"></td></tr><tr><td><span class='email-from text-inverse f-w-600'>標題:</span></td><td>"
+				+mailTitle+"</td><td><i class='fa fa-clock-o fa-fw'></i>日期:</td><td>"+mailSendDate+"</td></tr>"
+				+"<tr><td><i class='fa fa-file-text-o fa-fw'></i>內文:</td><td><div>"+mailContent+"</div></td></tr>"
 				);
 		//功能1-2 修改信件為已讀---
 			$.ajax({

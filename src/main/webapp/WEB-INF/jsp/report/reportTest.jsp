@@ -63,7 +63,7 @@ $(function(){
 		
 		var content="contentYYYZZ";
 		var reviewId=1;
-		var memberid=4;
+		var memberId=4;
 		var review_author=3;
 		var report_title="testXXZZ";
 		
@@ -72,7 +72,7 @@ $(function(){
 			"url":"/review_report/post",
 			type:"POST",
 			data:{"reviewId":reviewId,
-				"memberid":memberid,
+				"memberId":memberId,
 				"reportContent":content,
 				"report_title":report_title},
 			success:function(result){

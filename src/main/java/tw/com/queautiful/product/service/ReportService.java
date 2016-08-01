@@ -1,6 +1,10 @@
 package tw.com.queautiful.product.service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.entity.Article;
-import tw.com.queautiful.product.entity.Article_report;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.entity.WebMail;
@@ -37,6 +40,17 @@ public class ReportService {
 		long athorId=0;
 		String result="新增檢舉事件成功";
 		
+		Properties properties = new Properties();
+		String configFile = "src/main/resources/application.properties";
+		try {
+			properties.load(new FileInputStream(configFile));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int reportProperty=Integer.valueOf(properties.getProperty("reportProperty"));
+		
 		if(webMail.getArticleId()!=null){
 		Article	article=articleService.getById(webMail.getArticleId());
 		int articleReportCount=(article.getArticleReport()+1);
@@ -57,7 +71,7 @@ public class ReportService {
 			long review_author=review.getMemberId();
 			int reviewReportCount=review.getReviewReport()+1;
 			review.setReviewReport(reviewReportCount);
-			if(reviewReportCount>=5){
+			if(reviewReportCount>=reportProperty){
 				review.setReviewShow(false);	
 			}
 			athorId=review_author;
@@ -75,7 +89,7 @@ public class ReportService {
 		
 		int ReportsSum=(article_reportList.size()+review_reportList.size());
 		
-		if(ReportsSum>=5){
+		if(ReportsSum>=reportProperty){
 			Member member=memberService.getById(athorId);
 			member.setMemberSuspend(true);
 			member.setMemberSuspendStart(webMail.getMailSendDate());

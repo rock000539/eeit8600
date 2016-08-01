@@ -1,12 +1,11 @@
 package tw.com.queautiful.product.web;
 
-import java.sql.Date;
-import java.util.HashSet;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +38,17 @@ public class Review_ReportController {
 	@RequestParam long reviewId,@RequestParam long memberId,
 	@RequestParam String reportContent,
 	@RequestParam String report_title){
+		Properties properties = new Properties();
+		String configFile = "src/main/resources/application.properties";
+		try {
+			properties.load(new FileInputStream(configFile));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("test"+properties.getProperty("review.reportProperty"));
+		
 		java.util.Date now = new java.util.Date();
 		String report_date= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);				
 		String result="檢舉已送出";
