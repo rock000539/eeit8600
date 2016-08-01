@@ -160,25 +160,6 @@ public class BmsController {
 		
 	}
 	
-	@RequestMapping("/bms/reportcontroller")
-	public String reportPropertyController(Model model){
-		Properties properties = new Properties();
-		String configFile = "src/main/resources/application.properties";
-		try {
-			properties.load(new FileInputStream(configFile));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String reportProperty=properties.getProperty("reportProperty");
-		String reviewReportProperty=properties.getProperty("review.reportProperty");
-		String articleReportProperty=properties.getProperty("article.reportProperty");
-		model.addAttribute("reportProperty",reportProperty);
-		model.addAttribute("reviewReportProperty",reviewReportProperty);
-		model.addAttribute("articleReportProperty",articleReportProperty);
-		
-		return "/report/reportPropertyController";
-	}
+
 	
 }

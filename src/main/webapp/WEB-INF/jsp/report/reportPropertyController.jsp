@@ -41,18 +41,25 @@
 			<div class="row">
 			    <div class="col-md-12 ui-sortable">
 	            <!-- **每頁不同的內容從這裡開始** -->
-	            	<div>修改檢舉停權次數</div>
-	            	<div>
+	            	<div >修改檢舉停權次數</div>
+	            	<div >
 	            	<br>
-	            	<span>文章檢舉停權次數</span>
+	            	<span>文章檢舉:隱藏文章所需次數</span>
 	            	<input type="text" id="articleReportPropertys" value="${articleReportProperty}">
 	            	<input type="button" id="articleReportPropertysSubmit" value="確認">
 	            	</div>
 	            	<div>
 	            	<br>
-	            	<span>心得檢舉停權次數</span>
+	            	<span>心得檢舉:隱藏心得所需次數</span>
 	            	<input type="text" id="reviewReportPropertys" value="${reviewReportProperty}">
 	            	<input type="button" id="reviewReportPropertysSubmit" value="確認">
+	            	<br>
+	            	</div>
+	            	<div>
+	            	<br>
+	            	<span>會員停權設定</span>
+	            	<input type="text" id="ReportPropertys" value="${reportProperty}">
+	            	<input type="button" id="reportPropertySubmit" value="確認">
 	            	<br>
 	            	</div>
 	            
@@ -76,20 +83,41 @@
 	$(function(){
 		$("#articleReportPropertysSubmit").click(function (){
 			var articleReportPropertys=$("#articleReportPropertys").val();
+			
 			$.ajax({
-				
-				
-				
+				url:"/report/ReportPropertys",
+				type:"post",
+				data:{"articleReportPropertys":articleReportPropertys},
+				success:function(result){
+				alert(result);
+			}
 			})
 		});
+		
 		$("#reviewReportPropertysSubmit").click(function (){
-			var articleReportPropertys=$("#reviewReportPropertys").val();
+			var reviewReportPropertys=$("#reviewReportPropertys").val();
+			
 			$.ajax({
-				
-				
-				
+				url:"/report/ReportPropertys",
+				type:"post",
+				data:{"reviewReportPropertys":reviewReportPropertys},
+				success:function(result){
+				alert(result);
+			}
 			})
 		});
+		
+		$("#reportPropertySubmit").click(function(){
+			var reportPropertys=$("#ReportPropertys").val();
+			$.ajax({
+				url:"/report/ReportPropertys",
+				type:"post",
+				data:{"reportPropertys":reportPropertys},
+				success:function(result){
+				alert(result);
+			}
+			})
+		})
 		
 	})
 	</script>
