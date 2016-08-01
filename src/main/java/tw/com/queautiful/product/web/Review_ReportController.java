@@ -36,14 +36,14 @@ public class Review_ReportController {
 	@RequestMapping(value="/post",method = RequestMethod.POST)   
 	@ResponseBody
 	public String articlereport(
-	@RequestParam long reviewId,@RequestParam long memberid,
+	@RequestParam long reviewId,@RequestParam long memberId,
 	@RequestParam String reportContent,
 	@RequestParam String report_title){
 		java.util.Date now = new java.util.Date();
 		String report_date= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);				
 		String result="檢舉已送出";
 		java.sql.Date reportSqlDate=new java.sql.Date(now.getTime());
-		Member member=memberService.getById(memberid);
+		Member member=memberService.getById(memberId);
 		long review_author=reviewService.getById(reviewId).getMemberId();
 		Review_Report rp=new Review_Report();
 		rp.setReportContent(reportContent);

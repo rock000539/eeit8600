@@ -37,8 +37,8 @@ public class ReportService {
 		long athorId=0;
 		String result="新增檢舉事件成功";
 		
-		if(webMail.getArticleid()!=null){
-		Article	article=articleService.getById(webMail.getArticleid());
+		if(webMail.getArticleId()!=null){
+		Article	article=articleService.getById(webMail.getArticleId());
 		int articleReportCount=(article.getArticleReport()+1);
 		article.setArticleReport(articleReportCount);
 		if(articleReportCount>=5){
@@ -48,7 +48,7 @@ public class ReportService {
 		Member member=article.getMember();
 		long article_athorId=member.getMemberId();
 		athorId=article_athorId;
-		result=article_reportService.insertReport(webMail.getArticleid(),
+		result=article_reportService.insertReport(webMail.getArticleId(),
 					webMail.getWebMailSender(),webMail.getMailContent(),
 					report_date,article_athorId,webMail.getMailTitle());
 		

@@ -14,13 +14,13 @@ public class Article_reportService {
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public String insertReport (long articleid,long memberid,String report_content,
+	public String insertReport (long articleId,long memberId,String report_content,
 		String report_date,long article_athorId,String report_title){
 		
 		String result="新增檢舉事件成功";
 		String insertReport=
-" insert into [article_report](articleid, memberid, [report_content] , report_date , [article_athor_id] , report_title) values"
-+"("+articleid+","+memberid+",'"+report_content+"','"+report_date+"',"+article_athorId+",'"+report_title+"')";
+" insert into [article_report](articleId, memberId, [report_content] , report_date , [article_athor_id] , report_title) values"
++"("+articleId+","+memberId+",'"+report_content+"','"+report_date+"',"+article_athorId+",'"+report_title+"')";
 		
 		try {
 			manager.createNativeQuery(insertReport).executeUpdate();

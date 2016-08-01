@@ -155,6 +155,7 @@
 		</dependency>
 
 		<dependency>
+<<<<<<< HEAD
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast-hibernate4</artifactId>
 		</dependency>
@@ -323,6 +324,8 @@
 		</dependency>
 
 		<dependency>
+=======
+>>>>>>> branch 'master' of https://github.com/rock000539/eeit8600
 			<groupId>xml-resolver</groupId>
 			<artifactId>xml-resolver</artifactId>
 			<version>1.2</version>

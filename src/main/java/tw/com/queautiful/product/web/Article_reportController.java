@@ -32,13 +32,13 @@ public class Article_reportController {
 	@ResponseBody
 	@Transactional
 	public String articlereport (
-	@RequestParam long articleid,@RequestParam long memberid,@RequestParam String reportContent,
+	@RequestParam long articleId,@RequestParam long memberId,@RequestParam String reportContent,
 	 @RequestParam String report_title){
-		long article_athorId=articleService.getById(articleid).getMemberId();
+		long article_athorId=articleService.getById(articleId).getMemberId();
 		java.util.Date now = new java.util.Date();
 		String report_date= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);				
 		
-		String result=article_reportService.insertReport(articleid,memberid, reportContent, report_date, article_athorId, report_title);		
+		String result=article_reportService.insertReport(articleId,memberId, reportContent, report_date, article_athorId, report_title);		
 		return result;
 	}	
 	

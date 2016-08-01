@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ReviewDao;
@@ -31,7 +32,8 @@ public class ReviewService {
 	}
 	
 	public Page<Review> getAll(Specification<Review> spec, Pageable pageable) {
-		return reviewDAO.findAll(spec, pageable);
+		
+		return reviewDAO.findAll(Specifications.where(spec).and(spec), pageable);
 	}
 	
 	public void insert(Review review){

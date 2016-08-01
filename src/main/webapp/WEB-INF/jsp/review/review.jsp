@@ -362,7 +362,7 @@
 <!--在这里添加一些文本-->				
 			
 			<br>
-			<textarea cols="50" rows="5" id="reportDetile" name="reportDetile" placeholder="檢舉內容"></textarea>
+			<textarea cols="50" rows="5" id="reportDetail" name="reportDetail" placeholder="檢舉內容"></textarea>
 			<br><br>
 <!-- 		<input type="button" name="cancel" class="btn btn-sm btn-default" value="cancel" > -->
 			<button id="sendReprot" class="btn btn-sm btn-default" name="submit" >送出檢舉</button>
@@ -563,23 +563,23 @@ $(function(){  //=$(document.)ready
 		// 文章新增檢舉
 			$("#sendReprot").click(function(){
 			var reportTitle=$("#reportTitle").val();
-			var reportDetile=$("#reportDetile").val();
-			var memberid=$("#memberInfo").attr("value");
+			var reportDetail=$("#reportDetail").val();
+			var memberId=$("#memberInfo").attr("value");
 			var reviewId=$("#reviewId").attr("value");
-			var articleid=0;  //不用參數要設0
+			var articleId=0;  //不用參數要設0
 			var acmId=0;
 			var rcmId=0;
-// 			alert("reportTitle="+reportTitle+" reportDetile="+reportDetile+" memberid="+memberid+"reviewId="+reviewId);
+// 			alert("reportTitle="+reportTitle+" reportDetail="+reportDetail+" memberid="+memberid+"reviewId="+reviewId);
 			$.ajax({
 			"url":"/webmail/sendmail",
 				type:"POST",
-				data:{"memberid":memberid,
-			"articleid":articleid,
+				data:{"memberId":memberId,
+			"articleId":articleId,
 			"reviewId":reviewId,
 			"acmId":acmId,
 			"rcmId":rcmId,
 			"reportTitle":reportTitle,
-			"reportDetile":reportDetile},
+			"reportDetail":reportDetail},
 				success:function(result){
 				$('#myModal').modal("toggle");		
 				}

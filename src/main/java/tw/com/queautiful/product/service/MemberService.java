@@ -249,12 +249,12 @@ public class MemberService {
 		return age;
 	}
 	
-	public List<Review> findReviewByCategory(long categoryId,long memberId){
+	public List<Review> findReviewByCategory(String categorytitle,long memberId,String direction){
 	String findReviewByCategory=
 	"select reviewid,reviewtitle,review,reviewimg,reviewrating,reviewtime,rewcollect from review r join " 
 	+"(select p.prodid from product p join category c on  p.categoryid =c.categoryid "
-	+ "where p.categoryid="+categoryId+") t "
-	+"on r.prodid = t.prodid where r.memberid = "+memberId;
+	+ "where c.categorytitle ='"+categorytitle+"') t "
+	+"on r.prodid = t.prodid where r.memberid = "+memberId+" order by r.reviewtime";
 	
 	List<Object[]> resultList = em.createNativeQuery(findReviewByCategory).getResultList();
 	List<Review> result=new ArrayList<Review>();
