@@ -83,11 +83,7 @@
                         <li><a href="/ingredients/search"><s:message code="via_ingredient"></s:message></a></li>
                     </ul>
                 </li>
-
-                <li><a href="#"><s:message code="order"></s:message></a></li>
-
                 <li><a href="/products/search"><span class="data-hover" data-hover="blog"><s:message code="product"></s:message></span></a></li>
-
                 <li><a href="/reviews/reviews"><s:message code="review"></s:message></a></li>
                 <li><a href="/articles/listfms"><s:message code="forum"></s:message></a></li>
 				<li><a href="/contact"><s:message code="contact"></s:message></a></li>

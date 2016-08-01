@@ -91,6 +91,10 @@ $(function(){//#1
 body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
 }
+#ingredientArea{
+width: 800px;
+margin:auto auto;
+}
 .modal {
 height: 900px;
 margin-top:100px; }
@@ -146,27 +150,39 @@ background-size:cover;
 </table>
 </form>
 
-<table class="table">
-<c:if test="${not empty result}">
-<tr><th>成份名稱</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
+<div class="ingredientArea">
+<table class="table table-hover">
 
-<c:forEach var="items" items="${result}">
-<tr>
-<td>${items.ingredName}</td>
-<td>${items.ingredChName}</td>
-<td>${items.ingredChar}</td>
-<td>${items.ingredIrritant}</td>
-<td>${items.ingredAcne}</td>
-<td>${items.ingredSafety}</td>
-<td ><button class="btn-info btn-sm btn-block searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}">查看使用產品資訊</button></td>
-</tr>
-</c:forEach>
+<c:if test="${empty result}">
+<tr><td>使用說明:</td></tr>
+<tr><td>步驟一: 輸入部分成份關鍵字，選擇成份</td></tr>
+<tr><td>步驟二: 在產品右方按鈕即可查看有使用此成份的產品資訊</td></tr>
 </c:if>
-<c:set var="items" value="${resultStr}" scope="request"/>
+
+<c:if test="${not empty result}">
+	<tr><th>成份名稱</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
+
+	<c:forEach var="items" items="${result}">
+	<tr>
+		<td>${items.ingredName}</td>
+		<td>${items.ingredChName}</td>
+		<td>${items.ingredChar}</td>
+		<td>${items.ingredIrritant}</td>
+		<td>${items.ingredAcne}</td>
+		<td>${items.ingredSafety}</td>
+		<td ><button class="btn-info btn-sm btn-block searchProducts" value="查看使用產品資訊" ingredId="${items.ingredId}" name="${items.ingredName}">查看使用產品資訊</button></td>
+	</tr>
+	</c:forEach>
+
+</c:if>
+
+<c:set var="items" value="${resultStr}" scope="request"></c:set>
 <c:if test="${items}" >
 <tr><td><div class="alert alert-danger alert-dismissable">請輸入文字進行搜尋</div></td></tr>
 </c:if>
 </table>
+</div>
+
 </div>
 </div>
 <!-- 使用model1 ----------------------------------------------------------------->

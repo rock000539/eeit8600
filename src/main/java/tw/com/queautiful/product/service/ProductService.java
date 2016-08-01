@@ -1,5 +1,7 @@
 package tw.com.queautiful.product.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -62,6 +64,18 @@ public class ProductService {
 
 	public void delete(Long productId) {
 		productDao.delete(productId);
+	}
+	
+	public double initScore(List<Review> reviews) {
+		
+		double score = 0.0;
+		for(Review review : reviews) {
+			score += review.getReviewRating();
+		}
+		
+		BigDecimal result = new BigDecimal(score/reviews.size()).setScale(1, RoundingMode.UP);
+		
+		return result.doubleValue();
 	}
 	
 	public int[] calcAges(List<Review> reviews) {
