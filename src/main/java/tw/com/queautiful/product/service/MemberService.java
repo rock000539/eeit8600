@@ -264,38 +264,31 @@ public class MemberService {
 		if(categoryTitle!=null){
 			categoryTitleQuery = "where c.categorytitle ='"+categoryTitle+"'";
 		}
+
+		if(direction==null){
+			direction = "DESC";
+		}
 		
 		String orderby = "";
 		if(sortProperty == null){
 			log.debug("null");
-			orderby = "r.reviewtime";
+			orderby = "r.reviewtime "+direction;
 		}
 		if(sortProperty!=null){
-			if(sortProperty=="reviewtime"){
-				log.debug("1: {}", sortProperty);
-				orderby = "r.reviewtime";
-			}else if(sortProperty=="reviewRating"){
-				log.debug("2, {}", sortProperty);
-				orderby = "r.reviewRating";
-			}else if(sortProperty=="rewCollect"){
-				log.debug("3, {}", sortProperty);
-				orderby = "r.rewCollect";
+			if("reviewTime".equals(sortProperty)){
+				orderby = "r."+sortProperty+" "+direction;
 			}else{
-				log.debug("4: {}",sortProperty);
-				orderby = "r.reviewtime";
+				orderby = "r."+sortProperty+" "+direction+", r.reviewtime DESC";
 			}
 		}
 		
-		if(direction==null){
-			direction = "DESC";
-		}
 		
 		
 		String findReviewByCategory=
 		"select reviewid,t.prodid, t.categoryId from review r join " 
 		+"(select p.prodid, c.categoryid from product p join category c on p.categoryid = c.categoryid "
 		+ categoryTitleQuery+") t "
-		+"on r.prodid = t.prodid where r.memberid = "+memberId+" order by "+ orderby + " " + direction;
+		+"on r.prodid = t.prodid where r.memberid = "+memberId+" order by "+ orderby;
 		
 		List<Object[]> resultList = em.createNativeQuery(findReviewByCategory).getResultList();
 		
