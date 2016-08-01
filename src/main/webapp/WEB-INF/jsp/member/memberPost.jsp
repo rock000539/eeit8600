@@ -199,7 +199,7 @@ h2, h4{
 			<div class="subtabs">
 				<span class="subtab selected">ALL (${reviewsTotalElement})</span>
 				<span class="sep"> · </span>
-				<span value="NEWS" class="subtab">MAKEUP</span>
+				<span value="MAKEUP" class="subtab">MAKEUP</span>
 				<span class="sep"> · </span>
 				<span value="SKINCARE" class="subtab">SKINCARE</span>
 				<span class="sep"> · </span>
@@ -343,7 +343,7 @@ h2, h4{
 <script>
 $(function(){
 	var memberId = ${member.memberId};
-	
+	var categoryTitle;
 	var sortProperty="reviewTime";
 	var articleType;
 	var direction = "DESC";
@@ -370,7 +370,10 @@ $(function(){
 		if($('#tab-r').hasClass('active')){
 			$('#review .subtabs>.selected').removeClass('selected');
 			$(this).addClass('selected');
-			
+			categoryTitle = $(this).attr('value');
+// 			$('#reviewsPageNum').attr("value", 0);
+// 			$('#reviewContentDiv').empty();
+			loadReviewData(0, sortProperty, direction);
 		}
 		
 		// articles
@@ -411,7 +414,8 @@ $(function(){
     	
     	if(loadedPageNum < totalPages){
     	$.ajax({
-    		url: '/members/post/review/'+pageNum,
+//     		url: '/members/post/review/'+pageNum,
+			url: '/members/post/review/',
 			type: 'POST',
 			dataType: 'json',
 			data: data,

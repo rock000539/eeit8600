@@ -366,12 +366,12 @@ public class MemberController {
 	@ResponseBody
 	public  List<Map> memberPostArticlePageSort(
 			@PathVariable(value="pageNum") Integer pageNum,
+			@RequestParam(value="memberId") Long memberId,
 			@RequestParam(required=false) ArticleType articleType,
 			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			HttpServletRequest request, Model model){
 		log.debug("page: {}",pageNum);
-		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		
 		Page<Article> pages = 
 				memberService.getArticlesPaging(memberId, articleType, pageNum, sortProperty, direction);
@@ -433,7 +433,20 @@ public class MemberController {
 		return result;
 	}
 	
-
+	
+	@RequestMapping(value="/post/review")
+	@ResponseBody
+	public  List<Map> memberPostReviewSort(
+			@RequestParam(value="memberId") Long memberId,
+			@RequestParam(value="categoryTitle", required=false) CategoryTitle categoryTitle,
+			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction,
+			Model model){
+		
+		List<Review> reviews = memberService
+				.findReviewByCategory(memberId, categoryTitle, sortProperty, direction);
+		return null;
+	}
 	
 	//format date
 	private List<String> formatDate(Collection<Review> reviews){
