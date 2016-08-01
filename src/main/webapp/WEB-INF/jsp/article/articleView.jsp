@@ -341,7 +341,7 @@
 				<div class="pbhead">
 					<h2>【${article.articleType}】${article.articleTitle}</h2>
 					<ul>
-						<li><a href="#" class="btn-danger" title="report"><i class="fa fa-warning"></i></a></li>
+						<li><a class="btn-danger" title="report" data-toggle="modal" data-target="#reportModal"><i class="fa fa-warning"></i></a></li>
 						<li><a href="#collapseArticle" class="btn-success" title="comments" data-toggle="collapse" data-target="#collapseArticle"><i class="fa fa-comments-o"></i></a></li>
 						<li><a href="#replyarea" class="btn-warning" title="reply"><i class="fa fa-reply"></i></a></li>
 						<c:if test="${article.memberId==memberId}">
@@ -547,6 +547,29 @@
 </div>
 <!-- end of Modal -->
 					
+<!-- Report Modal -->
+<div class="modal fade" id="reportModal" role="dialog">
+    <div class="modal-dialog">    
+<!--       Modal content -->
+      <div class="modal-content">
+	      <div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	        	<h4 class="modal-title">Report this Article</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<input type="text" class="form-control" id="reportTitle" name="reportTitle" placeholder="Report Title">
+	      	<textarea cols="50" rows="5" class="form-control" id="reportDetail" name="reportDetail" placeholder="Report Detail" style="resize:none"></textarea>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" name="sendReport" id="sendReport" class="btn btn-default" data-dismiss="modal">Confirm</button>
+	      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+      </div>
+      
+    </div>
+</div>
+<!-- end of Report Modal -->
+
 				</div>        
             <!-- **每頁不同的內容結束** -->
 
@@ -729,6 +752,32 @@
 		    if($('textarea[name="acmMsg"]').val().trim()!=""  && keyCode == 13){
 			    save_msg($(this));
 		    }
+		});
+		
+		// 檢舉文章
+		$("#sendReport").click(function(){
+			var reportTitle=$("#reportTitle").val();
+			var reportDetail=$("#reportDetail").val();
+			var memberId='${memberId}';
+			var articleId='${article.articleId}';
+			var reviewId=0;  //不用參數要設0
+			var acmId=0;
+			var rcmId=0;
+			var reportData = {"memberId":memberId,
+							"articleId":articleId,
+							"reviewId":reviewId,
+							"acmId":acmId,
+							"rcmId":rcmId,
+							"reportTitle":reportTitle,
+							"reportDetail":reportDetail};
+			$.ajax({
+				url:"/webmail/sendmail",
+				type:"POST",
+				data:reportData,
+				success:function(result){
+					console.log(result);		
+				}
+			});
 		});
 		
 		$.fn.serializeObject = function()
