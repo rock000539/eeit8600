@@ -353,7 +353,7 @@
                data-dismiss="modal" aria-hidden="true">
                   &times;
             </button>
-            <h4 class="modal-title" id="myModalLabel">
+            <h4 class="modal-title" id="myModalLabel">Report this Review :
           	<!-- title 位置 --><input type="text" id="reportTitle" name="reportTitle" placeholder="檢舉標題">
             </h4>
          </div>
@@ -365,12 +365,12 @@
 			<textarea cols="50" rows="5" id="reportDetail" name="reportDetail" placeholder="檢舉內容"></textarea>
 			<br><br>
 <!-- 		<input type="button" name="cancel" class="btn btn-sm btn-default" value="cancel" > -->
-			<button id="sendReprot" class="btn btn-sm btn-default" name="submit" >送出檢舉</button>
+			<button id="sendReprot" class="btn btn-sm btn-default" name="submit" >Confirm</button>
          </div>
          
          <div class="modal-footer">
             <button type="button" class="btn btn-default"   id="cancelInsert"   data-dismiss="modal" >
-         	   關閉視窗
+         	 Close
             </button>
 <!--             <button type="button" class="btn btn-primary" id="insertNewIngredient" > -->
 <!--             	   提交更改 -->

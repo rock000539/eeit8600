@@ -128,7 +128,11 @@ button{color:white;
 <!-- **每頁不同的內容 end** -->
 
 <div id="productArea">
-<table id="productList" class="table  table-hover"></table>
+<table id="productList" class="table  table-hover">
+<tr><td>使用說明:</td></tr>
+<tr><td>步驟一: 輸入產品部分關鍵字，選擇產品</td></tr>
+<tr><td>步驟二: 在產品右方按鈕即可查看成份資訊</td></tr>
+</table>
 </div>
 <!-- top ////////////////////////////////////////////////////-->	
 </div> 
