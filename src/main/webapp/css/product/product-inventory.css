@@ -48,7 +48,7 @@ body {
 
 .portfolio-title {
 	height: 60px;
-	background-color: #999;
+	background-color: #777;
 	/*border-bottom: 1px solid #4FBAAA;*/
 	color: #ffffff;
 	text-align: center;
@@ -56,24 +56,24 @@ body {
 }
 
 #proList div:nth-child(4n+2) .portfolio-title {
-	background-color: #31708f;
+	background-color: #0A84C1;
 	/*border-bottom: 1px solid #C6BFB4;*/
 }
 
 #proList div:nth-child(4n+3) .portfolio-title {
-	background-color: #337ab7;
+	background-color: #17649A;
 	/*border-bottom: 1px solid #C6BFB4;*/
 } 
 
 #proList div:nth-child(4n+4) .portfolio-title {
-	background-color: #FF95CA;
+	background-color: #EA3556;
 	/*border-bottom: 1px solid #D97F88;*/
 }
 
 .blog_medium .post {
    padding-bottom: 25px;
    margin-bottom: 30px;
-   border-bottom: 3px solid #f2f2f2;
+   border-bottom: 3px solid #EDBDDC;
 /* 		    background: black; */
   		padding: 12px;
 }

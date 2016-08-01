@@ -153,6 +153,22 @@
 		    <groupId>org.springframework.hateoas</groupId>
 		    <artifactId>spring-hateoas</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>xml-resolver</groupId>
+			<artifactId>xml-resolver</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-facebook</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-twitter</artifactId>
+		</dependency>
 		
 	</dependencies>
 	<profiles>
