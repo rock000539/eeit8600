@@ -150,8 +150,8 @@ form button:hover {
   height: 80px;
   -webkit-animation-delay: 2s;
           animation-delay: 2s;
-  -webkit-animation-duration: 17s;
-          animation-duration: 17s;
+  -webkit-animation-duration: 12s;
+          animation-duration: 12s;
 }
 .bg-bubbles li:nth-child(3) {
   left: 25%;
@@ -162,8 +162,8 @@ form button:hover {
   left: 40%;
   width: 60px;
   height: 60px;
-  -webkit-animation-duration: 22s;
-          animation-duration: 22s;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
   background-color: rgba(255, 255, 255, 0.25);
 }
 .bg-bubbles li:nth-child(5) {
