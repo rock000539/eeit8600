@@ -341,9 +341,8 @@ h2, h4{
 <script>
 $(function(){
 	var memberId = ${member.memberId};
-	console.log(memberId);
-	var sortProperty;
 	
+	var sortProperty;
 	var articleType;
 	var direction = "DESC";
 	

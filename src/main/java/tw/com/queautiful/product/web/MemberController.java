@@ -70,8 +70,8 @@ public class MemberController {
 	private ReviewService reviewService;
 	
 	//overview頁面
-	@RequestMapping("/overview/{memberId}")
-	public String memberOverviewPage(@PathVariable Long memberId, HttpServletRequest request, Model model){
+	@RequestMapping("/overview/{targerMemberId}")
+	public String memberOverviewPage(@PathVariable(value="targerMemberId") Long memberId, HttpServletRequest request, Model model){
 		Member member = memberService.getById(memberId);
 		
 		java.sql.Date regiDate = member.getMemberRegiDate();
@@ -328,8 +328,8 @@ public class MemberController {
 	}
 		
 	//review n article - post頁面
-	@RequestMapping("/post/{memberId}")
-	public String memberPostedReviewPage(@PathVariable Long memberId, Model model, HttpServletRequest request){
+	@RequestMapping("/post/{targerMemberId}")
+	public String memberPostedReviewPage(@PathVariable(value="targerMemberId") Long memberId, Model model, HttpServletRequest request){
 		Member member = memberService.getById(memberId);
 		
 		Page<Review> pages = 
