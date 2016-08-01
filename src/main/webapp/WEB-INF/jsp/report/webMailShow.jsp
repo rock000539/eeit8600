@@ -103,7 +103,7 @@
                data-dismiss="modal" aria-hidden="true">
                   &times;
             </button>
-            <h4 class="modal-title" id="myModalLabel"></h4>
+            <h4 class="modal-title" id="myModalLabel" class="m-b-15 m-t-0 p-b-10 underline"></h4>
          </div>
          <form id="NewIngredientForm">
          <div class="modal-body" id="modal-body">
@@ -134,7 +134,7 @@
                data-dismiss="modal" aria-hidden="true">
                   &times;
             </button>
-            <h4 class="modal-title" id="myModalLabel2">
+            <h4 class="modal-title" id="myModalLabel2" class="m-b-15 m-t-0 p-b-10 underline">
               <div><input type="text" name="replyTitle" id="replyTitle" placeholder="Subject"></div><br>
             </h4>
          </div>
@@ -204,9 +204,10 @@ $(function(){
 		$("#myModalLabel").append("標題 :"+mailTitle);
 		$("#mailDetailsTable").empty();
 		$("#mailDetailsTable").append(
-				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
-				webMailId+"></td><td>日期</td><td>"+mailSendDate+"</td></tr>"
-				+"<tr><td>內容</td><td colspan='4'><div>"+mailContent+"</div></td></tr>"
+				"<tr><td><i class='fa fa-group fa-fw'></i><span class='email-from text-inverse f-w-600'>"+
+               "寄信者 </span></td><td><span class='email-from text-inverse f-w-600'>"+webMailSender+"</span></td><td id='webMailId' value="+
+				webMailId+"></td></tr><tr><td><i class='fa fa-clock-o fa-fw'></i>日期</td><td>"+mailSendDate+"</td></tr>"
+				+"<tr><td><i class='fa fa-file-text-o fa-fw'></i>內容</td><td colspan='4'><div>"+mailContent+"</div></td></tr>"
 				);
 		//功能1-2 修改信件為已讀---
 			$.ajax({
@@ -311,10 +312,11 @@ $(function(){
 					
 			$("#mailDetailsTable").empty();
 			$("#mailDetailsTable").append(
-				"<tr><td>寄信者</td><td>"+webMailSender+"</td><td id='webMailId' value="+
+				"<tr><td><i class='fa fa-group fa-fw'></i><span class='email-from text-inverse f-w-600'> 寄信者</span></td><td><span class='email-from text-inverse f-w-600'>"
+				+webMailSender+"</span></td><td id='webMailId' value="+
 				webMailId+"></td></tr><tr><td>標題</td><td>"
-				+mailTitle+"</td><td>日期</td><td>"+mailSendDate+"</td></tr>"
-				+"<tr><td>內文</td><td><div>"+mailContent+"</div></td></tr>"
+				+mailTitle+"</td></tr><tr><td><i class='fa fa-clock-o fa-fw'></i> 日期</td><td>"+mailSendDate+"</td></tr>"
+				+"<tr><td><i class='fa fa-file-text-o fa-fw'></i>內文</td><td><div>"+mailContent+"</div></td></tr>"
 				);
 			//功能1-2 修改信件為已讀---
 				$.ajax({
