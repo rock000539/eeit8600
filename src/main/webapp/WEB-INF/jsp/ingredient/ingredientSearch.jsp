@@ -91,10 +91,7 @@ $(function(){//#1
 body {
 	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;	
 }
-#ingredientArea{
-width: 800px;
-margin:auto auto;
-}
+
 .modal {
 height: 900px;
 margin-top:100px; }
@@ -102,9 +99,10 @@ margin-top:100px; }
 font-size: 50px;}
 #searchbox { 
     padding: 20px;
-    margin: auto auto;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
+    width: 800px;
+    margin: auto auto;
 }
 #productTable{
 margin: auto auto;
@@ -131,6 +129,7 @@ min-height: 650px;
 -o-background-size:cover;
 background-size:cover;
 }
+
 </style>
 
 </head>
@@ -139,27 +138,28 @@ background-size:cover;
 			<!-- **每頁不同的內容從這裡開始** -->
 <div class="grey_bg row">
 <div id="searchbox">
-<h2>Find by Ingredient</h2>
-<form action="/ingredients/SearchIngredient" method="post">
-<table id="inputForm">
-<tr><td colspan="2"><h3>輸入成份之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
-<tr>
-<td><input type="text" name="ingredName" id="IngredientName" class="form-control" style="border-radius:20px;"></td> 
-<td><input type="submit" class="btn btn-default btn-lg button"id="searchBtn" value="查成份"></td>
-</tr>
-</table>
-</form>
+	<h2>Find by Ingredient</h2>
+	<form action="/ingredients/SearchIngredient" method="post">
+	<table id="inputForm">
+	<tr><td colspan="2"><h3>輸入成份之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr>
+	<tr>
+		<td><input type="text" name="ingredName" id="IngredientName" class="form-control" style="border-radius:20px;"></td> 
+		<td><input type="submit" class="btn btn-default btn-lg button"id="searchBtn" value="查成份"></td>
+	</tr>
+	</table>
+	</form>
 
 <div class="ingredientArea">
-<table class="table table-hover">
+<br><br><br>
+	<table class="table table-hover">
 
-<c:if test="${empty result}">
-<tr><td>使用說明:</td></tr>
-<tr><td>步驟一: 輸入部分成份關鍵字，選擇成份</td></tr>
-<tr><td>步驟二: 在產品右方按鈕即可查看有使用此成份的產品資訊</td></tr>
-</c:if>
+		<c:if test="${empty result}">
+		<tr><td>使用說明:</td></tr>
+		<tr><td>步驟一: 輸入部分成份關鍵字，選擇成份</td></tr>
+		<tr><td>步驟二: 在產品右方按鈕即可查看有使用此成份的產品資訊</td></tr>
+		</c:if>
 
-<c:if test="${not empty result}">
+	<c:if test="${not empty result}">
 	<tr><th>成份名稱</th><th>中文名稱</th><th>概略特性</th><th>粉刺</th><th>刺激</th><th>安心度</th></tr>
 
 	<c:forEach var="items" items="${result}">
@@ -174,13 +174,13 @@ background-size:cover;
 	</tr>
 	</c:forEach>
 
-</c:if>
+	</c:if>
 
-<c:set var="items" value="${resultStr}" scope="request"></c:set>
-<c:if test="${items}" >
-<tr><td><div class="alert alert-danger alert-dismissable">請輸入文字進行搜尋</div></td></tr>
-</c:if>
-</table>
+	<c:set var="items" value="${resultStr}" scope="request"></c:set>
+	<c:if test="${items}" >
+	<tr><td><div class="alert alert-danger alert-dismissable">請輸入文字進行搜尋</div></td></tr>
+	</c:if>
+	</table>
 </div>
 
 </div>
