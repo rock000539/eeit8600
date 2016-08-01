@@ -6,7 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +35,7 @@ import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.vo.review.ReviewVO;
 
 @Service
 public class MemberService {
@@ -47,6 +51,8 @@ public class MemberService {
 	private ReviewService reviewService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private CategoryService categoryService;
 
 	public Member getById(Long memberId) {
 		return memberDao.findOne(memberId);
@@ -83,25 +89,25 @@ public class MemberService {
 		memberDao.delete(memberId);
 	}
 	
-	//reviews Saved/Wroted ByMember PAGEDnSORTED
-	public Page<Review> getReviewsPaging(String findby, Long memberId, Integer pageNum,
+	//reviews Saved/Wroted ByMember
+	public List<Review> getReviewsPaging(String findby, Long memberId, Integer pageNum,
 			CategoryTitle categoryTitle, String sortProperty, String direction){
+		
 		Review review = new Review();
 		review.setMember(getById(memberId));
-		
 		Specification<Review> spec = Spec.byAuto(em, review);
+		
+		if(sortProperty==null)
+			sortProperty = "reviewTime";
 		
 		Direction sortDirection = Sort.Direction.DESC;
 		if("ASC".equals(direction)){
 			sortDirection = Sort.Direction.ASC;		
 		}
 		
-		if(sortProperty==null)
-			sortProperty = "reviewTime";
-		
 		//PageRequest(int page, int size, Sort.Direction direction, String... properties)
-		Pageable pageable = new PageRequest(pageNum, 3, new Sort(sortDirection, sortProperty));
-		return reviewService.getAll(spec, pageable);
+//		Pageable pageable = new PageRequest(pageNum, 3, new Sort(sortDirection, sortProperty));
+		return reviewService.getAll(spec);
 	}
 
 //	public Integer getReviewCategoryNum(Long memberId, CategoryTitle categoryTitle){
@@ -249,41 +255,70 @@ public class MemberService {
 		return age;
 	}
 	
-	public List<Review> findReviewByCategory(Long memberId, CategoryTitle categoryTitle,
+	public List<ReviewVO> getReviewByCategory(Long memberId, CategoryTitle categoryTitle,
 			String sortProperty, String direction){
-	String orderby = "r.reviewtime";
-	if(sortProperty!=null){
-		if(sortProperty=="reviewRating"){
-			orderby = "r.reviewRating";
-		}
-		if(sortProperty=="rewCollect"){
-			orderby = "r.rewCollect";
-		}
-	}
-	
-	String findReviewByCategory=
-	"select reviewid,reviewtitle,review,reviewimg,reviewrating,reviewtime,rewcollect from review r join " 
-	+"(select p.prodid from product p join category c on  p.categoryid =c.categoryid "
-	+ "where c.categorytitle ='"+categoryTitle+"') t "
-	+"on r.prodid = t.prodid where r.memberid = "+memberId+" order by "+ orderby + direction;
-	
-	List<Object[]> resultList = em.createNativeQuery(findReviewByCategory).getResultList();
-	List<Review> result=new ArrayList<Review>();
-		for(int i=0;i<resultList.size();i++){
-			Review review=new Review();
-			Object[] datas=resultList.get(i);
-			BigInteger bigId= (BigInteger) datas[0];
-			long BigInteger=bigId.longValue();
-			review.setReviewId(BigInteger);
-			review.setReviewTitle((String) datas[1]);
-			review.setReview((String) datas[2]);
-			review.setReviewImg((String)datas[3]);
-			review.setReviewRating((Integer)datas[4]);
-			review.setReviewTime((Date)datas[5]);
-			review.setRewCollect((Integer)datas[6]);
-			result.add(review);
+		
+		log.debug("input: {}, {}, {}, {}", memberId, categoryTitle, sortProperty, direction);
+		
+		String categoryTitleQuery = "";
+		if(categoryTitle!=null){
+			categoryTitleQuery = "where c.categorytitle ='"+categoryTitle+"'";
 		}
 		
-		return result;
+		String orderby = "";
+		if(sortProperty == null){
+			log.debug("null");
+			orderby = "r.reviewtime";
+		}
+		if(sortProperty!=null){
+			if(sortProperty=="reviewtime"){
+				log.debug("1: {}", sortProperty);
+				orderby = "r.reviewtime";
+			}else if(sortProperty=="reviewRating"){
+				log.debug("2, {}", sortProperty);
+				orderby = "r.reviewRating";
+			}else if(sortProperty=="rewCollect"){
+				log.debug("3, {}", sortProperty);
+				orderby = "r.rewCollect";
+			}else{
+				log.debug("4: {}",sortProperty);
+				orderby = "r.reviewtime";
+			}
+		}
+		
+		if(direction==null){
+			direction = "DESC";
+		}
+		
+		
+		String findReviewByCategory=
+		"select reviewid,t.prodid, t.categoryId from review r join " 
+		+"(select p.prodid, c.categoryid from product p join category c on p.categoryid = c.categoryid "
+		+ categoryTitleQuery+") t "
+		+"on r.prodid = t.prodid where r.memberid = "+memberId+" order by "+ orderby + " " + direction;
+		
+		List<Object[]> resultList = em.createNativeQuery(findReviewByCategory).getResultList();
+		
+		List<ReviewVO> reviews = new ArrayList<ReviewVO>();
+		
+		for(int i=0;i<resultList.size();i++){
+			Object[] datas = resultList.get(i);
+			BigInteger rId = (BigInteger) datas[0];
+			Long reviewId = rId.longValue();
+			ReviewVO reviewVO = new ReviewVO();
+			BeanUtils.copyProperties(reviewService.getById(reviewId), reviewVO);
+			
+			BigInteger pId= (BigInteger) datas[1];
+			Long prodId = pId.longValue();
+			BeanUtils.copyProperties(productService.getById(prodId), reviewVO);
+			
+			BigInteger cId = (BigInteger) datas[2];
+			Long categoryId = cId.longValue();
+			BeanUtils.copyProperties(categoryService.getById(categoryId), reviewVO);
+			
+			reviews.add(reviewVO);
+		}
+		
+		return reviews;
 	}
 }

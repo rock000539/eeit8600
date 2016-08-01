@@ -50,6 +50,7 @@ import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.ReviewService;
 import tw.com.queautiful.product.vo.member.MemberEditVO;
 import tw.com.queautiful.product.vo.product.ProductView;
+import tw.com.queautiful.product.vo.review.ReviewVO;
 
 @Controller
 @RequestMapping("/members")
@@ -332,18 +333,15 @@ public class MemberController {
 	public String memberPostedReviewPage(@PathVariable(value="targerMemberId") Long memberId, Model model, HttpServletRequest request){
 		Member member = memberService.getById(memberId);
 		
-		Page<Review> pages = 
-				memberService.getReviewsPaging("", memberId, 0, CategoryTitle.HAIR, null, null);
-		List<Review> reviews = pages.getContent();
+		List<ReviewVO> reviews = 
+				memberService.getReviewByCategory(memberId, null, null, null);
 		
-		model.addAttribute("reviews", pages.getContent());
-		model.addAttribute("reviewsPageNum", pages.getNumber());
-		model.addAttribute("reviewsTotalPages", pages.getTotalPages());
-		model.addAttribute("reviewsTotalElement", pages.getTotalElements());
-//		model.addAttribute("countMakeUp", memberService.getReviewCategoryNum(memberId, CategoryTitle.MAKEUP));
-//		model.addAttribute("countSkinCare", memberService.getReviewCategoryNum(memberId, "SKINCARE"));
-//		model.addAttribute("countBath&Body", memberService.getReviewCategoryNum(memberId, "BATHBODY"));
-//		model.addAttribute("countHair", memberService.getReviewCategoryNum(memberId, "HAIR"));
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("reviewsTotalElement", reviews.size());
+		model.addAttribute("countMakeUp", memberService.getReviewByCategory(memberId, CategoryTitle.MAKEUP, null, null).size());
+		model.addAttribute("countSkinCare", memberService.getReviewByCategory(memberId, CategoryTitle.SKINCARE, null, null).size());
+		model.addAttribute("countBathBody", memberService.getReviewByCategory(memberId, CategoryTitle.BATHBODY, null, null).size());
+		model.addAttribute("countHair", memberService.getReviewByCategory(memberId, CategoryTitle.HAIR, null, null).size());
 		
 		Page<Article> articlePages =
 				memberService.getArticlesPaging(memberId, null, 0, null, null);
@@ -394,58 +392,59 @@ public class MemberController {
 	}
 	
 	//review 分頁(3/page), 分類(none), 排序(reviewTime,reviewRating,rewCollect)
-	@RequestMapping(value="/post/review/{pageNum}")
-	@ResponseBody
-	public  List<Map> memberPostReviewPageSort(
-			@PathVariable(value="pageNum") Integer pageNum,
-			@RequestParam(value="memberId") Long memberId,
-			@RequestParam(value="categoryTitle", required=false) CategoryTitle categoryTitle,
-			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
-			@RequestParam(value="direction", defaultValue="DESC") String direction,
-			HttpServletRequest request, Model model){
-		
-		Page<Review> pages = 
-				memberService.getReviewsPaging("", memberId, pageNum, categoryTitle, sortProperty, direction);
-		
-		List<Review> reviews = pages.getContent();
-		List<ProductView> products = new ArrayList();
-		for(Review review:reviews){
-			Long prodId = review.getProduct().getProdId();
-			ProductView productView = new ProductView();
-			BeanUtils.copyProperties(productService.getById(prodId), productView);
-			products.add(productView);
-		}
-		
-		List<Map> result = new ArrayList<Map>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("reviews", reviews);
-		map.put("products", products);
-		map.put("reviewsPageNum", pages.getNumber());
-		map.put("reviewsTotalPages", pages.getTotalPages());
-		map.put("member", memberService.getById(memberId));
-		result.add(map);
-		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
-		log.debug("page size = {}", pages.getSize()); //size of the slice
-		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
-		log.debug("totalPages() = {}", pages.getTotalPages()); 
-		log.debug("totalElements = {}", pages.getTotalElements()); 
-		
-		return result;
-	}
+//	@RequestMapping(value="/post/review/{pageNum}")
+//	@ResponseBody
+//	public  List<Map> memberPostReviewPageSort(
+//			@PathVariable(value="pageNum") Integer pageNum,
+//			@RequestParam(value="memberId") Long memberId,
+//			@RequestParam(value="categoryTitle", required=false) CategoryTitle categoryTitle,
+//			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
+//			@RequestParam(value="direction", defaultValue="DESC") String direction,
+//			HttpServletRequest request, Model model){
+//		
+//		Page<Review> pages = 
+//				memberService.getReviewsPaging("", memberId, pageNum, categoryTitle, sortProperty, direction);
+//		
+//		List<Review> reviews = pages.getContent();
+//		List<ProductView> products = new ArrayList();
+//		for(Review review:reviews){
+//			Long prodId = review.getProduct().getProdId();
+//			ProductView productView = new ProductView();
+//			BeanUtils.copyProperties(productService.getById(prodId), productView);
+//			products.add(productView);
+//		}
+//		
+//		List<Map> result = new ArrayList<Map>();
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("reviews", reviews);
+//		map.put("products", products);
+//		map.put("reviewsPageNum", pages.getNumber());
+//		map.put("reviewsTotalPages", pages.getTotalPages());
+//		map.put("member", memberService.getById(memberId));
+//		result.add(map);
+//		log.debug("page number = {}", pages.getNumber()); //num of current slice(starting 0)
+//		log.debug("page size = {}", pages.getSize()); //size of the slice
+//		log.debug("page numberOfElements = {}", pages.getNumberOfElements()); //elements on this slice
+//		log.debug("totalPages() = {}", pages.getTotalPages()); 
+//		log.debug("totalElements = {}", pages.getTotalElements()); 
+//		
+//		return result;
+//	}
 	
 	
 	@RequestMapping(value="/post/review")
 	@ResponseBody
-	public  List<Map> memberPostReviewSort(
+	public List<ReviewVO> memberPostReviewSort(
 			@RequestParam(value="memberId") Long memberId,
 			@RequestParam(value="categoryTitle", required=false) CategoryTitle categoryTitle,
 			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			Model model){
 		
-		List<Review> reviews = memberService
-				.findReviewByCategory(memberId, categoryTitle, sortProperty, direction);
-		return null;
+		List<ReviewVO> reviews = memberService
+					.getReviewByCategory(memberId, categoryTitle, sortProperty, direction);
+		
+		return reviews;
 	}
 	
 	//format date

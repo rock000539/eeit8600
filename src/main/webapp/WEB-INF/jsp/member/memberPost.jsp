@@ -199,13 +199,13 @@ h2, h4{
 			<div class="subtabs">
 				<span class="subtab selected">ALL (${reviewsTotalElement})</span>
 				<span class="sep"> · </span>
-				<span value="MAKEUP" class="subtab">MAKEUP</span>
+				<span value="MAKEUP" class="subtab">MAKEUP (${countMakeUp})</span>
 				<span class="sep"> · </span>
-				<span value="SKINCARE" class="subtab">SKINCARE</span>
+				<span value="SKINCARE" class="subtab">SKINCARE (${countSkinCare})</span>
 				<span class="sep"> · </span>
-				<span value="BATHBODY" class="subtab">BATHBODY</span>
+				<span value="BATHBODY" class="subtab">BATHBODY (${countBathBody})</span>
 				<span class="sep"> · </span>
-				<span value="HAIR" class="subtab">HAIR</span>
+				<span value="HAIR" class="subtab">HAIR (${countHair})</span>
 				
 				<div class="dropdown">
 				  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -223,23 +223,26 @@ h2, h4{
 	        <div id="reviewContentDiv">
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
+	        <div class="review-all">
 	        	<div class="reviewTime">
 	        		<span>${item.reviewTime}</span>
+	        		<span class="articleType">${item.categoryTitle}</span>
 					<div class="rating">
 					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
 	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rcmNum}</div>
 	        	</div>
-		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}"><img src="/products/show?prodImg=${item.product.prodImg}"/></a></div>
+		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.prodId}"><img src="/products/show?prodImg=${item.prodImg}"/></a></div>
 		        <div class="reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
 		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
-		        	<h4 class="prod">${item.product.prodName} | ${item.product.brandName}</h4>
+		        	<h4 class="prod">${item.prodName} | ${item.brandName}</h4>
 		        	<div class="preview">${item.review}</div>
 		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>
 		        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 		        </div>
+		    </div>
 	        </div> <!-- reviews -->
 	        </c:forEach>
 	        </div>
@@ -307,6 +310,7 @@ h2, h4{
 <div class="reviews col-lg-12 animated fadeIn">
 	<div class="reviewTime">
 		<span>_reviewTime</span>
+		<span class="articleType">_categoryTitle</span>
 		<div class="rating">_rating</div>
 		<div class="info"><i class="fa fa-heart"></i> _rewCollect
 			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rcmNum</div>
@@ -344,10 +348,11 @@ h2, h4{
 $(function(){
 	var memberId = ${member.memberId};
 	var categoryTitle;
-	var sortProperty="reviewTime";
+	var sortProperty="reviewTime"; //default
 	var articleType;
-	var direction = "DESC";
+	var direction = "DESC"; //default
 	
+	//根據sortProperty排序
 	$('.dropdown-menu a').click(function(){
 		if(sortProperty == $(this).attr('value')){
 			return;
@@ -355,10 +360,10 @@ $(function(){
 		sortProperty = $(this).attr('value');
 		console.log(sortProperty);
 		$('#dropdownMenu1').html($(this).html()+' <span class="caret"></span>');
-		$('#reviewsPageNum').attr("value", 0);
 		$('#reviewContentDiv').empty();
 		loadReviewData(0, sortProperty, direction);
 	});
+	
 	
 	$('.subtabs>.subtab').click(function(){
 		// 改變樣式，但同一個tab不作用
@@ -366,17 +371,17 @@ $(function(){
 			return;
 		}
 		
-		//review
+		//review 指定categoryTitle
 		if($('#tab-r').hasClass('active')){
 			$('#review .subtabs>.selected').removeClass('selected');
 			$(this).addClass('selected');
+			console.log($(this).attr('value'));
 			categoryTitle = $(this).attr('value');
-// 			$('#reviewsPageNum').attr("value", 0);
-// 			$('#reviewContentDiv').empty();
+			$('#reviewContentDiv').empty();
 			loadReviewData(0, sortProperty, direction);
 		}
 		
-		// articles
+		// articles 指定articleType
 		if($('#tab-a').hasClass('active')){
 			$('#article .subtabs>.selected').removeClass('selected');
 			$(this).addClass('selected');
@@ -390,10 +395,6 @@ $(function(){
 	$(window).scroll(function(){
 		
 		if($(window).scrollTop() + $(window).height() >= $(document).height()){	
-			if($('#tab-r').hasClass('active')){
-				var nextPage = parseInt($('#reviewsPageNum').val())+1;
-				loadReviewData(nextPage, sortProperty, direction);
-			}
 			if($('#tab-a').hasClass('active')){
 				var nextPage = parseInt($('#articlesPageNum').val())+1;
 				loadArticleData(nextPage, articleType, direction);
@@ -402,60 +403,68 @@ $(function(){
 	}); /* onScroll */
 	
 	
+	var timelineBlocks = $('.reviews'),
+	offset = 0.95;
+	hideBlocks(timelineBlocks, offset);
+	$(window).on('scroll', function(){
+		(!window.requestAnimationFrame) 
+			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+	});
+	function hideBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.review-all').addClass('is-hidden');
+			console.log("hide");
+		});
+	}
+	function showBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.review-all').hasClass('is-hidden') ) && $(this).find('.review-all').removeClass('is-hidden').addClass('animated fadeInDown');
+			console.log("show"+$(this));
+		});
+	}  	
+	
+	
 	function loadReviewData(pageNum, sortProperty, direction){
-		var data= {"memberId": memberId, "sortProperty": sortProperty, "direction": direction};
+		var data= {"memberId": memberId,"categoryTitle":categoryTitle, "sortProperty": sortProperty, "direction": direction};
 		console.log(data);
 		
-    	totalPages = $('#reviewsTotalPages').val();
-    	loadedPageNum = $('#reviewsPageNum').val();
-    	console.log("totalPages: "+totalPages);
-    	console.log("loadedPageNum: "+loadedPageNum);
-    	console.log("pageNum: "+pageNum);
+//     	totalPages = $('#reviewsTotalPages').val();
+//     	loadedPageNum = $('#reviewsPageNum').val();
     	
-    	if(loadedPageNum < totalPages){
     	$.ajax({
-//     		url: '/members/post/review/'+pageNum,
-			url: '/members/post/review/',
-			type: 'POST',
+			url: '/members/post/review',
+			type: 'GET',
 			dataType: 'json',
 			data: data,
 			contextType: 'application/json; charset=utf-8;',
-			success: function(response){
-				var result = response[0];
-				var reviews = result.reviews;
-				var reviewsPageNum = result.reviewsPageNum;
-				var reviewsTotalPages = result.reviewsTotalPages;
-				var products = result.products;
-				var member = result.member;
+			success: function(result){
+				console.log(result[0].reviewRating);
 				
-				$('#reviewsPageNum').val(reviewsPageNum);
-				$('#reviewsTotalPages').val(reviewsTotalPages);
-				
-				for(var i=0; i<reviews.length; i++){
-					console.log("prodId: "+reviews[i].prodId);
-					var reviewRating = reviews[i].reviewRating;
+				for(var i=0; i<result.length; i++){
+					var reviewRating = result[i].reviewRating;
 					var dimand = '<i class="fa fa-diamond"></i>';
 					var rating = "";
 					for(var j=0; j<reviewRating; j++){
 						rating += dimand;
 					}
 					$($('#reviewTemplate').html()
-						.replace('_reviewTime', reviews[i].reviewTime)
+						.replace('_reviewTime', result[i].reviewTime)
+						.replace('_categoryTitle', result[i].categoryTitle)
 						.replace('_rating', rating)
-						.replace('_rewCollect', reviews[i].rewCollect)
-						.replace('_rcmNum', reviews[i].rcmNum)
-						.replace('_prodId', reviews[i].prodId)
-						.replace('_prodImg', products[i].prodImg)
-						.replace('_reviewTitle', reviews[i].reviewTitle)
-						.replace('_prodName', products[i].prodName)
-						.replace('_brandName', products[i].brandName)
-						.replace('_review', reviews[i].review)
-						.replace('_reviewId', reviews[i].reviewId))
+						.replace('_rewCollect', result[i].rewCollect)
+						.replace('_rcmNum', result[i].rcmNum)
+						.replace('_prodId', result[i].prodId)
+						.replace('_prodImg', result[i].prodImg)
+						.replace('_reviewTitle', result[i].reviewTitle)
+						.replace('_prodName', result[i].prodName)
+						.replace('_brandName', result[i].brandName)
+						.replace('_review', result[i].review)
+						.replace('_reviewId', result[i].reviewId))
 						.appendTo($('#reviewContentDiv'));
-				 
 				}
 			} /* success */
-    	});} /* ajax */
+    	}); /* ajax */
 	} /* loadReviewData */ 
 	
 	
