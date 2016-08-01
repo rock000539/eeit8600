@@ -220,6 +220,7 @@ h2, h4{
 				</div>
 				<div style="display:inline-block; float:right;">Order By</div>
 			</div> <!-- subtabs -->
+	        <div id="reviewContentDiv">
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
 	        	<div class="reviewTime">
@@ -241,6 +242,7 @@ h2, h4{
 		        </div>
 	        </div> <!-- reviews -->
 	        </c:forEach>
+	        </div>
 	        <input type="hidden" id="reviewsPageNum" value="${reviewsPageNum}">
 			<input type="hidden" id="reviewsTotalPages" value="${reviewsTotalPages}">
 	    </div>
@@ -342,14 +344,20 @@ h2, h4{
 $(function(){
 	var memberId = ${member.memberId};
 	
-	var sortProperty;
+	var sortProperty="reviewTime";
 	var articleType;
 	var direction = "DESC";
 	
 	$('.dropdown-menu a').click(function(){
+		if(sortProperty == $(this).attr('value')){
+			return;
+		}
 		sortProperty = $(this).attr('value');
 		console.log(sortProperty);
 		$('#dropdownMenu1').html($(this).html()+' <span class="caret"></span>');
+		$('#reviewsPageNum').attr("value", 0);
+		$('#reviewContentDiv').empty();
+		loadReviewData(0, sortProperty, direction);
 	});
 	
 	$('.subtabs>.subtab').click(function(){
@@ -439,7 +447,7 @@ $(function(){
 						.replace('_brandName', products[i].brandName)
 						.replace('_review', reviews[i].review)
 						.replace('_reviewId', reviews[i].reviewId))
-						.appendTo($('#review'));
+						.appendTo($('#reviewContentDiv'));
 				 
 				}
 			} /* success */
