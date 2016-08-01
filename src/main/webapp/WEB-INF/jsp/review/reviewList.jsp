@@ -271,7 +271,7 @@
 	        {
 	         /*	beforeShowForm: function() { 
 	        		$('#editmodjqGrid').remove();
-	        		document.location.href="/reviews/add";
+	        		document.location.href="/reviews/add_bms";
 	        	},
 	         */
 	        },

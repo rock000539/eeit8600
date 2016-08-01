@@ -67,7 +67,8 @@ public class Review {
 	private String reviewTitle;
 	
 	//心得內容
-	@Column(name="REVIEW",length=2000)
+//	@Column(name="REVIEW",length=2000)
+	@Column(name="REVIEW",columnDefinition="nvarchar(2000)")
 	private String review;
 	
 	//心得評分

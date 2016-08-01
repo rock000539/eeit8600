@@ -392,6 +392,9 @@ select {
 							<select id="sbrand" class="js-example-basic-single" style="width: 90%;">
 								<option value="0">請選擇品牌</option>
 								<c:forEach items="${brands}" var="brand">
+									<c:if test="${brand.brandId==review.product.brandId}">
+										<option value="${brand.brandId}" selected="selected">${brand.brandName}</option>
+									</c:if>
 									<option value="${brand.brandId}">${brand.brandName}</option>
 								</c:forEach>
 							</select>
@@ -402,6 +405,14 @@ select {
                     <a >
                     	<div class="row">
 							<select id="sprod" class="js-example-basic-single" style="width: 90%"></select>
+<!-- 								<option value="0">請選擇產品</option> -->
+<%-- 								<c:forEach items="${products}" var="brand"> --%>
+<%-- 									<c:if test="${products.prodId==review.prodId}"> --%>
+<%-- 										<option value="${products.prodId}" selected="selected">${products.prodName}</option> --%>
+<%-- 									</c:if> --%>
+<%-- 									<option value="${products.prodId}">${products.prodName}</option> --%>
+<%-- 								</c:forEach> --%>
+							</select>
 						</div>                 
                     </a>
                 </li>
@@ -445,10 +456,10 @@ select {
 					<input type="hidden" name="rewCollect" value="${review.rewCollect}"/>
 					<input type="hidden" name="reviewShow" value="${review.reviewShow}"/>
 					<input type="hidden" name="reviewReport" value="${review.reviewReport}"/>
-					
-					
 					<input type="hidden" name="reviewRating" id="reviewRating"/>
-					<input type="hidden" name="prodId" id="prodId"/>
+<!-- 					<input type="hidden" name="prodId" id="prodId"/> -->
+					
+					<input type="hidden" name="prodId" id="prodId" value="${review.prodId}"/>
 		
 					
 					<div class="col-lg-6 col-md-6 col-sm-6">
@@ -507,7 +518,6 @@ select {
 									        ],
 				                     		initialPreviewAsData: true,
 				                     		initialPreviewFileType: 'image',
-				                     	    initialPreviewConfig:{image:{width: "auto", height: "210px"}},
 									    });
 		// 								$('#reviewImg').on('fileimageloaded', function(event, previewId) {
 		// 									console.log("fileimageloaded");
@@ -537,8 +547,10 @@ select {
 			<div class="col-lg-12 col-md-12 col-sm-12 hasbutton">
 				<div class="row">
 					<div class="form-group">
-						<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button>
-						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cancel</button>
+						<span style="margin-right:10px ">
+							<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-check fa-fw" aria-hidden="true" ></i>&nbsp;Save</button>
+						</span>
+						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true" ></i>&nbsp;Cancel</button>
 					</div>
 				</div>
 			</div>		
@@ -599,11 +611,6 @@ select {
 		CKEDITOR.replace('review');
 		CKEDITOR.instances['review'].setData('${review.review}');
 		
-		// 設定Side Bar
-// 		id="sbrand"
-// 		${review.product.brandName}
-// 		$('#').attr('selected',true);
-		
 	/*  ==================== Side Bar ======================== */
 		
 		  $('[data-toggle="offcanvas"]').click(function () {
@@ -612,7 +619,7 @@ select {
 
 	/*  ================驗     證============================= */
 	
-	$('#eidtForm').validate({
+	$('#editForm').validate({
 		onkeyup: true,
 		onfocusout: function (element) {
 	        $(element).valid();
@@ -628,75 +635,76 @@ select {
 	/*  =====================Prod Search ======================== */
 		
 	// hide  select
-	$('#sprod').hide();
-	$('#sprodLi').hide();
-	$('#prodImg').hide();
-	$('#prodImgLi').hide();
-	$('#check').hide();
+// 	$('#sprod').hide();
+// 	$('#sprodLi').hide();
+// 	$('#prodImg').hide();
+// 	$('#prodImgLi').hide();
+// 	$('#check').hide();
 	$('#prodImgButton').hide();
 	
+	// select-brand init
+	$('#sbrand').select2({
+		placeholder: 'Select a	 brand',
+		allowClear: true,
+		theme: 'classic', 
+	});
 	
-// 	// select-brand init
-// 	$('#sbrand').select2({
-// 		placeholder: 'Select a	 brand',
-// 		allowClear: true,
-// 		theme: 'classic', 
-// 	});
-	
-// 	$('#sbrand').on('select2:select', function (evt) {
-
-// 		if($(this).val() > 0) {
+// 		$("#sbrand").append($("<option></option>").attr("value", "0").text("請選擇品牌"));
+	$('#sbrand').on('select2:select', function (evt) {
+		
+		
+		if($(this).val() > 0) {
 			
-// 			$('#brandName').text($(this).select2('data')[0].text);
+			$('#brandName').text($(this).select2('data')[0].text);
 // 			$('#sprodLi').show();
 			
-// 			// select-product init
-// 			$('#sprod').select2({
-// 				placeholder: '請選擇產品',
-// 				allowClear: true,
-// 				theme: 'classic',
-// 			});
+			// select-product init
+			$('#sprod').select2({
+				placeholder: '請選擇產品',
+				allowClear: true,
+				theme: 'classic',
+			});
 			
-// 			// append data to select #sprod
-// 			$.ajax({
-// 				url: '/products/search/' + $(this).val(),
-// 				type: 'POST',
-// 				dataType: 'json',
-// 				contextType: 'application/json; charset=utf-8;',
-// 				success:function(response){
-// 					var select = $('#sprod').empty();
-// 					select.append($('<option>請選擇產品</option>'));
-// 					for(i=0; i<response.length; i++) {
-// 						select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
-// 					}
-// 				}
-// 			});
-// 		}
-// 	});
+			// append data to select #sprod
+			$.ajax({
+				url: '/products/search/' + $(this).val(),
+				type: 'POST',
+				dataType: 'json',
+				contextType: 'application/json; charset=utf-8;',
+				success:function(response){
+					var select = $('#sprod').empty();
+					select.append($('<option>請選擇產品</option>'));
+					for(i=0; i<response.length; i++) {
+						select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
+					}
+				}
+			});
+		}
+	});
 	
 	
-// 	$('#sprod').on('select2:select', function (evt) {
+	$('#sprod').on('select2:select', function (evt) {
 		
-// 		var prodNum=$(this).val();
+		var prodNum=$(this).val();
 		
-// 		$('#prodId').val(prodNum); //產品id評分到後端
+		$('#prodId').val(prodNum); //產品id評分到後端
 		
-// 		if(prodNum > 0) {
-// 			$('#prodName').text($(this).select2('data')[0].text);
-// 			// show img
+		if(prodNum > 0) {
+			$('#prodName').text($(this).select2('data')[0].text);
+			// show img
 // 			$('#prodImgLi').show();
 // 			$('#prodImg').show()
-// 						.attr("src","/reviews/showProd?prodId="+prodNum);
+			$('#prodImg').attr("src","/reviews/showProd?prodId="+prodNum);
 // 			$('#check').show();
 			
-// 			$('#check').on('click',function(){
-// 				$("#prodImgButton").remove();
-// 				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
-// 				$('#wrapper').toggleClass('toggled'); //sidebar open/close
-// 			})
-// 		}
-// 	});
-	
+			$('#check').on('click',function(){
+				$("#prodImgButton").remove();
+				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
+				$('#wrapper').toggleClass('toggled'); //sidebar open/close
+			})
+		}
+	});
+	 	
 	/*  ===================== diamond ================================ */
 	
 		// 設定原始diamond變亮
@@ -739,7 +747,7 @@ select {
 	    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
 	        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
 	    }
-	    $('#reviewRating').val(id.substr(1)); //心得評分到後端
+	    $('#reviewRating').val("${review.reviewRating}"); //心得評分到後端
 	    
 		    switch (id.substr(1)) {
 			    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
@@ -774,19 +782,20 @@ select {
 /*  =================save click============================ */
 
 		$('#save').on('click',function(){
-		    if($('#eidtForm').validate().form()&& CKEDITOR.instances['review'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
+			console.log($('#editForm').validate().form());
+		    if($('#editForm').validate().form() && CKEDITOR.instances['review'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
 		    	
 			//ckEditor and eidtForm input formdata
 			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
 			var formdata = new FormData(); 
 				formdata.append('reviewImgFile', $('#reviewImg').prop('files')[0]); 
-				formdata.append('review', new Blob([JSON.stringify($('#eidtForm').serializeObject())],
+				formdata.append('review', new Blob([JSON.stringify($('#editForm').serializeObject())],
 											{type: 'application/json'})); 
 // 			var ckeditorvalue = CKEDITOR.instances['content'].getData();
 // 			var datas={'memberId':'${memberId}','articleType':$(':selected').val(),'articleTitle':$(':text[name=articleTitle]').val(),'review':ckeditorvalue};
 // 			console.log(JSON.stringify(datas));
 			$.ajax({
-					url:'/reviews/insert_fms',
+					url:'/reviews/update_fms',
 					type:'post',
 					contentType : false,
 					processData : false, 

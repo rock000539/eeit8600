@@ -83,7 +83,7 @@
 							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}scores</span>  
 						</div>
 						<!--心得評分  end -->
-						<div class="user-skin">${review.member.skinType}&nbsp;Skin、${review.member.age}&nbsp;Age</div>
+						<div class="user-skin">${review.member.skinType}&nbsp;Skin、${review.member.age}&nbsp;Years</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				
