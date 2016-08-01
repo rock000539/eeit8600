@@ -193,25 +193,6 @@
 			text-indent: 8px;
 		}
 		
-		.star-icon {
-			content: 'f219';
-		    color: blue;
-		}
-		.star-icon.full:before {
-		    text-shadow: 0 0 2px rgba(0,0,0,0.7);
-		    color: #FDE16D;
-		    content: '\f219';
-		    left: 0;
-		}
-		.star-icon.half:before {
-		    text-shadow: 0 0 2px rgba(0,0,0,0.7);
-		    color: #FDE16D;
-		    content: '\f219';
-		    left: 0;
-		    width: 50%;
-		    overflow: hidden;
-		}
-		
 	</style>
 	
 </head>
@@ -300,9 +281,9 @@
 				    			<c:forEach begin="1" end="${product.score}">
 									<i class="fa fa-diamond"></i>
 								</c:forEach>
-								<c:if test="${product.score/1!=0}">
-									<i class="fa fa-diamond"></i>
-								</c:if>
+<%-- 								<c:if test="${product.score/1!=0}"> --%>
+<!-- 									<i class="fa fa-diamond"></i> -->
+<%-- 								</c:if> --%>
 								&nbsp;${product.score}
 				    		</span>
 				    	</label>

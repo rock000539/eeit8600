@@ -80,9 +80,6 @@
                         <li><a href="/ingredients/search">Via Ingredient</a></li>
                     </ul>
                 </li>
-
-                <li><a href="#">Order</a></li>
-
                 <li><a href="/products/search"><span class="data-hover" data-hover="blog">Product</span></a></li>
 
                 <li><a href="/reviews/reviews">Review</a></li>

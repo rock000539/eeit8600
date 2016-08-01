@@ -246,8 +246,10 @@ public class ReviewController {
 		model.addAttribute("brands", brands);
 		
 		//商品
+		if(prodId!=null){
 		Product product = prodService.getById(prodId);
 		model.addAttribute("product", product);
+		}
 		
 		return "/review/reviewAddFms";
 	}
@@ -309,7 +311,7 @@ public class ReviewController {
 		return service.getAll();
 	}
 
-	@RequestMapping("show")
+	@RequestMapping("/show")
 	public void show(HttpServletResponse resp,@RequestParam String reviewImg){
 		if(reviewImg !=null){
 			FileProcessing.showImg(resp, reviewImg);

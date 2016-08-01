@@ -527,8 +527,8 @@ select {
 			<div class="col-lg-12 col-md-12 col-sm-12 hasbutton">
 				<div class="row">
 					<div class="form-group">
-						<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button>
-						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbspCancel</button>
+						<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button>
+						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cancel</button>
 					</div>
 				</div>
 			</div>		
@@ -598,11 +598,10 @@ select {
 	    focusInvalid: true,
 		rules:{
 			reviewTitle:{required:true},
-// 			review:{required:true}, //ckeditor沒有效果
 		},//end of rules
 		messages:{
 				reviewTitle:{required:'please enter review title'},
-// 				review:{required:'please enter review'},
+				review:{required:'please enter review'},
 		},//end of messages	
 	});
 	/*  =====================Prod Search ======================== */
@@ -746,7 +745,7 @@ select {
 /*  =================save click============================ */
 
 		$('#save').on('click',function(){
-		    if($('#addForm').validate().form()){
+		    if($('#addForm').validate().form()&& CKEDITOR.instances['review'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
 		    	
 			//ckEditor and addform input formdata
 			$('#review').val(CKEDITOR.instances['review'].getData().replace(/\n/g,""));
@@ -783,10 +782,10 @@ select {
 			$(".modal-body").empty()
 							.append('<h2 style="margin-left:130px">Success! Your Review Will Post</h2>')	
 			$('#close').hide();
-// 			    window.setTimeout(function () {		    	
-// 			        $("#myModal").modal("hide");
-// 			        history.back(1);
-// 			    }, 2500);	
+		    window.setTimeout(function () {		    	
+		        $("#myModal").modal("hide");
+		        history.back(1);
+		    }, 2500);	
 	}
 	
 	function toModealError(){

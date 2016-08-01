@@ -70,8 +70,8 @@ public class MemberController {
 	private ReviewService reviewService;
 	
 	//overview頁面
-	@RequestMapping("/overview/{memberId}")
-	public String memberOverviewPage(@PathVariable Long memberId, HttpServletRequest request, Model model){
+	@RequestMapping("/overview/{targerMemberId}")
+	public String memberOverviewPage(@PathVariable(value="targerMemberId") Long memberId, HttpServletRequest request, Model model){
 		Member member = memberService.getById(memberId);
 		
 		java.sql.Date regiDate = member.getMemberRegiDate();
@@ -328,8 +328,8 @@ public class MemberController {
 	}
 		
 	//review n article - post頁面
-	@RequestMapping("/post/{memberId}")
-	public String memberPostedReviewPage(@PathVariable Long memberId, Model model, HttpServletRequest request){
+	@RequestMapping("/post/{targerMemberId}")
+	public String memberPostedReviewPage(@PathVariable(value="targerMemberId") Long memberId, Model model, HttpServletRequest request){
 		Member member = memberService.getById(memberId);
 		
 		Page<Review> pages = 
@@ -366,12 +366,12 @@ public class MemberController {
 	@ResponseBody
 	public  List<Map> memberPostArticlePageSort(
 			@PathVariable(value="pageNum") Integer pageNum,
+			@RequestParam(value="memberId") Long memberId,
 			@RequestParam(required=false) ArticleType articleType,
 			@RequestParam(value="sortProperty", defaultValue="articleTime") String sortProperty, 
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			HttpServletRequest request, Model model){
 		log.debug("page: {}",pageNum);
-		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		
 		Page<Article> pages = 
 				memberService.getArticlesPaging(memberId, articleType, pageNum, sortProperty, direction);
@@ -433,7 +433,20 @@ public class MemberController {
 		return result;
 	}
 	
-
+	
+	@RequestMapping(value="/post/review")
+	@ResponseBody
+	public  List<Map> memberPostReviewSort(
+			@RequestParam(value="memberId") Long memberId,
+			@RequestParam(value="categoryTitle", required=false) CategoryTitle categoryTitle,
+			@RequestParam(value="sortProperty", defaultValue="reviewTime") String sortProperty, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction,
+			Model model){
+		
+		List<Review> reviews = memberService
+				.findReviewByCategory(memberId, categoryTitle, sortProperty, direction);
+		return null;
+	}
 	
 	//format date
 	private List<String> formatDate(Collection<Review> reviews){

@@ -3,7 +3,7 @@
 
 <div id="member-header" class="detail-list">
 	<div id="memberphoto" class="detail-list-col1">
-	   	<img src="/members/show?memberId=${memberId}"/>
+	   	<img src="/members/show?memberId=${member.memberId}"/>
 	</div>
 	<div class="detail-list-col2">
 	       <h3>${member.nickname}</h3>
