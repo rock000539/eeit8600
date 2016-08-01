@@ -107,7 +107,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable()
                 .authorizeRequests()  //開始設定路徑&權限
                 .antMatchers(
-                "/","/expdate/search","/**/show","/**/select",
+                "/","/expdate/search","/**/show","/**/select","/members/register",
                 "/expdate/batchCodeController","/reviews/reviews",
                 "/reviews//review/{reviewId}","/reviewCMs/select_data",
                 "/loginBms","/logout","/**/select_jqgrid",

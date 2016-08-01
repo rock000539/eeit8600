@@ -15,8 +15,9 @@
             <li>  
             <c:if test="${empty memberId}">
                 <a href="/fmslogin"><i class="fa fa-user" aria-hidden="true"></i>
-                <span style="font-family: Open Sans;">&nbsp Login / Sign Up</span>
-                </a>
+                   <span style="font-family: Open Sans;">&nbsp Login /</span> </a>
+                 <a href="javascript:"> <span id="signUpModal" data-toggle="modal"  data-target="#regiModal" href="/members/register"  style="font-family: Open Sans;">Sign Up</span></a>
+               
             </c:if>
             </li>
             
@@ -90,5 +91,15 @@
             </ul>
         </div>
     </div>   
+ <!-- //////////////////////////////////////////////////////////////// -->
+ <!-- modal -->
+<div class="modal fade" id="regiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body"></div>
+        </div> <!-- content -->
+    </div> <!-- dialog -->
+</div> <!-- m -->
+<!-- //////////////////////////////////////////////////////////////////////// -->
 </header>
 <!--End Header-->

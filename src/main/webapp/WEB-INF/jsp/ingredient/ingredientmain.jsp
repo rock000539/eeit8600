@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+	<script src="/js/jquery.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
@@ -41,10 +41,9 @@ margin: 6px;}
 				<div class="container">
 				<div class=" row ">
 				
-					<div class="item mobile isotope-item" style="width: 376px; height: 270px;display:inline-block;position:relative;float:left;text-align:center;">
+						<div class="item" style="width: 376px; height: 270px;display:inline-block;position:relative;float:left;text-align:center;">
                             <figure class="touching effect-bubba">
                                 <img src="/img/cosmeticProducts.jpg"  alt="" class="img-responsive" >
-
                                 <div class="option">
                                     <a href="/prodIngreList/prodNameSearchIngred" class="fa fa-link" ></a>
                                 </div>
