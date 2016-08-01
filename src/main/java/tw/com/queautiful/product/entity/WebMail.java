@@ -25,7 +25,7 @@ public class WebMail {
 	private String anonymousName;
 	private String anonymousEMail;
 	
-	private Long articleid;
+	private Long articleId;
 	private Long reviewId;
 	private Long acmId;
 	private Long rcmId;
@@ -35,7 +35,7 @@ public class WebMail {
 		return "WebMail [webMailId=" + webMailId + ", webMailSender=" + webMailSender + ", mailAddressee="
 				+ mailAddressee + ", mailTitle=" + mailTitle + ", mailContent=" + mailContent + ", mailReadType="
 				+ mailReadType + ", mailContentType=" + mailContentType + ", mailSendDate=" + mailSendDate
-				+ ", anonymousName=" + anonymousName + ", anonymousEMail=" + anonymousEMail + ", articleid=" + articleid
+				+ ", anonymousName=" + anonymousName + ", anonymousEMail=" + anonymousEMail + ", articleId=" + articleId
 				+ ", reviewId=" + reviewId + ", acmId=" + acmId + ", rcmId=" + rcmId + "]";
 	}
 
@@ -89,12 +89,12 @@ public class WebMail {
 		this.mailContentType = mailContentType;
 	}
 
-	public Long getArticleid() {
-		return articleid;
+	public Long getArticleId() {
+		return articleId;
 	}
 
-	public void setArticleid(Long articleid) {
-		this.articleid = articleid;
+	public void setArticleId(Long articleId) {
+		this.articleId = articleId;
 	}
 
 	public Long getReviewId() {

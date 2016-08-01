@@ -31,18 +31,18 @@ public class WebMailController {
 	
 	@RequestMapping(value="/sendmail",method = RequestMethod.POST)   
 	@ResponseBody
-	public String sendMail(@RequestParam long memberid,
-			 Long articleid,
+	public String sendMail(@RequestParam long memberId,
+			 Long articleId,
 			 Long reviewId,
 			 Long acmId,
 			 Long rcmId,
-			@RequestParam String reportTitle,@RequestParam String reportDetile){
+			@RequestParam String reportTitle,@RequestParam String reportDetail){
 		
 		WebMail webMail=new WebMail();
-		webMail.setWebMailSender(memberid);
+		webMail.setWebMailSender(memberId);
 		webMail.setMailAddressee(0L);
 		webMail.setMailTitle(reportTitle);
-		webMail.setMailContent(reportDetile);
+		webMail.setMailContent(reportDetail);
 		
 		long now=new java.util.Date().getTime();
 		java.sql.Date date=new java.sql.Date(now);
@@ -51,8 +51,8 @@ public class WebMailController {
 		webMail.setMailReadType(false);
 		webMail.setMailContentType("Report");
 		
-		if(articleid!=0){
-			webMail.setArticleid(articleid);
+		if(articleId!=0){
+			webMail.setArticleId(articleId);
 		}else if(reviewId!=0){
 			webMail.setReviewId(reviewId);
 		}else if(acmId!=0){
