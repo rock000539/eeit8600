@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -718,7 +720,8 @@
         </div>
     </div> -->
 
-    <div class="row super_sub_content gradient_bg1">
+<!-- Product top 10 -->
+    <div class="row super_sub_content grey_bg" style="padding-top: 40px;">
         <div class="col-md-12">
             <div class="dividerHeading text-center">
                 <h4><span>Top 10</span></h4>
@@ -831,33 +834,38 @@
             </div>
         </div>
     </div>
+<!-- end of Product top 10 -->    
     
-    <div class="grey_bg row" style="padding-top: 20px;">
-    <div class="col-md-12">
+<!-- Latest Post -->
+    <div class="grey_bg row super_sub_content" style="padding-top: 40px; background-image: url('/images/fms/bg1.jpg'); background-repeat: no-repeat;">
+	    <div class="col-md-12">
             <div class="dividerHeading text-center">
-                <h4><span>Recent Post Timeline</span></h4>
+                <h4><span>Latest Post</span></h4>
             </div>
-    <div id="timelineDiv">
-		<section id="cd-timeline">
-			<c:forEach var="item" items="${articles}">
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img"></div>
-				
-				<div class="cd-timeline-content">
-					<h2>${item.articleTitle}</h2>
-					<small>${item.articleType}</small>
-					<p>${item.articleContent}</p>
-					<a href="/articles/view/${item.articleId}" class="cd-info">觀看文章</a>
-					<span class="cd-date">${item.articleTime}</span>
-				</div> <!-- cd-timeline-content -->
-			</div> <!-- cd-timeline-block -->
-			</c:forEach>
-			<input type="hidden" id="pageNum" value="${pageNum}">
-			<input type="hidden" id="totalPages" value="${totalPages}">
-		</section>
-	</div> <!-- timeline Div -->
+		    <div id="timelineDiv">
+				<section id="cd-timeline">
+					<c:forEach var="item" items="${articles}">
+					<div class="cd-timeline-block">
+						<div class="cd-timeline-img"></div>
+						
+						<div class="cd-timeline-content">
+							<h2>${item.articleTitle}</h2>
+							<small>${item.articleType}</small>
+							<span style="float:right; color:#337ab7; font-weight:bold; ">by ${item.nickname}</span>
+<%-- 							<p>${item.articleContent}</p> --%>
+<%-- 							<p>${fn:escapeXml(item.articleContent)}</p> --%>
+<%-- 							<html:text property="${item.articleContent}" /> --%>
+							<p>${fn:substring(item.articleContent,0,200)}</p>
+							<a href="/articles/view/${item.articleId}" class="cd-info text-center" style="clear:both;">Read More</a>
+							<span class="cd-date"><fmt:formatDate pattern="yyyy-MMM-dd" value="${item.articleTime}" /></span>
+						</div> <!-- cd-timeline-content -->
+					</div> <!-- cd-timeline-block -->
+					</c:forEach>
+				</section>
+			</div> <!-- timeline Div -->
+		</div>
 	</div>
-	</div>
+<!-- end of Latest Post -->
 
     <!-- <section class="promo_box wow bounceInUp row" data-wow-offset="50">
         <div class=" container-fluid">
@@ -1036,6 +1044,30 @@ $(function(){
 			},
 			itemTemplate : '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
 		});
+	
+	var timelineBlocks = $('.cd-timeline-block'),
+	offset = 0.8;
+
+	hideBlocks(timelineBlocks, offset);
+	
+	//on scolling, show/animate timeline blocks when enter the viewport
+	$(window).on('scroll', function(){
+		(!window.requestAnimationFrame) 
+			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+	});
+	
+	function hideBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+		});
+	}
+	
+	function showBlocks(blocks, offset) {
+		blocks.each(function(){
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+		});
+	}
 })
  </script> 
 </body>
