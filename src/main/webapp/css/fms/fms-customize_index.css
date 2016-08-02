@@ -256,6 +256,10 @@
     transform: rotate(10deg);
 }
 
+.owl-prev, .owl-next {
+    background: #ffffff;
+}
+
 .gradient_bg1{
 	background-image:url('/images/pattern-1.png');
 	padding-top: 40px;
@@ -368,7 +372,7 @@ img {
     top: 18px;
     left: 50%;
     margin-left: -8px;
-    Force Hardware Acceleration in WebKit
+/*     Force Hardware Acceleration in WebKit */
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
   }
@@ -455,7 +459,7 @@ img {
   color: #969696;
   float: left;
   padding: .8em 0;
-  opacity: .7;
+/*   opacity: .7; */
 }
 
 @media only screen and (min-width: 768px) {
@@ -491,7 +495,10 @@ img {
     left: 122%;
     top: 6px;
     font-size: 16px;
-    font-size: 1rem;
+/*     font-size: 20px; */
+    font-family: Microsoft JhengHei;
+    color:#4a5164;
+/*     font-size: 1.2em; */
   }
   .cd-timeline-block:nth-child(even) .cd-timeline-content {
     float: right;
