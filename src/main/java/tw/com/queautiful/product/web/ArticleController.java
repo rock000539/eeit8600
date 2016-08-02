@@ -27,10 +27,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.ArticleReply;
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.service.ArticleReplyService;
 import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.MemberService;
 import tw.com.queautiful.product.vo.article.ArticleListFms;
+import tw.com.queautiful.product.vo.article.ArticleReplyVO;
 
 @Controller
 @RequestMapping("/articles")
@@ -40,6 +43,9 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private ArticleReplyService arService;
 
 	@Autowired
 	private MemberService memberService;
@@ -171,7 +177,20 @@ public class ArticleController {
 
 	@RequestMapping("/view/{articleId}")
 	public String articleView(@PathVariable Long articleId, Model model) {
+//		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.ASC,"arTime"));
+//		ArticleReply ar_spec = new ArticleReply();
+//		ar_spec.setArShow(true);
+//		ar_spec.setArticle(articleService.getById(articleId));
+//		Page<ArticleReply> ar_page = arService.getAll(Spec.byAuto(em, ar_spec), pageable);
+//		List<ArticleReply> ar_list = ar_page.getContent();
+//		
+//		log.debug("ar_list-->{}", ar_list);
+//		List<ArticleReplyVO> areplies = arService.getAllByVO(ar_list);
+//		
+//		log.debug("areplies-->{}", areplies);
+		
 		model.addAttribute("article", articleService.viewNCount(articleId));
+//		model.addAttribute("areplies" , areplies);
 		return "/article/articleView";
 	}
 

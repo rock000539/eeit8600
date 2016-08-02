@@ -91,6 +91,9 @@ public class Article {
 	@Transient
 	private String nickname;
 	
+	@Transient
+	private java.sql.Date memberRegiDate;
+	
 	//文章回覆
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 	@OrderBy("ARTICLEREPLYTIME ASC")
@@ -255,6 +258,18 @@ public class Article {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public java.sql.Date getMemberRegiDate() {
+		if(this.nickname==null && this.member!=null){
+			return this.getMember().getMemberRegiDate();
+		}else{
+			return memberRegiDate;
+		}
+	}
+
+	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+		this.memberRegiDate = memberRegiDate;
 	}
 
 	public List<ArticleReply> getAreplies() {

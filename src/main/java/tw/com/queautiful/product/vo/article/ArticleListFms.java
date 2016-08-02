@@ -30,7 +30,7 @@ public class ArticleListFms {
 	
 	private String nickname;
 	
-//	private java.sql.Date memberRegiDate;
+	private java.sql.Date memberRegiDate;
 	
 	//回覆數
 	private Integer arSize;
@@ -120,13 +120,13 @@ public class ArticleListFms {
 		this.nickname = nickname;
 	}
 	
-//	public java.sql.Date getMemberRegiDate() {
-//		return memberRegiDate;
-//	}
-//
-//	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
-//		this.memberRegiDate = memberRegiDate;
-//	}
+	public java.sql.Date getMemberRegiDate() {
+		return memberRegiDate;
+	}
+
+	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
+		this.memberRegiDate = memberRegiDate;
+	}
 
 	public Integer getArSize() {
 		return arSize;
