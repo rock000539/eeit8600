@@ -25,14 +25,21 @@ import tw.com.queautiful.product.service.ReviewService;
 public class ReviewCMController {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	private ReviewCMService service;
 
-	@Autowired
+	private ReviewCMService service;
 	private ReviewService reviewService;
-	
-	@Autowired
 	private MemberService memberService;
+	
+	
+	//使用建構子@Autowired
+	@Autowired
+	public ReviewCMController(MemberService memberService,ReviewService reviewService,ReviewCMService service){
+		this.service= service;
+		this.reviewService= reviewService;
+		this.memberService= memberService;
+	}
+	
+	public ReviewCMController(){}
 	
 	@RequestMapping("/list")
 	public String listPage(Model model){
@@ -74,8 +81,9 @@ public class ReviewCMController {
 	@RequestMapping(value="/select_data",method=RequestMethod.POST)
 	@ResponseBody
 	public List<ReviewCM> selects(@RequestParam Long reviewId){
-		log.debug("ReviewId={}",reviewId);		
-		List<ReviewCM> reviewCMs = reviewService.getById(reviewId).getReviewCMs();
+		log.debug("ReviewId={}",reviewId);	
+		List<ReviewCM> reviewCMs = reviewService.getByIdByVOReviewId(reviewId).getReviewCMs();
+//		List<ReviewCM> reviewCMs = reviewService.getById(reviewId).getReviewCMs();
 		log.debug("ReviewCMs={}",reviewCMs);
 		
 		return reviewCMs;	

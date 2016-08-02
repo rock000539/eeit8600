@@ -2,6 +2,7 @@ package tw.com.queautiful.product.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import tw.com.queautiful.product.dao.ReviewDao;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
+import tw.com.queautiful.product.vo.review.ReviewVOForReviewCM;
 
 @Service
 public class ReviewService {
@@ -50,6 +52,14 @@ public class ReviewService {
 	
 	public void delete(Long reviewId){
 		reviewDAO.delete(reviewId);
+	}
+	
+	public ReviewVOForReviewCM getByIdByVOReviewId(Long reviewId){
+		
+		ReviewVOForReviewCM review=new ReviewVOForReviewCM();
+		BeanUtils.copyProperties(reviewDAO.findOne(reviewId),review);
+		
+		return review;
 	}
 	
 	public List<Review> findByOrderByReviewTimeDesc() {

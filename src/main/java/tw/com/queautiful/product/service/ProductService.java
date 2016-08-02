@@ -86,12 +86,8 @@ public class ProductService {
 			
 			Date date = review.getMember().getBirthDay();
 			
-			int age = 0;
-			try {
-				age = memberService.getMemberAge(date);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			int age = memberService.getMemberAge(date);
+		
 			
 			if(age<=19) {
 				ages[0]++;

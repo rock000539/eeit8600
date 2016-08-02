@@ -98,11 +98,7 @@ public class MemberController {
 	public String memberPersonalPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
-		try {
-			member.setAge(memberService.getMemberAge(member.getBirthDay()));
-		} catch (ParseException e) {
-			log.error(e.getMessage());
-		}
+		member.setAge(memberService.getMemberAge(member.getBirthDay()));
 		model.addAttribute("member", member);
 		return "/member/memberProfile";
 	}
@@ -112,11 +108,7 @@ public class MemberController {
 	public String memberPersonalEditPage(HttpServletRequest request, Model model){
 		Long memberId = (Long)request.getSession().getAttribute("memberId");
 		Member member = memberService.getById(memberId);
-		try {
-			member.setAge(memberService.getMemberAge(member.getBirthDay()));
-		} catch (ParseException e) {
-			log.error(e.getMessage());
-		}
+		member.setAge(memberService.getMemberAge(member.getBirthDay()));
 		model.addAttribute("member", member);
 		return "/member/memberProfile-edit";
 	}

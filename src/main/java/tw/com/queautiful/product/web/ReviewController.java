@@ -116,7 +116,7 @@ public class ReviewController {
 
 	// 前端心得總覽頁面
 	@RequestMapping("/reviews")
-	public String reviews(Model model) throws ParseException {
+	public String reviews(Model model)  {
 
 		List<Review> list = service.getAll();
 		model.addAttribute("reviews", list);

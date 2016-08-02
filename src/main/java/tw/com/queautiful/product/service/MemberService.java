@@ -237,10 +237,16 @@ public class MemberService {
 		memberDao.save(member);
 	}
 		// 計算年齡
-	public Integer getMemberAge(java.sql.Date memberBirthday) throws ParseException {
+	public Integer getMemberAge(java.sql.Date memberBirthday)  {
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date birthday = df.parse(memberBirthday.toString());
+		java.util.Date birthday=null;
+		try {
+			birthday = df.parse(memberBirthday.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Calendar nowCal = Calendar.getInstance();
 		Calendar birthdayCal = Calendar.getInstance();
 		birthdayCal.setTime(birthday);

@@ -2,11 +2,13 @@ package tw.com.queautiful.product.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ReviewCMDao;
 import tw.com.queautiful.product.entity.ReviewCM;
+import tw.com.queautiful.product.vo.reviewCM.ReviewCMSelectData;
 
 
 
@@ -34,5 +36,12 @@ public class ReviewCMService {
 	
 	public void delete(Long rcmId){
 		reviewCMDao.delete(rcmId);
+	}
+	
+	public ReviewCMSelectData getByIdByVoSelectData(Long rcmId){
+		
+		ReviewCMSelectData reviewCM = new ReviewCMSelectData();
+		BeanUtils.copyProperties(reviewCMDao.findOne(rcmId), reviewCM); //前面findone放到到後面reviewCM Bean裡
+		return reviewCM;
 	}
 }
