@@ -68,7 +68,7 @@
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="row">
-	<div style="border:3px solid #efefef"></div>
+	<div style="border:2px solid #efefef"></div>
 <!--start wrapper-->
 <section class=" container">
     <!--Start Header-->
