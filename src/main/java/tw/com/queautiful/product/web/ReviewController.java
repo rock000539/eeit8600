@@ -244,10 +244,6 @@ public class ReviewController {
 		List<BrandSearch> brands = brandService.getAllByVoSearch();
 		model.addAttribute("brands", brands);
 		
-		//產品
-		List<Product> products = prodService.getAll();
-		model.addAttribute("products", products);
-		
 		model.addAttribute("review", service.getById(reviewId));
 		
 		return "/review/reviewEditFms";

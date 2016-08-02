@@ -111,7 +111,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/members/register","/members/check_email","/members/insert",
                 "/members/forgotpsw","/members/check_emailexist","/members/requestforpsw",
                 "/expdate/batchCodeController","/reviews/reviews",
-                "/reviews//review/{reviewId}","/reviewCMs/select_data",
+                "/reviews/review/{reviewId}","/reviewCMs/select_data",
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
                 "/ingredients/**","/prodIngreList/**",

@@ -376,69 +376,11 @@ select {
 <FORM id="editForm">
     <div id="wrapper">
         <div class="overlay"></div>
-        <!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" style="margin-top:135px;height:390px;">
-            <ul class="nav sidebar-nav">
-                <li class="sidebar-brand" style="background: black;">
-                    <a  class="fa fa-search" style="height: 65px;font-size: 26px;padding:20px 0 0 10px">&nbsp;&nbsp;Product Search</a>
-                </li>
-                <li>
-                    <a style="color: #565656;font-size: 14px;">選擇品牌名稱，搜尋產品！</a>
-                </li>
-                <li>
-                    <a >
-                    	<div class="row">
-	<!-- 						<select id="sbrand" class="js-example-basic-single" style="width: 80%; visibility: hidden;"> -->
-							<select id="sbrand" class="js-example-basic-single" style="width: 90%;">
-								<option value="0">請選擇品牌</option>
-								<c:forEach items="${brands}" var="brand">
-									<c:if test="${brand.brandId==review.product.brandId}">
-										<option value="${brand.brandId}" selected="selected">${brand.brandName}</option>
-									</c:if>
-									<option value="${brand.brandId}">${brand.brandName}</option>
-								</c:forEach>
-							</select>
-						</div>
-					</a>
-                </li>
-                <li id="sprodLi">
-                    <a >
-                    	<div class="row">
-							<select id="sprod" class="js-example-basic-single" style="width: 90%"></select>
-<!-- 								<option value="0">請選擇產品</option> -->
-<%-- 								<c:forEach items="${products}" var="brand"> --%>
-<%-- 									<c:if test="${products.prodId==review.prodId}"> --%>
-<%-- 										<option value="${products.prodId}" selected="selected">${products.prodName}</option> --%>
-<%-- 									</c:if> --%>
-<%-- 									<option value="${products.prodId}">${products.prodName}</option> --%>
-<%-- 								</c:forEach> --%>
-							</select>
-						</div>                 
-                    </a>
-                </li>
-                <li id="prodImgLi">
-                    <a >
-                        <div class="row">
-							<img id="prodImg" class="js-example-basic-single" alt="prodImg" style="width: auto;height: 120px;margin-left: 30px">
-						</div>
-                    </a>
-                </li>
-                <li id="check">
-                    <a >
-                        <div class="row">
-							<button  class="btn btn-default" type="button" style="margin:0 0 0 45px;"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Check</button>
-						</div>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-10 article">
         
-<!-- 	        <div id="page-content-wrapper"> -->
             
           	<section class="team row sub_content" style="padding-bottom: 0">
 				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;padding-bottom: 0">
@@ -457,22 +399,11 @@ select {
 					<input type="hidden" name="reviewShow" value="${review.reviewShow}"/>
 					<input type="hidden" name="reviewReport" value="${review.reviewReport}"/>
 					<input type="hidden" name="reviewRating" id="reviewRating"/>
-<!-- 					<input type="hidden" name="prodId" id="prodId"/> -->
-					
 					<input type="hidden" name="prodId" id="prodId" value="${review.prodId}"/>
 		
-					
 					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="row">
-							<button class="btn btn-default btn-lg is-closed" type="button" data-toggle="offcanvas" style="width:400px;margin-left: 35px">
-								<i class="fa fa-search" aria-hidden="true">
-								</i>&nbsp;請先找到您要發表心得的產品唷
-							</button>
-						</div>
-					
 						<div class="col-lg-5 col-md-5 col-sm-5" style="width:210px;height: 210px;margin: 20px 0 0 20px;">
 							<div class="row"> 						<!-- max-width:240px;max-height:270px; -->
-								<input id="prodImgButton" type="text" class="form-control" placeholder="&nbsp;&nbsp;產品圖片" style="border-radius:20px;font-family:'Microsoft JhengHei';height: 210px;font-size:35px;"/>
 								<img id="prodImgMain" class="js-example-basic-single prodImgMain" src="/reviews/showProd?prodId=${review.prodId}">
 							</div>
 						</div>
@@ -531,7 +462,6 @@ select {
 						<div class="row" >
 							<h3 style="margin:15px 0 5px 35px;padding-bottom: 0;font-family:'Microsoft JhengHei';">&nbsp;&nbsp;&nbsp;心得標題</h3>
 							<input type="text" name="reviewTitle" id="reviewTitle" class="form-control"  placeholder="請輸入心得標題" value="${review.reviewTitle}"style="border-radius:20px;font-family:'Microsoft JhengHei';margin-left: 35px"/>
-		<!-- 						<textarea class="form-control" name="review"  rows="2" cols="5" placeholder="Please Enter Your Title" style="border-radius:10px;"></textarea> -->
 						</div>
 					</div>
 				</div>
@@ -576,9 +506,7 @@ select {
 	        	<button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
     </div>
-    
 </div>
 <!-- end of Modal -->
 
@@ -610,12 +538,6 @@ select {
 		// 設定原始文章內容
 		CKEDITOR.replace('review');
 		CKEDITOR.instances['review'].setData('${review.review}');
-		
-	/*  ==================== Side Bar ======================== */
-		
-		  $('[data-toggle="offcanvas"]').click(function () {
-		        $('#wrapper').toggleClass('toggled');
-		  });  
 
 	/*  ================驗     證============================= */
 	
@@ -632,79 +554,7 @@ select {
 				reviewTitle:{required:'please enter review title'},
 		},//end of messages	
 	});
-	/*  =====================Prod Search ======================== */
-		
-	// hide  select
-// 	$('#sprod').hide();
-// 	$('#sprodLi').hide();
-// 	$('#prodImg').hide();
-// 	$('#prodImgLi').hide();
-// 	$('#check').hide();
-	$('#prodImgButton').hide();
-	
-	// select-brand init
-	$('#sbrand').select2({
-		placeholder: 'Select a	 brand',
-		allowClear: true,
-		theme: 'classic', 
-	});
-	
-// 		$("#sbrand").append($("<option></option>").attr("value", "0").text("請選擇品牌"));
-	$('#sbrand').on('select2:select', function (evt) {
-		
-		
-		if($(this).val() > 0) {
-			
-			$('#brandName').text($(this).select2('data')[0].text);
-// 			$('#sprodLi').show();
-			
-			// select-product init
-			$('#sprod').select2({
-				placeholder: '請選擇產品',
-				allowClear: true,
-				theme: 'classic',
-			});
-			
-			// append data to select #sprod
-			$.ajax({
-				url: '/products/search/' + $(this).val(),
-				type: 'POST',
-				dataType: 'json',
-				contextType: 'application/json; charset=utf-8;',
-				success:function(response){
-					var select = $('#sprod').empty();
-					select.append($('<option>請選擇產品</option>'));
-					for(i=0; i<response.length; i++) {
-						select.append($('<option></option>').attr('value', response[i].prodId).text(response[i].prodName));
-					}
-				}
-			});
-		}
-	});
-	
-	
-	$('#sprod').on('select2:select', function (evt) {
-		
-		var prodNum=$(this).val();
-		
-		$('#prodId').val(prodNum); //產品id評分到後端
-		
-		if(prodNum > 0) {
-			$('#prodName').text($(this).select2('data')[0].text);
-			// show img
-// 			$('#prodImgLi').show();
-// 			$('#prodImg').show()
-			$('#prodImg').attr("src","/reviews/showProd?prodId="+prodNum);
-// 			$('#check').show();
-			
-			$('#check').on('click',function(){
-				$("#prodImgButton").remove();
-				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
-				$('#wrapper').toggleClass('toggled'); //sidebar open/close
-			})
-		}
-	});
-	 	
+
 	/*  ===================== diamond ================================ */
 	
 		// 設定原始diamond變亮
