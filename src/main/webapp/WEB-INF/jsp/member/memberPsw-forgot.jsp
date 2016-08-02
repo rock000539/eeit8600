@@ -176,14 +176,13 @@ $(function(){
 				data:{"email":email},
 				type : "Get",
 				beforeSend:function(){
-					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending Email</div>")
+					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending ...</div>")
 					.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
 				},
 				success : function(result){
-					alert(result);//test
 					$('div.icon1').html("<i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Please check your Email");
-					setTimeout(function() {	window.location.reload(); }, 1000);
-					$('.modal-backdrop').remove();
+					setTimeout(function() {	$('.modal-backdrop').remove(); }, 2000);
+					
 				}
 			});//ajax
 		}//validate
