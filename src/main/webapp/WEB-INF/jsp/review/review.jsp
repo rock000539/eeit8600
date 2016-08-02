@@ -30,6 +30,10 @@
     border-top: 5px solid #648CD5;
 }
 
+.bgcolor{
+	background: #FFFFFF;
+	}
+
 .pbhead  ul > li{
     margin-top:10px;
 	float: right;
@@ -67,29 +71,11 @@
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
-				<div class="row">
-	<div style="border:2px solid #efefef"></div>
+				<div class="grey_bg row bgcolor">
+	<div style="border:2.5px solid #efefef"></div>
+
 <!--start wrapper-->
-<section class=" container">
-    <!--Start Header-->
-
-    <!--End Header-->
-
-		<!-- start site search -->
-<!-- 			<div class="widget widget_search"
-				style="width: 200px; height: 40px; float: right">
-				<div class="site-search-area">
-					<form method="get" id="site-searchform" action="#">
-						<div>
-							<input class="input-text" name="s" id="s"
-								placeholder="Enter Search keywords..." type="text" /> <input
-								id="searchsubmit" value="Search" type="submit" />
-						</div>
-					</form>
-				</div>
-				
-			</div>
-		<!-- end site search -->
+<section class="container">
         <section class="content blog">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -334,11 +320,16 @@
                     </div>
                 </div><!--/.row-->
         </section>
-
+    </section>
     <!--start footer-->
 
+
+            <!-- **每頁不同的內容結束** -->
+
+<!--加入footer -->
+<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
     <!--end footer-->
-<!-- </section> -->
+</section>
 <!--end wrapper-->
 
 <!-- 使用model1 ----------------------------------------------------------------->
@@ -381,11 +372,6 @@
 
 
 
-
-            <!-- **每頁不同的內容結束** -->
-
-<!--加入footer -->
-<c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 
 
 	<!--內縮的script是必加的 -->
