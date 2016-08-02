@@ -24,6 +24,12 @@
 	<script src="/js/jquery.min.js"></script>
 </head> 
 <style>
+.wrapper {
+    background: #FFFFFF;
+    margin-top: 0px;
+    border-top: 5px solid #648CD5;
+}
+
 .pbhead  ul > li{
     margin-top:10px;
 	float: right;
@@ -61,11 +67,10 @@
 <c:import url="/WEB-INF/jsp/fms_header_nav.jsp" />
 			
 			<!-- **每頁不同的內容從這裡開始** -->
-				<div class="grey_bg row">
-
-
+				<div class="row">
+	<div style="border:3px solid #efefef"></div>
 <!--start wrapper-->
-<section class="wrapper container">
+<section class=" container">
     <!--Start Header-->
 
     <!--End Header-->
@@ -296,7 +301,7 @@
                                         <ul class="recent_tab_list">
                                             <li style="border:0px">
                                                 <span><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></a></span>
-                                                <p><span>${review.product.prodDesc}</span></p>
+                                                <p><span></span>${review.product.prodDesc}</p>
                                             </li>
                                         </ul>
                                     </div>
