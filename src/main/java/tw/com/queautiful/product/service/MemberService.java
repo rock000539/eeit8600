@@ -169,8 +169,9 @@ public class MemberService {
 		Member member = memberDao.findByEmailIs(email);
 		String token = UUID.randomUUID().toString();
 		member.setResetPswToken(token);
-		java.sql.Date expDate = new java.sql.Date(
-				new java.util.Date().getTime() + 7 * 24 * 60 * 60 * 1000);
+		Calendar today = Calendar.getInstance();
+		today.add(Calendar.DATE, +7);
+		java.sql.Date expDate = new java.sql.Date(today.getTimeInMillis());
 		member.setResetPswExp(expDate);
 		memberDao.save(member);
 		log.debug("token saved: {}", member.getResetPswToken());
