@@ -110,4 +110,8 @@ public class ArticleService {
 	public Long getCountByMemberAndArticleType(Member member, ArticleType articleType){
 		return articleDao.countByMemberAndArticleType(member, articleType);
 	}
+	
+	public List<Article> findTop5ByOrderByArticleTimeDesc(){
+		return articleDao.findTop5ByOrderByArticleTimeDesc();
+	}
 }
