@@ -24,6 +24,16 @@
 	<script src="/js/jquery.min.js"></script>
 </head> 
 <style>
+#header {
+    z-index: 999;
+    background: #fff;
+    padding:0; 
+}
+
+#header .col-sm-3{
+	height: 22px;
+}
+
 .wrapper {
     background: #FFFFFF;
     margin-top: 0px;
