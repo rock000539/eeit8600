@@ -109,7 +109,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers(
                 "/","/expdate/search","/**/show","/**/select","/members/register",
                 "/expdate/batchCodeController","/reviews/reviews",
-                "/reviews//review/{reviewId}","/reviewCMs/select_data",
+                "/reviews/review/{reviewId}","/reviewCMs/select_data",
                 "/loginBms","/logout","/**/select_jqgrid",
                 "/loginBmsDenied","/webmail/sendMail","/contact",
                 "/ingredients/**","/prodIngreList/**",
