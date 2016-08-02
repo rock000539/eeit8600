@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import tw.com.queautiful.product.entity.WebViewAndVisitorData;
+import tw.com.queautiful.product.service.ArticleService;
 import tw.com.queautiful.product.service.ProductService;
 import tw.com.queautiful.product.service.WebViewAndVisitorDataService;
 
@@ -22,6 +23,9 @@ public class FmsController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ArticleService articleService;
 
 	@RequestMapping("/fms")
 	public String fmsPage(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -41,7 +45,7 @@ public class FmsController {
 		}
 		
 		model.addAttribute("prodTop10",productService.findTop10ByOrderByScoreDesc());
-
+		model.addAttribute("articles",articleService.findTop5ByOrderByArticleTimeDesc());
 		return "/fms";
 	}
 

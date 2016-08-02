@@ -243,7 +243,7 @@ h2, h4{
 		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.prodId}"><img src="/products/show?prodImg=${item.prodImg}"/></a></div>
 		        <div class="reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
-		        	<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
+		        	<span><a href="/reviews/edit_fms/${item.reviewId}"><i class="fa fa-pencil"></i>&nbsp;EDIT</a></span></h2>
 		        	<h4 class="prod">${item.prodName} | ${item.brandName}</h4>
 		        	<div class="preview">${item.review}</div>
 		        	<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/${item.reviewId}">read more</a>

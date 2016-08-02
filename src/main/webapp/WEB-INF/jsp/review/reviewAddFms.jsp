@@ -444,7 +444,7 @@ select {
 					<input type="hidden" name="reviewShow" value="true"/>
 					<input type="hidden" name="reviewReport" value="0"/>
 					<input type="hidden" name="reviewRating" id="reviewRating"/>
-					<input type="hidden" name="prodId" id="prodId"/>
+					<input type="hidden" name="prodId" id="prodId" value="${product.prodId}"/>
 		
 					
 					<div class="col-lg-6 col-md-6 col-sm-6">
@@ -457,15 +457,21 @@ select {
 					
 						<div class="col-lg-5 col-md-5 col-sm-5" style="width:210px;height: 210px;margin: 20px 0 0 20px;">
 							<div class="row"> 						<!-- max-width:240px;max-height:270px; -->
-								<input id="prodImgButton" type="text" class="form-control" placeholder="&nbsp;&nbsp;產品圖片" style="border-radius:20px;font-family:'Microsoft JhengHei';height: 210px;font-size:35px;"/>
-								<img id="prodImgMain" class="js-example-basic-single prodImgMain">
-								
+								<c:choose> 
+									<c:when test="${not empty product.prodId}">
+										<img id="prodImgMain" class="js-example-basic-single prodImgMain" src="/reviews/showProd?prodId=${product.prodId}">
+									</c:when>
+									<c:otherwise>
+										<input id="prodImgButton" type="text" class="form-control" placeholder="&nbsp;&nbsp;產品圖片" style="border-radius:20px;font-family:'Microsoft JhengHei';height: 210px;font-size:35px;"/>
+										<img id="prodImgMain" class="js-example-basic-single prodImgMain">
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-5" style="margin:0 0 0 10px ">
 							<div class="row">
-								<div id="brandName" style="margin:70px 0 50px 10px;font-family:'Microsoft JhengHei';font-size:20px;">品牌名稱</div>
-								<div id="prodName"style="margin:0 0 0 10px;font-family:'Microsoft JhengHei';font-size:20px;">產品名稱</div>
+								<div id="brandName" style="margin:70px 0 50px 10px;font-family:'Microsoft JhengHei';font-size:20px;">${product.brandName}</div>
+								<div id="prodName"style="margin:0 0 0 10px;font-family:'Microsoft JhengHei';font-size:20px;">${product.prodName}</div>
 							</div>
 						</div>
 						<!-- 評分  -->

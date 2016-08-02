@@ -19,6 +19,7 @@ public interface ArticleDao extends JpaRepository<Article, Long>, JpaSpecificati
 //	Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable);
 	
 	List<Article> findByMember(Member member);
+	List<Article> findTop5ByOrderByArticleTimeDesc();
 	
 	Long countByMemberAndArticleType(Member member, ArticleType articleType);
 }
