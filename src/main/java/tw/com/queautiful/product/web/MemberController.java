@@ -486,6 +486,7 @@ public class MemberController {
 	@RequestMapping("/check_email")
 	@ResponseBody
 	public Boolean accountCheck(String email){
+		log.debug(email);
 		return memberService.accountCheck(email);
 	}
 
@@ -506,7 +507,7 @@ public class MemberController {
 	@ResponseBody
 	public String requestForResetPsw(@RequestParam String email, HttpServletRequest req){
 		String resetPswUrl = memberService.createPswResetUrl(email, req);
-		log.debug("URL: {}", resetPswUrl);
+		log.debug("resetPswUrl: {}", resetPswUrl);
 		mailSender.sendResetPsw(email, resetPswUrl);
 		return "Please check your email and follow the instructions.";
 	}

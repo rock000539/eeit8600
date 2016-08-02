@@ -63,15 +63,18 @@
 /* 		border: 2px double white; */
 /* 		box-shadow: 0 3px 0 0 #84D2CE; */
 	}
-	.modal-dialog {
-	  padding-top:5%;
+	.modal-title{
+		color: #fff;
+		font-size: 22px;
+		text-align: 30px;
+		padding-top: 12px;
 	}
 </style>
 </head>
 <body>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h3 class="modal-title">MemberRegister<small>Sign Up TestPage </small></h3>
+                 <h3 class="modal-title">Member Registration<small>&nbsp;&nbsp;&nbsp;Sign Up !</small></h3>
             </div>			<!-- modal header -->
             <div class="modal-body">
             
