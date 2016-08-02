@@ -281,9 +281,9 @@
 				    			<c:forEach begin="1" end="${product.score}">
 									<i class="fa fa-diamond"></i>
 								</c:forEach>
-<%-- 								<c:if test="${product.score/1!=0}"> --%>
-<!-- 									<i class="fa fa-diamond"></i> -->
-<%-- 								</c:if> --%>
+								<c:if test="${product.score%1!=0}">
+									<i class="fa fa-diamond"></i>
+								</c:if>
 								&nbsp;${product.score}
 				    		</span>
 				    	</label>
