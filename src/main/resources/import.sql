@@ -53,7 +53,7 @@ INSERT INTO PRODUCT (PRODNAME, BRANDID, CATEGORYID, WEIGHT, SCORE, PRICE, CAPACI
 INSERT INTO EXPDATE(MEMBERID,PROID,BATCHCODE,MFD,EXP) values (3,1,333,'2015-01-16','2016-08-20')
 INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (1,8,555,'2015-01-16','2018-02-16')
 INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (2,9,999,'2015-01-16','2018-01-16')
-INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (1,2,555,'2014-01-16','2016-08-21')
+INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (1,2,555,'2014-01-16','2016-09-02')
 INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (1,3,555,'2016-02-16','2016-07-30')
 INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (1,6,555,'2016-07-16','2016-05-16')
 INSERT INTO EXPDATE(memberId,proId,batchCode,mfd,exp) values (1,4,555,'2016-07-16','2016-08-28')

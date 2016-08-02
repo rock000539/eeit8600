@@ -43,7 +43,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     width:250px;
     margin:auto auto;
 }
-
+.forgot{
+	text-align: center;
+	padding-top: 5px;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+	font-size: 16px;
+}
 </style>      
 </head>
 
@@ -72,6 +80,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 			<input type="text" placeholder="Username" id="username" name="username">
 			<input type="password" placeholder="Password" id="password" name="password">
 			<button type="submit"  name="submit">Login</button>
+			<div class="forgot"><a href="/members/forgotpsw">Forgot Password ?</a></div>
 <!-- 		<input name="submit" id="login-button" type="submit" class="btn btn-default" value="Submit" /> -->
 			<input type="hidden" 
                      name="${_csrf.parameterName}" value="${_csrf.token}" />

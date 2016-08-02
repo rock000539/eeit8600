@@ -10,10 +10,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
-    <link rel="stylesheet" href="/css/fms/fms-customize.css">		
-	
+    <link rel="stylesheet" href="/css/fms/fms-customize.css">	
+    	
+	<script src="/js/jquery.min.js"></script>
 </head>
 <style>
+.row{
+	margin-top: 30px;
+}
 div.grey_bg{
 	min-height: 450px;
 }
@@ -85,6 +89,13 @@ button:after {
     transform: rotate(360deg);
   }
 }
+.icon1 {
+	 color:white;
+	 opacity: 1;
+	 font-size: 5em;
+	 text-align:center;
+	 margin-top: 15%;
+}
 </style>
 <body>
 <!--加入header&nav -->
@@ -95,7 +106,7 @@ button:after {
 <div class="row">
 <div class="col-lg-3"></div>
 <div class="col-lg-6 col-sm-6">
-<h1 style="text-align:center;">Reset Password</h1>     
+<h1 style="text-align:center;margin-bottom: 50px;">Reset Password</h1>     
 <h4>Please enter your EMAIL you have registered</h4>
 <form id="forgotPsw">
 <div class="form-group">
@@ -103,10 +114,8 @@ button:after {
 <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 </div>
 <br>
-<div class="form-group btn-submit">
-<button id="forgotPswBtn" class="btn-default" ></button>
-</div>
 </form>
+<div id="forgotPswBtn" class="btn btn-default" >Submit</div>
 </div><!-- col -->
 </div><!-- row -->
 
@@ -146,6 +155,7 @@ $(function(){
 	
 	$('#forgotPswBtn').click(function(){
 		var email=$('#email').val();
+		console.log(email);
 // 		$("#forgotPswBtn").removeClass("btn-default").addClass("onclic", 250, function(){
 // 			console.log("click");
 // 			setTimeout(function() {
@@ -161,14 +171,21 @@ $(function(){
 // 		});
 		var validateform = $('#forgotPsw').validate().form();
 		if(validateform){
-		$.ajax({
-			url:"/members/requestforpsw",
-			data:{"email":email},
-			type : "Get",
-			success : function(result){
-				alert(result);//test
-			}
-		});//ajax
+			$.ajax({
+				url:"/members/requestforpsw",
+				data:{"email":email},
+				type : "Get",
+				beforeSend:function(){
+					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending Email</div>")
+					.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+				},
+				success : function(result){
+					alert(result);//test
+					$('div.icon1').html("<i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Please check your Email");
+					setTimeout(function() {	window.location.reload(); }, 1000);
+					$('.modal-backdrop').remove();
+				}
+			});//ajax
 		}//validate
 	});//click
 	
