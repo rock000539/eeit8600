@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import tw.com.queautiful.product.dao.ReviewDao;
 import tw.com.queautiful.product.entity.Product;
 import tw.com.queautiful.product.entity.Review;
-import tw.com.queautiful.product.vo.review.ReviewFmsReviews;
 import tw.com.queautiful.product.vo.review.ReviewVOForReviewCM;
 
 @Service
