@@ -206,8 +206,16 @@ h2, h4{
 				<span value="BATHBODY" class="subtab">BATHBODY (${countBathBody})</span>
 				<span class="sep"> · </span>
 				<span value="HAIR" class="subtab">HAIR (${countHair})</span>
-				
-				<div class="dropdown">
+				<div class="dropdown arrow">
+				  <div class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    <i class="fa fa-sort" aria-hidden="true"></i>
+				  </div>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+				    <li style="margin-bottom: 10px;"><a value="DESC"> <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></a></li>
+				    <li><a value="ASC"> <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a></li>
+				  </ul>
+				</div>
+				<div id="reviewsort" class="dropdown">
 				  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				    Time
 				    <span class="caret"></span>
@@ -215,7 +223,6 @@ h2, h4{
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				    <li><a value="reviewTime">Time</a></li>
 				    <li><a value="reviewRating">Rating</a></li>
-				    <li><a value="rewCollect">Liked</a></li>
 				  </ul>
 				</div>
 				<div style="display:inline-block; float:right;">Order By</div>
@@ -322,7 +329,7 @@ h2, h4{
 			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
 		<h4 class="prod">_prodName | _brandName </h4>		
 		<p class="preview">_review</p>
-		<a class="singlepage" href="<%=request.getContextPath()%>/reviews/review/_reviewId">read more</a>
+		<a class="singlepage" href="/reviews/review/_reviewId">read more</a>
 		<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 	</div>
 </div>
@@ -353,15 +360,31 @@ $(function(){
 	var direction = "DESC"; //default
 	
 	//根據sortProperty排序
-	$('.dropdown-menu a').click(function(){
+	$('#reviewsort a').click(function(){
 		if(sortProperty == $(this).attr('value')){
 			return;
 		}
 		sortProperty = $(this).attr('value');
 		console.log(sortProperty);
-		$('#dropdownMenu1').html($(this).html()+' <span class="caret"></span>');
+		$('#reviewsort #dropdownMenu1').html($(this).html()+' <span class="caret"></span>');
 		$('#reviewContentDiv').empty();
-		loadReviewData(0, sortProperty, direction);
+		loadReviewData();
+	});
+	
+	//DESC或ASC
+	$('.arrow a').click(function(){
+		if(direction == $(this).attr('value')){
+			return
+		}
+		direction = $(this).attr('value');
+		if(direction=="DESC"){
+			$('.arrow #dropdownMenu2').html('<i class="fa fa-sort-amount-desc" aria-hidden="true"></i>');
+		}
+		if(direction=="ASC"){
+			$('.arrow #dropdownMenu2').html('<i class="fa fa-sort-amount-asc" aria-hidden="true"></i>');
+		}
+		$('#reviewContentDiv').empty();
+		loadReviewData();
 	});
 	
 	
@@ -378,7 +401,7 @@ $(function(){
 			console.log($(this).attr('value'));
 			categoryTitle = $(this).attr('value');
 			$('#reviewContentDiv').empty();
-			loadReviewData(0, sortProperty, direction);
+			loadReviewData();
 		}
 		
 		// articles 指定articleType
@@ -425,14 +448,10 @@ $(function(){
 	}  	
 	
 	
-	function loadReviewData(pageNum, sortProperty, direction){
+	function loadReviewData(){
 		var data= {"memberId": memberId,"categoryTitle":categoryTitle, "sortProperty": sortProperty, "direction": direction};
-		console.log(data);
-		
-//     	totalPages = $('#reviewsTotalPages').val();
-//     	loadedPageNum = $('#reviewsPageNum').val();
-    	
-    	$.ajax({
+
+		$.ajax({
 			url: '/members/post/review',
 			type: 'GET',
 			dataType: 'json',

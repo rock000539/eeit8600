@@ -486,6 +486,7 @@ public class MemberController {
 	@RequestMapping("/check_email")
 	@ResponseBody
 	public Boolean accountCheck(String email){
+		log.debug(email);
 		return memberService.accountCheck(email);
 	}
 

@@ -255,6 +255,7 @@ public class MemberService {
 		return age;
 	}
 	
+	//Review-post sort and category
 	public List<ReviewVO> getReviewByCategory(Long memberId, CategoryTitle categoryTitle,
 			String sortProperty, String direction){
 		
@@ -275,14 +276,13 @@ public class MemberService {
 			orderby = "r.reviewtime "+direction;
 		}
 		if(sortProperty!=null){
-			if("reviewTime".equals(sortProperty)){
-				orderby = "r."+sortProperty+" "+direction;
-			}else{
-				orderby = "r."+sortProperty+" "+direction+", r.reviewtime DESC";
-			}
+			orderby = "r."+sortProperty+" "+direction;
+//			if("reviewTime".equals(sortProperty)){
+//				orderby = "r."+sortProperty+" "+direction;
+//			}else{
+//				orderby = "r."+sortProperty+" "+direction+", r.reviewtime DESC";
+//			}
 		}
-		
-		
 		
 		String findReviewByCategory=
 		"select reviewid,t.prodid, t.categoryId from review r join " 

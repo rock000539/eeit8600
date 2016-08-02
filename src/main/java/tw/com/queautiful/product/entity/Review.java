@@ -261,11 +261,6 @@ public class Review {
 	}
 
 	public void setRewCollect(Integer rewCollect) {
-		if(memberSave!=null){
-			rewCollect = memberSave.size();
-		}else{
-			rewCollect = 0;
-		}
 		this.rewCollect = rewCollect;
 	}
 
