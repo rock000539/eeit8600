@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/css/fms/style-fraction.css"/>
     
     <link rel="stylesheet" href="/css/fms/fms-customize_index.css">
+    
+<!--     <link rel="stylesheet" href="/css/member-post.css" type="text/css" media="all"> -->
 
 </head>
 <body>
@@ -716,12 +718,11 @@
         </div>
     </div> -->
 
-    <div class="row super_sub_content">
+    <div class="row super_sub_content gradient_bg1">
         <div class="col-md-12">
-            <div class="dividerHeading">
-                <h4><span>Top 10 Product</span></h4>
+            <div class="dividerHeading text-center">
+                <h4><span>Top 10</span></h4>
             </div>
-
             <div id="post-slider" class="owl-carousel">
 <!--                 <div class="post-slide"> -->
 <!--                     <div class="post-img"> -->
@@ -734,53 +735,129 @@
 <!--                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p> -->
 <!--                     <a class="readmore" href="">Read more</a> -->
 <!--                 </div> -->  
-				<c:forEach var="product" items="${prodTop10}">      
+				<c:forEach var="product" items="${prodTop10}" varStatus="status">      
 					<div class="post-slide">					
                         <div class="serviceBox_5">
                             <div class="service-image">
                                 <img src="/products/show?prodImg=${product.prodImg}" style="height:100px; width:auto;"/>
                             </div>
-                            <div class="service-content bg1">
-                                <div class="internal">
-                                    <div class="item_content">
-<!--                                         <div class="service-icon"> -->
-<!--                                             <img src="images/services/service-3-icon.png"/> -->
-<!--                                         </div> -->
-                                        <h3>${product.prodName}<br>${product.brandName}</h3>
-                                        <a class="read" href="">more</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <c:choose>
+	                            <c:when test="${status.index==0}">
+	                            	<div class="service-content bg3">
+	                            		<div class="internal">
+		                                    <div class="item_content">
+		                                        <h4>${product.prodName}</h4>
+		                                        <h4>${product.brandName}</h4>
+		                                        <h4>
+									    			<c:forEach begin="1" end="${product.score}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:forEach>
+													<c:if test="${product.score/1!=0}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:if>
+													<span style="color:#f94877">&nbsp;${product.score}</span>
+									    		</h4>
+		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+		                                    </div>
+		                                </div>
+		                            </div>
+	                        
+	                            </c:when>
+	                            <c:when test="${status.index==1}">
+	                            	<div class="service-content bg2">
+	                            		<div class="internal">
+		                                    <div class="item_content">
+		                                        <h4>${product.prodName}</h4>
+		                                        <h4>${product.brandName}</h4>
+		                                        <h4>
+									    			<c:forEach begin="1" end="${product.score}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:forEach>
+													<c:if test="${product.score/1!=0}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:if>
+													<span style="color:#f94877">&nbsp;${product.score}</span>
+									    		</h4>
+		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+		                                    </div>
+		                                </div>
+		                            </div>
+	                            </c:when>
+	                            <c:when test="${status.index==2}">
+	                            	<div class="service-content bg1">
+	                            		<div class="internal">
+		                                    <div class="item_content">
+		                                        <h4>${product.prodName}</h4>
+		                                        <h4>${product.brandName}</h4>
+		                                        <h4>
+									    			<c:forEach begin="1" end="${product.score}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:forEach>
+													<c:if test="${product.score/1!=0}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:if>
+													<span style="color:#f94877">&nbsp;${product.score}</span>
+									    		</h4>
+		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+		                                    </div>
+		                                </div>
+		                            </div>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<div class="service-content bg4">
+	                            		<div class="internal">
+		                                    <div class="item_content">
+		                                        <h4>${product.prodName}</h4>
+		                                        <h4>${product.brandName}</h4>
+		                                        <h4>
+									    			<c:forEach begin="1" end="${product.score}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:forEach>
+													<c:if test="${product.score/1!=0}">
+														<i class="fa fa-diamond" style="color:#f94877"></i>
+													</c:if>
+													<span style="color:#f94877">&nbsp;${product.score}</span>
+									    		</h4>
+		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+		                                    </div>
+		                                </div>
+		                            </div>
+	                            </c:otherwise>
+                            </c:choose>
+                                
                         </div>                 
                     </div>
      			</c:forEach>
-                <c:forEach var="product" items="${prodTop10}">
-	                <div class="post-slide">
-	                    <div class="post-img">
-	                        <img src="/products/show?prodImg=${product.prodImg}" style="height:100px; width:auto;">
-	                    </div>
-	                    <h5 class="post-title"><a href="blog-post.html">${product.brandName} ${product.prodName}</a></h5>
-	                    <div class="post-date">
-	                        <i class="fa fa-calendar"></i> ${product.launchDate}
-	                    </div>
-	                    <p>
-	                    	<span>Score&nbsp;:&nbsp;
-				    			<c:forEach begin="1" end="${product.score}">
-									<i class="fa fa-diamond" style="color:#f94877"></i>
-								</c:forEach>
-								<c:if test="${product.score/1!=0}">
-									<i class="fa fa-diamond" style="color:#f94877"></i>
-								</c:if>
-								&nbsp;${product.score}
-				    		</span>
-	                    
-	                    </p>
-	                    <a class="readmore" href="">Read more</a>
-	                </div>
-                </c:forEach>
             </div>
         </div>
     </div>
+    
+    <div class="grey_bg row" style="padding-top: 20px;">
+    <div class="col-md-12">
+            <div class="dividerHeading text-center">
+                <h4><span>Recent Post Timeline</span></h4>
+            </div>
+    <div id="timelineDiv">
+		<section id="cd-timeline">
+			<c:forEach var="item" items="${articles}">
+			<div class="cd-timeline-block">
+				<div class="cd-timeline-img"></div>
+				
+				<div class="cd-timeline-content">
+					<h2>${item.articleTitle}</h2>
+					<small>${item.articleType}</small>
+					<p>${item.articleContent}</p>
+					<a href="/articles/view/${item.articleId}" class="cd-info">觀看文章</a>
+					<span class="cd-date">${item.articleTime}</span>
+				</div> <!-- cd-timeline-content -->
+			</div> <!-- cd-timeline-block -->
+			</c:forEach>
+			<input type="hidden" id="pageNum" value="${pageNum}">
+			<input type="hidden" id="totalPages" value="${totalPages}">
+		</section>
+	</div> <!-- timeline Div -->
+	</div>
+	</div>
 
     <!-- <section class="promo_box wow bounceInUp row" data-wow-offset="50">
         <div class=" container-fluid">
