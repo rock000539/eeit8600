@@ -45,6 +45,7 @@ import tw.com.queautiful.product.service.ReviewService;
 import tw.com.queautiful.product.service.Review_TagListService;
 import tw.com.queautiful.product.vo.brand.BrandSearch;
 import tw.com.queautiful.product.vo.category.CategorySearch;
+import tw.com.queautiful.product.vo.product.ProductInventory;
 import tw.com.queautiful.product.vo.product.ProductSearch;
 import tw.com.queautiful.product.vo.product.ProductView;
 
@@ -294,9 +295,7 @@ public class ReviewController {
 		model.addAttribute("brands", brands);
 
 		// 商品
-		ProductView product = new ProductView();
-		
-		
+		ProductInventory product=new ProductInventory();
 		if (prodId != null) {
 			BeanUtils.copyProperties(prodService.getById(prodId), product);//前面放到後面
 		} else {

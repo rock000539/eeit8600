@@ -444,7 +444,7 @@ select {
 					<input type="hidden" name="reviewShow" value="true"/>
 					<input type="hidden" name="reviewReport" value="0"/>
 					<input type="hidden" name="reviewRating" id="reviewRating"/>
-					<input type="hidden" name="prodId" id="prodId"/>
+					<input type="hidden" name="prodId" id="prodId" value="${product.prodId}"/>
 		
 					
 					<div class="col-lg-6 col-md-6 col-sm-6">
