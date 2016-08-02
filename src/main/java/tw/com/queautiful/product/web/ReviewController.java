@@ -130,8 +130,7 @@ public class ReviewController {
 		// ).getMember().getBirthDay().toString();
 		// log.debug("birthday={}",y);
 		for (int i = 0; i < list.size(); i++) {
-			Integer age = memberService.getMemberAge(list.get(i).getMember()
-					.getBirthDay());
+			Integer age = memberService.getMemberAge(list.get(i).getMember().getBirthDay());
 			log.debug("x={}", age);
 			list.get(i).getMember().setAge(age);
 		}
