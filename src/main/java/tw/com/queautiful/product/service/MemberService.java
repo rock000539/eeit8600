@@ -315,13 +315,20 @@ public class MemberService {
 			
 			ReviewVO reviewVO = new ReviewVO();
 			BeanUtils.copyProperties(reviewService.getById(reviewId), reviewVO);
-			
+			Long prodId =0L;
+			Long categoryId=0L;
+			try{	
 			BigInteger pId= (BigInteger) datas[1];
-			Long prodId = pId.longValue();
-			BeanUtils.copyProperties(productService.getById(prodId), reviewVO);
+			prodId = pId.longValue();
 			
 			BigInteger cId = (BigInteger) datas[2];
-			Long categoryId = cId.longValue();
+			categoryId = cId.longValue();
+			
+			}catch(Exception e){
+				prodId=((BigDecimal) datas[1]).longValue();
+				categoryId=((BigDecimal) datas[2]).longValue();
+			}
+			BeanUtils.copyProperties(productService.getById(prodId), reviewVO);
 			BeanUtils.copyProperties(categoryService.getById(categoryId), reviewVO);
 			
 			reviews.add(reviewVO);
