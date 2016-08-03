@@ -178,6 +178,7 @@ $(function(){
 				beforeSend:function(){
 					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending ...</div>")
 					.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+						setTimeout(function() {	}, 2000);
 				},
 				success : function(result){
 					$('div.icon1').html("<i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Please check your Email");
