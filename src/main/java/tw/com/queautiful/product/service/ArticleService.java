@@ -1,7 +1,10 @@
 package tw.com.queautiful.product.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.ArticleDao;
 import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ArticleReply;
 import tw.com.queautiful.product.entity.Member;
 import tw.com.queautiful.product.vo.article.ArticleListFms;
@@ -49,18 +53,19 @@ public class ArticleService {
 		return articleDao.findAll(pageable);
 	}
 
-//	public List<Article> findByOrderByArticleTimeDesc() {
-//		return articleDao.findByOrderByArticleTimeDesc();
-//	}
-//
-//	public Page<Article> findByOrderByArticleTimeDesc(Pageable pageable) {
-//		return articleDao.findByOrderByArticleTimeDesc(pageable);
-//	}
-//
-//	public Page<Article> findByOrderByArticleTimeDesc(Specification<Article> spec, Pageable pageable){
-//		return articleDao.findByOrderByArticleTimeDesc(spec, pageable);
-//	}
-	
+	// public List<Article> findByOrderByArticleTimeDesc() {
+	// return articleDao.findByOrderByArticleTimeDesc();
+	// }
+	//
+	// public Page<Article> findByOrderByArticleTimeDesc(Pageable pageable) {
+	// return articleDao.findByOrderByArticleTimeDesc(pageable);
+	// }
+	//
+	// public Page<Article> findByOrderByArticleTimeDesc(Specification<Article>
+	// spec, Pageable pageable){
+	// return articleDao.findByOrderByArticleTimeDesc(spec, pageable);
+	// }
+
 	public void insert(Article article) {
 		articleDao.save(article);
 	}
@@ -80,16 +85,25 @@ public class ArticleService {
 		log.debug("arSize = {}", article.getArSize());
 		return article;
 	}
-	
-	public ArticleListFms getOneByVO(Article temp){
+
+	public ArticleListFms getOneByVO(Article temp) {
 		Article a_temp = temp;
 		ArticleListFms article = new ArticleListFms();
 		BeanUtils.copyProperties(a_temp, article);
-//		article.setArticlesWorteByAuthorSize(a_temp.getMember().getArticlesWorteByAuthor().size());
+		article.setArticlesWorteByAuthorSize(a_temp.getMember().getArticlesWorteByAuthor().size());
+		if (article.getAcms() != null) {
+			Set<ArticleCM> acms = new LinkedHashSet<>();
+			for (ArticleCM acm : article.getAcms()) {
+				if (acm.getAcmShow()) {
+					acms.add(acm);
+				}
+			}
+			article.setAcms(acms);
+		}
 		return article;
 	}
-	
-	public List<ArticleListFms> getAllByVOListFms(List<Article> list){
+
+	public List<ArticleListFms> getAllByVOListFms(List<Article> list) {
 		List<Article> a_list = list;
 		List<ArticleListFms> articles = new ArrayList<>();
 
@@ -97,30 +111,21 @@ public class ArticleService {
 		for (Article temp : a_list) {
 			article = new ArticleListFms();
 			BeanUtils.copyProperties(temp, article);
-//			Integer arSize = temp.getAreplies().size();
 			Integer arSize = temp.getArSize();
-//			article.setArSize(arSize);
-			if(arSize!=0){
-				ArticleReply lastPost = temp.getAreplies().get(arSize-1);
+			if (arSize != 0) {
+				ArticleReply lastPost = temp.getAreplies().get(arSize - 1);
 				article.setLastPost(lastPost);
 			}
-//			Member member = temp.getMember();
-//			log.debug("member-->{}",member);
-//			article.setMemberId(member.getMemberId());
-//			article.setNickname(member.getNickname());
-//			article.setMemberRegiDate(member.getMemberRegiDate());
-//			Object[] reply = temp.getAreplies().toArray();
-//			article.setAcmsSize(temp.getAcms().size());
 			articles.add(article);
-		}		
-		return articles;	
+		}
+		return articles;
 	}
-	
-	public Long getCountByMemberAndArticleType(Member member, ArticleType articleType){
+
+	public Long getCountByMemberAndArticleType(Member member, ArticleType articleType) {
 		return articleDao.countByMemberAndArticleType(member, articleType);
 	}
-	
-	public List<Article> findTop5ByOrderByArticleTimeDesc(){
+
+	public List<Article> findTop5ByOrderByArticleTimeDesc() {
 		return articleDao.findTop5ByOrderByArticleTimeDesc();
 	}
 }

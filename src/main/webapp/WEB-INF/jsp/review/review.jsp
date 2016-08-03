@@ -95,8 +95,8 @@
                                     <img class="reviewImg" src="/reviews/show?reviewImg=${review.reviewImg}" alt="reviewImg">
                                 </figure>
                                 <div class="post_date">
-                                    <span class="day">${day}</span>
-                                    <span class="month">${month}</span>
+                                    <span class="day"><fmt:formatDate pattern="dd" value="${review.reviewTime}" /></span>
+                                    <span class="month"><fmt:formatDate pattern="MMM" value="${review.reviewTime}" /></span>
                                 </div>
                                 <div class="post_content">
                                     <div class="post_meta">
@@ -154,7 +154,7 @@
 									<c:if test="${review.memberId==memberId}">
 										<li><a href="/reviews/edit_fms/${review.reviewId}" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
 									</c:if>
-									<li><a href="#Comments" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
+									<li><a href="#leaveAComment" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
 									<li><a href="#replyarea" class="btn-warning btn-like" title="like" data-prodId="${review.reviewId}" onClick="save_review_click($(this))"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
                                 </ul>
                                 </div>	
@@ -165,9 +165,9 @@
 <%--                                     <img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg">  --%>
                                     <img src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
                                     <ul class="author_social">
-                                        <li><a class="fb" href="#." data-placement="top" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="twtr" href="#." data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="skype" href="#." data-placement="top" data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
+                                        <li><a class="fb" data-placement="top" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="twtr" data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a class="skype" data-placement="top" data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
                                     </ul>
                                 </div>
                                 <!--心得發布者資訊start -->
@@ -245,7 +245,7 @@
                             </div>
                             <!-- /#comments -->
                             <div class="dividerHeading">
-                                <h4><span>Leave a comment</span></h4>
+                                <h4 id="leaveAComment"><span>Leave a comment</span></h4>
                                 </div>
 						<form id="addForm" action="/reviewCMs/insert" method="post">
                             <input type="hidden" name="memberId" id="memberInfo" value="${memberId}"/>
@@ -506,8 +506,14 @@ $(function(){  //=$(document.)ready
 				dataType:'json',
 				success:function(result){
 // 					console.log("result1="+result);
-					$("#MyComments").text('Comments (' + (parseInt($("#MyComments").text().substr(10, 1)) + 1) + ')');
-					$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
+// 					if("${review.reviewCMs.size()}"==0){
+// 						$("#MyComments").text('Comments (' + (parseInt('${review.reviewCMs.size()}') + 1) + ')');
+// 						$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
+// 					}else{
+// 						console.log($("#myComments").text().substr(0, 1));
+						$("#MyComments").text('Comments (' + (parseInt( 0 + $("#myComments").text().substr(0, 1)) + 1) + ')');
+						$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
+// 					}
 					appendReviewCM(result);
 					CKEDITOR.instances['rcmMsg'].setData("");
 // 					location.href="#addForm";
