@@ -121,7 +121,7 @@ h2, h4{
 	background: #727CB6;
 	cursor: pointer;
 }
-.reviewContent h2>span, .articleEdit{
+.reviewContent h2>span a, .articleEdit{
 	color: #fff;
 	line-height: 20px;
 }
