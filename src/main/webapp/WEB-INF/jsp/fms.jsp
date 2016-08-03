@@ -845,21 +845,26 @@
 		    <div id="timelineDiv">
 				<section id="cd-timeline">
 					<c:forEach var="item" items="${articles}">
-					<div class="cd-timeline-block">
-						<div class="cd-timeline-img"></div>
-						
-						<div class="cd-timeline-content">
-							<h2>${item.articleTitle}</h2>
-							<small>${item.articleType}</small>
-							<span style="float:right; color:#337ab7; font-weight:bold; ">by ${item.nickname}</span>
-<%-- 							<p>${item.articleContent}</p> --%>
-<%-- 							<p>${fn:escapeXml(item.articleContent)}</p> --%>
-<%-- 							<html:text property="${item.articleContent}" /> --%>
-							<p>${fn:substring(item.articleContent,0,200)}</p>
-							<a href="/articles/view/${item.articleId}" class="cd-info text-center" style="clear:both;">Read More</a>
-							<span class="cd-date"><fmt:formatDate pattern="yyyy-MMM-dd" value="${item.articleTime}" /></span>
-						</div> <!-- cd-timeline-content -->
-					</div> <!-- cd-timeline-block -->
+						<div class="cd-timeline-block">
+							<div class="cd-timeline-img"></div>
+							<div class="cd-timeline-content">
+								<h2>${item.articleTitle}</h2>
+								<small>${item.articleType}</small>
+								<span style="float:right; color:#337ab7; font-weight:bold; ">by <a href="/members/overview/${item.memberId}">${item.nickname}</a></span>
+	<%-- 							<p>${item.articleContent}</p> --%>
+	<%-- 							<p>${fn:escapeXml(item.articleContent)}</p> --%>
+	<%-- 							<html:text property="${item.articleContent}" /> --%>
+	<!-- 							<div style="width: 300px; height:60px; border: #ef5c28 2px solid; overflow : hidden;"> -->
+									<p id="txt">${fn:substring(item.articleContent, 0, 140)}</p>
+									<script>
+											var html = document.getElementById("txt").innerHTML;
+										 	document.getElementById("txt").innerHTML = html.replace(/<[^>]+>/gm, '');
+									</script>
+	<!-- 							</div> -->
+								<a href="/articles/view/${item.articleId}" class="cd-info text-center" style="clear:both;">Read More</a>
+								<span class="cd-date"><fmt:formatDate pattern="yyyy-MMM-dd" value="${item.articleTime}" /></span>
+							</div> <!-- cd-timeline-content -->
+						</div> <!-- cd-timeline-block -->
 					</c:forEach>
 				</section>
 			</div> <!-- timeline Div -->
