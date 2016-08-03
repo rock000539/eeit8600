@@ -50,10 +50,10 @@ public class ReviewFmsReviews {
 	public void setProdId(Long prodId) {
 		this.prodId = prodId;
 	}
-	public List<ReviewCM> getReviewCMs() {
+	public List<ReviewCM> getRcms() {
 		return rcms;
 	}
-	public void setReviewCMs(List<ReviewCM> rcms) {
+	public void setRcms(List<ReviewCM> rcms) {
 		this.rcms = rcms;
 	}
 	public String getReviewTitle() {
@@ -106,7 +106,7 @@ public class ReviewFmsReviews {
 					result += String.format("\nReviewCMs[id=%d, title='%s']",reviewCM.getRcmId(),reviewCM.getRcmMsg());
 				}
 			}else{
-				result+="ReviewCMs is null";
+				result+="Rcms is null";
 			}
 		
 		

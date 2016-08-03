@@ -174,15 +174,15 @@ public class Review {
 		this.prodId = prodId;
 	}
 
-	public List<ReviewCM> getReviewCMs() {
+	public List<ReviewCM> getRcms() {
 		return rcms;
 	}
 	
-	public void setReviewCMs(List<ReviewCM> rcms) {
+	public void setRcms(List<ReviewCM> rcms) {
 		this.rcms = rcms;
 	}
 	
-	public void addReviewCMs(ReviewCM rcms){
+	public void addRcms(ReviewCM rcms){
 		this.rcms.add(rcms);
 		if(rcms.getReview()!=this){
 			rcms.setReview(this);

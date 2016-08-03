@@ -49,7 +49,7 @@
 	      	</div></a>
 	      			<!-- Img end -->
 		      	<div class="reviewTime">${review.reviewTime}</div>
-		      	<div class="reviewState">${review.reviewCMs.size()}&nbsp;Comments</div>
+		      	<div class="reviewState">${review.rcms.size()}&nbsp;Comments</div>
 		      	
 		      	<div class="caption">
 						<!--心得發布者資訊start -->

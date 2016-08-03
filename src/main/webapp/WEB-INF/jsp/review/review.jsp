@@ -105,11 +105,11 @@
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
                                             <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
                                             <c:choose> 
-												<c:when test="${review.reviewCMs.size()==0}">
-		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.reviewCMs.size()} Comment</a></span> 
+												<c:when test="${review.rcms.size()==0}">
+		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.rcms.size()} Comment</a></span> 
 												</c:when>
 												<c:otherwise>
-		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.reviewCMs.size()} Comments</a></span> 
+		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.rcms.size()} Comments</a></span> 
 												</c:otherwise>
 											</c:choose>
 <!--                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span> --><!--??tag標籤數量?? -->
@@ -188,11 +188,11 @@
                         <div class="news_comments">
                             <div class="dividerHeading">
                             	<c:choose> 
-									<c:when test="${review.reviewCMs.size()==0}">
+									<c:when test="${review.rcms.size()==0}">
                               			<h4 id="Comments"><span id="MyComments">Comment</span></h4>
 									</c:when>
 									<c:otherwise>
-                                		<h4 id="Comments"><span id="MyComments">Comments (${review.reviewCMs.size()})</span></h4>
+                                		<h4 id="Comments"><span id="MyComments">Comments (${review.rcms.size()})</span></h4>
 									</c:otherwise>
 								</c:choose>
                             </div>
@@ -411,9 +411,9 @@
     	<div class="avatar"><img alt="" src="/members/show?memberId=_memberId" class="avatar"></div>
         <div class="comment-container">
 	        <h4 class="comment-author"><a href="#">_memberNickname</a></span></h4>
-            <div class="comment-meta"><a href="#" class="comment-date link-style1">_reviewCMTime </a></div>
+            <div class="comment-meta"><a href="#" class="comment-date link-style1">_rcmTime </a></div>
             <div class="comment-body">
-    	        <p>_reviewCMMsg</p>
+    	        <p>_rcmMsg</p>
             </div>
         </div>
      	<div class="pbhead_comment">
@@ -506,14 +506,8 @@ $(function(){  //=$(document.)ready
 				dataType:'json',
 				success:function(result){
 // 					console.log("result1="+result);
-// 					if("${review.reviewCMs.size()}"==0){
-// 						$("#MyComments").text('Comments (' + (parseInt('${review.reviewCMs.size()}') + 1) + ')');
-// 						$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
-// 					}else{
-// 						console.log($("#myComments").text().substr(0, 1));
-						$("#MyComments").text('Comments (' + (parseInt( 0 + $("#myComments").text().substr(0, 1)) + 1) + ')');
-						$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
-// 					}
+					$("#MyComments").text('Comments (' + (parseInt( 0 + $("#myComments").text().substr(0, 1)) + 1) + ')');
+					$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
 					appendReviewCM(result);
 					CKEDITOR.instances['rcmMsg'].setData("");
 // 					location.href="#addForm";
@@ -531,15 +525,15 @@ $(function(){  //=$(document.)ready
 // 			console.log("result[0]=",result[0]);
 // 			console.log("result[0].memberId=",result[0].memberId);
 // 			console.log("result[0].nickname=",result[0].nickname);
-			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
+// 			console.log("result[0].rcmTime=",result[0].rcmTime);
 // 			console.log("result[0].rcmMsg=",result[0].rcmMsg);
 			for(var i=0 ; i < result.length; i++){
 				var str =$('#reviewCM_mode').html();
 // 				console.log("str="+str);
 				$(str.replace("_memberId",result[i].memberId)
 					  .replace("_memberNickname",result[i].nickname)
-					  .replace("_reviewCMTime",result[i].reviewCMTime)
-					  .replace("_reviewCMMsg",result[i].rcmMsg))					  
+					  .replace("_rcmTime",result[i].rcmTime)
+					  .replace("_rcmMsg",result[i].rcmMsg))					  
 					  .appendTo($('#comment-list'));
 			}
 		}//appendReviewCMData end
@@ -551,8 +545,8 @@ $(function(){  //=$(document.)ready
 					console.log(result);
 				$(str.replace("_memberId",result.memberId)
 					  .replace("_memberNickname",result.nickname)
-					  .replace("_reviewCMTime",result.reviewCMTime)
-					  .replace("_reviewCMMsg",result.rcmMsg))
+					  .replace("_rcmTime",result.rcmTime)
+					  .replace("_rcmMsg",result.rcmMsg))
 					  .appendTo($('#comment-list'));
 		}//appendReviewCM end
 		

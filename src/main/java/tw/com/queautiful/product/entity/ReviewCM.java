@@ -74,11 +74,11 @@ public class ReviewCM {
 		this.rcmMsg = rcmMsg;
 	}
 
-	public java.sql.Timestamp getReviewCMTime() {
+	public java.sql.Timestamp getRcmTime() {
 		return rcmTime;
 	}
 
-	public void setReviewCMTime(java.sql.Timestamp rcmTime) {
+	public void setRcmTime(java.sql.Timestamp rcmTime) {
 		this.rcmTime = rcmTime;
 	}
 	
@@ -104,8 +104,8 @@ public class ReviewCM {
 
 	public void setReview(Review review) {
 		this.review = review;
-		if(!review.getReviewCMs().contains(this)){
-			review.getReviewCMs().add(this);
+		if(!review.getRcms().contains(this)){
+			review.getRcms().add(this);
 		}
 	}
 

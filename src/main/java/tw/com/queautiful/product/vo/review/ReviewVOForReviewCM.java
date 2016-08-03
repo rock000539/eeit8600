@@ -20,11 +20,11 @@ public class ReviewVOForReviewCM {
 	}
 	
 	
-	public List<ReviewCM> getReviewCMs() {
+	public List<ReviewCM> getRcms() {
 		return rcms;
 	}
 
-	public void setReviewCMs(List<ReviewCM> rcms) {
+	public void setRcms(List<ReviewCM> rcms) {
 		this.rcms = rcms;
 	}
 

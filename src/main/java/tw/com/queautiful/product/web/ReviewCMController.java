@@ -66,7 +66,7 @@ public class ReviewCMController {
 		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 		
 		log.debug("{}",reviewCM);
-		reviewCM.setReviewCMTime(new java.sql.Timestamp(System.currentTimeMillis()));
+		reviewCM.setRcmTime(new java.sql.Timestamp(System.currentTimeMillis()));
 //		Long memberId = (Long) request.getSession().getAttribute("memberId");
 		reviewCM.setMember(memberService.getById(reviewCM.getMemberId()));
 		reviewCM.setReview(reviewService.getById(reviewCM.getReviewId()));
@@ -82,7 +82,7 @@ public class ReviewCMController {
 	@ResponseBody
 	public List<ReviewCM> selects(@RequestParam Long reviewId){
 		log.debug("ReviewId={}",reviewId);	
-		List<ReviewCM> reviewCMs = reviewService.getByIdByVOReviewId(reviewId).getReviewCMs();
+		List<ReviewCM> reviewCMs = reviewService.getByIdByVOReviewId(reviewId).getRcms();
 //		List<ReviewCM> reviewCMs = reviewService.getById(reviewId).getReviewCMs();
 		log.debug("ReviewCMs={}",reviewCMs);
 		
