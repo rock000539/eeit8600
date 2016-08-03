@@ -121,7 +121,7 @@ h2, h4{
 	background: #727CB6;
 	cursor: pointer;
 }
-.reviewContent h2>span, .articleEdit{
+.reviewContent h2>span a, .articleEdit{
 	color: #fff;
 	line-height: 20px;
 }
@@ -238,7 +238,7 @@ h2, h4{
 					<c:forEach begin="1" end="${item.reviewRating}"><i class="fa fa-diamond"></i></c:forEach>
 					</div>
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
-	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> ${item.rcmNum}</div>
+	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> </div>
 	        	</div>
 		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.prodId}"><img src="/products/show?prodImg=${item.prodImg}"/></a></div>
 		        <div class="reviewContent">

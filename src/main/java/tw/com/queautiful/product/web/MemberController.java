@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletRequestEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -509,26 +510,26 @@ public class MemberController {
 	public String changePswPage(@RequestParam String token, Model model){ 
 		Member member = memberService.getByResetPswToken(token);
 		log.debug("email token: {}", token);
-		String validToken = memberService.validateResetPswToken(token);
+		Boolean validToken = memberService.validateResetPswToken(token);
 		log.debug("validToken: {}", validToken);
-		if(validToken==null){
+		if(validToken){
 			model.addAttribute("email", member.getEmail());
 			return "/member/memberPsw-reset";
 		}
-		//xxxxxxxxxx   回傳validToken訊息
+		//Token有誤，回首頁
 		return "/fms";
 	}
 	
 	//update password
 	@RequestMapping(value="/updatepassword", method=RequestMethod.POST)
 	@ResponseBody
-	public String resetPassword(@RequestParam String email, @RequestParam String password){
+	public Boolean resetPassword(@RequestParam String email, @RequestParam String password){
 		Member member = memberService.getByEmail(email);
 		if(member != null){
 			memberService.updatePassword(member, password);
-			return "success";
+			return true;
 		}
-		return "failure";
+		return false;
 	}
 	
 	@RequestMapping("/check_emailexist")
