@@ -66,9 +66,9 @@ public class ProductService {
 		productDao.delete(productId);
 	}
 	
-	public double initScore(List<Review> reviews) {
+	public Double initScore(List<Review> reviews) {
 		
-		double score = 0.0;
+		Double score = 0.0;
 		for(Review review : reviews) {
 			score += review.getReviewRating();
 		}

@@ -243,12 +243,14 @@
 					            <span class="nav-span">心得分析</span>
 					        </a>
 					    </li>
+					    <!--  
 					    <li>
 					    	<a class="share">
 					    		<span class="nav-icon"><i class="fa fa-facebook"></i></span>
 					            <span class="nav-span">分享</span>
 					        </a>
 					    </li>
+					    -->
 					</ul>
 				</div>
 				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" />
@@ -264,10 +266,10 @@
 			      		<label for="tab-two"><span>Date : ${product.launchDate}</span></label>
 			    	</div>
 			    	<div class="view_tab">
-				    	<label for="tab-one"><span>Brand : ${product.brandName}</span></label>
+				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?brandId=${product.brandId}';">Brand : ${product.brandName}</span></label>
 				    </div>
 			    	<div class="view_tab">
-				    	<label for="tab-one"><span>Category : ${product.categoryName}</span></label>
+				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?categoryId=${product.categoryId}';">Category : ${product.categoryName}</span></label>
 				    </div>
 				    <div class="view_tab">
 				    	<label for="tab-one"><span>Ingredient : ${product.mainIgdt}</span></label>

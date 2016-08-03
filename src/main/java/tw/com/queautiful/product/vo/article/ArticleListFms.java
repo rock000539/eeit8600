@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.vo.article;
 
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -35,7 +36,7 @@ public class ArticleListFms {
 	private java.sql.Date memberRegiDate;
 	
 	// member撰寫文章數
-//	private Integer articlesWorteByAuthorSize;
+	private Integer articlesWorteByAuthorSize;
 	
 	//回覆數
 	private Integer arSize;
@@ -46,12 +47,12 @@ public class ArticleListFms {
 	//留言數
 	private Integer acmsSize;
 	
-	private Member member;
+//	private Member member;
 	
 	private Set<Member> memberSave;
 	
 	private Set<ArticleCM> acms;
-
+	
 	@Override
 	public String toString() {
 		return "ArticleListFms [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle="
@@ -139,13 +140,13 @@ public class ArticleListFms {
 		this.memberRegiDate = memberRegiDate;
 	}
 	
-//	public Integer getArticlesWorteByAuthorSize() {
-//		return articlesWorteByAuthorSize;
-//	}
-//
-//	public void setArticlesWorteByAuthorSize(Integer articlesWorteByAuthorSize) {
-//		this.articlesWorteByAuthorSize = articlesWorteByAuthorSize;
-//	}
+	public Integer getArticlesWorteByAuthorSize() {
+		return articlesWorteByAuthorSize;
+	}
+
+	public void setArticlesWorteByAuthorSize(Integer articlesWorteByAuthorSize) {
+		this.articlesWorteByAuthorSize = articlesWorteByAuthorSize;
+	}
 
 	public Integer getArSize() {
 		return arSize;
@@ -171,13 +172,13 @@ public class ArticleListFms {
 		this.acmsSize = acmsSize;
 	}
 	
-	public Member getMember() {
+	/*public Member getMember() {
 		return member;
 	}
 
 	public void setMember(Member member) {
 		this.member = member;
-	}
+	}*/
 
 	public Set<Member> getMemberSave() {
 		return memberSave;
