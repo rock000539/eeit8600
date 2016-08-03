@@ -1,9 +1,11 @@
 package tw.com.queautiful.product.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.crsh.console.jline.internal.Log;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ArticleReplyDao;
-import tw.com.queautiful.product.entity.Article;
+import tw.com.queautiful.product.entity.ArticleRCM;
 import tw.com.queautiful.product.entity.ArticleReply;
 import tw.com.queautiful.product.vo.article.ArticleReplyVO;
 
@@ -21,42 +23,57 @@ public class ArticleReplyService {
 
 	@Autowired
 	private ArticleReplyDao articleReplyDao;
-	
-	public ArticleReply getById(Long arId){
+
+	public ArticleReply getById(Long arId) {
 		return articleReplyDao.findOne(arId);
 	}
-	
-	public List<ArticleReply> getAll(){
+
+	public List<ArticleReply> getAll() {
 		return articleReplyDao.findAll();
 	}
-	
-	public void insert(ArticleReply articleReply){
+
+	public void insert(ArticleReply articleReply) {
 		articleReplyDao.save(articleReply);
 	}
-	
-	public void update(ArticleReply articleReply){
+
+	public void update(ArticleReply articleReply) {
 		articleReplyDao.save(articleReply);
 	}
-	
-	public void delete(Long arId){
+
+	public void delete(Long arId) {
 		articleReplyDao.delete(arId);
 	}
-	
-	public Page<ArticleReply> getAll(Specification<ArticleReply> spec, Pageable pageable){
+
+	public Page<ArticleReply> getAll(Specification<ArticleReply> spec, Pageable pageable) {
 		return articleReplyDao.findAll(spec, pageable);
 	}
-	
-	public List<ArticleReplyVO> getAllByVO(List<ArticleReply> list){
-		System.out.println(list.size());
+
+	public List<ArticleReplyVO> getAllByVO(List<ArticleReply> list) {
+		
 		List<ArticleReply> ar_list = list;
 		List<ArticleReplyVO> areplies = new ArrayList<>();
+		
 		ArticleReplyVO areply = null;
-		for(ArticleReply temp : ar_list){
+		for (ArticleReply temp : ar_list) {
+			
 			areply = new ArticleReplyVO();
 			BeanUtils.copyProperties(temp, areply);
+			
+			if (!areply.getArcms().isEmpty()) {
+				
+				Set<ArticleRCM> set = new LinkedHashSet<>();
+				for (ArticleRCM arcm : areply.getArcms()) {
+					if (arcm.getArcmShow()) {					
+						set.add(arcm);
+					}
+				}
+				
+				areply.setArcms(set);
+			}
+			
 			areplies.add(areply);
 		}
-		System.out.println(areplies.size());
+		
 		return areplies;
 	}
 }

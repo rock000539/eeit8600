@@ -24,7 +24,7 @@
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-		
+	
 </head>
 
 <style>
@@ -332,7 +332,7 @@
 						<h3><a href="#">${article.nickname}</a></h3>
 						
 					</dt>
-<%-- 					<dd>Post:${article.articlesWorteByAuthorSize}</dd> --%>
+					<dd>Post:${article.articlesWorteByAuthorSize}</dd>
 					<dd>Joined:${article.memberRegiDate}</dd>
 				</dl>			
 			</div>
@@ -355,7 +355,7 @@
 					${article.articleContent}
 					<ul>
 						<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapseArticle">
-							<i class="fa fa-comments-o"></i><span id="acms_num">&nbsp;${article.acmsSize}</span>
+							<i class="fa fa-comments-o"></i><span id="acms_num">&nbsp;${article.acms.size()}</span>
 						</li>
 						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span id="ar_num">&nbsp;${arSize}</span></li>
 						<li style="color:#ff007f;"><i class="fa fa-heart"></i><span id="memberSave_num">&nbsp;${article.memberSave.size()}</span></li>
@@ -437,7 +437,7 @@
 						${areply.arContent}
 						<ul>
 							<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapse${areply.arId}">
-								<i class="fa fa-comments-o"></i><span id="arcms${areply.arId}_num">&nbsp;${areply.arcmsSize}</span>
+								<i class="fa fa-comments-o"></i><span id="arcms${areply.arId}_num">&nbsp;${areply.arcms.size()}</span>
 							</li>
 						</ul>
 					</div>
@@ -541,8 +541,7 @@
         	<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">Confirm</button>
         	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-      </div>
-      
+      </div>      
     </div>
 </div>
 <!-- end of Modal -->
@@ -775,6 +774,8 @@
 				type:"POST",
 				data:reportData,
 				success:function(result){
+					$('#reportTitle').val("");
+					$('#reportDetail').val("");
 					console.log(result);		
 				}
 			});
@@ -883,14 +884,14 @@
 	
 	function toModal(){
 		if($('#replyForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
-			$(".modal-title").text('Please Check Your Post');
-			$(".modal-body").empty()
+			$("#myModal .modal-title").text('Please Check Your Post');
+			$("#myModal .modal-body").empty()
 							.append('<p>Title：'+ $(':text[name=arTitle]').val() +'</p>')		
 							.append('<p>Content：'+ CKEDITOR.instances['arContent'].getData() +'</p>');
 			$('#confirm').show();
 		}else{
-			$(".modal-title").text('Please Modify Your Post');
-			$(".modal-body").empty()
+			$("#myModal .modal-title").text('Please Modify Your Post');
+			$("#myModal .modal-body").empty()
 							.append('<p>Please Enter the Required Fields</p>');
 			$('#confirm').hide();
 			
