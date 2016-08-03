@@ -135,9 +135,9 @@ public class ArticleReply {
 
 	public void setArticle(Article article) {
 		this.article = article;
-		if(!article.getAreplies().contains(this)){
-			article.getAreplies().add(this);
-		}
+//		if(!article.getAreplies().contains(this)){
+//			article.getAreplies().add(this);
+//		}
 	}
 
 	public Long getArticleId() {

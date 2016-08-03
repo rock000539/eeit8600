@@ -123,7 +123,5 @@ public class ProductView {
 		
 		return result;
 	}
-
-	
 	
 }

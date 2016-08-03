@@ -103,12 +103,14 @@ public class Article {
 	@OneToMany(mappedBy="article" , fetch = FetchType.LAZY) 
 	@OrderBy("ARTICLECMTIME ASC")
 	private Set<ArticleCM> acms;
-
+	
 	@Override
 	public String toString() {
 		return "Article [articleId=" + articleId + ", articleType=" + articleType + ", articleTitle=" + articleTitle
-				+ ", articleContent=" + articleContent + ", articleTime=" + articleTime + ", articleView=" + articleView
-				+ ", articleShow=" + articleShow + ", articleReport=" + articleReport + ", memberId=" + memberId + "]";
+				+ ", articleContent=" + articleContent + ", articleTime=" + articleTime + ", aEditTime=" + aEditTime
+				+ ", articleView=" + articleView + ", articleShow=" + articleShow + ", articleReport=" + articleReport
+				+ ", arSize=" + arSize + ", acmsSize=" + acmsSize + ", memberId=" + memberId + ", nickname=" + nickname
+				+ ", memberRegiDate=" + memberRegiDate + "]";
 	}
 
 	public Long getArticleId() {
@@ -197,7 +199,7 @@ public class Article {
 	}
 
 	public Integer getArSize() {
-		if(this.getAreplies()!=null){			
+		if(this.getAreplies()!=null){
 			return this.getAreplies().size();
 		}else {
 			return 0 ;

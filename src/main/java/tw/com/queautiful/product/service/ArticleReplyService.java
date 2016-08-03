@@ -3,6 +3,7 @@ package tw.com.queautiful.product.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.crsh.console.jline.internal.Log;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,7 @@ public class ArticleReplyService {
 	}
 	
 	public List<ArticleReplyVO> getAllByVO(List<ArticleReply> list){
+		System.out.println(list.size());
 		List<ArticleReply> ar_list = list;
 		List<ArticleReplyVO> areplies = new ArrayList<>();
 		ArticleReplyVO areply = null;
@@ -54,6 +56,7 @@ public class ArticleReplyService {
 			BeanUtils.copyProperties(temp, areply);
 			areplies.add(areply);
 		}
+		System.out.println(areplies.size());
 		return areplies;
 	}
 }

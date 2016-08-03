@@ -177,20 +177,19 @@ public class ArticleController {
 
 	@RequestMapping("/view/{articleId}")
 	public String articleView(@PathVariable Long articleId, Model model) {
-//		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.ASC,"arTime"));
-//		ArticleReply ar_spec = new ArticleReply();
-//		ar_spec.setArShow(true);
-//		ar_spec.setArticle(articleService.getById(articleId));
-//		Page<ArticleReply> ar_page = arService.getAll(Spec.byAuto(em, ar_spec), pageable);
-//		List<ArticleReply> ar_list = ar_page.getContent();
-//		
-//		log.debug("ar_list-->{}", ar_list);
-//		List<ArticleReplyVO> areplies = arService.getAllByVO(ar_list);
-//		
-//		log.debug("areplies-->{}", areplies);
+		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.ASC,"arTime"));
+		ArticleReply ar_spec = new ArticleReply();
+		ar_spec.setArShow(true);
+		ar_spec.setArticle(articleService.getById(articleId));
+		Page<ArticleReply> ar_page = arService.getAll(Spec.byAuto(em, ar_spec), pageable);
+		List<ArticleReply> ar_list = ar_page.getContent();
 		
-		model.addAttribute("article", articleService.viewNCount(articleId));
-//		model.addAttribute("areplies" , areplies);
+		List<ArticleReplyVO> areplies = arService.getAllByVO(ar_list);
+		
+		model.addAttribute("article", articleService.getOneByVO(articleService.viewNCount(articleId)));
+		model.addAttribute("arSize", areplies.size());
+		model.addAttribute("areplies" , areplies);
+		
 		return "/article/articleView";
 	}
 

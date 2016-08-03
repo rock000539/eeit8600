@@ -1,11 +1,13 @@
 package tw.com.queautiful.product.vo.article;
 
-import javax.persistence.Column;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.com.queautiful.commons.enums.ArticleType;
+import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ArticleReply;
+import tw.com.queautiful.product.entity.Member;
 
 public class ArticleListFms {
 
@@ -32,6 +34,9 @@ public class ArticleListFms {
 	
 	private java.sql.Date memberRegiDate;
 	
+	// member撰寫文章數
+//	private Integer articlesWorteByAuthorSize;
+	
 	//回覆數
 	private Integer arSize;
 	
@@ -40,6 +45,12 @@ public class ArticleListFms {
 
 	//留言數
 	private Integer acmsSize;
+	
+	private Member member;
+	
+	private Set<Member> memberSave;
+	
+	private Set<ArticleCM> acms;
 
 	@Override
 	public String toString() {
@@ -127,6 +138,14 @@ public class ArticleListFms {
 	public void setMemberRegiDate(java.sql.Date memberRegiDate) {
 		this.memberRegiDate = memberRegiDate;
 	}
+	
+//	public Integer getArticlesWorteByAuthorSize() {
+//		return articlesWorteByAuthorSize;
+//	}
+//
+//	public void setArticlesWorteByAuthorSize(Integer articlesWorteByAuthorSize) {
+//		this.articlesWorteByAuthorSize = articlesWorteByAuthorSize;
+//	}
 
 	public Integer getArSize() {
 		return arSize;
@@ -152,5 +171,28 @@ public class ArticleListFms {
 		this.acmsSize = acmsSize;
 	}
 	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public Set<Member> getMemberSave() {
+		return memberSave;
+	}
+
+	public void setMemberSave(Set<Member> memberSave) {
+		this.memberSave = memberSave;
+	}
+
+	public Set<ArticleCM> getAcms() {
+		return acms;
+	}
+
+	public void setAcms(Set<ArticleCM> acms) {
+		this.acms = acms;
+	}
 	
 }

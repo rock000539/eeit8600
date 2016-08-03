@@ -77,6 +77,15 @@ public class ArticleService {
 		Article article = articleDao.findOne(articleId);
 		article.setArticleView(article.getArticleView() + 1);
 		articleDao.save(article);
+		log.debug("arSize = {}", article.getArSize());
+		return article;
+	}
+	
+	public ArticleListFms getOneByVO(Article temp){
+		Article a_temp = temp;
+		ArticleListFms article = new ArticleListFms();
+		BeanUtils.copyProperties(a_temp, article);
+//		article.setArticlesWorteByAuthorSize(a_temp.getMember().getArticlesWorteByAuthor().size());
 		return article;
 	}
 	
