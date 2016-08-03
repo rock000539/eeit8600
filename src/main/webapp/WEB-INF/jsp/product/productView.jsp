@@ -517,7 +517,7 @@
 			var reviewId = $(a).attr('data-reviewId');
 			
 			$.ajax({
-				url: '',
+				url: '/members/like/review/' + $(a).attr('data-reviewId'),
 				type: 'POST',
 				dataType: 'json',
 				contextType: 'application/json; charset=utf-8;',
@@ -526,10 +526,18 @@
 					if(response == true) {
 						swal({
 							type: 'success',
-							text: '<h1 style="line-height:0px;">Save this review!</h1>',
+							text: '<h1 style="line-height:0px;">收藏成功!</h1>',
 							showConfirmButton: false,
 							customClass: 'swal',
-							timer: 1000,
+							timer: 1500,
+						});
+					} else {
+						swal({
+							type: 'info',
+							text: '<h1 style="line-height:0px;">已經收藏過囉!</h1>',
+							showConfirmButton: false,
+							customClass: 'swal',
+							timer: 1500,
 						});
 					}
 				},
@@ -542,7 +550,7 @@
 		
 		// 觀看心得
 		function watch_review_click (a) {
-			document.location.href='/reviews/review?reviewId=' + $(a).attr('data-reviewId');
+			document.location.href='/reviews/review/' + $(a).attr('data-reviewId');
 		}
 		
 		// 收藏產品
