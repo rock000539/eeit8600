@@ -1,5 +1,6 @@
 package tw.com.queautiful.product.service;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.text.ParseException;
@@ -303,8 +304,15 @@ public class MemberService {
 		
 		for(int i=0;i<resultList.size();i++){
 			Object[] datas = resultList.get(i);
+			
+			Long reviewId=0L;
+			try{
 			BigInteger rId = (BigInteger) datas[0];
-			Long reviewId = rId.longValue();
+			 reviewId = rId.longValue();
+			}catch(Exception e){
+				reviewId= ((BigDecimal) datas[0]).longValue();
+			}
+			
 			ReviewVO reviewVO = new ReviewVO();
 			BeanUtils.copyProperties(reviewService.getById(reviewId), reviewVO);
 			

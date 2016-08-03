@@ -1,8 +1,6 @@
 package tw.com.queautiful.index;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -90,9 +87,15 @@ public class BmsController {
 		//計算網站停留時間資料----------------------------------------------------
 		
 		String queryAvgTime="SELECT AVG([time_on_site]) From [timeonsite]";
-		List<BigInteger> resultList =manager.createNativeQuery(queryAvgTime).getResultList();
-		BigInteger bigId=resultList.get(0);
-		long avgTimeMs=bigId.longValue();
+		List resultList =manager.createNativeQuery(queryAvgTime).getResultList();
+		long avgTimeMs=0L;
+		
+		try{
+		BigInteger bigId=(BigInteger) resultList.get(0);
+		avgTimeMs=bigId.longValue();
+		}catch(java.lang.ClassCastException e){
+			avgTimeMs= ((BigDecimal) resultList.get(0)).longValue();
+		}
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("00:mm:ss",Locale.US);
 		String avgTimeOnSite=sdf.format(new Date(avgTimeMs));		
