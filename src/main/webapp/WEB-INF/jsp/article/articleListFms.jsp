@@ -129,7 +129,7 @@
 				        <td>
 				          <h4><a class="articleTitle" onclick="location.href='/articles/view/${article.articleId}'">【${article.articleType}】${article.articleTitle}</a><br>
 				          <small>
-				          <i class="fa fa-user"></i><a href="#">&nbsp;${article.nickname}</a> &nbsp;&nbsp;
+				          <i class="fa fa-user"></i><a href="/members/overview/${article.memberId}">&nbsp;${article.nickname}</a> &nbsp;&nbsp;
 				          <i class="fa fa-clock-o"></i>&nbsp;${fn:substring(article.articleTime,0,19)} &nbsp;&nbsp;
 <%-- 				          <i class="fa fa-clock-o"></i>&nbsp;${article.aEditTime} --%>
 				          </small>
@@ -139,13 +139,13 @@
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
 				        <c:if test="${empty article.lastPost}">
 					        <td class="hidden-xs hidden-sm">
-					        	<i class="fa fa-user"></i><a href="#">&nbsp;${article.nickname}</a><br>
+					        	<i class="fa fa-user"></i><a href="/members/overview/${article.memberId}">&nbsp;${article.nickname}</a><br>
 					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.articleTime,0,19)}</small>
 					        </td>
 				        </c:if>
 				        <c:if test="${not empty article.lastPost}">
 					        <td class="hidden-xs hidden-sm">
-					        	<i class="fa fa-user"></i><a href="#">&nbsp;${article.lastPost.member.nickname}</a><br>
+					        	<i class="fa fa-user"></i><a href="/members/overview/${article.lastPost.member.memberId}">&nbsp;${article.lastPost.member.nickname}</a><br>
 					        	<small><i class="fa fa-clock-o"></i>${fn:substring(article.lastPost.arTime,0,19)}</small>
 					        </td>
 				        </c:if>
@@ -183,7 +183,7 @@
 				<td>
 				    <h4><a class="articleTitle" onclick="location.href='/articles/view/_articleId'">【_articleType】_articleTitle</a><br>
 				    	<small>
-							<i class="fa fa-user"></i><a href="#">&nbsp;_memberNickname</a>&nbsp;&nbsp;
+							<i class="fa fa-user"></i><a href="/members/overview/_memberId">&nbsp;_memberNickname</a>&nbsp;&nbsp;
 				    		<i class="fa fa-clock-o"></i>&nbsp;_articleTime
 						</small>
 				    </h4>
@@ -191,7 +191,7 @@
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_arSize</a></td>
 				<td class="text-center hidden-xs hidden-sm"><a href="#">_articleView</a></td>
 				<td class="hidden-xs hidden-sm">
-				    <i class="fa fa-user"></i><a href="#">&nbsp;_lpmemberNickname</a><br>
+				    <i class="fa fa-user"></i><a href="/members/overview/_lpmemberId">&nbsp;_lpmemberNickname</a><br>
 					<small><i class="fa fa-clock-o"></i>_lparticleTime</small>
 				</td>
 				
@@ -268,16 +268,19 @@
 			   //設定LastPost
 			   var str2 = '';
 			   if(result[i].lastPost == null){
-				   str2 = str1.replace("_lpmemberNickname", result[i].nickname)
+				   str2 = str1.replace("_lpmemberId", result[i].memberId)
+		   						.replace("_lpmemberNickname", result[i].nickname)
 		   						.replace("_lparticleTime", result[i].articleTime);
 			   } else {
-				   str2 = str1.replace("_lpmemberNickname", result[i].lastPost.nickname)
+				   str2 = str1.replace("_lpmemberId", result[i].lastPost.memberId)
+								.replace("_lpmemberNickname", result[i].lastPost.nickname)
 								.replace("_lparticleTime", result[i].lastPost.arTime);
 			   }		   
-			   $(str2.replace("_articleType", result[i].articleType.toUpperCase())
+			   $(str2.replace(/_articleType/g, result[i].articleType.toUpperCase())
 				    .replace("_articleId", result[i].articleId)
-		   			.replace("_articleType", result[i].articleType.toUpperCase())
+// 		   			.replace("_articleType", result[i].articleType.toUpperCase())
 		   			.replace("_articleTitle", result[i].articleTitle)
+		   			.replace("_memberId", result[i].memberId)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
 		   			.replace("_arSize", result[i].arSize)	

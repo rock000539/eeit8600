@@ -37,7 +37,7 @@ public class Article {
 	@Enumerated(EnumType.STRING)
 	private ArticleType articleType;
 	
-	@Column(name = "ARTICLETITLE" ,columnDefinition="nvarchar(20)")
+	@Column(name = "ARTICLETITLE" ,columnDefinition="nvarchar(100)")
 	private String articleTitle;
 	
 	@Column(name = "ARTICLECONTENT" ,columnDefinition="nvarchar(2000)")

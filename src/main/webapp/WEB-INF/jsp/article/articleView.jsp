@@ -329,7 +329,7 @@
 						<div class="authordiv img-circle">
 						<img  class="authorimg" src="/members/show?memberId=${article.memberId}">
 						</div>
-						<h3><a href="#">${article.nickname}</a></h3>
+						<h3><a href="/members/overview/${article.memberId}">${article.nickname}</a></h3>
 						
 					</dt>
 					<dd>Post:${article.articlesWorteByAuthorSize}</dd>
@@ -375,7 +375,9 @@
 					        	<div class="msgAuthordiv authordiv img-circle" style="float:left;">
 									<img  class="authorimg" src="/members/show?memberId=${acm.memberId}">
 								</div>
-					        	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">${acm.nickname}：</span>
+					        	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">
+					        		<a href="/members/overview/${acm.memberId}">${acm.nickname}：</a>
+					        	</span>
 					        	<span>${acm.acmMsg}</span>  
 					        	<span style="float:right;">
 					        		${fn:substring(acm.acmTime,0,19)}
@@ -412,7 +414,7 @@
 							<div class="authordiv img-circle">
 							<img  class="authorimg" src="/members/show?memberId=${areply.memberId}">
 							</div>
-							<h3><a href="#">${areply.nickname}</a></h3>
+							<h3><a href="/members/overview/${areply.memberId}">${areply.nickname}</a></h3>
 							
 						</dt>
 						<dd>Post:</dd>
@@ -599,7 +601,7 @@
 					<div class="authordiv img-circle">
 					<img  class="authorimg" src="/members/show?memberId=_memberId">
 					</div>
-					<h3><a href="#">_nickname</a></h3>					
+					<h3><a href="/members/overview/_memberId">_nickname</a></h3>					
 				</dt>
 				<dd>Post:</dd>
 				<dd>Joined:_memberRegiDate</dd>
@@ -653,7 +655,9 @@
        	<div class="msgAuthordiv authordiv img-circle" style="float:left;">
 			<img  class="authorimg" src="/members/show?memberId=_memberId">
 		</div>
-       	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">_nickname：</span>
+       	<span style="margin-left:10px; color:#337ab7; font-weight:bold;">
+			<a href="/members/overview/_memberId">_nickname：</a>
+		</span>
        	<span>_acmMsg</span>  
        	<span style="float:right;">_acmTime
 			<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a>
@@ -718,20 +722,20 @@
 						$('#arTitle').val('RE:【${article.articleType}】${article.articleTitle}');
 						CKEDITOR.instances['arContent'].setData('');
 						$($('#article_reply').html()
-										.replace('_memberId',data.memberId)
+										.replace(/_memberId/g,data.memberId)
 										.replace('_nickname',data.nickname)
 										.replace('_memberRegiDate',data.memberRegiDate)
 										.replace('_arTitle',data.arTitle)
-										.replace('_arId',data.arId)
-										.replace('_arId',data.arId)
+										.replace(/_arId/g,data.arId)
+// 										.replace('_arId',data.arId)
 										.replace('_arTime',data.arTime)
 										.replace('_arContent',data.arContent)
-										.replace('_arId',data.arId)
-										.replace('_arId',data.arId)
+// 										.replace('_arId',data.arId)
+// 										.replace('_arId',data.arId)
 										.replace('_arcmsSize',data.arcmsSize)
-										.replace('_arId',data.arId)
+// 										.replace('_arId',data.arId)
 										.replace('_memberId',data.memberId)
-										.replace('_arId',data.arId)
+// 										.replace('_arId',data.arId)
 										
 						).appendTo($('#articleReply'));
 						$('#ar_num').text(" " + (parseInt($('#ar_num').text()) + 1));
@@ -843,7 +847,7 @@
 			success:function(result){
 // 				console.log(result);
 				$($('#article_cm').html()
-								.replace('_memberId',result.memberId)
+								.replace(/_memberId/g,result.memberId)
 								.replace('_nickname',result.nickname)
 								.replace('_acmMsg',result.acmMsg)
 								.replace('_acmTime',result.acmTime)
@@ -870,7 +874,7 @@
 // 					console.log(result);
 					var arId = result.arId;
 	 				$($('#article_cm').html()
-	 								.replace('_memberId',result.memberId)
+	 								.replace(/_memberId/g,result.memberId)
 	 								.replace('_nickname',result.nickname)
 	 								.replace('_acmMsg',result.arcmMsg)
 	 								.replace('_acmTime',result.arcmTime)

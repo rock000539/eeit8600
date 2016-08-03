@@ -27,10 +27,10 @@ public class ArticleReply {
 	@Column(name = "ARTICLEREPLYID")
 	private Long arId;
 
-	@Column(name = "ARTICLEREPLYTITLE", columnDefinition = "nvarchar(30)")
+	@Column(name = "ARTICLEREPLYTITLE", columnDefinition = "nvarchar(100)")
 	private String arTitle;
 
-	@Column(name = "ARTICLEREPLYCONTENT", columnDefinition = "nvarchar(200)")
+	@Column(name = "ARTICLEREPLYCONTENT", columnDefinition = "nvarchar(2000)")
 	private String arContent;
 
 	@Column(name = "ARTICLEREPLYTIME")
