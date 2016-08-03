@@ -122,6 +122,9 @@ public class ReviewController {
 //		List<Review> list = service.getAll();
 		List<ReviewFmsReviews> list = service.getAllByVoReviews();
 		
+		
+		
+		
 		model.addAttribute("reviews", list);
 		log.debug("{}", list);
 		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
