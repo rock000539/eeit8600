@@ -27,4 +27,12 @@ public class ReviewVOForReviewCM {
 	public void setReviewCMs(List<ReviewCM> reviewCMs) {
 		this.reviewCMs = reviewCMs;
 	}
+
+	@Override
+	public String toString() {
+		return "ReviewVOForReviewCM [reviewId=" + reviewId + ", reviewCMs="
+				+ reviewCMs + "]";
+	}
+	
+	
 }
