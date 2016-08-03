@@ -6,7 +6,9 @@ import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ArticleRCM;
+import tw.com.queautiful.product.entity.Member;
 
 public class ArticleReplyVO {
 
@@ -33,7 +35,7 @@ public class ArticleReplyVO {
 	
 	//回覆留言數
 	private Integer arcmsSize;
-
+	
 	public Long getArId() {
 		return arId;
 	}
@@ -113,7 +115,5 @@ public class ArticleReplyVO {
 	public void setArcmsSize(Integer arcmsSize) {
 		this.arcmsSize = arcmsSize;
 	}
-	
-	
 
 }

@@ -332,8 +332,8 @@
 						<h3><a href="#">${article.nickname}</a></h3>
 						
 					</dt>
-					<dd>Post:${article.member.articlesWorteByAuthor.size()}</dd>
-					<dd>Joined:${article.member.memberRegiDate}</dd>
+<%-- 					<dd>Post:${article.articlesWorteByAuthorSize}</dd> --%>
+					<dd>Joined:${article.memberRegiDate}</dd>
 				</dl>			
 			</div>
 			
@@ -357,7 +357,7 @@
 						<li style="color:#4cae4c;" data-toggle="collapse" data-target="#collapseArticle">
 							<i class="fa fa-comments-o"></i><span id="acms_num">&nbsp;${article.acmsSize}</span>
 						</li>
-						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span id="ar_num">&nbsp;${article.arSize}</span></li>
+						<li style="color:#ff9600;"><i class="fa fa-reply"></i><span id="ar_num">&nbsp;${arSize}</span></li>
 						<li style="color:#ff007f;"><i class="fa fa-heart"></i><span id="memberSave_num">&nbsp;${article.memberSave.size()}</span></li>
 					</ul>
 				</div>
@@ -404,7 +404,7 @@
 		
 		<!-- start articleReply -->
 		<div id="articleReply">
-			<c:forEach var="areply" items="${article.areplies}">
+			<c:forEach var="areply" items="${areplies}">
 			<div class="col-lg-12 post">
 				<div class="postprofile col-lg-3">
 					<dl>
@@ -412,11 +412,11 @@
 							<div class="authordiv img-circle">
 							<img  class="authorimg" src="/members/show?memberId=${areply.memberId}">
 							</div>
-							<h3><a href="#">${areply.member.nickname}</a></h3>
+							<h3><a href="#">${areply.nickname}</a></h3>
 							
 						</dt>
 						<dd>Post:</dd>
-						<dd>Joined:${areply.member.memberRegiDate}</dd>
+						<dd>Joined:${areply.memberRegiDate}</dd>
 					</dl>
 				
 				</div>

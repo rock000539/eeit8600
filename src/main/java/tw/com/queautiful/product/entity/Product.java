@@ -20,8 +20,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import tw.com.queautiful.commons.enums.CategoryTitle;
-
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
