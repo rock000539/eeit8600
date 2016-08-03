@@ -48,6 +48,7 @@ import tw.com.queautiful.product.vo.category.CategorySearch;
 import tw.com.queautiful.product.vo.product.ProductInventory;
 import tw.com.queautiful.product.vo.product.ProductSearch;
 import tw.com.queautiful.product.vo.product.ProductView;
+import tw.com.queautiful.product.vo.review.ReviewFmsReviews;
 
 @Controller
 @RequestMapping("/reviews")
@@ -118,7 +119,9 @@ public class ReviewController {
 	@RequestMapping("/reviews")
 	public String reviews(Model model)  {
 
-		List<Review> list = service.getAll();
+//		List<Review> list = service.getAll();
+		List<ReviewFmsReviews> list = service.getAllByVoReviews();
+		
 		model.addAttribute("reviews", list);
 		log.debug("{}", list);
 		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
@@ -248,6 +251,7 @@ public class ReviewController {
 		model.addAttribute("brands", brands);
 
 		model.addAttribute("review", service.getById(reviewId));
+//		model.addAttribute("review", service.getByIdByVOFmsEdit(reviewId));
 
 		return "/review/reviewEditFms";
 	}
