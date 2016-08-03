@@ -34,17 +34,16 @@ public class ReviewService {
 		return reviewDAO.findAll();
 	}
 	
-	public List<Review> getAll(Specification<Review> spec){
-		return reviewDAO.findAll(spec);
-	}
-	
 	public Page<Review> getAll(Pageable pageable) {
 		return reviewDAO.findAll(pageable);
 	}
 	
-	public Page<Review> getAll(Specification<Review> spec, Pageable pageable) {
-		
-		return reviewDAO.findAll(Specifications.where(spec).and(spec), pageable);
+	public List<Review> getAll(Specification<Review> spec){
+		return reviewDAO.findAll(spec);
+	}
+	
+	public Page<Review> getAll(Specification<Review> spec, Pageable pageable){
+		return reviewDAO.findAll(spec, pageable);
 	}
 	
 	public void insert(Review review){
