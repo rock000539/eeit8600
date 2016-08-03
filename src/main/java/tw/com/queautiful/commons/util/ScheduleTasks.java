@@ -29,7 +29,7 @@ public class ScheduleTasks {
 	@Autowired
 	private EmailSender emailSender;
 	
-	@Scheduled(cron="0 0 9 * * ?")   // 9 AM everyDay
+	@Scheduled(cron="0 28 15 * * ?")   // 9 AM everyDay
 	public void expDateReminder(){
 		List<ExpDate> expDate = expDateService.expDateAfterOneMonth(); //check Exp expired after 1 month
 		if(!expDate.isEmpty()){
@@ -38,6 +38,7 @@ public class ScheduleTasks {
 				String prodName = prodService.getById(exp.getProId()).getProdName();
 				String date = exp.getExp().toString();
 				emailSender.sendExpDateRemind(email, prodName, date);
+				log.debug("Schedule - ExpDateReminder sent to: {}", email);
 			}
 		}else {
 			log.debug("Schedule - ExpDateReminder checked: no result");
@@ -53,6 +54,7 @@ public class ScheduleTasks {
 				member.setResetPswToken(null);
 				member.setResetPswExp(null);
 				memberService.update(member);
+				log.debug("Schedule - ResetPswTokenExp checked: deleted token {}", member.getEmail());
 			}
 		} else{
 			log.debug("Schedule - ResetPswTokenExp checked: no result");

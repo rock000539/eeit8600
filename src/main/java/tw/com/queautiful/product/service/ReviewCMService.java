@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ReviewCMDao;
@@ -36,6 +37,10 @@ public class ReviewCMService {
 	
 	public void delete(Long rcmId){
 		reviewCMDao.delete(rcmId);
+	}
+	
+	public List<ReviewCM> getAll(Specification<ReviewCM> spec){
+		return reviewCMDao.findAll(spec);
 	}
 	
 	public ReviewCMSelectData getByIdByVoSelectData(Long rcmId){

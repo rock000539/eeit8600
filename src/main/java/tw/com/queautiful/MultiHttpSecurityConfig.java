@@ -97,7 +97,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
     public void configure(WebSecurity web) throws Exception {
     web
     .ignoring()
-    .antMatchers("/gundam"); // 這個過濾條件中，忽略url(不用登入即可看的路徑),
+    .antMatchers("/qqq"); // 這個過濾條件中，忽略url(不用登入即可看的路徑),
     						//因為和下面功能衝突只能用於設定全部路徑或設定不存在的路徑
     }
     
@@ -107,9 +107,10 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable()
                 .authorizeRequests()  //開始設定路徑&權限
                 .antMatchers(
-                "/","/expdate/search","/**/show","/**/select",
+                "//","/expdate/search","/**/show","/**/select",
                 "/members/register","/members/check_email","/members/insert",
                 "/members/forgotpsw","/members/check_emailexist","/members/requestforpsw",
+                "/members/resetpassword","/members/resetpassword","/members/updatepassword",
                 "/expdate/batchCodeController","/reviews/reviews",
                 "/reviews/review/{reviewId}","/reviewCMs/select_data",
                 "/loginBms","/logout","/**/select_jqgrid",

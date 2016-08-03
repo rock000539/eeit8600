@@ -14,8 +14,8 @@
 							<a href="javascript:;"><img src="" alt="" /></a>
 						</div>
 						<div class="info">
-							Sean Ngu
-							<small>Front end developer</small>
+							Parker
+							<small>資料管理員</small>
 						</div>
 					</li>
 				</ul>

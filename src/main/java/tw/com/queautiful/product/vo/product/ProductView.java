@@ -9,8 +9,12 @@ public class ProductView {
 	private Long prodId;
 	
 	private String prodName;
-
+	
+	private Long brandId;
+	
 	private String brandName;
+	
+	private Long CategoryId;
 	
 	private String categoryName;
 
@@ -41,6 +45,14 @@ public class ProductView {
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
+	
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
 
 	public String getBrandName() {
 		return brandName;
@@ -48,6 +60,14 @@ public class ProductView {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+	
+	public Long getCategoryId() {
+		return CategoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		CategoryId = categoryId;
 	}
 
 	public String getCategoryName() {

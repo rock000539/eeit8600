@@ -13,10 +13,17 @@
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">		
 	<!-- 表單驗證  -->
-	<script src="/js/jquery.validate.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
 <style>
 div.grey_bg{
 	min-height: 450px;
+}
+.icon1 {
+	 color:white;
+	 opacity: 1;
+	 font-size: 4em;
+	 text-align:center;
+	 margin-top: 15%;
 }
 </style>
 </head>
@@ -69,7 +76,6 @@ div.grey_bg{
 	
 	<!-- 表單驗證  -->
 	<script src="/js/jquery.validate.min.js"></script>
-
 <script>
 	$(function(){
 		$('#password').focus();
@@ -91,8 +97,6 @@ div.grey_bg{
 		$('#resetPswBtn').click(function(){
 			var email=$('#email').val();
 			var password=$('#password').val();
-			console.log("email: "+email);
-			console.log("password: "+password);
 			var validateform = $('#resetPsw').validate().form();
 			if(validateform){
 			$.ajax({
@@ -100,7 +104,18 @@ div.grey_bg{
 				data:{"email":email, "password":password},
 				type : "post",
 				success : function(result){
-					alert(result);//test
+					console.log(result);
+					var text; 
+					if(result){	
+						text = "<i class='fa fa-check' aria-hidden='true'></i>&nbsp;&nbsp;"+"Please login with your new password";
+					}else{
+						text = "<i class='fa fa-times' aria-hidden='true'></i>&nbsp;&nbsp;"+"Sorry, please try again";}
+					$("<div class='icon1'>"+text+"</div>")
+					.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+					
+					setTimeout(function() {	
+						location.href = "<%=request.getContextPath()%>/fms";
+					}, 2000);
 				}
 			});//ajax
 			}//validate

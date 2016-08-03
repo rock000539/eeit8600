@@ -176,7 +176,7 @@ $(function(){
 				data:{"email":email},
 				type : "Get",
 				beforeSend:function(){
-					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending ...</div>")
+					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending Mail...</div>")
 					.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
 				},
 				success : function(result){
