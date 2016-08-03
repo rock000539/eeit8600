@@ -47,8 +47,8 @@ public class ReviewCM {
 	
 	//心得留言時間
 	@Column(name="REVIEWCMTIME")
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Taipei")
-	private java.sql.Timestamp reviewCMTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
+	private java.sql.Timestamp rcmTime;
 	
 	//心得留言顯示或隱藏
 	@Column(name="REVIEWCMSHOW")
@@ -75,11 +75,11 @@ public class ReviewCM {
 	}
 
 	public java.sql.Timestamp getReviewCMTime() {
-		return reviewCMTime;
+		return rcmTime;
 	}
 
-	public void setReviewCMTime(java.sql.Timestamp reviewCMTime) {
-		this.reviewCMTime = reviewCMTime;
+	public void setReviewCMTime(java.sql.Timestamp rcmTime) {
+		this.rcmTime = rcmTime;
 	}
 	
 	public Boolean getRcmShow() {
@@ -159,7 +159,7 @@ public class ReviewCM {
 		return "ReviewCM [rcmId=" + rcmId + ", review=" + review
 				+ ", reviewId=" + reviewId + ", member=" + member
 				+ ", memberId=" + memberId + ", rcmMsg=" + rcmMsg
-				+ ", reviewCMTime=" + reviewCMTime + ", rcmShow=" + rcmShow
+				+ ", reviewCMTime=" + rcmTime + ", rcmShow=" + rcmShow
 				+ ", rcmReport=" + rcmReport + "]";
 	}
 	

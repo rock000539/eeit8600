@@ -50,7 +50,7 @@ public class Review {
 	//心得留言
 	@OneToMany(mappedBy="review",fetch=FetchType.LAZY)
 	@OrderBy("REVIEWCMTIME ASC")
-	private List<ReviewCM> reviewCMs;
+	private List<ReviewCM> rcms;
 	
 	@Transient
 	private Long rcmId;
@@ -175,17 +175,17 @@ public class Review {
 	}
 
 	public List<ReviewCM> getReviewCMs() {
-		return reviewCMs;
+		return rcms;
 	}
 	
-	public void setReviewCMs(List<ReviewCM> reviewCMs) {
-		this.reviewCMs = reviewCMs;
+	public void setReviewCMs(List<ReviewCM> rcms) {
+		this.rcms = rcms;
 	}
 	
-	public void addReviewCMs(ReviewCM reviewCMs){
-		this.reviewCMs.add(reviewCMs);
-		if(reviewCMs.getReview()!=this){
-			reviewCMs.setReview(this);
+	public void addReviewCMs(ReviewCM rcms){
+		this.rcms.add(rcms);
+		if(rcms.getReview()!=this){
+			rcms.setReview(this);
 		}
 	}
 	
@@ -198,8 +198,8 @@ public class Review {
 	}
 
 	public Integer getRcmNum() {
-		if(reviewCMs != null){
-			rcmNum = reviewCMs.size();
+		if(rcms != null){
+			rcmNum = rcms.size();
 		}else{
 			rcmNum = 0;
 		}

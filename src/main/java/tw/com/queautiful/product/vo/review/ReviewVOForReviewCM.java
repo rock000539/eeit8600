@@ -8,7 +8,7 @@ public class ReviewVOForReviewCM {
 
 	private Long reviewId;
 
-	private List<ReviewCM> reviewCMs;
+	private List<ReviewCM> rcms;
 
 
 	public Long getReviewId() {
@@ -21,17 +21,17 @@ public class ReviewVOForReviewCM {
 	
 	
 	public List<ReviewCM> getReviewCMs() {
-		return reviewCMs;
+		return rcms;
 	}
 
-	public void setReviewCMs(List<ReviewCM> reviewCMs) {
-		this.reviewCMs = reviewCMs;
+	public void setReviewCMs(List<ReviewCM> rcms) {
+		this.rcms = rcms;
 	}
 
 	@Override
 	public String toString() {
 		return "ReviewVOForReviewCM [reviewId=" + reviewId + ", reviewCMs="
-				+ reviewCMs + "]";
+				+ rcms + "]";
 	}
 	
 	

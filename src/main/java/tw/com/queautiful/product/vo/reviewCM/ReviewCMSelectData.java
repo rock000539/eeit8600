@@ -12,7 +12,7 @@ public class ReviewCMSelectData {
 	private String rcmMsg;
 	//心得留言時間
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Taipei")
-	private java.sql.Timestamp reviewCMTime;
+	private java.sql.Timestamp rcmTime;
 	
 	
 	public Long getRcmId() {
@@ -46,10 +46,10 @@ public class ReviewCMSelectData {
 		this.rcmMsg = rcmMsg;
 	}
 	public java.sql.Timestamp getReviewCMTime() {
-		return reviewCMTime;
+		return rcmTime;
 	}
-	public void setReviewCMTime(java.sql.Timestamp reviewCMTime) {
-		this.reviewCMTime = reviewCMTime;
+	public void setReviewCMTime(java.sql.Timestamp rcmTime) {
+		this.rcmTime = rcmTime;
 	}
 	
 }

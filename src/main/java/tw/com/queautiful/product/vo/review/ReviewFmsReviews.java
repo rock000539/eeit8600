@@ -14,7 +14,7 @@ public class ReviewFmsReviews {
 	private Long memberId;
 	private Product product;  
 	private Long prodId;
-	private List<ReviewCM> reviewCMs;
+	private List<ReviewCM> rcms;
 	private String reviewTitle;
 	private String review;
 	private Integer reviewRating;
@@ -51,10 +51,10 @@ public class ReviewFmsReviews {
 		this.prodId = prodId;
 	}
 	public List<ReviewCM> getReviewCMs() {
-		return reviewCMs;
+		return rcms;
 	}
-	public void setReviewCMs(List<ReviewCM> reviewCMs) {
-		this.reviewCMs = reviewCMs;
+	public void setReviewCMs(List<ReviewCM> rcms) {
+		this.rcms = rcms;
 	}
 	public String getReviewTitle() {
 		return reviewTitle;
@@ -101,8 +101,8 @@ public class ReviewFmsReviews {
 				result="Product is null";
 			}
 			
-			if(reviewCMs!=null){
-				for(ReviewCM reviewCM:reviewCMs){
+			if(rcms!=null){
+				for(ReviewCM reviewCM:rcms){
 					result += String.format("\nReviewCMs[id=%d, title='%s']",reviewCM.getRcmId(),reviewCM.getRcmMsg());
 				}
 			}else{

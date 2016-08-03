@@ -531,7 +531,7 @@ $(function(){  //=$(document.)ready
 // 			console.log("result[0]=",result[0]);
 // 			console.log("result[0].memberId=",result[0].memberId);
 // 			console.log("result[0].nickname=",result[0].nickname);
-// 			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
+			console.log("result[0].reviewCMTime=",result[0].reviewCMTime);
 // 			console.log("result[0].rcmMsg=",result[0].rcmMsg);
 			for(var i=0 ; i < result.length; i++){
 				var str =$('#reviewCM_mode').html();
@@ -548,6 +548,7 @@ $(function(){  //=$(document.)ready
 // 			console.log("result3="+result);
 				var str =$('#reviewCM_mode').html();
 // 				console.log("str="+str);
+					console.log(result);
 				$(str.replace("_memberId",result.memberId)
 					  .replace("_memberNickname",result.nickname)
 					  .replace("_reviewCMTime",result.reviewCMTime)
