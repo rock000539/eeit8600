@@ -180,15 +180,15 @@ public class MemberService {
 	}
 
 	// 驗證token及token期限
-	public String validateResetPswToken(String token) {
+	public Boolean validateResetPswToken(String token) {
 		Member member = memberDao.findByResetPswToken(token);
 		java.util.Date today = new java.util.Date();
 		if (member == null) {
-			return "invalid token";
+			return false; //invalid token
 		} else if ((member.getResetPswExp().getTime() - today.getTime()) <= 0) {
-			return "token expired";
+			return false; //token expired
 		}
-		return null;
+		return true;
 	}
 
 	public Member getByResetPswToken(String resetPswToken) {

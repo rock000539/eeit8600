@@ -110,7 +110,7 @@ public static class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/","/expdate/search","/**/show","/**/select",
                 "/members/register","/members/check_email","/members/insert",
                 "/members/forgotpsw","/members/check_emailexist","/members/requestforpsw",
-                "/members/resetpassword",
+                "/members/resetpassword","/members/resetpassword","/members/updatepassword",
                 "/expdate/batchCodeController","/reviews/reviews",
                 "/reviews/review/{reviewId}","/reviewCMs/select_data",
                 "/loginBms","/logout","/**/select_jqgrid",
