@@ -151,31 +151,10 @@ public class ReviewController {
 
 	// 前端單面心得頁面
 	@RequestMapping("/review/{reviewId}")
-	public String reviewjQueryRain(Model model, @PathVariable Long reviewId)
-			throws ParseException {
+	public String reviewjQueryRain(Model model, @PathVariable Long reviewId) {
 		Review review = service.getById(reviewId);
 		log.debug("{}", review);
 		model.addAttribute("review", review);
-
-		// 得到英文月份
-		Date temp = review.getReviewTime();
-		log.debug("{}", temp);
-		// 準備輸出的格式，如：Jun,18,16
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM,d,yy", Locale.US);
-		// 利用 DateFormat 來parse 日期的字串
-		DateFormat df = DateFormat.getDateInstance();
-		String reviewTime = temp.toString();
-		java.util.Date date = df.parse(reviewTime.replace("-", "/"));
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		log.debug("{}", sdf.format(calendar.getTime()));
-		log.debug("{}", sdf.format(calendar.getTime()).substring(0, 3));
-		log.debug("{}", sdf.format(calendar.getTime()).substring(4, 6));
-
-		String month = sdf.format(calendar.getTime()).substring(0, 3);
-		String day = sdf.format(calendar.getTime()).substring(4, 6);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
 
 		// 會員年齡
 		review.getMember().setAge(
