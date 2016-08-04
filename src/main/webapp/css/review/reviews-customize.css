@@ -228,7 +228,7 @@
 }
 
 .review-rating{
-	letter-spacing:3px;
+	letter-spacing:1px;
 	font-family:"Microsoft JhengHei";
 }
 
@@ -254,7 +254,7 @@
     padding-right:5px ;
 	overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 	/*     下面還看不出效果 */;    
     white-space: normal;

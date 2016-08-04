@@ -54,7 +54,7 @@
 		      	<div class="caption">
 						<!--心得發布者資訊start -->
 					<div class="user-info">
-						<a class="user-info-link" href="/members/list"><!-- ???放no1會員有發過的心得list連結-->
+						<a class="user-info-link" href="/members/overview/${review.memberId}">
 							<!--會員照片 -->
 							<div class="img-circle userdiv">
 								<img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
@@ -62,7 +62,7 @@
 						</a>
 						<!--會員暱稱 -->
 						<div class="user-name">
-							<a href="/members/list">${review.member.nickname}</a> <!-- ???*同38行*放no1會員有發過的心得list連結-->
+							<a href="/members/overview/${review.memberId}">${review.member.nickname}</a>
 						</div>
 						<!--心得評分 start-->
 						<div class="review-uc-diamond">
@@ -92,7 +92,6 @@
 				 <!--心得內容end -->
 				<a name="review-bottom-title" class="review-bottom-title" id="review-bottom-title" href="/reviews/review/${review.reviewId}" > ${review.reviewTitle}</a>
 <%-- 		      		<div  name="review-bottom-title" class="review-bottom-title" id="review-bottom-title">${review.reviewTitle}</div> --%>
-<!-- 		        </a> -->
 	        </div>
 	        <!-- caption end --> 
 	    </div>

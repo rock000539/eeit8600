@@ -161,9 +161,7 @@
                             </article>
                             <div class="about_author">
                                 <div class="author_desc">
-<!--                                     <img src="/images/review/author.png" alt="about author"> -->
-<%--                                     <img id="userimg" src="/members/show?memberId=${review.memberId}" alt="memeberImg">  --%>
-                                    <img src="/members/show?memberId=${review.memberId}" alt="memeberImg"> 
+                                    <img src="/members/show?memberId=${review.memberId}" alt="memeberImg" > 
                                     <ul class="author_social">
                                         <li><a class="fb" data-placement="top" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>
                                         <li><a class="twtr" data-placement="top" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
@@ -172,7 +170,7 @@
                                 </div>
                                 <!--心得發布者資訊start -->
                                 <div class="author_bio">
-                                    <h3 class="author_name"><a href="/members/post/review?memberId=${review.member.memberId}">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
+                                    <h3 class="author_name"><a href="/members/overview/${review.memberId}">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
                                   	<ul>
                                   		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender:&nbsp;${review.member.gender}</li>
                                   		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skin Type:&nbsp;${review.member.skinType}&nbsp;Skin</li>
