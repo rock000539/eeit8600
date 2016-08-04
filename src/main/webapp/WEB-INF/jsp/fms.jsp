@@ -837,7 +837,7 @@
 <!-- end of Product top 10 -->    
     
 <!-- Latest Post -->
-    <div class="grey_bg row super_sub_content" style="padding-top: 40px; background-image: url('/images/fms/bg1.jpg'); background-repeat: no-repeat;">
+    <div class="grey_bg row super_sub_content" style="padding-top: 40px; background-image: url('/images/fms/bg1.jpg'); background-repeat:repeat;">
 	    <div class="col-md-12">
             <div class="dividerHeading text-center">
                 <h4><span>Latest Post</span></h4>

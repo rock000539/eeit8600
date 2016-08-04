@@ -65,7 +65,9 @@ public class FmsController {
 	}
 
 	@RequestMapping("/fmslogin")
-	public String loginPage() {
+	public String loginPage(Model model) {
+		model.addAttribute("prodTop10",productService.findTop10ByOrderByScoreDesc());
+		model.addAttribute("articles",articleService.findTop5ByOrderByArticleTimeDesc());
 		return "/fms";
 	}
 
