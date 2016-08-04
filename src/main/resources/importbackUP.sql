@@ -25,6 +25,7 @@ INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, CATEGORYTITLE) VALUES ('身體�
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, CATEGORYTITLE) VALUES ('美足美甲', 'src\main\webapp\WEB-INF\img\category\美足美甲.png', 'BATHBODY')
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, CATEGORYTITLE) VALUES ('洗髮潤髮', 'src\main\webapp\WEB-INF\img\category\洗髮潤髮.png', 'HAIR')
 INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, CATEGORYTITLE) VALUES ('染髮燙髮', 'src\main\webapp\WEB-INF\img\category\染髮燙髮.png', 'HAIR')
+INSERT INTO Category (CATEGORYNAME, CATEGORYIMG, CATEGORYTITLE) VALUES ('洗顏', 'src\main\webapp\WEB-INF\img\category\洗顏.png', 'SKINCARE')
 
 INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety,checked_data) values ('Water', '水', '溶劑', 0, 0, 1,1)
 INSERT INTO Ingredient (INGREDName, INGREDCHName, INGREDChar, INGREDIrritant, INGREDAcne, INGREDSafety,checked_data) values ('Titanium Dioxide', '二氧化鈦', '防曬', 0, 0, 2,1)
