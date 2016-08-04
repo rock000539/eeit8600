@@ -41,6 +41,8 @@ public class ArticleListFms {
 	//回覆數
 	private Integer arSize;
 	
+	private Integer arSize_show;
+	
 	//最新回覆
 	private ArticleReply lastPost;
 
@@ -156,6 +158,14 @@ public class ArticleListFms {
 		this.arSize = arSize;
 	}
 	
+	public Integer getArSize_show() {
+		return arSize_show;
+	}
+
+	public void setArSize_show(Integer arSize_show) {
+		this.arSize_show = arSize_show;
+	}
+
 	public ArticleReply getLastPost() {
 		return lastPost;
 	}
