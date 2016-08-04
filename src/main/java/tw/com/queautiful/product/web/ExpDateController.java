@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,7 +61,9 @@ public class ExpDateController
     }
     
     @RequestMapping("/reloadsearch")
-    public String reloadSearch(Model model,String reloadBatchCode,String brandId)
+    public String reloadSearch(Model model,String reloadBatchCode,
+    		String brandId,@RequestParam long pd,@RequestParam String mfdStr,@RequestParam String expStr,
+    		HttpServletRequest request)
     {
     	List<Category> categorys = new ArrayList<Category>();
         List<Brand> brands = new ArrayList<Brand>();
@@ -71,6 +74,28 @@ public class ExpDateController
         model.addAttribute("reloadBatchCode", reloadBatchCode);
         model.addAttribute("categorys", categorys);
         
+        
+        long memberId=(long) request.getSession().getAttribute("memberId");
+        ExpDate date=new ExpDate();
+        date.setBatchCode(reloadBatchCode);
+        date.setMemberId(memberId);
+        
+        java.sql.Date exp;
+		java.sql.Date Mfd;
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+			java.util.Date formatDate = dateFormat.parse(expStr);
+			exp = new java.sql.Date(formatDate.getTime());
+			formatDate = dateFormat.parse(mfdStr);
+			Mfd = new java.sql.Date(formatDate.getTime());
+	        date.setMfd(Mfd);
+	        date.setExp(exp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        date.setProId(pd);
+
+        expDateService.update(date);
         return "/expDate/expDateSearch";
     }
 
