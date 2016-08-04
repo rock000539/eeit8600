@@ -675,6 +675,7 @@ select {
 			$('#check').on('click',function(){
 				$("#prodImgButton").remove();
 				$('#prodImgMain').attr("src","/reviews/showProd?prodId="+prodNum);
+				
 				$('#wrapper').toggleClass('toggled'); //sidebar open/close
 			})
 		}

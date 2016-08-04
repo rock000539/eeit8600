@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import tw.com.queautiful.commons.enums.ArticleType;
 import tw.com.queautiful.commons.util.Spec;
 import tw.com.queautiful.product.dao.ArticleDao;
+import tw.com.queautiful.product.dao.ArticleReplyDao;
 import tw.com.queautiful.product.entity.Article;
 import tw.com.queautiful.product.entity.ArticleCM;
 import tw.com.queautiful.product.entity.ArticleReply;
@@ -32,6 +33,9 @@ public class ArticleService {
 
 	@Autowired
 	private ArticleDao articleDao;
+	
+	@Autowired
+	private ArticleReplyDao articleReplyDao;
 
 	public Article getById(Long articleId) {
 		return articleDao.findOne(articleId);
@@ -112,6 +116,8 @@ public class ArticleService {
 			article = new ArticleListFms();
 			BeanUtils.copyProperties(temp, article);
 			Integer arSize = temp.getArSize();
+			Integer arSize_show = articleReplyDao.countByArticleAndArShow(temp, true);
+			article.setArSize_show(arSize_show);
 			if (arSize != 0) {
 				ArticleReply lastPost = temp.getAreplies().get(arSize - 1);
 				article.setLastPost(lastPost);

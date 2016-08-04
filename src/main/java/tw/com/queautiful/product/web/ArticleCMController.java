@@ -69,11 +69,13 @@ public class ArticleCMController {
 		return"/articleCM/articleCMEdit";
 	}
 	
-	@RequestMapping(value="/update",method=RequestMethod.POST)
+	@RequestMapping(value="/update")
 	@ResponseBody
-	public ArticleCM update(@RequestBody ArticleCM articleCM){
-		service.update(articleCM);
-		return articleCM;
+	public boolean update(@RequestParam Long acmId){
+		ArticleCM acm = service.getById(acmId);
+		acm.setAcmShow(false);
+		service.update(acm);
+		return true;
 	}
 	
 	// 提供一般抓取資料使用
