@@ -253,7 +253,7 @@
 					    -->
 					</ul>
 				</div>
-				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" />
+				<img class="img-prod" src="<%= request.getContextPath() %>/products/show?prodImg=${product.prodImg}" style="width: 250px; height: auto;" />
 			</div>
 			
 			<div class="col-sm-5">
