@@ -104,9 +104,9 @@ public class ReviewCM {
 
 	public void setReview(Review review) {
 		this.review = review;
-		if(!review.getRcms().contains(this)){
-			review.getRcms().add(this);
-		}
+//		if(!review.getRcms().contains(this)){
+//			review.getRcms().add(this);
+//		}
 	}
 
 	public Long getReviewId() {

@@ -382,8 +382,8 @@
 					        	<span style="float:right;">
 					        		${fn:substring(acm.acmTime,0,19)}
 					        		<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a>
-					        		<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
-					        		</span>			        	
+					        		<a style="margin-left:10px; color:#fff; background:black; padding:0 5px;" onclick="delete_acm(${acm.acmId},$(this))"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
+					        	</span>			        	
 				        	</li>
 						</c:forEach>
 			        </ul>
@@ -661,7 +661,7 @@
        	<span>_acmMsg</span>  
        	<span style="float:right;">_acmTime
 			<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-warning"></i>&nbsp;Report</a>
-			<a href="#" style="margin-left:10px; color:#fff; background:black; padding:0 5px;"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
+			<a style="margin-left:10px; color:#fff; background:black; padding:0 5px;" onclick="delete_acm(_acmId,$(this))"><i class="fa fa-close"></i>&nbsp;Delete</a>				        		
 		</span>	
     </li>
 	</script>
@@ -851,6 +851,7 @@
 								.replace('_nickname',result.nickname)
 								.replace('_acmMsg',result.acmMsg)
 								.replace('_acmTime',result.acmTime)
+								.replace('_acmId',result.acmId)
 								).appendTo($('#articleCMsArea'));
 				$('#acms_num').text(" "+(parseInt($('#acms_num').text())+1));
 				$('textarea[name="acmMsg"]').val("");
@@ -886,6 +887,30 @@
 	    }
 	}// end of 回覆留言
 	
+	//文章留言刪除
+	function delete_acm(acmId,a){
+// 		console.log(a.parent().parent());
+		$.ajax({
+			url:'/articleCMs/update',
+			data:{'acmId':acmId},
+			type:'post',
+			dataType:'json',
+ 			success:function(result){
+//  				console.log(result);
+ 				if(result){  //true-->刪除成功
+					swal({
+						type: 'success',
+						text: '<h1 style="line-height:0px;">刪除成功!</h1>',
+						showConfirmButton: false,
+						customClass: 'swal',
+						timer: 1500,
+					});
+					$('#acms_num').text(" "+(parseInt($('#acms_num').text()) - 1));
+					a.parent().parent().remove();
+				}
+ 			}
+		});
+	}
 	function toModal(){
 		if($('#replyForm').validate().form() && CKEDITOR.instances['arContent'].getData().replace(/&nbsp;/g,'').replace(/<p>/g, "").replace(/<\/p>/g,"").trim().length != 0){
 			$("#myModal .modal-title").text('Please Check Your Post');

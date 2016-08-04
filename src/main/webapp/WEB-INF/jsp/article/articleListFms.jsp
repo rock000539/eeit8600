@@ -135,7 +135,7 @@
 				          </small>
 				          </h4>
 				        </td>
-				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.arSize}</a></td>
+				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.arSize_show}</a></td>
 				        <td class="text-center hidden-xs hidden-sm"><a href="#">${article.articleView}</a></td>
 				        <c:if test="${empty article.lastPost}">
 					        <td class="hidden-xs hidden-sm">
@@ -283,7 +283,7 @@
 		   			.replace("_memberId", result[i].memberId)
 		   			.replace("_memberNickname", result[i].nickname)
 		   			.replace("_articleTime", result[i].articleTime)
-		   			.replace("_arSize", result[i].arSize)	
+		   			.replace("_arSize", result[i].arSize_show)	
 		   			.replace("_articleView", result[i].articleView)
 					).appendTo($('tbody'));
 		   }
