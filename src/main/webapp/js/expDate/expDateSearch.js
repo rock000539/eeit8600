@@ -66,6 +66,7 @@
 								"expStr" : data.expDate,"batchCode":batchCode},
 				success : function(data) {
 				alert(data);
+				$("#batchCode").val("");
 				$('#proList').empty();
 				}
 				});//end #2

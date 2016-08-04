@@ -103,7 +103,7 @@ public class ExpDateSearchService {
 				int month=date.get(Calendar.MONTH)+1;
 				System.out.println("date= "+date);
 				mfdStr= year + "-" + month;
-				expStr = (year + 2) + "-" + month;
+				expStr = (year + 3) + "-" + month;
 				}else{
 					throw new NumberFormatException();
 				}
@@ -168,7 +168,7 @@ public class ExpDateSearchService {
 		
 		String monthStr = batchCode.substring(1, 2);
 		String yearStr = batchCode.substring(2, 3);
-		int year = Integer.valueOf(yearStr) + 2000;
+		int year = Integer.valueOf(yearStr) + 2010;
 		Pattern pattern = Pattern.compile("[0-9]*");
 		Matcher isNum = pattern.matcher(monthStr);
 		int month = 0;

@@ -106,7 +106,5 @@ margin: 6px;}
 	<script type="text/javascript" src="/js/fms/jflickrfeed.js"></script>
 	<script type="text/javascript" src="/js/fms/fms-main.js"></script>
 
-
-
 </body>
 </html>

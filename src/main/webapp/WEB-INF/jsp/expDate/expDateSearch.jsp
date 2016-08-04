@@ -141,9 +141,11 @@ margin: auto auto;}
 <!-- 檢查會員登入與否用的token -->
 <div class="grey_bg row">
 	<div class="col-md-6" id="information">
-	<div><h1>Welcome to Qutie 2016!</h1></div>
+	<div><h1>歡迎來到 Qutie 2016!</h1></div>
 	<br>
-	<div><p>Qutie helps you calculate your cosmetics' production date or expiration date from the batch code found on the product package.</p></div>
+	<div><p>
+<!-- 	只要在右邊輸入包裝盒上的batch code，Qutie可以幫助你在找到化妝品的到期日 -->
+	 helps you calculate your cosmetics' production date or expiration date from the batch code found on the product package.</p></div>
 	<div><p>What is batch code?  -  Batch codes are mostly short codes printed or stamped on the package with different font from the product specification, e.g. XLO25LA</p></div>
 	<div><p>The brands that can be calculated are Anna Sui, Aveda, Biotherm, BODY SHOP, Burt's bees, Chanel, Christian Dior, Clarins, Clinique, Decleor, Elizabeth Arden, Estee lauder, Givenchy, Guerlain, H2O+, Helena Rubinstein, Kiehl's , Lancome, L'occitane, L'Oreal, MAC, Neutrogena , Origins, Sisley, Sofina, Vichy, and YSL.</p></div>
 	<div><p>Check the color and smell if you think that your product has expired. Strange smell, separation of oil, change of color are signs of expiration.</p></div>
