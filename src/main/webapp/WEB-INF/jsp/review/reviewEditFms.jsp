@@ -398,8 +398,9 @@ select {
 					<input type="hidden" name="rewCollect" value="${review.rewCollect}"/>
 					<input type="hidden" name="reviewShow" value="${review.reviewShow}"/>
 					<input type="hidden" name="reviewReport" value="${review.reviewReport}"/>
-					<input type="hidden" name="reviewRating" id="reviewRating"/>
+					<input type="hidden" name="reviewRating" id="reviewRating" value="${review.reviewRating}"/>
 					<input type="hidden" name="prodId" id="prodId" value="${review.prodId}"/>
+					<input type="hidden" name="reviewImg" id="reviewImgInput" value="${review.reviewImg}"/>
 		
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="col-lg-5 col-md-5 col-sm-5" style="width:210px;height: 210px;margin: 20px 0 0 20px;">
@@ -597,7 +598,7 @@ select {
 	    for (var i = 1; i <= id.substr(1) ; i++) {//img的id的第二個字1,2,3,4....  
 	        document.getElementById("d" + i).className = "fa fa-diamond diamond li";
 	    }
-	    $('#reviewRating').val("${review.reviewRating}"); //心得評分到後端
+	    $('#reviewRating').val(id.substr(1)); //心得評分到後端
 	    
 		    switch (id.substr(1)) {
 			    case "1":  document.getElementById("p1").textContent =id.substr(1) + "分，不合我意...";
@@ -629,6 +630,10 @@ select {
 		    });
 		    return o;
 		};
+		
+/*  ======================================================= */
+
+
 /*  =================save click============================ */
 
 		$('#save').on('click',function(){

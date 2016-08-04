@@ -142,8 +142,8 @@
  		 		} else {
  		 			$('#userimg').removeClass('portrait');
  		 		}
- 		 		console.log('w=' + $('#userimg').width());
- 		 		console.log('h=' + $('#userimg').height());
+//  		 		console.log('w=' + $('#userimg').width());
+//  		 		console.log('h=' + $('#userimg').height());
 
  				function category_click(a) {
  					console.log($(a).attr('data-categoryId'));
