@@ -574,6 +574,13 @@ $(function(){  //=$(document.)ready
 			"reportTitle":reportTitle,
 			"reportDetail":reportDetail},
 				success:function(result){
+					swal({
+						type: 'success',
+						text: '<h1 style="line-height:0px;">檢舉已受理</h1>',
+						showConfirmButton: false,
+						customClass: 'swal',
+						timer: 1500,
+					});
 				$('#myModal').modal("toggle");		
 				}
 				})
