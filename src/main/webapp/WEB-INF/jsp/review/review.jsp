@@ -282,7 +282,7 @@
                                     <div class="tab-pane fade active in" id="Popular">
                                         <ul class="recent_tab_list">
                                             <li style="border:0px">
-                                                <span><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></a></span>
+                                                <a href="/products/view/${review.prodId}" ><span><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></span></a>
                                                 <p><span>Brand :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.brand.brandName}</p>
                                                 <p><span>Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.prodName}</p>
                                                 <p><span>Category :</span>${review.product.category.categoryName}</p>
@@ -294,7 +294,7 @@
                                     <div class="tab-pane fade" id="Recent">
                                         <ul class="recent_tab_list">
                                             <li style="border:0px">
-                                                <span><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></a></span>
+                                                <a href="/products/view/${review.prodId}"><span><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></span></a>
                                                 <p><span></span>${review.product.prodDesc}</p>
                                             </li>
                                         </ul>
