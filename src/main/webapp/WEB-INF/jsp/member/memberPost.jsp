@@ -326,7 +326,7 @@ h2, h4{
 		<img src="/products/show?prodImg=_prodImg"/></a></div>
 	<div class="reviewContent">
 		<h2 class="reviewTitle">_reviewTitle&nbsp;
-			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></h2>
+			<span><a href="/reviews/edit_fms/_reviewId"><i class="fa fa-pencil"></i>&nbsp;EDIT</a></span></h2>
 		<h4 class="prod">_prodName | _brandName </h4>		
 		<p class="preview">_review</p>
 		<a class="singlepage" href="/reviews/review/_reviewId">read more</a>
@@ -476,6 +476,7 @@ $(function(){
 						.replace('_prodId', result[i].prodId)
 						.replace('_prodImg', result[i].prodImg)
 						.replace('_reviewTitle', result[i].reviewTitle)
+						.replace('_reviewId', result[i].reviewId)
 						.replace('_prodName', result[i].prodName)
 						.replace('_brandName', result[i].brandName)
 						.replace('_review', result[i].review)
