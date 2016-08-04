@@ -90,15 +90,14 @@
 								<div class="metaInfo">
 									<span><i class="fa fa-calendar"></i> ${product.launchDate} </span>
 									<span><i class="fa fa-tag"></i> ${product.brandName} </span>
+									<script type="text/javascript">console.log("${product.brandName}")</script>
 									<span><i class="fa fa-comments"></i> ${product.rSize} </span>
 								</div>
 							</div>
-							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
-								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p>
-							</c:if>
-							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
-								<p>${fn:substring(review.review, 0, 25)} ... </p>
-							</c:if>
+<%-- 							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }"> --%>
+<!-- 								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p> -->
+<%-- 							</c:if> --%>
+								<p>${fn:substring(product.prodDesc, 0, 45)} ... </p>
 							<span style="float:right;">
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;收藏商品</a>
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
@@ -130,12 +129,10 @@
 									<span><i class="fa fa-comments"></i> ${product.rSize} </span>
 								</div>
 							</div>
-							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }">
-								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p>
-							</c:if>
-							<c:if test="${fn:substring(product.prodDesc, 0, 4) != '產品說明' }">
-								<p>${fn:substring(review.review, 0, 20)} ... </p>
-							</c:if>
+<%-- 							<c:if test="${fn:substring(product.prodDesc, 0, 4) == '產品說明' }"> --%>
+<!-- 								<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p> -->
+<%-- 							</c:if> --%>
+								<p>${fn:substring(product.prodDesc, 0, 45)} ... </p>
 							<span style="float:right;">
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;收藏商品</a>
 								<a class="btn btn-small btn-default" data-prodId="${product.prodId}" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
@@ -204,7 +201,7 @@
 						<span><i class="fa fa-comments"></i> _size </span>
 					</div>
 				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adip Etu eros omnes theophratus mei, cumit usulan dicit omnium eripuit... </p>				
+				<p> _prodDesc ... </p>
 				<span style="float:right;">
 					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="save_click($(this))"> <i class="fa fa-heart"></i>&nbsp;&nbsp;收藏商品</a>
 					<a class="btn btn-small btn-default" data-prodId="_prodId" onClick="info_click($(this))"> <i class="fa fa-info"></i>&nbsp;&nbsp;查看商品 </a>
@@ -317,7 +314,7 @@
 								.replace(/_prodId/g, products[i].prodId)
 								.replace(/_prodName/g, products[i].prodName)
 								.replace(/_prodImg/g, products[i].prodImg)
-								//.replace('_prodDesc', products[i].prodDesc)
+								.replace(/_prodDesc/, products[i].prodDesc.substr(0, 45))
 								.replace(/_launchDate/g, products[i].launchDate)
 								.replace(/_size/g, products[i].rSize)
 								.replace(/_brandName/g, products[i].brandName))
