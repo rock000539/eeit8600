@@ -72,7 +72,8 @@
 				}else{//end #1
 					var brandId = $('#brandId').val();
 					var reloadBatchCode = $('#batchCode').val();
-		 location.href="/expdate/reloadsearch?brandId="+brandId+"&reloadBatchCode="+reloadBatchCode;
+		 location.href="/expdate/reloadsearch?brandId="+brandId+"&reloadBatchCode="+reloadBatchCode+"&pd="+prodId
+		 +"&mfdStr="+data.mfdDate+"&expStr="+data.expDate;
 				}
 				})
 //------------------------------------------------      
