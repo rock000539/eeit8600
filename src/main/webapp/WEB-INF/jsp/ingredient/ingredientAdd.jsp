@@ -45,10 +45,71 @@ color:red;
 			    <div class="col-md-12 ui-sortable">
 	            <!-- **每頁不同的內容從這裡開始** -->
 
-	<form id='Addform'>
-	<fieldset>
-		<table>
-			<tr>
+<div class="row">
+<div class="col-md-6">	            
+<form id='Addform' class="form-horizontal">
+	<div class="form-group">
+	    <label class="col-md-3 control-label">ID</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredId"
+	         value="${ingredient.ingredId}" disabled />
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">成份</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control"  name="ingredName"
+					value="${ingredient.ingredName}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">中文名稱</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredChName"
+					value="${ingredient.ingredChName}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">特性</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredChar"
+					value="${ingredient.ingredChar}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">刺激度</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredIrritant"
+					value="${ingredient.ingredIrritant}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">致粉刺性</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredAcne"
+					value="${ingredient.ingredAcne}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">安心度</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredSafety"
+					value="${ingredient.ingredSafety}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">Submit</label>
+	    <div class="col-md-9">
+	        <input id="editBtn" type="button" class="btn btn-sm btn-success"
+	         name="update" value="update"> 
+			<input type="button" name="cancel" class="btn btn-sm btn-success"
+				value="Cancel" onclick='window.location="/ingredients/list"'>
+	    </div>
+	</div>
+</form>
+</div>
+</div>
+
 				<td>成分</td>
 				<td><input type="text" name="ingredName"
 					value="${ingredient.ingredName}"></td>

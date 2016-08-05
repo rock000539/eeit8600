@@ -69,12 +69,12 @@ body :-ms-input-placeholder {
   font-weight: 200;
    color:white;
 }
-form {
+form.form {
   padding: 20px 0;
   position: relative;
   z-index: 2;
 }
-form input {
+form.form input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -93,15 +93,15 @@ form input {
           transition-duration: 0.25s;
   font-weight: 300;
 }
-form input:hover {
+form.form input:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
-form input:focus {
+form.form input:focus {
   background-color: white;
   width: 300px;
   color: #53e3a6;
 }
-form button {
+form.form button {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -117,7 +117,7 @@ form button {
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s;
 }
-form button:hover {
+form.form button:hover {
   background-color: #f5f7f9;
 }
 .bg-bubbles {
@@ -230,3 +230,4 @@ form button:hover {
             transform: translateY(-700px) rotate(600deg);
   }
 }
+

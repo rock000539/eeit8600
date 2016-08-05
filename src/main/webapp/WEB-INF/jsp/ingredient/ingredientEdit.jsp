@@ -62,6 +62,7 @@
 	    <div class="col-md-9">
 	        <input type="text" class="form-control"  name="ingredName"
 					value="${ingredient.ingredName}"/>
+	    <label for='ingredName' class='error'></label>
 	    </div>
 	</div>
 	<div class="form-group">
@@ -136,9 +137,6 @@
 				ingredName : {
 					required : true
 				},
-				ingredChar : {
-					required : true
-				},
 				ingredIrritant : {
 					digits : true
 				},
@@ -152,7 +150,6 @@
 			messages : {
 				ingredName : "必填項目",
 				ingredChName : "必填項目",
-				ingredChar : "必填項目",
 				ingredIrritant : "必須為數字",
 				ingredAcne : "必須為數字",
 				ingredSafety : "必須為數字"
@@ -212,7 +209,7 @@
 					//	$('#data').children().addClass("temp1");
 				}
 			});
-		}else{alert("資料格式不正確");}
+		}else{}
 					});
 
 		$.fn.serializeObject = function() {

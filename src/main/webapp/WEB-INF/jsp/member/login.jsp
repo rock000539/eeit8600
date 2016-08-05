@@ -11,16 +11,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Login</title>
     
-    
-    <script src="/js/jquery.min.js"></script>
-<!--     <link rel="stylesheet" href="/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
 <!--     <link rel="stylesheet" href="/css/fms/fms-customize.css"> -->
-<!--     <link rel="stylesheet" href="/css/font-awesome.css"/> -->
 <!-- 	<link rel="stylesheet" href="/css/fms/styleForLogin.css">  -->
-
     <link rel="stylesheet" href="/css/loginstyle.css">
+	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
 <style>
-.error {
+.errorTypeIn {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -61,7 +62,6 @@ a{
 <div class="row">
 <div class="col-lg-4"></div>
 <div  class="col-lg-4" style="text-align: center;"><a href="/fms"><figure><img src="/images/logo_qutie-02.png" ></figure></a></div>
-
 </div>
 
 <div class="row">
@@ -70,7 +70,7 @@ a{
 		<h1>Welcome</h1>
 		
 	    <c:if test="${not empty error}">
-            <div class="error">${error}</div>
+            <div class="errorTypeIn">${error}</div>
         </c:if>
         <c:if test="${not empty msg}">
             <div class="msg">${msg}</div>
@@ -80,13 +80,29 @@ a{
 			<input type="text" placeholder="Username" id="username" name="username">
 			<input type="password" placeholder="Password" id="password" name="password">
 			<button type="submit"  name="submit">Login</button>
-			<div class="forgot"><a href="/members/forgotpsw">Forgot Password ?</a></div>
+			<div class="forgot"><a href="/members/forgotpsw">Forgot Password ?</a><br><br>
+				Not a member? 
+				<span id="signUpModal" data-toggle="modal"
+				  data-target="#regiModal" href="/members/register"
+				    style="font-weight: normal;">
+				    &nbsp;<i class="fa fa-long-arrow-right"></i>
+				    <a href="javascript:">SignUp Now !</a>
+				</span>
+            </a>
+			</div>
 <!-- 		<input name="submit" id="login-button" type="submit" class="btn btn-default" value="Submit" /> -->
 			<input type="hidden" 
                      name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>
 	</div>
-	
+				 <!-- modal -->
+	<div class="modal fade" id="regiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-body"></div>
+	        </div> <!-- content -->
+	    </div> <!-- dialog -->
+	</div> <!-- m -->
 	<ul class="bg-bubbles">
 		<li></li>
 		<li></li>
@@ -99,10 +115,9 @@ a{
 		<li></li>
 		<li></li>
 	</ul>
+	
 </div>
 </div>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="/js/fms/swipe.js"></script>
 <script type="text/javascript" src="/js/fms/jquery.magnific-popup.min.js"></script>
