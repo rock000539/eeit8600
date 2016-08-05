@@ -24,28 +24,10 @@ import tw.com.queautiful.product.service.ProductService;
 @EnableAutoConfiguration
 @ServletComponentScan
 @SpringBootApplication
-public class App extends SpringBootServletInitializer implements CommandLineRunner  {
+public class App extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) throws Exception {
         SpringApplication.run(App.class, args);
     }
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(App.class);
-    }
-
-	@Autowired
-	private ProductService productService;
-	
-	@Override
-	@Transactional
-	public void run(String... args) throws Exception {
-		List<Product> products = productService.getAll();
-		for(Product product : products) {
-			if(!product.getReviews().isEmpty()) {
-				product.setScore(productService.initScore(product.getReviews()));
-			}
-		}
-	}
 	
 }
