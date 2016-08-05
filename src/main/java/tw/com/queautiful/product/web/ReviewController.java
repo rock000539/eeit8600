@@ -263,6 +263,7 @@ public class ReviewController {
 		review.setProduct(prodService.getById(review.getProdId()));
 
 		service.update(review);
+		service.updateScore(review.getProdId());
 
 		return review;
 	}
@@ -304,7 +305,7 @@ public class ReviewController {
 		// FK設定
 		review.setProduct(prodService.getById(review.getProdId()));
 		review.setMember(memberService.getById(review.getMemberId()));
-
+		service.insert(review);
 		review.setReviewTime(new java.sql.Date(System.currentTimeMillis()));
 		if (reviewImgFile != null) {
 			String reviewTitle = "review" + review.getReviewId();
@@ -315,8 +316,9 @@ public class ReviewController {
 		log.debug("{}", review);
 		review.setMember(memberService.getById(review.getMemberId()));
 		review.setProduct(prodService.getById(review.getProdId()));
-
-		service.insert(review);
+		
+		service.update(review);
+		service.updateScore(review.getProdId());
 
 		return review;
 	}
