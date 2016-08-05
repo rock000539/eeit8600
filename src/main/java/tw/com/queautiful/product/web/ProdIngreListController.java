@@ -177,7 +177,6 @@ public class ProdIngreListController {
 	public Map<String, Object> search(@RequestParam String prodName) {
 		
 		List<Product> products = productService.findByProdNameEndsWith(prodName);
-
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -187,7 +186,6 @@ public class ProdIngreListController {
 		List<Brand> brands= new ArrayList<Brand>();;
 
 		for (int i = 0; i < products.size(); i++) {
-
 			Product product = products.get(i);
 			Category category = categoryService.getById(product.getCategoryId());
 			Brand brand=brandService.getById(product.getBrandId());
@@ -198,7 +196,6 @@ public class ProdIngreListController {
 		resultMap.put("products", products);
 		resultMap.put("categorys", categorys);
 		resultMap.put("brands", brands);
-		System.out.println(resultMap);
 		return resultMap;
 	}
 
