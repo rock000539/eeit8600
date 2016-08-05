@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Reset Password Confirm</title>
+	<title>重設密碼</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
@@ -36,14 +36,14 @@ div.grey_bg{
 <div class="row" style="margin-top: 20px">
 <div class="col-lg-3"></div>
 <div class="col-lg-6 col-sm-6">
-<h1 style="text-align:center;margin-bottom:20px">Reset Password</h1> 
+<h1 style="text-align:center;margin-bottom:20px">重設密碼</h1> 
 <form id="resetPsw">
 <div class="form-group">
-<label for="password">Your New Password</label>
+<label for="password">新密碼</label>
 <input type="text" class="form-control" id="password" name="password" placeholder="new password">
 </div>
 <div class="form-group">
-<label for="psw_confirm">Confirm Password</label>
+<label for="psw_confirm">密碼確認</label>
 <input type="text" class="form-control" id="psw_confirm" name="psw_confirm" placeholder="re-enter password">
 </div>
 <br>
