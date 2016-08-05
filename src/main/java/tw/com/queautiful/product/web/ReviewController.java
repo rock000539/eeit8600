@@ -304,7 +304,7 @@ public class ReviewController {
 		// FK設定
 		review.setProduct(prodService.getById(review.getProdId()));
 		review.setMember(memberService.getById(review.getMemberId()));
-
+		service.insert(review);
 		review.setReviewTime(new java.sql.Date(System.currentTimeMillis()));
 		if (reviewImgFile != null) {
 			String reviewTitle = "review" + review.getReviewId();
@@ -316,7 +316,7 @@ public class ReviewController {
 		review.setMember(memberService.getById(review.getMemberId()));
 		review.setProduct(prodService.getById(review.getProdId()));
 
-		service.insert(review);
+		service.update(review);
 
 		return review;
 	}
