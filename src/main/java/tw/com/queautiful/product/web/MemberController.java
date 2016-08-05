@@ -326,15 +326,15 @@ public class MemberController {
 	public String memberPostedReviewPage(@PathVariable(value="targerMemberId") Long memberId, Model model, HttpServletRequest request){
 		Member member = memberService.getById(memberId);
 		
-		List<ReviewVO> reviews = 
+		Map map = 
 				memberService.getReviewByCategory(memberId, null, null, null);
-		
+		List<ReviewVO> reviews = (List<ReviewVO>) map.get("reviews");
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("reviewsTotalElement", reviews.size());
-		model.addAttribute("countMakeUp", memberService.getReviewByCategory(memberId, CategoryTitle.MAKEUP, null, null).size());
-		model.addAttribute("countSkinCare", memberService.getReviewByCategory(memberId, CategoryTitle.SKINCARE, null, null).size());
-		model.addAttribute("countBathBody", memberService.getReviewByCategory(memberId, CategoryTitle.BATHBODY, null, null).size());
-		model.addAttribute("countHair", memberService.getReviewByCategory(memberId, CategoryTitle.HAIR, null, null).size());
+		model.addAttribute("countMakeUp", (Integer)map.get("countMakeUp"));
+		model.addAttribute("countSkinCare", (Integer)map.get("countSkinCare"));
+		model.addAttribute("countBathBody", (Integer)map.get("countBathBody"));
+		model.addAttribute("countHair", (Integer)map.get("countHair"));
 		
 		Page<Article> articlePages =
 				memberService.getArticlesPaging(memberId, null, 0, null, null);
@@ -434,9 +434,9 @@ public class MemberController {
 			@RequestParam(value="direction", defaultValue="DESC") String direction,
 			Model model){
 		
-		List<ReviewVO> reviews = memberService
+		Map map = memberService
 					.getReviewByCategory(memberId, categoryTitle, sortProperty, direction);
-		
+		 List<ReviewVO> reviews = (List<ReviewVO>) map.get("reviews");
 		return reviews;
 	}
 	

@@ -46,51 +46,71 @@
 			<div class="row">
 			    <div class="col-md-12 ui-sortable">
 	            <!-- **每頁不同的內容從這裡開始** -->
-	            
-	            	<form id="editForm">
-		<table>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" name="ingredId"
-					value="${ingredient.ingredId}" readonly="readonly"></td>
-			</tr>
-			<tr>
-				<td>成份</td>
-				<td><input type="text" name="ingredName"
-					value="${ingredient.ingredName}"></td>
-			</tr>
-			<tr>
-				<td>中文名稱</td>
-				<td><input type="text" name="ingredChName"
-					value="${ingredient.ingredChName}"></td>
-			</tr>
-			<tr>
-				<td>特性</td>
-				<td><input type="text" name="ingredChar"
-					value="${ingredient.ingredChar}"></td>
-			</tr>
-			<tr>
-				<td>刺激度</td>
-				<td><input type="text" name="ingredIrritant"
-					value="${ingredient.ingredIrritant}"></td>
-			</tr>
-			<tr>
-				<td>致粉刺性</td>
-				<td><input type="text" name="ingredAcne"
-					value="${ingredient.ingredAcne}"></td>
-			</tr>
-			<tr>
-				<td>安心度</td>
-				<td><input type="text" name="ingredSafety"
-					value="${ingredient.ingredSafety}"></td>
-			</tr>
-		</table>
-		<div>
-			<br> <input id="editBtn" type="button" name="update"
-				value="update"> <input type="button" name="cancel"
-				value="Cancel" onclick='window.location="/ingredients/list"'><br>
-		</div>
-	</form>
+
+<div class="row">
+<div class="col-md-6">	            
+<form id="editForm" class="form-horizontal">
+	<div class="form-group">
+	    <label class="col-md-3 control-label">ID</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredId"
+	         value="${ingredient.ingredId}" disabled />
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">成份</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control"  name="ingredName"
+					value="${ingredient.ingredName}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">中文名稱</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredChName"
+					value="${ingredient.ingredChName}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">特性</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredChar"
+					value="${ingredient.ingredChar}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">刺激度</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredIrritant"
+					value="${ingredient.ingredIrritant}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">致粉刺性</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredAcne"
+					value="${ingredient.ingredAcne}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">安心度</label>
+	    <div class="col-md-9">
+	        <input type="text" class="form-control" name="ingredSafety"
+					value="${ingredient.ingredSafety}"/>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-3 control-label">Submit</label>
+	    <div class="col-md-9">
+	        <input id="editBtn" type="button" class="btn btn-sm btn-success"
+	         name="update" value="update"> 
+			<input type="button" name="cancel" class="btn btn-sm btn-success"
+				value="Cancel" onclick='window.location="/ingredients/list"'>
+	    </div>
+	</div>
+</form>
+</div>
+</div>
 	<div id="resultMsg"></div>
 	<div id="data"></div>
 	            <!-- **每頁不同的內容 end** -->     
@@ -146,53 +166,54 @@
 		
 
 		$('#editBtn').on('click',function() {
+			
 			var validate=$('#editForm').validate().form();
 			if(validate){
 			$.ajax({
-										url : "/ingredients/update",
-										type : "POST",
-										contentType : 'application/json; charset=utf-8',
-										dataType : "json",
-										data : JSON.stringify($('form')
-												.serializeObject()),
-										success : function(result) {
-											//$(':text:gt(0)').val(" ");//clear the form except id
-											$('#resultMsg').empty().append(
-													"<h2>update success</h2>");
-											var tb = $('#data').append(
-													'<table></table>');
-											tb.empty();
-											tb
-													.append('<tr align="center"><td>ID</td><td>成份</td><td>中文名稱</td><td>特性</td><td>刺激度</td><td>致粉刺性</td><td>安心度</td></tr>');
-											var row = $(
-													'<tr align="center"></tr>')
-													.appendTo(tb);
-											$('<td></td>')
-													.text(result.ingredId)
-													.appendTo(row);
-											$('<td></td>').text(
-													result.ingredName)
-													.appendTo(row);
-											$('<td></td>').text(
-													result.ingredChName)
-													.appendTo(row);
-											$('<td></td>').text(
-													result.ingredChar)
-													.appendTo(row);
-											$('<td></td>').text(
-													result.ingredIrritant)
-													.appendTo(row);
-											$('<td></td>').text(
-													result.ingredAcne)
-													.appendTo(row);
-											$('<td></td>').text(
-													result.ingredSafety)
-													.appendTo(row);
-											//	$('#data').children().addClass("temp1");
-										}
-									});
-			}else{alert("資料格式不正確");}
-						});
+				url : "/ingredients/update",
+				type : "POST",
+				contentType : 'application/json; charset=utf-8',
+				dataType : "json",
+				data : JSON.stringify($('form')
+						.serializeObject()),
+				success : function(result) {
+					//$(':text:gt(0)').val(" ");//clear the form except id
+					$('#resultMsg').empty().append(
+							"<h2>update success</h2>");
+					var tb = $('#data').append(
+							'<table></table>');
+					tb.empty();
+					tb
+							.append('<tr align="center"><td>ID</td><td>成份</td><td>中文名稱</td><td>特性</td><td>刺激度</td><td>致粉刺性</td><td>安心度</td></tr>');
+					var row = $(
+							'<tr align="center"></tr>')
+							.appendTo(tb);
+					$('<td></td>')
+							.text(result.ingredId)
+							.appendTo(row);
+					$('<td></td>').text(
+							result.ingredName)
+							.appendTo(row);
+					$('<td></td>').text(
+							result.ingredChName)
+							.appendTo(row);
+					$('<td></td>').text(
+							result.ingredChar)
+							.appendTo(row);
+					$('<td></td>').text(
+							result.ingredIrritant)
+							.appendTo(row);
+					$('<td></td>').text(
+							result.ingredAcne)
+							.appendTo(row);
+					$('<td></td>').text(
+							result.ingredSafety)
+							.appendTo(row);
+					//	$('#data').children().addClass("temp1");
+				}
+			});
+		}else{alert("資料格式不正確");}
+					});
 
 		$.fn.serializeObject = function() {
 			var o = {};

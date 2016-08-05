@@ -264,7 +264,7 @@ public class MemberService {
 	}
 	
 	//Review-post sort and category
-	public List<ReviewVO> getReviewByCategory(Long memberId, CategoryTitle categoryTitle,
+	public Map getReviewByCategory(Long memberId, CategoryTitle categoryTitle,
 			String sortProperty, String direction){
 		
 		log.debug("input: {}, {}, {}, {}", memberId, categoryTitle, sortProperty, direction);
@@ -299,8 +299,12 @@ public class MemberService {
 		+"on r.prodid = t.prodid where r.memberid = "+memberId+" order by "+ orderby;
 		
 		List<Object[]> resultList = em.createNativeQuery(findReviewByCategory).getResultList();
-		
 		List<ReviewVO> reviews = new ArrayList<ReviewVO>();
+		
+		Integer countMakeUp = 0;
+		Integer countSkinCare = 0;
+		Integer countBathBody = 0;
+		Integer countHair = 0;
 		
 		for(int i=0;i<resultList.size();i++){
 			Object[] datas = resultList.get(i);
@@ -312,9 +316,9 @@ public class MemberService {
 			}catch(Exception e){
 				reviewId= ((BigDecimal) datas[0]).longValue();
 			}
-			
 			ReviewVO reviewVO = new ReviewVO();
 			BeanUtils.copyProperties(reviewService.getById(reviewId), reviewVO);
+
 			Long prodId =0L;
 			Long categoryId=0L;
 			try{	
@@ -323,17 +327,33 @@ public class MemberService {
 			
 			BigInteger cId = (BigInteger) datas[2];
 			categoryId = cId.longValue();
-			
 			}catch(Exception e){
 				prodId=((BigDecimal) datas[1]).longValue();
 				categoryId=((BigDecimal) datas[2]).longValue();
 			}
 			BeanUtils.copyProperties(productService.getById(prodId), reviewVO);
 			BeanUtils.copyProperties(categoryService.getById(categoryId), reviewVO);
+			if(CategoryTitle.MAKEUP.equals(reviewVO.getCategoryTitle())){
+				countMakeUp++;
+			}
+			if(CategoryTitle.SKINCARE.equals(reviewVO.getCategoryTitle())){
+				countSkinCare++;
+			}
+			if(CategoryTitle.BATHBODY.equals(reviewVO.getCategoryTitle())){
+				countBathBody++;
+			}
+			if(CategoryTitle.HAIR.equals(reviewVO.getCategoryTitle())){
+				countHair++;
+			}
 			
 			reviews.add(reviewVO);
 		}
-		
-		return reviews;
+		Map map = new HashMap();
+		map.put("reviews", reviews);
+		map.put("countMakeUp", countMakeUp);
+		map.put("countSkinCare", countSkinCare);
+		map.put("countBathBody", countBathBody);
+		map.put("countHair", countHair);
+		return map;
 	}
 }

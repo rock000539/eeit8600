@@ -14,7 +14,6 @@ public class ReviewVO {
 	private String reviewImg;
 	private Date reviewTime;
 	private Integer rewCollect;
-	private Boolean reviewShow;
 	private Long prodId;
 	private String prodName;
 	private String prodImg;
@@ -69,12 +68,6 @@ public class ReviewVO {
 	}
 	public void setRewCollect(Integer rewCollect) {
 		this.rewCollect = rewCollect;
-	}
-	public Boolean getReviewShow() {
-		return reviewShow;
-	}
-	public void setReviewShow(Boolean reviewShow) {
-		this.reviewShow = reviewShow;
 	}
 	public Long getProdId() {
 		return prodId;

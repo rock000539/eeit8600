@@ -29,7 +29,7 @@ public class ScheduleTasks {
 	@Autowired
 	private EmailSender emailSender;
 	
-	@Scheduled(cron="0 28 15 * * ?")   // 9 AM everyDay
+	@Scheduled(cron="0 0 9 * * ?")   // 9 AM everyDay
 	public void expDateReminder(){
 		List<ExpDate> expDate = expDateService.expDateAfterOneMonth(); //check Exp expired after 1 month
 		if(!expDate.isEmpty()){
@@ -45,7 +45,7 @@ public class ScheduleTasks {
 		}
 	}
 	
-	@Scheduled(cron="0 0 10 * * ?")	  // 10 AM everyDay
+	@Scheduled(cron="0 0 9 * * ?")	  // 10 AM everyDay
 	public void deleteRestPswToken(){
 		java.sql.Date today = new java.sql.Date(new java.util.Date().getTime());
 		List<Member> memberPswTokenExpired = memberService.getByResetPswExp(today);
