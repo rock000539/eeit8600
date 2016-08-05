@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>${nickname}'s WishList</title>
+    <title>${nickname}'s 慾望清單</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -170,7 +170,7 @@ i{
 	         </div>
 	         <div>
 	         	<button class="btn btn-default btn-delete" value="${item.prodId}"
-	         		 data-toggle="modal" data-target="#myModal">DELETE</button>
+	         		 data-toggle="modal" data-target="#myModal">刪除</button>
 	         </div>
          </div>
     </div> <!-- portfolio-item -->
@@ -183,9 +183,9 @@ i{
 <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-    	<h2>Do you want to delete ${product.prodName} ?</h2>
+    	<h2>刪除  ${product.prodName} ?</h2>
     	<br>
-    	<button id="del-confirm" class="btn btn-default">Confirm</button>
+    	<button id="del-confirm" class="btn btn-default">確認</button>
     </div>
   </div>
 </div>

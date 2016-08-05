@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>${member.nickname} EDIT</title>
+    <title>${member.nickname} 編輯頁面</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>${member.nickname}'s Profile</title>
+    <title>${member.nickname}'s 個人資料</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

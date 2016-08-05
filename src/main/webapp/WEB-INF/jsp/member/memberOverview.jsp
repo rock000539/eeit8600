@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>${member.nickname}'s Overview</title>
+    <title>關於${member.nickname}</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

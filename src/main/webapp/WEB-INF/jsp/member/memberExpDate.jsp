@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>${nickname}'s Expiration List</title>
+<title>${nickname}'s 產品清單</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- CSS -->
@@ -115,6 +115,7 @@ td.data{
 	font-size: 15px;
 	color: #000;
 	vertical-align: middle;
+	padding-top: 7px;
 }
 .modal-content{
 	text-align: center;
@@ -193,16 +194,16 @@ td.data{
 		        <p class="bell <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<30 && expDays>0}"> within30</c:if>">
 		        	<i class="fa fa-bell-o "></i>&nbsp;
 		        	<c:if test="${expDays>=0}">
-		        		Valid for &nbsp;<span class="days">${item.lastsDay}</span>&nbsp;Days</c:if>
+		        		有效期限還有 &nbsp;<span class="days">${item.lastsDay}</span>&nbsp;天</c:if>
 		        	<c:if test="${expDays<0}">
-		        		Expired&nbsp;<span class="days">${item.lastsDay}</span>&nbsp;Days</c:if>
+		        		已經過期 &nbsp;<span class="days">${fn:substringAfter(item.lastsDay, "-")}</span>&nbsp;Days</c:if>
 		        </p>  <!-- ${fn:substringAfter(expDays, '-')} -->
 		        
 		        <div class="expinfo">
 			        <table>
-			        <tr><td class="info">Production&nbsp;&nbsp;</td><td class="data">${item.mfd}</td></tr>
-			        <tr><td class="info">Expiration&nbsp;&nbsp;</td><td class="data">${item.exp}</td></tr>
-			        <tr><td class="info">BatchCode&nbsp;&nbsp;</td><td class="data">${item.batchCode}</td></tr>
+			        <tr><td class="info">製造日&nbsp;&nbsp;</td><td class="data">${item.mfd}</td></tr>
+			        <tr><td class="info">到期日&nbsp;&nbsp;</td><td class="data">${item.exp}</td></tr>
+			        <tr><td class="info">生產批號&nbsp;&nbsp;</td><td class="data">${item.batchCode}</td></tr>
 			        </table>
 		        </div>
 		        <div class="portfolio-btn">
