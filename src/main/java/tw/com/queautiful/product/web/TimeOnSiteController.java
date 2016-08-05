@@ -32,8 +32,8 @@ public class TimeOnSiteController {
 		long timeOnSite=Long.valueOf(timeOnSiteStr);
 		timeOnSiteEnity.setTimeOnSite(timeOnSite);
 		
-//		String realIp=RealIpUtils.getRealIpAddr(req);
-//		timeOnSiteEnity.setClientIp(realIp);
+		String realIp=RealIpUtils.getRealIpAddr(req);
+		timeOnSiteEnity.setClientIp(realIp);
 		
 		timeOnSiteService.insert(timeOnSiteEnity);
 		return "";
