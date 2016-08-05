@@ -74,6 +74,8 @@ background-size:cover;
 }
 button{color:white;
 }
+#myModal{
+margin-top: 25px;}
 </style>
 </head>
 <body>
