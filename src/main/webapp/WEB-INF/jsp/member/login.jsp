@@ -14,12 +14,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/font-awesome.css"/>
 <!--     <link rel="stylesheet" href="/css/fms/fms-customize.css"> -->
-<!-- 	<link rel="stylesheet" href="/css/fms/styleForLogin.css">  -->
     <link rel="stylesheet" href="/css/loginstyle.css">
 	
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.validate.min.js"></script>
 <style>
 .errorTypeIn {
     padding: 15px;
@@ -64,7 +62,7 @@ a{
 <div  class="col-lg-4" style="text-align: center;"><a href="/fms"><figure><img src="/images/logo_qutie-02.png" ></figure></a></div>
 </div>
 
-<div class="row">
+<div class="row loginPage">
     <div class="wrapper col-md-12">
 	<div class="container">
 		<h1>Welcome</h1>

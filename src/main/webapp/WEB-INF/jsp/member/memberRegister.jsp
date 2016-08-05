@@ -56,7 +56,6 @@
 	#insertBtn, #insertBtn:focus {
 		width: 10em;
 /*  	border-radius: 24px;  */
- 		font-family:cursive; 
 		background-color: #FFFFFF;
 		color:#84786C;
 		font-weight: bold;
@@ -69,6 +68,13 @@
 		text-align: 30px;
 		padding-top: 12px;
 	}
+	.tab-content{
+		margin-top: 10px;
+	}
+	.nav-tabs li a{
+		color: #555;
+	}
+	
 </style>
 </head>
 <body>
@@ -77,8 +83,20 @@
                  <h3 class="modal-title">Member Registration<small>&nbsp;&nbsp;&nbsp;Sign Up !</small></h3>
             </div>			<!-- modal header -->
             <div class="modal-body">
-            
+
+<div>
+
 <form accept-charset="UTF-8" class="form-horizontal" id="signup">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#requiredData" aria-controls="requiredData" role="tab" data-toggle="tab">必填資料</a></li>
+  <li role="presentation"><a href="#moreDetail" aria-controls="moreDetail" role="tab" data-toggle="tab">選填資料</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <!-- ======== requiredData ======== -->
+  <div role="tabpanel" class="tab-pane active" id="requiredData">
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="email">電子信箱</label>
 	    <div class="col-sm-7" >
@@ -97,20 +115,20 @@
 	    <label class="col-sm-3 control-label" for="password">密碼</label>
 	    <div class="col-sm-7">
 	    	<div class=" input-group">
-		    	<input type="text" class="form-control" id="password" 
+		    	<input type="password" class="form-control" id="regi_password" 
 		    		name="password" value="${member.password}">
 		    	<span class="input-group-addon" data-toggle="popover" data-placement="right" 
 		    		data-content="請輸入6-12位數密碼 且使用數字及英文">
 	            <span class="fa fa-info-circle"></span>
             </div>
-	    	<label class="error" for="password"></label>
+	    	<label class="error" for="regi_password"></label>
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="psw_confirm">密碼確認</label>
 	    <div class="col-sm-7">
 	    	<div class=" input-group">
-		    	<input type="text" class="form-control" id="psw_confirm" 
+		    	<input type="password" class="form-control" id="psw_confirm" 
 		    		name="psw_confirm" value="${member.password}">
 		    	<span class="input-group-addon" data-toggle="popover" data-placement="right" 
 		    		data-content="請再輸入一次密碼">
@@ -126,6 +144,24 @@
 	    		name="nickname" value="${member.nickname}">
 	    </div>
 	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="birthDay">生日</label>
+	    <div class="col-sm-7">
+	    	<div class="input-group date" id="datetimepicker">
+			    <input type="text" class="form-control" id="birthDay" 
+			    	name="birthDay" value="${member.birthDay}">
+			    <span class="input-group-addon">
+                    <span class="fa fa-calendar"></span>
+                </span>
+			</div>
+			<label class="error" for="birthDay"></label>
+	    </div>
+	</div>
+  </div> <!-- requiredData -->
+  
+  <!-- ======== More Detail ======== -->
+  <div role="tabpanel" class="tab-pane" id="moreDetail">
+
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="lastName">姓</label>
 	    <div class="col-sm-7">
@@ -153,20 +189,7 @@
 		    </label>
 		</div>
 	</div>
-											
-	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="birthDay">生日</label>
-	    <div class="col-sm-7">
-	    	<div class="input-group date" id="datetimepicker">
-			    <input type="text" class="form-control" id="birthDay" 
-			    	name="birthDay" value="${member.birthDay}">
-			    <span class="input-group-addon">
-                    <span class="fa fa-calendar"></span>
-                </span>
-			</div>
-			<label class="error" for="birthDay"></label>
-	    </div>
-	</div>
+
 	<div class="form-group">
 	    <label class="col-sm-3 control-label" for="skinType">肌膚性質</label>
 	    <div class="col-sm-7">
@@ -213,15 +236,21 @@
 	    		name="addr" value="${member.addr}">
 	    </div>
 	</div>
+	
+	</div> <!-- moreDetail -->
+</div> <!-- tab-content -->
+
 </form>
-            </div>			<!-- m body -->
-            <div class="modal-footer">
-                <button type="button" id="insertBtn" name="insert" 
-                	 >SignUp</button>
-            </div>			<!-- m footer --> <!-- data-dismiss="modal" -->
 </div>
 
+            </div>			<!-- m body -->
+            <div class="modal-footer">
+                <button class="btn" id="insertBtn" name="insert" 
+                	 >SignUp</button>
+            </div>			<!-- m footer --> <!-- data-dismiss="modal" -->
 
+
+</div>
 <script type="text/javascript">
 	$(function() {
 		$('#email').focus();
@@ -239,8 +268,8 @@
 		    focusInvalid: true,
 		    rules:{
 		    	email: {required: true, email: true, remote:'/members/check_email'},
-		    	password:{required: true, minlength: 6, maxlength: 12, pswrule: true},
-		    	psw_confirm:{required: true, equalTo: '#password'},
+		    	regi_password:{required: true, minlength: 6, maxlength: 12, pswrule: true},
+		    	psw_confirm:{required: true, equalTo: '#regi_password'},
 		    	nickname:{required: true},
 		    	birthDay:{required: true},
 		    },
