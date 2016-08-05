@@ -76,6 +76,13 @@ button{color:white;
 }
 #myModal{
 margin-top: 25px;}
+.icon1 {
+	 color:white;
+	 opacity: 1;
+	 font-size: 5em;
+	 text-align:center;
+	 margin-top: 300px;
+}
 </style>
 </head>
 <body>

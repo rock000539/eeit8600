@@ -122,7 +122,13 @@ min-height: 610px;}
 #information div{
 width: 380px;
 margin: auto auto;}
-
+.icon1 {
+	 color:white;
+	 opacity: 1;
+	 font-size: 5em;
+	 text-align:center;
+	 margin-top: 300px;
+}
 </style>
 </head>
 
@@ -152,7 +158,7 @@ margin: auto auto;}
 	What is batch code?  -  Batch codes are mostly short codes printed or stamped on the package with different font from the product specification, e.g. XLO25LA
 	</p></div>
 	<div><p>
-	<!--  -->
+	<!-- 這些品牌 -->
 	The brands that can be calculated are Anna Sui, Aveda, Biotherm, BODY SHOP, Burt's bees, Chanel, Christian Dior, Clarins, Clinique, Decleor, Elizabeth Arden, Estee lauder, Givenchy, Guerlain, H2O+, Helena Rubinstein, Kiehl's , Lancome, L'occitane, L'Oreal, MAC, Neutrogena , Origins, Sisley, Sofina, Vichy, and YSL.</p></div>
 	<div><p>Check the color and smell if you think that your product has expired. Strange smell, separation of oil, change of color are signs of expiration.</p></div>
 	</div>

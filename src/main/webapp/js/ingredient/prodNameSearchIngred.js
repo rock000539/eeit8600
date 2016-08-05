@@ -6,8 +6,12 @@ $(function(){
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
 		"type" : "post",
+		beforeSend:function(){
+		$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;搜尋中...</div>")
+		.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+		},
 		'success': function (data){
-			
+			$(".modal-backdrop").remove();
 			$('#productList').empty();
 			if(data.products.length==0){
 				$("#productList").append(

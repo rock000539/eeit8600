@@ -13,8 +13,12 @@
 				type : 'POST',
 				data : {"brandIdstr" : brandId,
 						"batchCode" : batchCode},
+				beforeSend:function(){
+				$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;搜尋中...</div>")
+				.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+				},
 				success : function(data) {
-				
+				$(".modal-backdrop").remove();
 				$('#mfd').empty().prepend(data.mfdDate);
 				$('#exp').empty().prepend(data.expDate);
 				$('#proList').empty();
