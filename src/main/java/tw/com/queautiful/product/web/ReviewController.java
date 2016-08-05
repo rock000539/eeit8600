@@ -263,6 +263,7 @@ public class ReviewController {
 		review.setProduct(prodService.getById(review.getProdId()));
 
 		service.update(review);
+		service.updateScore(review.getProdId());
 
 		return review;
 	}
@@ -315,8 +316,9 @@ public class ReviewController {
 		log.debug("{}", review);
 		review.setMember(memberService.getById(review.getMemberId()));
 		review.setProduct(prodService.getById(review.getProdId()));
-
+		
 		service.update(review);
+		service.updateScore(review.getProdId());
 
 		return review;
 	}
