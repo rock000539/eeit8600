@@ -90,14 +90,14 @@
 
 <div id="overview">
 	<div class="row">
-		<div class="col-lg-4"><span class="count">${expDates}</span><br><span class="source">Expiration</span></div>
-		<div class="col-lg-4"><span class="count">${postedReviews}</span><br><span class="source">Reviews</span></div>
-		<div class="col-lg-4"><span class="count">${postedArticles}</span><br><span class="source">Articles</span></div>
+		<div class="col-lg-4"><span class="count">${expDates}</span><br><span class="source">產品期限</span></div>
+		<div class="col-lg-4"><span class="count">${postedReviews}</span><br><span class="source">心得發佈</span></div>
+		<div class="col-lg-4"><span class="count">${postedArticles}</span><br><span class="source">文章發佈</span></div>
 	</div>
 	<div class="row">
 		<div class="col-lg-4"><span class="count">${wishlist}</span><br><span class="source">WishList</span></div>
-		<div class="col-lg-4"><span class="count">${likedReviews}</span><br><span class="source"><i class="fa fa-heart"></i> Reviews</span></div>
-		<div class="col-lg-4"><span class="count">${likedArticles}</span><br><span class="source"><i class="fa fa-heart"></i> Articles</span></div>
+		<div class="col-lg-4"><span class="count">${likedReviews}</span><br><span class="source"><i class="fa fa-heart"></i> 心得收藏</span></div>
+		<div class="col-lg-4"><span class="count">${likedArticles}</span><br><span class="source"><i class="fa fa-heart"></i> 文章收藏</span></div>
 	</div>
 	<div class="since">
 		<h4>Member since <span>${memberRegiDate}</span></h4>

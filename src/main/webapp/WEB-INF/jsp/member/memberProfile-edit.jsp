@@ -92,36 +92,36 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="nickname">Nickname</label>
+	    <label class="col-sm-3 control-label" for="nickname">暱稱</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="nickname"
 	    		name="nickname" value="${member.nickname}">
 	    </div>
 	</div>
-	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="firstName">First Name</label>
-	    <div class="col-sm-7">
-	    	<input type="text" class="form-control" id="firstName"
-	    		name="firstName" value="${member.firstName}">
-	    </div>
-	</div>
-	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="lastName">Last Name</label>
+		<div class="form-group">
+	    <label class="col-sm-3 control-label" for="lastName">姓</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="lastName"
 	    		name="lastName" value="${member.lastName}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="gender">Gender</label>
+	    <label class="col-sm-3 control-label" for="firstName">名</label>
+	    <div class="col-sm-7">
+	    	<input type="text" class="form-control" id="firstName"
+	    		name="firstName" value="${member.firstName}">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-3 control-label" for="gender">性別</label>
 	    <div class="col-sm-7">
 	    	<label class="radio-inline">
 			    <input type="radio"
-			    	name="gender" value="Female" ${member.gender=='Female'? 'checked':''}> Female
+			    	name="gender" value="Female" ${member.gender=='Female'? 'checked':''}> 女性
 			</label>
 	    	<label class="radio-inline">
 			    <input type="radio"
-			    	name="gender" value="Male" ${member.gender=='Male'? 'checked':''}> Male
+			    	name="gender" value="Male" ${member.gender=='Male'? 'checked':''}> 男性
 		    </label>
 	    </div>
 	</div>
@@ -139,7 +139,7 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="skinType">SkinType</label>
+	    <label class="col-sm-3 control-label" for="skinType">膚質</label>
 	    <div class="col-sm-7">
 	    	<label class="radio-inline">
 			    <input type="radio"
@@ -164,14 +164,14 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="phone">phone</label>
+	    <label class="col-sm-3 control-label" for="phone">電話</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="phone"
 	    		name="phone" value="${member.phone}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-3 control-label" for="addr">Location</label>
+	    <label class="col-sm-3 control-label" for="addr">居住地</label>
 	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" id="addr"
 	    		name="addr" value="${member.addr}">
@@ -180,7 +180,7 @@
     <div class="form-group">
     	<div class="col-sm-offset-4">
     	<input type="hidden" name="memberId" value="${member.memberId}">
-        <button type="button" class="btn btn-default" id="insertBtn" name="insert">Confirm</button>
+        <button type="button" class="btn btn-default" id="insertBtn" name="insert">確認</button>
         </div>
     </div>
 </form>

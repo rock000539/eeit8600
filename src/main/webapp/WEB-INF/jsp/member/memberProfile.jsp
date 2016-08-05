@@ -72,7 +72,7 @@
 		</div>		
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left fa-lg"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
 			       <h3>Email</h3>
@@ -81,61 +81,61 @@
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left fa-lg"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
 			    <div style="display:inline-block; margin-right: 30px;">
-			       <h3>First Name</h3>
-			       <p>${member.firstName}</p>
+			       <h3>姓</h3>
+			       <p>${member.lastName}</p>
 			    </div>
 			    <div style="display:inline-block">
-			       <h3>Last Name</h3>
-			       <p>${member.lastName}</p>
+			       <h3>名</h3>
+			       <p>${member.firstName}</p>
 			    </div>
 			</div>
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
-			       <h3>Gender</h3>
+			       <h3>性別</h3>
 			       <p>${member.gender}</p>
 			</div>
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
-			       <h3>Birthday</h3>
+			       <h3>生日</h3>
 			       <p>${member.birthDay}</p>
 			</div>
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
-			       <h3>Phone</h3>
+			       <h3>電話</h3>
 			       <p>${member.phone}</p>
 			</div>
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
-			       <h3>Address</h3>
+			       <h3>居住地</h3>
 			       <p>${member.addr}</p>
 			</div>
 		</div>
 		<div class="detail-list">
 			<div class="detail-list-col1">
-			   	<i class="fa fa-quote-left fa-lg"></i>
+			   	<i class="fa fa-quote-left fa-2x"></i>
 			</div>
 			<div class="detail-list-col2">
-			       <h3>Your Registration Date</h3>
+			       <h3>註冊日期</h3>
 			       <p>${member.memberRegiDate}</p>
 			</div>
 		</div>
