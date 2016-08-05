@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Review Add</title>
+    <title>心得新增</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -379,10 +379,10 @@ select {
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" style="margin-top:135px;height:390px;">
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand" style="background: black;">
-                    <a  class="fa fa-search" style="height: 65px;font-size: 26px;padding:20px 0 0 10px">&nbsp;&nbsp;Product Search</a>
+                    <a class="fa fa-search" style="height: 65px;font-size: 26px;padding:20px 0 0 10px">&nbsp;&nbsp;<spand style="font-family:'Microsoft JhengHei'">產品搜尋</spand></a>
                 </li>
                 <li>
-                    <a style="color: #565656;font-size: 14px;">選擇品牌名稱，搜尋產品！</a>
+                    <a style="color: #565656;font-size: 14px;font-family:'Microsoft JhengHei'">選擇品牌名稱，搜尋產品！</a>
                 </li>
                 <li>
                     <a >
@@ -414,7 +414,7 @@ select {
                 <li id="check">
                     <a >
                         <div class="row">
-							<button  class="btn btn-default" type="button" style="margin:0 0 0 45px;"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Check</button>
+							<button  class="btn btn-default" type="button" style="margin:0 0 0 45px;"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;確認</button>
 						</div>
                     </a>
                 </li>
@@ -431,7 +431,7 @@ select {
           	<section class="team row sub_content" style="padding-bottom: 0">
 				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;padding-bottom: 0">
 		            <div class="dividerHeading">
-		                <h4><span style="font-family:'Microsoft JhengHei';">Post A New Review</span></h4>
+		                <h4><span style="font-family:'Microsoft JhengHei';">新增心得</span></h4>
 		            </div>
 		        </div>
 			</section>  
@@ -533,8 +533,8 @@ select {
 			<div class="col-lg-12 col-md-12 col-sm-12 hasbutton">
 				<div class="row">
 					<div class="form-group">
-						<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button>
-						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cancel</button>
+						<button id="save" class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;發布</button>
+						<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="history.back()"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;取消</button>
 					</div>
 				</div>
 			</div>		
@@ -557,7 +557,7 @@ select {
         <div class="modal-body">
         </div>
         <div class="modal-footer">
-	        	<button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        	<button id="close" type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
         </div>
       </div>
       
@@ -606,8 +606,8 @@ select {
 			reviewTitle:{required:true},
 		},//end of rules
 		messages:{
-				reviewTitle:{required:'please enter review title'},
-				review:{required:'please enter review'},
+				reviewTitle:{required:'請輸入心得標題'},
+				review:{required:'請輸入心得內容'},
 		},//end of messages	
 	});
 	/*  =====================Prod Search ======================== */
@@ -787,7 +787,7 @@ select {
 			$(".modal-title").empty()
 							 .append('<img style="width: 150px;height: auto;margin-left:200px" src="/images/review/thumbs-up.jpg">');
 			$(".modal-body").empty()
-							.append('<h2 style="margin-left:130px">Success! Your Review Will Post</h2>')	
+							.append('<h2 style="margin-left:150px">新增成功! 你的心得及將發布</h2>')	
 			$('#close').hide();
 		    window.setTimeout(function () {		    	
 		        $("#myModal").modal("hide");
@@ -799,7 +799,7 @@ select {
 			$(".modal-title").empty()
 						     .append('<img style="width: 280px;height: auto;margin-left:140px" src="/images/review/Oops.jpg">');
 			$(".modal-body").empty()
-							.append('<p style="color:red;font-size:20px;margin-left:140px">Please Enter the Required Fields</p>');
+							.append('<p style="color:red;font-size:20px;margin-left:210px">請輸入必要欄位</p>');
 	}
 	
 

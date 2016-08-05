@@ -105,14 +105,14 @@ margin: 30px 350px;}
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
 	<br><br>
-	<form action="" id="insertArea">
+<!-- 	<form action="" id="insertArea"> -->
 	<input class="ui-widget ui-autocomplete-input" autocomplete="on" id="IngredientName" >
 	<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none; top: 29px; left: 44px; width: 159px;">
 	<li class="ui-menu-item" id="ui-id-12" tabindex="-1">AppleScript</li></ul>
 	<span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
-	<input type="button" class="btn btn-default" id="insertIngredient" value="新增">
-	<input type="submit" class="btn btn-default">
-	</form>
+	<input type="button" class="btn btn-default" id="insertIngredient" value="新增" style="font-size: 15px;">
+<!-- 	<input type="submit" class="btn btn-default"> -->
+<!-- 	</form> -->
 	</div>
 	<div class="col-md-3"></div>
 </div>
