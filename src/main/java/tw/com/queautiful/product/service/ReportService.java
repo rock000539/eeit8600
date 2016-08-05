@@ -41,15 +41,18 @@ public class ReportService {
 		String result="新增檢舉事件成功";
 		
 		Properties properties = new Properties();
-		String configFile = "src/main/resources/application.properties";
+		String configFile = "src/main/resources/report.properties";
+
 		try {
 			properties.load(new FileInputStream(configFile));
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		int reportProperty=Integer.valueOf(properties.getProperty("reportProperty"));
+		String reportPropertyStr=properties.getProperty("reportProperty");
+		int reportProperty=Integer.valueOf(reportPropertyStr);
 		
 		if(webMail.getArticleId()!=null){
 		Article	article=articleService.getById(webMail.getArticleId());
