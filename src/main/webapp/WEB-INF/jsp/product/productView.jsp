@@ -272,7 +272,7 @@
 				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?categoryId=${product.categoryId}';">Category : ${product.categoryName}</span></label>
 				    </div>
 				    <div class="view_tab">
-				    	<label for="tab-one"><span>Ingredient : ${product.mainIgdt}</span></label>
+				    	<label for="tab-one"><span data-prodId="${product.prodId}" onClick="watch_ingre($(this))">Look Ingredients</span></label>
 				    </div>
 				</div>
 				
@@ -494,6 +494,36 @@
 	    </div>
 	</div>
 	
+	<!-- Modal部分   -->
+	<div class="modal fade" id="findIngredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+		            <button type="button" class="close" 
+		               data-dismiss="modal" aria-hidden="true">
+		                  &times;
+		            </button>
+		            <h4 class="modal-title" id="myModalLabel"></h4>
+	         	</div>
+	         	<div class="modal-body" >
+	         		<table id="showArea" class="table">
+	           			<tr>
+	           				<th>成份</th>
+	           				<th>中文名稱</th>
+	           				<th>概略特性</th>
+	           				<th>粉刺</th>
+	           				<th>刺激</th>
+	           				<th>安心度</th>
+	           			</tr>
+	           		</table>
+	         	</div>
+	         	<div class="modal-footer">
+	            	<button type="button" class="btn btn-default" data-dismiss="modal">  關閉視窗</button>
+	         	</div>
+	      	</div>
+		</div>
+	</div>
+	
     <!-- **每頁不同的內容結束** -->
 	
 	<!--加入footer -->
@@ -509,7 +539,49 @@
 	
 	<script type="text/javascript" src="/js/product/view/main.js"></script>
 	
+	<script src="/js/ingredient/prodNameSearchIngred.js"></script>
+	
 	<script>
+	
+		function watch_ingre(a) {
+			
+			var prodId = $(a).attr('data-prodId');
+			console.log('prodId = ' + prodId);
+			$.ajax({
+				url : '/prodIngreList/showIngredient',
+				type : 'get',
+				data : { "proIdStr" : prodId },
+				success : function(data){
+					console.log('data = ' + data);		
+					$('#showArea td').remove();
+					$('#showArea h4').remove();
+					$('#myModalLabel').empty();
+					$('#myModalLabel').append(data.productName);
+					
+					if(data.ingredients.length==0) {
+						$('#showArea').append("<tr><td colspan='6'><div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無成份資料</div></td></tr>");
+					} else {
+						console.log('else');
+						for(var i=0; i<data.ingredients.length; i++) {							
+	 						$('#showArea').append(
+	 						'<tr><td>'+data.ingredients[i].ingredName
+	 						+'</td><td>'+data.ingredients[i].ingredChName
+	 						+'</td><td>'+data.ingredients[i].ingredChar
+	 						+'</td><td>'+data.ingredients[i].ingredIrritant
+	 						+'</td><td>'+data.ingredients[i].ingredAcne
+	 						+'</td><td>'+data.ingredients[i].ingredSafety+'</td></tr>')
+ 						}
+					}
+					
+					$('#findIngredient').modal('show');
+				
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log('jqXHR = ' + jqXHR + ', textStatus = ' + textStatus + ', errorThrown = ' + errorThrown);
+				},
+			});
+				
+		}
 		
 		// 收藏心得
 		function save_review_click (a) {
