@@ -19,7 +19,7 @@
 <!-- jQuery Redirect Plugin -->
 <script src="/js/jquery.redirect.js"></script>	
 
-<title>Reviews</title>
+<title>心得總覽</title>
 </head>
 <body>
 <!--加入header&nav -->
@@ -31,8 +31,8 @@
 <!-- <div class="container text-center" style="text-align: center"> -->
 <div class="container">
 <div>
-<a href="/reviews/add"><button class="btn btn-danger btn-lg" type="button" style="width:150px;margin:10px 0 0 10px">
-	<i class="fa fa-plus"></i>&nbsp;New Review</button>
+<a href="/reviews/add"><button class="btn btn-danger btn-lg" type="button" style="width:110px;margin:10px 0 0 10px;font-family:'Microsoft JhengHei'">
+	<i class="fa fa-plus"></i>&nbsp;寫心得</button>
 </a>	
 <!-- <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbspSave</button> -->
 
@@ -48,8 +48,8 @@
 	      		<img class="reviewImg-Img" src="/products/show?prodImg=${review.product.prodImg}">
 	      	</div></a>
 	      			<!-- Img end -->
-		      	<div class="reviewTime">${review.reviewTime}</div>
-		      	<div class="reviewState">${review.rcms.size()}&nbsp;Comments</div>
+		      	<div class="reviewTime" style="font-family:'Microsoft JhengHei'">${review.reviewTime}</div>
+		      	<div class="reviewState" style="font-family:'Microsoft JhengHei'">${review.rcms.size()}&nbsp;留言</div>
 		      	
 		      	<div class="caption">
 						<!--心得發布者資訊start -->
@@ -61,7 +61,7 @@
 							</div>
 						</a>
 						<!--會員暱稱 -->
-						<div class="user-name">
+						<div class="user-name" style="font-family:'Microsoft JhengHei'">
 							<a href="/members/overview/${review.memberId}">${review.member.nickname}</a>
 						</div>
 						<!--心得評分 start-->
@@ -80,10 +80,10 @@
 										}
 									});
 								</script>
-							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}scores</span>  
+							</div>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating" style="font-family:'Microsoft JhengHei'">${review.reviewRating}分</span>  
 						</div>
 						<!--心得評分  end -->
-						<div class="user-skin">${review.member.skinType}&nbsp;Skin、${review.member.age}&nbsp;Years</div>
+						<div class="user-skin" style="font-family:'Microsoft JhengHei'">${review.member.skinType}&nbsp;皮膚、${review.member.age}&nbsp;歲</div>
 					</div>
 					<!-- user-info end -->	 <!--心得發布者資訊end -->
 				

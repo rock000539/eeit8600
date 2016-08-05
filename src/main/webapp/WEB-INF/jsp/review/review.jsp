@@ -103,13 +103,13 @@
                                     <h2>${review.reviewTitle}</h2>
                                         <div class="metaInfo">
                                             <span><i class="fa fa-calendar"></i>&nbsp;${review.reviewTime}</span>
-                                            <span><a href="#shares"><i class="fa fa-user"></i> By ${review.member.nickname}</a> </span>                          
+                                            <span><a href="#shares"><i class="fa fa-user"></i> ${review.member.nickname}</a> </span>                          
                                             <c:choose> 
 												<c:when test="${review.rcms.size()==0}">
-		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.rcms.size()} Comment</a></span> 
+		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.rcms.size()} &nbsp;留言</a></span> 
 												</c:when>
 												<c:otherwise>
-		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.rcms.size()} Comments</a></span> 
+		                                            <span><i class="fa fa-comments"></i> <a id="myComments" href="#Comments">${review.rcms.size()} &nbsp;留言</a></span> 
 												</c:otherwise>
 											</c:choose>
 <!--                                             <span><i class="fa fa-tag"></i> <a href="#">Emin</a>, <a href="#">News</a> </span> --><!--??tag標籤數量?? -->
@@ -128,7 +128,7 @@
 															}
 														});
 													</script>
-												</span>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}&nbsp;scores</span>  
+												</span>&nbsp;&nbsp;&nbsp;<span name="review-rating" class="review-rating">${review.reviewRating}&nbsp;分</span>  
 											</span>
 											<!--心得評分  end -->
                                         </div>
@@ -140,7 +140,7 @@
                                     
                                 </div>
                                 <ul class="shares" id="shares">
-                                    <li class="shareslabel"><h3>Share This Story</h3></li>
+                                    <li class="shareslabel"><h3>分享心得</h3></li>
                                     <li><a class="twitter" data-placement="bottom" data-toggle="tooltip" title="Twitter"></a></li>
                                     <li><a class="facebook" data-placement="bottom" data-toggle="tooltip" title="Facebook"></a></li>
                                     <li><a class="gplus" data-placement="bottom" data-toggle="tooltip" title="Google Plus"></a></li>
@@ -150,12 +150,12 @@
                                 </ul>
                                 <div class="pbhead">
                                 <ul>
-                                    <li><a href="javascript:;" class="btn-danger" title="report"><i class="fa fa-warning" id="reportBtn" style="font-size:22px;margin:12px 11px"></i></a></li>
+                                    <li><a href="javascript:;" class="btn-danger" title="檢舉"><i class="fa fa-warning" id="reportBtn" style="font-size:22px;margin:12px 11px"></i></a></li>
 									<c:if test="${review.memberId==memberId}">
-										<li><a href="/reviews/edit_fms/${review.reviewId}" class="btn-info" title="edit"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
+										<li><a href="/reviews/edit_fms/${review.reviewId}" class="btn-info" title="編輯"><i class="fa fa-pencil" style="font-size:22px;margin:12px 13px"></i></a></li>
 									</c:if>
-									<li><a href="#leaveAComment" class="btn-success" title="comments"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
-									<li><a href="#replyarea" class="btn-warning btn-like" title="like" data-prodId="${review.reviewId}" onClick="save_review_click($(this))"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
+									<li><a href="#leaveAComment" class="btn-success" title="留言"><i class="fa fa-comments-o" style="font-size:22px;margin:11px 11px"></i></a></li>
+									<li><a href="#replyarea" class="btn-warning btn-like" title="收藏" data-prodId="${review.reviewId}" onClick="save_review_click($(this))"><i class="fa fa-heart" style="font-size:22px;margin:12px 15px"></i></a></li>
                                 </ul>
                                 </div>	
                             </article>
@@ -172,9 +172,9 @@
                                 <div class="author_bio">
                                     <h3 class="author_name"><a href="/members/overview/${review.memberId}">${review.member.nickname}</a></h3><!-- ???放no1會員有發過的心得list連結-->
                                   	<ul>
-                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender:&nbsp;${review.member.gender}</li>
-                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skin Type:&nbsp;${review.member.skinType}&nbsp;Skin</li>
-                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age:&nbsp;${review.member.age}&nbsp;Age</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性別:&nbsp;${review.member.gender}</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;膚質:&nbsp;${review.member.skinType}&nbsp;皮膚</li>
+                                  		<li class="user-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:&nbsp;${review.member.age}&nbsp;歲</li>
                                   		<p></p><!--不可以刪,為了版型好看-->
                                   	</ul>
                                 </div>
@@ -187,10 +187,10 @@
                             <div class="dividerHeading">
                             	<c:choose> 
 									<c:when test="${review.rcms.size()==0}">
-                              			<h4 id="Comments"><span id="MyComments">Comment</span></h4>
+                              			<h4 id="Comments"><span id="MyComments" style="font-family:'Microsoft JhengHei'">留言區</span></h4>
 									</c:when>
 									<c:otherwise>
-                                		<h4 id="Comments"><span id="MyComments">Comments (${review.rcms.size()})</span></h4>
+                                		<h4 id="Comments"><span id="MyComments" style="font-family:'Microsoft JhengHei'">留言區 (${review.rcms.size()})</span></h4>
 									</c:otherwise>
 								</c:choose>
                             </div>
@@ -243,7 +243,7 @@
                             </div>
                             <!-- /#comments -->
                             <div class="dividerHeading">
-                                <h4 id="leaveAComment"><span>Leave a comment</span></h4>
+                                <h4 id="leaveAComment"><span style="font-family:'Microsoft JhengHei'">留言</span></h4>
                                 </div>
 						<form id="addForm" action="/reviewCMs/insert" method="post">
                             <input type="hidden" name="memberId" id="memberInfo" value="${memberId}"/>
@@ -268,13 +268,13 @@
                         <div class="sidebar">
                             
                                 <div class="widget_title">
-                                    <h4><span>Product</span></h4>
+                                    <h2><span>產品</span></h2>
                                 </div>
                             
                             <div class="velocity-tab sidebar-tab">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#Popular" data-toggle="tab">DETAILS</a></li>
-                                    <li class=""><a href="#Recent" data-toggle="tab">DESCRIPTIONS</a></li>
+                                    <li class="active"><a href="#Popular" data-toggle="tab">詳細資訊</a></li>
+                                    <li class=""><a href="#Recent" data-toggle="tab">產品介紹</a></li>
 <!--                                     <li class="last-tab"><a href="#Comment" data-toggle="tab"><i class="fa fa-tint"></i>&nbsp;成份</a></li>  -->
                                 </ul>
 
@@ -283,10 +283,10 @@
                                         <ul class="recent_tab_list">
                                             <li style="border:0px">
                                                 <a href="/products/view/${review.prodId}" ><span><img class="product-image" src="/products/show?prodImg=${review.product.prodImg}" alt="product-image" /></span></a>
-                                                <p><span>Brand :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.brand.brandName}</p>
-                                                <p><span>Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.prodName}</p>
-                                                <p><span>Category :</span>${review.product.category.categoryName}</p>
-                                                <p><span class="product-score">Score :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.score}&nbsp;&nbsp;scores</p>
+                                                <p><span>品牌名稱 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.brand.brandName}</p>
+                                                <p><span>產品名稱 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.prodName}</p>
+                                                <p><span>類別名稱 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.category.categoryName}</p>
+                                                <p><span class="product-score">分數 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${review.product.score}&nbsp;&nbsp;分</p>
                                             </li>
                                         </ul>
                                     </div>
