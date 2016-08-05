@@ -151,10 +151,10 @@ margin: auto auto;}
 	<div><p>Check the color and smell if you think that your product has expired. Strange smell, separation of oil, change of color are signs of expiration.</p></div>
 	</div>
 	<div id="mainSpace" class="col-md-6">	
-		<h1>CHECK YOUR COSMETICS</h1><br>
-		<h4>Production/Expiration Date</h4><br>
+		<h1>保養品日期檢查</h1><br>
+		<h4>生產日期 | 保存期限</h4><br>
 					<div >
-					<label for="selectBar">Select A Brand</label>	
+					<label for="selectBar">選擇品牌</label>	
 					<select id="brandId" class="form-control" name="selectBar" style="border-radius:20px;">
 							<c:set var="reloadBrandId" scope="session" value="${reloadBrandId}"/>
 							<c:forEach items='${Brands}' var="items">
@@ -168,7 +168,7 @@ margin: auto auto;}
 					</select>
 					</div>
 					<div >
-					<label for="batchCode">Batch Code</label>	
+					<label for="batchCode">產品批號</label>	
 					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}" style="border-radius:20px;"/></div>
 					<div style="display: inline-block;float:right;">
 					<br>
