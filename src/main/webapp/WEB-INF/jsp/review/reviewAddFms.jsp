@@ -791,7 +791,8 @@ select {
 			$('#close').hide();
 		    window.setTimeout(function () {		    	
 		        $("#myModal").modal("hide");
-		        history.back(1);
+// 		        history.back(1); //回上一頁
+		        location.href="/reviews/reviews"
 		    }, 2500);	
 	}
 	
