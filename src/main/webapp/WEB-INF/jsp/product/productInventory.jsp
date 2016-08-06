@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="/css/animate.css">
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ProductInventory</title>
+	<title>產品列表</title>
 
 	<style>
 		.swal {

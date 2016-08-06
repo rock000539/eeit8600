@@ -210,7 +210,7 @@
 				<section class="team row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
 			            <div class="dividerHeading">
-			                <h4><span>Product Introduction</span></h4>
+			                <h4><span>產品介紹</span></h4>
 			            </div>
 			        </div>
 		        </section>
@@ -260,19 +260,19 @@
 			
 				<div class="col-sm-6">
 					<div class="view_tab" style="margin-top: 15px;">
-			    		<label for="tab-one"><span>Name : ${product.prodName}</span></label>
+			    		<label for="tab-one"><span>名稱 : ${product.prodName}</span></label>
 				    </div>
 			    	<div class="view_tab">
-			      		<label for="tab-two"><span>Date : ${product.launchDate}</span></label>
+			      		<label for="tab-two"><span>日期 : ${product.launchDate}</span></label>
 			    	</div>
 			    	<div class="view_tab">
-				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?brandId=${product.brandId}';">Brand : ${product.brandName}</span></label>
+				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?brandId=${product.brandId}';">品牌 : ${product.brandName}</span></label>
 				    </div>
 			    	<div class="view_tab">
-				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?categoryId=${product.categoryId}';">Category : ${product.categoryName}</span></label>
+				    	<label for="tab-one"><span onClick="location.href='<%= request.getContextPath() %>/products/inventory?categoryId=${product.categoryId}';">類別 : ${product.categoryName}</span></label>
 				    </div>
 				    <div class="view_tab">
-				    	<label for="tab-one"><span data-prodId="${product.prodId}" onClick="watch_ingre($(this))">Look Ingredients</span></label>
+				    	<label for="tab-one"><span data-prodId="${product.prodId}" onClick="watch_ingre($(this))">查看所有成分</span></label>
 				    </div>
 				</div>
 				
@@ -292,7 +292,7 @@
 				    </div>
 					<div class="view_tab">
 				      	<input id="tab-three" type="checkbox" name="tabs">
-				      	<label for="tab-three"><span>Description</span></label>
+				      	<label for="tab-three"><span>產品說明</span></label>
 				    	<div class="view_tab-content" style="overflow:auto;">
 				    		<c:choose>
 				    			<c:when test="${product.prodDesc.length() > 10}">
@@ -322,7 +322,7 @@
 				
 			        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom:30px;">
 			            <div class="dividerHeading">
-			                <h4><span>Recent Reviews</span></h4>
+			                <h4><span>相關心得</span></h4>
 			            </div>
 			        </div>
 					
