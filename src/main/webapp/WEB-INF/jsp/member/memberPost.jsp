@@ -437,13 +437,11 @@ $(function(){
 	function hideBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.review-all').addClass('is-hidden');
-			console.log("hide");
 		});
 	}
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.review-all').hasClass('is-hidden') ) && $(this).find('.review-all').removeClass('is-hidden').addClass('animated fadeInDown');
-			console.log("show"+$(this));
 		});
 	}  	
 	

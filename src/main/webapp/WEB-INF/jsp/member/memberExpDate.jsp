@@ -114,6 +114,27 @@ div.expinfo h3 span{
 .btn{
 	border-radius: 0px;
 }
+#count-review span{
+	border-bottom: 2px solid #5d5d5d;
+	background-color: transparent;
+    border: 2px solid #ECECEC;
+    border-radius: 2px;
+    color: #888;
+    cursor: pointer;
+    font: 400 12px/29px "Open Sans",sans-serif;
+    margin: 10px 10px 0 0;
+    padding: 0 17px;
+    position: relative;
+    display: inline-block;
+}
+#count-review span.selected{
+	background-color: #5d5d5d;
+    color: #fff;
+    border-color: #5d5d5d;
+}
+.is-hidden{
+	display: none;
+}
 </style>
 </head>
 <body>
@@ -122,11 +143,17 @@ div.expinfo h3 span{
 			
 			<!-- **每頁不同的內容從這裡開始** -->
 				<div class="grey_bg row">
-<div class="row detail-div">
+<div class="row detail-div"> 
 	<div class="col-lg-10 col-sm-6 delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
 		<div class="subject">
-			<p id="count-review">總數量</p>
+			<p id="count-review">產品到期日清單</p>
+			<p id="count-review">
+				<span class="tab selected" value="all">全部產品 (${fn:length(beans)})</span>
+				<span class="tab" value="efficient">有效 (${efficientNum})</span>
+				<span class="tab" value="monthList">一個月內到期  (${withinMonthNum})</span>
+				<span class="tab" value="expiredList">已過期  (${expiredNum})</span>				
+			</p>
 		</div>
 		
 <!-- Page Content -->
@@ -135,7 +162,13 @@ div.expinfo h3 span{
 <div id="exprow" class="row">
 
 	<c:forEach items="${beans}" var="item">
-	<div class="col-lg-12 expDiv" dateId="${item.expDate.dateId}"> 
+	<c:set var="expDays" value="${item.lastsDay}"></c:set>
+	<div class='col-lg-12 expDiv' 
+		 dateList=
+		'<c:if test="${expDays<0}">expiredList</c:if> 
+		 <c:if test="${expDays>0 && expDays<32}">monthList</c:if>
+		 <c:if test="${expDays>=32}">efficient</c:if>' 
+		 dateId="${item.expDate.dateId}" > 
 	<div class="exp-content">
 		<div class="col-lg-3">
 			<div class="prodImg">
@@ -161,7 +194,6 @@ div.expinfo h3 span{
 			<button name="${item.expDate.dateId}" class="btn btn-default btn-delete">刪除</button>
 		</div>
 		<div class="col-lg-3">
-			<c:set var="expDays" value="${item.lastsDay}"></c:set>
 			<div class='lastDays <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<=27 && expDays>0}"> within30</c:if>'>
 				<p>
 		        	<c:if test="${expDays>=0}">
@@ -204,6 +236,18 @@ div.expinfo h3 span{
 <script src="/js/member/member.js"></script>
 <script>
 $(function(){
+	$('.tab').click(function(){
+		$('#count-review>.selected').removeClass('selected');
+		$(this).addClass('selected');
+		
+		var tabValue = $(this).attr('value');
+		$(".expDiv").addClass('is-hidden');
+		$(".expDiv[dateList*="+tabValue+"]").removeClass('is-hidden').addClass('animated fadeInUp');
+		if(tabValue=="all"){
+			$(".expDiv").removeClass('is-hidden').addClass('animated fadeInUp');
+		}
+	});
+	
     $('.btn-delete').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
@@ -242,14 +286,12 @@ $(function(){
 	function hideBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.exp-content').addClass('is-hidden');
-			console.log("hide");
 		});
 	}
 
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.exp-content').hasClass('is-hidden') ) && $(this).find('.exp-content').removeClass('is-hidden').addClass('animated fadeInUp');
-			console.log("show"+$(this));
 		});
 	}
 

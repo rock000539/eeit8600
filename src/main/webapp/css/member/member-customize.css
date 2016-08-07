@@ -97,7 +97,7 @@ h1,h2,h3,h4,h5,h6,p,a {
 	border-bottom: .1rem solid #000;
 }
 .is-hidden {
-  visibility: hidden;
+	visibility: hidden;
 }
 .rating{
 	margin-top: 100px;
