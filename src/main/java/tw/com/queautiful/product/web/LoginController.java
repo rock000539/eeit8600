@@ -37,7 +37,7 @@ public class LoginController
         @RequestParam(value = "logout", required = false) String logout) {
 
        if (error != null) {
-           req.setAttribute("error", "輸入錯誤內容");
+           req.setAttribute("error", "帳號或密碼輸入錯誤");
         }
 
        if (logout != null) {
@@ -55,7 +55,7 @@ public class LoginController
         @RequestParam(value = "logout", required = false) String logout) {
 
        if (error != null) {
-           req.setAttribute("error", "輸入錯誤內容");
+           req.setAttribute("error", "帳號或密碼輸入錯誤");
         }
 
        if (logout != null) {

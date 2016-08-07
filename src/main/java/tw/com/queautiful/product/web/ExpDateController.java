@@ -108,7 +108,6 @@ public class ExpDateController
         int brandId = Integer.valueOf(brandIdstr);
 
         Map<String, Object> result = expDateSearchService.compute(brandId, batchCode);
-
         return result;
     }
 
@@ -179,9 +178,7 @@ public class ExpDateController
     {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("username is " + username);
         long memberId = (long) request.getSession().getAttribute("memberId");
-        System.out.println("in post");
 
         try
         {
