@@ -42,6 +42,7 @@ i{
     background: #fff;
     text-align: center;
     box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12) , 1px 0 2px 0 rgba(0,0,0,0.12) , 0 1px 1px 0 rgba(0,0,0,0.24);
+	height: 430px;
 }
 .prodImg{
 	text-align: center;
@@ -163,10 +164,18 @@ i{
 	        </div>        
 	        <div class="prodInfo">
 	         	<h2><a href="<%=request.getContextPath() %>/products/view/${item.prodId}">${item.prodName}</a></h2>
+	         	<c:if test="${item.score>0}">
 	         	<p>
 		         	<c:forEach begin="1" end="${item.score}"><i class="fa fa-diamond"></i></c:forEach>
 	         	</p>
 	         	<span>(${item.score})</span>
+	         	</c:if>
+	         	<c:if test="${item.score<=0}">
+	         	<p>
+					<i class="fa fa-diamond" style="color: transparent;"></i>
+	         	</p>
+	         	<span>(尚未有心得評分)</span>
+	         	</c:if>
 	         </div>
 	         <div>
 	         	<button class="btn btn-default btn-delete" value="${item.prodId}"
