@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -54,7 +55,7 @@
         <div class="slide">
             <img src="/images/fms/fraction-slider/pauljoe.jpg" width="1170" height="auto" data-in="top" data-out="fade"/>
 
-            <p class="slide-2 " data-position="50,50" data-in="top" data-out="top" data-delay="1000">Summer 2016 Makeup Collection</p>
+            <p class="slide-2 " data-position="50,50" data-in="top" data-out="top" data-delay="1000"><s:message code="slide2title"></s:message></p>
 
             <img src="/images/fms/fraction-slider/pjcatlip1.png" width="50" height="auto" data-position="150,200" data-in="right" data-out="left" data-delay="1500" />
             <img src="/images/fms/fraction-slider/pjcatlip2.png" width="50" height="auto" data-position="110,240" data-in="right" data-out="left" data-delay="1600" />
@@ -81,18 +82,18 @@
             <img src="/images/fms/fraction-slider/heart-note-nashi-blossom.jpg" width="160" height="80" data-position="275,230" data-in="top" data-out="bottom" data-delay="1500">
             <img src="/images/fms/fraction-slider/base-note-white-musk.jpg" width="160" height="80" data-position="275,390" data-in="right" data-out="left" data-delay="1600">
 
-            <p class="style heading" data-position="50,180" data-in="top" data-out="top" data-delay="2000" data-ease-in="easeOutBounce">Tasting Notes</p>
+            <p class="style heading" data-position="50,180" data-in="top" data-out="top" data-delay="2000" data-ease-in="easeOutBounce"><s:message code="tastingnotes"></s:message></p>
 
-            <p class="list" data-position="120,210" data-in="right" data-out="left" data-delay="2100">Top Note: Lemon</p>
-            <p class="list" data-position="150,210" data-in="right" data-out="right" data-delay="3000">Heart Note: Nashi blossom</p>
-            <p class="list" data-position="180,210" data-in="right" data-out="left" data-delay="3900">Base Note: White Musk</p>
+            <p class="list" data-position="120,210" data-in="right" data-out="left" data-delay="2100"><s:message code="topnote"></s:message></p>
+            <p class="list" data-position="150,210" data-in="right" data-out="right" data-delay="3000"><s:message code="heartnote"></s:message></p>
+            <p class="list" data-position="180,210" data-in="right" data-out="left" data-delay="3900"><s:message code="basenote"></s:message></p>
             
 
             <p class=" icon" data-position="120,180" data-in="top" data-out="bottom" data-delay="1100" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
             <p class=" icon" data-position="150,180" data-in="top" data-out="bottom" data-delay="1200" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
             <p class=" icon" data-position="180,180" data-in="top" data-out="bottom" data-delay="1300" data-ease-in="easeOutBounce"><i class="fa fa-check"></i></p>
  
-            <a class="slider-read" data-position="210,180" data-in="bottom" data-out="bottom" data-ease-in="easeOutBounce" data-delay="2000">Check Now</a>
+            <a class="slider-read" data-position="210,180" data-in="bottom" data-out="bottom" data-ease-in="easeOutBounce" data-delay="2000"><s:message code="checknow"></s:message></a>
         </div>
     </div>
 </div>
@@ -103,14 +104,14 @@
             <div class="col-md-3 col-sm-6">
                 <div class="serviceBox_2 green">
                     <div class="service-icon">
-                        <i class="fa fa-globe"></i>
+                        <i class="fa fa-rocket"></i>
                     </div>
                     <div class="service-content">
                         <h3>Quick</h3>
-                        <p>Get What You Need Quickly</p>
-                        <div class="read">
-                            <a href="">Read more</a>
-                        </div>
+                        <p><s:message code="quickly"></s:message></p>
+<!--                         <div class="read"> -->
+<!--                             <a href="">Read more</a> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -118,14 +119,14 @@
             <div class="col-md-3 col-sm-6">
                 <div class="serviceBox_2 purple">
                     <div class="service-icon">
-                        <i class="fa fa-rocket"></i>
+                        <i class="fa fa-globe"></i>
                     </div>
                     <div class="service-content">
                         <h3>Query</h3>
-                        <p>Query Whatever You Want To Know </p>
-                        <div class="read">
-                            <a href="">Read more</a>
-                        </div>
+                        <p><s:message code="query"></s:message></p>
+<!--                         <div class="read"> -->
+<!--                             <a href="">Read more</a> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -137,10 +138,10 @@
                     </div>
                     <div class="service-content">
                         <h3>Quality</h3>
-                        <p>We Provide Quality Information</p>
-                        <div class="read">
-                            <a href="">Read more</a>
-                        </div>
+                        <p><s:message code="quality"></s:message></p>
+<!--                         <div class="read"> -->
+<!--                             <a href="">Read more</a> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -148,14 +149,14 @@
             <div class="col-md-3 col-sm-6">
                 <div class="serviceBox_2 blue">
                     <div class="service-icon">
-                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-question-circle"></i>
                     </div>
                     <div class="service-content">
                         <h3>Question</h3>
-                        <p>Share Experience & Put Question</p>
-                        <div class="read">
-                            <a href="">Read more</a>
-                        </div>
+                        <p><s:message code="question"></s:message></p>
+<!--                         <div class="read"> -->
+<!--                             <a href="">Read more</a> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -724,7 +725,7 @@
     <div class="row super_sub_content grey_bg" style="padding-top: 40px;">
         <div class="col-md-12">
             <div class="dividerHeading text-center">
-                <h4><span>Top 10</span></h4>
+                <h4><span><s:message code="top10"></s:message></span></h4>
             </div>
             <div id="post-slider" class="owl-carousel">
 <!--                 <div class="post-slide"> -->
@@ -739,7 +740,8 @@
 <!--                     <a class="readmore" href="">Read more</a> -->
 <!--                 </div> -->  
 				<c:forEach var="product" items="${prodTop10}" varStatus="status">      
-					<div class="post-slide">					
+					<div class="post-slide">
+						<a href="/products/view/${product.prodId}">					
                         <div class="serviceBox_5">
                             <div class="service-image">
                                 <img src="/products/show?prodImg=${product.prodImg}" style="height:100px; width:auto;"/>
@@ -760,7 +762,7 @@
 													</c:if>
 													<span style="color:#f94877">&nbsp;${product.score}</span>
 									    		</h4>
-		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+<%-- 		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a> --%>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -781,7 +783,7 @@
 													</c:if>
 													<span style="color:#f94877">&nbsp;${product.score}</span>
 									    		</h4>
-		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+<%-- 		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a> --%>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -801,7 +803,7 @@
 													</c:if>
 													<span style="color:#f94877">&nbsp;${product.score}</span>
 									    		</h4>
-		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+<%-- 		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a> --%>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -821,14 +823,15 @@
 													</c:if>
 													<span style="color:#f94877">&nbsp;${product.score}</span>
 									    		</h4>
-		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a>
+<%-- 		                                        <a class="read"  href="location.href='/products/view/${product.prodId}'">more</a> --%>
 		                                    </div>
 		                                </div>
 		                            </div>
 	                            </c:otherwise>
                             </c:choose>
                                 
-                        </div>                 
+                        </div>
+                        </a>                 
                     </div>
      			</c:forEach>
             </div>
@@ -840,7 +843,7 @@
     <div class="grey_bg row super_sub_content" style="padding-top: 40px; background-image: url('/images/fms/bg1.jpg'); background-repeat:repeat;">
 	    <div class="col-md-12">
             <div class="dividerHeading text-center">
-                <h4><span>Latest Post</span></h4>
+                <h4><span><s:message code="latestpost"></s:message></span></h4>
             </div>
 		    <div id="timelineDiv">
 				<section id="cd-timeline">

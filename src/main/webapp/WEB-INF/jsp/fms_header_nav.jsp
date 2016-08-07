@@ -17,8 +17,10 @@
             <li>
             <c:if test="${empty memberId}">
                 <a href="/fmslogin"><i class="fa fa-user" aria-hidden="true"></i>
-                   <span style="font-family: Open Sans;">&nbsp Login /</span> </a>
-                <a href="javascript:"> <span id="signUpModal" data-toggle="modal"  data-target="#regiModal" href="/members/register"  style="font-family: Open Sans;">Sign Up</span></a>
+                	<span style="font-family: Open Sans;">&nbsp;<s:message code="login"></s:message>&nbsp;/</span>
+                </a>
+                <a href="javascript:">
+                	<span id="signUpModal" data-toggle="modal" data-target="#regiModal" href="/members/register" style="font-family: Open Sans;">&nbsp;<s:message code="signup"></s:message></span>
                 </a>
             </c:if>
             </li>
@@ -27,7 +29,7 @@
 		<!--  登入後     -->
         	 <c:if test="${not empty nickname}"> 
             <li>
-                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp;<s:message code="logout"></s:message></span></a>
             </li>
             <li>
                 <a href="/members/overview/${memberId}"><span id="forCheckLogin" value="${memberId}">${nickname}</span></a>
@@ -42,10 +44,10 @@
              <sec:authorize access="hasRole('ADMIN')">
  
             <li>
-                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp Logout</span></a>
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i><span>&nbsp;<s:message code="logout"></s:message></span></a>
             </li>
             <li>
-                <a href="/bms"><span>Background management</span></a>
+                <a href="/bms"><span>&nbsp;<s:message code="backgroundmanagement"></s:message></span></a>
             </li>
             </sec:authorize>
         </ul>
