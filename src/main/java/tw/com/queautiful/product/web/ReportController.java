@@ -56,9 +56,11 @@ public class ReportController {
 		String reportProperty=properties.getProperty("reportProperty");
 		String reviewReportProperty=properties.getProperty("review.reportProperty");
 		String articleReportProperty=properties.getProperty("article.reportProperty");
+		String dayReportProperty=properties.getProperty("day.reportProperty");
 		model.addAttribute("reportProperty",reportProperty);
 		model.addAttribute("reviewReportProperty",reviewReportProperty);
 		model.addAttribute("articleReportProperty",articleReportProperty);
+		model.addAttribute("dayReportProperty",dayReportProperty);
 		
 		return "/report/reportPropertyController";
 	}
@@ -134,7 +136,8 @@ public class ReportController {
 	@ResponseBody
 	public String setArticleReportPropertys(String articleReportPropertys,
 			String reviewReportPropertys,
-			String reportPropertys){
+			String reportPropertys,
+			String dayReportProperty){
 		
 		
 		Properties properties = new Properties();
@@ -156,7 +159,10 @@ public class ReportController {
 			properties.setProperty("review.reportProperty",reviewReportPropertys );
 		}else if(reportPropertys!=null&&reportPropertys!=""){
 			properties.setProperty("reportProperty",reportPropertys );
-		}else{
+		}else if(dayReportProperty!=null&&dayReportProperty!=""){
+			properties.setProperty("day.reportProperty",dayReportProperty );
+		}
+		else{
 			result="輸入錯誤";
 		}
 		
