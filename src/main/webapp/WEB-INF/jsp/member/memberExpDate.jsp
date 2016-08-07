@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>${nickname}'s 產品清單</title>
+<title>${nickname}'s 產品期限清單</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- CSS -->
@@ -14,142 +14,105 @@
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">
+    <link rel="stylesheet" href="/css/product/sweetalert2.min.css">
+	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
 	<!-- customize -->
     <link rel="stylesheet" href="/css/member/member-customize.css">
 	<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 <style>
-body {
-	font-family: Microsoft JhengHei, "Open Sans",Helvetica,Arial,sans-serif;
+.expDiv{
+	padding: 33px 0 40px 0;
+    border-bottom: 1px solid #E0E0E0;
 }
-.portfolio-item {
- 	padding: 15px; 
-}
-.portfolio-item:hover .portfolio-content{
-	border-bottom-color:#727CB6; 
-}
-
-.portfolio-all {
-	background-color: #ffffff;
-	margin-bottom: 10px;
-}
-
-.portfolio-title{
-	height: 60px;
-	background-color: #DDD5C9;  /*beige default*/  /* #98DaD6 blue  #4FBAAA*/
-	border-bottom: 1px solid #C6BFB4;
-	color: #ffffff;
-	text-align: center;
-	padding: 10px;
-}
-.pink{
-	background-color: #FF9985;	/*pink*/
-	border-bottom: 1px solid #D97F88;
-} 
-
-.portfolio-title h3 {
-	font-size: 15px;
- 	line-height: 15px; 
-	color: #ffffff;
-	margin: 5px;
-}
-.portfolio-title small {
-	font-size: 22px;
-	margin: 10px;
-}
-
-.portfolio-content {
-	border: 1px solid #E7E6E6;
-	padding: 5px 10px 30px 10px;
-	text-align: center;
-}
-.portfolio-content h3 {
-	font-size: 15px;
- 	line-height: 15px; 
-}
-.portfolio-img {
-	margin: 0 auto;
-	height: 130px;
-	width: 130px;
-	overflow:hidden;
-}
-.portfolio-content img{
-	height: 130px;
-	width: 130px;
-}
-.portfolio-btn {
-	margin-top: 20px;
-}
-p.bell{
+.prodImg{
+	display: table-cell;
+	position: relative;
+	width: 200px;
 	margin-top: 10px;
+}
+.prodImg img{
+	width: 100%;
+}
+.dateTitle h2{
+	color: #000;
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+	padding-bottom: 5px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+.dateTitle h3{
+	color: #000;
 	font-size: 16px;
-	line-height: 26px;
-	
-}
-.bell span{
-	font-size: 20px;
-}
-.days{
-	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
+	line-height: 20px;
+	font-weight: normal;
+	letter-spacing: 0.02em;
+	padding-bottom: 5px;
+	margin-top:0px;
+	margin-bottom:0px;
 }
 div.expinfo{
 	text-align: left;
-	padding-left: 10px;
-	font-size: 14px;
-	line-height: 16px;
 }
-.expinfo tr{
-	text-align: left;
-	height: 25px;
-	font-size: 14px;
-	line-height: 16px;
-}
-td.info{
-	font-size: 14px;
-	line-height: 16px;
-	padding-right: 10px;
-}
-td.data{
-	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
-	font-style: normal;
-	font-size: 15px;
+div.expinfo h3{
 	color: #000;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: normal;
+	letter-spacing: 0.02em;
+	padding-bottom: 2px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+div.expinfo h3 span{
+	color: #000;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: normal;
+	letter-spacing: 0.02em;
+	padding-bottom: 2px;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
+}
+.lastDays{
+	display: table-cell;
 	vertical-align: middle;
-	padding-top: 7px;
-}
-.modal-content{
-	text-align: center;
-	padding: 30px 0 20px 0;
-}
-.modal-content h2{
-	font-weight: 400;
-}
-.btn-delete{
-	background:#8A817C;
+	width: 145px;
+	height: 145px;
+	padding-left: 18%;
+	background: #DDD5C9;
+	color: #555;
 }
 .expired{
-	color: #9A9A9A;
+	background:#B7B5B3;
 }
-.within30{
-	color: #FF1E76;
+.within30, .within30 p, .within30 h1{
+	background:#FF9985;
+	color:#fff;
 }
-.modal {
-  text-align: center;
+.lastDays p{
+	margin:0px;
 }
-
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
+.lastDays span, .lastDays h1 span{
+	font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
 }
-
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+.lastDays h1{
+	font-family: "Irvin Display",Georgia,"Times New Roman",Times,serif;
+	margin: 0px;
+	font-size: 48px;
+    line-height: 48px;
+}
+.btn-delete{
+	margin-top: 50px;
+}
+.btn{
+	border-radius: 0px;
 }
 </style>
 </head>
@@ -162,70 +125,60 @@ td.data{
 <div class="row detail-div">
 	<div class="col-lg-10 col-sm-6 delay-05s memberDiv">
 		<c:import url="/WEB-INF/jsp/member/memberPages-header.jsp" />
-		
+		<div class="subject">
+			<p id="count-review">總數量</p>
+		</div>
 		
 <!-- Page Content -->
 <div class="col-lg-12">
 <!-- ExpDate Row -->
 <div id="exprow" class="row">
+
 	<c:forEach items="${beans}" var="item">
-    <div class="col-md-4 portfolio-item" dateId="${item.expDate.dateId}">
-    	<div class="portfolio-all">
-    		<c:set var="expDays" value="${item.lastsDay}"></c:set>
-	    	<c:if test="${expDays>31 || expDays<=0}">
-	    	<div class="portfolio-title">
-	    		<small>${item.brandName}</small>
-		        <h3>${item.product.prodName}</h3>
-		    </div>
-		    </c:if>
-		    
-		    <c:if test="${expDays<=31 && expDays>0}">
-		    <div class="portfolio-title pink">
-	    		<small>${item.brandName}</small>
-		        <h3>${item.product.prodName}</h3>
-		    </div>
-		    </c:if>
-		    <div class="portfolio-content">
-		        <div class="portfolio-img">
-		        	<a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}">
+	<div class="col-lg-12 expDiv" dateId="${item.expDate.dateId}"> 
+	<div class="exp-content">
+		<div class="col-lg-3">
+			<div class="prodImg">
+				<a href="<%=request.getContextPath()%>/products/view/${item.product.prodId}">
 		            <img src="/products/show?prodImg=${item.product.prodImg}"/>
-		        </a></div>
-		        
-		        <p class="bell <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<30 && expDays>0}"> within30</c:if>">
-		        	<i class="fa fa-bell-o "></i>&nbsp;
+		        </a>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="dateTitle">
+				<h2>${item.product.prodName}</h2>
+				<h3>${item.brandName}</h3>
+				<h3>${item.product.categoryName}</h3>
+			</div>
+			
+			<div class="expinfo">
+		        <h3 class="date">製造日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${item.mfd}</span></h3>
+				<h3 class="date">到期日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${item.exp}</span></h3>
+				<h3 class="date">生產批號&nbsp;&nbsp;<span>${item.batchCode}</span></h3>
+		    </div>
+		</div>
+		<div class="col-lg-2 btnDiv">
+			<button name="${item.expDate.dateId}" class="btn btn-default btn-delete">刪除</button>
+		</div>
+		<div class="col-lg-3">
+			<c:set var="expDays" value="${item.lastsDay}"></c:set>
+			<div class='lastDays <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<=27 && expDays>0}"> within30</c:if>'>
+				<p>
 		        	<c:if test="${expDays>=0}">
-		        		有效期限還有 &nbsp;<span class="days">${item.lastsDay}</span>&nbsp;天</c:if>
+		        		 <span>還有</span>&nbsp;<h1>${item.lastsDay}<span>&nbsp;&nbsp;天</span></h1></c:if>
 		        	<c:if test="${expDays<0}">
-		        		已經過期 &nbsp;<span class="days">${fn:substringAfter(item.lastsDay, "-")}</span>&nbsp;Days</c:if>
-		        </p>  <!-- ${fn:substringAfter(expDays, '-')} -->
-		        
-		        <div class="expinfo">
-			        <table>
-			        <tr><td class="info">製造日&nbsp;&nbsp;</td><td class="data">${item.mfd}</td></tr>
-			        <tr><td class="info">到期日&nbsp;&nbsp;</td><td class="data">${item.exp}</td></tr>
-			        <tr><td class="info">生產批號&nbsp;&nbsp;</td><td class="data">${item.batchCode}</td></tr>
-			        </table>
-		        </div>
-		        <div class="portfolio-btn">
-				    <button type="button" name="${item.expDate.dateId}" class="btn btn-default btn-delete" data-toggle="modal" data-target="#myModal">Delete</button>
-				</div>
-	        </div> <!-- portfolio-content -->
-        </div> <!-- portfolio-all -->
-    </div><!-- portfolio -->
-    </c:forEach>
+		        		<span>已過期</span> &nbsp;<h1>${fn:substringAfter(item.lastsDay, "-")}<span>&nbsp;&nbsp;天</span></h1></c:if>
+		        </p>
+			</div>
+		</div>
+	</div> <!-- exp-content -->
+	</div> <!-- expDiv -->
+	</c:forEach>
+	
 </div> <!-- /.row -->
 </div> <!-- col -->
 
 
-<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-    	<h2>Do you want to delete ?</h2>
-    	<br>
-    	<button id="del-confirm" class="btn btn-default">Confirm</button>
-    </div>
-  </div>
-</div>
 
 
 	</div> <!-- col-lg -->
@@ -254,24 +207,29 @@ $(function(){
     $('.btn-delete').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
+
+    	swal({
+    		  title: '刪除 ?',
+    		  showCancelButton: true,
+    		  confirmButtonText: 'OK',
+    		  showLoaderOnConfirm: true,
+    		  allowOutsideClick: false
+    		}).then(function() {
+    			$.ajax({
+    				url:'/expdate/delete',
+              		type : 'GET',
+              		data : {"dateIdStr":dateIdStr},
+              		success : function(result){
+              			$(".expDiv[dateId*="+dateIdStr+"]").remove();
+              		}
+            	}); //ajax
+    		}) //then
     	
-    	$('#del-confirm').click(function(){
-    	
-    		$.ajax({
-        		url:'/expdate/delete',
-          		type : 'GET',
-          		data : {"dateIdStr":dateIdStr},
-          		success : function(result){
-          			$(".portfolio-item[dateId*="+dateIdStr+"]").remove();
-          			$('#myModal').modal('toggle');
-          		}
-        	});
-    	});
     });//end $('#delete').click
 	
     
-    var timelineBlocks = $('.portfolio-item'),
-	offset = 0.8;
+    var timelineBlocks = $('.expDiv'),
+	offset = 0.9;
 	
 	hideBlocks(timelineBlocks, offset);
 	
@@ -283,14 +241,14 @@ $(function(){
 
 	function hideBlocks(blocks, offset) {
 		blocks.each(function(){
-			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.portfolio-all').addClass('is-hidden');
+			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.exp-content').addClass('is-hidden');
 			console.log("hide");
 		});
 	}
 
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
-			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.portfolio-all').hasClass('is-hidden') ) && $(this).find('.portfolio-all').removeClass('is-hidden').addClass('animated fadeInUp');
+			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.exp-content').hasClass('is-hidden') ) && $(this).find('.exp-content').removeClass('is-hidden').addClass('animated fadeInUp');
 			console.log("show"+$(this));
 		});
 	}
