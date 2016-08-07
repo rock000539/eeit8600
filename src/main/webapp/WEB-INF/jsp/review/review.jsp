@@ -258,7 +258,7 @@
                                     </p>
                                 </div>
                             </div>
-							<button class="btn btn-lg btn-default" type="button"  id="postComment"onclick="">Post Comment</button>
+							<button class="btn btn-lg btn-default" type="button"  id="postComment"onclick="">送出</button>
                          </form>
                         </div>
                     </div>
