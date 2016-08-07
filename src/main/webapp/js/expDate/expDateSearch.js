@@ -37,7 +37,7 @@
 				$(".dividerHeading").append("<h4><span>"+brandName+"</span></h4><h3> Product Choice </h3><br>");
 				for (var i = 0; i < data.productList.length; i++) {
 				var prodName = data.productList[i].prodName;
-				var prodId = data.productList[i].prodId;
+				var prodId = data.productList[i].prodId; 
 				var prodImg=data.productList[i].prodImg;
 				var categoryId=data.productList[i].categoryId;
 				$("#proList").append(	//---------------------------------
@@ -50,7 +50,7 @@
 				+"</div>"
 				+"<div class='portfolio-btn'>"
  				+"<button class='saveDate btn btn-default' name='"
- 				+data.productList[i].prodId+"'>加入最愛</button> &nbsp;"
+ 				+prodId+"'>加入最愛</button> &nbsp;"
 				+"</div></div></div></div>"		
 					)//-----------------------------------------------------
 					}//end of for Loop

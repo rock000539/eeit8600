@@ -120,16 +120,15 @@ public class ReviewController {
 	public String reviews(Model model)  {
 
 //		List<Review> list = service.getAll();
-		List<ReviewFmsReviews> list = service.getAllByVoReviews();
-		
+//		List<ReviewFmsReviews> list = service.getAllByVoReviews();
+		List<Review> list = service.findByOrderByReviewTimeDesc();
+//		List<Review> list = service.findByOrderByReviewReportDesc();
 		
 		
 		
 		model.addAttribute("reviews", list);
 		log.debug("{}", list);
-		// model.addAttribute("reviews", service.findByOrderByReviewTimeDesc());
-		// model.addAttribute("reviews",
-		// service.findByOrderByReviewReportDesc());
+
 
 		// 會員年齡
 		// String y = service.getAll().get

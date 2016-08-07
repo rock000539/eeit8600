@@ -23,13 +23,10 @@
 
 <style>
 .bgcolor{
-/* 	background-color:#EBDBFF; */
 	background: -webkit-linear-gradient(#EBDBFF , #FFEFD5); /* For Safari 5.1 to 6.0 */
  	background: -o-linear-gradient(#EBDBFF , #FFEFD5); /* For Opera 11.1 to 12.0 */
   	background: -moz-linear-gradient(#EBDBFF , #FFEFD5); /* For Firefox 3.6 to 15 */
   	background: linear-gradient(#EBDBFF , #FFEFD5); /* Standard syntax */
-/* 	padding:40px; */
-/* 	border-radius:10px; */
 }
 
 .article > section{
@@ -135,11 +132,6 @@ select {
 	margin-bottom:20px;
 }
 
-/* .col-lg-12:has(button){ */
-/* text-align:center; margin-top:20px; */
-/* } */
-
-
 </style>
 
 </head>
@@ -153,54 +145,59 @@ select {
 <div class="row sub_content">
 
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+	
 	<div class="col-lg-10 col-md-10 col-sm-10 article">
-		<section class="team row sub_content">
-					<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
-			            <div class="dividerHeading">
-			                <h4><span>Edit your Post</span></h4>
-			            </div>
-			        </div>
-		</section>
+	
+	<section class="team row sub_content">
+				<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:30px;">
+		            <div class="dividerHeading">
+		                <h4><span>編輯文章</span></h4>
+		            </div>
+		        </div>
+	</section>
+		
 	<FORM id="editForm">
-	<div class="row">
-		<div class="form-group">
-			<div class="col-lg-3">
-				<input type="hidden" name="articleId" value="${article.articleId}"/>
-				<input type="hidden" name="memberId" value="${memberId}"/>
-				<input type="hidden" name="articleTime" value="${article.articleTime}"/>
-				<input type="hidden" name="articleView" value="${article.articleView}"/>
-				<input type="hidden" name="articleShow" value="${article.articleShow}"/>
-				<input type="hidden" name="articleReport" value="${article.articleReport}"/>
-				<select name="articleType" class="form-control" >
-				<option id="NEWS" value="news">情報</option>
-				<option id="SOLICIT" value="solicit">徵文</option>
-				<option id="QUESTION" value="question">問題</option>
-				<option id="CHAT" value="chat">閒聊</option>			
-				</select>
-			</div>
-			<div class="col-lg-9">
-				<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${article.articleTitle}">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="form-group">
-			<div class="col-lg-12">
-				<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-2">
+					<input type="hidden" name="articleId" value="${article.articleId}"/>
+					<input type="hidden" name="memberId" value="${memberId}"/>
+					<input type="hidden" name="articleTime" value="${article.articleTime}"/>
+					<input type="hidden" name="articleView" value="${article.articleView}"/>
+					<input type="hidden" name="articleShow" value="${article.articleShow}"/>
+					<input type="hidden" name="articleReport" value="${article.articleReport}"/>
+					<select name="articleType" class="form-control" >
+					<option id="NEWS" value="news">NEWS</option>
+					<option id="SOLICIT" value="solicit">SOLICIT</option>
+					<option id="QUESTION" value="question">QUESTION</option>
+					<option id="CHAT" value="chat">CHAT</option>			
+					</select>
+				</div>
+				<div class="col-lg-10">
+					<input type="text" name="articleTitle" id="articleTitle" class="form-control" value="${article.articleTitle}">
+				</div>
 			</div>
 		</div>
-	</div>	
-	<div class="row">
-		<div class="form-group">
-			<div class="col-lg-12 hasbutton">
-<!-- 				<button class="btn btn-default btn-lg" type="button" name="save" id="save"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button> -->
-				<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;Save</button>
-				<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location.href='/articles/view/${article.articleId}'"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cancel</button>
+		
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-12">
+					<textarea class="ckeditor" id="articleContent" name="articleContent" cols="80" rows="12"></textarea>
+				</div>
 			</div>
 		</div>
-	</div>		
+			
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-12 hasbutton">
+					<button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal" onclick="toModal()"><i class="fa fa-check fa-fw" aria-hidden="true"></i>&nbsp;送出</button>
+					<button class="btn btn-default btn-lg" type="button" name="cancel" onclick="location.href='/articles/view/${article.articleId}'"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;取消</button>
+				</div>
+			</div>
+		</div>			
 	</FORM>
 	</div>
+	
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
 	
 </div>
@@ -211,15 +208,15 @@ select {
     
 <!--       Modal content -->
       <div class="modal-content">
-        <div class="modal-header">
+      	<div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
         </div>
         <div class="modal-footer">
-        	<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">Confirm</button>
-        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        	<button type="button" name="confirm" id="confirm" class="btn btn-default" data-dismiss="modal">確認送出</button>
+        	<button type="button" class="btn btn-default" id="cancel" data-dismiss="modal"></button>
         </div>
       </div>
       
@@ -250,7 +247,7 @@ select {
 	<script>
 	$(function(){
 
-		$('title').text("Forum - Edit【${article.articleType}】${article.articleTitle}");
+		$('title').text("Forum - 編輯文章【${article.articleType}】${article.articleTitle}");
 		
 		// 設定文章Type & Content
 		$('#${article.articleType}').attr('selected',true);
@@ -270,8 +267,8 @@ select {
 // 				articleContent:{required:true},
 			},//end of rules
 			messages:{
-// 				articleType:'必填',
-// 				articleTitle:'必填',
+				articleType:'請選擇文章類型',
+				articleTitle:'請輸入文章標題',
 // 				articleContent:'必填'
 			},//end of messages			
 		});
@@ -322,17 +319,18 @@ select {
 						.replace(/<p>/g, "")
 						.replace(/<\/p>/g,"")
 						.trim().length != 0){  //驗證成功
-			$(".modal-title").text('Please Check Your Post');
+			$(".modal-title").text('請確認文章內容');
 			$(".modal-body").empty()
-							.append('<p>Post Type：'+$(':selected').val()+'</p>')
-							.append('<p>Title：'+ $(':text[name=articleTitle]').val() +'</p>')		
-							.append('<p>Content：'+ CKEDITOR.instances['articleContent'].getData() +'</p>');
+							.append('<h2>【'+$(':selected').text()+'】'+$(':text[name=articleTitle]').val() +'</h2>')	
+							.append(CKEDITOR.instances['articleContent'].getData());
 			$('#confirm').show();
+			$('#cancel').text('取消');
 		}else{  //驗證失敗
-			$(".modal-title").text('Please Modify Your Post');
+			$(".modal-title").text('請修正錯誤');
 			$(".modal-body").empty()
-							.append('<p>Please Enter the Required Fields</p>');
-			$('#confirm').hide();		
+							.append('<p>請依錯誤訊息填入必填欄位</p>');
+			$('#confirm').hide();	
+			$('#cancel').text('關閉');
 		}
 	}
 

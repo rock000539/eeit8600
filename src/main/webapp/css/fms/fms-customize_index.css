@@ -93,6 +93,7 @@
 .serviceBox_5 .service-content{
     padding-top: 62px;
     position: relative;
+    padding-bottom: 30px;
 }
 .serviceBox_5 .service-content::before {
     background: hsl(188, 30%, 39%) none repeat scroll 0 0;

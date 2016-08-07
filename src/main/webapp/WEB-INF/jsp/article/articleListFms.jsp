@@ -90,22 +90,20 @@
 <!-- 				</div> -->
 <!-- 				<p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p> -->
 				  <a href="/articles/listfms">
-				  	<button class="btn btn-default btn-lg" type="button" style="width:150px;margin-right:10px;" id="allpost">All Post</button>
+				  	<button class="btn btn-default btn-lg" type="button" style="width:150px;margin-right:10px;" id="allpost">所有文章</button>
 				  </a>
 				  <a href="/articles/add"><button class="btn btn-default btn-lg" type="button" style="width:150px">
-				  	<i class="fa fa-plus"></i>&nbsp;New Topic</button>
+				  	<i class="fa fa-plus"></i>&nbsp;發表新文章</button>
 				  </a>
 				  
 				  <table class="table forum table-striped">
 				    <thead id="thead">
 				      <tr>
 				        <th class="cell-stat"></th>
-				        <th>
-				          <h3>Topics</h3>
-				        </th>
-				        <th class="cell-stat text-center hidden-xs hidden-sm">Replies</th>
-				        <th class="cell-stat text-center hidden-xs hidden-sm">Views</th>
-				        <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
+				        <th>文章標題</th>
+				        <th class="cell-stat text-center hidden-xs hidden-sm">回覆數</th>
+				        <th class="cell-stat text-center hidden-xs hidden-sm">瀏覽數</th>
+				        <th class="cell-stat-2x hidden-xs hidden-sm">最後發表</th>
 				      </tr>
 				    </thead>
 				    <tbody>

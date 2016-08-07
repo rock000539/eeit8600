@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="/js/product/contact/jquery.gmap.js"></script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ContactPage</title>
+	<title></title>
 	
 	<script>
 	
@@ -80,9 +80,9 @@
 	        	
 	            <div class="col-lg-7 col-md-7 col-sm-7">
 	                <div class="dividerHeading">
-	                    <h4><span>Get in Touch</span></h4>
+	                    <h4><span>聯絡我們</span></h4>
 	                </div>
-	                <p>Send us an email, using the form below or at eeit8600@gmail.com</p>
+	                <p>您可以透過下面表單發送mail或直接寄送mail到eeit8600@gmail.com</p>
 	
 	                <div class="alert alert-success hidden alert-dismissable" id="contactSuccess">
 	                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -132,21 +132,21 @@
 	                <div class="sidebar">
 	                    <div class="widget_info">
 	                        <div class="dividerHeading">
-	                            <h4><span>Contact Info</span></h4>
+	                            <h4><span>聯絡資訊</span></h4>
 	                            </div>
-	                        <p>Welcome to contact us through the following methods.</p>
+	                        <p>歡迎透過下列方式聯絡我們</p>
 	                        <ul class="widget_info_contact">
-	                            <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: &nbsp;台北市復興南路一段390號</p></li>
-	                            <li><i class="fa fa-user"></i> <p><strong>Phone</strong>: &nbsp;(02) 2782-3590</p></li>
-	                            <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: &nbsp;eeit86@gmail.com</p></li>
-	                            <li><i class="fa fa-globe"></i> <p><strong>Web</strong>: <a href="#" data-placement="bottom" data-toggle="tooltip" title="www.example.com"> &nbsp;www.quite.com</a></p></li>
+	                            <li><i class="fa fa-map-marker"></i> <p><strong>地址</strong>: &nbsp;台北市復興南路一段390號</p></li>
+	                            <li><i class="fa fa-user"></i> <p><strong>電話</strong>: &nbsp;(02) 2782-3590</p></li>
+	                            <li><i class="fa fa-envelope"></i> <p><strong>信箱</strong>: &nbsp;eeit86@gmail.com</p></li>
+	                            <li><i class="fa fa-globe"></i> <p><strong>網址</strong>: <a href="#" data-placement="bottom" data-toggle="tooltip" title="www.example.com"> &nbsp;www.quite.com</a></p></li>
 	                        </ul>
 	
 	                    </div>
 	
 	                    <div class="widget_social" style="margin-top:10px;">
 	                        <div class="dividerHeading">
-	                            <h4><span>Get Social</span></h4>
+	                            <h4><span>相關社群</span></h4>
 	                        </div>
 	                        <ul class="widget_social">
 	                            <li><a class="fb" href="https://goo.gl/SxtMoa" data-placement="bottom" data-toggle="tooltip" title="Facbook"><i class="fa fa-facebook"></i></a></li>

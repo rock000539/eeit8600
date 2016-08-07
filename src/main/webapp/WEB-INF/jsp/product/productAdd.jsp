@@ -6,7 +6,7 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>productAdd</title>
+	<title></title>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<script src="/js/jquery.min.js"></script>
@@ -90,14 +90,14 @@
 	                <div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="panel panel-primary">
-							<div class="panel-heading">Product Add Form</div>
+							<div class="panel-heading">產品新增表單</div>
 							<div class="panel-body">
 								<form accept-charset="UTF-8"
 									action="" class="simple_form form-horizontal" id="addForm" method="post">
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="prodName">
-											prodName
+											產品名稱
 										</label>
 										<div class="col-sm-8">
 											<input class="string required form-control"
@@ -110,7 +110,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="brandId">
 											<abbr title="required">*</abbr>
-											brandId
+											品牌
 										</label>
 										<div class="col-sm-8">
 											<select class="form-control" id="brandId" name="brandId"></select>
@@ -121,7 +121,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="categoryId">
 											<abbr title="required">*</abbr>
-											categoryId
+											類別
 										</label>
 										<div class="col-sm-8">
 											<select class="form-control" id="categoryId" name="categoryId"></select>
@@ -131,7 +131,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="weight">
-											weight
+											權重
 										</label>
 										<div class="col-sm-8">
 											<input class="required number form-control"
@@ -143,7 +143,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="score">
-											score
+											分數
 										</label>
 										<div class="col-sm-8">
 											<input class="required number form-control"
@@ -155,7 +155,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="price">
-											price
+											價格
 										</label>
 										<div class="col-sm-8">
 											<input class="required digits form-control"
@@ -167,7 +167,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="capacity">
-											capacity
+											容量
 										</label>
 										<div class="col-sm-8">
 											<input class="required digits form-control"
@@ -179,7 +179,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="launchDate">
-											launchDate
+											發表日期
 										</label>
 										<div class="col-sm-8">
 							                <div class="input-group date" id="datetimepicker">
@@ -197,7 +197,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="mainIgdt">
 											<abbr title="required">*</abbr>
-											mainIgdt
+											主成分
 										</label>
 										<div class="col-sm-8">
 											<select class="form-control" id="mainIgdt" name="mainIgdt">
@@ -211,7 +211,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="concentration">
-											concentration
+											濃度
 										</label>
 										<div class="col-sm-8">
 											<input class="required number form-control"
@@ -223,7 +223,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="prodDesc">
-											prodDesc
+											產品說明
 										</label>
 										<div class="col-sm-8">
 											​<textarea class="string required form-control" 
@@ -235,7 +235,7 @@
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="prodDesc">
-											prodImgFile
+											產品圖片
 										</label>
 										<div class="col-sm-8">
 											<input id="prodImgFile" name="prodImgFile" type="file" class="file-loading">

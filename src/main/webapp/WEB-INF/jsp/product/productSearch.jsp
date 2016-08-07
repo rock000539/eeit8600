@@ -25,7 +25,7 @@
 	<script src="/js/jquery.redirect.js"></script>	
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ProductSearchPage</title>
+	<title>搜尋產品</title>
 	
 	<style>
 		
@@ -84,11 +84,11 @@
 	
 	        <nav class="clearfix col-sm-12">
 	            <ul id="filter">
-	                <li data-filter="*" class="selected"><a href="#">All Categories</a></li>
-	                <li data-filter=".MAKEUP"><a href="#">MakeUp</a></li>
-	                <li data-filter=".SKINCARE"><a href="#">Skin Care</a></li>
-	                <li data-filter=".BATHBODY"><a href="#">Bath & Body</a></li>
-	                <li data-filter=".HAIR"><a href="#">Hair</a></li>
+	                <li data-filter="*" class="selected"><a href="#">所有分類</a></li>
+	                <li data-filter=".MAKEUP"><a href="#">化妝相關</a></li>
+	                <li data-filter=".SKINCARE"><a href="#">護膚保養</a></li>
+	                <li data-filter=".BATHBODY"><a href="#">美體健康</a></li>
+	                <li data-filter=".HAIR"><a href="#">美髮美甲</a></li>
 	            </ul>
 	        </nav>
 			
