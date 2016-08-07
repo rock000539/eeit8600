@@ -1,0 +1,315 @@
+.bgcolor {
+	background: -webkit-linear-gradient(#EBDBFF, #FFEFD5);
+	/* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#EBDBFF, #FFEFD5);
+	/* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#EBDBFF, #FFEFD5);
+	/* For Firefox 3.6 to 15 */
+	background: linear-gradient(#EBDBFF, #FFEFD5); /* Standard syntax */
+}
+
+.breadcrumb-line {
+	position: relative;
+	margin: 0 0 35px;
+	border-radius: 4px;
+	background-color: #e1e5eb;
+}
+
+.breadcrumb {
+	/*  	background:rgba(0,0,0,0); */
+	/* 	border-radius:0; */
+	height: 40px;
+	line-height: 40px;
+	margin: 0;
+	overflow: hidden;
+	padding: 0 20px 0 0;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.breadcrumb-buttons {
+	background: #d7dee3;
+	border-radius: 0 4px 4px 0;
+	display: inline-block;
+	list-style: none;
+	margin: 0;
+	padding-left: 15px;
+	position: absolute;
+	right: 0;
+	top: 0
+}
+
+.breadcrumb .icon, .breadcrumb-buttons .icon {
+	font-size: 18px;
+	vertical-align: text-bottom
+}
+
+.breadcrumb-buttons li a {
+	line-height: 40px;
+	position: relative;
+	margin-right: 14px;
+	text-decoration: none
+}
+
+.breadcrumb li {
+	display: inline
+}
+
+.breadcrumb li a {
+	-webkit-transition: none 0s ease 0s;
+	transition: none 0s ease 0s;
+	text-align: center;
+	text-decoration: none;
+}
+
+.breadcrumb li:first-child a {
+	background: #00d8b2;
+	background: #707478;
+	/* 	background:#c8d2d8; */
+	padding: 11px 15px;
+	display: inline-block;
+	border-radius: 4px 0 0 4px;
+	color: #fff;
+	/* 	color: #888; */
+}
+
+.breadcrumb .icon {
+	font-size: 18px
+}
+
+.breadcrumb>li+li:before {
+	font-family: "FontAwesome";
+	content: "\f054";
+	vertical-align: middle;
+	color: #ccc;
+}
+
+.breadcrumb li:last-child a {
+	font-weight: 700;
+	color: #888
+}
+
+/* ==============
+		   Author div
+		================= */
+.authordiv {
+	position: relative;
+	width: 80px;
+	height: 80px;
+	overflow: hidden;
+}
+
+.msgAuthordiv {
+	position: relative;
+	width: 25px;
+	height: 25px;
+	overflow: hidden;
+}
+
+/*橫*/
+.authordiv img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100%;
+	width: auto;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+/*直*/
+.authordiv img.portrait {
+	width: 100%;
+	height: auto;
+}
+
+/* ==============
+		   Post Area
+		================= */
+.post {
+	/* 	background-color:white; */
+	border: #e8ecf3 solid 1px;
+	border-top: #e8ecf3 solid 3px;
+	background-color: #fff;
+	/* 		 	margin-bottom:10px; */
+	border-radius: 4px;
+	transition: all 0.5s ease-in-out;
+}
+
+.post:hover {
+	/* 	border:#ccd3ff solid 2px; */
+	border-top: #727CB6 solid 3px;
+	transition: all 0.3s ease-in-out;
+}
+
+.postprofile {
+	/* 	border:#e8ecf3 solid 1px; */
+	padding-top: 20px;
+	/* 	border-right:#e8ecf3 solid 1px; */
+}
+
+.postprofile h3 {
+	margin: 5px 0 0;
+}
+
+.postbody {
+	padding: 0px 20px 0 30px;
+	border-left: #e8ecf3 solid 1px;
+}
+
+.postbody ul {
+	margin: 10px;
+}
+
+.postbody  ul>li {
+	font-size: 20px;
+	float: right;
+}
+
+.postbody  ul>li>a {
+	border-radius: 5px;
+	padding: 4px 7px;
+	margin-left: 5px;
+}
+
+.pbhead {
+	border-bottom: 4px solid #e5e5e5;
+}
+
+.pbhead:after {
+	bottom: 0;
+	display: block;
+	width: 80px;
+	height: 4px;
+	margin-bottom: -4px;
+	margin-top: 15px;
+	content: "";
+	background-color: #ee836e;
+}
+
+.content ul>li {
+	font-size: 16px;
+	margin-left: 20px;
+}
+
+.content ul>li:first-child {
+	cursor: pointer; /* for comment+num*/
+}
+
+/* ==============
+		   Comment Area
+		================= */
+.panel.panel-default {
+	border-top: none;
+	border-bottom: none;
+}
+
+.panel>.list-group:first-child .list-group-item:first-child, .panel>.panel-collapse>.list-group:first-child .list-group-item:first-child
+	{
+	border-top: 1px solid #4cae4c;
+}
+
+.panel-group .panel-footer {
+	border-bottom: 1px solid #ddd;
+}
+
+.panel>.panel-collapse>.list-group .list-group-item:hover {
+	background: #f5f5f5;
+	border-width: 0px 0;
+}
+
+/* ==============
+		   Reply Area
+		================= */
+/*dividerHeading*/
+.dividerHeading, .widget_title {
+	text-align: center;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+.dividerHeading h4, .widget_title h4 {
+	font-size: 18px;
+	position: relative;
+	line-height: 0;
+	border-bottom: 1px solid #727CB6;
+}
+
+.dividerHeading h4 span {
+	background: white;
+	position: relative;
+	line-height: 7px;
+	top: 4px;
+	display: inline-block;
+}
+
+.dividerHeading h4 span:before, .dividerHeading h4 span:after,
+	.widget_title h4 span:after, .widget_title h4 span:before {
+	color: #E74C3C;
+	font-size: 10px;
+	content: "\f10c";
+	font-family: fontawesome;
+	display: inline-block;
+}
+
+.dividerHeading h4 span:before, .widget_title h4 span:before {
+	margin-right: 10px;
+}
+
+.dividerHeading h4 span:after, .widget_title h4 span:after {
+	margin-left: 10px;
+}
+
+/* 修改樣式 */
+.dividerHeading h4 span:after, .widget_title h4 span:after,
+	.widget_title h4 span:before {
+	color: #727CB6;
+}
+
+.dividerHeading h4 span:before, .dividerHeading h4 span:after,
+	.widget_title h4 span:after, .widget_title h4 span:before {
+	color: #727CB6;
+}
+
+.dividerHeading h4 span {
+	background: #faeadf; /*new post bgcolor*/
+}
+
+.dividerHeading h4, .widget_title h4 {
+	font-size: 21px;
+	font-weight: normal;
+	margin-bottom: 0px;
+	padding: 0px;
+	position: relative;
+}
+
+.dividerHeading h4::before, .widget_title h4::before {
+	border: 0px;
+	content: none;
+}
+
+#replyForm button {
+	margin: 0 5px;
+}
+
+.hasbutton {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.btn-like {
+	/* 	background: #ff9b9b; */
+	background: #ff2691;
+}
+
+.btn-like:hover {
+	/* 	background: #ff7f7f; */
+	background: #ff007f;
+}
+
+.swal {
+	border-radius: 20px !important;
+	width: 400px !important;
+	margin-left: -200px !important;
+}

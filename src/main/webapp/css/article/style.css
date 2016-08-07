@@ -97,9 +97,14 @@
 }
 
 .forum.table th.cell-stat-2x {
-    width: 14em;
+/*     width: 14em; */
+    width: 12em;
 }
 
 .articleTitle{
 	cursor:pointer;
+}
+
+.forum.table thead th{
+	font-size:16px;
 }
