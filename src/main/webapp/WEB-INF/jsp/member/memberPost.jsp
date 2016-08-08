@@ -69,16 +69,17 @@ h2, h4{
 	float: left;
 	min-height: 200px;
 	text-align: right;
-	font-size: 12px;
-	line-height: 24px;
+	font-size: 10px;
+	line-height: 20px;
 	letter-spacing: 0.1em;
 	color:#666;
-	margin-right: 30px;
 	margin-bottom: 20px;
 	width: 90px;
 	top:2px;
 	border-top: 2px solid #000;
 	font-family: FranklinGothic,Helvetica,sans-serif;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 .reviewTime>span{
 	display: block;
@@ -99,8 +100,8 @@ h2, h4{
 
 .reviewContent{
 	display: table-cell;
-	padding-left: 30px;
 	vertical-align: top;
+	padding-right: 0px;
 }
 .reviewContent h2, .reviewContent p, .reviewContent h4
 .articleContent h2, .articleContent p, .articleContent h4{
@@ -161,14 +162,13 @@ h2, h4{
 	padding: 13px 16px;
 	text-transform: uppercase;
 }
-.articleType{
+span.articleType{
 	color: #df3331;
 	font-family: "Irvin Text",Georgia,"Times New Roman",Times,serif;
-    font-size: 12px;
-   	line-height: 24px;
+    font-size: 10px;
+   	line-height: 20px;
     margin-bottom: 12px;
 }
-
 </style>
 </head>
 <body>
@@ -231,7 +231,7 @@ h2, h4{
 	        <c:forEach var="item" items="${reviews}" varStatus="vs">
 	        <div class="reviews col-lg-12">
 	        <div class="review-all">
-	        	<div class="reviewTime">
+	        	<div class="col-lg-5 reviewTime">
 	        		<span>${item.reviewTime}</span>
 	        		<span class="articleType">${item.categoryTitle}</span>
 					<div class="rating">
@@ -240,8 +240,8 @@ h2, h4{
 	        		<div class="info"><i class="fa fa-heart"></i> ${item.rewCollect}
 	        		&nbsp;&nbsp;<i class="fa fa-comments"></i> </div>
 	        	</div>
-		        <div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.prodId}"><img src="/products/show?prodImg=${item.prodImg}"/></a></div>
-		        <div class="reviewContent">
+		        <div class="col-lg-1 reviewImg"><a href="<%=request.getContextPath()%>/products/view/${item.prodId}"><img src="/products/show?prodImg=${item.prodImg}"/></a></div>
+		        <div class="col-lg-6 reviewContent">
 		        	<h2 class="reviewTitle">${item.reviewTitle}&nbsp;
 		        	<span><a href="/reviews/edit_fms/${item.reviewId}"><i class="fa fa-pencil"></i>&nbsp;EDIT</a></span></h2>
 		        	<h4 class="prod">${item.prodName} | ${item.brandName}</h4>
@@ -277,12 +277,12 @@ h2, h4{
 			<div id="articleContentDiv">
 				<c:forEach var="item" items="${articles}" varStatus="vs">
 				<div class="articles col-lg-12">
-					<div class="articleTime">
+					<div class="col-lg-5 articleTime">
 						<h4>${fn:substring(item.articleTime,0,19)}</h4>
 						<h4 class="articleType">${item.articleType}</h4>
 						<h4 class="info"><i class="fa fa-comments"></i> ${item.arSize}</h4>
 					</div>
-					<div class="articleContent">
+					<div class="col-lg-7 articleContent">
 						<h2 class="articleTitle">${item.articleTitle}&nbsp;
 							<a  class="articleEdit" href="/articles/edit/${item.articleId}">
 							<span>
@@ -310,42 +310,49 @@ h2, h4{
 					
 				</div>        
 
+
+
+
+
+
 <!--加入footer -->
 <c:import url="/WEB-INF/jsp/fms_footer.jsp" />
 <script type="text/javascript" src="/js/jquery.min.js"></script> 
 <script id="reviewTemplate" type="text/template">
-<div class="reviews col-lg-12 animated fadeIn">
-	<div class="reviewTime">
+<div class="reviews col-lg-12">
+   <div class="review-all">
+   	<div class="col-lg-5 reviewTime">
 		<span>_reviewTime</span>
 		<span class="articleType">_categoryTitle</span>
 		<div class="rating">_rating</div>
 		<div class="info"><i class="fa fa-heart"></i> _rewCollect
 			&nbsp;&nbsp;<i class="fa fa-comments"></i> _rcmNum</div>
 	</div>
-	<div class="reviewImg"><a href="<%=request.getContextPath()%>/products/view/_prodId">
+	<div class="col-lg-1 reviewImg"><a href="<%=request.getContextPath()%>/products/view/_prodId">
 		<img src="/products/show?prodImg=_prodImg"/></a></div>
-	<div class="reviewContent">
+	<div class="col-lg-6 reviewContent">
 		<h2 class="reviewTitle">_reviewTitle&nbsp;
 			<span><a href="/reviews/edit_fms/_reviewId"><i class="fa fa-pencil"></i>&nbsp;EDIT</a></span></h2>
 		<h4 class="prod">_prodName | _brandName </h4>		
-		<p class="preview">_review</p>
+		<div class="preview">_review</div>
 		<a class="singlepage" href="/reviews/review/_reviewId">read more</a>
 		<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
-	</div>
+    </div>
+</div>
 </div>
 </script>
 <script id="articleTemplate" type="text/template">
 <div class="articles col-lg-12 animated fadeIn">
-	<div class="articleTime">
+	<div class="col-lg-5 articleTime">
 		<h4>_articleTime</h4>
 		<h4 class="articleType">_articleType</h4>
 		<h4 class="info"><i class="fa fa-comments"></i> _arSize</h4>
 	</div>
-	<div class="articleContent">
+	<div class="col-lg-7 articleContent">
 		<h2 class="articleTitle">_articleTitle&nbsp;
 			<a class="articleEdit" href="/articles/edit/_articleId">
 			<span><i class="fa fa-pencil"></i>&nbsp;EDIT</span></a></h2>
-		<p class="preview">_articleContent</p>
+		<div class="preview">_articleContent</div>
 		<a class="singlepage" href="/articles/view/_articleId">read more</a>
        	<i class="fa fa-angle-right" style="color:#a60505;padding-left:5px;"></i>
 	</div>

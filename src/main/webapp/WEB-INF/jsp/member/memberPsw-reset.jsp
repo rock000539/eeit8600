@@ -40,11 +40,11 @@ div.grey_bg{
 <form id="resetPsw">
 <div class="form-group">
 <label for="password">新密碼</label>
-<input type="text" class="form-control" id="password" name="password" placeholder="new password">
+<input type="password" class="form-control" id="password" name="password" placeholder="new password">
 </div>
 <div class="form-group">
 <label for="psw_confirm">密碼確認</label>
-<input type="text" class="form-control" id="psw_confirm" name="psw_confirm" placeholder="re-enter password">
+<input type="password" class="form-control" id="psw_confirm" name="psw_confirm" placeholder="re-enter password">
 </div>
 <br>
 <div class="form-group">
