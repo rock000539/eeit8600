@@ -29,7 +29,7 @@ public class ScheduleTasks {
 	@Autowired
 	private EmailSender emailSender;
 	
-	@Scheduled(cron="0 0 9 * * ?")   // 9 AM everyDay
+	@Scheduled(cron="0 0 09 * * ?")   // 9 AM everyDay
 	public void expDateReminder(){
 		List<ExpDate> expDate = expDateService.expDateAfterOneMonth(); //check Exp expired after 1 month
 		if(!expDate.isEmpty()){
