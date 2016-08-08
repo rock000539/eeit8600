@@ -6,7 +6,7 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Article ListPage</title>
+	<title>Article List</title>
 	<script src="/js/jquery.min.js"></script>
 		<!--  BASE CSS STYLE  -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -49,12 +49,12 @@
 			<!-- breadcrumb 目前位置 -->
 			<ol class="breadcrumb pull-right">
 				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
-				<li><a href="javascript:;">Page Options</a></li>
-				<li class="active">Blank Page</li>
+				<li><a href="javascript:;">檢舉系統</a></li>
+				<li class="active">文章管理</li>
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
-			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
+			<h1 class="page-header">文章管理列表 <small>文章管理總覽</small></h1>
 			
 			<!-- 內文 -->
 			<div class="row">
@@ -272,7 +272,7 @@
 			//設定要出現在jqGridPager的button
 			{
 				edit: false,
-				add: true,
+				add: false,
 	            del: false,
 	            search: true,
 	            refresh: true,
@@ -286,10 +286,10 @@
             },
             //options for the Add Dialog
             {
-            	beforeShowForm: function(){
-            		$('#editmodjqGrid').remove();
-	        		document.location.href="/articles/add";
-            	}
+//             	beforeShowForm: function(){
+//             		$('#editmodjqGrid').remove();
+// 	        		document.location.href="/articles/add";
+//             	}
             },
             // options for the Delete Dailog
             {

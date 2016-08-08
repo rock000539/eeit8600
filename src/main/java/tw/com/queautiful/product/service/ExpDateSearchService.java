@@ -253,7 +253,7 @@ public class ExpDateSearchService {
 		Calendar tempDay=Calendar.getInstance();
 		
 		tempDay.set(Calendar.DAY_OF_YEAR,day);
-		int month=tempDay.get(Calendar.MONTH);
+		int month=tempDay.get(Calendar.MONTH) + 1;
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 		
@@ -320,7 +320,7 @@ public class ExpDateSearchService {
 		Calendar tempDay=Calendar.getInstance();
 		
 		tempDay.set(Calendar.DAY_OF_YEAR,day);
-		int month=tempDay.get(Calendar.MONTH);
+		int month=tempDay.get(Calendar.MONTH) + 1;
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 		
