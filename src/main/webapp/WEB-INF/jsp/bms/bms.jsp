@@ -32,9 +32,6 @@
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
-			<ol class="breadcrumb pull-right">
-				<li class="active"><a href="javascript:;">Home</a></li>
-			</ol>
 			
 			<!-- page-header 每頁標題/副標 -->
 			<h1 class="page-header">網站數據分析 <small></small></h1>
