@@ -189,7 +189,8 @@
 			
 			// Search Button Click
 			$('#search').on('click', function() {
-				if($('#sprod').val() == '請選擇產品') {
+				console.log($('#sprod').val());
+				if($('#sprod').val() == '請選擇產品' || $('#sprod').val() == null) {
 					document.location.href='/products/inventory?brandId=' + $('#sbrand').val();
 				} else if($('#sprod').val() != '請選擇產品') {
 					document.location.href='/products/view/' + $('#sprod').val();
