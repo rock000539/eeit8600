@@ -133,7 +133,7 @@ public class MemberService {
 	//articlesSavedByMember pagination and sorted
 	public Page<Article> getArticlesPaging(Long memberId, ArticleType articleType, Integer pageNum,
 			String sortProperty, String direction){
-		log.debug("input: {} {} {} {} {}", memberId,articleType,pageNum,sortProperty,direction);
+		log.debug("input articles: {} {} {} {} {}", memberId,articleType,pageNum,sortProperty,direction);
 		
 		Article article = new Article();
 		article.setMember(getById(memberId));
@@ -267,7 +267,7 @@ public class MemberService {
 	public Map getReviewByCategory(Long memberId, CategoryTitle categoryTitle,
 			String sortProperty, String direction){
 		
-		log.debug("input: {}, {}, {}, {}", memberId, categoryTitle, sortProperty, direction);
+		log.debug("input review: {}, {}, {}, {}", memberId, categoryTitle, sortProperty, direction);
 		
 		String categoryTitleQuery = "";
 		if(categoryTitle!=null){

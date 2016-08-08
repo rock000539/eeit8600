@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.dao.ExpDateDao;
@@ -23,7 +24,7 @@ public class ExpDateService {
 	}
 
 	public List<ExpDate> getAll() {
-		return DateDao.findAll();
+		return DateDao.findAll(new Sort(Sort.Direction.ASC, "exp"));
 	}
 	
 	public void update(ExpDate date) {

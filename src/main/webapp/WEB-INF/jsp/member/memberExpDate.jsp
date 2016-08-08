@@ -84,11 +84,12 @@ div.expinfo h3 span{
 	width: 145px;
 	height: 145px;
 	padding-left: 18%;
-	background: #DDD5C9;
+	background: #BBE4D3; /*#BBE4D3; blue*/
 	color: #555;
+	overflow: hidden;
 }
 .expired{
-	background:#B7B5B3;
+	background:#DDD5C9; /*B7B5B3; gray*/
 }
 .within30, .within30 p, .within30 h1{
 	background:#FF9985;
@@ -187,14 +188,14 @@ div.expinfo h3 span{
 			<div class="expinfo">
 		        <h3 class="date">製造日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${item.mfd}</span></h3>
 				<h3 class="date">到期日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${item.exp}</span></h3>
-				<h3 class="date">生產批號&nbsp;&nbsp;<span>${item.batchCode}</span></h3>
+				<h3 class="date">生產批號&nbsp;&nbsp;<span>${item.expDate.batchCode}</span></h3>
 		    </div>
 		</div>
 		<div class="col-lg-2 btnDiv">
 			<button name="${item.expDate.dateId}" class="btn btn-default btn-delete">刪除</button>
 		</div>
 		<div class="col-lg-3">
-			<div class='lastDays <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<=27 && expDays>0}"> within30</c:if>'>
+			<div class='lastDays <c:if test="${expDays<0}"> expired </c:if> <c:if test="${expDays<=31 && expDays>0}"> within30</c:if>'>
 				<p>
 		        	<c:if test="${expDays>=0}">
 		        		 <span>還有</span>&nbsp;<h1>${item.lastsDay}<span>&nbsp;&nbsp;天</span></h1></c:if>

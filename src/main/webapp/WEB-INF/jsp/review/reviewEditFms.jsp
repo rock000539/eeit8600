@@ -446,7 +446,7 @@ select {
 									    	maxFileCount: 1,
 									    	previewSettings:{image: {width: "auto", height: "210px"}},
 									        initialPreview: [
-										        "http://localhost:8080/reviews/show?reviewImg="+$('#reviewImgPath').val(),
+										        "/reviews/show?reviewImg="+$('#reviewImgPath').val(),
 									        ],
 				                     		initialPreviewAsData: true,
 				                     		initialPreviewFileType: 'image',

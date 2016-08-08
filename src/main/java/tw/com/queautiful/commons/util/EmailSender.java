@@ -49,17 +49,16 @@ public class EmailSender implements ServletContextAware{
 		try {
 			MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true,"UTF-8");//multipart
 				
-			mimeMessageHelper.setFrom("queatiful.eeit@gmail.com");
+			mimeMessageHelper.setFrom("qutie2016@hotmail.com");
 			mimeMessageHelper.setTo(email);
-			mimeMessageHelper.setSubject("Reset Password");
+			mimeMessageHelper.setSubject("密碼相關通知");
 			mimeMessageHelper.setText(
-				""+
-				"Dear "+ member.getNickname()+",<br><br>"+
-				"You're receiving this because you (or someone else) have requested for reseting password for your account.<br>"+
-				"Please click the Link, or paste it into your browser to complete the reset password process : <br><br>"+
+				"Hi "+member.getNickname()+"<br><br>"+
+				"我們獲知您想更改您的密碼。"+
+				"您只要按以下連結，再按照提示操作即可。 別忘了密碼請使用英文及數字。<br><br>"+
 				resetPswUrl+"<br>"+
-				"This link will be expired after 7 days <br><br>"+
-				"<hr>Best Regards,<br><br>" + "Qutie Team <br><br>" +
+				"此連結將會在7天后之效。<br>您沒有要求更改密碼嗎？ 那麼請忽略這封電郵。<br><br><br><br>"+
+				"您的 Qutie 團隊<br><br>" +
 				"<img src='cid:logo'><br>" + "&copy;Qutie " +sendDate
 				, true);
 			String path = servletContext.getRealPath("/images");
@@ -84,13 +83,14 @@ public class EmailSender implements ServletContextAware{
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		try {
 			MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true,"UTF-8");
-			mimeMessageHelper.setFrom("queatiful.eeit@gmail.com");
+			mimeMessageHelper.setFrom("qutie2016@hotmail.com");
 			mimeMessageHelper.setTo(email);
-			mimeMessageHelper.setSubject("Product Expired Date Reminder");
+			mimeMessageHelper.setSubject("產品到期提醒");
 			mimeMessageHelper.setText(
-					"Dear "+ member.getNickname() +", <br><br>"+
-					"Your <b>"+ prodName + "</b> will be expired on <b>"+ date +"</b><br><br><br><br>"+
-					"<hr>Best Regards,<br><br>" + "Qutie Team <br><br>" +
+					"Hi "+ member.getNickname() +" <br><br>"+
+					"您的<b>"+ prodName + "</b> 即將在 <b>"+ date +"</b>到期<br><br>"+
+					"提醒您盡快用完，別讓"+ prodName +"過期了！<br><br><br><br>"+
+					"您的 Qutie 團隊<br><br>"+
 					"<img src='cid:logo'><br>" + "&copy;Qutie " +sendDate
 					, true);
 			String path = servletContext.getRealPath("/images");
@@ -105,39 +105,6 @@ public class EmailSender implements ServletContextAware{
 		}
 	}
 	
-	public void sendResetPsw2 (String email, String resetPswUrl){
-		Date sendDate = new Date();
-		Member member = memberService.getByEmail(email);
-		SimpleMailMessage simpleMsg = new SimpleMailMessage();
-		simpleMsg.setFrom("queatiful.eeit@gmail.com");
-		simpleMsg.setTo(email);
-		simpleMsg.setSubject("Reset Password");
-		simpleMsg.setText("Dear "+ member.getNickname()+", \n"+
-			"You're receiving this because you (or someone else) have requested the reset of password for your account.\n"+
-			"Please click the Link, or paste into your browser to complete the reset password process :\n\n"+
-			resetPswUrl+"\n\n"+
-			"This link will be expired after 7 days"+"\n\n\n\n"+
-			"Best Regards,\n\n" + "Qutie Team \n\n" + sendDate
-		);
-		mailSender.send(simpleMsg);
-		log.debug("ResetPsw mail sent to {}", email);
-	}
-	
-	public void sendExpDateRemind2(String email, String prodName, String date){
-		
-		Date sendDate = new Date();
-		Member member = memberService.getByEmail(email);
-		SimpleMailMessage simpleMsg = new SimpleMailMessage();
-//		simpleMsg.setFrom("queatiful.eeit@gmail.com");
-		simpleMsg.setTo(email);
-		simpleMsg.setSubject("Product Expired Date Reminder");
-		simpleMsg.setText("Dear "+ member.getNickname()+", \n"+
-			"Your "+ prodName + " will be expired on "+ date+"\n\n\n\n"
-			+"Best Regards,\n\n" + "Qutie Team \n\n" + sendDate
-		);
-		mailSender.send(simpleMsg);
-		log.debug("ExpDateReminder mail sent to {}", email);
-	}
 
 	@Override
 	public void setServletContext(ServletContext servletContext) {
