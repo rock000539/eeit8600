@@ -44,7 +44,7 @@ $(function(){
 					+data.categorys[i].categoryName+"</td>"
 					+"<td><input type='submit' class='checkIngredient btn btn-primary'"+ 
 					"data-toggle='modal'  data-target='#myModal' name='"
-					+data.products[i].prodId+"' value=查看成份>"
+					+data.products[i].prodId+"' value=編輯產品成份>"
 					+"</td></tr>")
 		}//end of for
  //----------------------------------------------
@@ -88,11 +88,6 @@ width: 80px;}
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
-			<ol class="breadcrumb pull-right">
-				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
-				<li><a href="javascript:;">Page Options</a></li>
-				<li class="active">Blank Page</li>
-			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
 			<h1 class="page-header">產品成份對應管理 <small></small></h1>

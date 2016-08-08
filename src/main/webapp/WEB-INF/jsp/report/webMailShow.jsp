@@ -17,7 +17,10 @@
 	<link href="/css/bms/bms-customize.css" rel="stylesheet">
 	<!--  BASE JS  -->
 	<script src="/js/bms/pace.min.js"></script>
-
+<style>
+.btn a{
+color:white;}
+</style>
 </head>
 <body>
 	<!-- Loading animate -->
@@ -32,9 +35,7 @@
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
-			<ol class="breadcrumb pull-right">
-				<li class="active"><a href="javascript:;">Home</a></li>
-			</ol>
+
 			
 			<!-- page-header 每頁標題/副標 -->
 			<h1 class="page-header"> 管理員信箱 <small>顧客服務、通知</small></h1>
@@ -78,8 +79,20 @@
 	<a href="#">未讀</a>
 	</c:if>
 	</td>
-	<td class="details" name="${items.webMail.webMailId}">
+	
+	<c:if test="${items.webMail.mailContentType == 'Report'}">
+	<td class="details btn btn-danger m-r-5 m-b-5" name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	<c:if test="${items.webMail.mailContentType == 'Contact'}">
+	<td class="details btn btn-success m-r-5 m-b-5" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	<c:if test="${items.webMail.mailContentType == 'Reply'}">
+	<td class="details btn btn-warning m-r-5 m-b-5" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	
 	<td class="details" name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailSendDate}</a></td>
 	<td>
@@ -200,6 +213,7 @@ $(function(){
 		if(mailType=="Report"){
 			$("#insertNewIngredient").show();
 		}else{$("#insertNewIngredient").hide();}
+		
 		$("#myModalLabel").empty();
 		$("#myModalLabel").append("標題 :"+mailTitle);
 		$("#mailDetailsTable").empty();
@@ -265,9 +279,13 @@ $(function(){
 				$("#mailTable td").parent().remove();
 				for(var i=0;i<result.length;i++){
 					var nickName=result[i].nickName;
-					var webMailSender=result[i].WebMails.webMailSender;
 					var webMailId=result[i].WebMails.webMailId;					
 					var mailReadType="";
+					var webMailSender=0;
+					if(result[i].WebMails.webMailSender!= undefined){
+						webMailSender=result[i].WebMails.webMailSender;
+					}
+					
 					if(result[i].WebMails.mailReadType){
 						mailReadType="已讀";
 					}else{
@@ -278,11 +296,14 @@ $(function(){
 	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailTitle+"</a></td>"
 	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContent+"</a></td>"
 	+"<td class='details mailReadType' name='"+webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
-	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContentType+"</a></td>"
+	+"<td class='details "+result[i].WebMails.mailContentType+"' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContentType+"</a></td>"
 	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailSendDate+"</a></td>"
 	+"<td><input type='button' class='btn deleteBtn' webMailId='"+webMailId+"' value='Delete'></td>"
 	+"<td><input type='button' class='btn replyMail' webMailId='"+webMailId+"'  value='reply'></td></tr>"
 	);//end of append
+	$(".Report").attr("class","details btn btn-danger m-r-5 m-b-5");
+	$(".Contact").attr("class","details btn btn-success m-r-5 m-b-5");
+	$(".Reply").attr("class","details btn btn-warning m-r-5 m-b-5");
 			}//end of for loop
 			
 			//重新綁上事件-------------------------------------

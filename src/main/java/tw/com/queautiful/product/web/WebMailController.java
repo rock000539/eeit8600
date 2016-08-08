@@ -118,7 +118,6 @@ public class WebMailController {
 		
 		List<Map<String, Object>> result=new ArrayList<Map<String, Object>>();
 		List<WebMail> WebMails=webMailService.findAll();
-		System.out.println(WebMails.size());
 		for(int i=0;i<WebMails.size();i++){
 			Map<String, Object> resultMap=new HashMap<String, Object>();
 			WebMail webMail=WebMails.get(i);
@@ -127,17 +126,16 @@ public class WebMailController {
 				resultMap.put("nickName", memberService.getById(webMail.getWebMailSender()).getNickname());
 				resultMap.put("WebMails", webMail);
 				result.add(resultMap);
-				
-			}else if(snederId==0){
-				resultMap.put("nickName", "ADMIN");
-				resultMap.put("WebMails", webMail);
-				result.add(resultMap);
-			}
-			else{
+			}else{
 				resultMap.put("nickName", webMail.getAnonymousName());
 				resultMap.put("WebMails", webMail);
 				result.add(resultMap);
+			}
 			
+			if(snederId!=null&&snederId==0){
+				resultMap.put("nickName", "ADMIN");
+				resultMap.put("WebMails", webMail);
+				result.add(resultMap);
 			}
 		}
 		return result;
@@ -198,6 +196,8 @@ public class WebMailController {
 		}
 		long now=new java.util.Date().getTime();
 		java.sql.Date date=new java.sql.Date(now);
+		
+		webMail.setAnonymousName("Admin");
 		webMail.setMailSendDate(date);
 		webMail.setMailContent(replyMessages);
 		webMail.setMailTitle(replyTitle);
