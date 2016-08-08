@@ -52,4 +52,10 @@ public class CategoryService {
 		return categories;
 	}
 	
+	public CategorySearch copyCategoryToCategorySearch(Category category){
+		CategorySearch categorySearch=new CategorySearch();
+		BeanUtils.copyProperties(category, categorySearch);
+		return categorySearch;
+	}
+	
 }
