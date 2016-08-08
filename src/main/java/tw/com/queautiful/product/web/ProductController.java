@@ -17,6 +17,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -193,7 +195,8 @@ public class ProductController {
 		}
 
 		// 初始頁碼、每頁幾筆資料
-		Pageable pageable = new PageRequest(0, 10);
+		Direction direction = Sort.Direction.DESC;
+		Pageable pageable = new PageRequest(0, 10, new Sort(direction, "score"));
 
 		// 查詢資料
 		Page<Product> pages = prodService.getAll(Spec.byAuto(entityManager, filter), pageable);
@@ -224,7 +227,8 @@ public class ProductController {
 		log.debug("rows = {}", rows);
 		
 		// 頁碼、每頁幾筆資料
-		Pageable pageable = new PageRequest(page - 1, rows);
+		Direction direction = Sort.Direction.DESC;
+		Pageable pageable = new PageRequest(page - 1, rows, new Sort(direction, "score"));
 
 		// 篩選條件
 		Product filter = new Product();
