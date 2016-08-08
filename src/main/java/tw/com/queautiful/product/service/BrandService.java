@@ -56,5 +56,11 @@ public class BrandService {
 		
 		return brands;
 	}
+	
+	public BrandSearch copyBrandForIngredient(Brand brand){
+		BrandSearch brandSearch=new BrandSearch();
+		BeanUtils.copyProperties(brand, brandSearch);
+		return brandSearch;
+	}
 
 }

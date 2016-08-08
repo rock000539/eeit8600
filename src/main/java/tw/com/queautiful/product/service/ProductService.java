@@ -22,6 +22,7 @@ import tw.com.queautiful.product.entity.Review;
 import tw.com.queautiful.product.vo.product.ProductInventory;
 import tw.com.queautiful.product.vo.product.ProductSearch;
 import tw.com.queautiful.product.vo.product.ProductView;
+import tw.com.queautiful.product.vo.product.productVoForIngredient;
 
 @Service
 public class ProductService {
@@ -123,6 +124,20 @@ public class ProductService {
 		BeanUtils.copyProperties(productDao.findOne(prodId), product);
 		
 		return product;
+	}
+	
+	public List<productVoForIngredient> copyByIdGetVoViews(List<Product> Products) {
+		
+//		List<Product> p_list = list != null ? list : productDao.findAll();
+		List<productVoForIngredient> ProductViews = new ArrayList<>();
+		productVoForIngredient productView = null;
+		for(Product temp : Products) {
+			productView = new productVoForIngredient();
+			BeanUtils.copyProperties(temp, productView);
+			ProductViews.add(productView);
+		}
+		
+		return ProductViews;
 	}
 	
 	public List<ProductSearch> getAllByVoSearch(List<Product> list) {
