@@ -14,4 +14,5 @@ public interface ExpDateDao extends JpaRepository<ExpDate, Long>{
 	public ExpDate findByMemberIdAndExp(Long memberId, java.sql.Date exp);
 	
 	public List<ExpDate> findByMemberIdIs(Long memberId);
+	
 }
