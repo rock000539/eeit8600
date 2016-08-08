@@ -49,10 +49,10 @@ margin: 6px;}
                                     <a href="/prodIngreList/prodNameSearchIngred" class="fa fa-link" ></a>
                                 </div>
                                 <figcaption class="item-description">
-                                    <h5>產品成份查詢</h5>
+                                    <h5>化妝品成份搜尋</h5>
                                 </figcaption>
                             </figure>
-                            <div><h1>Find by Product</h1></div>
+                            <div><h1>化妝品成份搜尋</h1></div>
                         </div>
                          
                                                                     
@@ -68,7 +68,7 @@ margin: 6px;}
                                     
                                 </figcaption>
                             </figure>
-                            <div><h1>Find by Ingredient</h1></div>
+                            <div><h1>單一成份查詢</h1></div>
                         </div>
                         
                         
@@ -84,7 +84,7 @@ margin: 6px;}
                                     <h5>分享產品成份資訊</h5>
                                 </figcaption>
                             </figure>
-                            <div><h1>Share your Information</h1></div>
+                            <div><h1>分享產品成份資訊</h1></div>
                         </div>
 					
 				</div></div></div>     

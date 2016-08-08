@@ -28,6 +28,9 @@ import tw.com.queautiful.product.service.CategoryService;
 import tw.com.queautiful.product.service.IngredientService;
 import tw.com.queautiful.product.service.ProdIngreListService;
 import tw.com.queautiful.product.service.ProductService;
+import tw.com.queautiful.product.vo.brand.BrandSearch;
+import tw.com.queautiful.product.vo.category.CategorySearch;
+import tw.com.queautiful.product.vo.product.productVoForIngredient;
 
 @Controller
 @RequestMapping("/prodIngreList")
@@ -177,23 +180,25 @@ public class ProdIngreListController {
 	public Map<String, Object> search(@RequestParam String prodName) {
 		
 		List<Product> products = productService.findByProdNameEndsWith(prodName);
+		List<productVoForIngredient> productVoForIngredients=productService.copyByIdGetVoViews(products);
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
-		List<Category> categorys = new ArrayList<Category>();
+		List<CategorySearch> categorys = new ArrayList<CategorySearch>();
 		
-		List<Brand> brands= new ArrayList<Brand>();;
+		List<BrandSearch> brands= new ArrayList<BrandSearch>();
 
-		for (int i = 0; i < products.size(); i++) {
-			Product product = products.get(i);
+		for (int i = 0; i < productVoForIngredients.size(); i++) {
+			productVoForIngredient product = productVoForIngredients.get(i);
 			Category category = categoryService.getById(product.getCategoryId());
+			CategorySearch categorySearch=categoryService.copyCategoryToCategorySearch(category);
 			Brand brand=brandService.getById(product.getBrandId());
-			categorys.add(category);
-			brands.add(brand);
-
+			BrandSearch brandSearch=brandService.copyBrandForIngredient(brand);
+			categorys.add(categorySearch);
+			brands.add(brandSearch);
 		}
-		resultMap.put("products", products);
+		resultMap.put("products", productVoForIngredients);
 		resultMap.put("categorys", categorys);
 		resultMap.put("brands", brands);
 		return resultMap;

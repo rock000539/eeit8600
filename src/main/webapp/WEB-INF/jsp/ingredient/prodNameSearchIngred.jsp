@@ -91,7 +91,7 @@ margin-top: 25px;}
 <!-- top ////////////////////////////////////////////////////-->	
 
 <div id="searchbox">	
-<h2>Find by Product</h2>
+<h2>化妝品成份搜尋</h2>
 <table id="inputTable">
 <tr><td colspan="2"><h3>輸入產品之中英文 / 完整 / 部份名稱皆可</h3></td></tr><tr><td colspan="2"><br></td></tr> 
 <tr><td><form  id="inputForm"><input type="text" name="prodName" id="prodName" class="form-control" style="border-radius:20px;" ></form></td>
