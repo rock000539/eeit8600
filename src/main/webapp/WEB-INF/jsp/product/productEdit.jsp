@@ -272,7 +272,7 @@
 											        maxFileCount: 1,
 											        mainClass: "input-group-sm",
 											        initialPreview: [
-											        	"http://localhost:8080/products/show?prodImg="+$('#prodImg').val(),
+											        	"/products/show?prodImg="+$('#prodImg').val(),
 											        ],
 						                     		initialPreviewAsData: true,
 						                     		initialPreviewFileType: 'image',
