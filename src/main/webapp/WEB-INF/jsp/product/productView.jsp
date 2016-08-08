@@ -561,15 +561,45 @@
 					if(data.ingredients.length==0) {
 						$('#showArea').append("<tr><td colspan='6'><div class='alert alert-danger alert-dismissable'><strong>抱歉! </strong> 查無成份資料</div></td></tr>");
 					} else {
-						console.log('else');
 						for(var i=0; i<data.ingredients.length; i++) {							
+// 	 						$('#showArea').append(
+// 	 						'<tr><td>'+data.ingredients[i].ingredName
+// 	 						+'</td><td>'+data.ingredients[i].ingredChName
+// 	 						+'</td><td>'+data.ingredients[i].ingredChar
+// 	 						+'</td><td>'+data.ingredients[i].ingredIrritant
+// 	 						+'</td><td>'+data.ingredients[i].ingredAcne
+// 	 						+'</td><td>'+data.ingredients[i].ingredSafety+'</td></tr>')
+
+							var ingredChName = data.ingredients[i].ingredChName;
+							var ingredChar = data.ingredients[i].ingredChar;
+							var ingredIrritant = data.ingredients[i].ingredIrritant;
+							var ingredAcne = data.ingredients[i].ingredAcne;
+							var ingredSafety = data.ingredients[i].ingredSafety;
+							
+							if(ingredChName == null){
+								ingredChName = "";
+							}
+							if(ingredChar == null){
+								ingredChar = "";
+							}
+							if(ingredIrritant == null){
+								ingredIrritant = "";
+							}
+							if(ingredAcne == null){
+								ingredAcne = "";
+							}
+							if(ingredSafety == null){
+								ingredSafety ="";
+							}
+							
 	 						$('#showArea').append(
 	 						'<tr><td>'+data.ingredients[i].ingredName
-	 						+'</td><td>'+data.ingredients[i].ingredChName
-	 						+'</td><td>'+data.ingredients[i].ingredChar
-	 						+'</td><td>'+data.ingredients[i].ingredIrritant
-	 						+'</td><td>'+data.ingredients[i].ingredAcne
-	 						+'</td><td>'+data.ingredients[i].ingredSafety+'</td></tr>')
+	 						+'</td><td>'+ingredChName
+	 						+'</td><td>'+ingredChar
+	 						+'</td><td>'+ingredIrritant
+	 						+'</td><td>'+ingredAcne
+	 						+'</td><td>'+ingredSafety+'</td></tr>');
+	 						
  						}
 					}
 					
