@@ -17,6 +17,7 @@
 	<link href="/css/bms/bms-customize.css" rel="stylesheet">
 	<!--  BASE JS  -->
 	<script src="/js/bms/pace.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
 </head>
 <body>
 	<!-- page-container -->
@@ -60,6 +61,13 @@
 	            	<span>會員停權設定</span>
 	            	<input type="text" id="ReportPropertys" value="${reportProperty}">
 	            	<input type="button" id="reportPropertySubmit" value="確認">
+	            	<br>
+	            	</div>
+	            	<div>
+	            	<br>
+	            	<span>會員停權時間</span>
+	            	<input type="text" id="dayReportProperty" value="${dayReportProperty}">
+	            	<input type="button" id="dayReportPropertySubmit" value="確認">
 	            	<br>
 	            	</div>
 	            
@@ -117,6 +125,19 @@
 				alert(result);
 			}
 			})
+		})
+		
+		$("#dayReportPropertySubmit").click(function(){
+			var dayReportProperty=$("#dayReportProperty").val();
+			$.ajax({
+				url:"/report/ReportPropertys",
+				type:"post",
+				data:{"dayReportProperty":dayReportProperty},
+				success:function(result){
+				alert(result);
+			}
+			})
+			
 		})
 		
 	})

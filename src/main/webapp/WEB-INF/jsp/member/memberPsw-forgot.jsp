@@ -6,12 +6,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Reset Password</title>
+	<title>忘記密碼</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/fms/style.css">
     <link rel="stylesheet" href="/css/fms/fms-customize.css">	
-    	
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
+	
+	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
 	<script src="/js/jquery.min.js"></script>
 </head>
 <style>
@@ -53,9 +55,6 @@ button:hover {
 }
 button:active {
 	letter-spacing: 2px ;
-}
-button:after {
-	content:"SUBMIT";
 }
 .onclic {
   width: 40px;
@@ -106,16 +105,16 @@ button:after {
 <div class="row">
 <div class="col-lg-3"></div>
 <div class="col-lg-6 col-sm-6">
-<h1 style="text-align:center;margin-bottom: 50px;">Reset Password</h1>     
-<h4>Please enter your EMAIL you have registered</h4>
+<h1 style="text-align:center;margin-bottom: 50px;">重設密碼</h1>     
+<h4>請輸入註冊時使用的EMAIL</h4>
 <form id="forgotPsw">
 <div class="form-group">
-<label for="email">Email address</label>
+<label for="email">Email</label>
 <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 </div>
 <br>
 </form>
-<div id="forgotPswBtn" class="btn btn-default" >Submit</div>
+<div id="forgotPswBtn" class="btn btn-default" >送出</div>
 </div><!-- col -->
 </div><!-- row -->
 
@@ -176,24 +175,27 @@ $(function(){
 				data:{"email":email},
 				type : "Get",
 				beforeSend:function(){
-					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Sending Mail...</div>")
+					$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;密碼重設確認信寄出...</div>")
 					.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+					setTimeout(function() {	
+						$('.modal-backdrop').remove(); 
+						swal({
+							text: '信件送達時間將在3到10分鐘之內<br>請到您的信箱中確認',
+							type: 'success',
+						}).then(function(){
+							location.href = "<%=request.getContextPath()%>/fms";
+						});
+					}, 2000);
+					
 				},
 				success : function(result){
-					$('div.icon1').html("<i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;Please check your Email");
-					setTimeout(function() {	$('.modal-backdrop').remove(); }, 2000);
+									
 					
 				}
 			});//ajax
 		}//validate
 	});//click
 	
-	function oking() {
-		
-	}
-	  function callback() {
-	    
-	  }
 
 });//onload
 

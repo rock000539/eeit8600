@@ -7,7 +7,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>${member.nickname}'s Posted</title>
+	<title>${member.nickname}'s 發佈清單</title>
 
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/animate.css">
@@ -437,13 +437,11 @@ $(function(){
 	function hideBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.review-all').addClass('is-hidden');
-			console.log("hide");
 		});
 	}
 	function showBlocks(blocks, offset) {
 		blocks.each(function(){
 			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.review-all').hasClass('is-hidden') ) && $(this).find('.review-all').removeClass('is-hidden').addClass('animated fadeInDown');
-			console.log("show"+$(this));
 		});
 	}  	
 	

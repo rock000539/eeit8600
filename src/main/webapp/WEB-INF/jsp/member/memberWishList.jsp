@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>${nickname}'s WishList</title>
+    <title>${nickname}'s 慾望清單</title>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,6 +42,7 @@ i{
     background: #fff;
     text-align: center;
     box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12) , 1px 0 2px 0 rgba(0,0,0,0.12) , 0 1px 1px 0 rgba(0,0,0,0.24);
+	height: 430px;
 }
 .prodImg{
 	text-align: center;
@@ -163,14 +164,22 @@ i{
 	        </div>        
 	        <div class="prodInfo">
 	         	<h2><a href="<%=request.getContextPath() %>/products/view/${item.prodId}">${item.prodName}</a></h2>
+	         	<c:if test="${item.score>0}">
 	         	<p>
 		         	<c:forEach begin="1" end="${item.score}"><i class="fa fa-diamond"></i></c:forEach>
 	         	</p>
 	         	<span>(${item.score})</span>
+	         	</c:if>
+	         	<c:if test="${item.score<=0}">
+	         	<p>
+					<i class="fa fa-diamond" style="color: transparent;"></i>
+	         	</p>
+	         	<span>(尚未有心得評分)</span>
+	         	</c:if>
 	         </div>
 	         <div>
 	         	<button class="btn btn-default btn-delete" value="${item.prodId}"
-	         		 data-toggle="modal" data-target="#myModal">DELETE</button>
+	         		 data-toggle="modal" data-target="#myModal">刪除</button>
 	         </div>
          </div>
     </div> <!-- portfolio-item -->
@@ -183,9 +192,9 @@ i{
 <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-    	<h2>Do you want to delete ${product.prodName} ?</h2>
+    	<h2>刪除  ${product.prodName} ?</h2>
     	<br>
-    	<button id="del-confirm" class="btn btn-default">Confirm</button>
+    	<button id="del-confirm" class="btn btn-default">確認</button>
     </div>
   </div>
 </div>

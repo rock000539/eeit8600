@@ -200,6 +200,9 @@ public class MemberController {
         	memberId = (long) request.getSession().getAttribute("memberId");
         }
     	List<ExpDate> expDates = expDateService.getAll();
+    	Integer expiredNum = 0;
+    	Integer withinMonthNum = 0;
+    	Integer efficientNum = 0;
         for (int i = 0; i < expDates.size(); i++){
             ExpDate expDate = expDates.get(i);
             if (expDate.getMemberId() == memberId){
@@ -217,6 +220,13 @@ public class MemberController {
                 long expSec = expDate.getExp().getTime();
                 long lastTime = expSec - todaySec;
                 long lastsDay = lastTime / (24*60*60*1000);
+                if(lastsDay<0){
+                	expiredNum++;
+                }else if(lastsDay>0 && lastsDay<32){
+                	withinMonthNum++;
+                }else{
+                	efficientNum++;
+                }
                 
                 beansMap.put("expDate", expDate);
                 beansMap.put("product", product);
@@ -234,6 +244,9 @@ public class MemberController {
         Member member = memberService.getById(memberId);
         model.addAttribute("member", member);
         model.addAttribute("beans", result);
+        model.addAttribute("efficientNum", efficientNum);
+        model.addAttribute("withinMonthNum", withinMonthNum);
+        model.addAttribute("expiredNum", expiredNum);
         return "/member/memberExpDate";
     }
     

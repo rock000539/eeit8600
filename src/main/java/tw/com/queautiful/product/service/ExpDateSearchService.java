@@ -36,17 +36,18 @@ public class ExpDateSearchService {
 		for (int i = 0; i < products.size(); i++) {
 
 			if (products.get(i).getBrand().getBrandId() == brandId) {
-
+				
 				productList.add(products.get(i));
 			}
 		}
-		System.out.println(productList.size());
+		
 		try {
 			if (brandId == 1) {
 				Biore(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productList);
+				
 
 			} else if (brandId == 2) {
 				Clinique(batchCode);
@@ -83,9 +84,6 @@ public class ExpDateSearchService {
 			result.put("productList", "Your input is wrong.");
 			return result;
 		}
-
-
-
 		return result;
 	}
 

@@ -209,6 +209,7 @@
 			    <input type="radio"
 			    	name="skinType" value="Oily" ${member.skinType=='Oily'? 'checked':''}> Oily
 			</label>
+			<br>
 	    	<label class="radio-inline">
 			    <input type="radio"
 			    	name="skinType" value="Sensitive" ${member.skinType=='Sensitive'? 'checked':''}> Sensitive
