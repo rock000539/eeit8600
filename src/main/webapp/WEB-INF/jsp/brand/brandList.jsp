@@ -6,7 +6,7 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Brand ListPage</title>
+	<title>Brand List</title>
 	<script src="/js/jquery.min.js"></script>
 	<!--  BASE CSS STYLE  -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -49,12 +49,12 @@
 			<!-- breadcrumb 目前位置 -->
 			<ol class="breadcrumb pull-right">
 				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
-				<li><a href="javascript:;">Page Options</a></li>
-				<li class="active">Blank Page</li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">品牌管理</li>
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
-			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
+			<h1 class="page-header">品牌資料列表<small>品牌管理總覽</small></h1>
 			
 			<!-- 內文 -->
 			<div class="row">
