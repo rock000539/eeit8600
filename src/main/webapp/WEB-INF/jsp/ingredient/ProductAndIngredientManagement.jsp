@@ -34,8 +34,12 @@ $(function(){
 		'url':'/prodIngreList/get',
 		'data':{"prodName":prodName},
 		'type' : 'POST',
+		beforeSend:function(){
+			$("<div class='icon1'><i class='fa fa-spinner fa-1x fa-spin'></i>&nbsp;&nbsp;搜尋中...</div>")
+			.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
+			},
 		'success': function (data){
-			
+			$(".modal-backdrop").remove();
 			$('#productList').empty();
 		for(var i=0;i<data.products.length;i++){
 			$("#productList").append(					
@@ -76,6 +80,13 @@ width:500px;
 margin: auto auto;}
 #buttonTd{
 width: 80px;}
+.icon1 {
+	 color:white;
+	 opacity: 1;
+	 font-size: 5em;
+	 text-align:center;
+	 margin-top: 300px;
+}
 </style>
 </head>
 <body>
@@ -88,6 +99,11 @@ width: 80px;}
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">產品成分管理</li>
+			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
 			<h1 class="page-header">產品成份對應管理 <small></small></h1>

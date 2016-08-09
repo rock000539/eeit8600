@@ -188,7 +188,7 @@ margin: auto auto;}
 					<input type="text" class="form-control" name="batchCode" id="batchCode"   value="${reloadBatchCode}" style="border-radius:20px;"/></div>
 					<div style="display: inline-block;float:right;">
 					<br>
-					<button id="searchDate" class="btn btn-default btn-lg btn-block" >Calculate</button></div>
+					<button id="searchDate" class="btn btn-default btn-lg btn-block" >計算日期</button></div>
 					
 			
 		

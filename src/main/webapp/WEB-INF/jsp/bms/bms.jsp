@@ -17,7 +17,13 @@
 	<link href="/css/bms/bms-customize.css" rel="stylesheet">
 	<!--  BASE JS  -->
 	<script src="/js/bms/pace.min.js"></script>
-
+<style>
+.btn a{
+color:white;}
+.btn{
+width: 80px;
+height: 40px;}
+</style>
 </head>
 <body>
 	<!-- Loading animate -->
@@ -106,8 +112,8 @@
 	                           <h4 class="panel-title">新進信件</h4>
 	                       </div>
 	                       <div class="panel-body">
-	                       <!-- //////////////////////////////////////////////////////////// -->
-	                           Panel Content Here
+	        <!-- //////////////////////////////////////////////////////////// -->
+	                        
 	                           	<table class="table">
 	<tr>
 	<th>發信人</th><th>標題</th><th>內容</th><th>狀態</th><th>信件類型</th><th>發信日期</th>
@@ -126,11 +132,23 @@
 	<a href="#">已讀</a>
 	</c:if>
 	<c:if test="${items.webMail.mailReadType ==false}">
-	<a href="#">未讀</a>
+	<a href="#" style="color:red;">未讀</a>
 	</c:if>
 	</td>
-	<td class="details" name="${items.webMail.webMailId}">
+	
+	<c:if test="${items.webMail.mailContentType == 'Report'}">
+	<td class="details btn btn-danger m-r-5 m-b-5" name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	<c:if test="${items.webMail.mailContentType == 'Contact'}">
+	<td class="details btn btn-success m-r-5 m-b-5 " name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	<c:if test="${items.webMail.mailContentType == 'Reply'}">
+	<td class="details btn btn-warning m-r-5 m-b-5 " name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	
 	<td class="details" name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailSendDate}</a></td>
 	</tr>
@@ -308,8 +326,10 @@ $(function(){
 			"url":"/webmail/changemailreadtype",type:"POST",
 			data:{"webMailId":webMailId},
 			success:function(result){
-					$(".mailReadType[name*="+webMailId+"]").empty();
-					$(".mailReadType[name*="+webMailId+"]").append("<a href='#'>已讀</a>");
+				var targetBtn= $(".mailReadType[name*="+webMailId+"]");
+				targetBtn.empty();
+				targetBtn.append("<a href='#'>已讀</a>");
+				targetBtn.attr("class","details mailReadType");
 				}
 				});
 		
