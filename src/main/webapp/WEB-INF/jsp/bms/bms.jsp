@@ -129,7 +129,7 @@ color:white;}
 	<a href="#">已讀</a>
 	</c:if>
 	<c:if test="${items.webMail.mailReadType ==false}">
-	<a href="#">未讀</a>
+	<a href="#" style="color:red;">未讀</a>
 	</c:if>
 	</td>
 	
@@ -323,8 +323,10 @@ $(function(){
 			"url":"/webmail/changemailreadtype",type:"POST",
 			data:{"webMailId":webMailId},
 			success:function(result){
-					$(".mailReadType[name*="+webMailId+"]").empty();
-					$(".mailReadType[name*="+webMailId+"]").append("<a href='#'>已讀</a>");
+				var targetBtn= $(".mailReadType[name*="+webMailId+"]");
+				targetBtn.empty();
+				targetBtn.append("<a href='#'>已讀</a>");
+				targetBtn.attr("class","details mailReadType");
 				}
 				});
 		

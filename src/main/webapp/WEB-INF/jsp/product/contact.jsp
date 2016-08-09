@@ -19,7 +19,8 @@
 	
 	<!-- GoogleMap -->
 	<script type="text/javascript" src="/js/product/contact/jquery.gmap.js"></script>
-
+	<link rel="stylesheet" href="/css/product/sweetalert2.min.css">
+	<script type="text/javascript" src="/js/product/sweetalert2.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title></title>
 	
@@ -43,8 +44,11 @@
 							"mailSubject" : mailSubject,
 							"mailMessage" : mailMessage,
 							"memberId" : memberId},
+					beforeSend:function(){
+							alert("信件寄發成功");
+							},
 					success : function(data){
-						alert(data);
+						
 					}	
 				});
 				

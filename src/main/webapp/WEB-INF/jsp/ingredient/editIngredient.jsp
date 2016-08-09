@@ -47,11 +47,11 @@ font-size: 15px;
 font-size: 20px; 
 }
 fieldset{
-display:inline;
+/* display:inline; */
 }
 #editArea li{
 margin:5px;
-float: left;
+float: left; 
 color: black;
 }
 .error{
@@ -76,14 +76,9 @@ margin: 30px 350px;}
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
-			<ol class="breadcrumb pull-right">
-				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
-				<li><a href="javascript:;">Page Options</a></li>
-				<li class="active">Blank Page</li>
-			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
-			<h1 class="page-header">Dashboard <small>overview of background management system</small></h1>
+			<h1 class="page-header">產品成份修改 <small>輸入成份資訊即可更新</small></h1>
 			
 			<!-- 內文 -->
 			<div class="row">
