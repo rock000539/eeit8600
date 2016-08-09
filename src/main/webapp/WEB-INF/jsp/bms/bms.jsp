@@ -17,7 +17,10 @@
 	<link href="/css/bms/bms-customize.css" rel="stylesheet">
 	<!--  BASE JS  -->
 	<script src="/js/bms/pace.min.js"></script>
-
+<style>
+.btn a{
+color:white;}
+</style>
 </head>
 <body>
 	<!-- Loading animate -->
@@ -129,8 +132,20 @@
 	<a href="#">未讀</a>
 	</c:if>
 	</td>
-	<td class="details" name="${items.webMail.webMailId}">
+	
+	<c:if test="${items.webMail.mailContentType == 'Report'}">
+	<td class="details btn btn-danger m-r-5 m-b-5" name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	<c:if test="${items.webMail.mailContentType == 'Contact'}">
+	<td class="details btn btn-success m-r-5 m-b-5" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	<c:if test="${items.webMail.mailContentType == 'Reply'}">
+	<td class="details btn btn-warning m-r-5 m-b-5" name="${items.webMail.webMailId}">
+	<a href="#">${items.webMail.mailContentType}</a></td>
+	</c:if>
+	
 	<td class="details" name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailSendDate}</a></td>
 	</tr>
