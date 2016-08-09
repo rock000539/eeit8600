@@ -22,6 +22,9 @@
 color:white;}
 .noneRead a{
 color:red;}
+.btn{
+width: 80px;
+height: 40px;}
 </style>
 </head>
 <body>

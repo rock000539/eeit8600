@@ -20,6 +20,9 @@
 <style>
 .btn a{
 color:white;}
+.btn{
+width: 80px;
+height: 40px;}
 </style>
 </head>
 <body>
@@ -109,8 +112,8 @@ color:white;}
 	                           <h4 class="panel-title">新進信件</h4>
 	                       </div>
 	                       <div class="panel-body">
-	                       <!-- //////////////////////////////////////////////////////////// -->
-	                           Panel Content Here
+	        <!-- //////////////////////////////////////////////////////////// -->
+	                        
 	                           	<table class="table">
 	<tr>
 	<th>發信人</th><th>標題</th><th>內容</th><th>狀態</th><th>信件類型</th><th>發信日期</th>
@@ -138,11 +141,11 @@ color:white;}
 	<a href="#">${items.webMail.mailContentType}</a></td>
 	</c:if>
 	<c:if test="${items.webMail.mailContentType == 'Contact'}">
-	<td class="details btn btn-success m-r-5 m-b-5" name="${items.webMail.webMailId}">
+	<td class="details btn btn-success m-r-5 m-b-5 " name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailContentType}</a></td>
 	</c:if>
 	<c:if test="${items.webMail.mailContentType == 'Reply'}">
-	<td class="details btn btn-warning m-r-5 m-b-5" name="${items.webMail.webMailId}">
+	<td class="details btn btn-warning m-r-5 m-b-5 " name="${items.webMail.webMailId}">
 	<a href="#">${items.webMail.mailContentType}</a></td>
 	</c:if>
 	
