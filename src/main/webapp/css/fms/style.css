@@ -671,6 +671,7 @@ ul.sm li *,ul.sm li *:before,ul.sm li *:after{-moz-box-sizing:content-box;-webki
 }
 .tweet_list li::before {
     content: "";
+    content: "\f091";
     font-family: fontawesome;
     font-size: 16px;
     padding-right: 8px;

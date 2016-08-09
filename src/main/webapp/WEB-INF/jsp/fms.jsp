@@ -898,49 +898,45 @@
 <footer class="footer row">
     <div class="col-sm-6 col-md-3 col-lg-3">
         <div class="widget_title">
-            <h4><span>About Us</span></h4>
+            <h4><span><s:message code="about_as"></s:message></span></h4>
         </div>
         <div class="widget_content">
-            <p>Donec earum rerum hic tenetur ans sapiente delectus, ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores.</p>
+            <p></p>
             <ul class="contact-details-alt">
-                <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: Taipei, Taiwan</p></li>
-                <li><i class="fa fa-user"></i> <p><strong>Phone</strong>:(+886) 8888-8888</p></li>
-                <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: <a href="#">qutie@gmail.com</a></p></li>
+                <li><i class="fa fa-map-marker"></i> <p><strong><s:message code="address"></s:message></strong>: <s:message code="address_locate"></s:message></p></li>
+                <li><i class="fa fa-user"></i> <p><strong><s:message code="phone"></s:message></strong>:(+886) 8888-8888</p></li>
+                <li><i class="fa fa-envelope"></i> <p><strong><s:message code="email"></s:message></strong>: <a href="#">qutie@gmail.com</a></p></li>
             </ul>
         </div>
     </div>
     <div class="col-sm-6 col-md-3 col-lg-3">
         <div class="widget_title">
-            <h4><span>Recent Posts</span></h4>
+            <h4><span><s:message code="latestpost"></s:message></span></h4>
         </div>
         <div class="widget_content">
             <ul class="links">
-                <li> <a href="#">Aenean commodo ligula eget dolor<span>November 07, 2015</span></a></li>
-                <li> <a href="#">Temporibus autem quibusdam <span>November 05, 2015</span></a></li>
-                <li> <a href="#">Debitis aut rerum saepe <span>November 03, 2015</span></a></li>
-                <li> <a href="#">Et voluptates repudiandae <span>November 02, 2015</span></a></li>
+            	<c:forEach var="item" items="${articles}" varStatus="status">
+            	<c:if test="${status.index<3}">
+	                <li> <a href="/articles/view/${item.articleId}">【${item.articleType}】${item.articleTitle}<span>${fn:substring(item.articleTime,0,19)}</span></a></li>
+	            </c:if>
+	            </c:forEach>
             </ul>
         </div>
     </div>
     <div class="col-sm-6 col-md-3 col-lg-3">
         <div class="widget_title">
-            <h4><span>Twitter</span></h4>
-
+            <h4><span>Top 3</span></h4>
         </div>
         <div class="widget_content">
             <ul class="tweet_list">
+            	<c:forEach var="product" items="${prodTop10}" varStatus="status"> 
+            	<c:if test="${status.index<3}">
                 <li class="tweet_content item">
-                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                    <span class="time">29 September 2015</span>
+                    <p class="tweet_link"><a href="/products/view/${product.prodId}">${product.brandName}&nbsp;</a>&nbsp;${product.prodName}</p>
+                    <span class="time">${product.launchDate}</span>
                 </li>
-                <li class="tweet_content item">
-                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                    <span class="time">29 September 2015</span>
-                </li>
-                <li class="tweet_content item">
-                    <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                    <span class="time">29 September 2015</span>
-                </li>
+                </c:if>
+                </c:forEach>
             </ul>
         </div>
         <div class="widget_content">
