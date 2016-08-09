@@ -116,8 +116,16 @@ public class ReviewService {
 		}
 	}
 	
-	public List<Review> findByOrderByReviewTimeDesc() {
-		return reviewDAO.findByOrderByReviewTimeDesc();
+	public List<ReviewFmsReviews> findByOrderByReviewTimeDesc() {
+		List<Review> r_list=reviewDAO.findByOrderByReviewTimeDesc();
+		List<ReviewFmsReviews> reviews = new ArrayList<>();
+		ReviewFmsReviews review=null;
+		for(Review temp:r_list){
+			review=new ReviewFmsReviews();
+			BeanUtils.copyProperties(temp, review);
+			reviews.add(review);
+		}
+		return reviews;
 	}
 	
 	public List<Review> findByOrderByReviewReportDesc(){

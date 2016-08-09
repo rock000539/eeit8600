@@ -121,7 +121,7 @@ public class ReviewController {
 
 //		List<Review> list = service.getAll();
 //		List<ReviewFmsReviews> list = service.getAllByVoReviews();
-		List<Review> list = service.findByOrderByReviewTimeDesc();
+		List<ReviewFmsReviews> list = service.findByOrderByReviewTimeDesc();
 //		List<Review> list = service.findByOrderByReviewReportDesc();
 		
 		
