@@ -504,8 +504,8 @@ $(function(){  //=$(document.)ready
 				dataType:'json',
 				success:function(result){
 // 					console.log("result1="+result);
-					$("#MyComments").text('Comments (' + (parseInt( 0 + $("#myComments").text().substr(0, 1)) + 1) + ')');
-					$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' Comments');					
+					$("#MyComments").text('留言區  (' + (parseInt( 0 + $("#myComments").text().substr(0, 1)) + 1) + ')');
+					$("#myComments").text(parseInt($("#myComments").text().substr(0,1))+1+' 留言');					
 					appendReviewCM(result);
 					CKEDITOR.instances['rcmMsg'].setData("");
 // 					location.href="#addForm";
