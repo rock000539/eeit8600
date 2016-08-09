@@ -20,6 +20,8 @@
 <style>
 .btn a{
 color:white;}
+.noneRead a{
+color:red;}
 </style>
 </head>
 <body>
@@ -76,7 +78,7 @@ color:white;}
 	<a href="#">已讀</a>
 	</c:if>
 	<c:if test="${items.webMail.mailReadType ==false}">
-	<a href="#">未讀</a>
+	<a href="#" style="color:red;">未讀</a>
 	</c:if>
 	</td>
 	
@@ -228,8 +230,10 @@ $(function(){
 			"url":"/webmail/changemailreadtype",type:"POST",
 			data:{"webMailId":webMailId},
 			success:function(result){
-					$(".mailReadType[name*="+webMailId+"]").empty();
-					$(".mailReadType[name*="+webMailId+"]").append("<a href='#'>已讀</a>");
+				var targetBtn= $(".mailReadType[name*="+webMailId+"]");
+				targetBtn.empty();
+				targetBtn.append("<a href='#'>已讀</a>");
+				targetBtn.attr("class","details mailReadType");
 				}
 				});
 		
@@ -295,7 +299,7 @@ $(function(){
 	+"' value='"+webMailSender+"'><a href='#'>"+nickName+"</a></td>"
 	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailTitle+"</a></td>"
 	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContent+"</a></td>"
-	+"<td class='details mailReadType' name='"+webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
+	+"<td class='details mailReadType "+mailReadType+"' name='"+webMailId+"'><a href='#'>"+mailReadType+"</a></td>"
 	+"<td class='details "+result[i].WebMails.mailContentType+"' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailContentType+"</a></td>"
 	+"<td class='details' name='"+webMailId+"'><a href='#'>"+result[i].WebMails.mailSendDate+"</a></td>"
 	+"<td><input type='button' class='btn deleteBtn' webMailId='"+webMailId+"' value='Delete'></td>"
@@ -304,6 +308,7 @@ $(function(){
 	$(".Report").attr("class","details btn btn-danger m-r-5 m-b-5");
 	$(".Contact").attr("class","details btn btn-success m-r-5 m-b-5");
 	$(".Reply").attr("class","details btn btn-warning m-r-5 m-b-5");
+	$(".未讀").attr("class","details mailReadType noneRead");
 			}//end of for loop
 			
 			//重新綁上事件-------------------------------------
