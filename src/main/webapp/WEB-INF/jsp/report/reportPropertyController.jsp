@@ -31,8 +31,8 @@
 			<!-- breadcrumb 目前位置 -->
 			<ol class="breadcrumb pull-right">
 				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
-				<li><a href="javascript:;">Page Options</a></li>
-				<li class="active">Blank Page</li>
+				<li><a href="javascript:;">檢舉系統管理</a></li>
+				<li class="active">設定檢舉條件</li>
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->

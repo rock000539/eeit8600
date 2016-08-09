@@ -88,6 +88,11 @@ width: 80px;}
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">產品成分管理</li>
+			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
 			<h1 class="page-header">產品成份對應管理 <small></small></h1>

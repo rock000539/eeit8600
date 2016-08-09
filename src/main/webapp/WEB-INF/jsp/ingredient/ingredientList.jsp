@@ -46,8 +46,8 @@
 			<!-- breadcrumb 目前位置 -->
 			<ol class="breadcrumb pull-right">
 				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
-				<li><a href="javascript:;">檢舉系統</a></li>
-				<li class="active">會員管理</li>
+				<li><a href="javascript:;">美妝資料管理</a></li>
+				<li class="active">產品成分</li>
 			</ol>
 			
 			<!-- page-header 每頁標題 副標 -->
@@ -149,21 +149,21 @@ $(function () {
 		{ 
 			label: '成份', 
 			name: 'ingredName', 
-			width: 180,
+			width: 200,
 			align: 'center',
 			resizable: false,
 		},
 		{ 
 			label: '中文名稱', 
 			name: 'ingredChName', 
-			width: 180,
+			width: 230,
 			align: 'center',
 			resizable: false,
 		},
 		{ 
 			label: '特性',
 			name: 'ingredChar',
-			width: 180,
+			width: 235,
 			align: 'center',
 			resizable: false,
 		},

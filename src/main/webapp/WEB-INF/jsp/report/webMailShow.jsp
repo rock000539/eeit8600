@@ -35,6 +35,10 @@ color:white;}
 		<!-- page content -->
 		<div id="content" class="content">
 			<!-- breadcrumb 目前位置 -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="<% request.getContextPath(); %>/bms">Home</a></li>
+				<li class="active">會員意見管理</li>
+			</ol>
 
 			
 			<!-- page-header 每頁標題/副標 -->

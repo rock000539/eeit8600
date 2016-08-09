@@ -252,7 +252,10 @@ $(function(){
     $('.btn-delete').click(function(e){
     	var dateIdStr=e.target.name;
     	var target=e.target;
-
+    	var tabs=$(".tab");
+//     	tabs[1].val("");
+    	alert(tabs[1]);
+    	
     	swal({
     		  title: '刪除 ?',
     		  showCancelButton: true,
@@ -261,11 +264,26 @@ $(function(){
     		  allowOutsideClick: false
     		}).then(function() {
     			$.ajax({
-    				url:'/expdate/delete',
+    				url:'/expdate/deleteXX',
               		type : 'GET',
               		data : {"dateIdStr":dateIdStr},
               		success : function(result){
               			$(".expDiv[dateId*="+dateIdStr+"]").remove();
+              			var efficients=$(".expDiv[datelist*=efficient]");
+              			var efficientNum=efficients.length;
+              			var monthLists=$(".expDiv[datelist*=monthList]");
+              			var monthListsNum=monthLists.length;
+              			var expiredLists= $(".expDiv[datelist*=expiredLists]");
+              			var expiredListsNum=expiredLists.length;
+              			var totalNum=(efficientNum+monthListsNum+expiredListsNum);
+              			var tabs=$(".tab");
+              			for(var i=0;i<tabs.length;i++){
+              				tabs[i].innerHtml("");
+              			}
+              			tabs[0].innerHtml("全部產品 ("+totalNum+")");
+              			tabs[1].innerHtml("有效 ("+efficientNum+")");
+              			tabs[2].innerHtml("一個月內到期 ("+monthListsNum+")");
+              			tabs[3].innerHtml("已過期 ("+expiredListsNum+")");
               		}
             	}); //ajax
     		}) //then
