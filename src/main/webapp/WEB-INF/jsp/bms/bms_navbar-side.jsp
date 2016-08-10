@@ -53,7 +53,7 @@
 							<li><a href="<% request.getContextPath(); %>/members/list">會員管理</a></li>
 							<li><a href="<% request.getContextPath(); %>/reviews/list">心得管理</a></li>
 							<li><a href="<% request.getContextPath(); %>/articles/list">討論區管理</a></li>
-							<li><a href=".jsp">留言管理</a></li>
+							<li><a href="javascript:;">留言管理</a></li>
 						</ul>
 					</li>
 					

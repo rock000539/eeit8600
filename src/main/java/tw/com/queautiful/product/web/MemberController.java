@@ -513,7 +513,6 @@ public class MemberController {
 	@ResponseBody
 	public String requestForResetPsw(@RequestParam String email, HttpServletRequest req){
 		String resetPswUrl = memberService.createPswResetUrl(email, req);
-		log.debug("resetPswUrl: {}", resetPswUrl);
 		mailSender.sendResetPsw(email, resetPswUrl);
 		return "Please check your email and follow the instructions.";
 	}
