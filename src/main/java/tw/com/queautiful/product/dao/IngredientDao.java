@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import tw.com.queautiful.product.entity.Ingredient;
 
 public interface IngredientDao extends JpaRepository<Ingredient, Long>{
-	@Query("select s from Ingredient s where s.ingredName like %?1%")
+	@Query("select s from Ingredient s where s.ingredName like %?1% order by s.ingredName asc ")
 	List<Ingredient> findByIngredNameEndsWith(String ingredName);
 	
-	@Query("select s from Ingredient s where s.ingredChName like %?1%")
+	@Query("select s from Ingredient s where s.ingredChName like %?1% order by s.ingredName asc")
 	List<Ingredient> findByIngredChNameEndsWith(String ingredChName);
 	
 	@Query("select s from Ingredient s where s.ingredChName = ?")
