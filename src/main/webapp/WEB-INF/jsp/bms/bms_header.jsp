@@ -72,8 +72,8 @@ $(function(){
 				
 				<!-- 上方 header navigation -->
 				<div class="navbar-header">
-					<a href="/bms" ><img src="/images/logo_qutie-02.png"></a>
-					<span class="navbar-brand">Background Management System</span>
+					<a href="/fms" ><img src="/images/logo_qutie-02.png"></a>
+					<span class="navbar-brand">後台管理系統</span>
 					<!-- 漢堡選單: 768px以下出現  使用bootstrap設定 -->
 					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 						<span class="icon-bar"></span>
