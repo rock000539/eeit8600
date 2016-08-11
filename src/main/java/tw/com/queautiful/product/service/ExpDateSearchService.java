@@ -1,7 +1,5 @@
 package tw.com.queautiful.product.service;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.queautiful.product.entity.Product;
+import tw.com.queautiful.product.vo.product.productVoForIngredient;
 
 @Service
 public class ExpDateSearchService {
 
 	private String mfdStr;
 	private String expStr;
+	boolean expState=false;
 
 	@Autowired
 	private ProductService productServ;
@@ -32,49 +32,55 @@ public class ExpDateSearchService {
 
 		List<Product> productList = new ArrayList<Product>();
 		
+		List<productVoForIngredient> productVoForIngredientList=new ArrayList<productVoForIngredient>();
+		
+		
+		
 		products = productServ.getAll();
 		for (int i = 0; i < products.size(); i++) {
 
 			if (products.get(i).getBrand().getBrandId() == brandId) {
 				
 				productList.add(products.get(i));
+			
 			}
 		}
 		
+		productVoForIngredientList=productServ.copyByIdGetVoViews(productList);
 		try {
 			if (brandId == 1) {
 				Biore(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
-				result.put("productList", productList);
+				result.put("productList", productVoForIngredientList);
 				
 
 			} else if (brandId == 2) {
 				Clinique(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
-				result.put("productList", productList);
+				result.put("productList", productVoForIngredientList);
 			} else if (brandId == 3) {
 				MAC(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
-				result.put("productList", productList);
+				result.put("productList", productVoForIngredientList);
 			} else if (brandId == 4) {
 				Lancome(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
-				result.put("productList", productList);
+				result.put("productList", productVoForIngredientList);
 			} else if(brandId ==5){
 				lOreal(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
-				result.put("productList", productList);
+				result.put("productList", productVoForIngredientList);
 			}
 			else {
 				System.out.println("Exception2");
 				result.put("mfdDate", "Your input is wrong.");
 				result.put("expDate", "Your input is wrong.");
-				result.put("productList", productList);
+				result.put("productList", productVoForIngredientList);
 			}
 
 		} catch (Exception e) {
@@ -84,6 +90,8 @@ public class ExpDateSearchService {
 			result.put("productList", "Your input is wrong.");
 			return result;
 		}
+		result.put("expState", expState);
+		
 		return result;
 	}
 
@@ -99,7 +107,14 @@ public class ExpDateSearchService {
 				date.set(Calendar.DAY_OF_YEAR,day);
 				date.set(Calendar.YEAR,year);
 				int month=date.get(Calendar.MONTH)+1;
-				System.out.println("date= "+date);
+				
+				Calendar now=Calendar.getInstance();
+				now.getTime();
+				date.set(Calendar.YEAR,(year+3));
+				if(date.before(now)){
+					expState=true;
+				}
+				
 				mfdStr= year + "-" + month;
 				expStr = (year + 3) + "-" + month;
 				}else{
@@ -151,6 +166,18 @@ public class ExpDateSearchService {
 				break;
 			}
 		}
+		
+		
+		Calendar date= Calendar.getInstance();
+		date.set(Calendar.MONTH,month);
+		date.set(Calendar.YEAR,year);
+		
+		Calendar now=Calendar.getInstance();
+		now.getTime();
+		date.set(Calendar.YEAR,(year+3));
+		if(date.before(now)){
+			expState=true;
+		}
 
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
@@ -188,6 +215,18 @@ public class ExpDateSearchService {
 				break;
 			}
 		}
+		
+		Calendar date= Calendar.getInstance();
+		date.set(Calendar.MONTH,month);
+		date.set(Calendar.YEAR,year);
+		
+		Calendar now=Calendar.getInstance();
+		now.getTime();
+		date.set(Calendar.YEAR,(year+3));
+		if(date.before(now)){
+			expState=true;
+		}
+		
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 
@@ -254,6 +293,18 @@ public class ExpDateSearchService {
 		
 		tempDay.set(Calendar.DAY_OF_YEAR,day);
 		int month=tempDay.get(Calendar.MONTH) + 1;
+		
+		Calendar date= Calendar.getInstance();
+		date.set(Calendar.MONTH,month);
+		date.set(Calendar.YEAR,year);
+		
+		Calendar now=Calendar.getInstance();
+		now.getTime();
+		date.set(Calendar.YEAR,(year+3));
+		if(date.before(now)){
+			expState=true;
+		}
+		
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 		
@@ -321,6 +372,18 @@ public class ExpDateSearchService {
 		
 		tempDay.set(Calendar.DAY_OF_YEAR,day);
 		int month=tempDay.get(Calendar.MONTH) + 1;
+		
+		Calendar date= Calendar.getInstance();
+		date.set(Calendar.MONTH,month);
+		date.set(Calendar.YEAR,year);
+		
+		Calendar now=Calendar.getInstance();
+		now.getTime();
+		date.set(Calendar.YEAR,(year+3));
+		if(date.before(now)){
+			expState=true;
+		}
+		
 		mfdStr = year + "-" + month;
 		expStr = (year + 3) + "-" + month;
 		

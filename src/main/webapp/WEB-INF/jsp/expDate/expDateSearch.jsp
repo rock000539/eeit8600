@@ -195,13 +195,14 @@ margin: auto auto;}
 			<table id="dateResult"  >
 				<tr>
 					<td colspan="2" class="dateArea"><h5>製造日</h5></td>
-					<td colspan="2" class="dateResult"><p id="mfd"></p></td>
+					<td colspan="2" class="dateResult"><h2 id="mfd"></h2></td>
 				</tr><tr>
 					<td colspan="2" class="dateArea"><h5>到期日</h5></td>
-					<td colspan="2" class="dateResult"><p id="exp"></p></td>
+					<td colspan="2" class="dateResult"><h2 id="exp"></h2></td>
 				</tr>
 			</table>
 			<!-- 分隔線用 -->
+			<br>
 			<br>
 			<div class="dividerHeading">
 			

@@ -18,12 +18,17 @@
 				.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
 				},
 				success : function(data) {
+				$('#exp').attr("style","");
 				$(".modal-backdrop").remove();
 				$('#mfd').empty().prepend(data.mfdDate);
 				$('#exp').empty().prepend(data.expDate);
+				
+				if(data.expState){
+					$('#exp').attr("style","color:red;");
+				}
+				
 				$('#proList').empty();
 				$(".dividerHeading").empty();
-// 				var brandName=$(":selected").text();
 			
 				var prodNameCheck;
 				try{prodNameCheck = data.productList[0].prodName;
