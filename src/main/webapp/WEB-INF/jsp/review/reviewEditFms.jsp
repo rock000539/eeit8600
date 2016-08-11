@@ -673,7 +673,7 @@ select {
 			$(".modal-title").empty()
 							 .append('<img style="width: 150px;height: auto;margin-left:200px" src="/images/review/thumbs-up.jpg">');
 			$(".modal-body").empty()
-							.append('<h2 style="margin-left:150px">新增成功! 你的心得及將發布</h2>')	
+							.append('<h2 style="margin-left:150px">新增成功! 你的心得即將發布</h2>')	
 			$('#close').hide();
 		    window.setTimeout(function () {		    	
 		        $("#myModal").modal("hide");
