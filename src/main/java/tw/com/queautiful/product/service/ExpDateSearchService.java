@@ -49,45 +49,52 @@ public class ExpDateSearchService {
 		productVoForIngredientList=productServ.copyByIdGetVoViews(productList);
 		try {
 			if (brandId == 1) {
+				expState=false;
 				Biore(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productVoForIngredientList);
-				
-
 			} else if (brandId == 2) {
+				expState=false;
 				Clinique(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productVoForIngredientList);
 			} else if (brandId == 3) {
+				expState=false;
 				MAC(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productVoForIngredientList);
 			} else if (brandId == 4) {
+				expState=false;
 				Lancome(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productVoForIngredientList);
 			} else if(brandId ==5){
+				expState=false;
 				lOreal(batchCode);
 				result.put("mfdDate", mfdStr);
 				result.put("expDate", expStr);
 				result.put("productList", productVoForIngredientList);
 			}
 			else {
+				expState=false;
 				System.out.println("Exception2");
 				result.put("mfdDate", "Your input is wrong.");
 				result.put("expDate", "Your input is wrong.");
 				result.put("productList", productVoForIngredientList);
+				
 			}
 
 		} catch (Exception e) {
+			expState=false;
 			System.out.println("Exception 1");
 			result.put("mfdDate", "Your input is wrong.");
 			result.put("expDate", "Your input is wrong.");
 			result.put("productList", "Your input is wrong.");
+			
 			return result;
 		}
 		result.put("expState", expState);

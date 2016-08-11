@@ -18,11 +18,10 @@
 				.appendTo($('<div class="modal-backdrop fade in"></div>').appendTo(document.body));
 				},
 				success : function(data) {
-				$('#exp').attr("style","");
+				$('#exp').attr("style","color:black;");
 				$(".modal-backdrop").remove();
 				$('#mfd').empty().prepend(data.mfdDate);
 				$('#exp').empty().prepend(data.expDate);
-				
 				if(data.expState){
 					$('#exp').attr("style","color:red;");
 				}
